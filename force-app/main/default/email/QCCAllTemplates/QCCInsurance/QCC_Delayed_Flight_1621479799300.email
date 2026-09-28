@@ -1,0 +1,63 @@
+<html>
+<head><meta />
+	<title>Flight Delay Information</title>
+</head>
+<body style="height: auto; min-height: auto;">
+<p>&nbsp;</p>
+<meta /><title></title>
+<p>Ref No: {{{Case.Case_Number__c}}}<br />
+<br />
+Hi {{{Case.First_Name__c}}},<br />
+<br />
+Thank you for getting in touch with the Qantas Customer Care team. I’m sorry to hear about the delay on your recent flight to {{{Case.Arrival_City__c}}}.<br />
+<br />
+<strong>Delayed flight details</strong><br />
+<br />
+I can confirm that flight {{{Case.Flight_Number_With_Code__c}}}, which was scheduled to depart from {{{Case.Departure_City__c}}} to {{{Case.Arrival_City__c}}} on {{{Case.Departure_Date_Time__c}}}, was delayed due to {{{Case.Delay_Reason__c}}}.<br />
+<br />
+This flight did not arrive at {{{Case.Arrival_City__c}}} until {{{Case.Actual_Arrival_Date_Time__c}}}. This was a total delay period of {{{Case.Arrival_Delay_Time_Hours__c}}} hours, {{{Case.Arrival_Delay_Time_Mins__c}}} minutes.</p>
+
+<table border="1">
+	
+		<tr>
+			<td>
+			<p>{{{Case.Flight_Number_With_Code__c}}}</p>
+			</td>
+			<td>
+			<p>DEPARTURE</p>
+			</td>
+			<td>
+			<p>ARRIVAL</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Scheduled:</p>
+			</td>
+			<td>
+			<p>{{{Case.Departure_Date_Time__c}}}</p>
+			</td>
+			<td>
+			<p>{{{Case.Arrival_Date_Time__c}}}</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Recorded:</p>
+			</td>
+			<td>
+			<p>{{{Case.Actual_Departure_Date_Time__c}}}</p>
+			</td>
+			<td>
+			<p>{{{Case.Actual_Arrival_Date_Time__c}}}</p>
+			</td>
+		</tr>
+	
+</table>
+
+<p><br />
+<br />
+This information is supplied to assist you in making a claim with your insurance company. It should not be considered as an admission of liability by Qantas Airways, to you or any person acting on your behalf, or confirmation that any particular person travelled on the above flight.<br />
+<br />
+&nbsp;</p></body>
+</html>

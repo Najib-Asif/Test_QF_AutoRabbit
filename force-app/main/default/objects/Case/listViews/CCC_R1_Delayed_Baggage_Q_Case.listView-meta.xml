@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CCC_R1_Delayed_Baggage_Q_Case</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>Group__c</columns>
+    <columns>Due_Date__c</columns>
+    <columns>Case_Age__c</columns>
+    <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
+    <columns>Frequent_Flyer_Tier__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed,In Progress,Waiting for Customer,Waiting for Internal,Pending Recovery</value>
+    </filters>
+    <filters>
+        <field>Due_Date__c</field>
+        <operation>greaterThan</operation>
+    </filters>
+    <label>CCC Delayed Baggage Queue</label>
+    <queue>CCC_R1_Delayed_Baggage_Q</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

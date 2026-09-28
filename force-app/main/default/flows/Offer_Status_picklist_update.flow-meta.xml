@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>IS_SME_Offer_lookup_empty</name>
+        <label>IS SME Offer lookup empty</label>
+        <locationX>350</locationX>
+        <locationY>214</locationY>
+        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <rules>
+            <name>is_SME_Offer_id_empty</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SMEOFFERID</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_SME_Offer</targetReference>
+            </connector>
+            <label>is SME Offer id empty</label>
+        </rules>
+    </decisions>
+    <description>Offer Status picklist update from the campaign member level to the SME Offer object level.</description>
+    <interviewLabel>Offer Status picklist update  {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Offer Status picklist update</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_SME_Offer</name>
+        <label>Update SME Offer</label>
+        <locationX>352</locationX>
+        <locationY>358</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>SMEOFFERID</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Offer_Status__c</field>
+            <value>
+                <elementReference>OfferStatus</elementReference>
+            </value>
+        </inputAssignments>
+        <object>SME_Offers__c</object>
+    </recordUpdates>
+    <startElementReference>IS_SME_Offer_lookup_empty</startElementReference>
+    <status>Active</status>
+    <variables>
+        <description>Get the picklist value and update the same to the offer status under master object</description>
+        <name>OfferStatus</name>
+        <dataType>Picklist</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>SME Offer ID where the Offer Status needs to be updated</description>
+        <name>SMEOFFERID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

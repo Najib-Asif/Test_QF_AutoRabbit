@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Rep_Score__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (ISPICKVAL(Score__c , &quot;O&quot;),IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/Q6&apos;, &apos;Six Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;CI&quot;),IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/Q2&apos;, &apos;Two Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;SI&quot;),IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/Q3&apos;, &apos;Three Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;FE&quot;),IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/Q4&apos;, &apos;Four Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;EE&quot;),IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/Q5&apos;, &apos;Five Star&apos;),
+IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/Q1&apos;, &apos;One Star&apos;))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Overall Performance Score</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recovery_Failures_Queue_CCAT</fullName>
+    <columns>Case_Number__c</columns>
+    <columns>NAME</columns>
+    <columns>Process_Status__c</columns>
+    <columns>Recovery_System_log__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Contact_First_Name__c</columns>
+    <columns>Contact_LastName__c</columns>
+    <columns>Type__c</columns>
+    <columns>Refund_POS_Country__c</columns>
+    <columns>Original_Currency__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Process_Status__c</field>
+        <operation>equals</operation>
+        <value>Exception</value>
+    </filters>
+    <filters>
+        <field>Type__c</field>
+        <operation>equals</operation>
+        <value>Payment (EFT),Payment (Credit Card),Travel vouchers,Ticket Refund EFT</value>
+    </filters>
+    <filters>
+        <field>CREATEDBY_USER</field>
+        <operation>equals</operation>
+        <value>Angela Lofaro,Chrystal Deair,Hanan McCrea,Karin Edwards,Melanie Newman,Rebecca Fox,Rhonda Fong,Robbie Tiati,Rebekah Browning,Gus Feachnie (HBA old),Philippa Hannay</value>
+    </filters>
+    <label>Recovery Failures Queue CCAT</label>
+    <sharedTo>
+        <group>Recovery_Failures</group>
+    </sharedTo>
+</ListView>

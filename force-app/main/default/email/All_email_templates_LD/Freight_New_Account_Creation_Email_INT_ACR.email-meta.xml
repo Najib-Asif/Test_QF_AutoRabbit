@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Freight - Template to be sent to iCargo and Scorpio Support Team for new international account creations</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Freight New Account Creation Email INT ACR</name>
+    <style>none</style>
+    <subject>New International Customer set up in iCargo and Scorpio</subject>
+    <textOnly>Hi,
+
+Please note the following New Account has been created. 
+
+IMPORTANT: Please verify whether Customer Code exists. If it already exists, please do not create a new account, instead please update the account details as per below.
+
+Customer code in iCargo (IATA code): {!Account.IATA_Number__c}
+
+Agent/Customer Name: {!Account.Name}
+
+Global Customer Code (iCargo &amp; Taurus only) (FCI): {!Account.Freight_Corporate_Identifier__c}
+
+Address: {!Account.BillingAddress}
+
+Approver: {!Account.Freight_Clearance__c}
+
+Customer Type (Scorpio only): {!Account.Freight_Agent_Type__c}
+
+Origin: {!Account.Freight_Station_Code__c}
+
+Billing Calendar: {!Account.Freight_Billing_Calendar__c}
+
+Billing Period: 30 days
+
+Currency: {!Account.CurrencyIsoCode}
+
+Contact Details: {!Contact.Name}
+
+Phone: {!Contact.Phone}
+
+Fax: {!Contact.Fax}
+
+Email: {!Contact.Email}
+
+Customer Number (Taurus) (Cust#): {!Account.Freight_eQ_Reference__c}
+
+Address Number (Taurus) (Ref#): {!Account.Freight_Reference__c}
+
+Thanks,
+
+{!Account.OwnerFullName}
+
+{!Account.OwnerEmail}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,109 @@
+<aura:component controller="QCC_AddEventstoGlobalEventController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="displayData" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="sortedBy" type="String" />
+    <aura:attribute name="sortedDirection" type="Boolean" default="true" />
+    <aura:attribute name="selectedRows" type="Object" default="[]"/>
+
+    <aura:attribute name="isAddedRecord" type="Boolean" default="false" />
+    
+    <aura:attribute name="currentPage" type="Integer" default="0"/>
+    <aura:attribute name="totalPage" type="Integer" default="0"/>
+    <aura:attribute name="offSet" type="Integer" default="10"/>
+    
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="recordData" type="Object"/>
+    
+    <!--<aura:attribute name="eventFlightNo" type="String"/>
+    <aura:attribute name="eventDate" type="Date"/>
+    <aura:attribute name="eventDeparture" type="String"/>-->
+    
+    <aura:attribute name="selectedIds" type="String[]" />
+    <aura:attribute name="selectedTrackers" type="String[]"/>
+    <aura:attribute name="failureInfo" type="String" default=""/>
+    
+    <aura:attribute name="listFieldInFieldSet" type="QCC_AddEventstoGlobalEventController.FieldSetMemberWrapperClass[]"/>
+    
+    <aura:attribute name="listEventSelected" type="Event__c[]"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <aura:handler name="handleIOCFlightFailureDataEvent" event="c:IOCFlightFailureDataEvent" action="{!c.handleIOCFlightFailureDataEvent}"/>
+    
+    <force:recordData aura:id="myRecord"
+                      recordId="{!v.recordId}"
+                      mode="VIEW"
+                      layoutType="FULL"
+                      targetFields="{!v.recordData}"
+                      targetError="{!v.recordError}"/>
+    
+    <aura:if isTrue="{!v.recordData.Status__c != 'Closed'}">
+          <div class="slds-grid slds-p-top_small slds-wrap">
+              
+                  
+                  <aura:iteration items="{!v.listFieldInFieldSet}" var="item">
+                    <div class="slds-col slds-size_1-of-4 slds-m-left_xxx-small">
+                      <lightning:input type="{!item.fieldType}" label="{!item.fieldLabel}" value="{!item.fieldValue}" disabled="{!item.isDisabled}"/>
+                    </div>
+                  </aura:iteration>
+                  <br/>
+                  <div class="slds-col slds-size_4-of-4 ">
+                    <div class="slds-float_right">
+                      <lightning:button
+                                        onclick="{!c.searchData}"
+                                        label="Search"
+                                        variant="neutral"
+                                        class="slds-size_4-of-10"
+                                        type="submit"/>
+                      <lightning:button
+                                        onclick="{!c.resetData}"
+                                        label="Reset"
+                                        variant="neutral"
+                                        class="slds-size_4-of-10"
+                                        type="submit"/>
+                      </div>
+                  </div> 
+              <div class="slds-col slds-size_3-of-3 slds-p-top_small slds-p-left_small">
+                  <div style="height:300px" >
+                      <lightning:datatable
+                                           keyField="id"
+                                           data="{!v.displayData}"
+                                           columns="{!v.columns}"
+                                           onrowselection="{! c.getSelectedItems }"
+                                           onsort="{!c.updateColumnSorting}"
+                                           sortedBy="{!v.sortedBy}"
+                                           sortedDirection="{!v.sortedDirection}"
+                                           maxRowSelection="10"
+                                           hideCheckboxColumn="false"
+                                           selectedRows="{! v.selectedRows }"/>
+                      <div class="slds-modal__footer"> 
+                          <lightning:buttonGroup >
+                              <lightning:button label="Previous" disabled="{!v.currentPage == 0}"  
+                                                onclick="{!c.previous}" variant="base"
+                                                iconName='utility:back'/>
+                              <lightning:button label="Next" disabled="{!v.currentPage + 2 >= v.totalPage}" 
+                                                onclick="{!c.next}" variant="base"
+                                                iconName='utility:forward' iconPosition='right'/>
+                          </lightning:buttonGroup>
+                      </div> 
+                     <div class="slds-float_right">
+                              <lightning:button
+                                        onclick="{!c.doAddEvents}"
+                                        label="Add"
+                                        variant="neutral"
+                                        class="slds-size_4-of-10 slds-m-top_medium"
+                                        type="submit"/>
+                      </div>
+                  </div>
+                  
+              </div>
+              
+          </div>
+        <aura:set attribute="else">
+            You can’t add Flight Event to this Closed Event.
+        </aura:set>
+    </aura:if>
+    <lightning:overlayLibrary aura:id="overlayLib" />
+</aura:component>

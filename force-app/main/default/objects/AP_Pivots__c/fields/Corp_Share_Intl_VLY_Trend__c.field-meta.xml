@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Corp_Share_Intl_VLY_Trend__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(  Corp_Share_Intl_VLY__c  != 0, 
+IF( 
+(Corp_Share_Intl_VLY__c &gt; 0), 
+LEFT((Text(Corp_Share_Intl_VLY__c)),5)+ &quot; &quot; +IMAGE(&quot;/resource/Green_up&quot;, &quot;Up&quot;), 
+IF( 
+(Corp_Share_Intl_VLY__c &lt;0), 
+LEFT((Text(Corp_Share_Intl_VLY__c)),5)+ &quot; &quot;+IMAGE(&quot;/resource/Red_Down&quot;, &quot;Down&quot;), 
+LEFT((Text(Corp_Share_Intl_VLY__c)),5)+ &quot; &quot;+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;) 
+) 
+), 
+Text(Corp_Share_Intl_VLY__c)+ &quot; &quot;+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Corp Share Intl VLY Trend</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

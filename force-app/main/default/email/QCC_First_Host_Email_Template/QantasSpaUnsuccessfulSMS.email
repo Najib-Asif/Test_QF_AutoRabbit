@@ -1,0 +1,13 @@
+Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},<br>
+
+<p>Thank you for your enquiry regarding  a spa appointment in the Qantas First Lounge.</p>
+
+<p>Due to the popularity of the spa experience, we’re unable to confirm an appointment for you on this occasion. We do receive cancellations from time to time, and we have added your request to our waitlist. Please check with our staff upon arrival at the Lounge, if an appointment time has become available.</p>
+
+<p>We trust you’ll enjoy the Qantas First Lounge experience.</p>
+
+Warm regards,<br>
+{!User.FirstName}<br>
+Customer Relationship Specialist<br>
+Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team<br>
+{!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "World Wide +61 (2) 6250 8204", IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Platinum One" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge Platinum One" || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c ="FFLP" ,"World Wide +61 1300 752 801","vipserviceteam@qantas.com.au"))}<br>

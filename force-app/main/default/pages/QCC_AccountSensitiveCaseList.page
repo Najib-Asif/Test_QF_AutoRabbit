@@ -1,0 +1,51 @@
+<apex:page showHeader="false" sidebar="false" lightningStylesheets="true" standardController="Account" extensions="QCC_SensitiveCaseListController" action="{!initSensitiveCaseLayout}"> 
+    <apex:slds /> 
+<apex:form >  
+<!-- CREATE SENSITIVE CASES TABLE -->
+<apex:outputText value="This is private section." rendered="{!!isDisplay}"/>
+<apex:outputText value="{!$Label.QCC_Sensitive_Case_Header_Text}" rendered="{!isDisplay && $Label.QCC_Sensitive_Case_Header_Text != '_'}"/>
+    <apex:outputPanel id="theSensitiveCasePanel" rendered="{!isDisplay}">
+    <fieldset class="slds-box slds-theme--default slds-container--large">
+    
+        <legend id="newexpenseform" class="slds-text-heading--small 
+          slds-p-vertical--medium">
+          Sensitive Cases({!totalRecord})
+        </legend>
+    <apex:dataTable value="{!SensitiveCaseWrapperList}" var="CaseWrapper" id="theTable"
+    rowClasses="odd,even" styleClass="tableClass slds-table slds-table_bordered slds-table_cell-buffer">
+        <apex:column >
+            <apex:facet name="header">NO.</apex:facet>
+            <apex:outputText value="{!CaseWrapper.index}"/>
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">CASE NUMBER</apex:facet>
+            <apex:outputText value="{!CaseWrapper.objCase.CaseNumber}"/>
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">CONTACT NAME</apex:facet>
+            <apex:outputText value="{!CaseWrapper.objCase.Contact.Name}"/>
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">GROUP CONTACT</apex:facet>
+            <apex:outputText value="{!CaseWrapper.groupContact}"/>
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">LAST MODIFIED DATE/TIME</apex:facet>
+            <apex:outputField value="{!CaseWrapper.objCase.LastModifiedDate}"/>
+        </apex:column>
+
+    </apex:dataTable>
+
+    <apex:outputPanel style="text-align:center;" layout="block">
+                <apex:outputText value="<<Previous" rendered="{!!hasPrevious}" />
+                <apex:commandLink status="fetchStatus" reRender="theSensitiveCasePanel" value="<<Previous" action="{!previous}" title="Previous Page" rendered="{!hasPrevious}"/>
+                <span>&nbsp;Page {!pageNumber} of {!totalPages}&nbsp;</span>
+                <apex:outputText value="Next>>" rendered="{!!hasNext}" />
+                <apex:commandLink status="fetchStatus" reRender="theSensitiveCasePanel" value="Next>>" action="{!next}" title="Next Page" rendered="{!hasNext}"/>
+    </apex:outputPanel>
+    </fieldset>
+</apex:outputPanel>
+<!-- / CREATE SENSITIVE CASES TABLE -->
+</apex:form>  
+          
+</apex:page>

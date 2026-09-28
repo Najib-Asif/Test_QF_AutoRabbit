@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Other_Recovery_Except_CCAT</fullName>
+    <active>true</active>
+    <description>Created to restrict consultants other than Sydney to choose Other recovery option</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(  Type__c , &quot;Other&quot;),
+OR(
+$UserRole.Name = &quot;QF-QDC-OM-HBA-TL-USR&quot;,
+$UserRole.Name = &quot;QF-QDC-OM-CPT-TL-USR&quot;,
+$UserRole.Name = &quot;QF-QDC-OM-AKL-TL-USR&quot;,
+$UserRole.Name = &quot;QF-QDC-OM-MNL-TL-USR&quot;
+)
+)</errorConditionFormula>
+    <errorDisplayField>Type__c</errorDisplayField>
+    <errorMessage>This recovery is not available for this Case Type.</errorMessage>
+</ValidationRule>

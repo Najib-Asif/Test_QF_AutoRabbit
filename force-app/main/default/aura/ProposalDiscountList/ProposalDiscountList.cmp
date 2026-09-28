@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:html tag="style">
+        .slds-modal__container {
+        max-width: 500rem !important;
+        width:90% !important;
+        }
+    </aura:html>
+    <iframe src="{! '/apex/proposalProductEntry?id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/>
+</aura:component>

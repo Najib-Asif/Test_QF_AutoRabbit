@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Campaign_End_Date_Reached</fullName>
+        <description>Campaign End Date Reached</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Campaign_End_Date_Reached</template>
+    </alerts>
+    <alerts>
+        <fullName>S_D_Event_Notify_Account_Managers_Acquired</fullName>
+        <description>S &amp; D Event Notify Account Managers Acquired</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>AU_Events</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Event_Management/Notify_Account_Managers_Acquired_1741062279316</template>
+    </alerts>
+    <alerts>
+        <fullName>S_D_Event_Notify_Account_Managers_Not_Available</fullName>
+        <description>S &amp; D Event Notify Account Managers Not Available</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>AU_Events</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Event_Management/Notify_Account_Managers_Not_Available_1741062350219</template>
+    </alerts>
+    <alerts>
+        <fullName>S_D_Event_Notify_Account_Managers_Planned</fullName>
+        <description>S &amp; D Event Notify Account Managers Planned</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>AU_Events</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Event_Management/Notify_Account_Managers_Planned_1741060201447</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Campaign_Status_to_In_Progress</fullName>
+        <field>Status</field>
+        <literalValue>In Progress</literalValue>
+        <name>Campaign Status to In Progress</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Total_Campaign_Budgeted_Cost_Update</fullName>
+        <field>Total_Campaign_Budgeted_Cost__c</field>
+        <formula>Incentive_Budget__c - (Incentive_Budget__c  * Bounty_Incentive_Budget__c)</formula>
+        <name>Total Campaign Budgeted Cost Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_Status_to_Approved</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Update Approval Status to Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_Status_to_Recalled</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Recalled</literalValue>
+        <name>Update Approval Status to Recalled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_Status_to_Rejected</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Update Approval Status to Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_Status_to_Submit</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Update Approval Status to Submit</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_Status_to_Submitted</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Update Approval Status to Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Campaign_to_Active</fullName>
+        <description>Update Campaign to Active</description>
+        <field>IsActive</field>
+        <literalValue>1</literalValue>
+        <name>Update Campaign to Active</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Campaign_to_Inactive</fullName>
+        <description>Update Campaign to Inactive</description>
+        <field>IsActive</field>
+        <literalValue>0</literalValue>
+        <name>Update Campaign to Inactive</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_approval_status_to_Approve</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Update approval status to Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_approval_status_to_Reject</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Update approval status to Reject</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_approval_status_to_recall</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Recalled</literalValue>
+        <name>Update approval status to Recall</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_expected_reporting_date</fullName>
+        <field>Expected_Reporting_Date__c</field>
+        <formula>DATE( 
+year(EndDate) 
++ floor((month(EndDate) + 2)/12) + if(and(month(EndDate)=12,2&gt;=12),-1,0) 
+, 
+if( mod( month(EndDate) + 2, 12 ) = 0, 12 , mod( month(EndDate) + 2, 12 )) 
+, 
+min( 
+day(EndDate), 
+case( 
+max( mod( month(EndDate) + 2, 12 ) , 1), 
+9,30, 
+4,30, 
+6,30, 
+11,30, 
+2,28, 
+31 
+) 
+) 
+)</formula>
+        <name>Update expected reporting date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_the_standard_Actual_field</fullName>
+        <description>to update the standard actual field sourcing value from the custom Actual field.</description>
+        <field>ActualCost</field>
+        <formula>Child_Actual_Cost__c</formula>
+        <name>update the standard Actual field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Activate Marketing campaign on Start Date</fullName>
+        <actions>
+            <name>Update_Campaign_to_Active</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Activate Marketing campaign on Start Date</description>
+        <formula>AND ( OR ((RecordType.DeveloperName = &apos;Marketing_Child&apos;),(RecordType.DeveloperName = &apos;Marketing_Parent&apos;)), StartDate &lt;= TODAY(),  EndDate &gt;= TODAY())</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Campaign_to_Inactive</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Campaign.EndDate</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Deactivate Marketing campaign on End Date</fullName>
+        <actions>
+            <name>Update_Campaign_to_Inactive</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>De-activate Marketing campaign on End Date</description>
+        <formula>AND ( OR ((RecordType.DeveloperName = &apos;Marketing_Child&apos;),(RecordType.DeveloperName = &apos;Marketing_Parent&apos;)), StartDate &lt;= TODAY(), EndDate &gt;= TODAY())</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Notification regarding Campaign</fullName>
+        <active>true</active>
+        <description>Sending Email notification to the user regarding Campaign</description>
+        <formula>AND (EndDate != null,$RecordType.DeveloperName=&apos;Loyalty_Commercial&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Campaign_End_Date_Reached</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Campaign.EndDate</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Total Campaign Budgeted Cost Update</fullName>
+        <actions>
+            <name>Total_Campaign_Budgeted_Cost_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Campaign.Type</field>
+            <operation>equals</operation>
+            <value>Incentive Budget</value>
+        </criteriaItems>
+        <description>When Type is selected to be  Incentive Budget, Total Campaign Budgeted Cost should be updated with value of Incentive Budget x Bounty Incentive Budget (%).</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update expected reporting date</fullName>
+        <actions>
+            <name>Update_expected_reporting_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Campaign.EndDate</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.Expected_Reporting_Date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>To set expected reporting date to 2 months from campaign end date</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the Actual</fullName>
+        <actions>
+            <name>update_the_standard_Actual_field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Campaign.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Marketing - Child</value>
+        </criteriaItems>
+        <description>To update the standard Actual field.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freq_Flyer_Expiry_Date_mandatory</fullName>
+    <active>true</active>
+    <description>If Request Type = Tier Retain – Mbr can only be retained in Exp Month or Case = Sales Offers, Frequent Flyer Expiry Date is mandatory</description>
+    <errorConditionFormula>AND(
+ISBLANK(Freq_Flyer_Expiry_Date__c), 
+
+OR (
+ Case__r.RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/ 
+ ISPICKVAL( Request_Type__c , &quot;Tier Retain – Mbr can only be retained in Exp Month&quot;)
+)
+)</errorConditionFormula>
+    <errorDisplayField>Freq_Flyer_Expiry_Date__c</errorDisplayField>
+    <errorMessage>If Request Type is &apos;Tier Retain – Mbr can only be retained in Exp Month&apos; OR If you are requesting a Sales Offer, , please fill in the Expiry Date.</errorMessage>
+</ValidationRule>

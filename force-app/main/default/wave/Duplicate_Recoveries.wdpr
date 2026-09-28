@@ -1,0 +1,580 @@
+{
+  "version" : "62.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "OwnerId", "IsDeleted", "Name", "CurrencyIsoCode", "RecordTypeId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "LastViewedDate", "Contact__c", "Amount__c", "ApprovedBy__c", "Approved_By__c", "Bank_Account_Number__c", "Bank_Name__c", "Case_Number__c", "Equivalent_AUD_Refund_Amount__c", "Monetary_Value__c", "Original_Currency__c", "Payment_Status__c", "Recovery_Points__c", "Status__c", "Type__c", "Value__c", "LastReferencedDate" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Recovery__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Recovery__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1640995200000" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ContactPhone", "Contact_Phone__c", "Id", "MasterRecordId", "CaseNumber", "ContactId", "ParentId", "Type", "RecordTypeId", "Status", "Reason", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "OwnerId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "ContactEmail", "Contact_Fullname__c", "Created_By_Name__c", "Sub_Type_1__c", "Sub_Type_2__c", "Created_by_Role__c", "Booking_PNR__c", "Category__c", "ClosedByLocation__c", "FF_Tier__c", "Flight_Number__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Owner_City__c", "Passenger_Id__c", "Received_On__c", "Record_Type__c", "Recovery_Quantity__c", "Recovery_Value__c", "Sub_Category__c", "InteractionId__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1640995200000" ]
+        } ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "FILTER1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Case_Number__c" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Uniqu_Flight_Recovery",
+          "label" : "Unique Flight Recovery",
+          "formulaExpression" : "concat(\"Case.Contact_Fullname__c\", ' + ', \"Case.Booking_PNR__c\" , ' + ', \r\n \"Equivalent_AUD_Refund_Amount__c\")",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Unique_Flight_Points",
+          "label" : "Unique Flight Points",
+          "formulaExpression" : "concat(\"Case.Contact_Fullname__c\", ' + ', \"Case.Booking_PNR__c\" , ' + ', Amount__c)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Status__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Awaiting Approval" ]
+        } ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FORMULA1", "DROP_FIELDS0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Case_Number__c" ],
+        "rightQualifier" : "Contacts_With_Pending",
+        "rightKeys" : [ "Case.Id" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Duplicate Pending Recoveries",
+          "name" : "Duplicate_pending_recoveries"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Phone", "MobilePhone", "Id", "LastName", "FirstName", "Name", "RecordTypeId", "Frequent_Flyer_Number__c", "Frequent_Flyer_Tier__c", "QCC_Contact_Full_Name__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "FILTER1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ {
+            "argument" : 0,
+            "type" : "N_YEARS"
+          }, {
+            "argument" : 0,
+            "type" : "N_MONTHS"
+          } ]
+        }, {
+          "type" : "TEXT",
+          "field" : "RecordTypeId",
+          "operator" : "EQUAL",
+          "operands" : [ "012Mo000000FjT3IAK" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Description",
+          "operator" : "EQUAL",
+          "operands" : [ "Case created from a call" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "ContactId",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER3", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "ContactId" ],
+        "rightQualifier" : "Contact",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Duplicated Voice Cases from One Call",
+          "name" : "Voice_Cases_with_Contacts_in_2_Months",
+          "folderName" : "Repeat_Call_Analytics"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Interaction_and_Owner_Id",
+          "label" : "Interaction and Owner Id",
+          "formulaExpression" : "concat(InteractionId__c, OwnerId)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "partitionBy" : [ "Interaction_and_Owner_Id" ],
+        "orderBy" : [ {
+          "fieldName" : "CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Dup_Case_Count",
+          "label" : "Dup Case Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER4" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "Dup_Case_Count",
+          "operator" : "EQUAL",
+          "operands" : [ "2" ]
+        } ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "FORMULA3", "FILTER4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "RIGHT_OUTER",
+        "leftKeys" : [ "Interaction_and_Owner_Id" ],
+        "rightQualifier" : "DupLabel",
+        "rightKeys" : [ "Interaction_and_Owner_Id" ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Contact__c" ],
+        "rightQualifier" : "Contact",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "IsDeleted", "Case_Number__c", "Case.MasterRecordId", "Case.CaseNumber", "OwnerId", "Name", "CurrencyIsoCode", "RecordTypeId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "LastViewedDate", "Amount__c", "ApprovedBy__c", "Approved_By__c", "Bank_Account_Number__c", "Bank_Name__c", "Contact__c", "Equivalent_AUD_Refund_Amount__c", "Monetary_Value__c", "Original_Currency__c", "Payment_Status__c", "Recovery_Points__c", "Status__c", "Type__c", "Value__c", "LastReferencedDate", "Case.ContactId", "Case.ParentId", "Case.Type", "Case.RecordTypeId", "Case.Status", "Case.Reason", "Case.Subject", "Case.Priority", "Case.Description", "Case.IsClosed", "Case.ClosedDate", "Case.OwnerId", "Case.CreatedDate", "Case.CreatedById", "Case.LastModifiedDate", "Case.LastModifiedById", "Case.ContactEmail", "Case.Contact_Fullname__c", "Case.Created_By_Name__c", "Case.Sub_Type_1__c", "Case.Sub_Type_2__c", "Case.Created_by_Role__c", "Case.Booking_PNR__c", "Case.Category__c", "Case.ClosedByLocation__c", "Case.FF_Tier__c", "Case.Flight_Number__c", "Case.Frequent_Flyer_Tier__c", "Case.Group__c", "Case.OwnerName__c", "Case.Owner_City__c", "Case.Passenger_Id__c", "Case.Received_On__c", "Case.Record_Type__c", "Case.Recovery_Quantity__c", "Case.Recovery_Value__c", "Case.Sub_Category__c", "Case.InteractionId__c", "Uniqu_Flight_Recovery", "Unique_Flight_Points" ]
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Recovery__c",
+        "type" : "LOAD_DATASET",
+        "top" : 532.4,
+        "left" : 112.4,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Recoveries since 2022",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532.4,
+        "left" : 252.39999999999998
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 392.4,
+        "left" : 112.4,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "FILTER1" : {
+        "label" : "Cases since 2022",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 392.4,
+        "left" : 252.39999999999998
+      },
+      "JOIN0" : {
+        "label" : "Get Case Info",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.4,
+        "left" : 392.4
+      },
+      "TRANSFORM0" : {
+        "label" : "Unique flight recovery",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532.4,
+        "left" : 532.4,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Unique flight refund"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Unique flight points"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        } ]
+      },
+      "FILTER2" : {
+        "label" : "Awaiting Approval",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 672.4,
+        "left" : 532.4
+      },
+      "JOIN1" : {
+        "label" : "Contacts with Pending Approval",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.4,
+        "left" : 672.4
+      },
+      "OUTPUT0" : {
+        "label" : "Duplicate Pending Recoveries",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 952
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 252.10000000000002,
+        "left" : 532.1,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER3" : {
+        "label" : "Voice Cases This Year",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112.4,
+        "left" : 252.39999999999998
+      },
+      "JOIN2" : {
+        "label" : "Get Contact",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.30000000000001,
+        "left" : 392.4
+      },
+      "OUTPUT1" : {
+        "label" : "Duplicated Voice Cases from One Call",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112.4,
+        "left" : 952.4
+      },
+      "TRANSFORM1" : {
+        "label" : "Interaction + Owner",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112.30000000000001,
+        "left" : 532.4,
+        "graph" : {
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Interaction and Owner Concat"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM2" : {
+        "label" : "Get Dup Count",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112.30000000000001,
+        "left" : 672.4,
+        "graph" : {
+          "FORMULA3" : {
+            "label" : "Get Dup Count"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER4" : {
+        "label" : "Keep One Dup to Rejoin",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 672
+      },
+      "JOIN3" : {
+        "label" : "Label Dup Cases",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.4,
+        "left" : 812.4
+      },
+      "JOIN4" : {
+        "label" : "Contact to Recovery",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 812
+      },
+      "TRANSFORM3" : {
+        "label" : "Drop Columns",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 671.9,
+        "left" : 672,
+        "graph" : {
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "FILTER2"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN4",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "FILTER3"
+    }, {
+      "source" : "FILTER3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "FILTER4"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "FILTER4",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN3",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN4"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN4"
+    }, {
+      "source" : "FILTER2",
+      "target" : "TRANSFORM3"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

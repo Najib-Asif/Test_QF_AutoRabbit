@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_Deal_termination</name>
+        <label>Check Deal termination</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>FALSE Check Deal termination</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Check_Deal_termination</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Closed - Deal Implemented</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Deal Termination</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.AccountId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Account_Linked_to_Case</targetReference>
+            </connector>
+            <label>TRUE Check Deal termination</label>
+        </rules>
+    </decisions>
+    <description>Migrated from the Enable Account to be in SME Callout when Deal expires/terminates process using Check Deal termination criteria.
+Update Account field Eligible for SME Campaigns when deal is terminated(Platform change)</description>
+    <environments>Default</environments>
+    <interviewLabel>EnableAccounttobeinSMECalloutwhenDealexpires/terminates {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-OtherEnableAccounttobeinSMECalloutwhenDealexpires/terminates</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Account_Linked_to_Case</name>
+        <label>Update Account Linked to Case</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>objNewCase.AccountId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Eligible_for_SME_Campaigns__c</field>
+            <value>
+                <elementReference>objNewCase.Eligible_for_SME_Campaigns__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Deal_termination</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>trigger.new</description>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

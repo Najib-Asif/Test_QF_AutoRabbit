@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Restrict_CancellingRecovery</fullName>
+    <active>true</active>
+    <description>CDP2-430.</description>
+    <errorConditionFormula>AND(ISCHANGED(Process_Status__c) ,
+ISPICKVAL( Process_Status__c, &apos;Cancelled&apos;),
+NOT($Profile.Name = &apos;System Administrator&apos;),
+NOT($Profile.Name = &apos;Qantas System Administrator&apos;),
+NOT($Profile.Name = &apos;Qantas System Admin - Freight&apos;),
+NOT($Profile.Name = &apos;Qantas System Admin - QCC&apos;),
+NOT($Profile.Name = &apos;Qantas System Admin - SND&apos;),
+OR(
+/* Cancellation Reason is blank */
+ISBLANK( Cancellation_Reason__c ),
+
+/* Consultant and he is not the Creator */
+
+IF((CreatedBy.CCAT_User__c), AND(NOT($User.CCAT_User__c),CreatedBy.Id &lt;&gt; $User.Id,NOT($Permission.QCC_Submit_Recovery_Permission)),
+IF(NOT(ISBLANK(Linked_Recoveries__c)), AND(AND(OR(
+$Profile.Name = &quot;Qantas CC Consultant&quot;,
+CONTAINS($Profile.Name,&quot;QCC Contact Center Agent&quot;)
+),NOT(ISPICKVAL($User.Operational_Group__c,&apos;Team Leader&apos;)) , Linked_Recoveries__r.CreatedBy.Id &lt;&gt; $User.Id),NOT($Permission.QCC_Submit_Recovery_Permission)), AND(AND(OR(
+$Profile.Name = &quot;Qantas CC Consultant&quot;,
+CONTAINS($Profile.Name,&quot;QCC Contact Center Agent&quot;)
+),NOT(ISPICKVAL($User.Operational_Group__c,&apos;Team Leader&apos;)),
+CreatedBy.Id &lt;&gt; $User.Id), NOT($Permission.QCC_Submit_Recovery_Permission))))
+)
+)</errorConditionFormula>
+    <errorMessage>To cancel a recovery:                                                         
+
+1. You must be the Recovery Creator, a Team Lead or Operating Manager
+2. You must enter a cancellation reason</errorMessage>
+</ValidationRule>

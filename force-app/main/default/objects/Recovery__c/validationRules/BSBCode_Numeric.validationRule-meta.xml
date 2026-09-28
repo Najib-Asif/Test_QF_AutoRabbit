@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BSBCode_Numeric</fullName>
+    <active>true</active>
+    <description>Branch Number (BSB/Sort Code/Routing Code) should be alphanumeric</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Type__c, &apos;Payment (EFT)&apos;) || ISPICKVAL(Type__c, &apos;Ticket Refund EFT&apos;),
+NOT(ISBLANK(Branch_Number_BSB_Sort_Code__c)),
+NOT(REGEX(Branch_Number_BSB_Sort_Code__c, &quot;^[A-Za-z0-9]+$&quot;)),
+ISCHANGED(Branch_Number_BSB_Sort_Code__c)
+)</errorConditionFormula>
+    <errorDisplayField>Branch_Number_BSB_Sort_Code__c</errorDisplayField>
+    <errorMessage>Branch Number (BSB/Sort Code/Routing Code) should be alphanumeric</errorMessage>
+</ValidationRule>

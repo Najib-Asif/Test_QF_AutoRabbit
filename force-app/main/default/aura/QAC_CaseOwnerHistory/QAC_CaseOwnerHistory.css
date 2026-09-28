@@ -1,0 +1,97 @@
+.THIS {
+    box-sizing: border-box;
+}
+
+.THIS .toggleRecord{
+    display:none;
+}
+
+.THIS body {
+    background-color: #474e5d;
+    font-family: Helvetica, sans-serif;
+}
+
+/* The actual timeline (the vertical ruler) */
+.THIS .timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.THIS .timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #F3F2F2;
+    top: 0;
+    bottom: 0;
+    left: 10%;
+    margin-left: -3px;
+    z-index: 1;
+
+}
+
+/* Container around content */
+.THIS .container {
+    padding: 10px 10px;
+    padding-left: 40px;
+    position: relative;
+    background-color: white;
+    width: 90%;
+    left: 10%;
+}
+
+
+/* Place the container to the left */
+.THIS .left {
+    left: 0;
+}
+
+/* Place the container to the right */
+.THIS .right {
+    left: 0.1%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.THIS .left::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    right: 30px;
+    border: medium solid white;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent white;
+    background-color: #F3F2F2;
+}
+
+/* Add arrows to the right container (pointing left) */
+.THIS .right::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    left: 30px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #F3F2F2 transparent transparent;
+    background-color: #F3F2F2;
+}
+
+/* Fix the circle for containers on the right side */
+.THIS .right::after {
+    left: -16px;
+}
+
+/* The actual content */
+.THIS .content {
+    padding: 10px 10px;
+    background-color: #F3F2F2;
+    position: relative;
+    border-radius: 6px;
+}

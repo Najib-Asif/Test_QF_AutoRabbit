@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Segment_Market_And_Category</fullName>
+    <active>false</active>
+    <description>To validate Segment,  Market and Category</description>
+    <errorConditionFormula>OR( ISPICKVAL(Family , &apos;&apos;), ISPICKVAL(Market__c , &apos;&apos;),ISPICKVAL(Category__c  , &apos;&apos;))</errorConditionFormula>
+    <errorMessage>Please enter Segment, Market &amp; Category</errorMessage>
+</ValidationRule>

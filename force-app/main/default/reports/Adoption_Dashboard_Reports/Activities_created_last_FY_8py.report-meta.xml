@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Activity$Owner.Profile</field>
+    </columns>
+    <columns>
+        <field>Activity$Owner.UserRole</field>
+    </columns>
+    <columns>
+        <field>Activity$CreatedBy.UserRole</field>
+    </columns>
+    <columns>
+        <field>Activity$Subject</field>
+    </columns>
+    <currency>AUD</currency>
+    <customDetailFormulas>
+        <calculatedFormula>CASE(Activity.Owner.Profile.Name, &quot;Qantas CC Consultant&quot;, &quot;QCC&quot;, &quot;Qantas CC Customer Specific Needs&quot;, &quot;QCC&quot;,&quot;Qantas CC Operational Manager&quot;,&quot;QCC&quot;,&quot;Qantas CC Team Lead&quot;,&quot;QCC&quot;,&quot;Qantas Freight Sales&quot;,&quot;Freight&quot;,&quot;Qantas Freight Service&quot;,&quot;Freight&quot;,
+&quot;Qantas Loyalty -Commercial Sales&quot;,&quot;Loyalty&quot;,&quot;Sales&quot;)</calculatedFormula>
+        <dataType>Text</dataType>
+        <description>Business Unit</description>
+        <developerName>CDF1</developerName>
+        <label>Business Unit</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <filter>
+        <criteriaItems>
+            <column>Activity$CreatedBy.Profile_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>PT1</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CDF1</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <name>Activities created last FY</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activities__c</reportType>
+    <roleHierarchyFilter>QF</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Activity$CreatedDate</dateColumn>
+        <interval>INTERVAL_PREVFY</interval>
+    </timeFrameFilter>
+</Report>

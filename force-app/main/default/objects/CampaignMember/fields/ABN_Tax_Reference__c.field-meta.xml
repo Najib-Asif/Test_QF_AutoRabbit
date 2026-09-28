@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ABN_Tax_Reference__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( LeadId != null,Lead.ABN_Tax_Reference__c ,IF(ContactId != null , Contact.Account.ABN_Tax_Reference__c,&apos;&apos;))</formula>
+    <label>ABN/Tax Reference</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

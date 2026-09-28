@@ -1,0 +1,79 @@
+<aura:component controller="QCC_BookingDetailController" access="global">
+    <aura:attribute name="completebooking" type="Object" />
+    <aura:attribute name="segmentID" type="String" />
+    <aura:attribute name="passengerID" type="String" />
+    <aura:attribute name="segmentTattoo" type="String" />
+    <aura:attribute name="passengerTattoo" type="String" />
+    <aura:attribute name="segment" type="Object" />
+    <aura:attribute name="passenger" type="Object" />
+    <aura:attribute name="firstPassenger" type="Object"/>
+    <aura:attribute name="selectedLeg" type="Object" />
+    <aura:attribute name="selectedSSR" type="Object[]" />
+    <aura:attribute name="pnr" type="String" />
+    <aura:attribute name="creationDate" type="String" />
+    <aura:attribute name="archivalData" type="Boolean" default="false"/>
+
+    <aura:attribute name="flightInfo" type="Object[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:method name="flightMethod" action="{!c.showFlightDetails}"> 
+        <aura:attribute name="flightDetail" type="Object[]"/> 
+    </aura:method>
+    <aura:method name="flightSelected" action="{!c.highlightFlight}"> 
+        <aura:attribute name="segmentId" type="String"/> 
+    </aura:method>
+    <aura:registerEvent name="flightEvent" type="c:QCC_PNRFlightEvent"/>
+   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:spinner aura:id="mySpinner" variant="brand" alternativeText="Fetching Data..." />
+    
+    <div>         
+            <aura:renderIf isTrue="{!empty(v.flightInfo)}">
+            <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg}</div>
+            <aura:set attribute="else">                
+                <table class="slds-table slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout slds-has-focus">
+                    <!--Table must be responsive-->
+                    <thead>
+                        <tr class="slds-text-title_caps slds-line-height_reset">
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Airline">Airline</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Flight Number">Flight Number</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Departure Date">Departure Date</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Departure Port">Departure Port</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Arrival Port">Arrival Port</div>
+                            </th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.flightInfo}" var="item" indexVar="i">
+                            <tr class="{! i == 0 ? 'slds-hint-parent record onhover onSelection' : 'slds-hint-parent record onhover'}" id ="{!item.segmentId}" data-record="{!item.segmentId}" onclick="{!c.returnSelectedFlight}">
+                                <td data-label="Airline">
+                                    <div  class="slds-truncate">{!item.operatingCarrierAlphaCode}</div>
+                                </td>
+                                <td data-label="Flight Number">
+                                    <div  class="slds-truncate">{!item.operatingFlightNumber}</div>
+                                </td>
+                                <td data-label="Depature Date">
+                                    <div  class="slds-truncate">{!item.departureLocalDate}</div>
+                                </td>
+                                <td data-label="Depature Port">
+                                    <div  class="slds-truncate">{!item.departureAirportCode}</div>
+                                </td>
+                                <td data-label="Arrival Port">
+                                    <div  class="slds-truncate">{!item.arrivalAirportCode}</div>
+                                </td>
+                             </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </aura:set>
+        </aura:renderIf>
+    </div>
+</aura:component>

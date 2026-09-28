@@ -1,0 +1,20 @@
+<aura:component  implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="ffNumber" type="String"/>
+    <div class="c-container">
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="4">
+                <c:QCC_LookupFrequentFlyer ffNumber="{! v.ffNumber}"/>
+                <c:QCC_PNRSearch />
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="around-small" size="4">
+                <c:QCC_SearchContactInfoV2 isLivePerson="true"/>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="around-small" size="4">
+                <c:QCC_CaseSearchResultV2 isLivePerson="true"/>
+            </lightning:layoutItem>
+            
+        </lightning:layout>
+    </div>
+</aura:component>

@@ -1,0 +1,32 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="KnowledgeController" access="global">
+    <!-- Attributes to store user input -->
+    <aura:attribute name="categoryGroupName" type="String"/>  
+    <aura:attribute name="categoryName" type="String"/>  
+    <aura:attribute name="knowledgeArticles" type="List"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <lightning:layout class="slds-m-around_medium">
+        <!-- Sidebar for Category Tree -->
+        <lightning:layoutItem flexibility="auto" size="3" class="slds-m-right_small">
+            <c:DataCategoryTreecmp aura:id="dataCategoryTreeComponent" categorySelected="{!c.handleCategorySelect}"/>
+        </lightning:layoutItem>
+
+        <!-- Main Content: Knowledge Articles Data Table -->
+        <lightning:layoutItem flexibility="auto" size="9" class="slds-p-around_x_small">
+            <!-- Data table to display results -->
+            <!--
+            <lightning:datatable
+                keyField="id"
+                data="{!v.knowledgeArticles}"
+                columns="{!v.columns}"
+                hideCheckboxColumn="true"
+                onrowaction="{! c.handleRowAction }"
+                class="slds-table slds-table_bordered "/>
+-->
+            <c:knowledgeArticleDataTable knowledgeArticles="{!v.knowledgeArticles}" />
+        </lightning:layoutItem>
+        
+    </lightning:layout>
+</aura:component>

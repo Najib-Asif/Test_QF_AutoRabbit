@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Termination_Date_validation</fullName>
+    <active>false</active>
+    <description>Case Termination date must be greater than contract start date</description>
+    <errorConditionFormula>AND(RecordTypeId =$Label.QEC_Case_Recordtype_Deal_support_request, Contract_Start_Date_f__c &gt; End_Date__c,NAM_s_Approval__c = false, Related_Contract__r.Active__c =true,ISPICKVAL(Type ,&apos;Deal Termination&apos;))</errorConditionFormula>
+    <errorDisplayField>End_Date__c</errorDisplayField>
+    <errorMessage>Termination date must be greater than or equal to Contract start date.</errorMessage>
+</ValidationRule>

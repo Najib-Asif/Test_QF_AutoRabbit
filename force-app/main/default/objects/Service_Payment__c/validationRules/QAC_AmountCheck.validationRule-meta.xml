@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_AmountCheck</fullName>
+    <active>true</active>
+    <description>Service Payment Amount Should be same as Work Order Amount</description>
+    <errorConditionFormula>AND(
+RecordType.Name = &apos;Service Request&apos;,
+Total_Amount__c &lt;&gt; ROUND(Work_Order__r.TotalPrice,2)
+)</errorConditionFormula>
+    <errorDisplayField>Total_Amount__c</errorDisplayField>
+    <errorMessage>Payment total amount should be match work order total price</errorMessage>
+</ValidationRule>

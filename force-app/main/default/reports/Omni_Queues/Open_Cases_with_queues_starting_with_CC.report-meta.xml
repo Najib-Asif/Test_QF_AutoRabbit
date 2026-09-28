@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_98234323</developerName>
+        <masterLabel>Queue</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>OWNER</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>CCC Advocacy Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Baggage Tracing Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Critical Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Damaged Baggage Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Delayed Baggage Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Exception Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC ExCo Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Flight Disruption Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Fulfillment Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Insurance Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Insurance Refund Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Language Translation</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Post Travel Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CCC Hobart Queue</sourceValue>
+            </sourceValues>
+            <value>New Queues</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>CLOSED</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>startsWith</operator>
+            <value>CC,QCC,Qantas,VIP,internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>specific,waiting</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Case.Frequent_Flyer_Request,Case.System_Admin_Request</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_98234323</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>OWNER</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>RECORDTYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Open Cases with queues starting with CC</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

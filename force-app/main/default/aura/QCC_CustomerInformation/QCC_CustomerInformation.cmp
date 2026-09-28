@@ -1,0 +1,56 @@
+<!---
+**********************************************************************************************
+Author:        Praveen Sampath
+Company:       Capgemini
+Description:   QCC Customer Information Component on the Console layout 
+    
+************************************************************************************************
+History
+************************************************************************************************
+01-Nov-2017      Praveen Sampath               Initial Design
+13-Sep-2019		 Raymart Tolentino			   GRAPHITE-113 Include a child component for Disruption Warning
+************************************************************************************************
+-->
+<aura:component access="global">
+    <aura:method name="contactMethod" action="{!c.getContactDetails}">
+        <aura:attribute name="contactDetail" type="Contact"/>
+    </aura:method>
+    <aura:attribute name="objCon" type="Contact"  default="{ 'sobjectType' : 'Contact' }"/>
+    <aura:attribute name="onContact" type="Boolean"/>
+    <aura:attribute name="contactId" type="String"/>
+    <lightning:card >
+        <aura:set attribute="title">
+            Customer Details
+        </aura:set>
+        <p class="slds-p-horizontal--large" style="padding-bottom: 1px;">
+            <force:outputField class="slds-text-heading_medium" value="{!v.objCon.Name}"/><br/><br/>
+            <table>
+                <tr>
+                    <td style="width: 80%">
+                        <dl class="slds-list_horizontal slds-wrap">
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate" style="margin-right: -30px;">
+                                <lightning:icon iconName="utility:email" size="small" alternativeText="Email"/>
+                            </dt>
+                            <dd class="slds-item_detail slds-truncate" title="{!v.objCon.Preferred_Email__c}">{!v.objCon.Preferred_Email__c}</dd>
+                        </dl>
+                    </td>
+                    <td rowspan="2">
+                        <aura:renderIf isTrue="{!v.onContact}">
+                            <c:QCC_DisruptionWarning recordId="{!v.contactId}"/>
+                        </aura:renderIf>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dl class="slds-list_horizontal slds-wrap">
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate" style="margin-right: -30px;">
+                                <lightning:icon iconName="utility:call" size="small" alternativeText="Phone"/>
+                            </dt>
+                            <dd class="slds-item_detail slds-truncate" title="{!v.objCon.Preferred_Phone_Number__c}"><lightning:clickToDial value="{!v.objCon.Preferred_Phone_Number__c}"/></dd>
+                        </dl>
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </lightning:card>
+</aura:component>

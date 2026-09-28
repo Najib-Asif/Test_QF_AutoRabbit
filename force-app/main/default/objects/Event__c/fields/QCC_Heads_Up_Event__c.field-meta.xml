@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Heads_Up_Event__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Populated automatically for a Flight Event Active with the Id of the equivalent Heads Up flight event record which has been auto-closed</description>
+    <label>Heads Up Event</label>
+    <referenceTo>Event__c</referenceTo>
+    <relationshipLabel>Flight Events (Heads Up Event)</relationshipLabel>
+    <relationshipName>Flight_Events</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

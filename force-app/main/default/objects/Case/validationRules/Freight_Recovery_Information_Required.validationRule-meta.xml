@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Recovery_Information_Required</fullName>
+    <active>false</active>
+    <description>Freight - Recovery Information Section is required before closure of a Freight Claims/Feedback request and when either Recovery Solution or Recover Cost is filled in for all Freight cases</description>
+    <errorConditionFormula>OR(AND(OR((RecordType.DeveloperName = &apos;Freight_Claims&apos;), (RecordType.DeveloperName = &apos;Freight_Feedback&apos;)), ISPICKVAL(Status, &quot;Closed&quot;), OR(ISBLANK( Freight_Recovery_Cost__c ), ISPICKVAL( Freight_Recovery_Solution__c , &quot;&quot;))), AND((RecordType.DeveloperName = &apos;Freight_Claims&apos;), NOT(ISPICKVAL( Freight_Recovery_Solution__c , &quot;&quot;)), ISBLANK( Freight_Recovery_Cost__c )),
+AND((RecordType.DeveloperName = &apos;Freight_Claims&apos;), NOT(ISBLANK( Freight_Recovery_Cost__c )),ISPICKVAL( Freight_Recovery_Solution__c , &quot;&quot;)))</errorConditionFormula>
+    <errorMessage>Please fill out the Recovery Information section</errorMessage>
+</ValidationRule>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Stamp Last Queue Owner on Case when Case is accepted.</description>
+        <name>Stamp_Last_Queue_Owner</name>
+        <label>Stamp Last Queue Owner</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <actionName>CCC_OmniUpdateLastQueueOwner</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>originalGroupId</name>
+            <value>
+                <elementReference>$Record.OriginalGroupId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>workItemId</name>
+            <value>
+                <elementReference>$Record.WorkItemId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>CCC_OmniUpdateLastQueueOwner</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>51.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>During automated routing,  &apos;OriginalGroupId&apos; field in AgentWork record contains the Group of Case Id.  During manual transfer, &apos;OriginalGroupId&apos; field is null in AgentWork record. So this decision checks if case is routed via manual transfer.</description>
+        <name>Manual_transfer_of_case_via_Transfer_Button</name>
+        <label>Manual transfer of case via Transfer Button</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>Stamp_Last_Queue_Owner</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Automated routing via Omni</defaultConnectorLabel>
+        <rules>
+            <name>Manual_Transfer_via_omni</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OriginalGroupId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Case_Record</targetReference>
+            </connector>
+            <label>Manual Transfer via Omni</label>
+        </rules>
+    </decisions>
+    <description>Update Status and Last Queue Owner for QCC Cases when automated assignment happens through Omni
+Update Status  for QCC Cases when Manual assignment happens through Omni</description>
+    <environments>Default</environments>
+    <interviewLabel>CCC {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CCC Update Last Queue Owner</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_related_Case_record</name>
+        <label>Get related Case record</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Manual_transfer_of_case_via_Transfer_Button</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.WorkItemId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updates the Case status to Inprogress</description>
+        <name>Update_Case_Record</name>
+        <label>Update Case Record</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.WorkItemId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_related_Case_record</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WorkItemId</field>
+            <operator>StartsWith</operator>
+            <value>
+                <stringValue>500</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Opened</stringValue>
+            </value>
+        </filters>
+        <object>AgentWork</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>LastQueueOwnerId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

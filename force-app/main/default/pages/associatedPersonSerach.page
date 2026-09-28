@@ -1,0 +1,59 @@
+<apex:page standardController="Account" tabStyle="Contact" extensions="associatedPersonSearchController">
+  <apex:form >
+  <style>
+      .search{
+          font-size:10pt;
+      }
+  </style>
+  
+      <apex:pageBlock >
+          
+           
+           <apex:pageBlockSection id="results" columns="1">
+              
+               <apex:outputPanel styleClass="search">
+                       <b> Frequent Flyer Number :</b>&nbsp; &nbsp;
+                        <apex:inputText value="{!searchString}" style="width:300px"/>
+                        &nbsp; &nbsp;<apex:commandButton value="Search" action="{!searchContacts}" reRender="results"/>
+               </apex:outputPanel>     
+               
+               <apex:outputPanel styleClass="search">
+                   Please ensure that there are no leading zeroes or text within the 'Frequent Flyer Number' that you put in the box to search.<br/>
+                   Eg. If you want to search for "QF0123456" please use "123456" to search.
+               </apex:outputPanel>    
+                              
+               <apex:outputPanel rendered="{!displayError}" id="error">
+                   No search results found. Please Go 'Back to List' and use the ‘New Contact’ option to create a contact record. <!--<apex:commandButton value="Continue" action="{!createNewContact}"/>-->
+               </apex:outputPanel>
+               <apex:outputPanel rendered="{!displayContacts}"><br/>
+               <apex:pageBlockTable value="{!allContacts}" var="con">
+                       <apex:column headerValue="Frequent Flyer #" value="{!con.Frequent_Flyer_Number__c}"/>
+                       
+                       <apex:column headerValue="Full Name">
+                           <apex:outputText value="{!con.Last_Name__c} {!con.First_Name__c} "/>
+                       </apex:column>
+                       <apex:column value="{!con.Account__c}"/>
+                       <apex:column value="{!con.Account__r.ABN_Tax_Reference__c}"/>
+                      <!-- <apex:column headerValue="{!$ObjectType.Associated_Person__c.Fields.Email__c.Label}" value="{!con.Email__c}"/>
+                       <apex:column headerValue="{!$ObjectType.Associated_Person__c.Fields.Phone__c .Label}" value="{!con.Phone__c}"/> -->
+                       <apex:column value="{!con.Profile_Email__c}"/>
+                       <apex:column value="{!con.Profile_Phone__c}"/>
+                       
+                       <apex:column headerValue="Action">
+                           <apex:commandLink value="Add as Contact" action="{!contiueToEdit}">
+                               <apex:param name="param1" value="{!con.Id}" assignTo="{!selectedContactId}"/>
+                           </apex:commandLink>
+                           
+                       </apex:column>
+               </apex:pageBlockTable>
+               </apex:outputPanel>
+               
+               <apex:outputPanel >
+                   <apex:commandLink action="{!goBack}" value="Back to List"/>
+               </apex:outputPanel>
+               
+           </apex:pageBlockSection>
+      
+      </apex:pageBlock>  
+  </apex:form>
+</apex:page>

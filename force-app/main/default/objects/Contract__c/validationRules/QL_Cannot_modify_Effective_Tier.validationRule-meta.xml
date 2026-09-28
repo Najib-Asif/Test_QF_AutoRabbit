@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QL_Cannot_modify_Effective_Tier</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISPICKVAL( Status__c , &apos;Signed by Customer&apos;),
+ISCHANGED(QL_Effective_Tier__c),  NOT($Permission.Ability_to_edit_effective_tier))</errorConditionFormula>
+    <errorMessage>Efffective Tier cannot be edited when the Contract Status is &apos;Signed by Customer&apos;</errorMessage>
+</ValidationRule>

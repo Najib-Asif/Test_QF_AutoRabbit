@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>QP_Invoice_Approval_Notification</fullName>
+        <description>QP Invoice Approval Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>QantasPayments/QP_Invoice_Approval_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>QP_Invoice_Rejection_Notification</fullName>
+        <description>QP Invoice Rejection Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>QantasPayments/QP_Invoice_Rejection_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>QP_NAM_Approved_Reminder</fullName>
+        <description>QP NAM Approved Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QantasPayments/QP_NAM_Approved_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>QP_NAM_Rejected_Reminder</fullName>
+        <description>QP NAM Rejected Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QantasPayments/QP_NAM_Rejected_Reminder</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>CP_Assign_Invoices_to_Sales_Team</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Sales_Invoice_Team</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>CP_Assign Invoices to Sales Team</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Assign_ReadOnly_Layout</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Approved_Corporate_Payments</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>CP Assign ReadOnly Layout</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Make_Readonly_upon_Payment_Processed</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Approved_Corporate_Payments</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>CP_Make Readonly upon Payment Processed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Status_Update_Draft</fullName>
+        <field>Status__c</field>
+        <literalValue>Draft</literalValue>
+        <name>CP_Status Update Draft</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Status_Update_Head_B_G_Rejected</fullName>
+        <field>Status__c</field>
+        <literalValue>Head of B&amp;G Rejected</literalValue>
+        <name>CP_Status Update Head B&amp;G Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Status_Update_NAM_Approval</fullName>
+        <field>Status__c</field>
+        <literalValue>NAM Approved</literalValue>
+        <name>CP_Status Update NAM Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Status_Update_NAM_Rejected</fullName>
+        <field>Status__c</field>
+        <literalValue>NAM Rejected</literalValue>
+        <name>CP_Status Update NAM Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Status_Update_Pending_Sales_Team</fullName>
+        <field>Status__c</field>
+        <literalValue>Pending with Sales Support Team</literalValue>
+        <name>CP_Status Update Pending Sales Team</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Update_Cost_Center_Number_Cash</fullName>
+        <description>To update the cost center number to 100242 for Cash</description>
+        <field>Cost_Centre__c</field>
+        <formula>&quot;100242&quot;</formula>
+        <name>CP_Update Cost Center Number - Cash</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Update_Status_as_Submit_for_Approval</fullName>
+        <field>Status__c</field>
+        <literalValue>Submitted for Approval</literalValue>
+        <name>CP_Update Status as Submit for Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Update_cost_center_Accnt_No_Cash</fullName>
+        <description>To update the cost center Account number to 608018 for Cash</description>
+        <field>Account_Number__c</field>
+        <formula>&apos;608018&apos;</formula>
+        <name>CP_Update cost center Accnt No - Cash</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CP_Update_cost_center_Accnt_No_TF</fullName>
+        <description>To update the cost center Account number to 754263 for Travel Fund</description>
+        <field>Account_Number__c</field>
+        <formula>&apos;754263&apos;</formula>
+        <name>CP_Update cost center Accnt No - TF</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Status_to_Submitted_for_Approval</fullName>
+        <field>Status__c</field>
+        <literalValue>Submitted for Approval</literalValue>
+        <name>Change Status to Submitted for Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_record_type_to_Approved</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Approved_Agency_Payments</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Change record type to Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_status_to_NAM_Approved</fullName>
+        <field>Status__c</field>
+        <literalValue>NAM Approved</literalValue>
+        <name>Change status to NAM Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_status_to_Nil_Payment</fullName>
+        <field>Status__c</field>
+        <literalValue>NIL Payment</literalValue>
+        <name>Change status to Nil Payment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_change_to_NAM_Rejected</fullName>
+        <field>Status__c</field>
+        <literalValue>NAM Rejected</literalValue>
+        <name>Status change to NAM Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_cost_center_TF</fullName>
+        <description>To update the cost center number to 176275 for Travel Fund</description>
+        <field>Cost_Centre__c</field>
+        <formula>&quot;176275&quot;</formula>
+        <name>Update cost center - TF</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>CP_Automated notification for Contract Payments</fullName>
+        <actions>
+            <name>CP_Update_the_Invoice_Details</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Invoices__c.Payment_Due_Date_System__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Invoices__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>New Corporate Payments,Approved Corporate Payments</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>CP_Make Readonly upon Payment Processed</fullName>
+        <actions>
+            <name>CP_Make_Readonly_upon_Payment_Processed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Invoices__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Payment Processed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Invoices__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>New Corporate Payments</value>
+        </criteriaItems>
+        <description>Make the layout as readonly once the payment has been processed</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>CP_Payment Frequency HalfYearly Notification</fullName>
+        <active>true</active>
+        <description>Payment Frequency HalfYearly Notification</description>
+        <formula>ISPICKVAL(Contract_Payments__r.Payment_Frequency__c,&apos;Half-Yearly&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Likelihood_to_Payment_Reminder_Note_125Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Likelihood_to_Payment_Reminder_Note_93Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Invoices__c.End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>CP_Payment Frequency Quarterly Notification</fullName>
+        <active>true</active>
+        <description>Payment Frequency Quarterly Notification</description>
+        <formula>ISPICKVAL(Contract_Payments__r.Payment_Frequency__c,&apos;Quarterly&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Likelihood_to_Payment_Reminder_Note_125Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Invoices__c.End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>CP_Payment Frequency Yearly Notification</fullName>
+        <active>true</active>
+        <description>Payment Frequency Yearly Notification</description>
+        <formula>ISPICKVAL(Contract_Payments__r.Payment_Frequency__c,&apos;Yearly&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Likelihood_to_Payment_Reminder_Note_125Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Likelihood_to_Payment_Reminder_Note_311Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Likelihood_to_Payment_Reminder_Note_93Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Invoices__c.End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>CP_Update cost center Account Number for Travel Fund</fullName>
+        <actions>
+            <name>CP_Update_cost_center_Accnt_No_TF</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Sales Support team use the same set of Cost Center Account Number: 754263 for Travel Fund</description>
+        <formula>ISPICKVAL(Contract_Payments__r.Paid_As__c, &quot;Travel Fund&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>CP_Update cost center Account Number for cash</fullName>
+        <actions>
+            <name>CP_Update_cost_center_Accnt_No_Cash</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Sales Support team use the same set of Cost Center Account Number: 726900 for Cash</description>
+        <formula>ISPICKVAL(Contract_Payments__r.Paid_As__c, &quot;Cash&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>CP_Update cost center for Travel Fund</fullName>
+        <actions>
+            <name>Update_cost_center_TF</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Sales Support team use the same set of Cost Center Number: 176275 for Travel Fund</description>
+        <formula>ISPICKVAL(Contract_Payments__r.Paid_As__c, &quot;Travel Fund&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>CP_Update cost center for cash</fullName>
+        <actions>
+            <name>CP_Update_Cost_Center_Number_Cash</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Sales Support team use the same set of Cost Center Number: 100242 for Cash</description>
+        <formula>ISPICKVAL(Contract_Payments__r.Paid_As__c, &quot;Cash&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QP Reminder for NAM Approved Invoices</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Invoices__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Payments,Approved Agency Payments</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Invoices__c.Status__c</field>
+            <operation>equals</operation>
+            <value>NAM Approved</value>
+        </criteriaItems>
+        <description>Sales Performance Manager will be reminded to action approved Invoices 7 days after Payment Due Date</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>QP_NAM_Approved_Reminder</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Invoices__c.Payment_Due_Date_System__c</offsetFromField>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>QP Reminder for NAM Rejected Invoices</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Invoices__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Payments,Approved Agency Payments</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Invoices__c.Status__c</field>
+            <operation>equals</operation>
+            <value>NAM Rejected</value>
+        </criteriaItems>
+        <description>Sales Performance Managers will be reminded to action Invoices 7 days after the approval process is rejected</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>QP_NAM_Rejected_Reminder</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>QP Status change for zero invoices</fullName>
+        <actions>
+            <name>Change_status_to_Nil_Payment</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Invoices__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Approved Agency Payments</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Invoices__c.Amount__c</field>
+            <operation>equals</operation>
+            <value>AUD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Invoices__c.Status__c</field>
+            <operation>equals</operation>
+            <value>NAM Approved</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>CP_Update_the_Invoice_Details</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Update invoice details regardless of payment required or not required.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Invoices__c.Payment_Due_Date_System__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Update the invoice details</subject>
+    </tasks>
+    <tasks>
+        <fullName>Likelihood_to_Payment_Reminder_Note_125Days</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Update invoice details regardless of payment required or not required.</description>
+        <dueDateOffset>125</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Invoices__c.Start_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Update the invoice details</subject>
+    </tasks>
+    <tasks>
+        <fullName>Likelihood_to_Payment_Reminder_Note_311Days</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Update invoice details regardless of payment required or not required.</description>
+        <dueDateOffset>311</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Invoices__c.Start_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Update the invoice details</subject>
+    </tasks>
+    <tasks>
+        <fullName>Likelihood_to_Payment_Reminder_Note_93Days</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Update invoice details regardless of payment required or not required.</description>
+        <dueDateOffset>218</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Invoices__c.Start_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Update the invoice details</subject>
+    </tasks>
+</Workflow>

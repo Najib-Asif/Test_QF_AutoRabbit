@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Total_Credits_field_validation</fullName>
+    <active>false</active>
+    <description>QAC Agency Credits - Total Credits field should be Positive number and multiply by 10.</description>
+    <errorConditionFormula>AND( 
+RecordType.Name==&quot;Account Maintenance&quot;,
+Account.BillingCountry == &quot;AU&quot;, 
+ISPICKVAL( Sub_Type_1__c , &quot;Ad-hoc Credits&quot;),
+ISPICKVAL( Account.Type, &quot;Agency Account&quot;),
+OR(Total_Credits__c &lt;= 0 , MOD(Total_Credits__c,10)!=0))</errorConditionFormula>
+    <errorMessage>Total Credits will accept positive values in multiplies of 10 (e.g : 10,20,30). The valuse cannot be zero.</errorMessage>
+</ValidationRule>

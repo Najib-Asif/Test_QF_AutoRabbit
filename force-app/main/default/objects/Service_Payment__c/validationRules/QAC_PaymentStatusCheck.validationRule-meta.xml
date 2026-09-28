@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_PaymentStatusCheck</fullName>
+    <active>true</active>
+    <description>To check Payment&apos;s Type and Work order when the payment status is Paid
+CRM-7557 - Removed EMDNumber Empty Check For NameCorrection Changes</description>
+    <errorConditionFormula>AND(
+	RecordType.DeveloperName = &apos;Service_Request&apos;,
+	$Setup.EnableValidationRule__c.Flag_to_Prevent_editing_QAC_Paid_ServPay__c = FALSE,
+	ISPICKVAL(Payment_Status__c,&quot;Paid&quot;),
+	OR(
+		ISBLANK(Work_Order__c),
+		Work_Order__r.IsClosed,
+                      ISBLANK(TEXT(Payment_Type__c))
+	)
+)</errorConditionFormula>
+    <errorMessage>For Payment status to be paid, 
+Workorder cannot be in closed status</errorMessage>
+</ValidationRule>

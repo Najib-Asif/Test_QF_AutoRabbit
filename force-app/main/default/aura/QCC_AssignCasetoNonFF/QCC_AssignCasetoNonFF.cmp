@@ -1,0 +1,44 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="QCC_PNRSearchController">
+	<aura:attribute name="recId" type="String" default=""/>
+     <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="case" type="Case"/>
+    <aura:attribute name="simpleCase" type="Case"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    <lightning:workspaceAPI aura:id="nonFFCon"/>
+    <!-- Only Invoked from Case Search Page-->
+    <aura:method name="caseNONFFContact" action="{!c.onLoad}" description="To get Case from the parent Case Search Component"> 
+        <aura:attribute name="caseId" type="String" /> 
+    </aura:method>
+    
+    <force:recordData aura:id="caseRecord"
+                      recordId="{!v.recId}"
+                      layoutType="FULL"
+                      fields="CaseNumber,Contact.RecordTypeId"
+                      targetRecord="{!v.case}"
+                      targetFields="{!v.simpleCase}"
+                      mode="VIEW"
+                      recordUpdated="{!c.handleRecordUpdated}"/>
+    
+    <aura:if isTrue="{! v.isLoading}">
+        <lightning:spinner variant="brand" alternativeText="Searching..."/>
+    </aura:if>
+    <lightning:card title="Add Non-Frequent Flyer" class="slds-clearfix">
+        
+        <aura:renderIf isTrue="{!not(empty(v.errMSG))}">
+            <ui:message title="Error" severity="error" closable="true">
+                {!v.errMSG} 
+            </ui:message>
+        </aura:renderIf> 
+        
+        <div class="slds-p-around_small">
+             <label class="slds-form-element__label outPutText-box"> {!$Label.c.QCC_NonFFLabel }   </label>
+        </div>
+        
+        <div class="slds-p-around_small slds-float_right">
+            <lightning:button label="Assign non-FF Customer" variant="brand" onclick="{! c.onAssigntoContact}" disabled="{! v.disabled}"/>
+        </div>
+        
+    </lightning:card>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <c:QCC_ShowModal showModal="{! v.showModal}" header="Info" content="Case is Updated"/>
+</aura:component>

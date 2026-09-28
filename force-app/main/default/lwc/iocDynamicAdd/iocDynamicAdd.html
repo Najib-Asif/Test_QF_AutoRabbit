@@ -1,0 +1,29 @@
+<template>
+    <lightning-layout  multiple-rows="true" >
+        
+        <!--<lightning-layout-item size="12"  padding="around-small">
+            <div if:false={showonClick}>
+                <a href="#" onclick={addNewRec}>
+                    <lightning-icon icon-name="utility:add" alternative-text="New Action"></lightning-icon>
+                </a>
+            </div>
+        </lightning-layout-item> 1085-->
+
+        <lightning-layout-item size="12">
+            <!--<div if:true={showonClick}> 1085-->
+                <div class="slds-grid ">
+            <lightning-combobox
+                    name="checklistType"
+                    label="Add a new checklist item"
+                    value={value}
+                    placeholder="Select a checklist item"
+                    options={dynamicOption}
+                    onchange={handleChange}
+                    class="slds-size_10-of-12 slds-m-right_small slds-text-align_left">
+            </lightning-combobox>
+            
+                <lightning-button variant="destructive" label="Add" onclick={createdNew} class="slds-size_1-of-12 slds-m-top_large slds-text-align_left"></lightning-button>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>  
+</template>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group_Sales_Waivers_Queue</fullName>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.ESCALATION_STATE</columns>
+    <columns>Team_Lead__c</columns>
+    <columns>Agent_Organisation_Name__c</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>Reason_for_Waiver__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.CREATED_DATE</field>
+        <operation>notEqual</operation>
+        <value>5/1/2017 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed - Approved</value>
+    </filters>
+    <label>Group Sales Waivers Queue</label>
+    <queue>Group_Sales_Waivers_Queue</queue>
+    <sharedTo>
+        <role>QF_Support_QIC_Member</role>
+    </sharedTo>
+</ListView>

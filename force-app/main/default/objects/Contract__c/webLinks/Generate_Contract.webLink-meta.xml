@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generate_Contract</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Generate Contract</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+var query = &quot;SELECT Id FROM Attachment where ParentId=\&apos;&quot;+&apos;{!Contract__c.Id}&apos;+&quot;\&apos;&quot;;
+
+var records = sforce.connection.query(query);
+var records1 = records.getArray(&apos;records&apos;);
+var size = records1.length+1;
+if({!Contract__c.Active__c} == true){
+var URL =&quot;https://composer.congamerge.com?sessionId={!API.Session_ID}&amp;serverUrl={!API.Partner_Server_URL_290}&quot;;
+URL +=&quot;&amp;id={!Contract__c.Id}&amp;TemplateId={!IF(Contract__c.RecordTypeId=&apos;01290000001IaHK&apos;, IF( Contract__c.Travel_Benefits__c ==TRUE,&apos;a0X90000009dQ5J&apos;,&apos;a0X90000009dQ5E&apos;),IF( ISPICKVAL(Contract__c.Type__c,&apos;Corporate Airfares&apos;), IF( ISPICKVAL( Contract__c.Travel_Fund__c , &apos;Yes&apos;) ,
+&apos;a0X90000009cHKJ&apos;, &apos;a0X90000009cHKO&apos;),IF(OR(ISPICKVAL(Contract__c.Type__c,&apos;Adhoc&apos;),ISPICKVAL(Contract__c.Type__c,&apos;Scheduled&apos;)), &apos;a0X90000009dX15&apos;, &apos;a0X90000009cHKE&apos;)))}&amp;DS7=1&amp;DS7Preview=1&quot;;
+URL +=&quot;{!IF(Contract__c.RecordTypeId=&apos;01290000001IaHK&apos;, &apos;&apos;,IF(AND( NOT(ISPICKVAL(Contract__c.Status__c , &apos;Approval Required – Legal&apos;)), NOT(ISPICKVAL(Contract__c.Standard__c, &apos;Yes&apos;))) ,&apos;&amp;DefaultPDF=1&apos;,&apos;&apos;))}&quot;;
+
+URL +=&quot;&amp;reportid=[Domestic]00O90000008k4lC&amp;queryid=a0W9000000InuNu,a0W9000000InuNt,a0W9000000InuNb,a0W9000000InuMv,a0W9000000InuNQ,a0W9000000InuMw,a0W9000000InuMo,a0W9000000InuNw,a0W9000000InuNx,a0W9000000InuNG,a0W9000000InuNZ,a0W9000000InuNl,a0W9000000InuNM,a0W9000000InuNJ,a0W9000000InuNK,a0W9000000InuNv,a0W9000000InuMz,a0W9000000InuNI,a0W9000000InuMy,a0W9000000InuNg,a0W9000000InuNh,a0W9000000InuNW,a0W9000000InuNi,a0W9000000InuO4,a0W9000000InuMs,a0W9000000InuNO,a0W9000000InuO0,a0W9000000InuNY,a0W9000000InuNf,a0W9000000InuN4,a0W9000000InuNk,a0W9000000InuNy,a0W9000000InuN3,a0W9000000InuNp,a0W9000000InuO2,a0W9000000InuNV,a0W9000000InuNE,a0W9000000InuO3,a0W9000000InuNo,a0W9000000InuN8,a0W9000000InuO9,a0W9000000InuOA,a0W9000000InuOC,a0W9000000InuOE,[CharterFlightInfo]a0W9000000Kj6Vn,[chmnginfo]a0W9000000Kj6Vx,[QMRINT]a0W9000000KizXj,[QMRDOM]a0W9000000KizXo?pv0={!Contract__c.Id}&amp;OFN= Qantas Contract-{!Contract__c.Account__c} v&quot;+size+&quot;.0&quot;;
+
+window.open(URL,&apos;Contract_Generation&apos;,&apos;width=800,height=800&apos;);
+}else{
+alert(&quot;Contract should be active!&quot;);
+}</url>
+</WebLink>

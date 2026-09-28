@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCCStageandRecoveryTypeMismatch</fullName>
+    <active>true</active>
+    <description>QCC: When Stage has a value Recovery Type Should be only EFT Refund or Credit Card Refund</description>
+    <errorConditionFormula>NOT(ISBLANK(Text(Stage__c) )) &amp;&amp; 
+NOT(Text(Stage__c) == &apos;NA&apos;) &amp;&amp; 
+NOT(Text(Type__c) == &apos;EFT Refund&apos;) &amp;&amp; 
+NOT(Text(Type__c) == &apos;Credit Card Refund&apos;) &amp;&amp;
+NOT(ISBLANK(Text(Type__c))) &amp;&amp;
+RecordType.DeveloperName = &apos;Customer_Connect&apos;</errorConditionFormula>
+    <errorMessage>Recovery Type can only be EFT Refund or Credit Card Refund</errorMessage>
+</ValidationRule>

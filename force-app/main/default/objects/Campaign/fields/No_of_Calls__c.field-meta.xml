@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_Calls__c</fullName>
+    <inlineHelpText>Indicates the sum of number of calls from campaign member</inlineHelpText>
+    <label>Total Call Attempts</label>
+    <summarizedField>CampaignMember.Calls_count__c</summarizedField>
+    <summaryFilterItems>
+        <field>CampaignMember.No_of_Calls__c</field>
+        <operation>equals</operation>
+        <value>0, 1, 2, 3, 4</value>
+    </summaryFilterItems>
+    <summaryForeignKey>CampaignMember.CampaignId</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

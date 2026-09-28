@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body style="height: auto; min-height: auto;">
+<p>Dear {{{Case.Consultants_Name__c}}},<br />
+<br />
+The reference for your Qantas Fare Quote request made via Qantas Agency Connect is:&nbsp;{{{Case.CaseNumber}}}<br />
+<br />
+We are unable to action your request for the following reason:</p>
+
+<ul>
+	<li>The flights held in the booking do not match your request</li>
+	<li>The booking classes held do not match your request</li>
+	<li>The flights are not booked from Origin to Destination</li>
+	<li>The Travel Manager Change (TMC) authorisation has not been provided or is not valid</li>
+	<li>The route map application does not permit the itinerary</li>
+	<li>Flight application failure. The carrier/s {{{Case.Carrier__c}}} is/are not permitted</li>
+	<li>The requested fare does not permit validation to Qantas (081)</li>
+	<li>The itinerary contains over 16 flights segments including ARNKS</li>
+	<li>The itinerary must contain a QF flight number</li>
+	<li>QAC does not quote other airline End on End fares</li>
+	<li>Only one fare quote per passenger is permitted.</li>
+	<li>A ticket has been already issued for one or more for the flights requested</li>
+	<li>Your request is not for a fare quote.</li>
+	<li>Ticketing time limit has not been met for this fare.</li>
+</ul>
+
+<p>Please submit a new request which meets our requirements.<br />
+<br />
+<b>Important</b>: Do not reply to this email as replies are not monitored<br />
+<br />
+Regards<br />
+{{{Sender.FirstName}}}<br />
+<br />
+Qantas Agency Connect Team<br />
+Website:&nbsp;<a href="http://www.qantasagencyconnect.com/">www.qantasagencyconnect.com</a></p>
+
+<p><a href="mailto:qantasagencyconnectAU@qantas.com.au"><font face="Calibri, serif"><img alt="User-added image" src="https://qantas.lightning.force.com/servlet/servlet.FileDownload?file=0159000000GG02J" /></font></a></p>
+</body>
+</html>

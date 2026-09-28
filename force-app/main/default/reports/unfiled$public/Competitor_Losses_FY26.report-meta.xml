@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_91633373</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Case.Created_by_Role__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Charter</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional ACT</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional ACT-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional Development-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional QLD</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional QLD-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional VIC/TAS</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional VIC/TAS-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional WA/SA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources and Charters</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources QLD</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Manager</sourceValue>
+            </sourceValues>
+            <value>Large Market</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager10</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager11</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager6</sourceValue>
+            </sourceValues>
+            <value>Mid Market</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CREATED</field>
+    </columns>
+    <columns>
+        <field>Case.Handover_to_QBR__c</field>
+    </columns>
+    <columns>
+        <field>Case.Reasons_for_Termination__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CLOSED</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Contracted__c</field>
+    </columns>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>Case.ReasonsForTermination__c</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Case.QCI_f__c</field>
+    </columns>
+    <columns>
+        <field>Account.ABN_Tax_Reference__c</field>
+    </columns>
+    <columns>
+        <field>Case.Assign_to_QBR_Level__c</field>
+    </columns>
+    <columns>
+        <field>Account.Airline_Level__c</field>
+    </columns>
+    <columns>
+        <field>Account.Aquire_Eligibility_f__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Aquire_System__c</field>
+    </columns>
+    <columns>
+        <field>Case.Created_by_Role__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>TYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Deal Termination</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CREATED_DATE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>7/1/2025 12:00 AM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Created_by_Role__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>DOM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CLOSED</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.ReasonsForTermination__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Competitor Loss</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CREATED_DATE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>lessOrEqual</operator>
+            <value>6/30/2026 12:00 AM</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_91633373</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <field>Case.End_Date__c</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ACCOUNT.OWNER</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Competitor Losses - FY26</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <sortColumn>Case.Created_by_Role__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

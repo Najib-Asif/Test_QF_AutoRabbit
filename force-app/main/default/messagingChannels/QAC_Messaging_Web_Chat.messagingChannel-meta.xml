@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MessagingChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <automatedResponses>
+        <autoResponseContentType>TextResponse</autoResponseContentType>
+        <language>en_US</language>
+        <response>You&apos;ve opted out of receiving messages from us, so we won&apos;t contact you again.</response>
+        <type>OptOutConfirmation</type>
+    </automatedResponses>
+    <automatedResponses>
+        <autoResponseContentType>TextResponse</autoResponseContentType>
+        <language>en_US</language>
+        <response>Text STOP to opt out of further messages.</response>
+        <type>HelpResponse</type>
+    </automatedResponses>
+    <customParameters>
+        <actionParameterMappings>
+            <actionParameterName>Contact_number</actionParameterName>
+        </actionParameterMappings>
+        <externalParameterName>Contact_number</externalParameterName>
+        <masterLabel>Contact number</masterLabel>
+        <maxLength>15</maxLength>
+        <name>Contact_number</name>
+        <parameterDataType>String</parameterDataType>
+    </customParameters>
+    <customParameters>
+        <actionParameterMappings>
+            <actionParameterName>Is_your_enquiry_today_based_on_an_NDC_booking</actionParameterName>
+        </actionParameterMappings>
+        <externalParameterName>Is_your_enquiry_today_based_on_an_NDC_booking</externalParameterName>
+        <masterLabel>Is your enquiry today based on an NDC booking?</masterLabel>
+        <maxLength>15</maxLength>
+        <name>Is_your_enquiry_today_based_on_an_NDC_booking</name>
+        <parameterDataType>String</parameterDataType>
+    </customParameters>
+    <customParameters>
+        <actionParameterMappings>
+            <actionParameterName>PNR</actionParameterName>
+        </actionParameterMappings>
+        <externalParameterName>Qantas_PNR</externalParameterName>
+        <masterLabel>Qantas PNR</masterLabel>
+        <maxLength>6</maxLength>
+        <name>Qantas_PNR</name>
+        <parameterDataType>String</parameterDataType>
+    </customParameters>
+    <customParameters>
+        <actionParameterMappings>
+            <actionParameterName>QIC_Number</actionParameterName>
+        </actionParameterMappings>
+        <externalParameterName>QIC_Number</externalParameterName>
+        <masterLabel>QIC Number</masterLabel>
+        <maxLength>15</maxLength>
+        <name>QIC_Number</name>
+        <parameterDataType>String</parameterDataType>
+    </customParameters>
+    <customParameters>
+        <actionParameterMappings>
+            <actionParameterName>Technology_Partner</actionParameterName>
+        </actionParameterMappings>
+        <externalParameterName>Technology_Partner</externalParameterName>
+        <masterLabel>Technology Partner</masterLabel>
+        <maxLength>255</maxLength>
+        <name>Technology_Partner</name>
+        <parameterDataType>String</parameterDataType>
+    </customParameters>
+    <customParameters>
+        <actionParameterMappings>
+            <actionParameterName>what_is_your_query_about</actionParameterName>
+        </actionParameterMappings>
+        <externalParameterName>What_is_your_query_about</externalParameterName>
+        <masterLabel>What is your query about?</masterLabel>
+        <maxLength>255</maxLength>
+        <name>What_is_your_query_about</name>
+        <parameterDataType>String</parameterDataType>
+    </customParameters>
+    <embeddedConfig>
+        <allowedFileTypes>bmp,csv,doc,docx,gif,jpg,pdf,png,tiff,txt,xls,xlsx,xml</allowedFileTypes>
+        <anonymousUserJwtExpirationTime>360</anonymousUserJwtExpirationTime>
+        <authMode>UnAuth</authMode>
+        <isAgentAvlCheckEnabled>false</isAgentAvlCheckEnabled>
+        <isAttachmentUploadEnabled>true</isAttachmentUploadEnabled>
+        <isEstimatedWaitTimeEnabled>false</isEstimatedWaitTimeEnabled>
+        <isFallbackMessageEnabled>false</isFallbackMessageEnabled>
+        <isSaveTranscriptEnabled>true</isSaveTranscriptEnabled>
+        <maxFileSize>5</maxFileSize>
+    </embeddedConfig>
+    <isEstimatedWaitTimeEnabled>false</isEstimatedWaitTimeEnabled>
+    <isQueuePositionEnabled>false</isQueuePositionEnabled>
+    <isSynchronousChatEnabled>true</isSynchronousChatEnabled>
+    <masterLabel>QAC Messaging Web Chat</masterLabel>
+    <messagingChannelType>EmbeddedMessaging</messagingChannelType>
+    <messagingKeywords>
+        <keyword>cancel</keyword>
+        <keyword>end</keyword>
+        <keyword>quit</keyword>
+        <keyword>stop</keyword>
+        <keyword>stopall</keyword>
+        <keyword>unsubscribe</keyword>
+        <keywordType>OptOut</keywordType>
+        <language>en_US</language>
+    </messagingKeywords>
+    <messagingKeywords>
+        <keyword>help</keyword>
+        <keywordType>Help</keywordType>
+        <language>en_US</language>
+    </messagingKeywords>
+    <sessionHandlerFlow>NDC_Web_Chat</sessionHandlerFlow>
+    <sessionHandlerQueue>QAC_Queue</sessionHandlerQueue>
+    <sessionHandlerType>Flow</sessionHandlerType>
+    <standardParameters>
+        <actionParameterMappings>
+            <actionParameterName>FirstName</actionParameterName>
+        </actionParameterMappings>
+        <parameterType>FirstName</parameterType>
+    </standardParameters>
+    <standardParameters>
+        <actionParameterMappings>
+            <actionParameterName>LastName</actionParameterName>
+        </actionParameterMappings>
+        <parameterType>LastName</parameterType>
+    </standardParameters>
+</MessagingChannel>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TY_Date__c</fullName>
+    <description>Determines date for last day of month for this year. Takes into account leap years.</description>
+    <formula>DATE(
+VALUE( Period_Year__c), VALUE(Month_No__c), 
+CASE(VALUE(Month_No__c),
+2, 
+  IF(
+     OR( 
+       MOD( VALUE( Period_Year__c), 400 ) = 0, 
+       AND( 
+        MOD( VALUE( Period_Year__c), 4 ) = 0,
+         MOD( VALUE( Period_Year__c), 100 ) != 0
+       )
+     ), 29, 28),
+4, 30,
+6, 30,
+9, 30,
+11, 30, 
+31)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Date for this year travel data</inlineHelpText>
+    <label>TY Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Monetary_Valuef__c</fullName>
+    <description>Formula field to display the Monatery value with + for EFT reports and - for Credit card Reports</description>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK(Monetary_Value__c))&amp;&amp; TEXT(Type__c)=&apos;EFT Refund&apos;, TEXT(Monetary_Value__c),
+IF(NOT(ISBLANK(Monetary_Value__c))&amp;&amp; (TEXT(Type__c)=&apos;Credit Card Refund&apos; || TEXT(Type__c)=&apos;Payment (Credit Card)&apos;),&quot;-&quot; +TEXT(Monetary_Value__c),&apos;&apos;)
+
+ )</formula>
+    <label>Monetary Value</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,141 @@
+{
+  "version" : "59.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "AccountId", "RecordTypeId", "Name", "Description", "StageName", "Amount", "Probability", "CloseDate", "Type", "NextStep", "LeadSource", "IsClosed", "IsWon", "ForecastCategory", "ForecastCategoryName", "CurrencyIsoCode", "CampaignId", "HasOpportunityLineItem", "Pricebook2Id", "OwnerId", "Territory2Id", "IsExcludedFromTerritory2Filter", "CreatedDate", "AgeInDays", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "LastActivityDate", "LastActivityInDays", "PushCount", "LastStageChangeDate", "LastStageChangeInDays", "FiscalQuarter", "FiscalYear", "Fiscal", "ContactId", "LastViewedDate", "LastReferencedDate", "SyncedQuoteId", "HasOpenActivity", "HasOverdueTask", "LastAmountChangedHistoryId", "LastCloseDateChangedHistoryId", "IsPriorityRecord", "HasUnlikelyToCloseInsight", "OpportunityScoreId", "Contract__c", "At_Risk_Since__c", "Closed_Reasons__c", "Competitor_Contract__c", "Current_Market_Share__c", "Current_Required_Actions__c", "Current_Revenue__c", "Estimated_Current_Market_Share__c", "Estimated_Current_Revenue__c", "Estimated_Increment_Market_Share__c", "Estimated_Increment_Revenue__c", "Increment_Mrkt_Share_Indicator__c", "Increment_Revenue_Indicator__c", "Incremental_Market_Share__c", "Incremental_Revenue_Amount__c", "Incremental_Revenue__c", "Open_skies_policy__c", "Other_reasons__c", "Proposed_Market_Share__c", "RFP_Process__c", "Reason_At_Risk__c", "Revenue_Trend_URL__c", "Risk_Indicator__c", "Risk_Level__c", "Senior_Executive_Action__c", "Switching_to_a_competitor__c", "Total_Revenue_Amount__c", "Number_of_Proposals__c", "Current_Market_Share_Int__c", "Proposed_Market_Share_Int__c", "EnquiryType__c", "PartnerType__c", "Opportunity_Creator__c", "Number_of_Days_Since_Last_Activity__c", "Opportunity_Type_Reporting__c", "PushCount__c", "Account_Name_Expected_Closure_Date__c", "Forecast_MCA_Revenue__c", "Part_of_Corporate_Deal__c", "Baseline_Total_Revenue__c", "Campaign_Total_Revenue__c", "Status__c", "Baseline_Start_Date__c", "Baseline_Close_Date__c", "Baseline_Total_Air_Spend__c", "Contact_Information__c", "Expected_Closure_Month__c", "Expected_Closure_Year__c", "Carbon_Offset_Projects__c", "Number_of_Opportunities__c", "Auto_Create_Oppty_for_Con_renewal__c", "Forecast_Charter_Spend__c", "RFP_Submission_Date__c", "Bureaux__c", "Overdue_Opportunity__c", "Gross_Margin__c", "Previous_Stage__c", "Opportunity_Unique_18_ID__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Opportunity",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Opportunity"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "Name", "CurrencyIsoCode", "RecordTypeId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "LastActivityDate", "LastViewedDate", "LastReferencedDate", "Opportunity__c", "Account_Legal_Name__c", "Account__c", "Active__c", "Approval_Required_DO__c", "Approval_Required_NAM__c", "Approval_Required_Others__c", "Approval_Required_Pricing__c", "Billing_To_Address__c", "Commercial_TC__c", "Contact_Title__c", "Contact__c", "DO_Approved__c", "Domestic_Annual_Share__c", "Email__c", "Fax__c", "International_Annual_Share__c", "Leadership_Approved__c", "Legal_TC__c", "NAM_Approved__c", "Phone__c", "Pricing_Approved__c", "Proposal_Number__c", "Qantas_Annual_Expenditure__c", "Ship_To_Address__c", "Status__c", "Type__c", "Valid_From_Date__c", "Valid_To_Date__c", "Discountlist_Count__c", "No_of_NAM_Approvals_Required__c", "No_of_Pricing_Approvals_Required__c", "No_of_Contr_Agr__c", "Proposal_Creator__c", "Proposal_Age__c", "Forecast_MCA_Revenue__c", "Customer_Name__c", "Approval_Required_SBD__c", "Approval_Required_TL__c", "QBS_Discount_Only__c", "QBS_Upgrade_and_Discount__c", "QBS_Upgrade_Only__c", "Approval_Status__c", "Contact_Information__c", "CA_Travel_Fund_only__c", "CA_Upgrade_Only__c", "CA_Upgrade_and_Discount__c", "Description__c", "CA_Discount_Only__c", "ENG_Approved1__c", "Forecast_Charter_Spend__c", "Link_to_the_Sharepoint_document__c", "Value_Add_Reasons__c", "Value_Adds__c", "Conga_Signature__c", "Comments__c", "Expected_Approval_Date__c", "Mandate_Business_Case__c", "Approval_Recalled__c", "Forecast_Group_Booking_Expenditure__c", "Group_Travel_Discount__c", "Group_Travel_Offer__c", "Group_Agent_Name__c", "No_of_Cps__c", "SBD_CA_Recalled__c", "Proposal_Signature__c", "QL_Discount_Model__c", "Proposal_Unique_18_ID__c", "QL_Is_MCA_Revenue_Updated__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Proposal__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Proposal__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "FILTER0" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Proposal__",
+        "rightKeys" : [ "Opportunity__c" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Status__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Accepted by Customer" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "QL_Discount_Model__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Tiered" ]
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Tiered Opps and Proposals",
+          "folderName" : "Sales_Distribution",
+          "name" : "Tiered_Opps_and_Proposals"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Opportunity",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Proposal__c",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "FILTER0" : {
+        "label" : "Status",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 392,
+        "left" : 111.30000000000001
+      },
+      "OUTPUT0" : {
+        "label" : "Tiered Opps and Proposals",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 392
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

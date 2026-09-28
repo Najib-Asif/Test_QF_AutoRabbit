@@ -1,0 +1,31 @@
+<aura:component implements="lightning:availableForFlowScreens"
+                access="global">
+                        
+    <!-- call doInit function on component load -->  
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+    
+    <!-- aura attributes-->  
+    <aura:attribute name="L1Label" type="string" default="Flight Segments"/>
+    <aura:attribute name="L1FieldValue" type="String" access="global" default=""/>
+    <aura:attribute name="L1FieldOutput" type="String" access="global" default=""/>
+    <aura:attribute name="requiredL1Field" type="Boolean" default="false" />
+    <aura:attribute name="validate" type="Aura.Action" description="Validation funtion for flow"/>
+    
+    <aura:attribute name="isValid" type="Boolean" default="false" />
+    <aura:attribute name="L1DisplayErrorMessage" type="Boolean" default="false" />
+    <aura:attribute name="messageWhenValueMissing" type="String" access="global" default="Value is required in this field" />
+
+    <aura:handler name="change" value="{!v.L1FieldValue}" action="{!c.onFieldChange}" />
+    
+<div>
+    <lightning:inputRichText    aura:id="L1Field"
+                                    label="{!v.L1Label}" 
+                                    value="{!v.L1FieldValue}"
+                                    required="{!v.requiredL1Field}" />
+    <aura:if isTrue="{!v.L1DisplayErrorMessage}">  
+        <div class="slds-text-align_left slds-text-color_destructive">{!v.messageWhenValueMissing}</div> 
+    </aura:if>    
+
+</div>   
+
+</aura:component>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CP_Closed_Status</fullName>
+    <active>true</active>
+    <description>Once the Corporate Scheme Case is Closed, only Sales Solutions is able to reopen the Cases</description>
+    <errorConditionFormula>AND (
+RecordTypeId = &quot;01290000001Ybqs&quot;, /*Corporate Scheme Service Request*/ 
+ISPICKVAL ( PRIORVALUE ( Status ), &quot;Closed - Completed&quot;),
+ISCHANGED ( Status ),
+NOT (  $User.Id = &quot;00590000004hkf4&quot;),
+NOT ( $User.Id = &quot;00590000004hkfG&quot;),
+NOT (  $User.ProfileId = &quot;00e90000001wK8z&quot;)
+
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Please contact the Sales Solutions Team if you would like to reopen the Corporate Scheme Case</errorMessage>
+</ValidationRule>

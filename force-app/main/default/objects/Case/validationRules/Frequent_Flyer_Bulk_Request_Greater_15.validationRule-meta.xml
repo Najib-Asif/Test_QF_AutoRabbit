@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Frequent_Flyer_Bulk_Request_Greater_15</fullName>
+    <active>false</active>
+    <description>For Frequent Flyer Bulk Request, Number of Frequent Flyers has to be more than 15.</description>
+    <errorConditionFormula>AND ( 
+RecordType.DeveloperName = &quot;Frequent_Flyer_Request&quot;, /*Frequent Flyer Request*/ 
+NOT ( $User.UserRoleId = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/ 
+
+Approved__c = FALSE,
+Number_of_Frequent_Flyer_Request__c &lt; 15 )</errorConditionFormula>
+    <errorDisplayField>Number_of_Frequent_Flyer_Request__c</errorDisplayField>
+    <errorMessage>For Bulk Frequent Flyer requests, Number of Frequent Flyers has to be greater than 15.</errorMessage>
+</ValidationRule>

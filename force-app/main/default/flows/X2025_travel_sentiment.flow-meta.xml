@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>pageNamesInOrder_Assignment</name>
+        <label>pageNamesInOrder_Assignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>pageNamesInOrder</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>welcome_page</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>pageNamesInOrder</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>p_787b682a_4eb1_4cf5_aee7_56b860688878</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>pageNamesInOrder</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>thank_you_page</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>welcome_page</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <name>c_05a72769_ec40_4cb0_8cc6_57ebe70c5019</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_1015c0b4_ffb4_4548_9be9_36a3574017cc</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_14c550da_ecf6_4c82_a61e_57407d75f0e6</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_16ecce7b_4c4a_4721_9f2a_917c82bf55b4</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_1ba606ea_57a2_45df_97f1_c854c8324df8</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_1bc42b96_123d_45ad_b4d5_84fe43ff3a2d</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_1db099f7_bddf_4dcd_96ca_88235c5f74ec</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_20f3f227_27c3_4c8e_a1b0_4d606b5851bd</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_20fb3150_37ea_40b5_b896_16e00b1c5db3</name>
+        <choiceText>Budget cut entirely</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Budget cut entirely</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_2296fec2_0e77_4889_a58d_116f59b0ded7</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_249d864c_f2d1_4781_a010_20e47dcc9f44</name>
+        <choiceText>Budgets reduced/further reduced</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Budgets reduced/further reduced</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_286722fd_5034_4f2f_a9d8_2de2abe80b3f</name>
+        <choiceText>Budgets remain the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue> Budgets remain the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_352a1b3d_8f0a_40d6_b1bc_e01fa40c00b2</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_38090a55_726f_4973_a544_073f639aafeb</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_3e87d4b2_7581_42a5_a8ce_0df7c8c27beb</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_3f77d077_96ce_476c_be44_9c9da2a8c7b6</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_465b437a_1897_4a8b_9e7e_4a4cfc9141fa</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_4d08f105_5030_428e_9725_26d5e6484966</name>
+        <choiceText>Budget cut entirely</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Budget cut entirely</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_5524f397_753a_4785_a51a_cabe29ed3c3c</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_5908b7c1_1699_4285_a05b_d482759c8ddf</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_59716eea_0601_49f4_8b9a_0a8ac73b74c3</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_5ea882c2_9572_441a_8963_7f4d6fc2e4ad</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_6f6b7917_75e1_4887_ad27_53d0a10087ef</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_7059296d_133c_4109_91cc_945c38b0aa23</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_7e2c85f1_d3c3_4d97_a2d0_ed976041d479</name>
+        <choiceText>Budgets remain the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue> Budgets remain the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_7e3d6d24_7116_4b9f_a578_ac7ba6deeb1c</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_8d68df72_9281_4371_8b91_c5fdec4877cb</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_8d986f84_c3bc_4104_b880_04a95b63d8e8</name>
+        <choiceText>No change</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No change</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_8ea17aed_a83c_4ac0_9898_120c1e08a18c</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_93399378_f7e3_458a_8176_09dede77467f</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_955c6282_abad_4b63_8e2b_8acdb3af6be0</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_9eb18696_03bc_4c63_97ed_1411ac51a6d5</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_af172ba4_a6fc_4755_89e7_ba6ae96aea90</name>
+        <choiceText>Budgets increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue> Budgets increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_b23bb289_e671_4cc2_92ab_3036c90319b4</name>
+        <choiceText>Budgets increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Budgets increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_b8fc132f_b439_424c_96d8_78914e7d7b12</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_be246056_2b76_4d8d_9ba2_10ae874ce929</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_bfd8b808_3f39_4fc9_9979_cb65a28c74bd</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_c0e26429_4368_439f_aac8_0a8076dcc347</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_c5e3e23f_e7c6_46ce_b76e_8f00b5b5bbec</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_cd50ec55_0b32_49f4_a3e1_2fbe57740b56</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_ced76183_96f9_467a_9df5_77975ea976b1</name>
+        <choiceText>No change</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No change</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_decf0b87_ea01_464f_832b_9f55af70fdfb</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_e8977929_d872_4c27_adc5_1b635d6fc80d</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_eaae7cb3_e185_49d2_a98b_5340079e655c</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_f153c943_318e_4d8a_93dd_26256c44b29b</name>
+        <choiceText>Budgets reduced/further reduced</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Budgets reduced/further reduced</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_f4d88255_8e6b_41f6_9336_cab357df97c1</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_f5ae8588_a197_46ec_a964_00d4caf26bdd</name>
+        <choiceText>Increased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Increased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_f6b10549_dcbf_4871_8829_5bae9ff01e52</name>
+        <choiceText>Not applicable</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not applicable</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_f980d576_16a4_47b1_92c3_eb1f93585e5f</name>
+        <choiceText>Decreased</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Decreased</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>c_fd4368af_fb96_4059_a0cf_def3ef950e0d</name>
+        <choiceText>Remained the same</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Remained the same</stringValue>
+        </value>
+    </choices>
+    <interviewLabel>2025 Travel Sentiment</interviewLabel>
+    <label>2025 Travel Sentiment</label>
+    <processMetadataValues>
+        <name>BrandingSet</name>
+        <value>
+            <stringValue>sb_X2025_travel_sentiment_2_181fe849_72f0_4cad_aa28_55bc4ec7602b</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>advanceThankYouPageEnabled</name>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>autoProgressEnabled</name>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>hasWelcomePage</name>
+        <value>
+            <booleanValue>true</booleanValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>isSimpleSurvey</name>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>overrideActiveVersion</name>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>surveyType</name>
+        <value>
+            <stringValue>Survey</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Survey</processType>
+    <screens>
+        <name>p_787b682a_4eb1_4cf5_aee7_56b860688878</name>
+        <label>Page 1</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_ed510acc_1c57_4f45_8015_8bbd1f33cc36</name>
+            <choiceReferences>c_af172ba4_a6fc_4755_89e7_ba6ae96aea90</choiceReferences>
+            <choiceReferences>c_7e2c85f1_d3c3_4d97_a2d0_ed976041d479</choiceReferences>
+            <choiceReferences>c_f153c943_318e_4d8a_93dd_26256c44b29b</choiceReferences>
+            <choiceReferences>c_20fb3150_37ea_40b5_b896_16e00b1c5db3</choiceReferences>
+            <choiceReferences>c_8d986f84_c3bc_4104_b880_04a95b63d8e8</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimeRadioButton</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;How do you think travel budgets will look in 2025 and beyond for your &lt;u&gt;domestic&lt;/u&gt; business travel?&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>In comparison to 2024</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_82cb802c_773b_4635_96a3_c25b7d3f1909</name>
+            <choiceReferences>c_b23bb289_e671_4cc2_92ab_3036c90319b4</choiceReferences>
+            <choiceReferences>c_286722fd_5034_4f2f_a9d8_2de2abe80b3f</choiceReferences>
+            <choiceReferences>c_249d864c_f2d1_4781_a010_20e47dcc9f44</choiceReferences>
+            <choiceReferences>c_4d08f105_5030_428e_9725_26d5e6484966</choiceReferences>
+            <choiceReferences>c_ced76183_96f9_467a_9df5_77975ea976b1</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimeRadioButton</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;How do you th&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;ink travel budgets will look in 2025 and beyond for your &lt;u&gt;international &lt;/u&gt;business travel?&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>In comparison to 2024</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_b713ed3d_0f54_41a9_9acb_df0db40cdb05</name>
+            <choiceReferences>c_955c6282_abad_4b63_8e2b_8acdb3af6be0</choiceReferences>
+            <choiceReferences>c_fd4368af_fb96_4059_a0cf_def3ef950e0d</choiceReferences>
+            <choiceReferences>c_14c550da_ecf6_4c82_a61e_57407d75f0e6</choiceReferences>
+            <choiceReferences>c_eaae7cb3_e185_49d2_a98b_5340079e655c</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimePicklist</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Executive &lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;Leadership&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>What are the main drivers for your employees travel in 2025 and their influence in comparison to 2024?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_c32792e5_1712_4913_98a0_ce06be28b70e</name>
+            <choiceReferences>c_f5ae8588_a197_46ec_a964_00d4caf26bdd</choiceReferences>
+            <choiceReferences>c_5908b7c1_1699_4285_a05b_d482759c8ddf</choiceReferences>
+            <choiceReferences>c_1ba606ea_57a2_45df_97f1_c854c8324df8</choiceReferences>
+            <choiceReferences>c_bfd8b808_3f39_4fc9_9979_cb65a28c74bd</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimePicklist</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Internal&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt; Meetings&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>What are the main drivers for your employees travel in 2025 and their influence in comparison to 2024?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_cb7351ee_daec_4f7c_bec2_a031d1739d0c</name>
+            <choiceReferences>c_38090a55_726f_4973_a544_073f639aafeb</choiceReferences>
+            <choiceReferences>c_8ea17aed_a83c_4ac0_9898_120c1e08a18c</choiceReferences>
+            <choiceReferences>c_9eb18696_03bc_4c63_97ed_1411ac51a6d5</choiceReferences>
+            <choiceReferences>c_f6b10549_dcbf_4871_8829_5bae9ff01e52</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimePicklist</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Customer Meetings/&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;Revenue Generation Purposes&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>What are the main drivers for your employees travel in 2025 and their influence in comparison to 2024?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_27f0268f_5844_46ce_88b8_e5b8c219a25e</name>
+            <choiceReferences>c_352a1b3d_8f0a_40d6_b1bc_e01fa40c00b2</choiceReferences>
+            <choiceReferences>c_cd50ec55_0b32_49f4_a3e1_2fbe57740b56</choiceReferences>
+            <choiceReferences>c_1db099f7_bddf_4dcd_96ca_88235c5f74ec</choiceReferences>
+            <choiceReferences>c_93399378_f7e3_458a_8176_09dede77467f</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimePicklist</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Conference/Events&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>What are the main drivers for your employees travel in 2025 and their influence in comparison to 2024?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_ba76ff43_4eee_4a88_affd_ed3a322bddfe</name>
+            <choiceReferences>c_05a72769_ec40_4cb0_8cc6_57ebe70c5019</choiceReferences>
+            <choiceReferences>c_20f3f227_27c3_4c8e_a1b0_4d606b5851bd</choiceReferences>
+            <choiceReferences>c_e8977929_d872_4c27_adc5_1b635d6fc80d</choiceReferences>
+            <choiceReferences>c_f4d88255_8e6b_41f6_9336_cab357df97c1</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimePicklist</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Operational/F&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;IFO&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>What are the main drivers for your employees travel in 2025 and their influence in comparison to 2024?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_673dd73a_97d3_4d50_8c81_e6d86f49551c</name>
+            <choiceReferences>c_16ecce7b_4c4a_4721_9f2a_917c82bf55b4</choiceReferences>
+            <choiceReferences>c_3e87d4b2_7581_42a5_a8ce_0df7c8c27beb</choiceReferences>
+            <choiceReferences>c_c0e26429_4368_439f_aac8_0a8076dcc347</choiceReferences>
+            <choiceReferences>c_5524f397_753a_4785_a51a_cabe29ed3c3c</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimePicklist</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Proje&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;cts&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>What are the main drivers for your employees travel in 2025 and their influence in comparison to 2024?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_217907a6_58ac_41f1_a4a6_fbe051592c2e</name>
+            <choiceReferences>c_1bc42b96_123d_45ad_b4d5_84fe43ff3a2d</choiceReferences>
+            <choiceReferences>c_decf0b87_ea01_464f_832b_9f55af70fdfb</choiceReferences>
+            <choiceReferences>c_b8fc132f_b439_424c_96d8_78914e7d7b12</choiceReferences>
+            <choiceReferences>c_5ea882c2_9572_441a_8963_7f4d6fc2e4ad</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimeRadioButton</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Day&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt; Trips&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>Do you believe your organisation’s preference or priority for business trip types will change in 2025?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_eca489a6_220b_42a3_b284_aeca7b8805a5</name>
+            <choiceReferences>c_c5e3e23f_e7c6_46ce_b76e_8f00b5b5bbec</choiceReferences>
+            <choiceReferences>c_7e3d6d24_7116_4b9f_a578_ac7ba6deeb1c</choiceReferences>
+            <choiceReferences>c_f980d576_16a4_47b1_92c3_eb1f93585e5f</choiceReferences>
+            <choiceReferences>c_be246056_2b76_4d8d_9ba2_10ae874ce929</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimeRadioButton</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Sho&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;rter Trips (2-3 days)&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>Do you believe your organisation’s preference or priority for business trip types will change in 2025?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_6bd4ad36_cc3f_4f10_a4b5_0b2ea24081e2</name>
+            <choiceReferences>c_3f77d077_96ce_476c_be44_9c9da2a8c7b6</choiceReferences>
+            <choiceReferences>c_465b437a_1897_4a8b_9e7e_4a4cfc9141fa</choiceReferences>
+            <choiceReferences>c_59716eea_0601_49f4_8b9a_0a8ac73b74c3</choiceReferences>
+            <choiceReferences>c_7059296d_133c_4109_91cc_945c38b0aa23</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimeRadioButton</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Longer T&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;rips (up to a week)&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>Do you believe your organisation’s preference or priority for business trip types will change in 2025?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <processMetadataValues>
+                <name>autoProgressAction</name>
+                <value>
+                    <stringValue>NONE</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>q_7f6c2302_e5a2_44ff_bde0_20ffa6ef0605</name>
+            <choiceReferences>c_6f6b7917_75e1_4887_ad27_53d0a10087ef</choiceReferences>
+            <choiceReferences>c_1015c0b4_ffb4_4548_9be9_36a3574017cc</choiceReferences>
+            <choiceReferences>c_8d68df72_9281_4371_8b91_c5fdec4877cb</choiceReferences>
+            <choiceReferences>c_2296fec2_0e77_4889_a58d_116f59b0ded7</choiceReferences>
+            <dataType>String</dataType>
+            <extensionName>survey:runtimeRadioButton</extensionName>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px;&quot;&gt;Extra long trips (o&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;ver a week)&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>ComponentChoice</fieldType>
+            <helpText>Do you believe your organisation’s preference or priority for business trip types will change in 2025?</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <pausedText>To pick up where you left off, refresh this page, or open the survey again.</pausedText>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>welcome_page</name>
+        <label>Welcome Page</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>p_787b682a_4eb1_4cf5_aee7_56b860688878</targetReference>
+        </connector>
+        <fields>
+            <name>welcome_question</name>
+            <extensionName>survey:runtimeWelcome</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>{!welcome_question_lref_tt}</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>description</name>
+                <value>
+                    <stringValue>{!welcome_question_dref_tt}</stringValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>pageNamesInOrder_Assignment</startElementReference>
+    <status>Active</status>
+    <textTemplates>
+        <name>thankYouDescriptionTextTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text></text>
+    </textTemplates>
+    <textTemplates>
+        <name>thankYouLabelTextTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;Thank you for completing this survey&lt;/strong&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>welcome_question_dref_tt</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>For any issues or questions, please raise a System Admin case for Aanchal and Rosie</text>
+    </textTemplates>
+    <textTemplates>
+        <name>welcome_question_lref_tt</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;This is a survey to gauge travel sentiment of corporate customers in Australia and gain an understanding on their focus&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt; for employee travel.&lt;/strong&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>guestUserLang</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>invitationId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>pageNamesInOrder</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>previewMode</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <name>thankYouDescription</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue>{!thankYouDescriptionTextTemplate}</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>thankYouLabel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue>{!thankYouLabelTextTemplate}</stringValue>
+        </value>
+    </variables>
+</Flow>

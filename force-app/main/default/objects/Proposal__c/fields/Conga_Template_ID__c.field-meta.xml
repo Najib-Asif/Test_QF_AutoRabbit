@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Template_ID__c</fullName>
+    <description>Displays Corresponding Template ID from Conga Template based on Opportunity Owner Country. Not to be visible in the page layout</description>
+    <externalId>false</externalId>
+    <formula>CASE(
+Account__r.BillingCountry ,
+&apos;US&apos;, &apos;a0X2v00000OEX0wEAH&apos;,
+&apos;AU&apos;,
+IF(
+(ISPICKVAL( Type__c ,&apos;Corporate Airfares&apos;) &amp;&amp;( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Tiered&apos;),ISBLANK( Account__r.QL_Current_Contract__c),Proposal_End_Date__c &gt;= DATE(2050,01,01) )) || (AND(ISPICKVAL(QL_Discount_Model__c,&apos;Tiered&apos;), Account__r.QL_Current_Contract__c = &apos;Tiered&apos;, Proposal_End_Date__c &gt;= DATE(2050,01,01)))||(AND(ISPICKVAL(QL_Discount_Model__c,&apos;Tiered&apos;), Account__r.QL_Current_Contract__c = &apos;Non-Tiered&apos;, Proposal_End_Date__c &gt;=DATE(2050,01,01)))
+),&apos;a0X2v00000TJYJcEAP&apos;,
+IF( (ISPICKVAL( Type__c ,&apos;Corporate Airfares&apos;) &amp;&amp; ( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Tiered&apos;),ISBLANK( Account__r.QL_Current_Contract__c),NOT( ISBLANK(Proposal_End_Date__c)) )) || ( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Tiered&apos;,NOT( ISBLANK(Proposal_End_Date__c)) ))||(AND(ISPICKVAL(QL_Discount_Model__c,&apos;Tiered&apos;), Account__r.QL_Current_Contract__c = &apos;Non-Tiered&apos;, NOT( ISBLANK(Proposal_End_Date__c))))
+),&apos;a0X2v00000TJYJcEAP&apos;,
+IF( (ISPICKVAL( Type__c ,&apos;Corporate Airfares&apos;) &amp;&amp;
+( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),ISBLANK( Account__r.QL_Current_Contract__c),
+Proposal_End_Date__c &gt;= DATE(2050,01,01),!Includes_R_KMLVS__c) )
+|| ( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Tiered&apos;,
+Proposal_End_Date__c &gt;= DATE(2050,01,01),!Includes_R_KMLVS__c ))
+|| ( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Non-Tiered&apos;,
+Proposal_End_Date__c &gt;= DATE(2050,01,01),!Includes_R_KMLVS__c ))
+||( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),ISBLANK( Account__r.QL_Current_Contract__c),
+NOT( ISBLANK(Proposal_End_Date__c)),!Includes_R_KMLVS__c))
+||( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Tiered&apos;,
+NOT( ISBLANK(Proposal_End_Date__c)),!Includes_R_KMLVS__c ))
+|| (AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Non-Tiered&apos;,
+NOT( ISBLANK(Proposal_End_Date__c)),!Includes_R_KMLVS__c))),&apos;a0X2v00000TJYJSEA5&apos;,
+IF((ISPICKVAL( Type__c ,&apos;Corporate Airfares&apos;) &amp;&amp;
+( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),ISBLANK( Account__r.QL_Current_Contract__c),
+Proposal_End_Date__c &gt;= DATE(2050,01,01),Includes_R_KMLVS__c) )
+
+|| ( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Tiered&apos;,
+Proposal_End_Date__c &gt;= DATE(2050,01,01) ,Includes_R_KMLVS__c))
+|| ( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Non-Tiered&apos;,
+Proposal_End_Date__c &gt;= DATE(2050,01,01),Includes_R_KMLVS__c ))
+
+
+||( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),ISBLANK( Account__r.QL_Current_Contract__c),
+NOT( ISBLANK(Proposal_End_Date__c)),Includes_R_KMLVS__c))
+||( AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Tiered&apos;,
+NOT( ISBLANK(Proposal_End_Date__c)),Includes_R_KMLVS__c)) || (AND(ISPICKVAL(QL_Discount_Model__c,&apos;Non-Tiered&apos;),Account__r.QL_Current_Contract__c = &apos;Non-Tiered&apos;,
+NOT( ISBLANK(Proposal_End_Date__c)),Includes_R_KMLVS__c))),&apos;a0XMo000002ehgDMAQ&apos;,
+IF (ISPICKVAL( Type__c,&apos;Adhoc&apos;),&apos;a0X90000009dX1AEAU&apos;,
+IF (ISPICKVAL( Type__c,&apos;Scheduled&apos;),&apos;a0X90000009dX1AEAU&apos;,
+IF (ISPICKVAL(Type__c, &apos;Qantas Business Savings&apos;), &apos;a0X9000000BDLycEAH,&apos;,&apos;&apos;))
+)))))
+,&apos;&apos;)</formula>
+    <label>Conga Template ID</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

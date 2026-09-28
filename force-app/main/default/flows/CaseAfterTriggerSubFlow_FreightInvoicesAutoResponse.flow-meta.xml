@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email_Alert_To_Case</name>
+        <label>Send Email Alert To Case</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>Case.FreightInvoicesEmailAlert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>CreateEmailMessageRecord</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Case.FreightInvoicesEmailAlert</nameSegment>
+    </actionCalls>
+    <apiVersion>54.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <constants>
+        <name>EmailTemplateID</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>00X0w000001VqSd</stringValue>
+        </value>
+    </constants>
+    <description>Migrated from Freight Invoices Auto Response flow(Platform change)</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>Subject</name>
+        <dataType>String</dataType>
+        <expression>&apos;Email: Qantas Freight Customer Support – Ref No &apos; + {!objNewCase.CaseNumber}</expression>
+    </formulas>
+    <interviewLabel>CaseAfterTriggerSubFlow- {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-FreightInvoicesAutoResponse</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>CreateEmailMessageRecord</name>
+        <label>CreateEmailMessageRecord</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <inputAssignments>
+            <field>CcAddress</field>
+            <value>
+                <elementReference>$Label.FreightInvoicesCCAddress</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FromAddress</field>
+            <value>
+                <elementReference>$Label.FreightInvoicesFromAddress</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FromName</field>
+            <value>
+                <elementReference>$Label.FreightInvoicesFromName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MessageDate</field>
+            <value>
+                <elementReference>objNewCase.CreatedDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>3</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TextBody</field>
+            <value>
+                <elementReference>EmailBodyTemplate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ToAddress</field>
+            <value>
+                <elementReference>objNewCase.SuppliedEmail</elementReference>
+            </value>
+        </inputAssignments>
+        <object>EmailMessage</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Email_Alert_To_Case</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>EmailBodyTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Thanks for contacting Qantas Freight. We’ve received your request and your reference number is {!objNewCase.CaseNumber}.
+
+We’ll be in touch again shortly. If you need immediate support, we recommend you use the chat function available during business hours via our website.
+
+Your Invoicing Query
+
+Invoice Number:  {!objNewCase.Freight_AWB_Number__c}
+Agent Account Number:  {!objNewCase.Agent_Organisation_Name__c}
+Comments:  {!objNewCase.Description}
+Air Waybill:   {!objNewCase.Freight_AWB_s__c}
+Amount in AUD:  {!objNewCase.Refund_Amount__c}
+Reason for Query :  {!objNewCase.Request_Reason_Others__c}
+Return Email Address :   {!objNewCase.SuppliedEmail}
+Contact Name :   {!objNewCase.SuppliedName}
+Contact Telephone Number :   {!objNewCase.SuppliedPhone}
+Company Name :   {!objNewCase.SuppliedCompany}
+Datetime of Query Submission:   {!objNewCase.CreatedDate}
+
+Thanks for your patience,
+The Qantas Freight Team
+{!objNewCase.Custom_Thread_ID__c}</text>
+    </textTemplates>
+    <variables>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

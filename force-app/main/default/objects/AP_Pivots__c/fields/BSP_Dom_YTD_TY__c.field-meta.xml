@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BSP_Dom_YTD_TY__c</fullName>
+    <label>BSP Dom (YTD) (TY)</label>
+    <summarizedField>Agency_Performance__c.Reported_Value__c</summarizedField>
+    <summaryFilterItems>
+        <field>Agency_Performance__c.Measure_Type__c</field>
+        <operation>equals</operation>
+        <value>BSP</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Agency_Performance__c.LY_Vs_TY__c</field>
+        <operation>equals</operation>
+        <value>TY</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Agency_Performance__c.Network__c</field>
+        <operation>equals</operation>
+        <value>Domestic</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Agency_Performance__c.AP_Insights_Link__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

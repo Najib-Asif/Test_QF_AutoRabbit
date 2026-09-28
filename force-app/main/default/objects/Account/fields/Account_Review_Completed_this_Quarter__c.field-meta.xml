@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Review_Completed_this_Quarter__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( OR ( AND
+( YEAR( DATEVALUE( Last_Completed_Account_Review__c) ) = YEAR(TODAY())
+, CASE(MONTH(DATEVALUE( Last_Completed_Account_Review__c)), 1,1, 2,1, 3,1, 4,2, 5,2, 6,2, 7,3, 8,3, 9,3, 10,4, 11,4, 12,4,  98)
+  =
+  CASE(MONTH(TODAY()), 1,1, 2,1, 3,1, 4,2, 5,2, 6,2, 7,3, 8,3, 9,3, 10,4, 11,4, 12,4,  99)
+),  DATEVALUE ( Last_Completed_Account_Review__c ) &gt;= TODAY())
+
+
+, 1, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Account Review Completed this Quarter?</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

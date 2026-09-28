@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Please_update_contact_in_QCC_cases</fullName>
+    <active>true</active>
+    <description>Restrict the QCC users from changing the case status when there is no contact linked to the QCC case</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_Please_update_contact_in_QCC_cases__c = TRUE,
+OR(
+RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+RecordType.DeveloperName = &apos;CCC_Query&apos;,
+RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;,
+RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+RecordType.DeveloperName = &apos;QCC_Disruption&apos;,
+RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;,
+RecordType.DeveloperName = &apos;CCC_Refund&apos;
+),
+ISCHANGED(Status), 
+OR( ISPICKVAL(PRIORVALUE( Status ),&quot;New&quot;),ISPICKVAL(PRIORVALUE( Status ),&quot;In Progress&quot;)),
+NOT(ISPICKVAL(Status , &quot;In Progress&quot;)),
+ISBLANK(ContactId ) )</errorConditionFormula>
+    <errorMessage>Please associate contact to the case before changing the status. If the customer is not a FF member then the null contact should be associated</errorMessage>
+</ValidationRule>

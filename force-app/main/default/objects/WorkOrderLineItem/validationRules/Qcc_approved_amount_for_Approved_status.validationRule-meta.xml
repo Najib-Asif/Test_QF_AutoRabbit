@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qcc_approved_amount_for_Approved_status</fullName>
+    <active>true</active>
+    <description>Allow approved status when total approved amount is greater than 0 and less than equal to amount claimed.</description>
+    <errorConditionFormula>RecordType.DeveloperName = &apos;Expense&apos; &amp;&amp; ISPICKVAL(Status ,&apos;Approved&apos;) &amp;&amp; ( Total_Approved_Amount__c &lt;= 0 ||  Receipt_Amount__c &lt; Total_Approved_Amount__c )</errorConditionFormula>
+    <errorMessage>The sum of the Approved Meal/Transport/Accommodation should be greater than 0 and less than or equal to the Receipt Amount</errorMessage>
+</ValidationRule>

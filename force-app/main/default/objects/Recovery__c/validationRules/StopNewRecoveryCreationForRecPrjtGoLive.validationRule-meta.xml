@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StopNewRecoveryCreationForRecPrjtGoLive</fullName>
+    <active>false</active>
+    <description>Recovery can&apos;t be created at this time</description>
+    <errorConditionFormula>ISNEW() &amp;&amp;  ($User.Email  != &apos;swathi.kotha@qantas.com.au&apos; &amp;&amp; $User.Email  != &apos;yogesh.prameshkumar@qantas.com.au&apos; &amp;&amp; $User.Email  != &apos;sourabh.singh@qantas.com.au&apos;)</errorConditionFormula>
+    <errorMessage>Recovery can&apos;t be created at this time</errorMessage>
+</ValidationRule>

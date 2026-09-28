@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_Dealing_Accounts_with_no_AM</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Qantas_Corporate_Identifier__c</columns>
+    <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
+    <columns>ACCOUNT.ADDRESS1_COUNTRY_CODE</columns>
+    <columns>Contract_Commencement_Date__c</columns>
+    <columns>Contract_Expiry_Date__c</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <columns>CORE.USERS.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Contracted__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Account.Customer_Account,Account.Prospect_Account</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.ALIAS</field>
+        <operation>equals</operation>
+        <value>dmigr,iuser</value>
+    </filters>
+    <label>Non Dealing Accounts with no AM</label>
+    <sharedTo>
+        <group>System_Admins</group>
+        <roleAndSubordinatesInternal>QF_DOM_Sales_B_G</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

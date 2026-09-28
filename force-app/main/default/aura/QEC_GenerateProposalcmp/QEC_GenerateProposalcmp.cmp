@@ -1,0 +1,22 @@
+<aura:component controller="QEC_GenerateProposalController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global">
+    <!--aura:handler name="init" action="{!c.invokeSelection}" value="{!this}" /-->
+    <aura:attribute name="recordId" type="Id" />
+    <aura:html tag="style">
+        .slds-modal__container {
+        max-width: 100rem !important;
+        width:20% !important;
+        }
+    </aura:html>
+    <lightning:card>
+        <lightning:select aura:id="selectDealSheetType" name="selectDealSheetType" label="Select Deal sheet type" required="true">
+            <option value="Domestic">Domestic</option>
+            <option value="International">International</option>
+        </lightning:select><br/>
+        <ui:inputCheckbox label="Exclude below the line discounts" aura:id="btlcheck"/>
+        <!--Removed as per JIRA CRM-4173-->
+        <!--<ui:inputCheckbox label="Generate as a Word document" aura:id="wordyes"/>-->
+        <div align="center">
+            <lightning:button label="Generate Deal sheet" onclick="{!c.invokeSelection}"/>
+        </div>
+    </lightning:card>
+</aura:component>

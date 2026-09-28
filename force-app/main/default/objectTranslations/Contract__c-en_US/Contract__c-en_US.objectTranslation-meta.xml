@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contract &amp; Agreement</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Contracts &amp; Agreements</value>
+    </caseValues>
+    <recordTypes>
+        <label><!-- Adhoc Charter --></label>
+        <name>Adhoc_Charter</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Agency - Approval Pending --></label>
+        <name>Agency_Approval_Pending</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Agency - Signed by Customer --></label>
+        <name>Agency_Signed_by_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type for contract variation --></description>
+        <label><!-- CA - Contract Variation --></label>
+        <name>CA_Contract_Variation</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Corporate Airfares contracts that have been accepted/signed by the customer --></description>
+        <label><!-- CA - Signed by Customer --></label>
+        <name>CA_Signed_by_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type for Charters information. --></description>
+        <label><!-- Charters Contract - Legal/Customer Pending --></label>
+        <name>Charters_Contract_Legal_Customer_Pending</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Charters Contract - Signed by Customer --></label>
+        <name>Charters_Contract_Signed_by_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Corporate Airfares contracts that having status as Signature required by Customer. No Legal approval required for Contract as per new process. --></description>
+        <label><!-- CA - Legal/Customer Pending --></label>
+        <name>Corporate_Airfares</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This is used for Loyalty Commercial purpose --></description>
+        <label><!-- Loyalty Commercial --></label>
+        <name>Loyalty_Commercial</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type for contract variation - QBS --></description>
+        <label><!-- QBS - Contract Variation --></label>
+        <name>QBS_Contract_Variation</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QBS contracts that have been accepted/signed by the customer --></description>
+        <label><!-- QBS - Signed by Customer --></label>
+        <name>QBS_Signed_by_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QBS Airfares contracts that having status as Signature required by Customer. No Legal approval required for Contract as per new process. --></description>
+        <label><!-- QBS - Legal/Customer Pending --></label>
+        <name>Qantas_Business_Savings</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please enter the value for Performance Bonus Amount and Next Review Date --></errorMessage>
+        <name>Amount_and_Next_Review_Date_Mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Contract Status must be either  &apos;Expired&apos; or &apos;Terminated&apos; or &apos;Superceded&apos; as the Contract End Date is in past --></errorMessage>
+        <name>Contract_Status_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Description Status can&apos;t be Blank when the Contract Status is &apos;Signed by Customer&apos; --></errorMessage>
+        <name>Description_Is_NotBlank</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- General, Domestic Amendments and International Amendments fields can&apos;t be Blank when the Contract Status is &apos;Signed by Customer&apos; --></errorMessage>
+        <name>GEN_DOM_INT_Is_NotBlank</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- General, Domestic Amendments and International Amendments fields can&apos;t be Blank when the Contract Status is &apos;Signed by Customer&apos; --></errorMessage>
+        <name>GEN_DOM_INT_Is_NotBlank_AU</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- General, Amendments fields can&apos;t be Blank when the Contract Status is &apos;Signed by Customer&apos; --></errorMessage>
+        <name>GEN_DOM_INT_Is_NotBlank_OTHER</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide the Linked Agreement Details --></errorMessage>
+        <name>Linked_Agreement_Details_Mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Extension is in place, please do not edit the end date --></errorMessage>
+        <name>Loyalty_End_Date_Lock</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter Performance Bonus Criteria --></errorMessage>
+        <name>Mandate_Performance_Bonus_Criteria</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please specify additional changes. --></errorMessage>
+        <name>Mandatory_Additional_Changes</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You should enter the value if Legal Approval is Required --></errorMessage>
+        <name>Mandatory_Changes_LegalTC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Efffective Tier cannot be edited when the Contract Status is &apos;Signed by Customer&apos; --></errorMessage>
+        <name>QL_Cannot_modify_Effective_Tier</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select Effective Tier --></errorMessage>
+        <name>QL_Effective_Tier_is_Mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter Approval Submission Date --></errorMessage>
+        <name>RestrictApprovalDateRemoveOnAppOrRej</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t enter Approved/Rejected Date if Legal Approval is not &quot;Approved&quot; or &quot;Rejected&quot;. --></errorMessage>
+        <name>Restrict_Approved_Rejected</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t enter value if Require Additional Changes is &quot;No&quot; --></errorMessage>
+        <name>Restrict_Entering_Additional_Changes</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Approval Submission Date cannot be a future date or null, please verify. --></errorMessage>
+        <name>Restrict_Legal_required_submission_date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not make the value as &quot;Approved&quot; or &quot;Rejected&quot; from &apos;None&apos; Value. Please select the value as &quot;Required&quot;. --></errorMessage>
+        <name>Restrict_Modify_LegalApp_Noneto_AppOrRej</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Can&apos;t change the Name since the record is locked --></errorMessage>
+        <name>Restrict_Modifying_Name</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not modified the requested field value as record is read only. --></errorMessage>
+        <name>Restrict_Modifying_Required_fields_Sign</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Approved/Rejected Date cannot be a future date or null, please verify. --></errorMessage>
+        <name>Restrict_legal_Approve_reject_date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Contract end date should be greater than contract start date. --></errorMessage>
+        <name>Validate_Contract_Start_and_End_Dates</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Enter Valid Name --></errorMessage>
+        <name>Validate_Name_Contract</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select Special Fare Conditions Category and enter Special Conditions Details --></errorMessage>
+        <name>Validate_Special_Conditions_Details</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Customer_Approved --></label>
+        <name>Customer_Approved</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Customer_Rejected --></label>
+        <name>Customer_Rejected</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Contract --></label>
+        <name>Generate_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Deal_Sheet --></label>
+        <name>Generate_Deal_Sheet</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Deal_Sheet_Domestic --></label>
+        <name>Generate_Deal_Sheet_Domestic</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Deal_Sheet_International --></label>
+        <name>Generate_Deal_Sheet_International</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Contracts_Agreements --></label>
+        <name>New_Contracts_Agreements</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Set_Customer_Response --></label>
+        <name>Set_Customer_Response</name>
+    </webLinks>
+</CustomObjectTranslation>

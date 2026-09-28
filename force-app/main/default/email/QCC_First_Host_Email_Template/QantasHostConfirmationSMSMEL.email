@@ -1,0 +1,13 @@
+Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},
+<br/>
+<br/>
+Thank you for choosing to fly with Qantas.
+ <br/>
+<br/>
+{!IF(QCC_First_Host__c.QCC_Qantas_Porter_Service__c = TRUE, "We’ve received your request for Porter Assistance for " + QCC_First_Host__c.QCC_Carrier_Code__c + "" + QCC_First_Host__c.QCC_Flight_No__c + " with your expected airport arrival time of "+ QCC_First_Host__c.QCC_TECH_Expected_Arrival_Time_Formula__c + ". Please proceed to the Qantas First curbside check-in on arrival at the Melbourne International Terminal and one of our porters will be expecting you.", "")} {!IF(QCC_First_Host__c.QCC_Qantas_First_Spa_Lounge__c = TRUE, "A member of our team will be in contact prior to departure in regards to your Spa appointment enquiry.","")} {!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Other_Details__c)), "Your special request was noted.","")}
+<br/>
+<br/>
+Warm regards,
+<br/>
+Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team<br/>
+{!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "World Wide +61 (2) 6250 8204", IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Platinum One" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge Platinum One" || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c ="FFLP" ,"World Wide +61 1300 752 801","vipserviceteam@qantas.com.au"))}

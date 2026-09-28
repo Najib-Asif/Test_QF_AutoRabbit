@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>IOC: Flight Event Recovery Comms Approval</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>QCC_BlankLetterhead</letterhead>
+    <name>IOCApprovalTemplate</name>
+    <style>freeForm</style>
+    <subject>Approval Request for Event {!Event__c.Name}</subject>
+    <textOnly>Hi Team,
+
+
+A request for approval has been submitted.
+
+
+Flight Event details below;
+
+
+Flight Number {!Event__c.FlightNumber__c} from {!Event__c.DeparturePort__c} to {!Event__c.ArrivalPort__c} on {!Event__c.ScheduledDepDate__c} is disrupted due to the following:
+
+Delay Failure: {!Event__c.DelayFailureCode__c} ;
+
+Non delay Failure: {!Event__c.Non_Delay_Failure_Code__c}.
+
+
+CJM Comments: {!Event__c.Comments__c}
+
+
+Recovery points for affected passengers as per the table below;
+
+
+Economy
+
+Premium Economy
+
+Business
+
+First
+
+Platinum One/CL
+
+{!Event__c.Platinum1SSUEconomy__c}
+
+{!Event__c.Platinum1SSUPremiumEconomy__c}
+
+{!Event__c.Platinum1SSUBusiness__c}
+
+{!Event__c.Platinum1SSUFirstClass__c}
+
+Platinum
+
+{!Event__c.PlatinumEconomy__c}
+
+{!Event__c.PlatinumPremiumEconomy__c}
+
+{!Event__c.PlatinumBusiness__c}
+
+{!Event__c.PlatinumFirstClass__c}
+
+Gold
+
+{!Event__c.GoldEconomy__c}
+
+{!Event__c.GoldEconomy__c}
+
+{!Event__c.GoldBusiness__c}
+
+{!Event__c.GoldFirstClass__c}
+
+Silver
+
+{!Event__c.SilverEconomy__c}
+
+{!Event__c.SilverPremiumEconomy__c}
+
+{!Event__c.SilverBusiness__c}
+
+{!Event__c.SilverFirstClass__c}
+
+Bronze
+
+{!Event__c.BronzeEconomy__c}
+
+{!Event__c.BronzePremiumEconomy__c}
+
+{!Event__c.BronzeBusiness__c}
+
+{!Event__c.BronzeFirstClass__c}
+
+Non Tier
+
+{!Event__c.NonTieredEconomy__c}
+
+{!Event__c.NonTieredPremiumEconomy__c}
+
+{!Event__c.NonTieredBusiness__c}
+
+{!Event__c.NonTieredFirstClass__c}
+
+
+To process the request please click on Approval Link
+
+
+Thanks,
+
+{!Approval_Requesting_User.FirstName} {!Approval_Requesting_User.LastName}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

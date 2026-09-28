@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Reasons__c</fullName>
+    <description>Used to record closed reasons. Mandatory when opportunity is closed.</description>
+    <inlineHelpText>Select the reason(s) for opportunity closure.</inlineHelpText>
+    <label>Closure Reasons</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>StageName</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Loyalty proposition</fullName>
+                <default>false</default>
+                <label>Loyalty proposition</label>
+            </value>
+            <value>
+                <fullName>Network</fullName>
+                <default>false</default>
+                <label>Network</label>
+            </value>
+            <value>
+                <fullName>Service (OTP/safety record/reliability)</fullName>
+                <default>false</default>
+                <label>Service (OTP/safety record/reliability)</label>
+            </value>
+            <value>
+                <fullName>Alliance partnerships</fullName>
+                <default>false</default>
+                <label>Alliance partnerships</label>
+            </value>
+            <value>
+                <fullName>Premium product (aircraft / lounges)</fullName>
+                <default>false</default>
+                <label>Premium product (aircraft / lounges)</label>
+            </value>
+            <value>
+                <fullName>Value adds (valet, QF Club, etc.)</fullName>
+                <default>false</default>
+                <label>Value adds (valet, QF Club, etc.)</label>
+            </value>
+            <value>
+                <fullName>Security of Supply</fullName>
+                <default>false</default>
+                <label>Security of Supply</label>
+            </value>
+            <value>
+                <fullName>Brand alignment</fullName>
+                <default>false</default>
+                <label>Brand alignment</label>
+            </value>
+            <value>
+                <fullName>Schedule (frequency / capacity)</fullName>
+                <default>false</default>
+                <label>Schedule (frequency / capacity)</label>
+            </value>
+            <value>
+                <fullName>TMC influence</fullName>
+                <default>false</default>
+                <label>TMC influence</label>
+            </value>
+            <value>
+                <fullName>Pricing</fullName>
+                <default>false</default>
+                <label>Pricing</label>
+            </value>
+            <value>
+                <fullName>Strong client / QF relationship</fullName>
+                <default>false</default>
+                <label>Strong client / QF relationship</label>
+            </value>
+            <value>
+                <fullName>with competitor</fullName>
+                <default>false</default>
+                <label>with competitor</label>
+            </value>
+            <value>
+                <fullName>High value</fullName>
+                <default>false</default>
+                <label>High value</label>
+            </value>
+            <value>
+                <fullName>Low value</fullName>
+                <default>false</default>
+                <label>Low value</label>
+            </value>
+            <value>
+                <fullName>Protect commercial relationship</fullName>
+                <default>false</default>
+                <label>Protect commercial relationship</label>
+            </value>
+            <value>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+                <label>Deferred</label>
+            </value>
+            <value>
+                <fullName>Refer to other area</fullName>
+                <default>false</default>
+                <label>Refer to other area</label>
+            </value>
+            <value>
+                <fullName>Declined</fullName>
+                <default>false</default>
+                <label>Declined</label>
+            </value>
+            <value>
+                <fullName>Other commitments</fullName>
+                <default>false</default>
+                <label>Other commitments</label>
+            </value>
+            <value>
+                <fullName>Not profitable</fullName>
+                <default>false</default>
+                <label>Not profitable</label>
+            </value>
+            <value>
+                <fullName>High cost of sale</fullName>
+                <default>false</default>
+                <label>High cost of sale</label>
+            </value>
+            <value>
+                <fullName>Won&apos;t commit to QF contract terms</fullName>
+                <default>false</default>
+                <label>Won&apos;t commit to QF contract terms</label>
+            </value>
+            <value>
+                <fullName>Withdrawn by QF</fullName>
+                <default>false</default>
+                <label>Withdrawn by QF</label>
+            </value>
+            <value>
+                <fullName>Opportunity for a volume deal</fullName>
+                <default>false</default>
+                <label>Opportunity for a volume deal</label>
+            </value>
+            <value>
+                <fullName>Company operating environment</fullName>
+                <default>false</default>
+                <label>Company operating environment</label>
+            </value>
+            <value>
+                <fullName>Relevance to business eg. partner mix</fullName>
+                <default>false</default>
+                <label>Relevance to business eg. partner mix</label>
+            </value>
+            <value>
+                <fullName>Switched to alternate product eg. Aquire</fullName>
+                <default>false</default>
+                <label>Switched to alternate product eg. Aquire</label>
+            </value>
+            <value>
+                <fullName>Merger</fullName>
+                <default>false</default>
+                <label>Merger</label>
+            </value>
+            <value>
+                <fullName>Aircraft availability</fullName>
+                <default>false</default>
+                <label>Aircraft availability</label>
+            </value>
+            <value>
+                <fullName>Strategic decision</fullName>
+                <default>false</default>
+                <label>Strategic decision</label>
+            </value>
+            <value>
+                <fullName>Fit for purpose</fullName>
+                <default>false</default>
+                <label>Fit for purpose</label>
+            </value>
+            <value>
+                <fullName>Premium product (e.g. QGO Priority / Express)</fullName>
+                <default>false</default>
+                <label>Premium product (e.g. QGO Priority / Express)</label>
+            </value>
+            <value>
+                <fullName>Competitor airline</fullName>
+                <default>false</default>
+                <label>Competitor airline</label>
+            </value>
+            <value>
+                <fullName>Shipper / Consignee influence</fullName>
+                <default>false</default>
+                <label>Shipper / Consignee influence</label>
+            </value>
+            <value>
+                <fullName>Freight forwarder influence</fullName>
+                <default>false</default>
+                <label>Freight forwarder influence</label>
+            </value>
+            <value>
+                <fullName>Freight forwarder unsuccessful</fullName>
+                <default>false</default>
+                <label>Freight forwarder unsuccessful</label>
+            </value>
+            <value>
+                <fullName>Service proposition at terminals</fullName>
+                <default>false</default>
+                <label>Service proposition at terminals</label>
+            </value>
+            <value>
+                <fullName>Customer accepted then cancelled</fullName>
+                <default>false</default>
+                <label>Customer accepted then cancelled</label>
+            </value>
+            <value>
+                <fullName>Account Management</fullName>
+                <default>false</default>
+                <label>Account Management</label>
+            </value>
+            <value>
+                <fullName>TMC Fees</fullName>
+                <default>false</default>
+                <label>TMC Fees</label>
+            </value>
+            <value>
+                <fullName>Market share targets</fullName>
+                <default>false</default>
+                <label>Market share targets</label>
+            </value>
+            <value>
+                <fullName>Booking policy</fullName>
+                <default>false</default>
+                <label>Booking policy</label>
+            </value>
+            <value>
+                <fullName>Revenue does not meet threshold</fullName>
+                <default>false</default>
+                <label>Revenue does not meet threshold</label>
+            </value>
+            <value>
+                <fullName>Competitors offer</fullName>
+                <default>false</default>
+                <label>Competitors offer</label>
+            </value>
+            <value>
+                <fullName>Points Offering</fullName>
+                <default>false</default>
+                <label>Points Offering</label>
+            </value>
+            <value>
+                <fullName>Discount Levels</fullName>
+                <default>false</default>
+                <label>Discount Levels</label>
+            </value>
+            <value>
+                <fullName>Network Alliance Partnership</fullName>
+                <default>false</default>
+                <label>Network Alliance Partnership</label>
+            </value>
+            <value>
+                <fullName>QBR Partnerships</fullName>
+                <default>false</default>
+                <label>QBR Partnerships</label>
+            </value>
+            <value>
+                <fullName>QF Club</fullName>
+                <default>false</default>
+                <label>QF Club</label>
+            </value>
+            <value>
+                <fullName>Airline preference</fullName>
+                <default>false</default>
+                <label>Airline preference</label>
+            </value>
+            <value>
+                <fullName>Program cost</fullName>
+                <default>false</default>
+                <label>Program cost</label>
+            </value>
+            <value>
+                <fullName>Travel/Company Policy</fullName>
+                <default>false</default>
+                <label>Travel/Company Policy</label>
+            </value>
+            <value>
+                <fullName>Fares/Pricing</fullName>
+                <default>false</default>
+                <label>Fares/Pricing</label>
+            </value>
+            <value>
+                <fullName>Card acceptance</fullName>
+                <default>false</default>
+                <label>Card acceptance</label>
+            </value>
+            <value>
+                <fullName>Competitor Product</fullName>
+                <default>false</default>
+                <label>Competitor Product</label>
+            </value>
+            <value>
+                <fullName>No Authorization</fullName>
+                <default>false</default>
+                <label>No Authorization</label>
+            </value>
+            <value>
+                <fullName>Accessing existing Product</fullName>
+                <default>false</default>
+                <label>Accessing existing Product</label>
+            </value>
+            <value>
+                <fullName>Unsure/Undecided</fullName>
+                <default>false</default>
+                <label>Unsure/Undecided</label>
+            </value>
+            <value>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+                <label>Duplicate</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Timing</fullName>
+                <default>false</default>
+                <label>Timing</label>
+            </value>
+            <value>
+                <fullName>Relationship</fullName>
+                <default>false</default>
+                <label>Relationship</label>
+            </value>
+            <value>
+                <fullName>Solution/Services</fullName>
+                <default>false</default>
+                <label>Solution/Services</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Ineligible</fullName>
+                <default>false</default>
+                <label>Ineligible</label>
+            </value>
+            <value>
+                <fullName>Duplicate Opportunity</fullName>
+                <default>false</default>
+                <label>Duplicate Opportunity</label>
+            </value>
+            <value>
+                <fullName>Unresponsive customer</fullName>
+                <default>false</default>
+                <label>Unresponsive customer</label>
+            </value>
+            <value>
+                <fullName>Preference for alternative Qantas product</fullName>
+                <default>false</default>
+                <label>Preference for alternative Qantas product</label>
+            </value>
+            <value>
+                <fullName>Does not want to use a TMC</fullName>
+                <default>false</default>
+                <label>Does not want to use a TMC</label>
+            </value>
+            <value>
+                <fullName>Using multiple TMC</fullName>
+                <default>false</default>
+                <label>Using multiple TMC</label>
+            </value>
+            <value>
+                <fullName>Does not want to use a IATA agent</fullName>
+                <default>false</default>
+                <label>Does not want to use a IATA agent</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Loyalty proposition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Network</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Service (OTP/safety record/reliability)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Alliance partnerships</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Premium product (aircraft / lounges)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Value adds (valet, QF Club, etc.)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Security of Supply</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Brand alignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Schedule (frequency / capacity)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>TMC influence</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Pricing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>with competitor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>High value</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Low value</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Protect commercial relationship</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Deferred</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Refer to other area</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Declined</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Other commitments</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Not profitable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>High cost of sale</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Won&apos;t commit to QF contract terms</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Withdrawn by QF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Opportunity for a volume deal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Company operating environment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Relevance to business eg. partner mix</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Switched to alternate product eg. Aquire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Merger</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Aircraft availability</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Strategic decision</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Fit for purpose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Premium product (e.g. QGO Priority / Express)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Competitor airline</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Shipper / Consignee influence</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Freight forwarder influence</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Freight forwarder unsuccessful</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Service proposition at terminals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Customer accepted then cancelled</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>TMC Fees</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Market share targets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Booking policy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Revenue does not meet threshold</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Competitors offer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Points Offering</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Discount Levels</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Network Alliance Partnership</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>QBR Partnerships</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>QF Club</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Airline preference</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Program cost</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Travel/Company Policy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Fares/Pricing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Card acceptance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Competitor Product</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>No Authorization</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Accessing existing Product</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Unsure/Undecided</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <valueName>Duplicate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Ineligible</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Duplicate Opportunity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Unresponsive customer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Preference for alternative Qantas product</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Does not want to use a TMC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Using multiple TMC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Declined</controllingFieldValue>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed - Not Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Does not want to use a IATA agent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Strong client / QF relationship</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Account Management</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Price</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Timing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Relationship</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Accepted</controllingFieldValue>
+            <controllingFieldValue>Closed Implemented</controllingFieldValue>
+            <valueName>Solution/Services</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Is_Visible_on_Queue__c</fullName>
+    <description>This field is checked based on the logged-in user if they are allowed to pick up the case from the Queue</description>
+    <formula>IF(
+    /*NON HOBART*/
+    OR(
+        ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Platinum One&quot;),
+        ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge Platinum One&quot;),
+        ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge Platinum One&quot;),
+        Contact.SSU__c = TRUE,
+        ISBLANK(ContactId) 
+    )
+    &amp;&amp; $UserRole.Name != &apos;QF-QDC-OM-HBA-TL-USR&apos;
+    &amp;&amp; $UserRole.Name != &apos;QF-QDC-OM-HBA-TL&apos;
+    &amp;&amp; NOT(ISPICKVAL(Type, &quot;Qantas Host Call&quot;))
+    &amp;&amp; NOT(ISPICKVAL(Type, &quot;Qantas Host Always Call&quot;))
+        
+    , TRUE,
+    /*HOBART*/
+    IF(
+		AND(
+			NOT(ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Platinum One&quot;)),
+            NOT(ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge Platinum One&quot;)),
+            NOT(ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge Platinum One&quot;)),
+			Contact.SSU__c = FALSE,
+            NOT(ISBLANK(ContactId)),
+			OR($UserRole.Name = &apos;QF-QDC-OM-HBA-TL-USR&apos;,$UserRole.Name = &apos;QF-QDC-OM-HBA-TL&apos;)) 
+    || AND(OR($UserRole.Name = &apos;QF-QDC-OM-HBA-TL-USR&apos;,$UserRole.Name = &apos;QF-QDC-OM-HBA-TL&apos;), OR(TEXT(Type)=&apos;Qantas Host Call&apos;, TEXT(Type)=&apos;Qantas Host Always Call&apos;)),
+        TRUE,
+        FALSE
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>QCC Is Visible on Queue</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

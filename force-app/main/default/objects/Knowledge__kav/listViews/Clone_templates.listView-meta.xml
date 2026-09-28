@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Clone_templates</fullName>
+    <booleanFilter>1 AND (2 OR 3) AND 4</booleanFilter>
+    <columns>TITLE</columns>
+    <columns>ARTICLE_NUMBER</columns>
+    <columns>Answer__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>LAST_PUBLISHED_DATE</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <columns>PUBLISH_STATUS</columns>
+    <columns>OWNER_ID</columns>
+    <columns>Channel__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Knowledge__kav.Informational_Article,Knowledge__kav.Internal_Noticeboard,Knowledge__kav.Marketing_and_Promotional,Knowledge__kav.Policy,Knowledge__kav.Process_and_Procedure,Knowledge__kav.Triage_Article</value>
+    </filters>
+    <filters>
+        <field>ARTICLE_NUMBER</field>
+        <operation>equals</operation>
+        <value>000005878,000004063,000004182,000004191,000004181,000004060,000005937,000006044,000006238,000006467</value>
+    </filters>
+    <filters>
+        <field>ARTICLE_NUMBER</field>
+        <operation>equals</operation>
+        <value>000004192,000007199,000006467</value>
+    </filters>
+    <filters>
+        <field>PUBLISH_STATUS</field>
+        <operation>notEqual</operation>
+        <value>3</value>
+    </filters>
+    <label>Clone Templates</label>
+    <sharedTo>
+        <group>Service_Delivery_Team</group>
+    </sharedTo>
+</ListView>

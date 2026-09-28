@@ -1,0 +1,557 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Freight_Reporting_Team__c", "Id", "Username", "LastName", "FirstName", "Name", "IsActive", "UserRoleId", "ProfileId", "FederationIdentifier", "RadarUser__c", "Location__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "ParentRoleId", "DeveloperName" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "PermissionsEmailSingle", "PermissionsEmailMass", "PermissionsEditTask", "PermissionsEditEvent", "PermissionsExportReport", "PermissionsImportPersonal", "PermissionsDataExport", "PermissionsManageUsers", "PermissionsEditPublicFilters", "PermissionsEditPublicTemplates", "PermissionsModifyAllData", "PermissionsEditBillingInfo", "PermissionsManageCases", "PermissionsMassInlineEdit", "PermissionsEditKnowledge", "PermissionsManageKnowledge", "PermissionsManageSolutions", "PermissionsCustomizeApplication", "PermissionsEditReadonlyFields", "PermissionsRunReports", "PermissionsViewSetup", "PermissionsTransferAnyEntity", "PermissionsNewReportBuilder", "PermissionsActivateContract", "PermissionsActivateOrder", "PermissionsImportLeads", "PermissionsManageLeads", "PermissionsTransferAnyLead", "PermissionsViewAllData", "PermissionsEditPublicDocuments", "PermissionsViewEncryptedData", "PermissionsEditBrandTemplates", "PermissionsEditHtmlTemplates", "PermissionsChatterInternalUser", "PermissionsManageTranslation", "PermissionsDeleteActivatedContract", "PermissionsChatterInviteExternalUsers", "PermissionsSendSitRequests", "PermissionsOverrideForecasts", "PermissionsViewAllForecasts", "PermissionsApiUserOnly", "PermissionsManageRemoteAccess", "PermissionsCanUseNewDashboardBuilder", "PermissionsManageCategories", "PermissionsConvertLeads", "PermissionsPasswordNeverExpires", "PermissionsUseTeamReassignWizards", "PermissionsEditActivatedOrders" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Profile",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Profile"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "UserRole",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ProfileId" ],
+        "rightQualifier" : "Profile",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "UserRole.RollupDescription", "UserRole.OpportunityAccessForAccountOwner", "UserRole.CaseAccessForAccountOwner", "UserRole.ContactAccessForAccountOwner", "UserRole.ForecastUserId", "UserRole.MayForecastManagerShare", "UserRole.LastModifiedDate", "UserRole.LastModifiedById", "UserRole.SystemModstamp", "UserRole.PortalAccountId", "UserRole.PortalType", "UserRole.PortalAccountOwnerId", "Profile.PermissionsEmailSingle", "Profile.PermissionsEmailMass", "Profile.PermissionsEditTask", "Profile.PermissionsEditEvent", "Profile.PermissionsExportReport", "Profile.PermissionsImportPersonal", "Profile.PermissionsDataExport", "Profile.PermissionsManageUsers", "Profile.PermissionsEditPublicFilters", "Profile.PermissionsEditPublicTemplates", "Profile.PermissionsModifyAllData", "Profile.PermissionsEditBillingInfo", "Profile.PermissionsManageCases", "Profile.PermissionsMassInlineEdit", "Profile.PermissionsEditKnowledge", "Profile.PermissionsManageKnowledge", "Profile.PermissionsManageSolutions", "Profile.PermissionsCustomizeApplication", "Profile.PermissionsEditReadonlyFields", "Profile.PermissionsRunReports", "Profile.PermissionsViewSetup", "Profile.PermissionsTransferAnyEntity", "Profile.PermissionsNewReportBuilder", "Profile.PermissionsActivateContract", "Profile.PermissionsImportLeads", "Profile.PermissionsActivateOrder", "Profile.PermissionsManageLeads", "Profile.PermissionsTransferAnyLead", "Profile.PermissionsViewAllData", "Profile.PermissionsEditPublicDocuments", "Profile.PermissionsViewEncryptedData", "Profile.PermissionsEditBrandTemplates", "Profile.PermissionsEditHtmlTemplates", "Profile.PermissionsChatterInternalUser", "Profile.PermissionsManageTranslation", "Profile.PermissionsDeleteActivatedContract", "Profile.PermissionsChatterInviteExternalUsers", "Profile.PermissionsSendSitRequests", "Profile.PermissionsOverrideForecasts", "Profile.PermissionsViewAllForecasts", "Profile.PermissionsApiUserOnly", "Profile.PermissionsManageRemoteAccess", "Profile.PermissionsCanUseNewDashboardBuilder", "Profile.PermissionsManageCategories", "Profile.PermissionsConvertLeads", "Profile.PermissionsPasswordNeverExpires", "Profile.PermissionsUseTeamReassignWizards", "Profile.PermissionsEditActivatedOrders" ]
+        }
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "DROP_FIELDS0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Profile.Name_bucket",
+          "label" : "Business Unit by Profile",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "Profile.Name",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Customer Care",
+              "sourceValues" : [ "Qantas CC Consultant", "Qantas CC Customer Specific Needs", "Qantas CC Journey Manager", "Qantas CC Operational Manager", "Qantas CC Team Lead" ]
+            }, {
+              "value" : "S&D",
+              "sourceValues" : [ "QL GSA", "QL Qantas Service", "QL_Qantas_Sales", "QL_Qantas_US_Sales", "Qantas Service Lightning" ]
+            }, {
+              "value" : "Freight",
+              "sourceValues" : [ "Qantas Freight Sales", "Qantas Freight Service" ]
+            }, {
+              "value" : "Loyalty",
+              "sourceValues" : [ "Qantas Loyalty", "Qantas Loyalty -Commercial Sales" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "BUCKET1" : {
+      "action" : "bucket",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "UserRole.Name_bucket",
+          "label" : "Role Bucket",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "nullBucketValue" : "No Role",
+            "isPassthroughEnabled" : false,
+            "algorithm" : {
+              "type" : "TYPOGRAPHIC_CLUSTERING",
+              "distanceThreshold" : 1,
+              "ignoreCase" : true
+            },
+            "sourceField" : {
+              "name" : "UserRole.Name",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Hobart",
+              "sourceValues" : [ "QF-QDC-OM-HBA-TL", "QF-QDC-OM-HBA-TL-USR" ]
+            }, {
+              "value" : "Capetown",
+              "sourceValues" : [ "QF-QDC-OM-CPT-TL", "QF-QDC-OM-CPT-TL-USR" ]
+            }, {
+              "value" : "Auckland",
+              "sourceValues" : [ "QF-QDC-OM-AKL-TL", "QF-QDC-OM-AKL-TL-USR" ]
+            }, {
+              "value" : "Suva",
+              "sourceValues" : [ "QF-QDC-OM-SUV-TL", "QF-QDC-OM-SUV-TL-USR" ]
+            }, {
+              "value" : "Sydney",
+              "sourceValues" : [ "QF-QDC-OM-SYD-TL", "QF-QDC-OM-SYD-TL-USR" ]
+            }, {
+              "value" : "Manila",
+              "sourceValues" : [ "QF-QDC-OM-MNL-TL", "QF-QDC-OM-MNL-TL-USR" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "BUCKET2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "BUCKET1", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "FederationIdentifier" ],
+        "rightQualifier" : "Transform1",
+        "rightKeys" : [ "StaffID" ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "Id_formula",
+          "label" : "Current Date",
+          "formulaExpression" : "now()",
+          "format" : "dd/MM/yyyy",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Id_formula_formula",
+          "label" : "Tenure (mnths)",
+          "formulaExpression" : "months_between(\"Transform1.StartDate\", Id_formula)",
+          "precision" : 18,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Id_formula_formula_formula",
+          "label" : "Tenure (mnths)+",
+          "formulaExpression" : "-1*Id_formula_formula",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "BUCKET2" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Id_formula_formula_formula_bucket",
+          "label" : "Tenure (mnths)+ Bucket",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "Id_formula_formula_formula",
+              "type" : "NUMBER"
+            },
+            "buckets" : [ {
+              "value" : "Less than 6 months",
+              "rangeEnd" : 6.0
+            }, {
+              "value" : "under 1 Year",
+              "rangeStart" : 6.0,
+              "rangeEnd" : 12.0
+            }, {
+              "value" : "1-2 Years",
+              "rangeStart" : 12.0,
+              "rangeEnd" : 24.0
+            }, {
+              "value" : "3-4 Years",
+              "rangeStart" : 24.0,
+              "rangeEnd" : 48.0
+            }, {
+              "value" : "4-10 Years",
+              "rangeStart" : 48.0,
+              "rangeEnd" : 120.0
+            }, {
+              "value" : "10+ Years",
+              "rangeStart" : 120.0
+            } ]
+          }
+        } ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "StartDate", "StaffID", "LastCallDate" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "WFM-AgentStartDate",
+          "name" : "WFM_AgentStartDate"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "BUCKET2" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "AVG",
+          "source" : "Id_formula_formula_formula",
+          "name" : "AVG_Id_formula_formula_formula",
+          "label" : "Average Tenure (mnths)+"
+        } ],
+        "groupings" : [ "UserRole.Name_bucket", "UserRole.Name" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Average Tenure",
+          "name" : "Average_Tenure",
+          "folderName" : "Repeat_Call_Analytics"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Role",
+          "name" : "Role"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Profile",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "JOIN1" : {
+        "label" : "Join 1",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 532,
+        "graph" : {
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          },
+          "BUCKET0" : {
+            "label" : "Business Unit by Profile"
+          },
+          "BUCKET1" : {
+            "label" : "Role Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "DROP_FIELDS0",
+          "target" : "BUCKET0"
+        }, {
+          "source" : "BUCKET0",
+          "target" : "BUCKET1"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "Basic User Master",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 1232
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 952
+      },
+      "TRANSFORM2" : {
+        "label" : "Transform 2",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 1092,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "DATE_NOW_UI"
+            },
+            "label" : "Current Date"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "DATE_DIFFERENCE_UI"
+            },
+            "label" : "Return Duration Between Dates"
+          },
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "BUCKET2" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "FORMULA2"
+        }, {
+          "source" : "FORMULA2",
+          "target" : "BUCKET2"
+        } ]
+      },
+      "LOAD_DATASET3" : {
+        "label" : "WFM-AgentStartDate",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "AGGREGATE0" : {
+        "label" : "Aggregate 0",
+        "type" : "AGGREGATE",
+        "top" : 252.39999999999998,
+        "left" : 1092,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Avg Tenure",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1232
+      },
+      "OUTPUT2" : {
+        "label" : "Output 2",
+        "type" : "OUTPUT",
+        "top" : 392.4,
+        "left" : 252
+      }
+    },
+    "connectors" : [ {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "AGGREGATE0"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "OUTPUT2"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

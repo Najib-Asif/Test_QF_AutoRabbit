@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_and_Distribution_Email_required</fullName>
+    <active>false</active>
+    <description>Contract and distribution name is required for particular type in Deal support cases</description>
+    <errorConditionFormula>AND
+( 
+OR
+(
+ISPICKVAL(Type,&apos;Audit Compliance&apos;),ISPICKVAL(Type,&apos;Deal Amendment&apos;),ISPICKVAL(Type,&apos;Deal Extension&apos;),ISPICKVAL(Type,&apos;Deal Renewal&apos;),ISPICKVAL(Type,&apos;Deal Termination&apos;),ISPICKVAL(Type,&apos;	New Deal Load&apos;)),
+OR(
+ISBLANK(Related_Contract__c),ISBLANK(Distribution_Email__c)),
+RecordType.DeveloperName == &apos;Deal_Support_request&apos; )</errorConditionFormula>
+    <errorDisplayField>ABN_Tax_Reference__c</errorDisplayField>
+    <errorMessage>Please enter value in the Related Contract and Distribution Email</errorMessage>
+</ValidationRule>

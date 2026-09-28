@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Do_Not_fill_Request_Type</fullName>
+    <active>true</active>
+    <description>For Sales Offers Case, user is not allowed to fill up Request Type and Upgrade Tier Requested</description>
+    <errorConditionFormula>AND ( 
+Case__r.RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/ 
+NOT (   $Profile.Name = &apos;System Administrator&apos;), /*System Administrator*/
+NOT (   $Profile.Name = &apos;Qantas System Administrator&apos;), 
+NOT (   $Profile.Name = &apos;Qantas System Admin - Freight&apos;), 
+NOT (   $Profile.Name = &apos;Qantas System Admin - QCC&apos;), 
+NOT (   $Profile.Name = &apos;Qantas System Admin - SND&apos;), 
+OR (
+NOT ( ISPICKVAL ( Upgrade_Tier_Requested__c , &quot;&quot;)),
+NOT ( ISPICKVAL ( Request_Type__c  , &quot;&quot;))
+)
+)</errorConditionFormula>
+    <errorMessage>You are not allowed to pick the values in the Upgrade Tier Requested or Request Type picklist for Sales Offers Type request.</errorMessage>
+</ValidationRule>

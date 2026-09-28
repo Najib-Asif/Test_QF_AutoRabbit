@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Agreement__c</fullName>
+    <description>Field to relate variation with contract &amp; agreement object</description>
+    <inlineHelpText>Contract associated to this variation</inlineHelpText>
+    <label>Contract &amp; Agreement</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <errorMessage>Contract still in draft stage</errorMessage>
+        <filterItems>
+            <field>Contract__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Draft</value>
+        </filterItems>
+        <filterItems>
+            <field>Contract__c.RecordType.DeveloperName</field>
+            <operation>notEqual</operation>
+            <value>Loyalty_Commercial</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Contract__c</referenceTo>
+    <relationshipLabel>Variations</relationshipLabel>
+    <relationshipName>Variations</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>EventActionPlanCJMReadWriteAccess</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>CJM: Can Edit The Events</description>
+        <label>Event Action Plan CJM - Read/Write Access</label>
+        <sharedTo>
+            <group>QCC_CJMPublicGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC CJM,CCC Duty Manager</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Event_Action_Plan_Read_Access_to_QCC</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share records with QCC users</description>
+        <label>Event Action Plan- Read Access to QCC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC CJM,CCC Duty Manager</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>KnowledgeiQ_Guest_User_Event_Action_Plans</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>sharing rule for knowledge iQ guest user to access event action plans with a * in the recovery plan name</description>
+        <label>KnowledgeiQ Guest User Event Action Plans</label>
+        <sharedTo>
+            <guestUser>Knowledge_iQ</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC CJM,CCC Duty Manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>contains</operation>
+            <value>*</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+</SharingRules>

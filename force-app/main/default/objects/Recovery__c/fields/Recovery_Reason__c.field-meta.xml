@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recovery_Reason__c</fullName>
+    <businessOwnerUser>brenton.watson@qantas.com.au.pist</businessOwnerUser>
+    <description>Recovery Reason shows the reason for the recovery, which is communicated to the customer</description>
+    <label>Recovery Reason</label>
+    <required>false</required>
+    <securityClassification>Public</securityClassification>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Damaged Baggage</fullName>
+                <default>false</default>
+                <label>Damaged Baggage</label>
+            </value>
+            <value>
+                <fullName>Lost Baggage</fullName>
+                <default>false</default>
+                <label>Lost Baggage</label>
+            </value>
+            <value>
+                <fullName>Ticket Refund (Compassionate Grounds)</fullName>
+                <default>false</default>
+                <label>Ticket Refund (Compassionate Grounds)</label>
+            </value>
+            <value>
+                <fullName>Ticket Refund (Non-Refundable Fare)</fullName>
+                <default>false</default>
+                <label>Ticket Refund (Non-Refundable Fare)</label>
+            </value>
+            <value>
+                <fullName>Ticket Refund (Error)</fullName>
+                <default>false</default>
+                <label>Ticket Refund (Error)</label>
+            </value>
+            <value>
+                <fullName>Cancellation Fees</fullName>
+                <default>false</default>
+                <label>Cancellation Fees</label>
+            </value>
+            <value>
+                <fullName>EMDS (Baggage &amp; Seats)</fullName>
+                <default>false</default>
+                <label>EMDS (Baggage &amp; Seats)</label>
+            </value>
+            <value>
+                <fullName>EMDS (Bid Upgrade)</fullName>
+                <default>false</default>
+                <label>EMDS (Bid Upgrade)</label>
+            </value>
+            <value>
+                <fullName>Adcol Charged Incorrectly</fullName>
+                <default>false</default>
+                <label>Adcol Charged Incorrectly</label>
+            </value>
+            <value>
+                <fullName>Expense Reimbursement (Flight Disruptions)</fullName>
+                <default>false</default>
+                <label>Expense Reimbursement (Flight Disruptions)</label>
+            </value>
+            <value>
+                <fullName>Delayed Baggage (Emergency Expenses)</fullName>
+                <default>false</default>
+                <label>Delayed Baggage (Emergency Expenses)</label>
+            </value>
+            <value>
+                <fullName>EU Compensation</fullName>
+                <default>false</default>
+                <label>EU Compensation</label>
+            </value>
+            <value>
+                <fullName>Montreal Convention Compensation</fullName>
+                <default>false</default>
+                <label>Montreal Convention Compensation</label>
+            </value>
+            <value>
+                <fullName>Civil Aviation Authority Compensation</fullName>
+                <default>false</default>
+                <label>Civil Aviation Authority Compensation</label>
+            </value>
+            <value>
+                <fullName>Bag Repair</fullName>
+                <default>false</default>
+                <label>Bag Repair</label>
+            </value>
+            <value>
+                <fullName>Missing Baggage Contents</fullName>
+                <default>false</default>
+                <label>Missing Baggage Contents</label>
+            </value>
+            <value>
+                <fullName>Damaged Mobility Aid</fullName>
+                <default>false</default>
+                <label>Damaged Mobility Aid</label>
+            </value>
+            <value>
+                <fullName>Delayed Mobility Aid</fullName>
+                <default>false</default>
+                <label>Delayed Mobility Aid</label>
+            </value>
+            <value>
+                <fullName>Lost Mobility Aid</fullName>
+                <default>false</default>
+                <label>Lost Mobility Aid</label>
+            </value>
+            <value>
+                <fullName>Ticket Refund</fullName>
+                <default>false</default>
+                <label>Ticket Refund</label>
+            </value>
+            <value>
+                <fullName>In-flight Experience (defaulted)</fullName>
+                <default>false</default>
+                <label>In-flight Experience (defaulted)</label>
+            </value>
+            <value>
+                <fullName>Airport Experience</fullName>
+                <default>false</default>
+                <label>Airport Experience</label>
+            </value>
+            <value>
+                <fullName>Lounge Experience</fullName>
+                <default>false</default>
+                <label>Lounge Experience</label>
+            </value>
+            <value>
+                <fullName>In-flight Experience</fullName>
+                <default>false</default>
+                <label>In-flight Experience</label>
+            </value>
+            <value>
+                <fullName>Digital Experience</fullName>
+                <default>false</default>
+                <label>Digital Experience</label>
+            </value>
+            <value>
+                <fullName>Flight Disruption</fullName>
+                <default>false</default>
+                <label>Flight Disruption</label>
+            </value>
+            <value>
+                <fullName>Baggage Experience</fullName>
+                <default>false</default>
+                <label>Baggage Experience</label>
+            </value>
+            <value>
+                <fullName>Contact Centre Service Experience</fullName>
+                <default>false</default>
+                <label>Contact Centre Service Experience</label>
+            </value>
+            <value>
+                <fullName>Points Refund</fullName>
+                <default>false</default>
+                <label>Points Refund</label>
+            </value>
+            <value>
+                <fullName>Seating Downgrades</fullName>
+                <default>false</default>
+                <label>Seating Downgrades</label>
+            </value>
+            <value>
+                <fullName>Unserviceable Seats</fullName>
+                <default>false</default>
+                <label>Unserviceable Seats</label>
+            </value>
+            <value>
+                <fullName>Aged (Z Status) &amp; Outdated Ticket</fullName>
+                <default>false</default>
+                <label>Aged (Z Status) &amp; Outdated Ticket</label>
+            </value>
+            <value>
+                <fullName>No Recovery Given</fullName>
+                <default>false</default>
+                <label>No Recovery Given</label>
+            </value>
+            <value>
+                <fullName>Gesture of Goodwill</fullName>
+                <default>false</default>
+                <label>Gesture of Goodwill</label>
+            </value>
+            <value>
+                <fullName>UK Compensation</fullName>
+                <default>false</default>
+                <label>UK Compensation</label>
+            </value>
+            <value>
+                <fullName>Canadian Air Passenger Protection Regulations</fullName>
+                <default>false</default>
+                <label>Canadian Air Passenger Protection Regulations</label>
+            </value>
+            <value>
+                <fullName>Downgrade</fullName>
+                <default>false</default>
+                <label>Downgrade</label>
+            </value>
+            <value>
+                <fullName>US Dot Baggage Refund</fullName>
+                <default>false</default>
+                <label>US Dot Baggage Refund</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Lounge Passes</controllingFieldValue>
+            <controllingFieldValue>First Lounge Pass</controllingFieldValue>
+            <controllingFieldValue>Space available upgrade</controllingFieldValue>
+            <controllingFieldValue>Firm space upgrade</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>Airport Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lounge Passes</controllingFieldValue>
+            <controllingFieldValue>First Lounge Pass</controllingFieldValue>
+            <controllingFieldValue>Space available upgrade</controllingFieldValue>
+            <controllingFieldValue>Firm space upgrade</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>Lounge Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lounge Passes</controllingFieldValue>
+            <controllingFieldValue>First Lounge Pass</controllingFieldValue>
+            <controllingFieldValue>Space available upgrade</controllingFieldValue>
+            <controllingFieldValue>Firm space upgrade</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>In-flight Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lounge Passes</controllingFieldValue>
+            <controllingFieldValue>First Lounge Pass</controllingFieldValue>
+            <controllingFieldValue>Space available upgrade</controllingFieldValue>
+            <controllingFieldValue>Firm space upgrade</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>Digital Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lounge Passes</controllingFieldValue>
+            <controllingFieldValue>First Lounge Pass</controllingFieldValue>
+            <controllingFieldValue>Space available upgrade</controllingFieldValue>
+            <controllingFieldValue>Firm space upgrade</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>Flight Disruption</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lounge Passes</controllingFieldValue>
+            <controllingFieldValue>First Lounge Pass</controllingFieldValue>
+            <controllingFieldValue>Space available upgrade</controllingFieldValue>
+            <controllingFieldValue>Firm space upgrade</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>Baggage Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lounge Passes</controllingFieldValue>
+            <controllingFieldValue>First Lounge Pass</controllingFieldValue>
+            <controllingFieldValue>Space available upgrade</controllingFieldValue>
+            <controllingFieldValue>Firm space upgrade</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>Contact Centre Service Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ticket Refund EFT</controllingFieldValue>
+            <valueName>Ticket Refund</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ticket Refund EFT</controllingFieldValue>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>UK Compensation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ticket Refund EFT</controllingFieldValue>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Canadian Air Passenger Protection Regulations</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ticket Refund EFT</controllingFieldValue>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Downgrade</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ticket Refund EFT</controllingFieldValue>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>US Dot Baggage Refund</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Qantas Points</controllingFieldValue>
+            <valueName>Points Refund</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Travel vouchers</controllingFieldValue>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>Ticket Refund (Non-Refundable Fare)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Travel vouchers</controllingFieldValue>
+            <valueName>Seating Downgrades</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Travel vouchers</controllingFieldValue>
+            <valueName>Unserviceable Seats</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Travel vouchers</controllingFieldValue>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Gesture of Goodwill</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bag Repair</controllingFieldValue>
+            <controllingFieldValue>Bag Replacement</controllingFieldValue>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Damaged Baggage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bag Replacement</controllingFieldValue>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Lost Baggage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>Ticket Refund (Compassionate Grounds)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>Ticket Refund (Error)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>Cancellation Fees</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>EMDS (Baggage &amp; Seats)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>EMDS (Bid Upgrade)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>Adcol Charged Incorrectly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cover Refund</controllingFieldValue>
+            <valueName>Aged (Z Status) &amp; Outdated Ticket</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Expense Reimbursement (Flight Disruptions)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Delayed Baggage (Emergency Expenses)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>EU Compensation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Montreal Convention Compensation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Civil Aviation Authority Compensation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Bag Repair</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Missing Baggage Contents</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Damaged Mobility Aid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Delayed Mobility Aid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payment (EFT)</controllingFieldValue>
+            <controllingFieldValue>Payment (Credit Card)</controllingFieldValue>
+            <valueName>Lost Mobility Aid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Goodwill</controllingFieldValue>
+            <valueName>No Recovery Given</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

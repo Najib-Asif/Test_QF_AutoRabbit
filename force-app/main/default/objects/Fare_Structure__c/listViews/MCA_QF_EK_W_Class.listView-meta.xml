@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MCA_QF_EK_W_Class</fullName>
+    <columns>NAME</columns>
+    <columns>Market__c</columns>
+    <columns>ProductCode__c</columns>
+    <columns>Category__c</columns>
+    <columns>Cabin__c</columns>
+    <columns>Network__c</columns>
+    <columns>Segment__c</columns>
+    <columns>QL_QF_EK__c</columns>
+    <columns>Active__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Segment__c</field>
+        <operation>equals</operation>
+        <value>International</value>
+    </filters>
+    <filters>
+        <field>Network__c</field>
+        <operation>equals</operation>
+        <value>MCA</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>equals</operation>
+        <value>W</value>
+    </filters>
+    <filters>
+        <field>QL_QF_EK__c</field>
+        <operation>equals</operation>
+        <value>QF-EK</value>
+    </filters>
+    <label>MCA - QF-EK W Class</label>
+</ListView>

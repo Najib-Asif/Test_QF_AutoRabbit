@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Convert_to_Proposal_and_Contract</fullName>
+    <availability>online</availability>
+    <description>Button to create a new proposal and contract record</description>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Convert to Proposal and Contract</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+
+
+var newproposal = new sforce.SObject(&apos;Proposal__c&apos;); 
+newproposal.Opportunity__c =&apos;{!Opportunity.Id}&apos;; 
+newproposal.Account__c	= &apos;{!Opportunity.AccountId}&apos;; 
+newproposal.Name = &apos;{!Opportunity.Name}&apos;; 
+newproposal.Status__c= &apos;System Created&apos;; 
+newproposal.Proposal_Start_Date__c = new Date(); 
+newproposal.Proposal_End_Date__c = new Date(); 
+newproposal.Forecast_MCA_Revenue__c=&apos;1000&apos;;
+
+if(&quot;{!Opportunity.Forecast_Charter_Spend__c}&quot; != &quot;&quot;){
+newproposal.Forecast_Charter_Spend__c =&apos;{!TEXT(Opportunity.Forecast_Charter_Spend__c)}&apos;;
+}
+
+newproposal.Contact_Information__c=&apos;{!JSENCODE(Opportunity.Contact_Information__c)}&apos;;
+newproposal.Description__c =&apos;{!JSENCODE(Opportunity.Description)}&apos;;
+
+var result = sforce.connection.query(&quot;Select Id, Name From RecordType Where SobjectType = &apos;Proposal__c&apos; AND Name = &apos;Adhoc Charter&apos;&quot;);
+var records = result.getArray(&quot;records&quot;);
+newproposal.RecordtypeId = records[0].Id;
+
+
+
+
+var result = sforce.connection.create([newproposal]); 
+
+if(result[0].getBoolean(&quot;success&quot;)) 
+{ 
+alert(&apos;Proposal &amp; Contract has been Created Successfully&apos;); 
+window.location = &apos;/&apos; + result[0].id; 
+} 
+else{ 
+alert(&apos;Error : &apos;+result); 
+}</url>
+</WebLink>

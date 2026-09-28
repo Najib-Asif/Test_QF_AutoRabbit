@@ -1,0 +1,11 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global" controller="QCC_CasePNRSearchFlowController" >
+
+    <!-- Input Paramters-->
+    <aura:attribute name="caseId" type="String" />>
+
+    <div >
+        <c:QCC_DisplayPAX aura:id="passengerDetailComponent" recordId="{!v.caseId}" />
+    </div>
+
+
+</aura:component>

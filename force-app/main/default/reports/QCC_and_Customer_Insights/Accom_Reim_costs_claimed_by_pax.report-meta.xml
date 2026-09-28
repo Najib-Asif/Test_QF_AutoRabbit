@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$Updated_Departure_Date_Time__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Recoveries_Case__r$Value__c</field>
+    </columns>
+    <columns>
+        <field>Case$Departure_Airport__c</field>
+    </columns>
+    <columns>
+        <field>Case$Arrival_Airport__c</field>
+    </columns>
+    <columns>
+        <field>Case$Description</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>For Tom Duffy , as requested via email 17/10/23 - look at 6 months of data for costs claimed by pax when claiming own accommodation</description>
+    <filter>
+        <criteriaItems>
+            <column>Case.Recoveries_Case__r$Type__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Credit Card Refund,EFT Refund</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Recoveries_Case__r$Refund_Account__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>718086	(Ops Expenditure)</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Accom/Reim costs claimed by pax</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$Updated_Departure_Date_Time__c</dateColumn>
+        <endDate>2023-08-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2023-03-01</startDate>
+    </timeFrameFilter>
+</Report>

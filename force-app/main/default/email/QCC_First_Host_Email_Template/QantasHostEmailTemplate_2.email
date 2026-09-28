@@ -1,0 +1,47 @@
+<center><img src="https://qantas.my.salesforce.com/servlet/servlet.ImageServer?id=015Mo000001ltTV&oid=00D900000010OOK" alt="QantasLetterhead"/> <br/> <br/> </center>
+
+Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c}, 
+<br/>
+<br/>
+We look forward to welcoming you onboard Qantas in First class soon, and we’re dedicated to overseeing your Qantas journey to ensure it is as smooth as possible.
+<br/>
+<br/>
+We've reviewed your upcoming booking on {!QCC_First_Host__c.QCC_Carrier_Code__c}{!QCC_First_Host__c.QCC_Flight_No__c} to {!QCC_First_Host__c.Qcc_Arrival_Airport__c} in {!QCC_First_Host__c.QCC_Cabin__c} class on {!QCC_First_Host__c.QCC_Departure_Date__c} 
+{!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_CONX_Arrival_Airport_Name__c)),"with a connection to "+QCC_First_Host__c.QCC_CONX_Arrival_Airport_Name__c,"")} and we can confirm that your booking is in order. {!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Seat_Number__c)), "Your current seat is "+ QCC_First_Host__c.QCC_Seat_Number__c+".","")} <a href="https://www.qantas.com/au/en/frequent-flyer/your-account/bookings.html">View my booking.</a>
+<br/>
+<!--BEGIN: THIS SECTION WILL SHOW CUSTOMER REQUESTED MEAL -->
+{!IF(ISPICKVAL(QCC_First_Host__c.QCC_Special_Meal__c, ""),"","<br/>We’ve noted your special meal request for ")}
+{!QCC_First_Host__c.QCC_Special_Meal__c}
+{!IF(ISPICKVAL(QCC_First_Host__c.QCC_Special_Meal__c, ""),""," in your booking as requested.<br/>")}
+<!--END: THIS  SECTION WILL SHOW CUSTOMER REQUESTED MEAL -->
+
+<!--BEGIN: THIS SECTION WILL SHOW CUSTOMER OTHER SERVICES -->
+{!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Other_Services_Formula__c)),"<br/>Additionally, there’s a request for " +QCC_First_Host__c.QCC_Other_Services_Formula__c+"<br/><br/>","")}
+<!--END: THIS SECTION WILL SHOW CUSTOMER OTHER SERVICES -->
+
+Before travel, ensure you check the latest <a href="https://www.qantas.com/au/en/travel-info/travel-advice/travel-documents.html">government travel requirements</a> which may include mandatory health declarations, entry permits, pre-approval or you could be denied entry.
+<br>
+<br/>
+Remember, we’re on hand to assist you with your Qantas travel needs for this booking by simply replying to this email. To make changes to a travel agent booking before your travel commences, please contact your agent.
+<br/>
+<br/>
+Finally, should you prefer to receive this communication via SMS, or to opt out of receiving it, please visit <a href="https://www.qantas.com/au/en/frequent-flyer/your-account/profile.html">Your Profile.</a>
+<br/>
+<br/>
+Kind regards,<br/>
+Qantas VIP Service Team
+<br/>
+{!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Worldwide + 61 2 6122 1111", IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Platinum One" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge Platinum One" || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c ="FFLP" ,"Worldwide + 61 2 6122 1111",""))}
+<br>
+<br>
+<br>
+<!--END: THIS SECTION WILL SHOW CUSTOMER OTHER SERVICES -->
+<img src="https://qantas.my.salesforce.com/servlet/servlet.ImageServer?id=015Mo000001ltV7&oid=00D900000010OOK" alt="QantasFooter" /> &nbsp; &nbsp; &nbsp <img src="https://qantas.my.salesforce.com/servlet/servlet.ImageServer?id=015Mo000001ltbZ&oid=00D900000010OOK" alt="QantasFooter" />
+<br>
+<br>
+--------------------------------------------------------------------<br>
+<font size ="4">Important Information </font><br/>
+<font size ="2"><p>The Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team monitors travel on Qantas operated flights and this communication is sent for Qantas International flights only. Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team does all possible to secure the preferred seat requests however it cannot be guaranteed as seats may need to be changed for operational, safety or security reasons, even after boarding the aircraft. For through flights, travel preferences are displayed for the first flight sector only. Porter Service and Spa appointments are subject to availability and we apologise in advance if the service is at capacity at the time of enquiry. Guests must be 18 years or older to access the Qantas Spa.  <a href="https://www.qantas.com/au/en/travel-info/seat-selection/seat-selection-conditions.html">View full terms</a> and conditions for seat selection and  <a href="https://www.qantas.com/au/en/travel-info/specific-needs.html
+">view full terms and conditions for Specific Needs</a> including meal and assistance during your journey. The Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Services offered are non transferable. </font></p>
+
+<font color="white">Ref#{!QCC_First_Host__c.Name}</font>

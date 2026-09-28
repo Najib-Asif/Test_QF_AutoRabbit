@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handover_Status_cannot_be_change</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND 
+( 
+RecordTypeId = &quot;01290000000A8Qn&quot;, /*Account Handover Case*/
+ Approved__c = FALSE,
+OR ( 
+NOT ( ISPICKVAL ( Type , &quot;Other&quot;)), 
+NOT ( ISPICKVAL ( New_Portfolio__c , &quot;Other&quot;))),
+NOT (ISPICKVAL ( Status , &apos;Not yet assigned - with Account Manager&apos;) ) , 
+NOT (ISPICKVAL ( Status , &apos;Closed - Incomplete Details&apos;)),
+NOT ( ISCHANGED (  Approval_Date_Time__c )),
+NOT( $User.ProfileId = &apos;00e90000001wK8z&apos;) /*SysAdmins*/ 
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Please Submit this Case for Approval before changing the Status</errorMessage>
+</ValidationRule>

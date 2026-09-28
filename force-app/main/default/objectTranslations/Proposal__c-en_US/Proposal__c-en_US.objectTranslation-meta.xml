@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Proposal</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Proposals</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- To Be used for AdhocCharter --></description>
+        <label><!-- Adhoc Charter --></label>
+        <name>Adhoc_Charter</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for adhoc charter proposal --></description>
+        <label><!-- Adhoc Charter - Approval Required - Customer --></label>
+        <name>Adhoc_Charter_Approval_Required_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To make the Proposal record read only once Accepted by customer --></description>
+        <label><!-- Adhoc Charter - Approved - Customer --></label>
+        <name>Adhoc_Charter_Approved_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To make the Proposal fields read only once Rejected by Customer --></description>
+        <label><!-- Adhoc Charter - Rejected - External --></label>
+        <name>Adhoc_Charter_Rejected_External</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Corporate Airfares proposals that await customer acceptance --></description>
+        <label><!-- CA - Approval Required - Customer --></label>
+        <name>Approval_Required_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Corporate Airfares proposals that require internal approval --></description>
+        <label><!-- CA - Approval Required - Internal --></label>
+        <name>Approval_Required_Internal</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Corporate Airfares proposals that have been accepted by the customer --></description>
+        <label><!-- CA - Approved - Customer --></label>
+        <name>Approved_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- CA - Approval Required - Legal --></label>
+        <name>CA_Approval_Required_Legal</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Corporate Airfares proposals that have been rejected (Internal/Customer) --></description>
+        <label><!-- CA - Rejected Internal/ External --></label>
+        <name>CA_Rejected_Internal_External</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Corporate Airfares proposals that are in draft status --></description>
+        <label><!-- CA - Draft --></label>
+        <name>Corporate_Airfares</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QBS proposals that await customer acceptance --></description>
+        <label><!-- QBS - Approval Required - Customer --></label>
+        <name>QBS_Approval_Required_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QBS proposals that require internal approvals --></description>
+        <label><!-- QBS - Approval Required - Internal --></label>
+        <name>QBS_Approval_Required_Internal</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- QBS - Approval Required - Legal --></label>
+        <name>QBS_Approval_Required_Legal</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QBS proposals that have been accepted by the Customer --></description>
+        <label><!-- QBS - Approved - Customer --></label>
+        <name>QBS_Approved_Customer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QBS proposals that have been rejected (Internal/Customer) --></description>
+        <label><!-- QBS - Rejected Internal/ External --></label>
+        <name>QBS_Rejected_Internal_External</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Created to show the layout in lock status --></description>
+        <label><!-- QL CA Approved Customer Locked --></label>
+        <name>QL_CA_Approved_Customer_Locked</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QBS proposals that are in draft status --></description>
+        <label><!-- QBS - Draft --></label>
+        <name>Qantas_Business_Savings</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Only the Account manager and  Deal Optimization team can override the Expected Approval Date --></errorMessage>
+        <name>DealOptimization_Team_can_override_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Expected Approval Date should be greater than today. --></errorMessage>
+        <name>ExpApprovalDate_should_be_greater_today</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Forecast MCA Revenue should be less than Forecast QF Revenue --></errorMessage>
+        <name>FMCA_Revenue_should_be_lesser_Total_MCA</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Forecast Group Booking Expenditure has to be greater than $50,000 --></errorMessage>
+        <name>Forecast_Group_Booki_Target_is_above_50k</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the reason for Urgent Approval --></errorMessage>
+        <name>Mandate_comments_if_Date_is_Changed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter value, if Require Additional Changes is &quot;Yes&quot; --></errorMessage>
+        <name>Mandatory_Additional_Changes</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You should enter the value if Legal Approval is Required --></errorMessage>
+        <name>Mandatory_Changes_LegalTC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the value for Qantas Club Join Discount Offer,Qantas Club Member Discount Offer --></errorMessage>
+        <name>Mandatory_Qantas_Club_Discount_Offer</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter value --></errorMessage>
+        <name>Mandatory_Upgrade_Offer</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a value --></errorMessage>
+        <name>Mandatory_if_Group_ofer_is_yes</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter Approval Submission Date --></errorMessage>
+        <name>RestrictApprovalDateRemoveOnAppOrRej</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t enter Approved/Rejected Date if Legal Approval is not &quot;Approved&quot; or &quot;Rejected&quot;. --></errorMessage>
+        <name>Restrict_Approved_Rejected</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t enter value if Require Additional Changes is &quot;No&quot; --></errorMessage>
+        <name>Restrict_Entering_Additional_Changes</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Offer is not valid, please select none for Qantas Club Join Discount Offer,Qantas Club Member Discount Offer --></errorMessage>
+        <name>Restrict_Entering_Qantas_Club_Discount</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Offer is not allowed --></errorMessage>
+        <name>Restrict_Entering_Upgrade_Offer</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Approval Submission Date cannot be a future date or null, please verify. --></errorMessage>
+        <name>Restrict_Legal_required_submission_date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- No Applicable Process Found - Please disable QF-EK Network Override Checkbox. --></errorMessage>
+        <name>Restrict_MCA_Revenue_for_QF_EK_Override</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not make the value as &quot;Approved&quot; or &quot;Rejected&quot; from &apos;None&apos; Value. Please select the value as &quot;Required&quot;. --></errorMessage>
+        <name>Restrict_Modify_LegalApp_Noneto_AppOrRej</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t modify the Commercial T&amp;C value --></errorMessage>
+        <name>Restrict_Modifying_CommercialTC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t modify the Legal T&amp;C value --></errorMessage>
+        <name>Restrict_Modifying_LegalTC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not modified the requested field value as record is read only. --></errorMessage>
+        <name>Restrict_Modifying_Proand_Acc_Name</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please note that you cannot create a proposal for a closed opportunity! --></errorMessage>
+        <name>Restrict_Proposal_Creation_ClosedOpty</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Approved/Rejected Date cannot be a future date or null, please verify --></errorMessage>
+        <name>Restrict_legal_Approve_reject_date</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Add_Discount_List --></label>
+        <name>Add_Discount_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Clone_Proposal --></label>
+        <name>Clone_Proposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Convert_to_Contract --></label>
+        <name>Convert_to_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Customer_Approved --></label>
+        <name>Customer_Approved</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Customer_Rejected --></label>
+        <name>Customer_Rejected</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Delete_Discounts_List --></label>
+        <name>Delete_Discounts_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Proposal --></label>
+        <name>Generate_Proposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Proposal_Lightning --></label>
+        <name>Generate_Proposal_Lightning</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Proposal --></label>
+        <name>New_Proposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Set_Customer_Response --></label>
+        <name>Set_Customer_Response</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Status_Override --></label>
+        <name>Status_Override</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group_Sales_Waivers_Queue_Escalated</fullName>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.ESCALATION_STATE</columns>
+    <columns>Team_Lead__c</columns>
+    <columns>Agent_Organisation_Name__c</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>Reason_for_Waiver__c</columns>
+    <columns>CASES.STATUS</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>012900000016QBj</value>
+    </filters>
+    <label>Group Sales Waivers Queue - Escalated</label>
+    <queue>Group_Sales_Waivers_Queue</queue>
+    <sharedTo>
+        <group>QF</group>
+        <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,1039 @@
+{
+  "version" : "64.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "OwnerId", "IsDeleted", "WorkOrderNumber", "RecordTypeId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "CaseId", "Subject", "Status", "IsClosed", "Have_the_mandatory_steps_been_completed__c", "Original_FOP_still_valid__c", "PNR__c", "Refund_mask_completed__c", "Revera_checked_and_PNR_remarked__c", "Subtype__c", "Ticket_Status__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "WorkOrder",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "WorkOrder"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "WoRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "WoRecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Refund Request" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "Id", "CaseNumber", "Type", "RecordTypeId", "Status", "Subject", "ClosedDate", "CreatedDate", "CreatedById", "Sub_Type__c", "Sub_Type_1__c", "Sub_Type_2__c", "Booking_PNR__c", "Category__c", "Group__c", "Sub_Category__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET2", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "CaseRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "CaseRecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Baggage", "CCC Complaints", "CCC Further Action Required", "CCC Query", "CCC Voice" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1735689600000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Booking_PNR__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "FILTER1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "PNR__c" ],
+        "rightQualifier" : "PnrCase",
+        "rightKeys" : [ "Booking_PNR__c" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Refund WO PNR and Cases",
+          "name" : "Refund_WO_PNR_and_Cases",
+          "folderName" : "NEO_REFUND_WO_AND_CASES"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Operational_Group__c", "Location__c", "Name", "Id" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN4", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "CreatedBy",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PNR__c",
+          "newProperties" : {
+            "label" : "WO PNR",
+            "name" : "PNR__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrCase.Booking_PNR__c",
+          "newProperties" : {
+            "label" : "Case PNR",
+            "name" : "PnrCase.Booking_PNR__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES2" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrCase.CaseRecordType.Name",
+          "newProperties" : {
+            "label" : "Case Record Type",
+            "name" : "PnrCase.CaseRecordType.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES3" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "WoRecordType.Name",
+          "newProperties" : {
+            "label" : "WO Record Type",
+            "name" : "WoRecordType.Name"
+          }
+        } ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Created_before_WO",
+          "label" : "Created before WO",
+          "formulaExpression" : "If(\"WoCase.CaseNumber\" = \"PnrCase.CaseNumber\", 'WO Case', if(CreatedDate > \"PnrCase.CreatedDate\", 'Before', 'After'))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "CaseNumber" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "LOAD_DATASET4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CaseId" ],
+        "rightQualifier" : "WoCase",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Operational_Group__c", "Location__c", "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "UPPERCASE0", "LOAD_DATASET5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "CreatedBy",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN6" : {
+      "action" : "join",
+      "sources" : [ "FILTER3", "JOIN5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Booking_PNR__c" ],
+        "rightQualifier" : "PnrChild",
+        "rightKeys" : [ "Booking_PNR__c" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Cases with Same PNR",
+          "name" : "Cases_with_Same_PNR",
+          "folderName" : "NEO_REFUND_WO_AND_CASES"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "JOIN6" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Child_Open_After_Parent_Closure_Hours",
+          "label" : "Follow Up after First Case Closure (Hours)",
+          "formulaExpression" : "(to_unix_timestamp(\"PnrChild.CreatedDate\") - to_unix_timestamp(ClosedDate))/3600",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES4" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CaseNumber",
+          "newProperties" : {
+            "label" : "First Interaction Case Number",
+            "name" : "CaseNumber"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES5" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES4" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Booking_PNR__c",
+          "newProperties" : {
+            "label" : "First Interaction PNR",
+            "name" : "Booking_PNR__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES6" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES5" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CaseRecordType.Name",
+          "newProperties" : {
+            "label" : "First Interaction Record Type",
+            "name" : "CaseRecordType.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES7" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES6" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CreatedBy.Name",
+          "newProperties" : {
+            "label" : "First Interaction Created By",
+            "name" : "CreatedBy.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES8" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES7" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CreatedBy.Location__c",
+          "newProperties" : {
+            "label" : "First Interaction Created By Location",
+            "name" : "CreatedBy.Location__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES9" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES8" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CreatedBy.Operational_Group__c",
+          "newProperties" : {
+            "label" : "First Interaction Operation Group",
+            "name" : "CreatedBy.Operational_Group__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES10" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES9" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrChild.CaseRecordType.Name",
+          "newProperties" : {
+            "label" : "Follow Up Case Record Type",
+            "name" : "PnrChild.CaseRecordType.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES11" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES10" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrChild.CreatedBy.Operational_Group__c",
+          "newProperties" : {
+            "label" : "Follow Up Case Operational Group",
+            "name" : "PnrChild.CreatedBy.Operational_Group__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES12" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES11" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrChild.CreatedBy.Name",
+          "newProperties" : {
+            "label" : "Follow Up Case Created By",
+            "name" : "PnrChild.CreatedBy.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES13" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES12" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrChild.CreatedBy.Location__c",
+          "newProperties" : {
+            "label" : "Follow Up Case Created By Location",
+            "name" : "PnrChild.CreatedBy.Location__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES14" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES13" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrChild.Booking_PNR__c",
+          "newProperties" : {
+            "label" : "Follow Up Case PNR",
+            "name" : "PnrChild.Booking_PNR__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES15" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES14" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "PnrChild.CaseNumber",
+          "newProperties" : {
+            "label" : "Follow Up Case Number",
+            "name" : "PnrChild.CaseNumber"
+          }
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "EDIT_ATTRIBUTES15" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "Child_Open_After_Parent_Closure_Hours",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "0" ]
+        } ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Child_Open_After_Parent_Closure_Hours_bucket",
+          "label" : "Bucket - Follow Up after First Case Closure (Hours) ",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "Child_Open_After_Parent_Closure_Hours",
+              "type" : "NUMBER"
+            },
+            "buckets" : [ {
+              "value" : "0 - 24 Hours",
+              "rangeEnd" : 25.0
+            }, {
+              "value" : "24 - 48 Hours",
+              "rangeStart" : 25.0,
+              "rangeEnd" : 49.0
+            }, {
+              "value" : "48 - 72 Hours",
+              "rangeStart" : 49.0,
+              "rangeEnd" : 73.0
+            }, {
+              "value" : "73 Hours to 7 Days",
+              "rangeStart" : 73.0,
+              "rangeEnd" : 168.0
+            }, {
+              "value" : "After 7 days",
+              "rangeStart" : 168.0
+            } ]
+          }
+        } ]
+      }
+    },
+    "UPPERCASE0" : {
+      "action" : "formula",
+      "sources" : [ "FILTER1" ],
+      "schema" : {
+        "fields" : [ {
+          "name" : "Booking_PNR__c_uppercase",
+          "newProperties" : {
+            "name" : "Booking_PNR__c"
+          }
+        } ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Booking_PNR__c" ]
+        }
+      },
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Booking_PNR__c_uppercase",
+          "label" : "PNR",
+          "formulaExpression" : "upper(Booking_PNR__c)",
+          "precision" : 255
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN5" ],
+      "parameters" : {
+        "partitionBy" : [ "Booking_PNR__c" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Count_PNR_Cases",
+          "label" : "Count PNR Cases",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "Count_PNR_Cases",
+          "operator" : "EQUAL",
+          "operands" : [ "1" ]
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "WorkOrder",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "WO Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 250,
+        "left" : 252.10000000000002
+      },
+      "FILTER0" : {
+        "label" : "Refund WO Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252.2,
+        "left" : 672.2
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 112.1,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Case Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.3,
+        "left" : 252
+      },
+      "FILTER1" : {
+        "label" : "QCC Cases Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532.3,
+        "left" : 392
+      },
+      "JOIN2" : {
+        "label" : "PNR and Cases",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.2,
+        "left" : 812.2
+      },
+      "OUTPUT0" : {
+        "label" : "Refund WO PNR and Cases",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252.2,
+        "left" : 1092.2
+      },
+      "LOAD_DATASET3" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 112.1,
+        "left" : 532,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN3" : {
+        "label" : "Created By Info",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.10000000000002,
+        "left" : 532.2
+      },
+      "TRANSFORM0" : {
+        "label" : "Rename Fields",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252.2,
+        "left" : 952.2,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "WO PNR"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Case PNR"
+          },
+          "EDIT_ATTRIBUTES2" : {
+            "label" : "Case Record Type"
+          },
+          "EDIT_ATTRIBUTES3" : {
+            "label" : "WO Record Type"
+          },
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Created before WO"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "EDIT_ATTRIBUTES1"
+        }, {
+          "source" : "EDIT_ATTRIBUTES1",
+          "target" : "EDIT_ATTRIBUTES2"
+        }, {
+          "source" : "EDIT_ATTRIBUTES2",
+          "target" : "EDIT_ATTRIBUTES3"
+        }, {
+          "source" : "EDIT_ATTRIBUTES3",
+          "target" : "FORMULA0"
+        } ]
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 391.9,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN4" : {
+        "label" : "WO Case Number",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.10000000000002,
+        "left" : 392
+      },
+      "LOAD_DATASET5" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 811.7,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN5" : {
+        "label" : "Created By Info",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 811.9,
+        "left" : 252
+      },
+      "JOIN6" : {
+        "label" : "Same PNR",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 811.6,
+        "left" : 532.2
+      },
+      "OUTPUT1" : {
+        "label" : "Cases with Same PNR",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 812.1,
+        "left" : 1092.2
+      },
+      "TRANSFORM1" : {
+        "label" : "Transform",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 812.1,
+        "left" : 672.2,
+        "graph" : {
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Child Open after Parent Closure (Hours)"
+          },
+          "EDIT_ATTRIBUTES4" : {
+            "label" : "First Interaction Case Number"
+          },
+          "EDIT_ATTRIBUTES5" : {
+            "label" : "First Interaction PNR"
+          },
+          "EDIT_ATTRIBUTES6" : {
+            "label" : "First Interaction Record Type"
+          },
+          "EDIT_ATTRIBUTES7" : {
+            "label" : "First Interaction Created By"
+          },
+          "EDIT_ATTRIBUTES8" : {
+            "label" : "First Interaction Created By Location"
+          },
+          "EDIT_ATTRIBUTES9" : {
+            "label" : "First Interaction Operation Group"
+          },
+          "EDIT_ATTRIBUTES10" : {
+            "label" : "Follow Up Case Record Type"
+          },
+          "EDIT_ATTRIBUTES11" : {
+            "label" : "Follow Up Case Operational Group"
+          },
+          "EDIT_ATTRIBUTES12" : {
+            "label" : "Follow Up Case Created By"
+          },
+          "EDIT_ATTRIBUTES13" : {
+            "label" : "Follow Up Case Created By Location"
+          },
+          "EDIT_ATTRIBUTES14" : {
+            "label" : "Follow Up Case PNR"
+          },
+          "EDIT_ATTRIBUTES15" : {
+            "label" : "Follow Up Case Number"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA1",
+          "target" : "EDIT_ATTRIBUTES4"
+        }, {
+          "source" : "EDIT_ATTRIBUTES4",
+          "target" : "EDIT_ATTRIBUTES5"
+        }, {
+          "source" : "EDIT_ATTRIBUTES5",
+          "target" : "EDIT_ATTRIBUTES6"
+        }, {
+          "source" : "EDIT_ATTRIBUTES6",
+          "target" : "EDIT_ATTRIBUTES7"
+        }, {
+          "source" : "EDIT_ATTRIBUTES7",
+          "target" : "EDIT_ATTRIBUTES8"
+        }, {
+          "source" : "EDIT_ATTRIBUTES8",
+          "target" : "EDIT_ATTRIBUTES9"
+        }, {
+          "source" : "EDIT_ATTRIBUTES9",
+          "target" : "EDIT_ATTRIBUTES10"
+        }, {
+          "source" : "EDIT_ATTRIBUTES10",
+          "target" : "EDIT_ATTRIBUTES11"
+        }, {
+          "source" : "EDIT_ATTRIBUTES11",
+          "target" : "EDIT_ATTRIBUTES12"
+        }, {
+          "source" : "EDIT_ATTRIBUTES12",
+          "target" : "EDIT_ATTRIBUTES13"
+        }, {
+          "source" : "EDIT_ATTRIBUTES13",
+          "target" : "EDIT_ATTRIBUTES14"
+        }, {
+          "source" : "EDIT_ATTRIBUTES14",
+          "target" : "EDIT_ATTRIBUTES15"
+        } ]
+      },
+      "FILTER2" : {
+        "label" : "After Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 812.1,
+        "left" : 812.2
+      },
+      "TRANSFORM2" : {
+        "label" : "Transform 2",
+        "type" : "TRANSFORM",
+        "top" : 812.1,
+        "left" : 952.2,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM3" : {
+        "label" : "PNR Upper Case",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 672,
+        "left" : 392,
+        "graph" : {
+          "UPPERCASE0" : {
+            "parameters" : {
+              "type" : "UPPER_UI"
+            },
+            "label" : "Make Uppercase"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM4" : {
+        "label" : "Count PNR Cases",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 952,
+        "left" : 392,
+        "graph" : {
+          "FORMULA2" : {
+            "label" : "Count PNR Cases"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER3" : {
+        "label" : "Keep First PNR Case",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 952,
+        "left" : 532
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER3",
+      "target" : "JOIN6"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN3",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN4",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN4"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN4"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "JOIN5"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN5"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "JOIN6",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "FILTER2"
+    }, {
+      "source" : "FILTER2",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "FILTER1",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "JOIN5",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "FILTER3"
+    }, {
+      "source" : "JOIN5",
+      "target" : "JOIN6"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

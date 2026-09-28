@@ -1,0 +1,142 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "LastModifiedDate", "Origin_bucket", "AccountId", "Description", "Frequent_Flyer_Tier__c", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "Case_Number__c", "Is_QCC_Case__c", "Frequent_Flyer_Number__c", "OwnerId", "OwnerName__c", "RecordType.DeveloperName", "Booking_PNR__c", "CCC_R1_CCAT_Type__c", "RecordTypeId", "CaseNumber", "Sub_Type_1__c", "Created_by_Role__c", "RecordType.Id", "MasterRecordId", "ParentId", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "RecordType.DeveloperName_bucket", "Record_Type__c", "Type", "IsEscalated", "Sub_Type_2__c", "Contact_Fullname__c", "Category__c", "CreatedDate", "ClosedDate", "Id", "Aircraft_Type_Code__c", "Recovery_Value__c", "Recovery_Quantity__c" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CaseRawDataSet",
+          "name" : "CaseRawDataSet"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Query" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Description",
+          "operator" : "STARTS_WITH",
+          "operands" : [ "***Refund Case" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1687737600000" ]
+        } ]
+      }
+    },
+    "SPLIT0" : {
+      "action" : "split",
+      "sources" : [ "FILTER0" ],
+      "parameters" : {
+        "sourceField" : "Description",
+        "delimiter" : "***",
+        "targetFields" : [ {
+          "name" : "Description_split",
+          "label" : "Type of Form"
+        }, {
+          "name" : "Description_split1",
+          "label" : "Description Remainder"
+        } ]
+      }
+    },
+    "SPLIT1" : {
+      "action" : "split",
+      "sources" : [ "SPLIT0" ],
+      "parameters" : {
+        "sourceField" : "Description_split1",
+        "delimiter" : "-",
+        "targetFields" : [ {
+          "name" : "Description_split1_split",
+          "label" : "Agent Name"
+        }, {
+          "name" : "Description_split1_split1",
+          "label" : "Site"
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "SPLIT1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Refunds Campaign",
+          "name" : "Refunds_Campaign"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "CaseRawDataSet",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Filter 0",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 392,
+        "graph" : {
+          "SPLIT0" : {
+            "label" : "Split"
+          },
+          "SPLIT1" : {
+            "label" : "Split"
+          }
+        },
+        "connectors" : [ {
+          "source" : "SPLIT0",
+          "target" : "SPLIT1"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "Refunds Campaign 2023",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 532
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Restrict_Individual_Contact_Creation</fullName>
+    <active>true</active>
+    <description>For restricting the contacts creation for Non frequent flyers, from case record page.
+For restricting modify firstName, LastName for Non frequent flyers.</description>
+    <errorConditionFormula>OR(
+AND(
+OR(
+$Profile.Name = &quot;Qantas CC Consultant&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Hobart&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Manila&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Capetown&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Suva&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Auckland&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Mumbai&quot;
+),
+RecordType.DeveloperName ==&apos;QCC_Individual_Contact&apos;,
+OR(ISBLANK( Frequent_Flyer_Number__c ), ISNULL(Frequent_Flyer_Number__c )),
+NOT(ISPICKVAL(Frequent_Flyer_Tier__c , &apos;Non-tiered&apos;))
+),
+AND(
+OR(
+$Profile.Name = &quot;Qantas CC Consultant&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Hobart&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Manila&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Capetown&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Suva&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Auckland&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Mumbai&quot;
+), 
+RecordType.DeveloperName ==&apos;QCC_Individual_Contact&apos;,
+AND(
+OR(ISBLANK( Frequent_Flyer_Number__c ),ISNULL(Frequent_Flyer_Number__c )),
+ISPICKVAL(Frequent_Flyer_Tier__c , &apos;Non-tiered&apos;),
+NOT( ISNEW() ),
+OR(ISCHANGED(  FirstName ), ISCHANGED(LastName )
+)
+)
+)
+)</errorConditionFormula>
+    <errorMessage>You cannot edit Frequent Flyer or Non-Frequent Flyer contacts. Please refer to the Frequent Flyer Service Centre.</errorMessage>
+</ValidationRule>

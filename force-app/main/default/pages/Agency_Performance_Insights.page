@@ -1,0 +1,864 @@
+<apex:page standardController="AP_Pivots__c" >
+
+<style type="text/css">
+        .col1 {text-align:center;}
+        .col2 {text-align:center;}
+        .col3 {text-align:center;}   
+        .col4 {text-align:center;}   
+        .col5 {text-align:center;}    
+        .col6 {text-align:Center;}   
+        .showinRed{font-weight:bold;color:red}
+        .showinGreen{font-weight:bold;color:green}
+        .showinblack{color:black}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+<!--tr{
+    background-color: #F5F5F5;
+} -->
+        .bpageBlock.detailList tr td.dataCol, 
+        .bpageBlock.detailList tr td.labelCol
+        {
+            border-top:1px;
+            border-bottom:2px;
+        }   
+</style>
+<apex:pageBlock rendered="{!AP_Pivots__c.Corp_Share_Indicator__c == True}">
+ <apex:outputLabel > <b>Note: Corporate Revenue and Share Performance is sourced from the Same QDM data set which is used to load figures against corporate accounts in salesforce and it represents the rolling 12 months in general.<br> Reporting Period: <font color = "red"><apex:outputText value="{!AP_Pivots__c.FY_Month__c}"></apex:outputtext> </font>  </br> </b> </apex:outputLabel>
+ 
+
+    <apex:pageBlockTable value="{!AP_Pivots__c}" var="var" columns="5" cellpadding="0" cellspacing="30" width="100%" headerclass="textalign" >
+        <apex:column width="100%">  
+          
+          <apex:pageBlockSection columns="4" >
+      <!-- Header Starts --->
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Measure"> <b> <font color="blue">Measure</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                                        
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Domestic"> <b> <font color="blue">Domestic</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="International"> <b> <font color="blue">International </font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel style="float: left;width:150px;" title="Total"> <b> <font color="blue">Total</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+        <!-- Header Ends --->
+        <!-- Sub-Header Starts -->
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Corporate Revenue" > <b> Corporate Revenue (QF) </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                   
+             <!-- Row 1 -->       
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.Corp_Revenue_Dom_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Revenue_Intl_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.Corp_Revenue_Overall_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.Corp_Revenue_Dom_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Revenue_Intl_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.Corp_Revenue_Overall_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+ 
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Value Last Year (VLY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Revenue_Dom_VLY__c}" > </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Revenue_Intl_VLY__c}" > </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;" >
+                       <apex:outputField value="{!var.Corp_Revenue_VLY__c}" > </apex:outputField>
+                    
+                    </apex:pageBlockSectionItem>
+        <!-- Sub-Header Starts -->
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Corporate Share Performance" > <b> Corporate Share Performance </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                   
+             <!-- Row 1 -->       
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.Corp_Share_Dom_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Share_Intl_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.Corp_Share_Overall_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.Corp_Share_Dom_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Share_Intl_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.Corp_Share_Overall_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+ 
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Percentage Points (PPTS)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Share_Dom_VLY_Trend__c}" > </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.Corp_Share_Intl_VLY_Trend__c}" > </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;" >
+                       <apex:outputField value="{!var.Corp_Share_Overall_VLY_Trend__c}" > </apex:outputField>
+                    
+                    </apex:pageBlockSectionItem>
+           
+                      
+          </apex:pageBlockSection>           
+        </apex:column> 
+    </apex:pageBlockTable>                    
+  </apex:pageBlock> 
+
+ <apex:pageBlock >
+ <apex:outputLabel > <b>Note: IPR Aggregates for Year to Date useful for Fiscal Year Performance measure and reporting purposes.<br> Reporting Period: <font color = "red"><apex:outputText value="{!AP_Pivots__c.FY_Month__c}"></apex:outputtext> </font>  </br> </b> </apex:outputLabel>
+ 
+
+    <apex:pageBlockTable value="{!AP_Pivots__c}" var="var" columns="5" cellpadding="0" cellspacing="30" width="100%" headerclass="textalign" >
+        <apex:column width="100%">  
+          
+          <apex:pageBlockSection columns="4">
+      <!-- Header Starts --->
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Measure"> <b> <font color="blue">Measure</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                                        
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Domestic"> <b> <font color="blue">Domestic</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="International"> <b> <font color="blue">International </font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel style="float: left;width:150px;" title="Total"> <b> <font color="blue">YTD Total</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+        <!-- Header Ends --->
+        
+        <!-- Sub-Header Starts -->
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Billing Settlement Plan (BSP)" > <b> Billing Settlement Plan (BSP) </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                   
+             <!-- Row 1 -->       
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.BSP_Dom_YTD_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.BSP_Intl_YTD_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.BSP_YTD_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.BSP_Dom_YTD_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.BSP_Intl_YTD_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.BSP_YTD_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Value Last Year (VLY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                   <apex:outputPanel styleClass="{!IF(var.BSP_YTD_Dom_VLY__c != -1 && var.BSP_YTD_Dom_VLY__c > 0.01,'showinGreen',IF(var.BSP_YTD_Dom_VLY__c != -1 && var.BSP_YTD_Dom_VLY__c < 0.0001 ,'showinRed',''))}">
+                        <apex:outputField value="{!var.BSP_YTD_Dom_VLY__c}"> </apex:outputField> </apex:outputPanel>                                             
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                    <apex:outputPanel styleClass="{!IF(var.BSP_YTD_Intl_VLY__c!= -1 && var.BSP_YTD_Intl_VLY__c> 0.01,'showinGreen',IF(var.BSP_YTD_Intl_VLY__c!= -1 && var.BSP_YTD_Intl_VLY__c< 0.0001 ,'showinRed',''))}">
+                        <apex:outputField value="{!var.BSP_YTD_Intl_VLY__c}"> </apex:outputField>  </apex:outputPanel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                     <apex:outputPanel styleClass="{!IF(var.BSP_YTD_VLY__c!= -1 && var.BSP_YTD_VLY__c> 0.01,'showinGreen',IF(var.BSP_YTD_VLY__c!= -1 && var.BSP_YTD_VLY__c< 0.0001 ,'showinRed',''))}">
+                       <apex:outputField value="{!var.BSP_YTD_VLY__c}"> </apex:outputField> </apex:outputPanel> 
+                    </apex:pageBlockSectionItem>
+                    
+                        
+        
+        <!-- Sub-Header Starts -->            
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Qantas Plate" > <b> QF Plate</b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                   
+        <!-- Sub-Header Ends -->        
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_Plate_Dom_YTD_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_Plate_Intl_YTD_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_Plate_YTD_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_Plate_Dom_YTD_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_Plate_Intl_YTD_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_Plate_YTD_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Value Last Year (VLY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_Plate_Dom_YTD_VLY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_Plate_Intl_YTD_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_Plate_YTD_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                      
+        <!-- Sub-Header Starts -->
+        <!-- Sub-Header Starts -->            
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="% QF MS" > <b> % Qantas Market Share</b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    
+        <!-- Sub-Header Ends -->        
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_MS_YTD_Dom_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_MS_YTD_Intl_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_MS_YTD_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_MS_YTD_Dom_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_MS_YTD_Intl_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_MS_YTD_TY__c}" > </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Percentage Points (PPTS)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_MS_DOM_VLY_Trend__c}" > </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_MS_Intl_VLY_Trend__c}" > </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;" >
+                       <apex:outputField value="{!var.QF_MS_YTD_VLY_Trend__c}" > </apex:outputField>
+                    
+                    </apex:pageBlockSectionItem>
+                    
+                    
+         <!-- Sub-Header Ends -->               
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Qantas Marketed Revenue" > <b> Qantas Marketed Revenue (QMR/FMR) </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                    
+                    
+        <!-- Sub-Header Ends -->  
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QMR_Dom_YTD_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QMR_Intl_YTD_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QMR_YTD_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                   
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QMR_Dom_YTD_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QMR_Intl_YTD_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QMR_YTD_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                   
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Value Last Year (VLY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QMR_Dom_YTD_VLY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QMR_Intl_YTD_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QMR_YTD_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                      
+          </apex:pageBlockSection>           
+        </apex:column> 
+    </apex:pageBlockTable>                    
+  </apex:pageBlock> 
+  
+ <!-- Moving Annual Total Section Starts --->
+  
+  
+   <apex:pageBlock >
+ <apex:outputLabel > <b>Note: IPR Aggregates for Moving Annual Total (MAT) useful for a rolling 12 month performance view.<br> Reporting Period: <font color = "red"><apex:outputText value="{!AP_Pivots__c.FY_Month__c}"></apex:outputtext> </font>  </br> </b> </apex:outputLabel>
+ 
+    <apex:pageBlockTable value="{!AP_Pivots__c}" var="var" columns="5" cellpadding="0" cellspacing="30" width="100%" headerclass="textalign" >
+        <apex:column width="100%">  
+          
+          <apex:pageBlockSection columns="4">
+      <!-- Header Starts --->
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Measure"> <b> <font color="blue">Measure</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                                        
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Domestic"> <b> <font color="blue">Domestic(MAT)</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="International"> <b> <font color="blue">International(MAT) </font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel style="float: left;width:150px;" title="Total"> <b> <font color="blue">MAT Total</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+        <!-- Header Ends --->
+        
+        <!-- Sub-Header Starts -->
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Billing Settlement Plan (BSP)" > <b> Billing Settlement Plan (BSP) </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                   
+             <!-- Row 1 -->       
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.BSP_MAT_Dom_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.BSP_MAT_Intl_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.BSP_MAT_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.BSP_MAT_Dom_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.BSP_MAT_Intl_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.BSP_MAT_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Value Last Year (VLY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                   <apex:outputPanel styleClass="{!IF(var.BSP_MAT_DOM_VLY__c!= -1 && var.BSP_MAT_DOM_VLY__c> 0.01,'showinGreen',IF(var.BSP_MAT_DOM_VLY__c!= -1 && var.BSP_MAT_DOM_VLY__c< 0.0001 ,'showinRed',''))}">
+                        <apex:outputField value="{!var.BSP_MAT_DOM_VLY__c}"> </apex:outputField> </apex:outputPanel>                                             
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                    <apex:outputPanel styleClass="{!IF(var.BSP_MAT_Intl_VLY__c!= -1 && var.BSP_MAT_Intl_VLY__c> 0.01,'showinGreen',IF(var.BSP_MAT_Intl_VLY__c!= -1 && var.BSP_MAT_Intl_VLY__c< 0.0001 ,'showinRed',''))}">
+                        <apex:outputField value="{!var.BSP_MAT_Intl_VLY__c}"> </apex:outputField>  </apex:outputPanel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                     <apex:outputPanel styleClass="{!IF(var.BSP_MAT_VLY__c!= -1 && var.BSP_MAT_VLY__c> 0.01,'showinGreen',IF(var.BSP_MAT_VLY__c!= -1 && var.BSP_MAT_VLY__c< 0.0001 ,'showinRed',''))}">
+                       <apex:outputField value="{!var.BSP_MAT_VLY__c}"> </apex:outputField> </apex:outputPanel> 
+                    </apex:pageBlockSectionItem>
+                    
+                        
+        
+        <!-- Sub-Header Starts -->            
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Qantas Plate" > <b> QF Plate</b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                   
+        <!-- Sub-Header Ends -->        
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_Plate_MAT_DOM_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_Plate_MAT_Intl_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_Plate_MAT_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_Plate_MAT_DOM_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_Plate_MAT_Intl_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_Plate_MAT_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Value Last Year (VLY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_Plate_MAT_DOM_VLY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_Plate_MAT_Intl_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_Plate_MAT_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                      
+        <!-- Sub-Header Starts -->
+        <!-- Sub-Header Starts -->            
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="% QF MS" > <b> % Qantas Market Share</b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    
+        <!-- Sub-Header Ends -->        
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_MS_MAT_DOM_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_MS_MAT_Intl_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_MS_MAT_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_MS_MAT_DOM_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_MS_MAT_Intl_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_MS_MAT_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Percentage Points (PPTS)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QF_MS_MAT_DOM_VLY_Trend__c}" > </apex:outputField>                                             
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QF_MS_MAT_Intl_VLY_Trend__c}" > </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QF_MS_MAT_VLY_Trend__c}" > </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+         <!-- Sub-Header Ends -->               
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Qantas Marketed Revenue" > <b> Qantas Marketed Revenue (QMR/FMR) </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                    
+                    
+        <!-- Sub-Header Ends -->  
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Last Year (LY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QMR_MAT_DOM_LY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QMR_MAT_Intl_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QMR_MAT_LY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                   
+                    <!-- Row 2 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">This Year (TY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QMR_MAT_DOM_TY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QMR_MAT_Intl_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QMR_MAT_TY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                   
+                    <!-- Row 3 -->
+                     <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Value Last Year (VLY)</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.QMR_MAT_DOM_VLY__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.QMR_MAT_Intl_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.QMR_MAT_VLY__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                      
+          </apex:pageBlockSection>           
+        </apex:column> 
+    </apex:pageBlockTable>                    
+  </apex:pageBlock> 
+</apex:page>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Quarterly Health Check Call</label>
+    <protected>false</protected>
+    <values>
+        <field>Batch_Size__c</field>
+        <value xsi:type="xsd:double">200.0</value>
+    </values>
+    <values>
+        <field>Filter_Condition__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Module_Name__c</field>
+        <value xsi:type="xsd:string">Quarterly Health Check Call</value>
+    </values>
+    <values>
+        <field>Query_String__c</field>
+        <value xsi:type="xsd:string">SELECT Id, Name, Frequent_Flyer_Number__c, Frequent_Flyer_Tier__c FROM Contact WHERE RecordType.Name = &apos;Individual Contact&apos; AND Account.RecordType.Name = &apos;Person Account&apos; AND Frequent_Flyer_Number__c != null AND Frequent_Flyer_Tier__c IN (&apos;Chairman\&apos;s Lounge Platinum One&apos;, &apos;Platinum One&apos;, &apos;Chairmans Lounge Platinum One&apos;) AND Quarterly_Health_Check_Filter_3</value>
+    </values>
+    <values>
+        <field>Target_Object__c</field>
+        <value xsi:type="xsd:string">Case</value>
+    </values>
+    <values>
+        <field>Target_Record_Type__c</field>
+        <value xsi:type="xsd:string">QCC Elite Process</value>
+    </values>
+</CustomMetadata>

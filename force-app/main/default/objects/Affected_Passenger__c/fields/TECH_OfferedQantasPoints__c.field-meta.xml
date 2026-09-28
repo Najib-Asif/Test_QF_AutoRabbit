@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TECH_OfferedQantasPoints__c</fullName>
+    <description>QCC: the amount of Qantas Points offered for this customer if applicable. This is based on the points specified on the Event based on Frequent Flyer Tier and Cabin</description>
+    <externalId>false</externalId>
+    <formula>IF(Affected__c, CASE(FF_Tier__c+&quot;, &quot;+Cabin__c,
+    &quot;Platinum One, First&quot;, Event__r.Platinum1SSUFirstClass__c,
+    &quot;Platinum One, Business&quot;, Event__r.Platinum1SSUBusiness__c,
+    &quot;Platinum One, Premium Economy&quot;, Event__r.Platinum1SSUPremiumEconomy__c,
+    &quot;Platinum One, Economy&quot;, Event__r.Platinum1SSUEconomy__c,
+    &quot;Chairman&apos;s Lounge, First&quot;, Event__r.Platinum1SSUFirstClass__c,
+    &quot;Chairman&apos;s Lounge, Business&quot;, Event__r.Platinum1SSUBusiness__c,
+    &quot;Chairman&apos;s Lounge, Premium Economy&quot;, Event__r.Platinum1SSUPremiumEconomy__c,
+    &quot;Chairman&apos;s Lounge, Economy&quot;, Event__r.Platinum1SSUEconomy__c,
+    &quot;Chairman&apos;s Lounge Platinum One, First&quot;, Event__r.Platinum1SSUFirstClass__c,
+    &quot;Chairman&apos;s Lounge Platinum One, Business&quot;, Event__r.Platinum1SSUBusiness__c,
+    &quot;Chairman&apos;s Lounge Platinum One, Premium Economy&quot;, Event__r.Platinum1SSUPremiumEconomy__c,
+    &quot;Chairman&apos;s Lounge Platinum One, Economy&quot;, Event__r.Platinum1SSUEconomy__c,  
+    &quot;Platinum, First&quot;, Event__r.PlatinumFirstClass__c,
+    &quot;Platinum, Business&quot;, Event__r.PlatinumBusiness__c,
+    &quot;Platinum, Premium Economy&quot;, Event__r.PlatinumPremiumEconomy__c,
+    &quot;Platinum, Economy&quot;, Event__r.PlatinumEconomy__c,
+    &quot;Gold, First&quot;, Event__r.GoldFirstClass__c,
+    &quot;Gold, Business&quot;, Event__r.GoldBusiness__c,
+    &quot;Gold, Premium Economy&quot;, Event__r.GoldPremiumEconomy__c,
+    &quot;Gold, Economy&quot;, Event__r.GoldEconomy__c,
+    &quot;Silver, First&quot;, Event__r.SilverFirstClass__c,
+    &quot;Silver, Business&quot;, Event__r.SilverBusiness__c,
+    &quot;Silver, Premium Economy&quot;, Event__r.SilverPremiumEconomy__c,
+    &quot;Silver, Economy&quot;, Event__r.SilverEconomy__c,
+    &quot;Bronze, First&quot;, Event__r.BronzeFirstClass__c,
+    &quot;Bronze, Business&quot;, Event__r.BronzeBusiness__c,
+    &quot;Bronze, Premium Economy&quot;, Event__r.BronzePremiumEconomy__c,
+    &quot;Bronze, Economy&quot;, Event__r.BronzeEconomy__c,
+    &quot;Non-Tiered, First&quot;, Event__r.NonTieredFirstClass__c,
+    &quot;Non-Tiered, Business&quot;, Event__r.NonTieredBusiness__c,
+    &quot;Non-Tiered, Premium Economy&quot;, Event__r.NonTieredPremiumEconomy__c,
+    &quot;Non-Tiered, Economy&quot;, Event__r.NonTieredEconomy__c,
+    0 ), 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Offered Qantas Points</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

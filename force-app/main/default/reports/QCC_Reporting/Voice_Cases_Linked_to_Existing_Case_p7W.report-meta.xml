@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case_Relationships__c$Name</field>
+    </columns>
+    <columns>
+        <field>Case_Relationships__c$Case_1__c</field>
+    </columns>
+    <columns>
+        <field>Case_Relationships__c$Case_1__c.RecordType</field>
+    </columns>
+    <columns>
+        <field>Case_Relationships__c$Case_2__c</field>
+    </columns>
+    <columns>
+        <field>Case_Relationships__c$Case_2__c.RecordType</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>A voice case will be linked to an existing case via Case Relationship when the customer calls about an existing case but not authenticated in IVR.</description>
+    <filter>
+        <criteriaItems>
+            <column>Case_Relationships__c$Case_2__c.RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Voice</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_Relationships__c$Case_1__c.RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Compliment,Case.CCC_Further_Action_Required,Case.CCC_Query,Case.QCC_Insurance_Letter_Case</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Voice Cases Linked to Existing Case</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Case_Relationships__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case_Relationships__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2026-08-03</startDate>
+    </timeFrameFilter>
+</Report>

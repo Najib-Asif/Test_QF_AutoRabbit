@@ -1,0 +1,39 @@
+<aura:component controller="QuickContractController"
+    implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+
+    <aura:attribute name="quote" type="Quote" />
+    <aura:attribute name="newContract" type="Contract__c"
+        default="{ 'sobjectType': 'Contract__c' }" /> <!-- default to empty record -->
+    <aura:attribute name="isDisabled" type="Boolean" default="false" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Display a header with details about the Opportunity -->
+    <div class="slds-page-header" role="banner">
+        <p class="slds-text-heading--label">{!v.quote.Name}</p>
+        <h1 class="slds-page-header__title slds-m-right--small
+            slds-truncate slds-align-left">Create New Contract</h1>
+    </div>
+
+    <!-- Display the new contract form -->
+     <lightning:input aura:id="contractField" name="contractName" label="Contract Name"
+                      value="{!v.newContract.Name}" required="true"/>
+    
+     <lightning:input aura:id="contractField" name="oppName" label="Opportunity Name"
+                      value="{!v.quote.Opportunity.Name}" readonly="true"/>
+    
+     
+    
+        
+    <lightning:button label="Cancel" onclick="{!c.handleCancel}" class="slds-m-top--medium" />
+    <lightning:button label="Save Contract" onclick="{!c.handleSaveContract}" disabled="{!v.isDisabled}"
+               variant="brand" class="slds-m-top--medium"/>    
+    
+    <div class="slds-spinner slds-hide" aura:id="spinner">
+        <div class="slds-spinner--brand slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+    
+</aura:component>

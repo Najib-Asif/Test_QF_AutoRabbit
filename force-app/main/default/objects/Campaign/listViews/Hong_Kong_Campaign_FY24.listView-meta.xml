@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hong_Kong_Campaign_FY24</fullName>
+    <columns>CAMPAIGN.NAME</columns>
+    <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+    <columns>CAMPAIGN.START_DATE</columns>
+    <columns>CAMPAIGN.END_DATE</columns>
+    <columns>Total_Campaign_Budgeted_Cost__c</columns>
+    <columns>TOT_BUDGETED_COST</columns>
+    <columns>TOT_ACTUAL_COST</columns>
+    <columns>CAMPAIGN.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CAMPAIGN.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Campaign.Marketing_Child,Campaign.Marketing_Parent</value>
+    </filters>
+    <filters>
+        <field>Created_By_Team__c</field>
+        <operation>startsWith</operation>
+        <value>QF-INT-Sales-Asia</value>
+    </filters>
+    <filters>
+        <field>Region__c</field>
+        <operation>equals</operation>
+        <value>Hong Kong</value>
+    </filters>
+    <filters>
+        <field>CAMPAIGN.START_DATE</field>
+        <operation>equals</operation>
+        <value>THIS_FISCAL_YEAR</value>
+    </filters>
+    <label>Hong Kong Campaigns FY24</label>
+</ListView>

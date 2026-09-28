@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Freight_Shakedown</fullName>
+        <accessLevel>All</accessLevel>
+        <label>Freight Shakedown</label>
+        <sharedTo>
+            <group>Freight_Shakedown</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Freight</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_Freight_Campaign_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>This is created as a part of RBAC project. CRM-11026</description>
+        <label>QF Freight Campaign Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Freight</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_Sales_Distribution_Campaign_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>This is created as a part of RBAC project. CRM-11026</description>
+        <label>QF Sales &amp; Distribution Campaign Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business and Government,Events,Travel Fund,Loyalty Commercial,Marketing - Parent,Marketing - Child,SME Campaigns,Subscription,Learning &amp; Development</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SME_Campaigns</fullName>
+        <accessLevel>All</accessLevel>
+        <label>SME Campaigns</label>
+        <sharedTo>
+            <group>SME_Callout</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Campaigns</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>AP_Marketing_Team_Access</fullName>
+        <accessLevel>All</accessLevel>
+        <description>AP Marketing Team Read/ Write access to each others campaign</description>
+        <label>AP - Marketing Team Access</label>
+        <sharedTo>
+            <group>Agency_Partnership_Marketing_Team</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Agency_Partnership_Marketing_Team</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_Access_To_QF_Sales_Distribution_Asia</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shared campaign access for QF Asia roles</description>
+        <label>Edit Access To QF-Sales &amp; Distribution-Asia</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_Access_To_QF_Sales_Distribution_Asia_QF</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shared campaign access for QF JP team to Asia roles</description>
+        <label>Edit Access To QF-Sales &amp; Distribution-Asia-QF</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_North_America_JP</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_Access_To_QF_Sales_Distribution_Asia_to_JP_QF</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shared campaign access for QF Asia roles JP QF roles</description>
+        <label>Edit Access To QF-Sales &amp; Distribution-Asia-to-JP-QF</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales_North_America_JP</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_Access_To_QF_Sales_Distribution_GSA_China</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shared campaign access for QF to new GSA profile for China</description>
+        <label>Edit Access To QF-Sales &amp; Distribution-GSA-China</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA_China_AM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_Access_To_QF_Sales_Distribution_GSA_SriLanka</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shared campaign access for QF to new GSA profile for Sri Lanka</description>
+        <label>Edit Access To QF-Sales &amp; Distribution-GSA-SriLanka</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA_Sri_Lanka</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_Access_To_QF_Sales_Distribution_SEA_GSA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shared campaign access for QF to new GSA profile for SEA</description>
+        <label>Edit Access To QF-Sales &amp; Distribution-SEA-GSA</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA_South_East_Asia_AM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_campaigns_under_the_role_and_sub_of_QF_INT_Sales_Asia_Other_Regions_GSA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Edit campaigns under the role and sub of QF-INT-Sales-Asia-Other Regions/GSA</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia_Other_Regions</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia_Other_Regions</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_campaigns_under_the_role_and_sub_of_QF_INT_Sales_Asia_SG</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Edit campaigns under the role and sub of QF-INT-Sales-Asia-SG</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia_SG</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_Asia_SG</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Edit_campaigns_under_the_role_and_sub_of_QF_INT_Sales_UKEMEIA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Edit campaigns under the role and sub of QF-INT-Sales-UKEMEIA</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales_UK_and_Europe</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_UK_and_Europe</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_Campaign_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Freight Campaign Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>GSA_Campaign_Sharing_Rule</fullName>
+        <accessLevel>All</accessLevel>
+        <description>GSA Campaign Sharing Rule</description>
+        <label>GSA Campaign Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>GSA_owned_Campaigns_with_QF_users</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>GSA Owned Campaigns to be opened up with QF users</description>
+        <label>GSA owned Campaigns with QF users</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>View_Edit_Access_Campaigns</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shared campaign access for INT-Sales</description>
+        <label>View/Edit Access Campaigns</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

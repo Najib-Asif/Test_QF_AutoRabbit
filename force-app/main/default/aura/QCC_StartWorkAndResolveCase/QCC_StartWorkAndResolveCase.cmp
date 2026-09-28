@@ -1,0 +1,8 @@
+<aura:component controller="QCC_StartWorkAndResolveCaseController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="caseStatus" type="String"/>  
+    <!--GRAPHITE-1154: Checks that the buttons are only enabled for certain status values. Lightning Component does not support CONTAINS yet, so status values are hardcoded-->
+    <lightning:button variant="neutral" label="Start Work" iconName="utility:play" iconposition="left"  disabled="{!v.caseStatus == 'In Progress'}"  onclick="{!c.changeCaseStatus}"/>
+    <lightning:button variant="neutral" label="Close Case" iconName="utility:success" iconposition="left" disabled="{!v.caseStatus != 'In Progress'}" onclick="{!c.changeCaseStatus}"/>
+    <lightning:spinner aura:id="mySpinner" class="slds-hide" variant="brand"/>
+</aura:component>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lock_fields_after_currency_conversion</fullName>
+    <active>true</active>
+    <errorConditionFormula>RecordType.DeveloperName = &apos;EFT_Recovery&apos; &amp;&amp;
+Automated_Currency_Conversion_Complete__c &amp;&amp;
+( ISCHANGED(Monetary_Value__c) || ISCHANGED(Original_Currency__c) || ISCHANGED(Currency_Conversion_Rate__c) )&amp;&amp;
+!ISCHANGED(Automated_Currency_Conversion_Complete__c ) &amp;&amp;
+AND($Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Administrator&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Admin - Freight&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Admin - QCC&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Admin - SND&quot;,
+$Permission.QCC_Submit_Recovery_Permission &lt;&gt; true,
+$Profile.Name &lt;&gt; &quot;CRM Administrator&quot;,
+$Profile.Name &lt;&gt; &quot;CRM Administrator - Freight&quot;,
+$Profile.Name &lt;&gt; &quot;CRM Administrator - Global&quot;,
+$Profile.Name &lt;&gt; &quot;CRM Administrator - QCC&quot;,
+$Profile.Name &lt;&gt; &quot;CRM Administrator - SND&quot;)</errorConditionFormula>
+    <errorMessage>Monetary Value,  Conversion Rate and Currency can&apos;t be changed at this stage!</errorMessage>
+</ValidationRule>

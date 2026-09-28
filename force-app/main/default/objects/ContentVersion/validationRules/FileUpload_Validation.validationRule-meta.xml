@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FileUpload_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(PathOnClient)),
+    OR(
+        LOWER(RIGHT(PathOnClient, 5)) = &quot;.html&quot;,
+        LOWER(RIGHT(PathOnClient, 4)) = &quot;.htm&quot;,
+        LOWER(RIGHT(PathOnClient, 4)) = &quot;.mht&quot;,
+        LOWER(RIGHT(PathOnClient, 4)) = &quot;.svg&quot;,
+        LOWER(RIGHT(PathOnClient, 4)) = &quot;.swf&quot;,
+        LOWER(RIGHT(PathOnClient, 4)) = &quot;.htt&quot;,
+        LOWER(RIGHT(PathOnClient, 6)) = &quot;.xhtml&quot;,
+        LOWER(RIGHT(PathOnClient, 6)) = &quot;.thtml&quot;
+    )
+)</errorConditionFormula>
+    <errorMessage>HTML files (.html and .htm) are not allowed for upload.</errorMessage>
+</ValidationRule>

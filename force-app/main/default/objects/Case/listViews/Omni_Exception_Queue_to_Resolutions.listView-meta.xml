@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Omni_Exception_Queue_to_Resolutions</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>Group__c</columns>
+    <columns>Category__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.CCC_Query,Case.CCC_Complaints,Case.CCC_Further_Action_Required</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Qantas Pass (UATP),Class Action Refunds,Refunds</value>
+    </filters>
+    <label>Omni - Exception Queue to Resolutions</label>
+    <queue>CCC_Exception_Queue</queue>
+</ListView>

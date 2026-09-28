@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Story_Validation</fullName>
+    <active>false</active>
+    <description>To be used on the system admin request when &quot;Idea&quot; or &quot;System Enhancement&quot; is selected as Type, users are required to fill in the &quot;As a&quot;, &quot;I want&quot; and &quot;So that&quot; field</description>
+    <errorConditionFormula>AND 
+( 
+RecordType.Name==&quot;System Admin Request&quot;, 
+OR( ISPICKVAL( Type, &apos;Idea&apos;) ,ISPICKVAL( Type , &apos;System Enhancement&apos;)), 
+OR(ISBLANK( As_a__c ), ISBLANK( I_want__c ), ISBLANK( So_that__c )))</errorConditionFormula>
+    <errorMessage>Please complete the &quot;User Story Format&quot; section</errorMessage>
+</ValidationRule>

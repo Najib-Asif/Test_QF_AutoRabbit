@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Donot_close_event_with_out_close_action</fullName>
+    <active>true</active>
+    <description>Don&apos;t close event with out entering close action</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_Donot_close_event_with_out_close_acti__c &amp;&amp; 
+Text(Status__c) = &apos;Closed&apos; &amp;&amp; ISBLANK(Text(CloseAction__c)) &amp;&amp; 
+(RecordType.DeveloperName ==  &apos;Active_Event&apos; || 
+	RecordType.DeveloperName ==  &apos;Closed_Event&apos;
+||RecordType.DeveloperName ==  &apos;GlobalEvent&apos;)</errorConditionFormula>
+    <errorDisplayField>CloseAction__c</errorDisplayField>
+    <errorMessage>Please enter Close Action to close event</errorMessage>
+</ValidationRule>

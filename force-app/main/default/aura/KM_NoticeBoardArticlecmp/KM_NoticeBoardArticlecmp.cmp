@@ -1,0 +1,19 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="map" type="map"/>
+    <aura:attribute name="key" type="string"/>
+    <aura:attribute name="value" type="Map"/>
+    <aura:attribute name="listKey" type="List"/> 
+    <aura:attribute name="finalval" type="Map"/>
+  
+    <lightning:tabset variant="vertical">
+        <aura:iteration items="{!v.finalval}" var ="child">
+            <lightning:tab label="{!child.key}">
+                <lightning:formattedDateTime value="{!child.value.Start_Date__c}" /> - <lightning:formattedDateTime value="{!child.value.End_Date__c}" /><br/><br/>
+                <lightning:formattedRichText value="{!child.value.Article_Overview__c}"/>
+                <lightning:formattedRichText value="{!child.value.Announcement__c}"/>
+                <lightning:formattedRichText value="{!child.value.Answer__c}"/>
+            </lightning:tab>
+        </aura:iteration>
+    </lightning:tabset>
+</aura:component>

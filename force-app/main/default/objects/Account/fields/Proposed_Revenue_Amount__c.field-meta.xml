@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proposed_Revenue_Amount__c</fullName>
+    <formula>IF(((Domestic_Air_Travel_Spend__c != 0.00 || Domestic_Air_Travel_Spend__c != NULL) &amp;&amp; (International_Air_Travel_Spend__c != 0.00 || International_Air_Travel_Spend__c != NULL)), 
+(Domestic_Air_Travel_Spend__c * 0.90 + International_Air_Travel_Spend__c *0.70), 
+
+IF(((Domestic_Air_Travel_Spend__c == 0.00 || Domestic_Air_Travel_Spend__c == NULL) &amp;&amp; (International_Air_Travel_Spend__c != 0.00 || International_Air_Travel_Spend__c != NULL)), 
+International_Air_Travel_Spend__c *0.70, 
+
+IF(((Domestic_Air_Travel_Spend__c != 0.00 || Domestic_Air_Travel_Spend__c != NULL) &amp;&amp; (International_Air_Travel_Spend__c == 0.00 || International_Air_Travel_Spend__c == NULL)), 
+Domestic_Air_Travel_Spend__c * 0.90, 
+
+Estimated_Total_Air_Travel_Spend__c)))</formula>
+    <label>Proposed Revenue Amount</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

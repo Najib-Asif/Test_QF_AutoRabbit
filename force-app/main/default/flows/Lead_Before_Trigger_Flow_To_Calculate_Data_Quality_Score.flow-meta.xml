@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Freight_Update_Data_Quality_Score_DOM</name>
+        <label>Freight Update Data Quality Score DOM</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Data_Quality_Score_for_All__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Revenue_Stream_DOM_Lead_Score</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Data_Quality_Score_for_Revenue_INT_Branch_and_Agent_type</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Freight_Update_Data_Quality_Score_INT</name>
+        <label>Freight Update Data Quality Score INT</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Data_Quality_Score_for_All__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Revenue_Stream_INT_Lead_Score</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Freight_Update_Data_Quality_Score_INT_IATA</name>
+        <label>Freight Update Data Quality Score INT(IATA)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Data_Quality_Score_for_All__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Revenue_Stream_INT_AND_IATA_Lead_Score</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Freight_Update_Data_Score_INT_Non_IATA</name>
+        <label>Freight Update Data Score INT(Non-IATA)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Data_Quality_Score_for_All__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Revenue_Stream_INT_AND_Non_IATA_Lead_Score</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>This decision element evaluates the Lead&apos;s Agent type to calculate the Lead score variable</description>
+        <name>Update_Data_Quality_Score_for_Revenue_INT_Branch_and_Agent_type</name>
+        <label>Update Data Quality Score for Revenue INT Branch and Agent type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Freight_Update_Data_Quality_Score_INT_Branch_IATA_Agent_type</name>
+            <conditionLogic>1 AND (2 OR 3) AND 4</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.New_Account_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Freight-Branch</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Revenue_Stream__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>DOM/INT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Revenue_Stream__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>INT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Agent_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>IATA Agent</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Records_for_INT_IATA_Revenue_Stream</targetReference>
+            </connector>
+            <label>Freight Update Data Quality Score INT Branch IATA Agent type</label>
+        </rules>
+        <rules>
+            <name>Freight_Update_Data_Quality_Score_INT_Branch_Non_IATA_Agent_type</name>
+            <conditionLogic>1 AND (2 OR 3) AND 4</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.New_Account_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Freight-Branch</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Revenue_Stream__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>DOM/INT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Revenue_Stream__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>INT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Agent_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Non-IATA Agent</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Records_for_INT_NON_IATA_Revenue_Stream</targetReference>
+            </connector>
+            <label>Freight Update Data Quality Score INT Branch Non - IATA Agent type</label>
+        </rules>
+        <rules>
+            <name>Freight_Update_Data_Quality_Score_INT_Branch</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.New_Account_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Freight-Branch</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Revenue_Stream__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>DOM/INT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Revenue_Stream__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>INT</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Records_for_INT_Revenue_Stream</targetReference>
+            </connector>
+            <label>Freight Update Data Quality Score INT Branch</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>This decision element evaluates the lead&apos;s revenue stream to calculate the Lead score.</description>
+        <name>Update_Data_Quality_Score_for_Revenue_Stream</name>
+        <label>Update Data Quality Score for Revenue Stream</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Update_Data_Quality_Score_for_Revenue_INT_Branch_and_Agent_type</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Freight_Update_Data_Quality_Score_DOM_Branch</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.New_Account_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Freight-Branch</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Freight_Revenue_Stream__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>DOM</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Records_from_Lead_Data_Quality_Score_for_DOM</targetReference>
+            </connector>
+            <label>Freight Update Data Quality Score DOM Branch</label>
+        </rules>
+    </decisions>
+    <description>Migrated Workflow to Flow
+Workflow rules:
+Freight Update Data Quality Score INT Branch Non - IATA Agent type
+Freight Update Data Quality Score INT Branch IATA Agent type
+Freight Update Data Quality Score INT Branch
+Freight Update Data Quality Score DOM Branch</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>CountryName</name>
+        <dataType>String</dataType>
+        <expression>IF(CONTAINS({!$Label.Lead_Data_Quality_Score_Based_on_Country},{!$Record.Country} ),{!$Record.Country}, &apos;Default&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>Revenue_Stream_DOM_Lead_Score</name>
+        <dataType>Number</dataType>
+        <expression>IF(ISPICKVAL( {!$Record.Freight_Revenue_Stream__c} , &quot;&quot;),0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Freight_Revenue_Stream__c}) +
+IF(LEN( {!$Record.Legal_Name__c} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Legal_Name__c}) + IF(LEN( {!$Record.ABN_Tax_Reference__c} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.ABN_Tax_Reference__c}) + IF(LEN( {!$Record.Freight_eQ_Customer__c} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Freight_eQ_Customer__c})+ IF(LEN( {!$Record.Freight_Corporate_Identifier__c} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Freight_Corporate_Identifier__c})+IF(LEN( {!$Record.Freight_Customer_Code__c} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Freight_Customer_Code__c})+IF( LEN( {!$Record.Street} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Street__c}) +
+IF(LEN( {!$Record.FirstName} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.FirstName__c}) + IF(ISPICKVAL( {!$Record.Job_Role__c} , &quot;&quot;),0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Job_Role__c}) +
+IF(ISPICKVAL( {!$Record.Function__c} , &quot;&quot;),0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Function__c}) + IF( LEN( {!$Record.Job_Title__c} ) = 0, 0,{!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Job_Title__c}) +
+IF(OR(LEN( {!$Record.MobilePhone})&gt;0, LEN( {!$Record.Phone} )&gt;0, LEN( {!$Record.Email} )&gt;0), {!Get_Records_from_Lead_Data_Quality_Score_for_DOM.Email_Phone_MobilePhone__c},0)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Revenue_Stream_INT_AND_IATA_Lead_Score</name>
+        <dataType>Number</dataType>
+        <expression>IF( ({!$Record.Country} =TEXT({!Get_Records_for_INT_IATA_Revenue_Stream.Country__c}) &amp;&amp; TEXT ({!$Record.Freight_Revenue_Stream__c}) = TEXT({!Get_Records_for_INT_IATA_Revenue_Stream.Revenue_Stream_Type__c})), (
+IF(ISPICKVAL( {!$Record.Freight_Revenue_Stream__c} , &quot;&quot;),0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Revenue_Stream__c}) +
+IF( LEN({!$Record.ABN_Tax_Reference__c}) =0,0,{!Get_Records_for_INT_IATA_Revenue_Stream.ABN_Tax_Reference__c}) + 
+IF(LEN( {!$Record.Legal_Name__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Legal_Name__c}) + IF(LEN({!$Record.IATA__c} )!=0, {!Get_Records_for_INT_IATA_Revenue_Stream.IATA__c},0) + IF(LEN({!$Record.Freight_CAS__c})!=0, {!Get_Records_for_INT_IATA_Revenue_Stream.Freight_CAS__c},0) + IF(LEN({!$Record.Freight_Controlling_Location__c})!= 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Controlling_Location__c},0)
++ IF(LEN( {!$Record.Freight_Corporate_Identifier__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Corporate_Identifier__c})+IF(LEN( {!$Record.Freight_Customer_Code__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Customer_Code__c})+IF( LEN( {!$Record.Street} ) = 0, 0,
+{!Get_Records_for_INT_IATA_Revenue_Stream.Street__c}
+) +
+IF(LEN( {!$Record.FirstName} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.FirstName__c}) + IF(ISPICKVAL( {!$Record.Job_Role__c} , &quot;&quot;),0,{!Get_Records_for_INT_IATA_Revenue_Stream.Job_Role__c}) +
+IF(ISPICKVAL( {!$Record.Function__c} , &quot;&quot;),0,{!Get_Records_for_INT_IATA_Revenue_Stream.Function__c}) + IF( LEN( {!$Record.Job_Title__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Job_Title__c}) +
+IF(OR(LEN( {!$Record.MobilePhone})!=0, LEN( {!$Record.Phone} )!=0, LEN( {!$Record.Email} )!=0), {!Get_Records_for_INT_IATA_Revenue_Stream.Email_Phone_MobilePhone__c},0)),
+ (
+IF(ISPICKVAL( {!$Record.Freight_Revenue_Stream__c} , &quot;&quot;),0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Revenue_Stream__c}) +
+IF(LEN( {!$Record.Legal_Name__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Legal_Name__c}) + IF(LEN({!$Record.IATA__c} )!=0, {!Get_Records_for_INT_IATA_Revenue_Stream.IATA__c},0) + IF(LEN({!$Record.Freight_CAS__c})!=0, {!Get_Records_for_INT_IATA_Revenue_Stream.Freight_CAS__c},0) + IF(LEN({!$Record.Freight_Controlling_Location__c})!= 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Controlling_Location__c},0)
++ IF(LEN( {!$Record.Freight_Corporate_Identifier__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Corporate_Identifier__c})+IF(LEN( {!$Record.Freight_Customer_Code__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Freight_Customer_Code__c})+IF( LEN( {!$Record.Street} ) = 0, 0,
+{!Get_Records_for_INT_IATA_Revenue_Stream.Street__c}) +
+IF(LEN( {!$Record.FirstName} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.FirstName__c}) + IF(ISPICKVAL( {!$Record.Job_Role__c} , &quot;&quot;),0,{!Get_Records_for_INT_IATA_Revenue_Stream.Job_Role__c}) +
+IF(ISPICKVAL( {!$Record.Function__c} , &quot;&quot;),0,{!Get_Records_for_INT_IATA_Revenue_Stream.Function__c}) + IF( LEN( {!$Record.Job_Title__c} ) = 0, 0,{!Get_Records_for_INT_IATA_Revenue_Stream.Job_Title__c}) +
+IF(OR(LEN( {!$Record.MobilePhone})!=0, LEN( {!$Record.Phone} )!=0, LEN( {!$Record.Email} )!=0), {!Get_Records_for_INT_IATA_Revenue_Stream.Email_Phone_MobilePhone__c},0)))</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Revenue_Stream_INT_AND_Non_IATA_Lead_Score</name>
+        <dataType>Number</dataType>
+        <expression>IF( ({!$Record.Country} =TEXT({!Get_Records_for_INT_NON_IATA_Revenue_Stream.Country__c}) &amp;&amp; TEXT ({!$Record.Freight_Revenue_Stream__c}) = TEXT({!Get_Records_for_INT_NON_IATA_Revenue_Stream.Revenue_Stream_Type__c})), (
+IF(ISPICKVAL( {!$Record.Freight_Revenue_Stream__c} , &quot;&quot;),0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Revenue_Stream__c}) +
+IF( LEN({!$Record.ABN_Tax_Reference__c}) =0,0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.ABN_Tax_Reference__c}) + 
+IF(LEN( {!$Record.Legal_Name__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Legal_Name__c}) + IF(LEN({!$Record.IATA__c} )!=0, {!Get_Records_for_INT_NON_IATA_Revenue_Stream.IATA__c},0) + IF(LEN({!$Record.Freight_Controlling_Location__c})!= 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Controlling_Location__c},0)
++ IF(LEN( {!$Record.Freight_Corporate_Identifier__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Corporate_Identifier__c})+IF(LEN( {!$Record.Freight_Customer_Code__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Customer_Code__c})+IF( LEN( {!$Record.Street} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Street__c}) +
+IF(LEN( {!$Record.FirstName} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.FirstName__c}) + IF(ISPICKVAL( {!$Record.Job_Role__c} , &quot;&quot;),0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Job_Role__c}) +
+IF(ISPICKVAL( {!$Record.Function__c} , &quot;&quot;),0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Function__c}) + IF( LEN( {!$Record.Job_Title__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Job_Title__c}) +
+IF(OR(LEN( {!$Record.MobilePhone})!=0, LEN( {!$Record.Phone} )!=0, LEN( {!$Record.Email} )!=0), {!Get_Records_for_INT_NON_IATA_Revenue_Stream.Email_Phone_MobilePhone__c},0)),
+ (
+IF(ISPICKVAL( {!$Record.Freight_Revenue_Stream__c} , &quot;&quot;),0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Revenue_Stream__c}) +
+IF(LEN( {!$Record.Legal_Name__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Legal_Name__c}) + IF(LEN({!$Record.IATA__c} )!=0, {!Get_Records_for_INT_NON_IATA_Revenue_Stream.IATA__c},0) + IF(LEN({!$Record.Freight_Controlling_Location__c})!= 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Controlling_Location__c},0)
++ IF(LEN( {!$Record.Freight_Corporate_Identifier__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Corporate_Identifier__c})+IF(LEN( {!$Record.Freight_Customer_Code__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Freight_Customer_Code__c})+IF( LEN( {!$Record.Street} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Street__c}) +
+IF(LEN( {!$Record.FirstName} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.FirstName__c}) + IF(ISPICKVAL( {!$Record.Job_Role__c} , &quot;&quot;),0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Job_Role__c}) +
+IF(ISPICKVAL( {!$Record.Function__c} , &quot;&quot;),0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Function__c}) + IF( LEN( {!$Record.Job_Title__c} ) = 0, 0,{!Get_Records_for_INT_NON_IATA_Revenue_Stream.Job_Title__c}) +
+IF(OR(LEN( {!$Record.MobilePhone})!=0, LEN( {!$Record.Phone} )!=0, LEN( {!$Record.Email} )!=0), {!Get_Records_for_INT_NON_IATA_Revenue_Stream.Email_Phone_MobilePhone__c},0)))</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Revenue_Stream_INT_Lead_Score</name>
+        <dataType>Number</dataType>
+        <expression>IF( ({!$Record.Country} =TEXT({!Get_Records_for_INT_Revenue_Stream.Country__c}) &amp;&amp; TEXT ({!$Record.Freight_Revenue_Stream__c}) = TEXT({!Get_Records_for_INT_Revenue_Stream.Revenue_Stream_Type__c})), (
+IF(ISPICKVAL( {!$Record.Freight_Revenue_Stream__c} , &quot;&quot;),0,{!Get_Records_for_INT_Revenue_Stream.Freight_Revenue_Stream__c}) +
+IF( LEN({!$Record.ABN_Tax_Reference__c}) =0,0,{!Get_Records_for_INT_Revenue_Stream.ABN_Tax_Reference__c}) + 
+IF(LEN( {!$Record.Legal_Name__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Legal_Name__c}) + IF(OR(LEN(  {!$Record.IATA__c} )!=0, LEN( {!$Record.Freight_eQ_Customer__c} )&gt;0),  {!Get_Records_for_INT_Revenue_Stream.IATA__c},0)+ IF(LEN( {!$Record.Freight_Corporate_Identifier__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Freight_Corporate_Identifier__c})+IF(LEN( {!$Record.Freight_Customer_Code__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Freight_Customer_Code__c})+IF( LEN( {!$Record.Street} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Street__c}) + 
+IF(LEN( {!$Record.FirstName} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.FirstName__c}) + IF(ISPICKVAL( {!$Record.Job_Role__c} , &quot;&quot;),0,{!Get_Records_for_INT_Revenue_Stream.Job_Role__c}) + 
+IF(ISPICKVAL( {!$Record.Function__c} , &quot;&quot;),0,{!Get_Records_for_INT_Revenue_Stream.Function__c}) + IF( LEN( {!$Record.Job_Title__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Job_Title__c}) + 
+IF(OR(LEN( {!$Record.MobilePhone})&gt;0, LEN( {!$Record.Phone} )&gt;0, LEN( {!$Record.Email} )&gt;0), {!Get_Records_for_INT_Revenue_Stream.Email_Phone_MobilePhone__c},0)),
+ (
+IF(ISPICKVAL( {!$Record.Freight_Revenue_Stream__c} , &quot;&quot;),0,{!Get_Records_for_INT_Revenue_Stream.Freight_Revenue_Stream__c}) + 
+IF(LEN( {!$Record.Legal_Name__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Legal_Name__c}) + IF(OR(LEN(  {!$Record.IATA__c} )!=0, LEN( {!$Record.Freight_eQ_Customer__c} )&gt;0),  {!Get_Records_for_INT_Revenue_Stream.IATA__c},0)+ IF(LEN( {!$Record.Freight_Corporate_Identifier__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Freight_Corporate_Identifier__c})+IF(LEN( {!$Record.Freight_Customer_Code__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Freight_Customer_Code__c})+IF( LEN( {!$Record.Street} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Street__c}) + 
+IF(LEN( {!$Record.FirstName} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.FirstName__c}) + IF(ISPICKVAL( {!$Record.Job_Role__c} , &quot;&quot;),0,{!Get_Records_for_INT_Revenue_Stream.Job_Role__c}) + 
+IF(ISPICKVAL( {!$Record.Function__c} , &quot;&quot;),0,{!Get_Records_for_INT_Revenue_Stream.Function__c}) + IF( LEN( {!$Record.Job_Title__c} ) = 0, 0,{!Get_Records_for_INT_Revenue_Stream.Job_Title__c}) + 
+IF(OR(LEN( {!$Record.MobilePhone})&gt;0, LEN( {!$Record.Phone} )&gt;0, LEN( {!$Record.Email} )&gt;0), {!Get_Records_for_INT_Revenue_Stream.Email_Phone_MobilePhone__c},0)))</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Lead BeforeTrigger Flow To Calculate Data Quality Score {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Lead Before Trigger Flow To Calculate Data Quality Score</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Records_for_INT_IATA_Revenue_Stream</name>
+        <label>Get Records for INT(IATA) Revenue Stream</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Freight_Update_Data_Quality_Score_INT_IATA</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Country__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>CountryName</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IATA_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>IATA</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Business_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>LeadDataScore__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Records_for_INT_NON_IATA_Revenue_Stream</name>
+        <label>Get Records for INT(NON-IATA) Revenue Stream</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Freight_Update_Data_Score_INT_Non_IATA</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Country__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>CountryName</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IATA_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Non IATA</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Business_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>LeadDataScore__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Records_for_INT_Revenue_Stream</name>
+        <label>Get Records for INT Revenue Stream</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Freight_Update_Data_Quality_Score_INT</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Country__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>CountryName</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Revenue_Stream_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>INT</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IATA_Type__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Business_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>LeadDataScore__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Records_from_Lead_Data_Quality_Score_for_DOM</name>
+        <label>Get Records from Lead Data Quality Score for DOM</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Freight_Update_Data_Quality_Score_DOM</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Revenue_Stream_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>DOM</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Business_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>LeadDataScore__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Data_Quality_Score_for_Revenue_Stream</targetReference>
+        </connector>
+        <object>Lead</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

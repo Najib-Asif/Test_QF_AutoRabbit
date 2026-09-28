@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Rsrt_Case_Creation_For_Automatic_Rep</fullName>
+    <active>true</active>
+    <description>CRM-7095: Reinstate CCC Email Bounce Back cases and Bounce Back Automatic Reply</description>
+    <errorConditionFormula>AND(OR(RecordType.Name==&quot;CCC Email Bounced Back&quot;,
+RecordType.Name==&quot;System Admin Request&quot;),
+ISPICKVAL(Origin,&quot;Email&quot;), 
+OR(CONTAINS(LOWER(Subject), &quot;automatic reply&quot;), CONTAINS(LOWER(Subject), &quot;out of office&quot;), CONTAINS(LOWER(Subject), &quot;ooo&quot;))
+)</errorConditionFormula>
+    <errorMessage>QCC Case can&apos;t be created for Automatic or Out Of Office incoming emails.</errorMessage>
+</ValidationRule>

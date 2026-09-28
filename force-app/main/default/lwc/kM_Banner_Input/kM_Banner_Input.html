@@ -1,0 +1,19 @@
+<template>
+    <template if:true={bannerInfo.data}>
+        <lightning-card variant="Narrow" title="Add Notification Banner to Knowledge Portal" icon-name="standard:announcement">
+            <template for:each={bannerInfo.data} for:item="banner">
+                <!--<p key={banner.DeveloperName}>{banner.Banner_Text__c}</p>-->
+                <p key={banner.DeveloperName}>
+                    <lightning-input-rich-text class="slds-p-around_medium" value={banner.Banner_Text__c}></lightning-input-rich-text>
+                </p>
+            </template>
+            <div class="slds-align_absolute-center">
+                <lightning-button class="slds-p-right_medium" variant="brand" label="Save" title="Save" onclick={handleSave}></lightning-button>
+                <lightning-button variant="brand" label="Clear" title="Clear" onclick={handleClear}></lightning-button>
+            </div>
+        </lightning-card>
+    </template>
+    <!--<template if:true={bannerInfo.error}>
+        <c-error-panel errors={contacts.error}></c-error-panel>
+    </template>-->
+</template>

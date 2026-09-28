@@ -1,0 +1,220 @@
+{
+  "version" : "62.0",
+  "nodes" : {
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ContentDocumentId", "IsLatest", "ContentUrl", "ContentBodyId", "VersionNumber", "Title", "Description", "ReasonForChange", "SharingOption", "SharingPrivacy", "PathOnClient", "RatingCount", "IsDeleted", "ContentModifiedDate", "ContentModifiedById", "PositiveRatingCount", "NegativeRatingCount", "FeaturedContentBoost", "FeaturedContentDate", "CurrencyIsoCode", "OwnerId", "CreatedById", "CreatedDate", "LastModifiedById", "LastModifiedDate", "SystemModstamp", "TagCsv", "FileType", "PublishStatus", "ContentSize", "FileExtension", "FirstPublishLocationId", "Origin", "NetworkId", "ContentLocation", "TextPreview", "ExternalDocumentInfo1", "ExternalDocumentInfo2", "ExternalDataSourceId", "Checksum", "IsMajorVersion", "IsAssetEnabled", "VersionDataUrl", "Migrated__c", "Resolve_Attachment_Id__c", "Resolve_Createdby__c", "Resolve_Createddate__c", "Resolve_Lastmodifiedby__c", "Resolve_Lastmodifieddate__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "ContentVersion",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "ContentVersion"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1733702400000" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CaseNumber", "Id", "Type", "RecordTypeId", "Origin", "CreatedDate", "Sub_Type__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1733702400000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "RecordTypeId",
+          "operator" : "EQUAL",
+          "operands" : [ "0122v000001qp76AAA" ]
+        } ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "JOIN1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Files",
+        "rightKeys" : [ "FirstPublishLocationId" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "SN Cases with Files",
+          "name" : "SN_Cases_with_Files"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Name", "Id" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Users",
+          "name" : "Users"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET3" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "Id" ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET1" : {
+        "label" : "ContentVersion",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "After 2025 12 05",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 252
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER1" : {
+        "label" : "After 2025 12 05",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "JOIN0" : {
+        "label" : "File to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "OUTPUT0" : {
+        "label" : "SN Cases with Files",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 532
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Users",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "File Creator",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 392.3
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN1"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

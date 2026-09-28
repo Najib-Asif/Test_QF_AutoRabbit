@@ -1,0 +1,73 @@
+<aura:component implements="flexipage:availableForRecordHome,flexipage:availableForRecordHome" controller="QCC_FlightDisruptions">
+    <!--attributes-->
+    <aura:attribute name="disptCommData" type="Object[]"/>
+    <aura:attribute name="disptCommPerFlight" type="Object[]"/>
+    <aura:attribute name="disptCommColumns" type="List"/>
+    <aura:attribute name="pnr" type="String" />
+    <aura:attribute name="segment" type="Object"/>
+    <aura:attribute name="passenger" type="Object"/>
+    <aura:attribute name="creationDate" type="String" />
+    <!--handlers-->
+    <aura:handler name="change" value="{!v.segment}" action="{!c.changeSegment}"/>
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-spinner_container slds-is-static ">
+            <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+        </div>
+    </aura:if>
+    <lightning:card title="Disruption Communication" iconName="standard:messaging_conversation">
+        <aura:set attribute="title">
+            <div class="slds-media__body">
+                <h2>
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Disruption Communication">
+                        <span class="slds-text-heading_small">Disruption Communication</span>
+                    </a>
+                </h2>
+            </div>
+        </aura:set>
+        <aura:set attribute="footer">
+        </aura:set>
+        <aura:If isTrue="{!empty(v.disptCommPerFlight)}">
+            <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_FlightCommMsg}</div>
+            <aura:set attribute="else">
+                <table class="slds-table slds-table_bordered slds-table_fixed-layout" style="width:100%;">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <aura:iteration items="{!v.disptCommColumns}" var="itm">
+                                <th scope="col" style="{!'width:'+(itm.Width__c)}">
+                                    <div class="slds-truncate" title="{!itm.Title__c}">{!itm.MasterLabel}</div>
+                                </th>
+                            </aura:iteration>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.disptCommPerFlight}" var="item">
+                            <tr class="slds-hint-parent">
+                                <aura:iteration items="{!v.disptCommColumns}" var="itm">
+                                    <aura:if isTrue="{!itm.MasterLabel == 'Category'}">
+                                        <td data-label="DISRUPTION CATEGORY" scope="row">
+                                            <div title="{!item.disruptionCategory}" class="{!'fill'+(item.disruptionCategory)}">
+                                                {!(item.disruptionCategory=='GREEN'?'GRN':(item.disruptionCategory=='YELLOW'?'YEL':(item.disruptionCategory=='BLUE'?'BLU':item.disruptionCategory)))}
+                                                <!--<lightning:icon iconName="utility:record" title="{!item.disruptCtgry}" class="{!'fill'+(item.disruptCtgry)}" size="small"/>-->
+                                            </div>
+                                        </td>
+                                    </aura:if>
+                                    <aura:if isTrue="{!itm.MasterLabel == 'Sent (Local Time)'}">
+                                        <td data-label="COMMUNICATION SENT (LOCAL TIME)">
+                                            <div class="slds-truncate" title="{!item.communicationSentLocalTimestamp}">{!item.communicationSentLocalTimestamp}</div>
+                                        </td>
+                                    </aura:if>
+                                    <aura:if isTrue="{!itm.MasterLabel == 'Channel'}">
+                                        <td data-label="CHANNEL">
+                                            <div class="slds-truncate" title="{!item.contactType}">{!item.contactType}</div>
+                                        </td>
+                                    </aura:if>
+                                </aura:iteration>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </aura:set>
+        </aura:If>
+    </lightning:card>
+</aura:component>

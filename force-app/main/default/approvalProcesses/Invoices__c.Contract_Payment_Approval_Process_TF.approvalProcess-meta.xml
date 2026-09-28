@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>QF_DOM_Sales_B_G_Business_and_Govt</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>QF_DOM_Sales_B_G_Business_and_Govt_Business</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>QF_DOM_Sales_B_G_Development_Other_States_Lead</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Contract_Payments__c</field>
+        <field>Status__c</field>
+        <field>Amount__c</field>
+        <field>Payment_Criteria__c</field>
+        <field>Comment__c</field>
+        <field>Paid__c</field>
+        <field>Payment_Date__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>CP_Status_Update_NAM_Approval</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>NOT(ISPICKVAL(Contract_Payments__r.Paid_As__c,&apos;Cash&apos;))</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Contract Payment Approval Process Actions</label>
+        <name>Contract_Payment_Approval_Process_Actions</name>
+        <rejectionActions>
+            <action>
+                <name>CP_Status_Update_NAM_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>CP_Assign_Invoices_to_Sales_Team</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>CP_Assign_ReadOnly_Layout</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>CP_Status_Update_Pending_Sales_Team</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>oronzomiccoli@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>NOT(ISPICKVAL(Contract_Payments__r.Paid_As__c,&apos;Cash&apos;))</formula>
+        </entryCriteria>
+        <label>Contract Payment Approval to Head-Sales</label>
+        <name>Contract_Payment_Approval_to_John_Simeone</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+        <rejectionActions>
+            <action>
+                <name>CP_Status_Update_Head_B_G_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>Two steps approval for Non Cash payment</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+	RecordType.DeveloperName = &apos;New_Corporate_Payments&apos;,
+NOT(ISPICKVAL(Contract_Payments__r.Paid_As__c,&apos;Cash&apos;)), 
+	ISPICKVAL(Payment_required__c,&apos;Yes&apos;), 
+	OR(
+		ISPICKVAL(Status__c,&apos;Draft&apos;),
+		ISPICKVAL(Status__c,&apos;Head of B&amp;G Rejected&apos;),
+		ISPICKVAL(Status__c,&apos;NAM Rejected&apos;)
+	),
+
+NOT(AND(Owner:User.UserRole.DeveloperName = &apos;QF_DOM_Sales_B_G_Business_and_Govt&apos;,
+
+ OR($UserRole.DeveloperName = &apos;QF_DOM_Sales_B_G_Business_and_Govt_Business&apos;,
+$UserRole.DeveloperName = &apos;QF_DOM_Sales_B_G_Development_Other_States_Lead&apos;) ) )
+
+
+
+
+)</formula>
+    </entryCriteria>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>CP_Update_Status_as_Submit_for_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Contract Payment Approval Process - TF</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>user__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>2</processOrder>
+    <recallActions>
+        <action>
+            <name>CP_Status_Update_Draft</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

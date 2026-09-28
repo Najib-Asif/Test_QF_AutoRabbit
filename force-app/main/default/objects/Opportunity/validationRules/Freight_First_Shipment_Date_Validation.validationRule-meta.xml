@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_First_Shipment_Date_Validation</fullName>
+    <active>true</active>
+    <description>Freight - First Shipment Propose Date needs to be equal or greater to the Expected Closure Date</description>
+    <errorConditionFormula>AND($RecordType.DeveloperName = &quot;Freight&quot;,   Freight_First_Shipment_Propose_Date__c &lt; CloseDate)</errorConditionFormula>
+    <errorDisplayField>Freight_First_Shipment_Propose_Date__c</errorDisplayField>
+    <errorMessage>Please enter a date which is equal or greater to the Expected Closure Date</errorMessage>
+</ValidationRule>

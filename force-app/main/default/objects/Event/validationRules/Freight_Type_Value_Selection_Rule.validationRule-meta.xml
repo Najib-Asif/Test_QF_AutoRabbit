@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Type_Value_Selection_Rule</fullName>
+    <active>true</active>
+    <description>Freight - Freight users can only select Type = Freight</description>
+    <errorConditionFormula>AND ( $User.ProfileId = &apos;00eO0000000IDcZ&apos;, /*Qantas Freight Sales*/ 
+NOT(ISPICKVAL ( Task_type__c , &quot;Freight&quot;)),NOT(ISPICKVAL ( Task_type__c , &quot;&quot;)))</errorConditionFormula>
+    <errorMessage>As a Freight user , you need to select Freight value only in Type field</errorMessage>
+</ValidationRule>

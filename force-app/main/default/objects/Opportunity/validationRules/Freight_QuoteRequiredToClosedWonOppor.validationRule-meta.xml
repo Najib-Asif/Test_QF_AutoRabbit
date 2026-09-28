@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_QuoteRequiredToClosedWonOppor</fullName>
+    <active>true</active>
+    <description>Freight Implementation: To validate whether Accepted Quote is available while making an opportunity to Closed Accepted.</description>
+    <errorConditionFormula>AND(
+
+	$RecordType.DeveloperName = &quot;Freight&quot;,
+	
+	AND(
+		ISCHANGED(StageName),
+		ISPICKVAL(StageName, &apos;Closed - Accepted&apos;) 
+	),
+	
+	Freight_Quote_Count__c = 0
+	
+)</errorConditionFormula>
+    <errorMessage>Customer Quote must be accepted to mark this Opportunity as Closed-Accepted</errorMessage>
+</ValidationRule>

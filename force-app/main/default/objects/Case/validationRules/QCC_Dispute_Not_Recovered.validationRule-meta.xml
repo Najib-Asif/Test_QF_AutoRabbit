@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Dispute_Not_Recovered</fullName>
+    <active>false</active>
+    <errorConditionFormula>QCC_Disputed_Recovery__c = FALSE 
+&amp;&amp; 
+LEN(QCC_Dispute_Reason__c) &gt; 0</errorConditionFormula>
+    <errorDisplayField>QCC_Dispute_Reason__c</errorDisplayField>
+    <errorMessage>Dispute Reason  must be empty if  the recovery has not been disputed.</errorMessage>
+</ValidationRule>

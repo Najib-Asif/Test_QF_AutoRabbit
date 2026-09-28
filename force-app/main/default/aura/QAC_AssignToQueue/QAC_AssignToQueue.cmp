@@ -1,0 +1,82 @@
+<!-- Created By : Ajay Bharathan | TCS | Cloud Developer -->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome"
+                access="global" controller="QAC_CaseQueueAssignment">
+
+	<lightning:utilityBarAPI aura:id="utilitybar" />    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:method name="reInit" action="{!c.doInit}" description="Runs the init method again "/>    
+
+    <aura:attribute name="options" type="String[]" />
+    <aura:attribute name="selectedQueue" type="String" default=""/>
+    <aura:attribute name="messageError" type="Boolean" default="false"/>
+    <aura:attribute name="message" type="String"/>       
+	<aura:attribute name="showSpinner" type="boolean" default="false"/>    
+    <aura:attribute name="ApexController" type="QAC_CaseQueueAssignment"/>
+    
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-spinner_container">
+            <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+        </div>
+    </aura:if>    
+    
+    <div class="slds-p-around--x-small slds-border--bottom slds-theme--shade">
+        <div class="slds-grid slds-grid--align-spread slds-grid--vertical-align-center">
+            
+            <aura:if isTrue="{!v.messageError}">
+                <!-- Load error -->
+                <div aura:id="errorDiv" class="userCreateError">
+                    <ui:message title="Error" severity="error" closable="true">
+                        <ui:outputText value="{!v.message}"/>
+                    </ui:message>
+                </div>
+            </aura:if>	
+            
+            <div class="slds-form slds-form_compound">
+                
+                <fieldset class="slds-form-element">
+                    <div class="slds-form-element__group">
+                        <div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size_1-of-1">
+                                <span class="slds-form-element__label"><strong>CASES OWNED BY YOU : </strong></span>
+                                <div class="slds-form-element__control slds-has-divider--bottom">
+                                    <span class="slds-form-element__static"><strong>{!v.ApexController.casesOwned}</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="slds-form-element">
+                    <div class="slds-form-element__group">
+                        <div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size_1-of-1">
+                                <span class="slds-form-element__label">Queue</span>
+                                <lightning:select aura:id="queueSelect" value="{!v.selectedQueue}">
+                                    <option value="">-- Choose a Queue --</option>
+                                    <aura:iteration items="{!v.options}" var="queue">
+                                        <option value="{!queue}" text="{!queue}"></option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="slds-form-element">
+                    <div class="slds-form-element__group">
+                        <div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size_1-of-1">
+                                <div class="slds-form-element__control">
+                                    <lightning:button variant="brand" label="Re-Assign" onclick="{!c.doAssign}" disabled="{!((v.ApexController.casesOwned le 0) || (v.selectedQueue == ''))? True : False }"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+</aura:component>

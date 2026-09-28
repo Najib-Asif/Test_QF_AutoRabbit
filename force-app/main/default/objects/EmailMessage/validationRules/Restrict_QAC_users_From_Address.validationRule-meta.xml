@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_QAC_users_From_Address</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND((FromAddress = &quot;noresponse@qantas.com.au&quot;), ISPICKVAL(Parent.Type, &quot;NDC&quot;),OR($Profile.Name = &apos;QL_Qantas_Sales&apos;,$Profile.Name = &apos;QL Qantas Service&apos;,$Profile.Name = &apos;QL_Sales&apos;,$Profile.Name = &apos;QL_Service&apos;),(Parent.RecordType.DeveloperName = &quot;QAC_Contact_Us_Support&quot;))</errorConditionFormula>
+    <errorMessage>From Address should not be &apos;noresponse@qantas.com.au&apos;</errorMessage>
+</ValidationRule>

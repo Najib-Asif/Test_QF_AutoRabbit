@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Performance_Queue</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>QCI_f__c</columns>
+    <columns>Portfolio__c</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed - Approved,Closed - Rejected</value>
+    </filters>
+    <label>Sales Performance Queue</label>
+    <queue>Sales_Performance_Team</queue>
+    <sharedTo>
+        <group>Sales_Performance_Team</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,33 @@
+<aura:component controller="QEC_SpecialConditionController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="specialConditionMap" type="Map" />
+    <aura:attribute name="fieldMap" type="Map" />
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="JQ_fields" type="List" default="QEC_Origin__c,QEC_Destination__c" />
+    <aura:attribute name="specialConditionList" type="List" />
+    <aura:registerEvent name="refreshDataEvent" type="c:QEC_refreshDataEvent" />
+    <aura:handler name="change" value="{!v.specialConditionMap}" action="{!c.doInit}" />
+    <aura:iteration items="{!v.specialConditionList}" var="specialCondition">
+        <div class="slds-box slds-box_xx-small">
+            <lightning:layout>
+                <lightning:layoutItem size="11" class="slds-m-around_x-small">
+                    <aura:if isTrue="{!v.type != 'JQ Inclusion'}">
+                        <lightning:recordForm recordId="{!specialCondition.Id}" objectApiName="QEC_Special_Condition__c" fields="{!v.fields}" columns="5"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.type == 'JQ Inclusion'}">
+                        <lightning:recordForm recordId="{!specialCondition.Id}" objectApiName="QEC_Special_Condition__c" fields="{!v.JQ_fields}" columns="5"/>
+                    </aura:if>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="1">
+                    <div class="slds-p-left_x-small slds-p-top_medium">
+                        <a name="{!specialCondition.Id}" onclick="{!c.removeRow}">
+                            <lightning:icon variant="error" iconName="action:delete" size="xx-small" alternativeText="icon"/>
+                            <span class="slds-assistive-text">Delete Icon</span>
+                        </a>
+                    </div>
+                </lightning:layoutItem>            
+            </lightning:layout>
+        </div>
+    </aura:iteration>
+</aura:component>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Incremental_Revenue_Pipeline</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>Incremental_Revenue__c</columns>
+    <columns>Current_Market_Share__c</columns>
+    <columns>Current_Market_Share_Int__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.TYPE</field>
+        <operation>equals</operation>
+        <value>Renewal,Amendment/Variation</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.TYPE</field>
+        <operation>equals</operation>
+        <value>New business contract</value>
+    </filters>
+    <label>Incremental Revenue Pipeline</label>
+    <sharedTo>
+        <group>QF</group>
+        <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

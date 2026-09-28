@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>IOC: Flight Event Recovery Comms Reject</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>QCC_BlankLetterhead</letterhead>
+    <name>IOCRejectTemplate</name>
+    <style>freeForm</style>
+    <subject>Rejection for Event {!Event__c.Name}</subject>
+    <textOnly>Hi Team,
+Flight Number {!Event__c.FlightNumber__c} from {!Event__c.DeparturePort__c} to {!Event__c.Affected_Ports__c} is disrupted. Passenger travelled/booked in this flight will be recovered by below Qantas Points
+
+
+
+Economy
+
+Premium Economy
+
+Business
+
+First
+
+Bronze
+
+{!Event__c.BronzeEconomy__c}
+
+{!Event__c.BronzePremiumEconomy__c}
+
+{!Event__c.BronzeBusiness__c}
+
+{!Event__c.BronzeFirstClass__c}
+
+Silver
+
+{!Event__c.SilverEconomy__c}
+
+{!Event__c.SilverPremiumEconomy__c}
+
+{!Event__c.SilverBusiness__c}
+
+{!Event__c.SilverFirstClass__c}
+
+Gold
+
+{!Event__c.GoldEconomy__c}
+
+{!Event__c.GoldEconomy__c}
+
+{!Event__c.GoldBusiness__c}
+
+{!Event__c.GoldFirstClass__c}
+
+Platinum
+
+{!Event__c.PlatinumEconomy__c}
+
+{!Event__c.PlatinumPremiumEconomy__c}
+
+{!Event__c.PlatinumBusiness__c}
+
+{!Event__c.PlatinumFirstClass__c}
+
+Platinum One/CL
+
+{!Event__c.Platinum1SSUEconomy__c}
+
+{!Event__c.Platinum1SSUPremiumEconomy__c}
+
+{!Event__c.Platinum1SSUBusiness__c}
+
+{!Event__c.Platinum1SSUFirstClass__c}
+
+
+Approval Link
+Thanks,
+{!Approval_Requesting_User.FirstName} {!Approval_Requesting_User.LastName}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

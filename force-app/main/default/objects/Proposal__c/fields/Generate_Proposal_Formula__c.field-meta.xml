@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generate_Proposal_Formula__c</fullName>
+    <description>Formula field used in Conga trigger outbound message</description>
+    <externalId>false</externalId>
+    <formula>&quot;&amp;id=&quot; + Id +
+&quot;&amp;templateid=&quot; + Conga_Template_ID__c +
+&quot;&amp;qmode=SalesforceFile&quot; +
+&quot;&amp;defaultpdf=&quot; + IF(OR(ISPICKVAL(Standard__c, &apos;Yes&apos;),ISPICKVAL(Type__c, &apos;Adhoc&apos;)),&apos;0&apos;,&apos;1&apos;) +
+&quot;&amp;fp0=&quot; + IF(OR(ISPICKVAL(Standard__c, &apos;Yes&apos;),ISPICKVAL(Type__c, &apos;Adhoc&apos;)),&apos;0&apos;,&apos;1&apos;) + &quot;;&quot; +
+&quot;&amp;ofn=&quot; + Proposal_File_Name__c +
+&quot;&amp;sc1=SalesforceFile&quot;+
+&quot;&amp;sc0=1&quot; +
+&quot;&amp;DS7=1&quot;+
+&quot;&amp;DS7Preview=1&quot; +
+&quot;&amp;queryid=[createduseremail]a0W9000000KjBzf,[PropAccRel]a0W9000000rq1LM,[NonMCAFAJCDI]a0W9000000uvOj3,[MCAFAJCDI]a0W9000000uvOk6,[MCAOther]a0W9000000uvOkG,[NonMCAOther]a0W9000000uvOkV,[RouteCate]a0W9000000uvOlY,[NonRouteCat]a0W9000000uvOli,[Mainline]a0W2v00001EaDLhEAN,[NoDisc]a0W2v00001EaDLmEAN,[chfinfo]a0W9000000Kj6Vi,[srilanka]a0W9000000x2ogzEAA,[chinaY]a0W9000000x2oh9EAA,[chinaB]a0W9000000x2ohEEAQ,[chinaH]a0W9000000x2ohOEAQ,[RoDeNMCA]a0W2v000018Fi8oEAC,[FiFaNMCA]a0W2v000018Fi8pEAC,[AdvResNMCA]a0W2v000018Fi8rEAC,[PenNMCA]a0W2v000018Fi8sEAC,[ExBaNMCA]a0W2v000018Fi8tEAC,[InFaNMCA]a0W2v000018Fi8uEAC,[EKSt]a0W2v000018Fi8vEAC,[BlFaSFlex]a0W2v000018Fi8wEAC,[BlFaFlex]a0W2v000018Fi8xEAC,[JQInDOM]a0W2v000018Fi8yEAC,[AdvResMCA]a0W2v000018Fi8zEAC,[JQInINT]a0W2v000018Fi90EAC,[ExBaDOM]a0W2v000018Fi92EAC,[AdvResDOM]a0W2v000018Fi91EAC,[FiFaMCA]a0W2v000018Fi94EAC,[BlFaDOM]a0W2v000018Fi95EAC,[PenMCA]a0W2v000018Fi96EAC,[InFaMCA]a0W2v000018Fi97EAC,[PenDOM]a0W2v000018Fi98EAC,[FiFaDOM]a0W2v000018Fi99EAC,[InFaDOM]a0W2v000018Fi9AEAS,[ExBaMCA]a0W2v000018Fi9BEAS,[RoDeDOM]a0W2v000018Fi9CEAS,[RoDeMCA]a0W2v000018Fi9DEAS,[3A]a0W2v000018FiMv,[4E]a0W2v000018FiMl,[4F]a0W2v000018FiMq,[ADINT]a0W2v000017vhOeEAI,[RDUS]a0W2v000017wLqxEAE,[FFINT]a0W2v000017vhOgEAI,[PEINT]a0W2v000017vhOhEAI,[EBINT]a0W2v000017vhOiEAI,[IFINT]a0W2v000017vhOjEAI,[SPDOM]a0W2v000017vhOlEAI,[SPINT]a0W2v000017vhOkEAI,[AMIN]a0W2v000017wLqzEAE,[QueryMEAF50]a0W2v00001GtoEREAZ,[QueryASIA51]a0W2v00001GtoEWEAZ,[QueryNZ52]a0W2v00001GtoEbEAJ,[MALJCD]a0W2v00001GtoRkEAJ,a0W9000000InuN2,a0W9000000InuN7,a0W9000000InuNT,a0W9000000InuNR,a0W9000000InuNz,a0W9000000InuNL,a0W9000000InuNB,a0W9000000InuNC,a0W9000000InuO5,a0W9000000InuN0,a0W9000000InuNH,a0W9000000InuNd,a0W9000000InuO6,a0W9000000InuNU,a0W9000000InuNj,a0W9000000InuO7,a0W9000000InuN1,a0W9000000InuNF,a0W9000000InuMx,a0W9000000InuNs,a0W9000000InuNn,a0W9000000InuNe,a0W9000000InuMu,a0W9000000InuMp,a0W9000000InuMq,a0W9000000InuMr,a0W9000000InuNq,a0W9000000InuN9,a0W9000000InuMt,a0W9000000InuNa,a0W9000000InuNX,a0W9000000InuN5,a0W9000000InuNP,a0W9000000InuN6,a0W9000000InuO1,a0W9000000InuNm,a0W9000000InuOB,a0W9000000InuOD,a0W9000000KjBzL,a0W9000000KjBzQ,a0W9000000KjBzV,a0W9000000KjBza,a0W9000000InuNc?pv0=&quot;+Id</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Generate Proposal Formula</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

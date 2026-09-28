@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>NetworkSearchQueryFrequency$QueryDate</field>
+    </columns>
+    <columns>
+        <field>NetworkSearchQueryFrequency$SearchTerm</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>NetworkSearchQueryFrequency$CountQueries</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>NetworkSearchQueryFrequency$AvgNumResults</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>NetworkSearchQueryFrequency$Network</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Knowledge iQ</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>New IA.Knowledge iQ Searches</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>ca_only_2_0__Community_Searches_2_0__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>NetworkSearchQueryFrequency$QueryDate</dateColumn>
+        <endDate>2022-09-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2022-09-07</startDate>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,53 @@
+<aura:component description="ArticleList" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"  controller="ArticleListController"> 
+    <aura:attribute name="articles" type="List" description="use for get the response from the controller" />
+    <aura:attribute name="searchVar" type="String" description="use for store user search input"/>
+    <aura:attribute name="Message" type="boolean" default="false" description="use for display no record found message"/>
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem size="8" padding="around-small">
+                <lightning:input value="{!v.searchVar}"
+                                 required="true"
+                                 placeholder="search.."
+                                 aura:id="searchField"
+                                 label="Search"/>
+            </lightning:layoutItem>
+            <div style="padding-top: 25px;">
+                <lightning:layoutItem size="0" padding="around-small" >
+                    <lightning:button onclick="{!c.searcharticles}"
+                                      variant="brand"
+                                      iconName="utility:search"/> 
+                </lightning:layoutItem>
+            </div>		
+        </lightning:layout>       
+        <lightning:button variant="brand" class="customButton" label="View Recent Published Articles" title="View Recent Published Articles" onclick="{! c.handleClick }"/>
+        <!-- ERROR MESSAGE IF NOT RECORDS FOUND--> 
+        <aura:if isTrue="{!v.Message}">
+            <div class="slds-notify_container slds-is-relative">
+                <div class="slds-notify slds-notify_toast slds-theme_error" role="alert">
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small">No Articles Found...</h2>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <aura:iteration var="article" items="{!v.articles}">
+            <div class="c-container">
+                <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="Title">Title</p>
+                            <a href="{!'/one/one.app?#/sObject/'+ article.Id + '/view'}" target="_blank"> {! article.Title } </a>
+                        </div>
+                    </lightning:layoutItem>
+                   
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="Summary">Summary</p>                   
+                            <p>{!article.Summary}</p>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </aura:iteration>
+    </div>
+</aura:component>

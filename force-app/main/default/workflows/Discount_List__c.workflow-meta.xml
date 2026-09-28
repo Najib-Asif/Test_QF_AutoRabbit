@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Approval</fullName>
+        <field>Approval__c</field>
+        <literalValue>1</literalValue>
+        <name>Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Required_SBD_to_False</fullName>
+        <field>Approval_Required_SBD__c</field>
+        <literalValue>0</literalValue>
+        <name>Approval Required SBD to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Required_SBD_to_False_QBS</fullName>
+        <field>Approval_Required_SBD_QBS__c</field>
+        <literalValue>0</literalValue>
+        <name>Approval Required (SBD)to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Required_SBD_to_True</fullName>
+        <field>Approval_Required_SBD__c</field>
+        <literalValue>1</literalValue>
+        <name>Approval Required SBD to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Required_SBD_to_True_QBS</fullName>
+        <field>Approval_Required_SBD_QBS__c</field>
+        <literalValue>1</literalValue>
+        <name>Approval Required (SBD) to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Required_TeamLead</fullName>
+        <field>Approval_Required_TeamLead_CA__c</field>
+        <literalValue>1</literalValue>
+        <name>Approval Required TeamLead</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Make_Destination_to_Uppercase</fullName>
+        <field>Route_Destination__c</field>
+        <formula>Upper( Route_Destination__c )</formula>
+        <name>Make Destination to Uppercase</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Make_origin_to_Uppercase</fullName>
+        <field>Route_Origin__c</field>
+        <formula>Upper( Route_Origin__c )</formula>
+        <name>Make origin to Uppercase</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QL_Update_Approval_Field</fullName>
+        <description>To update approved field to false when reapproval is initiated - CRM 5229</description>
+        <field>IsApproved__c</field>
+        <literalValue>0</literalValue>
+        <name>QL Update Approval Field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QL_Update_ReApproval_Field</fullName>
+        <description>To update reapproval field when reapproval is initiated - CRM 5229</description>
+        <field>QL_IsReapproved__c</field>
+        <literalValue>1</literalValue>
+        <name>QL Update ReApproval Field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Approval</fullName>
+        <field>Approval__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Approval_Required_TeamLead_CA</fullName>
+        <field>Approval_Required_TeamLead_CA__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Approval Required TeamLead - CA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Check the Approval Required %28SBD%29 for QBS</fullName>
+        <actions>
+            <name>Approval_Required_SBD_to_True_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Check the Approval Required (SBD) checkbox  for QBS</description>
+        <formula>AND( OR( ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal + Q&apos;),  ISPICKVAL(Fare_Combination__c, &apos;Mainline - Flex Only Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Regional&apos;),  ISPICKVAL(Fare_Combination__c, &apos;DOM Route Deal&apos;), ISPICKVAL(Fare_Combination__c, &apos;International&apos;),ISPICKVAL(Fare_Combination__c, &apos;Propeller&apos;)), Discount_Comparison_with_AM__c,  ISPICKVAL(Proposal_Type__c, &apos;Qantas Business Savings&apos;), NOT(SBD_Rejected__c),NOT(SBD_Approved__c),NOT(IsApproved__c),OR(CONTAINS(CreatedBy.Level__c,&apos;P5&apos;),CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Check the Approval Required SBD for CA</fullName>
+        <actions>
+            <name>Approval_Required_SBD_to_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Check the Approval Required SBD Checkbox for CA</description>
+        <formula>AND(OR(  AND( NOT(Approved_by_SBD__c ),Discount_Comparison_with_AM__c,Segment__c==&apos;Domestic&apos;,  OR(Category__c==&apos;Mainline&apos;, Category__c==&apos;Intra-WA&apos;, Category__c==&apos;Regional&apos;, Category__c==&apos;Route&apos;),  ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;)),   AND(NOT(Approved_by_SBD__c ),NOT(IsApproved__c), Discount_Comparison_with_AM__c, Segment__c==&apos;International&apos;, ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;))),  NOT(Rejected_by_SBD__c),NOT(IsApproved__c),   OR(CONTAINS(CreatedBy.Level__c,&apos;P5&apos;),CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Check the Approval Required Team Lead Checkbox for CA</fullName>
+        <actions>
+            <name>Approval_Required_TeamLead</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(OR(  AND( NOT(Approved_by_TL__c),NOT(IsApproved__c),Discount__c &gt; Discount_Threshold_AM__c,Segment__c==&apos;Domestic&apos;,  OR(Category__c==&apos;Mainline&apos;, Category__c==&apos;Intra-WA&apos;, Category__c==&apos;Regional&apos;, Category__c==&apos;Route&apos;),  ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;)),   AND(NOT(Approved_by_TL__c),NOT(IsApproved__c), Discount__c &gt; Discount_Threshold_AM__c, Segment__c==&apos;International&apos;, ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;))),  NOT(TL_Rejected__c),NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Check the Approval Required Team Lead Checkbox for QBS</fullName>
+        <actions>
+            <name>Approval</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( OR( ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal + Q&apos;),  ISPICKVAL(Fare_Combination__c, &apos;Mainline - Flex Only Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Regional&apos;),  ISPICKVAL(Fare_Combination__c, &apos;DOM Route Deal&apos;), ISPICKVAL(Fare_Combination__c, &apos;International&apos;),ISPICKVAL(Fare_Combination__c, &apos;Propeller&apos;)), Discount__c &gt; Discount_Threshold_AM__c,  ISPICKVAL(Proposal_Type__c, &apos;Qantas Business Savings&apos;), NOT(TeamLead_Approved__c), NOT(IsApproved__c),NOT(TeamLead_Rejected__c),NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QL Update Approval and Reapproval Fields</fullName>
+        <actions>
+            <name>QL_Update_Approval_Field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>QL_Update_ReApproval_Field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Created to update fields during reapproval - CRM 5229</description>
+        <formula>ISCHANGED(Discount__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>UnCheck the Approval Required %28SBD%29 for QBS</fullName>
+        <actions>
+            <name>Approval_Required_SBD_to_False_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>UnCheck the Approval Required (SBD) checkbox  for QBS</description>
+        <formula>NOT(AND( OR( ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal&apos;), ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal + Q&apos;), ISPICKVAL(Fare_Combination__c, &apos;Mainline - Flex Only Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Regional&apos;),  ISPICKVAL(Fare_Combination__c, &apos;DOM Route Deal&apos;), ISPICKVAL(Fare_Combination__c, &apos;International&apos;),ISPICKVAL(Fare_Combination__c, &apos;Propeller&apos;)), Discount_Comparison_with_AM__c,  ISPICKVAL(Proposal_Type__c, &apos;Qantas Business Savings&apos;),  NOT(SBD_Rejected__c), NOT(SBD_Approved__c),NOT(IsApproved__c),OR(CONTAINS(CreatedBy.Level__c,&apos;P5&apos;),CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>UnCheck the Approval Required SBD for CA</fullName>
+        <actions>
+            <name>Approval_Required_SBD_to_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>UnCheck the Approval Required SBD Checkbox for CA</description>
+        <formula>NOT(AND(OR(  AND( NOT(Approved_by_SBD__c ),NOT(IsApproved__c),Discount_Comparison_with_AM__c,Segment__c==&apos;Domestic&apos;,  OR(Category__c==&apos;Mainline&apos;, Category__c==&apos;Intra-WA&apos;, Category__c==&apos;Regional&apos;, Category__c==&apos;Route&apos;),  ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;)),   AND(NOT(Approved_by_SBD__c ),NOT(IsApproved__c), Discount_Comparison_with_AM__c, Segment__c==&apos;International&apos;, ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;))),  NOT(Rejected_by_SBD__c),  OR(CONTAINS(CreatedBy.Level__c,&apos;P5&apos;),CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Uncheck Approval Required TeamLead for CA</fullName>
+        <actions>
+            <name>Uncheck_Approval_Required_TeamLead_CA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>NOT(AND(OR(  AND( NOT(Approved_by_TL__c),NOT(IsApproved__c),Discount__c &gt; Discount_Threshold_AM__c,Segment__c==&apos;Domestic&apos;,  OR(Category__c==&apos;Mainline&apos;, Category__c==&apos;Intra-WA&apos;, Category__c==&apos;Regional&apos;, Category__c==&apos;Route&apos;),  ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;)),   AND(NOT(Approved_by_TL__c),NOT(IsApproved__c), Discount__c &gt; Discount_Threshold_AM__c, Segment__c==&apos;International&apos;, ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;))),  NOT(TL_Rejected__c),NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Uncheck the Approval Required Team Lead Checkbox for QBS</fullName>
+        <actions>
+            <name>Uncheck_Approval</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>NOT(AND( OR( ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal + Q&apos;),  ISPICKVAL(Fare_Combination__c, &apos;Mainline - Flex Only Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Regional&apos;),  ISPICKVAL(Fare_Combination__c, &apos;DOM Route Deal&apos;), ISPICKVAL(Fare_Combination__c, &apos;International&apos;),ISPICKVAL(Fare_Combination__c, &apos;Propeller&apos;)), Discount__c &gt; Discount_Threshold_AM__c,  ISPICKVAL(Proposal_Type__c, &apos;Qantas Business Savings&apos;), NOT(TeamLead_Approved__c),NOT(IsApproved__c), NOT(TeamLead_Rejected__c), NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Destination to Upper case</fullName>
+        <actions>
+            <name>Make_Destination_to_Uppercase</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Discount_List__c.Route_Destination__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Origin to Upper case</fullName>
+        <actions>
+            <name>Make_origin_to_Uppercase</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Discount_List__c.Route_Origin__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

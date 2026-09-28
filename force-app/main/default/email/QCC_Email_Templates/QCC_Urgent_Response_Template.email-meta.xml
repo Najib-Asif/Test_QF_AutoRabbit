@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>24 hour reminder email template which sent to other department</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QCC_Urgent Response Template</name>
+    <style>none</style>
+    <subject>Qantas Customer Care - Urgent response required for {!Case.CaseNumber}</subject>
+    <textOnly>Can you please respond to below email as soon as possible to enable us to respond to customer. Thank you.
+
+
+
+
+
+{!Case.Email_Content__c}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

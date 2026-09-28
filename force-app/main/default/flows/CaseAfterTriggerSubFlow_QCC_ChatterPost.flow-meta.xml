@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Publish_to_Chatter_Post</name>
+        <label>Publish to Chatter Post</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Check_Owner_Change_Chatter_Post</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>emailMsgChatterPostMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Publish_to_Chatter_Post_for_Owner_Change</name>
+        <label>Publish to Chatter Post for Owner Change</label>
+        <locationX>50</locationX>
+        <locationY>542</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ownerChangeChatterMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_Email_Message_Chatter_Post</name>
+        <label>Check Email Message Chatter Post</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>Check_Owner_Change_Chatter_Post</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Check_Email_Message_Chatter_Post</name>
+            <conditionLogic>1 AND 2 AND ( 3 OR 4 )</conditionLogic>
+            <conditions>
+                <leftValueReference>objOldCase</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reply Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Waiting for Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Waiting for Internal</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Publish_to_Chatter_Post</targetReference>
+            </connector>
+            <label>TRUE Check Email Message Chatter Post</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Owner_Change_Chatter_Post</name>
+        <label>Check Owner Change Chatter Post</label>
+        <locationX>182</locationX>
+        <locationY>434</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Check_Owner_Change_Chatter_Post</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>objOldCase</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.OwnerId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>objNewCase.OwnerId</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.IsClosed</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.OwnerId</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>005</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Publish_to_Chatter_Post_for_Owner_Change</targetReference>
+            </connector>
+            <label>TRUE Check Owner Change Chatter Post</label>
+        </rules>
+    </decisions>
+    <description>(Platform change)</description>
+    <formulas>
+        <name>TODAY</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <interviewLabel>CaseAfterTriggerSubFlow-QCC_ChatterPost {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-QCC_ChatterPost</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Email_Message_Chatter_Post</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>emailMsgChatterPostMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Case {!objNewCase.CaseNumber} Reply Received
+Case Type: {!objNewCase.Type}
+Priority: {!objNewCase.Priority}
+Status: {!objNewCase.Status}
+Customer Name: {!objNewCase.Contact_Fullname__c}
+Date Received: {!TODAY}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ownerChangeChatterMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{!objNewCase.CaseNumber} has been assigned to you!
+Case Type: {!objNewCase.Type}
+Priority: {!objNewCase.Priority}
+Status: {!objNewCase.Status}
+Customer Name: {!objNewCase.Contact.Name}
+Date Received: {!TODAY}</text>
+    </textTemplates>
+    <variables>
+        <description>trigger.new</description>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>trigger.old</description>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

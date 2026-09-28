@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PrimaryPNRNotNull</fullName>
+    <active>true</active>
+    <description>Checking if Primary PNR is provided on the case</description>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    ISBLANK(Case__r.Booking_PNR__c)
+)</errorConditionFormula>
+    <errorMessage>Additional PNR’s cannot be entered without a PNR in the Details tab</errorMessage>
+</ValidationRule>

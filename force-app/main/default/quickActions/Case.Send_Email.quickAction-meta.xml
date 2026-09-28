@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used for Freight Customer Service</description>
+    <fieldOverrides>
+        <field>ValidatedFromAddress</field>
+        <formula>IF(
+ISPICKVAL(Case.Origin,&quot;FRT Bookings&quot;), &quot;aufreightbookings@qantas.com.au&quot;,
+IF(ISPICKVAL(Case.Origin,&quot;FRT Spl Moves&quot;), &quot;specialmoves@qantas.com.au&quot;,
+IF(ISPICKVAL(Case.Origin,&quot;FRT JNB&quot;), &quot;johannesburgfreight@qantas.com.au&quot;,
+IF(ISPICKVAL(Case.Origin, &quot;FRT LON&quot;), &quot;londonfreight@qantas.com.au&quot;,
+IF(ISPICKVAL(Case.Origin, &quot;FRT Seniors&quot;), &quot;frtcsuseniors@qantas.com.au&quot;,
+&quot;freightcustomerservice@qantas.com.au&quot;
+)
+)
+)
+)
+)</formula>
+    </fieldOverrides>
+    <label>Send Email</label>
+    <optionsCreateFeedItem>true</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>ValidatedFromAddress</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>ToAddress</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>BccAddress</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>CcAddress</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Subject</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>HtmlBody</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+        <quickActionLayoutColumns/>
+    </quickActionLayout>
+    <quickActionSendEmailOptions>
+        <ignoreDefaultEmailTemplateSubject>false</ignoreDefaultEmailTemplateSubject>
+    </quickActionSendEmailOptions>
+    <targetObject>EmailMessage</targetObject>
+    <targetParentField>Parent</targetParentField>
+    <type>SendEmail</type>
+</QuickAction>

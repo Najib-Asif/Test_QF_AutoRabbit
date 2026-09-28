@@ -1,0 +1,415 @@
+{
+  "version" : "64.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "Id", "CaseNumber", "ContactId", "RecordTypeId", "CreatedDate", "ContactEmail", "Contact_Email__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "CaseRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1751328000000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "CaseRecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Baggage", "CCC Complaints", "CCC Further Action Required", "CCC Query" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "ContactEmail",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Origin",
+          "operator" : "NOT",
+          "operands" : [ "Red App" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "RecordTypeId", "Email", "EmailBouncedReason", "EmailBouncedDate", "IsEmailBounced", "Frequent_Flyer_Number__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET2", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "ContactRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "ContactRecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "Individual Contact" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Frequent_Flyer_Number__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Email",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "JOIN3", "FILTER1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ContactId" ],
+        "rightQualifier" : "ContactToCase",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Case_Email_FF_Email",
+          "label" : "Case Email = FF Email?",
+          "formulaExpression" : "If(Contact_Email__c = \"ContactToCase.Email\", 'Yes', 'No')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Case_Email_FF_Email",
+          "operator" : "EQUAL",
+          "operands" : [ "No", "Yes" ]
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case Email != FF Email",
+          "name" : "Case_Email_FF_Email"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CreatedDate", "Id", "RecordTypeId", "Case_Number__c", "Status__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Recovery__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Recovery__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Status__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Finalised" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1751328000000" ]
+        } ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "FILTER3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "CaseHasRecovery",
+        "rightKeys" : [ "Case_Number__c" ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Case Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "FILTER0" : {
+        "label" : "CC Case This FY",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 392
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 672.6,
+        "left" : 112.1,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Contact Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672.6,
+        "left" : 252.10000000000002
+      },
+      "FILTER1" : {
+        "label" : "Individual Contact Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 672.6,
+        "left" : 392.1
+      },
+      "JOIN2" : {
+        "label" : "Contact to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 812
+      },
+      "TRANSFORM0" : {
+        "label" : "Case Email = FF Email?",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 952,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Case Email = FF Email?"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER2" : {
+        "label" : "Case Email != FF Email",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 1092
+      },
+      "OUTPUT0" : {
+        "label" : "Case Email != FF Email",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 1232
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Recovery__c",
+        "type" : "LOAD_DATASET",
+        "top" : 531,
+        "left" : 391.8,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER3" : {
+        "label" : "Recoveries This FY",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 392,
+        "left" : 392
+      },
+      "JOIN3" : {
+        "label" : "Case Has Recovery",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 111.9,
+        "left" : 532
+      }
+    },
+    "connectors" : [ {
+      "source" : "JOIN3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "FILTER2"
+    }, {
+      "source" : "FILTER2",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "FILTER3"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN3"
+    }, {
+      "source" : "FILTER3",
+      "target" : "JOIN3"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

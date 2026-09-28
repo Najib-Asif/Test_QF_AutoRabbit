@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Omni_User_owned_to_Baggage_Queues</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 AND (5 OR 6 OR 7 OR 8)</booleanFilter>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>Group__c</columns>
+    <columns>Category__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>OWNER_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Reply Received,New</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Refunds</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>notEqual</operation>
+        <value>Case.CCC_Voice</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.CCC_Baggage</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Abigael Bea Bernardino,Alliah Faith Noelle Tarlit,Azile Mthunzini,Bradny Gumede,Caroline Maenetja,Cherelloi Adolfo,Christina Joyzen Pasia,Daniel Arendse,Elton Isaacs,Erica Tikili</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Escaraman Ma. Danilly Jane Mendoza,Eugene Agpoon,Hani Leila Mallari,Iris Banua,Isobelle Jane Soreno,James Patrick Abdula,Jean Kate Favila,Jemar Rey Alvarez,Joannelyn Silang,Jocelyn Belonio</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Joevic Macapagal,Julian Ludick,Kristine Joy Bondoc,Larriane Grace Almazar,Maria Cabajes,Maria Cecilia Collantes,Maria Pinili,Masithembe Nono,Neo Pan,Noah Buys</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Raul Taga-an,Rizaline Saavedra,Samantha Chakanetsa,Shamiel Jonathan,Sibongile Phama,Sigman Rhee Elarcosa,Steven Clint Velasco,Waldrex Jr Bautista</value>
+    </filters>
+    <label>Omni - User owned to Baggage Queues</label>
+</ListView>

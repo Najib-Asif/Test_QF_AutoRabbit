@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Agency_Partnership_Big_Deal_Notification</fullName>
+        <description>Agency Partnership Big Deal Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Agency_Partnerships_Big_Deal_Alert</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Agency_Big_Deal_Alert</template>
+    </alerts>
+    <alerts>
+        <fullName>Corporate_Big_Deal_Notification</fullName>
+        <description>Corporate Big Deal Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Business_Government_Big_Deal_Alert</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Events/Corporate_Big_Deal_Alert</template>
+    </alerts>
+    <alerts>
+        <fullName>Loyalty_Low_points_price_justification_Coalition</fullName>
+        <description>Loyalty Low points price justification Coalition</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Loyalty_Opportunity_Stage_Group_Coalitio</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Loyalty_Low_points_price_justification</template>
+    </alerts>
+    <alerts>
+        <fullName>Loyalty_Low_points_price_justification_Financial_Services</fullName>
+        <description>Loyalty Low points price justification Financial Services</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Loyalty_Opportunity_Stage_Financial_Serv</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Loyalty_Low_points_price_justification</template>
+    </alerts>
+    <alerts>
+        <fullName>Loyalty_Low_points_price_justification_QBR</fullName>
+        <description>Loyalty Low points price justification QBR</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Loyalty_Opportunity_Stage_Group_QBR</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Loyalty_Low_points_price_justification</template>
+    </alerts>
+    <alerts>
+        <fullName>Loyalty_Opportunity_stage_movement_QBR</fullName>
+        <description>Loyalty Opportunity stage movement QBR</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Loyalty_Opportunity_Stage_Group_QBR</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Loyalty_Opportunity_stage_movement_notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Loyalty_Stage_Movement_Collation</fullName>
+        <description>Loyalty Stage Movement Collation</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Loyalty_Opportunity_Stage_Group_Coalitio</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Loyalty_Opportunity_stage_movement_notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Loyalty_Stage_Movement_Financial_Services</fullName>
+        <description>Loyalty Stage Movement Financial Services</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Loyalty_Opportunity_Stage_Financial_Serv</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Loyalty_Opportunity_stage_movement_notification</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Auto_update_category_to_QBS_for_amount</fullName>
+        <description>If Category is CA and Proposed Revenue amount is less than 300K then Category defaults to QBS</description>
+        <field>Category__c</field>
+        <literalValue>Qantas Business Savings</literalValue>
+        <name>Auto update category to QBS for amount</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Calculated_Amount_Update</fullName>
+        <description>This updates the Amount field when the values used to calculated &quot;Annualised Deal Values&quot; are all inputted. e.g. customer base, Tag rate, price per point, point per $ , avg customer spend and probability adjustment</description>
+        <field>Amount</field>
+        <formula>(( Customer_Base__c * Assumed_Tag_Rate_at_Maturity__c )* ( Price_Per_Point__c * Points_Per__c * Average_Spend_Per_Customer__c ))*  Probability</formula>
+        <name>Loyalty Calculated Amount Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Default_value_for_Forecast_MCA_Revenue</fullName>
+        <field>Forecast_MCA_Revenue__c</field>
+        <formula>0.00</formula>
+        <name>Default_value_for_Forecast_MCA_Revenue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Loyalty_Update_Prior_Stage_Value</fullName>
+        <description>Loyalty Update Prior Stage Value</description>
+        <field>Previous_Stage__c</field>
+        <formula>TEXT(PRIORVALUE(StageName))</formula>
+        <name>Loyalty Update Prior Stage Value</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Update_Counter</fullName>
+        <description>To determine how many times an opportunity gets updated post closure for B&amp;G Opportunities and post submission for SME product &gt;&gt; AEQCC partner plus.</description>
+        <field>Opp_update_counter__c</field>
+        <formula>IF(((Opp_update_counter__c &gt;= 0) &amp;&amp; ( ISPICKVAL( Type , &apos;SME Product&apos;)) &amp;&amp; (ISPICKVAL( Sub_Type_Level_2__c , &apos;Partner Plus&apos;))&amp;&amp; (ISPICKVAL( Sub_Type_Level_3__c , &apos;Submitted&apos;))) 
+||((Opp_update_counter__c &gt;= 0) &amp;&amp;( ISPICKVAL( Type , &apos;Business and Government&apos;)) &amp;&amp; (ISPICKVAL( StageName , &apos;Closed Accepted&apos;))) , Opp_update_counter__c + 1, 0)</formula>
+        <name>Opp Update Counter</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opportunity_Stage_Update</fullName>
+        <description>Whenever the Number of Proposals is 1 the Stage field is updates to Propose</description>
+        <field>StageName</field>
+        <literalValue>Propose &amp; Negotiate</literalValue>
+        <name>Opportunity Stage Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposed_Revenue_to_Min_Commitment</fullName>
+        <description>Loyalty: Created</description>
+        <field>Amount</field>
+        <formula>Minimum_Spend_Commitment__c</formula>
+        <name>Proposed_Revenue_to_Min_Commitment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_Agency_Partnerships</fullName>
+        <description>Set Opportunity record type to  Agency Partnerships</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Agency_Partnerships</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type &apos;Agency Partnerships&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_Business_and_Government</fullName>
+        <description>Set Opportunity record type to Business and Government</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Business_and_Government</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type &apos;Business and Government</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_Charters</fullName>
+        <description>Set Opportunity record type to Charter</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Scheduled_Charters</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type &apos;Charters&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_GSA</fullName>
+        <description>Set Opportunity record type to GSA</description>
+        <field>RecordTypeId</field>
+        <lookupValue>GSA</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type &apos;GSA&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_Global_Opportunity</fullName>
+        <description>Set Opportunity record type to Global Opportunity</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Global_opportunity</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type &apos;Global Opportunity&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_SME_Product</fullName>
+        <description>Set Opportunity record type to SME Product</description>
+        <field>RecordTypeId</field>
+        <lookupValue>SME_Product</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type &apos;SME Product&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_Sales_Development</fullName>
+        <description>Set Opportunity record type to Sales Development</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Sales_Development</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type &apos;Sales Development&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_type_to_Agency_Partnerships</fullName>
+        <description>Set Opportunity type to Charters</description>
+        <field>Type</field>
+        <literalValue>Agency Partnerships</literalValue>
+        <name>Set type to Agency Partnerships</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_type_to_Business_and_Government</fullName>
+        <description>Set Opportunity type to Business and Government</description>
+        <field>Type</field>
+        <literalValue>Business and Government</literalValue>
+        <name>Set type to Business and Government</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_type_to_Charters</fullName>
+        <description>Set Opportunity type to Charters</description>
+        <field>Type</field>
+        <literalValue>Charters</literalValue>
+        <name>Set type to Charters</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_type_to_GSA</fullName>
+        <description>Set Opportunity type to GSA</description>
+        <field>Type</field>
+        <literalValue>GSA</literalValue>
+        <name>Set type to GSA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_type_to_SME_Product</fullName>
+        <description>Set Opportunity type to SME Product</description>
+        <field>Type</field>
+        <literalValue>SME Product</literalValue>
+        <name>Set type to SME Product</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_type_to_Sales_Development</fullName>
+        <description>Set Opportunity type to Sales Development</description>
+        <field>Type</field>
+        <literalValue>Sales Development</literalValue>
+        <name>Set type to Sales Development</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Last_Changed_Date</fullName>
+        <field>Status_Last_Changed__c</field>
+        <formula>TODAY()</formula>
+        <name>Status Last Changed Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Tick_the_Future_Planet_Checkbox</fullName>
+        <description>Tick the Future Planet Checkbox</description>
+        <field>Future_Planet__c</field>
+        <literalValue>1</literalValue>
+        <name>Tick the Future Planet Checkbox</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>AccountId</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Proposed_Revenue_Amount</fullName>
+        <field>Amount</field>
+        <formula>Forecast_Charter_Spend__c</formula>
+        <name>Update Proposed Revenue Amount</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>qualtrics__Qualtrics_Example_Outbound_Message</fullName>
+        <apiVersion>34.0</apiVersion>
+        <description>An example of how to setup an outbound message. 
+The endpoint url is not valid and needs to be updated to a real out endpoint url.</description>
+        <endpointUrl>https://survey.qualtrics.com/WRQualtricsServer/sfApi.php?r=outboundMessage&amp;u=UR_123456789&amp;s=SV_123456789&amp;t=TR_123456789</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>rajsharma@qantas.com.au</integrationUser>
+        <name>Qualtrics Example Outbound Message</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Auto Populate Forecast Charter Spend to Proposed Revenue Amount</fullName>
+        <actions>
+            <name>Update_Proposed_Revenue_Amount</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Charters</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Default_value_for_Forecast_MCA_Revenue</fullName>
+        <actions>
+            <name>Default_value_for_Forecast_MCA_Revenue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>To set default value as 0.00 when the user doesn&apos;t enter any value for Forecast MCA Revenue</description>
+        <formula>OR(ISBLANK(Forecast_MCA_Revenue__c),  ISNULL(Forecast_MCA_Revenue__c))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Annualised Deal Check</fullName>
+        <actions>
+            <name>Calculated_Amount_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Workflow to check that all values to calculate deal value is present, if so update the revenue amount with it</description>
+        <formula>AND( $RecordType.DeveloperName = &quot;Loyalty_Commercial&quot;,  AND( NOT(ISBLANK( Customer_Base__c )), NOT(ISBLANK( Assumed_Tag_Rate_at_Maturity__c )),  NOT(ISBLANK( Price_Per_Point__c )),  NOT(ISBLANK( Points_Per__c )),  NOT(ISBLANK( Average_Spend_Per_Customer__c )),  NOT(ISBLANK(  Probability  )) ), OR( ISCHANGED(Customer_Base__c),  ISCHANGED(Assumed_Tag_Rate_at_Maturity__c), ISCHANGED(Price_Per_Point__c), ISCHANGED(Points_Per__c),  ISCHANGED(Average_Spend_Per_Customer__c),  NOT(ISBLANK( Probability )   )) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Opportunity Low Points Justification Coalition</fullName>
+        <actions>
+            <name>Loyalty_Low_points_price_justification_Coalition</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty Opportunity Low Points Justification Coalition</description>
+        <formula>AND(ISCHANGED(Low_Points_Price_Justification__c), RecordType.DeveloperName =	&apos;Loyalty_Commercial&apos;,ISPICKVAL(Type,&apos;Qantas Frequent Flyer&apos;), ISPICKVAL(Sub_Type_Loyalty__c,&apos;Coalition&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Opportunity Low Points Justification Financial Services</fullName>
+        <actions>
+            <name>Loyalty_Low_points_price_justification_Financial_Services</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty Opportunity Low Points Justification Financial Services</description>
+        <formula>AND(ISCHANGED(Low_Points_Price_Justification__c), RecordType.DeveloperName =	&apos;Loyalty_Commercial&apos;,ISPICKVAL(Type,&apos;Qantas Frequent Flyer&apos;), ISPICKVAL(Sub_Type_Loyalty__c,&apos;Financial Services&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Opportunity Low points price justification QBR</fullName>
+        <actions>
+            <name>Loyalty_Low_points_price_justification_QBR</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty Opportunity Low points price justification QBR</description>
+        <formula>AND(ISCHANGED( Low_Points_Price_Justification__c), RecordType.DeveloperName =&apos;Loyalty_Commercial&apos;, ISPICKVAL(Type,&apos;Qantas Business Rewards&apos;), ISPICKVAL(Sub_Type_Loyalty__c,&apos;QBR&apos;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Opportunity Stage Movement Notification Coalition</fullName>
+        <actions>
+            <name>Loyalty_Stage_Movement_Collation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty Opportunity Stage Movement Notification Coalition</description>
+        <formula>AND(ISCHANGED(StageName), RecordType.DeveloperName =	&apos;Loyalty_Commercial&apos;,ISPICKVAL(Type,&apos;Qantas Frequent Flyer&apos;), ISPICKVAL(Sub_Type_Loyalty__c,&apos;Coalition&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Opportunity Stage Movement Notification Financial Services</fullName>
+        <actions>
+            <name>Loyalty_Stage_Movement_Financial_Services</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty Opportunity Stage Movement Notification Financial Services</description>
+        <formula>AND(ISCHANGED(StageName), RecordType.DeveloperName =	&apos;Loyalty_Commercial&apos;,ISPICKVAL(Type,&apos;Qantas Frequent Flyer&apos;), ISPICKVAL(Sub_Type_Loyalty__c,&apos;Financial Services&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Opportunity Stage Movement Notification QBR</fullName>
+        <actions>
+            <name>Loyalty_Opportunity_stage_movement_QBR</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty Opportunity Stage Movement Notification QBR</description>
+        <formula>AND(ISCHANGED(StageName), RecordType.DeveloperName =	&apos;Loyalty_Commercial&apos;,ISPICKVAL(Type,&apos;Qantas Business Rewards&apos;), ISPICKVAL(Sub_Type_Loyalty__c,&apos;QBR&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Loyalty Opportunity to Update the Prior Stage</fullName>
+        <actions>
+            <name>Loyalty_Update_Prior_Stage_Value</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty Opportunity to Update the Prior Stage</description>
+        <formula>AND(ISCHANGED(StageName),                 NOT(ISBLANK(TEXT(StageName))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Proposed Amount atleast min spend</fullName>
+        <actions>
+            <name>Proposed_Revenue_to_Min_Commitment</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Loyalty: Created</description>
+        <formula>AND(RecordType.DeveloperName==&apos;Loyalty_Commercial&apos;,  Amount &lt; Minimum_Spend_Commitment__c)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Update counter</fullName>
+        <actions>
+            <name>Opp_Update_Counter</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <criteriaItems>
+            <field>User.UserRoleId</field>
+            <operation>startsWith</operation>
+            <value>QF-DOM-Sales-SME-QIS-A&amp;G</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.UserRoleId</field>
+            <operation>startsWith</operation>
+            <value>QF-DOM-Sales-SME-QIS-R&amp;G</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.UserRoleId</field>
+            <operation>equals</operation>
+            <value>QF-DOM-Sales-SME-QIS-A&amp;G</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opportunity Stage Update</fullName>
+        <actions>
+            <name>Opportunity_Stage_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Number_of_Proposals__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter,Agency Partnerships,Business and Government,GSA,SME Product,Sales Development,Charters,Future Planet,Global opportunity,Group Sales,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <description>Update stage on Opportunity when first Proposal is created</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Status Last Changed Date Update</fullName>
+        <actions>
+            <name>Status_Last_Changed_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>To update the status last changed date</description>
+        <formula>AND(!ISNEW(),ISCHANGED(Status__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tick Future Planet Checkbox when Future Planet Opportunity is Closed</fullName>
+        <actions>
+            <name>Tick_the_Future_Planet_Checkbox</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Future Planet</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed - Accepted</value>
+        </criteriaItems>
+        <description>Tick Future Planet Checkbox when Future Planet Opportunity is Closed</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the record type to Agency Partnerships in Opportunity</fullName>
+        <actions>
+            <name>Set_Record_Type_Agency_Partnerships</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Type</field>
+            <operation>equals</operation>
+            <value>Agency Partnerships</value>
+        </criteriaItems>
+        <description>Sets Opportunity record type to &apos;Agency Partnerships&apos; when the Type field is changed to &apos;Agency Partnerships&apos; via another workflow.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the record type to Business and Government in Opportunity</fullName>
+        <actions>
+            <name>Set_Record_Type_Business_and_Government</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Type</field>
+            <operation>equals</operation>
+            <value>Business and Government</value>
+        </criteriaItems>
+        <description>Sets Opportunity record type to &apos;Business and Government&apos; when the Type field is changed to &apos;Business and Government&apos; via another workflow.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the record type to Charters in Opportunity</fullName>
+        <actions>
+            <name>Set_Record_Type_Charters</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Type</field>
+            <operation>equals</operation>
+            <value>Charters</value>
+        </criteriaItems>
+        <description>Sets Opportunity record type to &apos;Charters&apos; when the Type field is changed to &apos;Charters&apos; via another workflow.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the record type to GSA in Opportunity</fullName>
+        <actions>
+            <name>Set_Record_Type_GSA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Type</field>
+            <operation>equals</operation>
+            <value>GSA</value>
+        </criteriaItems>
+        <description>Sets Opportunity record type to &apos;SME Product&apos; when the Type field is changed to &apos;SME Product&apos; via another workflow.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the record type to Global Opportunity</fullName>
+        <actions>
+            <name>Set_Record_Type_Global_Opportunity</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Type</field>
+            <operation>equals</operation>
+            <value>Global Opportunity</value>
+        </criteriaItems>
+        <description>Sets Opportunity record type to &apos;Global Opportunity&apos; when the Type field is set to &apos;Global Opportunity&apos;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the record type to SME Product in Opportunity</fullName>
+        <actions>
+            <name>Set_Record_Type_SME_Product</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Type</field>
+            <operation>equals</operation>
+            <value>SME Product</value>
+        </criteriaItems>
+        <description>Sets Opportunity record type to &apos;SME Product&apos; when the Type field is changed to &apos;SME Product&apos; via another workflow.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the record type to Sales Development in Opportunity</fullName>
+        <actions>
+            <name>Set_Record_Type_Sales_Development</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Type</field>
+            <operation>equals</operation>
+            <value>Sales Development</value>
+        </criteriaItems>
+        <description>Sets Opportunity record type to &apos;Sales Development&apos; when the Type field is changed to &apos;Sales Development&apos; via another workflow.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the type to Agency Partnerships in Opportunity</fullName>
+        <actions>
+            <name>Set_type_to_Agency_Partnerships</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Opportunity_Type_System__c</field>
+            <operation>equals</operation>
+            <value>Agency Partnerships</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter,Agency Partnerships,Business and Government,GSA,SME Product,Sales Development,Charters,Future Planet,Global opportunity,Group Sales,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <description>When a Lead (with opportunity Type selected as &apos;Agency Partnerships&apos; is converted to opportunity this workflow will set the &apos;Type&apos; field in Opportunity to &apos;Agency Partnerships&apos;.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the type to Business and Government in Opportunity</fullName>
+        <actions>
+            <name>Set_type_to_Business_and_Government</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Opportunity_Type_System__c</field>
+            <operation>equals</operation>
+            <value>Business and Government</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter,Agency Partnerships,Business and Government,GSA,SME Product,Sales Development,Charters,Future Planet,Global opportunity,Group Sales,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <description>When a Lead (with opportunity Type selected as &apos;Business and Government&apos;) is converted to opportunity this workflow will set the &apos;Type&apos; field in Opportunity to &apos;Business and Government&apos;.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the type to Charters in Opportunity</fullName>
+        <actions>
+            <name>Set_type_to_Charters</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Opportunity_Type_System__c</field>
+            <operation>equals</operation>
+            <value>Charters</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter,Agency Partnerships,Business and Government,GSA,SME Product,Sales Development,Charters,Future Planet,Group Sales,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <description>When a Lead (with opportunity Type selected as &apos;Charters&apos;) is converted to opportunity this workflow will set the &apos;Type&apos; field in Opportunity to &apos;Charters&apos;.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the type to GSA in Opportunity</fullName>
+        <actions>
+            <name>Set_type_to_GSA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Opportunity_Type_System__c</field>
+            <operation>equals</operation>
+            <value>GSA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter,Agency Partnerships,Business and Government,GSA,SME Product,Sales Development,Charters,Future Planet,Global opportunity,Group Sales,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <description>When a Lead (with opportunity Type selected as &apos;Sales Development&apos;) is converted to opportunity this workflow will set the &apos;Type&apos; field in Opportunity to &apos;Sales Development&apos;.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the type to SME Product in Opportunity</fullName>
+        <actions>
+            <name>Set_type_to_SME_Product</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Opportunity_Type_System__c</field>
+            <operation>equals</operation>
+            <value>SME Product</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter,Agency Partnerships,Business and Government,GSA,SME Product,Sales Development,Charters,Future Planet,Global opportunity,Group Sales,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <description>When a Lead (with opportunity Type selected as &apos;SME Product&apos;) is converted to opportunity this workflow will set the &apos;Type&apos; field in Opportunity to &apos;SME Product&apos;.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>To update the type to Sales Development in Opportunity</fullName>
+        <actions>
+            <name>Set_type_to_Sales_Development</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Opportunity_Type_System__c</field>
+            <operation>equals</operation>
+            <value>Sales Development</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter,Agency Partnerships,Business and Government,GSA,SME Product,Sales Development,Charters,Future Planet,Global opportunity,Group Sales,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <description>When a Lead (with opportunity Type selected as &apos;Sales Development&apos;) is converted to opportunity this workflow will set the &apos;Type&apos; field in Opportunity to &apos;Sales Development&apos;.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>qualtrics__Qualtrics Example Survey Rule</fullName>
+        <actions>
+            <name>qualtrics__Qualtrics_Example_Outbound_Message</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.IsClosed</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>An example of how to setup a rule to trigger a survey using an outbound message. 
+In this example when an opportunity is closed we want to email the opportunity and see how their interaction with the sales representative went.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

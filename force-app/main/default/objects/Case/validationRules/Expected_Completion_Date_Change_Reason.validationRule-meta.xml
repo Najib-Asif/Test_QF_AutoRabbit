@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expected_Completion_Date_Change_Reason</fullName>
+    <active>false</active>
+    <description>For General Dealing Enquiry, if Expected Completion Date is &lt; 5 days OR is change, Comments is mandatory</description>
+    <errorConditionFormula>AND(
+ RecordTypeId = &apos;01290000001MHAe&apos;, /*General Dealing Enquiry*/
+
+OR (
+ISCHANGED(Expected_Completion_Date__c), 
+Expected_Completion_Date__c - TODAY () &lt; 5),
+
+NOT($UserRole.Id = &apos;00E90000001P6KH&apos;),
+
+NOT($User.Id = &apos;00590000004hkhl&apos;),   
+
+NOT($Profile.Name = &quot;System Administrator&quot;), 
+
+NOT($Profile.Name = &quot;Qantas System Administrator&quot;), 
+
+NOT($Profile.Name = &quot;Qantas System Admin - Freight&quot;), 
+
+NOT($Profile.Name = &quot;Qantas System Admin - QCC&quot;), 
+
+NOT($Profile.Name = &quot;Qantas System Admin - SND&quot;), 
+
+ISPICKVAL (  Status , &quot;Not yet assigned - with Account Manager&quot;),
+
+ISBLANK (  Comments__c )
+
+)</errorConditionFormula>
+    <errorDisplayField>Comments__c</errorDisplayField>
+    <errorMessage>Standard expected completion date is 6 working days, please state the reasons if you require this request to be fulfilled earlier.</errorMessage>
+</ValidationRule>

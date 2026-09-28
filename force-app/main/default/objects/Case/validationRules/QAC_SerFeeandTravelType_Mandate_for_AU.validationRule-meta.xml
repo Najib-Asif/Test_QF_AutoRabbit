@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_SerFeeandTravelType_Mandate_for_AU</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(RecordType.DeveloperName ==&quot;QIC_Service_request&quot;, ISPICKVAL(Account.BillingCountryCode,&quot;AU&quot;),
+ISPICKVAL (Service_Fee_Applies__c, &quot;Yes - Apply&quot;),NOT(ISPICKVAL(Origin, &quot;QAC Website&quot;)),
+$Setup.EnableValidationRule__c.VR_QAC_Mandate_Service_Fee__c =False,
+ISBLANK(TEXT(Travel_Type__c)))</errorConditionFormula>
+    <errorMessage>Travel Type is mandatory for the AU Consultants</errorMessage>
+</ValidationRule>

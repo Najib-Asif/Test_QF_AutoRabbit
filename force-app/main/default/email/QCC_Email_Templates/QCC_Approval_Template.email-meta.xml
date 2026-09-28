@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>QCC: Contact centre Approval template</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QCC Approval Template</name>
+    <style>none</style>
+    <subject>Qantas Customer Care - Approval Request</subject>
+    <textOnly>Dear Approver,
+
+{!ApprovalRequest.Process_Assignee} has requested your approval for the following item:
+
+Case Type:  {!Recovery__c.Case_Type__c}
+
+Case Category: {!Recovery__c.Case_Category__c}
+
+Case Sub-Category: {!Recovery__c.Case_Sub_Category__c}
+
+Description: {!Recovery__c.Description__c} Recovery Type: {!Recovery__c.Type__c}
+
+Recovery Quantity: {!Recovery__c.Amount__c}
+
+Recovery Dollar Value : {!Recovery__c.Value__c}
+
+Please click here to approve or reject this record.
+
+Thank you,</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

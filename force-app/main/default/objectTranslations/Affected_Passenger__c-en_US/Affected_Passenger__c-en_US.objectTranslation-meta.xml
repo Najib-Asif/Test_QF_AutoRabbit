@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Passenger</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Passengers</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- QCC: Migrated passengers --></description>
+        <label><!-- QCC Migrated Passengers --></label>
+        <name>Migrated_Passengers</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Events are related to Event record --></description>
+        <label><!-- QCC EventPassenger --></label>
+        <name>QCC_EventPassenger</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Passenger selected for generation of the Insurance Letter --></description>
+        <label><!-- Insurance Letter --></label>
+        <name>QCC_InsuranceLetter</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Passenger for Offload Event --></description>
+        <label><!-- QCC Offload Passenger --></label>
+        <name>QCC_Offload_Passenger</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type to store the QAC Tradesite Passenger records --></description>
+        <label><!-- Service Request --></label>
+        <name>Service_Request</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- You cannot edit the Passenger record if Case Origin is &apos;QAC Website&apos;. --></errorMessage>
+        <name>QAC_Passenger_no_edit_for_QACWeb_case</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot edit the Passenger record if case status is Closed. --></errorMessage>
+        <name>QAC_Passenger_record_cannot_be_edited</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please reopen the case to add passengers --></errorMessage>
+        <name>QCC_AvoidCreatedIfCaseClosed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>
+            <!-- Ticket number is not in a valid format, enter the number in one of the following numeric formats: 
+XXX-XXXXXXXXXX OR 
+XXX-XXXXXXXXXX-XXX OR 
+XXX-XXXXXXXXXX-XX OR 
+XXXXXXXXXXXXX -->
+        </errorMessage>
+        <name>QCC_Check_Ticket_Number_Format</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the value for currency --></errorMessage>
+        <name>QCC_Currency_should_be_mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter only Numbers for Fare Total --></errorMessage>
+        <name>QCC_Fare_Total_should_allow_only_Numbers</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Passenger Record can&apos;t be Edited on a closed Flight Event. Please Re-Open the Flight Event to update Passenger Record. --></errorMessage>
+        <name>QCC_PreventPassengerUpdateOnClosedEvent</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Conga_Composer_Affected_Passenger --></label>
+        <name>Conga_Composer_Affected_Passenger</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Prevent_Updating_Inactive_Asset</fullName>
+    <active>true</active>
+    <description>To prevent editing Inactive assets</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Prevent_Updating_Inactive_Asset__c &amp;&amp; 
+(RecordType.DeveloperName =&apos;Public_Scheme&apos; || RecordType.DeveloperName =&apos;Corporate_Scheme&apos; ) &amp;&amp; 
+ISPICKVAL(PRIORVALUE(Status) ,&apos;Inactive&apos;)</errorConditionFormula>
+    <errorMessage>You are not Entitled to Change Inactive schemes.Please contact Administrator for further assistance.</errorMessage>
+</ValidationRule>

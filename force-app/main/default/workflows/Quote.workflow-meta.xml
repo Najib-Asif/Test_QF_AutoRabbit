@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_alert_for_Rate_Publish_to_Pricing_Support</fullName>
+        <ccEmails>freightpricing@qantas.com.au</ccEmails>
+        <description>Freight Email alert for Rate Publish to Pricing Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Freight_Pricing</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Publish_Rates</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_for_Rate_Publish_to_Pricing_Support_dom</fullName>
+        <ccEmails>freightpricing@qantas.com.au</ccEmails>
+        <description>Freight Email alert for Rate Publish to Dom Pricing Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Freight_Pricing</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Publish_Rates</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_for_Rate_Publish_to_Sales_Support</fullName>
+        <ccEmails>freightsalessupport@qantas.com.au</ccEmails>
+        <description>Freight Email alert for Rate Publish to Sales Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Freight_Pricing</recipient>
+            <type>group</type>
+        </recipients>
+        <recipients>
+            <recipient>katecoall@qantas.com.au</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Publish_Rates</template>
+    </alerts>
+    <alerts>
+        <fullName>Freight_Email_alert_for_Rate_Publish_to_Freighter_AKL</fullName>
+        <description>Freight Email alert for Rate Publish to Freighter AKL</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Freight_Pricing</recipient>
+            <type>group</type>
+        </recipients>
+        <recipients>
+            <recipient>katecoall@qantas.com.au</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Publish_Rates</template>
+    </alerts>
+    <alerts>
+        <fullName>Freight_Email_alert_for_Rate_Publish_to_Freighter_Team</fullName>
+        <description>Freight Email alert for Rate Publish to Freighter Team</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Freight_Pricing</recipient>
+            <type>group</type>
+        </recipients>
+        <recipients>
+            <recipient>katecoall@qantas.com.au</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Publish_Rates</template>
+    </alerts>
+    <alerts>
+        <fullName>Quote_Approval_outcome</fullName>
+        <description>Quote Approval outcome</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Quote_approval_outcome</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approval_submission</fullName>
+        <description>Approval Submission date on quote</description>
+        <field>Approval_Submission__c</field>
+        <formula>TODAY ()</formula>
+        <name>Approval submission</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved</fullName>
+        <field>Status</field>
+        <literalValue>Approved</literalValue>
+        <name>Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Chatter_Post_approval_post_quote</fullName>
+        <field>Chatter_Post__c</field>
+        <literalValue>1</literalValue>
+        <name>Chatter Post aft quote approval outcome</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Needs_Review</fullName>
+        <description>Freight Implementation: It requires approval.</description>
+        <field>Status</field>
+        <literalValue>Needs Review</literalValue>
+        <name>Needs Review</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Quote_Approved</fullName>
+        <field>Approval_Step__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Quote Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Quote_Recalled</fullName>
+        <field>Approval_Step__c</field>
+        <literalValue>Recalled</literalValue>
+        <name>Quote Recalled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Quote_Rejected</fullName>
+        <field>Approval_Step__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Quote Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Quote_Value</fullName>
+        <description>Neutralise the Quote Value for approval as its the pricing team which comes up with the price.</description>
+        <field>Amount__c</field>
+        <formula>1.00</formula>
+        <name>Quote Value</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Quote_back_to_Draft</fullName>
+        <field>Status</field>
+        <literalValue>Draft</literalValue>
+        <name>Quote back to Draft</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected</fullName>
+        <field>Status</field>
+        <literalValue>Rejected</literalValue>
+        <name>Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approval_submission_to_blank</fullName>
+        <description>Approval submission date back to blank in case of Recall</description>
+        <field>Approval_Submission__c</field>
+        <name>approval submission to blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

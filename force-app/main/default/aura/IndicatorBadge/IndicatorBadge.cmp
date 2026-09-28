@@ -1,0 +1,17 @@
+<aura:component >
+  <aura:attribute name="badge" type="Object" />
+  <UL>
+      <LI class="li-icon">
+           <!-- Need to fix this, icon background colours not getting retrieved from styling class -->
+        <lightning:icon iconName="{!v.badge.icon}" class="{! 'slds-box slds-box_x-small slds-align_absolute-center slds-size__1-of-1 '+v.badge.color}" alternativeText="{!v.badge.label}" title="{!v.badge.label}" padding="horizontal-medium"/>
+          </LI>      
+         <LI class="li-icon-label" style="text-align:center">
+             {!v.badge.label}
+               </LI>
+
+  </UL>
+    
+    <BR/>
+        <BR/>
+           <BR/>
+</aura:component>

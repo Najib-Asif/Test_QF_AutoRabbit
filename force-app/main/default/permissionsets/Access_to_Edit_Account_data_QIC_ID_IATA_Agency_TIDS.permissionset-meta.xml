@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Providing Edit access of Account record QIC ID, IATA#,  and Agency TIDS fields to below users.
+--Jira: CRM-3934</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Agency_TIDS_Number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.IATA_Number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Qantas_Industry_Centre_ID__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Access to Edit Account data  QIC ID IATA Agency TIDS</label>
+</PermissionSet>

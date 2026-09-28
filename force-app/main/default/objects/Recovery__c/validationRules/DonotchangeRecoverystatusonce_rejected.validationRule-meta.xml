@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DonotchangeRecoverystatusonce_rejected</fullName>
+    <active>true</active>
+    <description>QCC: Don&apos;t change Recovery Status when rejected</description>
+    <errorConditionFormula>AND( $Setup.EnableValidationRule__c.DonotchangeRecoverystatusonce_rejected__c,
+RecordType.DeveloperName = &apos;Customer_Connect&apos;, ISCHANGED(Status__c),
+OR(
+OR(Text(PRIORVALUE(Status__c)) = &apos;Rejected&apos;,
+OR(
+AND(OR(Text(Type__c)=&apos;Credit Card Refund&apos;, Text(Type__c)=&apos;EFT Refund&apos;), Text(PRIORVALUE(Status__c))=&apos;Submit for Finalisation&apos;,Text(Status__c)=&apos;Finalised&apos;, Text(Payment_Status__c)&lt;&gt; &apos;Approved&apos;
+),
+
+AND(OR(Text(Type__c)=&apos;Credit Card Refund&apos;, Text(Type__c)=&apos;EFT Refund&apos;), Text(PRIORVALUE(Status__c))=&apos;Submit for Finalisation&apos;, Text(Status__c)=&apos;Finalisation Declined&apos;, Text(Payment_Status__c)&lt;&gt; &apos;Declined&apos;
+)
+))
+,OR(AND(Text(Status__c)=&apos;Submit for Finalisation&apos;, 
+Text(PRIORVALUE(Status__c))=&apos;Awaiting Approval&apos;),
+AND(Text(Status__c)=&apos;Finalised&apos;, Text(Payment_Status__c)&lt;&gt; &apos;Approved&apos;,OR(Text(Type__c)=&apos;Credit Card Refund&apos;, Text(Type__c)=&apos;EFT Refund&apos;),
+Text(PRIORVALUE(Status__c))=&apos;Awaiting Approval&apos;) 
+)))</errorConditionFormula>
+    <errorMessage>Recovery Status can&apos;t be changed</errorMessage>
+</ValidationRule>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Unallocated_System_Admin_Request</fullName>
+    <booleanFilter>(1 or 4) AND 2 AND 3 AND 5</booleanFilter>
+    <columns>CASES.RECORDTYPE</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>Business_Unit_Case_Creater__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>Business_Unit_Case_Creater__c</field>
+        <operation>equals</operation>
+        <value>Freight</value>
+    </filters>
+    <filters>
+        <field>CASES.CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>12/31/2016 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.System_Admin_Request</value>
+    </filters>
+    <filters>
+        <field>CASES.SUBJECT</field>
+        <operation>contains</operation>
+        <value>Freight</value>
+    </filters>
+    <filters>
+        <field>CASES.CLOSED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Freight Unallocated System Admin Request</label>
+    <queue>Freight_Team_Queue</queue>
+    <sharedTo>
+        <group>Freight_Team</group>
+        <group>System_Admins</group>
+    </sharedTo>
+</ListView>

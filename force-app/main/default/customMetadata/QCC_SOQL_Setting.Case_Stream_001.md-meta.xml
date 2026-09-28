@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Case Stream 001</label>
+    <protected>false</protected>
+    <values>
+        <field>Batch_Size__c</field>
+        <value xsi:type="xsd:double">0.0</value>
+    </values>
+    <values>
+        <field>Filter_Condition__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Module_Name__c</field>
+        <value xsi:type="xsd:string">Case Stream</value>
+    </values>
+    <values>
+        <field>Query_String__c</field>
+        <value xsi:type="xsd:string">SELECT Id, QCC_TECH_Event_Type__c, CaseNumber, RecordType.Name, Owner.Name, Origin, Subject, Type, Priority, Status, Due_Date__c, Description, Comments__c, Contact.Name, Contact.MobilePhone, Contact.Email, Group__c, QCC_Dispute_Reason__c, QCC_Action_Items__c, Qantas_Host__r.Name, Category__c, Sub_Category__c, CreatedDate, LastModifiedDate, QCC_Flight_No__c, QCC_Dispute_Type__c, QCC_Departure_Date__c, Contact.Frequent_Flyer_Number__c FROM Case WHERE Id IN: caseIds</value>
+    </values>
+    <values>
+        <field>Target_Object__c</field>
+        <value xsi:type="xsd:string">Case</value>
+    </values>
+    <values>
+        <field>Target_Record_Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

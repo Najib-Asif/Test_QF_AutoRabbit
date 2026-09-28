@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Validate_AWB_MandatoryFields</fullName>
+    <active>false</active>
+    <description>To validate Port, Product, Commodity fields when AWB# is NULL- CRM 8456.
+Invalid Case Type  to not need required fields - CRM -8541.
+To Avoid Restriction For System Admin Updates and Automated Process-CRM-8859.</description>
+    <errorConditionFormula>AND(NOT (
+(CONTAINS(&apos;System Admin&apos;, $User.FirstName) &amp;&amp; CONTAINS(&apos;Updates&apos;, $User.LastName)) ||
+(CONTAINS(&apos;Automated&apos;, $User.FirstName) &amp;&amp; CONTAINS(&apos;Process&apos;, $User.LastName))
+),
+CONTAINS(RecordType.DeveloperName,&apos;Qantas_Freight&apos;),
+NOT(ISPICKVAL( Type , &apos;Invalid Case&apos;) ) ,NOT( ISPICKVAL( Freight_Resolve_Reason__c , &apos;Duplicate Case&apos;)), NOT(ISCHANGED( OwnerId )),   NOT(ISPICKVAL( Status , &apos;Closed&apos;)),  
+OR(AND(ISPICKVAL(Origin,&apos;FRT Phone&apos;), ISBLANK( Freight_AWB_Number__c ),OR( ISBLANK( Freight_Port__c ), ISBLANK(                       TEXT( Product__c ) ) )),
+AND(NOT(ISNEW()),ISBLANK( Freight_AWB_Number__c ),OR( ISBLANK( Freight_Port__c ), ISBLANK( TEXT( Product__c ) )),OR( ISPICKVAL(Origin, &apos;FRT Bookings&apos;), ISPICKVAL(Origin,&apos;FRT Claims&apos;), ISPICKVAL(Origin,&apos;FRT Cust Service&apos;),  ISPICKVAL(Origin,&apos;FRT Sales Support&apos;),ISPICKVAL(Origin,&apos;FRT Export Spl Moves&apos;),ISPICKVAL(Origin,&apos;FRT Spl Moves&apos;),ISPICKVAL(Origin,&apos;FRT Chat&apos;),ISPICKVAL(Origin,&apos;Web&apos;), ISPICKVAL(Origin,&apos;FRT Portal&apos;))
+)
+))</errorConditionFormula>
+    <errorMessage>Please enter Port, Product, Commodity fields to proceed</errorMessage>
+</ValidationRule>

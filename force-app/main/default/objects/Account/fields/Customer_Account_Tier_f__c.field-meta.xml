@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Account_Tier_f__c</fullName>
+    <description>Formula to display the tier icon</description>
+    <externalId>false</externalId>
+    <formula>IF(
+CONTAINS(UPPER(TEXT(Customer_Category__c )),&quot;GOLD&quot;),IMAGE(&quot;/resource/QACTierGold&quot;, &apos;QACTierGold&apos;, 35, 105),
+IF(
+CONTAINS(UPPER(TEXT(Customer_Category__c )),&quot;SILVER&quot;),IMAGE(&quot;/resource/QACTierSilver&quot;, &apos;QACTierSilver&apos;, 35, 105),
+IF(
+CONTAINS(UPPER(TEXT(Customer_Category__c )),&quot;BRONZE&quot;),IMAGE(&quot;/resource/QACTierBronze&quot;, &apos;QACTierBronze&apos;, 35, 105),
+IF(
+CONTAINS(UPPER(TEXT(Customer_Category__c )),&quot;WHITE&quot;),IMAGE(&quot;/resource/QACTierWhite&quot;, &apos;QACTierWhite&apos;, 35, 105),
+IF(
+CONTAINS(UPPER(TEXT(Customer_Category__c )),&quot;RED&quot;),IMAGE(&quot;/resource/QACTierRed&quot;, &apos;QACTierRed&apos;, 35, 105),
+IF(
+CONTAINS(UPPER(TEXT(Customer_Category__c )),&quot;PLATINUM&quot;),IMAGE(&quot;/resource/QACTierPlatinum&quot;, &apos;QACTierPlatinum&apos;, 35, 105),
+&quot;&quot;)
+)
+)
+)
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tier</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

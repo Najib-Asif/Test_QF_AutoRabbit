@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$RecordType</field>
+    </columns>
+    <columns>
+        <field>Case.EmailMessages$ToAddress</field>
+    </columns>
+    <columns>
+        <field>Case.EmailMessages$FromAddress</field>
+    </columns>
+    <columns>
+        <field>Case$Description</field>
+    </columns>
+    <columns>
+        <field>Case.EmailMessages$TextBody</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Case.EmailMessages$TextBody</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>unprecedented volume of cases</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Accommodation/Reimbursement of Expenses</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>(for Meals),(for Transport),(for Accomodation),(for Accommodation)</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$CaseNumber</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>GW - Unprecedented Volume of Cases</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Emails__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <endDate>2025-03-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2024-10-03</startDate>
+    </timeFrameFilter>
+</Report>

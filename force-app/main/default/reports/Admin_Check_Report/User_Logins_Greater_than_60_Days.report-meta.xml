@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_98885903</developerName>
+        <masterLabel>Business_c</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>User.Profile_Name__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas CC Consultant</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Customer Specific Needs</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Journey Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Operational Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Team Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Pre Journey CC Consultant</sourceValue>
+            </sourceValues>
+            <value>Contact Centre</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas Freight Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Freight Service</sourceValue>
+            </sourceValues>
+            <value>Freight</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QAC API Integration Profile</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Agency Connect Help and Support Profile</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Service Lightning</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL_Qantas_Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL_Qantas_US_Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL GSA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL Qantas Service</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL Qantas Vendor</sourceValue>
+            </sourceValues>
+            <value>Sales</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas Loyalty</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Loyalty -Commercial Sales</sourceValue>
+            </sourceValues>
+            <value>Loyalty</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_46708317</developerName>
+        <masterLabel>Type</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>LICENSE_TYPE</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Standard</sourceValue>
+            </sourceValues>
+            <value>Full Salesforce License</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PowerPartner</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PowerCustomerSuccess</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CustomerSuccess</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Guest</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CspLitePortal</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CsnOnly</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>SelfService</sourceValue>
+            </sourceValues>
+            <value>Chatter</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>BucketField_46708317</field>
+    </columns>
+    <columns>
+        <field>PROFILE</field>
+    </columns>
+    <columns>
+        <field>User.Business_Unit__c</field>
+    </columns>
+    <columns>
+        <field>User.Position__c</field>
+    </columns>
+    <columns>
+        <field>USERNAME</field>
+    </columns>
+    <columns>
+        <field>ACTIVE</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>LAST_LOGIN</field>
+    </columns>
+    <columns>
+        <field>DIVISION</field>
+    </columns>
+    <columns>
+        <field>User.Qantas_Staff_ID__c</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <columns>
+        <field>USER_ID</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Including Chatter/ Full License</description>
+    <filter>
+        <criteriaItems>
+            <column>LAST_LOGIN</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>LAST_N_DAYS:60</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CREATED_DATE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>LAST_N_DAYS:30</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>LICENSE_TYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>S</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User.Business_Unit__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Platform</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User.Qantas_Staff_ID__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>111111</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_98885903</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ROLE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>User Logins Greater than 60 Days</name>
+    <params>
+        <name>active</name>
+        <value>active</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>User</reportType>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <sortColumn>BucketField_46708317</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>LAST_LOGIN</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

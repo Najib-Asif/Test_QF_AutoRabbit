@@ -1,0 +1,308 @@
+<!-- 
+	Created By : Abhijeet | TCS | Cloud Developer. 
+    Purpose : To fetch Booking information from CAP System based on Passenger's PNR and Lastname
+	Modified By : Ajay (To add error message on page and to set focus on those error fields
+	Modified By : Vinoth (CRM - 4082 : To add Service Fee Applies and Service Fee Reason on the Page)
+-->
+
+<aura:component controller="QAC_PNRSearch_Controller" 
+                implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes"
+                access="global">
+    
+    <aura:attribute name="recordTypeId" type="String"/>
+    <aura:attribute name="pnrInformation" type="object"/>
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:attribute name="refreshFlag" type="boolean" default="false"/>
+    <aura:attribute name="resetForm" type="boolean"/>
+    <aura:attribute name="userInfo" type="user"/>
+    <aura:attribute name="accountId" type="String"/>
+    
+    <lightning:navigationItemAPI aura:id="navigationItemAPI"/>    
+    
+    <aura:registerEvent name="bubblingEvent" type="c:QAC_NavigateEvent" />
+    <aura:handler event="c:QAC_DataSharingEvent" action="{!c.handleApplicationEvent}"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <!-- Method used by parent for resetting form-->
+    <aura:method name="resetFields" action="{!c.resetCaseFields}" />
+    <aura:attribute name="requiredFieldsMap" type="Map"/>
+    
+    <aura:attribute name="srActiveSections" type="List" default="['SR_A','SR_B','SR_C','SR_D','SR_E','SR_F']" />
+    
+    <div class="slds-box slds-theme_default c-container">
+        <div class="slds-p-around_large" style="width:70%;margin: 0 auto">
+            
+            <aura:if isTrue="{!v.resetForm}">
+                <lightning:recordEditForm aura:id="editFormSR" 
+                                          objectApiName="Case"
+                                          onsuccess="{!c.handleSuccess}"
+                                          onerror="{!c.handleErrors}"
+                                          recordTypeId="{!v.recordTypeId}"
+                                          >
+                    
+                    <lightning:messages />
+                    
+                    <lightning:accordion aura:id="accordionSR"
+                                         allowMultipleSectionsOpen="true"
+                                         activeSectionName="{! v.srActiveSections }">
+                        
+                        <div class="slds-p-around_large slds-box">
+                            
+                            <lightning:accordionSection name="SR_A" label="Case Information">
+                                
+                                <lightning:layout multipleRows="true">
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:input name="Case Owner" disabled="true" value="{!v.userInfo.Name}" label="Case Owner" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Status" disabled="true" value="New"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:input name="Case Number" disabled="true" value="" label="Case Number" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="On_hold_Reason__c" label="Account"  disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Origin" value="Phone" disabled="true" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Priority" value="Medium" disabled="true" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="QAC_Request_Country__c"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6"> 
+                                        <lightning:inputField fieldName="Type" onchange="{!c.onChangeType}" aura:id="requiredFields" />    
+                                        <div tabindex="-1" id="Type" aura:id="Type" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField aura:id="srAccountId" fieldName="AccountId" label="Account Name" />
+                                        <div tabindex="-1" id="Accounterr" aura:id="Accounterr" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">                                 
+                                        <lightning:inputField aura:id="requiredFields" fieldName="Problem_Type__c"/>
+                                        <div tabindex="-1" id="Problem_Type__c" aura:id="Problem_Type__c" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Corporate_Organisation__c"/>
+                                    </lightning:layoutItem>
+                                    <aura:if isTrue="{!v.refreshFlag}">
+                                        <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                            <lightning:inputField fieldName="Waiver_Sub_Type__c"/>
+                                        </lightning:layoutItem>
+                                    </aura:if>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Authority_Status__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Reason_for_Waiver__c"/>
+                                        <!-- <div tabindex="-1" id="Reason_for_Waiver__c" aura:id="Reason_for_Waiver__c" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div> -->
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Authority_Number_F__c" />
+                                    </lightning:layoutItem>
+                                    <aura:if isTrue="{!v.refreshFlag}">
+                                        <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                            <lightning:inputField fieldName="Request_Reason_Sub_Type__c"/>
+                                        </lightning:layoutItem>
+                                    </aura:if>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Service_Request_Number__c" disabled="true" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Request_Reason_Others__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="ParentId"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Condition_Met__c" aura:id="requiredFields"/>
+                                        <div tabindex="-1" id="Condition_Met__c" aura:id="Condition_Met__c" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="CurrencyIsoCode" />
+                                    </lightning:layoutItem>                            
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Approve__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Paid_Service__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Cost_of_Sale__c" aura:id="requiredFields" />
+                                        <div tabindex="-1" id="Cost_of_Sale__c" aura:id="Cost_of_Sale__c" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div>
+                                    </lightning:layoutItem>
+									<lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Service_Fee_Applies__c" />
+                                    </lightning:layoutItem>
+									<lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Service_Fee_Reason__c" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </lightning:accordionSection>
+                        </div>
+                        
+                        <div class="slds-p-around_large slds-box">
+                            <lightning:accordionSection name="SR_B" label="Booking Information - Primary">
+                                <lightning:layout multipleRows="true">
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="PNR_number__c" value="{!v.pnrInformation.caseFields.pnrNumber}" disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:input value="{!v.pnrInformation.caseFields.gdsValue}" label="GDS" disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Passenger_Name__c" value="{!v.pnrInformation.caseFields.passengerName}" disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="PCC_DI__c" value="{!v.pnrInformation.pointSales.pointOfSales.creatorDetails.inHouseIdentification}" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Ticket_Number__c" disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Travel_Type__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Group_Booking_Number__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Old_PNR_Number__c" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </lightning:accordionSection>
+                        </div>
+                        
+                        <div class="slds-p-around_large slds-box">
+                            <lightning:accordionSection name="SR_C" label="Booking Information - Others">
+                                <lightning:layout multipleRows="true">
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Region_Code__c"  />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Fare_Type__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Fare_basis_value__c"  />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Private_Fare_Basis__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Waiver_Date__c"  />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="GDS_Job_Reference__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Number_of_Passengers__c" value="{!v.pnrInformation.caseFields.passengerCount}" disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="First_Flight_Date__c" value="{!v.pnrInformation.caseFields.firstFligtDate}" aura:id="requiredFields"/>
+                                        <div tabindex="-1" id="First_Flight_Date__c" aura:id="First_Flight_Date__c" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div>                                    
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Customer_Tier__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="flight_itinerary__c" value="{!v.pnrInformation.caseFields.firstFligtNumber}" aura:id="requiredFields"/>
+                                        <div tabindex="-1" id="flight_itinerary__c" aura:id="flight_itinerary__c" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                                            Complete this field.
+                                        </div>                                    
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                    </lightning:layoutItem>                            
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Ticketing_Time_Limit__c" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </lightning:accordionSection>
+                        </div>
+                        
+                        <div class="slds-p-around_large slds-box">
+                            <lightning:accordionSection name="SR_D" label="Booking Information - Corporate/Agency">
+                                <lightning:layout multipleRows="true">
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="ABN_Tax_Reference__c" value="{!v.pnrInformation.caseFields.abnNumber}" disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="IATA__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Qantas_Corporate_Identifier__c" value="{!v.pnrInformation.caseFields.qciCode}" disabled="true"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </lightning:accordionSection>
+                        </div>
+                        
+                        <div class="slds-p-around_large slds-box">
+                            <lightning:accordionSection name="SR_E" label="Justification">
+                                <lightning:layout >
+                                    <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12"> <!--  -->
+                                        <lightning:inputField fieldName="Subject" />
+                                    </lightning:layoutItem>
+                                </lightning:layout >
+                                <lightning:layout >
+                                    <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12">
+                                        <lightning:inputField fieldName="Description" />
+                                    </lightning:layoutItem>
+                                </lightning:layout >
+                                <lightning:layout >
+                                    <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12">
+                                        <lightning:inputField fieldName="Additional_Requirements__c" />
+                                    </lightning:layoutItem>
+                                </lightning:layout >
+                            </lightning:accordionSection>
+                        </div>
+                        
+                        <div class="slds-p-around_large slds-box">
+                            <lightning:accordionSection name="SR_F" label="Travel Agent Information">
+                                <lightning:layout multipleRows="true">
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Consultants_Name__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        <lightning:inputField fieldName="Consultant_Phone__c" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="ContactId" label="Contact Name"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+                                        <lightning:inputField fieldName="Consultant_Email__c" />
+                                    </lightning:layoutItem>
+                                </lightning:layout >
+                            </lightning:accordionSection>
+                        </div>
+                    </lightning:accordion>
+                </lightning:recordEditForm>
+                <lightning:layout class="slds-align_absolute-center slds-p-around_xx-large slds-text-heading_small">
+                    <lightning:button variant="brand" label="Back" onclick="{!c.handleBack}"/>
+                    <lightning:button variant="brand" label="Submit" onclick="{!c.handleInsert}"/>
+                </lightning:layout>
+            </aura:if>
+        </div>
+    </div>
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-spinner_container slds-is-fixed"> 
+            <lightning:spinner aura:id="spinner" variant="brand" alternativeText="Please wait momentarily, Your will be shortly redirected to case."/>
+        </div>
+    </aura:if>
+    
+</aura:component>

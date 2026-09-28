@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Incremental_is_Mandatory</fullName>
+    <active>true</active>
+    <description>When Case = Sales Offers Request, Incremental is mandatory except for Type = Survey, Adhoc</description>
+    <errorConditionFormula>AND (
+ RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/
+ NOT ( $User.UserRoleId = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/
+ ISBLANK (  Incremental_Revenue__c ),
+ NOT ( ISPICKVAL ( Type , &quot;Survey&quot;)),
+ NOT ( ISPICKVAL ( Type , &quot;Adhoc&quot;)))</errorConditionFormula>
+    <errorDisplayField>Incremental_Revenue__c</errorDisplayField>
+    <errorMessage>For Sales Offers, you will need to populated the Incremental Revenue ($) field</errorMessage>
+</ValidationRule>

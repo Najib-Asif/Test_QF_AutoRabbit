@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Address_to_be_populated</fullName>
+    <active>true</active>
+    <description>Address is mandatory for Insurance Cases</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_QCC_Address_to_be_populated__c,TEXT(Type)=&apos;Insurance Letter&apos;, 
+OR(
+NOT(AND(ISNEW(),OR(TEXT(Origin)=&apos;Qantas.com&apos;,TEXT(Origin)=&apos;Webchat&apos;))), 
+AND(TEXT(Origin)&lt;&gt; &apos;Qantas.com&apos;,TEXT(Origin)&lt;&gt; &apos;Webchat&apos;)),
+NOT(AND(ISCHANGED(OwnerId), OR(BEGINS(PRIORVALUE(OwnerId),&apos;00G&apos;),BEGINS(OwnerId,&apos;00G&apos;)))
+),
+OR(ISBLANK(Street__c),ISBLANK(Post_Code__c),ISBLANK(TEXT(Country__c))))</errorConditionFormula>
+    <errorMessage>Address details required for Insurance Letter (Street Address, Post Code &amp; Country)</errorMessage>
+</ValidationRule>

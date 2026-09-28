@@ -1,0 +1,24 @@
+<center><img src="/resource/QantasLetterheadUpdated" alt="QantasLetterhead" /> <br/> <br/> </center>
+
+Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},
+<br/>
+<br/>
+As a Qantas First customer, we’re dedicated to overseeing your Qantas travel and ensuring that you have the smoothest journey possible. 
+<br/>
+<p>
+As part of the Qantas First Experience, we’d like to know if you require Qantas Porter Assistance for your luggage at the airport prior to your departure, or if you'd like to enquire about an appointment in the Qantas First Lounge Spa before your flight. <br/>
+<p>If you would like to take up either of these Exclusive VIP Services, please respond to this email before 4pm the day prior to your departure and include the service you’d like to enquire about and the best contact phone number. One of our Relationship Specialists will then contact you to assist.</p>
+Warm regards,<br/>
+Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team
+<br/>
+{!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "World Wide +61 (2) 6250 8204", IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Platinum One" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge Platinum One" || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c ="FFLP" ,"World Wide +61 1300 752 801","vipserviceteam@qantas.com.au"))}
+<br>
+<!--END: THIS SECTION WILL SHOW CUSTOMER OTHER SERVICES -->
+<img src="/resource/QantasFooter" alt="QantasFooter" />
+<br>
+<br>
+--------------------------------------------------------------------<br>
+<font size ="4">Important Information </font><br/>
+<font size ="2"><p>The Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team monitors travel on Qantas operated flights and this communication is sent for Qantas International flights only. Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team does all possible to secure the preferred seat requests however it cannot be guaranteed as seats may need to be changed for operational, safety or security reasons, even after boarding the aircraft. For through flights, travel preferences are displayed for the first flight sector only. Porter Service and Spa appointments are subject to availability and we apologise in advance if the service is at capacity at the time of enquiry. Guests must be 18 years or older to access the Qantas Spa.  <a href="https://www.qantas.com/au/en/travel-info/seat-selection/seat-selection-conditions.html">View full terms</a> and conditions for seat selection and <a href="https://www.qantas.com/au/en/travel-info/specific-needs.html">view full terms and conditions for Specific Needs</a>  including meal and assistance during your journey. The Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Services offered are non transferable. </p></font>
+
+<font color="white">Ref#{!QCC_First_Host__c.Name}</font>

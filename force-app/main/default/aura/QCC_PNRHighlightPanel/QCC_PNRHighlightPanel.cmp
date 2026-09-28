@@ -1,0 +1,35 @@
+<aura:component controller = "QCC_PNRHighlightPanelController" access="global">
+    <aura:attribute name="isContactPage" type="Boolean"/> 
+    <aura:attribute name="isShowButton" type="Boolean"/>
+    <aura:attribute name="ardURL" type="String"/> 
+    <aura:attribute name="isEnabled" type="Boolean"/> 
+    <!--Added for ADT-23 -->
+    <aura:attribute name="pnr" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- End For ADT-23 -->
+    <aura:registerEvent name="createCaseEvent" type="c:QCC_PNRCaseCreationEvent"/>
+    <aura:registerEvent name="addToCaseEvent" type="c:QCC_PNRAddtoCaseEvent"/>
+    <aura:method name="highlightMethod" action="{!c.getButtonDetails}"> 
+        <aura:attribute name="isContactPage" type="Boolean"/> 
+        <aura:attribute name="isDisable" type="Boolean"/> 
+    </aura:method>
+    <lightning:card >
+        <aura:set attribute="title">
+            Booking Details
+        </aura:set>
+        
+        <aura:set attribute="actions">
+            <!--Added new button for ADT-23 -->
+            <aura:renderIf isTrue="{!v.isEnabled}">
+            	<lightning:button label="Open Booking in ARD Web" onclick="{!c.redirectToARD}" />
+            </aura:renderIf>
+            <!-- End For ADT-23 -->
+            <aura:renderIf isTrue="{!v.isContactPage}">
+                <lightning:button label="Create Case" disabled="{!v.isShowButton}" onclick="{!c.createCase}" />
+                <aura:set attribute="else">
+                    <lightning:button label="Add to Case" onclick="{!c.addtoCase}" />
+                </aura:set>
+            </aura:renderIf>
+        </aura:set>
+    </lightning:card>
+</aura:component>

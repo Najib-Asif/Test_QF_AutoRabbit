@@ -1,0 +1,101 @@
+<aura:component >
+    <aura:attribute name="flightInfo" type="Object[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="disable" type="Boolean" default="false"/>
+    <aura:method name="flightMethod" action="{!c.getFlightDetails}"> 
+        <aura:attribute name="flightDetail" type="Object[]"/> 
+    </aura:method>
+    <aura:method name="flightSelected" action="{!c.highlightFlight}"> 
+        <aura:attribute name="segmentTattoo" type="String"/> 
+    </aura:method>
+    <aura:registerEvent name="flightEvent" type="c:QCC_PNRFlightEvent"/>
+    <aura:registerEvent name="flightHistoryEvent" type="c:QCC_PNRFlightHistoryEvent"/>
+    
+    <lightning:card >
+        <div class="slds-align_absolute-center">
+        <lightning:button variant="neutral" label="Get Flight History" disabled="{!v.disable}" onclick="{!c.showInfo}" />
+        </div>     
+        
+        <aura:renderIf isTrue="{!v.disable}">
+            <br/>
+            &nbsp;&nbsp;&nbsp;
+        <lightning:icon class="slds-media_center" iconName="custom:custom20" size="small" alternativeText="Flights(History)"/>
+        <b>
+			&nbsp;&nbsp;
+            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+            <span class="slds-text-heading_small">Flights(History)</span>
+            </a>
+        </b>
+            <br/>
+        <aura:renderIf isTrue="{!empty(v.flightInfo)}">
+            
+        
+		<!--
+             <h2>
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                        <span class="slds-text-heading_small">Flights(History)</span>
+                    </a>
+                </h2> -->
+            <br/>
+            <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg}</div>
+            <aura:set attribute="else">
+                <!--<lightning:datatable hideCheckboxColumn="true" data="{!v.flightInfo}" columns="{!v.mycolumns}" keyField="segmentId" 
+                                     onrowselection="{! c.getSelectedName }" />-->
+                &nbsp;
+                <table class="slds-table slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout slds-has-focus">
+                    <!--Table must be responsive-->
+                    <thead>
+                        <tr class="slds-text-title_caps slds-line-height_reset">
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Airline">Airline</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Flight Number">Flight Number</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Departure Date">Departure Date</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Departure Port">Departure Port</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Arrival Port">Arrival Port</div>
+                            </th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        <!--Added by Bharath for PNR Issue Functionality-->
+                        <aura:iteration items="{!v.flightInfo}" var="item" indexVar="i">                            
+                             <!--<tr class="slds-hint-parent record onhover" id ="{!(item.segmentTattoo)}" data-record="{!item.segmentTattoo}" onclick="{!c.getSelectedName}">-->
+                                  <tr class="slds-hint-parent record onhover" id ="{!(item.segmentTattoo+'abc')}" data-record="{!item.segmentTattoo}" onclick="{!c.getSelectedName}">
+                                <td data-label="Airline">
+                               
+                                    <div  class="slds-truncate">{!item.operatingCarrierAlphaCode}</div>
+                                </td>
+                                <td data-label="Flight Number">
+                                    <div  class="slds-truncate">{!item.operatingFlightNumber}</div>
+                                </td>
+                                <td data-label="Depature Date">
+                                    <div  class="slds-truncate">{!item.departureLocalDate}</div>
+                                </td>
+                                <td data-label="Depature Port">
+                                    <div  class="slds-truncate">{!item.departureAirportCode}</div>
+                                </td>
+                                <td data-label="Arrival Port">
+                                    <div  class="slds-truncate">{!item.arrivalAirportCode}</div>
+                                </td>
+                             </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </aura:set>
+        </aura:renderIf>
+        </aura:renderIf>
+        <div class="slds-spinner_container slds-hide" aura:id="spinner">
+            <div class="slds-spinner--brand slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </lightning:card>
+</aura:component>

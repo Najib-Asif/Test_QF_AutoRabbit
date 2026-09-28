@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ArrivalDelayinHRSandMIN__c</fullName>
+    <description>QCC: Arrival Delay in Hrs and MIN</description>
+    <externalId>false</externalId>
+    <formula>IF (TechArrivalDelayDuration__c &gt; 0, 
+TEXT( FLOOR( 24 * TechArrivalDelayDuration__c)) &amp; &quot; Hrs &quot; &amp; 
+TEXT( ROUND(60 * (ROUND( 24 * (TechArrivalDelayDuration__c - FLOOR(TechArrivalDelayDuration__c) ),8) - FLOOR( 
+ROUND( 24 * (TechArrivalDelayDuration__c - FLOOR(TechArrivalDelayDuration__c) ),8)) ),0)) &amp; &quot; Mins &quot; 
+, &quot;No Arrival Delay&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Arrival Delay Length</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

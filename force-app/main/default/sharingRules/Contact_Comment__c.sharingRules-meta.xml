@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>QCC_Share_Contact_Comment_to_all_in_QCC</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>QCC: Share read access to everyone in QF-QDC role</description>
+        <label>QCC Share Contact Comment to all in QCC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>QCC_Share_edit_access_to_OM</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: Share edit access to QF-QDC-OM</description>
+        <label>QCC Share edit access to OM</label>
+        <sharedTo>
+            <role>QF_QDC_OM</role>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

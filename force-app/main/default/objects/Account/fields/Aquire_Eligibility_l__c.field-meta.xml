@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aquire_Eligibility_l__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Aquire__c &amp;&amp; Aquire_Eligibility_f__c == &apos;Y&apos;,IMAGE(&quot;/resource/Aquire&quot;,&quot;Aquire_Logo&quot;,30, 50),&quot;&quot;)&amp;&quot; &quot;&amp;
+IF( AMEX__c &amp;&amp; AMEX_response_Code__c != &apos;&apos; &amp;&amp; AMEX_response_Code__c != &apos;I&apos;,IMAGE(&quot;/resource/Amex&quot;,&quot;Amex_Logo&quot;,30, 45),&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Eligibile for</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

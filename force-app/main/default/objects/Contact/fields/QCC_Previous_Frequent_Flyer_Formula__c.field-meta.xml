@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Previous_Frequent_Flyer_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT( QCC_Previous_Frequent_Flyer__c ),
+&quot;FFPO&quot;, &quot;In the meantime, as a Platinum One member, you can continue to use your existing membership card to receive your full Platinum One benefits.&quot;,
+&quot;CLPO&quot;, &quot;In the meantime, as a Chairmans Lounge member, you can continue to use your existing membership card to receive your full Chairmans Lounge benefits.&quot;,
+&quot;FFPL&quot;,&quot;In the meantime, you can continue to use your existing Platinum Frequent Flyer card to continue receiving full Platinum benefits.&quot;,
+&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>QCC Previous Frequent Flyer Formula</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

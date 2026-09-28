@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_a_Call_URL__c</fullName>
+    <externalId>false</externalId>
+    <formula>if( (Log_call_url__c!=&apos;&apos; &amp;&amp; Log_call_url__c!=null) ,HYPERLINK( &apos;/&apos;+Log_call_url__c ,
+ &apos;https://qantas.my.salesforce.com/&apos;+Log_call_url__c , &quot;_Parent&quot;),&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>If you want to do a new log a call then use the button else for updates use this link to amend the call notes of an existing log a call.</inlineHelpText>
+    <label>Log a Call URL</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

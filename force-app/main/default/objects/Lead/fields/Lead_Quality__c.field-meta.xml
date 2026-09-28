@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Quality__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Data_Quality_Score_for_All__c &lt;=20, IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/onestar&apos;, &apos;One Star&apos;),
+IF(Data_Quality_Score_for_All__c&lt;=50, IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/twostars&apos;, &apos;Two Stars&apos;), 
+IF(Data_Quality_Score_for_All__c&lt;=75, IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/threestars&apos;, &apos;Three Stars&apos;),
+IF(Data_Quality_Score_for_All__c&lt;100, IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/fourstars&apos;, &apos;Four Stars&apos;),
+IMAGE(&apos;https://qantas--c.ap1.visual.force.com/resource/1469693900000/fivestars&apos;,&apos;Five Stars&apos; )))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Lead Quality</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

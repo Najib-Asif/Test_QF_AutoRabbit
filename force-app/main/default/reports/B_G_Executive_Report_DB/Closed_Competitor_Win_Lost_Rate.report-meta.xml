@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>RowCount</calculatedFormula>
+        <datatype>currency</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel># of Opportunities</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>Opportunity.RFP_RFT__c:SUM</calculatedFormula>
+        <datatype>currency</datatype>
+        <developerName>FORMULA2</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>RFP/ RFT</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>Opportunity.Number_of_Opportunities__c:SUM / PARENTGROUPVAL(Opportunity.Number_of_Opportunities__c:SUM , GRAND_SUMMARY)</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA3</developerName>
+        <downGroupingContext>Account.Opportunities$StageName</downGroupingContext>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Conversion Ratio (%)</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_61541955</developerName>
+        <masterLabel>Teams</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account.Opportunities$Owner.Reporting_Team__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>B&amp;G - Business - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Business Development - Yosu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Government - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - National Manager - Business - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - National Manager - Development &amp; New Business - Yosu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - New Business - Yosu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Darren) - Dean</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Paul) - Dean</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Tim) - Dean</sourceValue>
+            </sourceValues>
+            <value>B&amp;G</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QIS - Acquisition and Growth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS - Retention and Growth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS - Senior Manager</sourceValue>
+            </sourceValues>
+            <value>QIS</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>FORMULA3</column>
+        </chartSummaries>
+        <chartType>VerticalColumn</chartType>
+        <enableHoverLabels>true</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>Account.Opportunities$StageName</groupingColumn>
+        <location>CHART_BOTTOM</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>Account.Opportunities$Owner</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Amount</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Proposed_Market_Share__c</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Proposed_International_Market_Share__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Incremental_Revenue__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Number_of_Opportunities__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account.Opportunities$StageName</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Closed - Accepted,Closed - Not Accepted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Owner.Reporting_Team__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>B&amp;G,QIS - Acquisition,QIS - Retention,QIS - Senior Manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Type</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Business and Government</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Competitor_Contract__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Sub_Type_Level_2__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Renewal,New Contract</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Opportunities$StageName</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Closed Competitor Win/Lost Rate</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_Opportunities__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account.Opportunities$CloseDate</dateColumn>
+        <interval>INTERVAL_CURFY</interval>
+    </timeFrameFilter>
+</Report>

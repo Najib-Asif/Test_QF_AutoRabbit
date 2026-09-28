@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Domestic_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( OR ( AND ( CONTAINS( O_D_Pair__c , &quot;ADL&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;PLO&quot;), CONTAINS( O_D_Pair__c , &quot;WYA&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;ASP&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;AYQ&quot;), CONTAINS( O_D_Pair__c , &quot;CNS&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;AYQ&quot;), CONTAINS( O_D_Pair__c , &quot;CNS&quot;)),
+AND ( CONTAINS( O_D_Pair__c , &quot;LRE&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;BCI&quot;), CONTAINS( O_D_Pair__c , &quot;BKQ&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;BNE&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;ASP&quot;), CONTAINS( O_D_Pair__c , &quot;BCI&quot;),CONTAINS( O_D_Pair__c , &quot;BDB&quot;),CONTAINS( O_D_Pair__c , &quot;BKQ&quot;),CONTAINS( O_D_Pair__c , &quot;CTL&quot;),CONTAINS( O_D_Pair__c , &quot;EMD&quot;),
+CONTAINS( O_D_Pair__c , &quot;GLT&quot;),CONTAINS( O_D_Pair__c , &quot;HTI&quot;),CONTAINS( O_D_Pair__c , &quot;HVB&quot;),CONTAINS( O_D_Pair__c , &quot;LDH&quot;),CONTAINS( O_D_Pair__c , &quot;LRE&quot;),CONTAINS( O_D_Pair__c , &quot;MKY&quot;),CONTAINS( O_D_Pair__c , &quot;MOV&quot;),
+CONTAINS( O_D_Pair__c , &quot;NTL&quot;),CONTAINS( O_D_Pair__c , &quot;RMA&quot;),CONTAINS( O_D_Pair__c , &quot;ROK&quot;),CONTAINS( O_D_Pair__c , &quot;ZBL&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;CNJ&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;ISA&quot;), CONTAINS( O_D_Pair__c , &quot;TSV&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;CNS&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;HID&quot;), CONTAINS( O_D_Pair__c , &quot;HTI&quot;),CONTAINS( O_D_Pair__c , &quot;TSV&quot;),CONTAINS( O_D_Pair__c , &quot;WEI&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;CTL&quot;), CONTAINS( O_D_Pair__c , &quot;RMA&quot;)),
+AND ( CONTAINS( O_D_Pair__c , &quot;DRW&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;ASP&quot;), CONTAINS( O_D_Pair__c , &quot;CNS&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;ISA&quot;), CONTAINS( O_D_Pair__c , &quot;TSV&quot;)),
+AND ( CONTAINS( O_D_Pair__c , &quot;LDH&quot;), CONTAINS( O_D_Pair__c , &quot;PQQ&quot;)),
+AND ( CONTAINS( O_D_Pair__c , &quot;MEL&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;CFS&quot;), CONTAINS( O_D_Pair__c , &quot;DPO&quot;),CONTAINS( O_D_Pair__c , &quot;HBA&quot;),CONTAINS( O_D_Pair__c , &quot;LST&quot;),CONTAINS( O_D_Pair__c , &quot;MQL&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;MKY&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;ROK&quot;), CONTAINS( O_D_Pair__c , &quot;TSV&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;PER&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;ASP&quot;), CONTAINS( O_D_Pair__c , &quot;GET&quot;),CONTAINS( O_D_Pair__c , &quot;LEA&quot;),CONTAINS( O_D_Pair__c , &quot;PBO&quot;))),
+AND ( CONTAINS( O_D_Pair__c , &quot;SYD&quot;), OR ( CONTAINS( O_D_Pair__c , &quot;ABX&quot;), CONTAINS( O_D_Pair__c , &quot;ARM&quot;),CONTAINS( O_D_Pair__c , &quot;CBR&quot;),CONTAINS( O_D_Pair__c , &quot;CFS&quot;),CONTAINS( O_D_Pair__c , &quot;DBO&quot;),CONTAINS( O_D_Pair__c , &quot;HBA&quot;)
+,CONTAINS( O_D_Pair__c , &quot;HVB&quot;),CONTAINS( O_D_Pair__c , &quot;LDH&quot;),CONTAINS( O_D_Pair__c , &quot;MCY&quot;),CONTAINS( O_D_Pair__c , &quot;MRZ&quot;),CONTAINS( O_D_Pair__c , &quot;PQQ&quot;),CONTAINS( O_D_Pair__c , &quot;TMW&quot;),CONTAINS( O_D_Pair__c , &quot;WGA&quot;),CONTAINS( O_D_Pair__c , &quot;WTB&quot;)))), &quot;Regional&quot;, &quot;Trunk&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Domestic Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

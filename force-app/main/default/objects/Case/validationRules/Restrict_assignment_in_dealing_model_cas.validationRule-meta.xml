@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_assignment_in_dealing_model_cas</fullName>
+    <active>false</active>
+    <description>Users cannot change the status before they assign to the Deal Optimisation Team for processing</description>
+    <errorConditionFormula>AND( 
+(NOT($Profile.Name=&apos;System Administrator&apos;)),(NOT($Profile.Name=&apos;Qantas System Administrator&apos;)),(NOT($Profile.Name=&apos;Qantas System Admin - Freight&apos;)),(NOT($Profile.Name=&apos;Qantas System Admin - QCC&apos;)),(NOT($Profile.Name=&apos;Qantas System Admin - SND&apos;)), NOT(($UserRole.Id = &apos;00E90000001P6KH&apos;)), NOT(($UserRole.Id = &apos;00E90000001P6KR&apos;)), NOT(($UserRole.Id = &apos;00E90000001P6Lo&apos;)),NOT(($UserRole.Id = &apos;00E90000001P6Kl&apos;)),NOT(($UserRole.Id = &apos;00E90000001P6KM&apos;)),NOT(($UserRole.Id = &apos;00E90000001P6MS&apos;)),  
+(RecordType.DeveloperName=&apos;Dealing_Model_Request&apos;), 
+OR(ISPICKVAL(Status,&apos;with QDM Team&apos;), 
+ISPICKVAL(Status,&apos;with Deal Optimisation - INT Model&apos;)) 
+)</errorConditionFormula>
+    <errorMessage>Please assign the case to Deal Optimisation for processing before changing the status</errorMessage>
+</ValidationRule>

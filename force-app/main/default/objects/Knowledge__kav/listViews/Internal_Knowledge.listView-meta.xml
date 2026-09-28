@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Internal_Knowledge</fullName>
+    <columns>LAST_UPDATE</columns>
+    <columns>TITLE</columns>
+    <columns>Question__c</columns>
+    <columns>ARTICLE_NUMBER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Knowledge__kav.Informational_Article,Knowledge__kav.Marketing_and_Promotional,Knowledge__kav.Policy,Knowledge__kav.Process_and_Procedure,Knowledge__kav.Triage_Article</value>
+    </filters>
+    <filters>
+        <field>PUBLISH_STATUS</field>
+        <operation>equals</operation>
+        <value>2</value>
+    </filters>
+    <filters>
+        <field>LAST_UPDATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>LAST_N_DAYS:7</value>
+    </filters>
+    <label>Internal Articles Updated in Last 7 Days</label>
+</ListView>

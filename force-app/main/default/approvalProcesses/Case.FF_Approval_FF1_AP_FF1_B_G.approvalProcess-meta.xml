@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>Account</field>
+        <field>Type</field>
+        <field>Number_of_Frequent_Flyer_Request__c</field>
+        <field>No_of_FF_with_Platinum_Tier__c</field>
+        <field>Justification__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>0=1</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approval</name>
+    </approvalStep>
+    <description>Frequent Flyer Requests: 
+Created for the AP managers and B&amp;G manager who can self-approve for gold.
+
+Example users: Ashley Howell (B&amp;G), Adele Sheers (AP)</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND ( 2 OR 5) AND 3 AND 4 AND (6 OR 7 OR 8) AND 9</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Frequent Flyer Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>notEqual</operation>
+            <value>Approved &amp; Assigned to Loyalty</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approved__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Presence_of_Frequent_Flyer_Information__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>notEqual</operation>
+            <value>Pending with Sales Solutions</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.Level__c</field>
+            <operation>contains</operation>
+            <value>FF1(AP)</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.Level__c</field>
+            <operation>contains</operation>
+            <value>FF1(B&amp;G)</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.Level__c</field>
+            <operation>contains</operation>
+            <value>FF1(Mgr-B&amp;G)</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.No_of_FF_with_Platinum_Tier__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Assign_to_Sales_Solution_Queue</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Check_the_Approved_checkbox</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Pending_with_Sales_Solutions</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Update_Approval_Status_as_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Last_Approved_By_update</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Recent_Approval_Date_Time</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>FF Approval FF1(AP) FF1(B&amp;G)</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>16</processOrder>
+    <recallActions>
+        <action>
+            <name>Upd_Status_to_Not_yet_assigned_with_AM</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group_Travel_Discount__c</fullName>
+    <description>This Discount is preset according to the Group Travel Discount Table and modified the formula based on CRM-5224</description>
+    <formula>IF( QL_Actual_Estimated_Dom_QF_Market_Share__c &lt; 0.85,0.00,
+   IF( 
+      AND( QL_Actual_Estimated_Dom_QF_Market_Share__c &gt;=0.85,QL_Actual_Estimated_Dom_QF_Market_Share__c &lt;= 0.8999,  Forecast_Group_Booking_Expenditure__c &lt;250000),0.03,
+   IF( 
+      AND( QL_Actual_Estimated_Dom_QF_Market_Share__c &gt;=0.85,QL_Actual_Estimated_Dom_QF_Market_Share__c &lt;= 0.8999,  Forecast_Group_Booking_Expenditure__c &gt;=250000),0.04,  
+   IF( 
+      AND( QL_Actual_Estimated_Dom_QF_Market_Share__c &gt;=0.90,QL_Actual_Estimated_Dom_QF_Market_Share__c &lt;= 0.9499,  Forecast_Group_Booking_Expenditure__c &lt;250000),0.04,  
+   IF( 
+      AND( QL_Actual_Estimated_Dom_QF_Market_Share__c &gt;=0.90,QL_Actual_Estimated_Dom_QF_Market_Share__c &lt;= 0.9499,  Forecast_Group_Booking_Expenditure__c &gt;=250000),0.05,  
+   IF( 
+      AND( QL_Actual_Estimated_Dom_QF_Market_Share__c &gt;=0.95,Forecast_Group_Booking_Expenditure__c &lt;250000),0.05,  
+   IF( 
+      AND( QL_Actual_Estimated_Dom_QF_Market_Share__c &gt;=0.95,Forecast_Group_Booking_Expenditure__c &gt;=250000),0.06,
+   IF( ISPICKVAL( Group_Travel_Offer__c , &quot;No&quot;) ,null,null))))))))</formula>
+    <label>Group Travel Discount</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Percent</type>
+</CustomField>

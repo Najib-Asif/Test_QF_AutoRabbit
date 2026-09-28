@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actual_Incremental__c</fullName>
+    <formula>IF( Dashboard_Bucket__c = &quot;Acquisition&quot;  ,(Estimated_Total_Air_Travel_Spend__c -   Estimated_Total_Annual_Revenue__c), IF(Dashboard_Bucket__c = &quot;Retention&quot;  || Dashboard_Bucket__c = &quot;Realisation&quot; ||   ISPICKVAL( Ownership , &quot;Retention&quot;) ,(QF_Revenue__c - Estimated_Total_Annual_Revenue__c),(QF_Revenue__c  - QF_Revenue_LY__c)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Actual Incremental</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

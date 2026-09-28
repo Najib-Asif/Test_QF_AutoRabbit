@@ -1,0 +1,45 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="QCC_LookupFrequentFlyerController">
+    <aura:attribute name="ffNumber" type="String"/>
+    <aura:attribute name="lastName" type="String"/>
+    <aura:attribute name="results" type="Object"/>
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <!--<aura:attribute name="displayNotFoundError" type="Boolean" default="false"/>-->
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="recId" type="String" default=""/>
+    <aura:attribute name="errorMsg" type="String"/>
+    
+    <aura:registerEvent name="resetEvent" type="c:QCC_ResetEvent"/>
+    <aura:registerEvent name="resetFormEvent" type="c:QCC_ResetFormEvent"/>
+    
+    <!--Handle reset ffNumber and last name-->
+    <aura:handler event="c:QCC_ResetEvent" action="{! c.doReset}"/>
+
+     <!-- Only Invoked from Case Search Page-->
+    <aura:method name="caseFFSearch" action="{!c.onLoad}" description="To get Case from the parent Case Search Component"> 
+        <aura:attribute name="caseId" type="String" /> 
+    </aura:method>
+    
+    <aura:if isTrue="{! v.isLoading}">
+        <lightning:spinner variant="brand" alternativeText="Searching..."/>
+    </aura:if>
+    <lightning:card class="slds-clearfix">
+        <aura:set attribute="title">
+            <b>Lookup Frequent Flyer</b>
+        </aura:set>
+        <div class="slds-p-around_small mypopover">
+            <lightning:input aura:id="ffNumber" value="{! v.ffNumber}" label="* Frequent Flyer Number"/>
+            <lightning:input value="{! v.lastName}" label="Last Name"/>
+        </div>
+        <div class="slds-p-around_small slds-float_right">
+            <lightning:button label="Lookup Customer" variant="brand" onclick="{! c.doLookup}"/>
+        </div>
+    </lightning:card>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <!--<aura:renderIf isTrue="{! v.displayNotFoundError}">-->
+    <c:QCC_ShowModal showModal="{! v.showModal}" header="Error" content="{! v.errorMsg}"/>
+        <!--<aura:set attribute="else">
+            <c:QCC_ShowModal showModal="{! v.showModal}" header="Error" content="FrequentFlyerNotEntered"/>
+        </aura:set>
+    </aura:renderIf>-->
+    <div style="height: 0px; " aura:id="overlayLibFF"/>
+</aura:component>

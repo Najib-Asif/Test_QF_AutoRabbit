@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Contract_Start_and_End_Dates</fullName>
+    <active>true</active>
+    <description>The contract end date should  be greater than contract start date.</description>
+    <errorConditionFormula>IF(Contract_End_Date__c &lt; Contract_Start_Date__c, true, false)</errorConditionFormula>
+    <errorDisplayField>Contract_End_Date__c</errorDisplayField>
+    <errorMessage>Contract end date should be greater than contract start date.</errorMessage>
+</ValidationRule>

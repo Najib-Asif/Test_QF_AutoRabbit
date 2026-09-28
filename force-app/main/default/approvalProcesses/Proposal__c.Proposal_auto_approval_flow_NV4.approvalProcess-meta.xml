@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Domestic_Annual_Share__c</field>
+        <field>International_Annual_Share__c</field>
+        <field>Qantas_Annual_Expenditure__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Level_1_Approver</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Level_1_Approver_DateTime</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>LastModifiedBy</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Proposal__c.Approval_Required_Deal_Optimization__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.Approval_Required_NAM__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.Approval_Required_Pricing__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.Approval_Required_Team_Lead__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Proposal Auto approval step</label>
+        <name>Proposal_Auto_approval_step</name>
+        <rejectionActions>
+            <action>
+                <name>Level_1_Approver</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Level_1_Approver_DateTime</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>Auto approval process for proposal within guidelines NV4</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(OR(
+AND(Approval_Required_Deal_Optimization__c = False, Approval_Required_Pricing__c = False, Approval_Required_NAM__c = False, Approval_Required_Team_Lead__c = False, Approval_Required_Manager_SBD__c = False, Approval_Required_TL__c = False, Approval_Required_SBD__c = False, Active__c = True, No_of_Cps__c &lt;&gt; 0, ISPICKVAL(Travel_Fund__c, &apos;Yes&apos;),ISPICKVAL(Type__c, &apos;Corporate Airfares&apos;), Mandate_Business_Case__c = False),
+
+AND(Approval_Required_Deal_Optimization__c = False, Approval_Required_Pricing__c = False, Approval_Required_NAM__c = False, Approval_Required_Team_Lead__c = False, Approval_Required_Manager_SBD__c = False, Approval_Required_TL__c = False, Approval_Required_SBD__c = False, Active__c = True, ISPICKVAL(Travel_Fund__c, &apos;No&apos;), ISPICKVAL(Type__c, &apos;Corporate Airfares&apos;), Mandate_Business_Case__c = False),
+
+AND(Approval_Required_Deal_Optimization__c = False, Approval_Required_Pricing__c = False, Approval_Required_NAM__c = False, Approval_Required_Team_Lead__c = False, Approval_Required_Manager_SBD__c = False, Approval_Required_TL__c = False, Approval_Required_SBD__c = False, Active__c = True, ISPICKVAL(Type__c, &apos;Qantas Business Savings&apos;), Mandate_Business_Case__c = False)
+), ISBLANK(QEC_Approval_Condition__c), EK_Stock__c = False, Group_Booking__c = False,Opportunity__r.Owner.Country = &apos;AU&apos;)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Completion_Date_TIme</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Recalled_to_Not_Recalled</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Status_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_proposal_status</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Approval_Completion_Date_TIme</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Proposal auto approval flow New</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>user__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>2</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

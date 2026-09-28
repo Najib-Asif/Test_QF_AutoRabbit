@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_62529145</developerName>
+        <masterLabel>Service Type</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Case$Type</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Welcome to Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to SSU</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to Life Time Platinum</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PNR Health Check</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PNR Health Check - Watchlist</sourceValue>
+            </sourceValues>
+            <value>Proactive</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>BucketField_62529145</field>
+    </columns>
+    <columns>
+        <field>Case$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case$Due_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case.EmailMessages$MessageDate</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Unique</aggregateTypes>
+        <field>Case.EmailMessages$Power_of_One_Email__c</field>
+    </columns>
+    <columns>
+        <field>Case$Status</field>
+    </columns>
+    <columns>
+        <field>Case.EmailMessages$Status</field>
+    </columns>
+    <columns>
+        <field>Case.EmailMessages$ToAddress</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Response Rate on cases based on first email going out to Customer on the case.</description>
+    <filter>
+        <criteriaItems>
+            <column>Case$Frequent_Flyer_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Lounge,one</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$FF_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Platinum One,Chairmans Lounge,Chairmans Lounge Platinum One,Chairman&apos;s Lounge,Chairman&apos;s Lounge Platinum One</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.EmailMessages$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>2,3</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.EmailMessages$ToAddress</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>@qantas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_62529145</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Proactive</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Type</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Reponse Rate on Cases</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_or_without_Emails__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <interval>INTERVAL_YESTERDAY</interval>
+    </timeFrameFilter>
+</Report>

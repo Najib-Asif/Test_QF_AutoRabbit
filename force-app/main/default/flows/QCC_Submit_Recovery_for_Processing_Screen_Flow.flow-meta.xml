@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <choices>
+        <name>No</name>
+        <choiceText>No</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Yes</name>
+        <choiceText>Yes</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Yes</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <name>Submit_for_Processing</name>
+        <label>Submit for Processing?</label>
+        <locationX>182</locationX>
+        <locationY>242</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Yes_No</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Yes</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Recovery_Record</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Screen Flow to submit recovery for processing</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>isEFTRecovery</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!Get_Recovery_Record.Type__c},&apos;Payment (EFT)&apos;)</expression>
+    </formulas>
+    <formulas>
+        <description>Process Status</description>
+        <name>Process_Status</name>
+        <dataType>String</dataType>
+        <expression>	IF(
+OR(
+
+ISPICKVAL({!Get_Recovery_Record.Type__c}, &quot;Payment (EFT)&quot;),
+ISPICKVAL({!Get_Recovery_Record.Type__c}, &quot;Ticket Refund EFT&quot;)
+),
+&quot;Payment Details Received&quot;,
+IF(ISPICKVAL({!Get_Recovery_Record.Type__c}, &quot;Payment (Credit Card)&quot;),
+&quot;Queued for Payment Processing&quot;,
+IF(OR(
+ISPICKVAL({!Get_Recovery_Record.Type__c}, &quot;Travel vouchers&quot;),
+ISPICKVAL({!Get_Recovery_Record.Type__c}, &quot;Lounge Passes&quot;),
+ISPICKVAL({!Get_Recovery_Record.Type__c}, &quot;Qantas Points&quot;)
+),
+&quot;Approved&quot;,
+&quot;&quot;
+)
+)
+)</expression>
+    </formulas>
+    <interviewLabel>QCC Submit Recovery for Processing Screen Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QCC Submit Recovery for Processing Screen Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Recovery_Record</name>
+        <label>Get Recovery Record</label>
+        <locationX>50</locationX>
+        <locationY>350</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_Recovery_Process_Status</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Recovery__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Recovery_Process_Status</name>
+        <label>Update Recovery Process Status</label>
+        <locationX>50</locationX>
+        <locationY>458</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Automated_Currency_Conversion_Complete__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Process_Status__c</field>
+            <value>
+                <elementReference>Process_Status</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SkipExceptionForEUComp__c</field>
+            <value>
+                <elementReference>isEFTRecovery</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Recovery__c</object>
+    </recordUpdates>
+    <screens>
+        <name>Confirmation_Screen</name>
+        <label>Confirmation Screen</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <backButtonLabel>Cancel</backButtonLabel>
+        <connector>
+            <targetReference>Submit_for_Processing</targetReference>
+        </connector>
+        <fields>
+            <name>Yes_No</name>
+            <choiceReferences>Yes</choiceReferences>
+            <choiceReferences>No</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Do you want to resubmit the recovery for processing?</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Done</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Confirmation_Screen</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

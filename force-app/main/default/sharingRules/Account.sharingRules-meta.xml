@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Access_to_Jessica_Ritcher</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>None</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Sharing Account access to Jessica as she needs to access Product Registration</description>
+        <label>Access to Jessica Ritcher</label>
+        <sharedTo>
+            <group>Access_to_Jessica_Ritcher</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Account,Prospect Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>GMC_Accounts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Access_to_QF_Support_QIC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <label>Access to QF-Support-QIC</label>
+        <sharedTo>
+            <role>QF_Support_QIC_Member</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>GMC_Accounts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Access_visiblity_to_Salescockpit_User</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>None</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <label>Access visiblity to Salescockpit User</label>
+        <sharedTo>
+            <group>Access_to_Salescockpit</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Type</field>
+            <operation>equals</operation>
+            <value>Freight-Country,Freight-Branch</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>B2B_Account_Shared_to_B2B_Roles_and_Subordinates</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Read</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <label>B2B Account Shared to B2B Roles and Subordinates</label>
+        <sharedTo>
+            <group>B2B_Roles_and_Subordinates</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Person Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>GMC_Accounts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>B2B_Account_Shared_with_Read_Write_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Share Accounts to group requiring read/write access to account to perform their function</description>
+        <label>B2B Account Shared with Read/Write Access</label>
+        <sharedTo>
+            <group>B2B_Account_Full_Access</group>
+        </sharedTo>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Person Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>GMC_Accounts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Enable_Government_Affairs_to_view_all_B2B_Accounts</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Read</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Read</opportunityAccessLevel>
+        </accountSettings>
+        <description>Enable Government Affairs to view all B2B Accounts</description>
+        <label>Enable Government Affairs to view all B2B Accounts</label>
+        <sharedTo>
+            <role>QF_Government_Affairs</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Type</field>
+            <operation>equals</operation>
+            <value>Prospect Account,Charter Account,Customer Account,Agency Account,Other Account,Regional Account</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Freight_Unmanaged_Accounts_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Freight - Allow Freight users to change unmanaged Account ownership to themselves</description>
+        <label>Freight Unmanaged Accounts Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business_Type__c</field>
+            <operation>equals</operation>
+            <value>Unmanaged</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Freight Account</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Person_Account_To_VIP_Team</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Share as read/write</description>
+        <label>QCC Share Person Account To VIP Team</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Person Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive_Contact__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Person_Account_to_CCAT</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <label>QCC_Share_Person_Account_to_CCAT</label>
+        <sharedTo>
+            <group>CCAT_and_Fulfilment_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Person Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive_Contact__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Person_Account_to_QF_QDC</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Share Person Accounts (B2C) to the role level QF-QDC</description>
+        <label>QCC Share Person Account to QF-QDC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Placeholder,Agency Account,Global Account,Other Account,Prospect Account,Person Account,Customer Account,Freight Account,Regional Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive_Contact__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QIC_Edit_Agency_Accounts</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Sharing rule to enable QIC members to edit Agency Accounts</description>
+        <label>QIC Edit Agency Accounts</label>
+        <sharedTo>
+            <group>QIC_Edit_Agency_Accounts</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>GMC_Accounts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Prospect_Customer_And_Agency_Account_with_NonGSA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Read</opportunityAccessLevel>
+        </accountSettings>
+        <description>To share Prospect Customer and Agency accounts with All Non-GSA Roles in S&amp;D</description>
+        <label>Share Prospect Customer And Agency Account with NonGSA</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Type</field>
+            <operation>equals</operation>
+            <value>Prospect Account,Customer Account,Agency Account</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_Deal_Support_Team_USA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>None</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Access to edit all US accounts for Deal Support Team (US)</description>
+        <label>Access to Deal Support Team USA</label>
+        <sharedTo>
+            <group>Deal_Support_Team_USA</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>All_USA_Sales_Users</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_QF_DOM_Sales_AP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <label>Access to QF-DOM-Sales-AP</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_AP_Regional</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_AP_Regional</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_QF_INT_Sales_North_America_NZ</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <label>Access to QF-INT-Sales-North America-NZ</label>
+        <sharedTo>
+            <group>NZ_Admin</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_North_America_NZ</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>B_G_Government_Team_Acces</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Use to grant access to Lead Manager - WOAG &amp; State Government Team - read/ write access</description>
+        <label>B&amp;G Government Team Acces</label>
+        <sharedTo>
+            <group>B_G_Government_Group</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>B_G_Government_Group</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_AU_Account_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Freight - To give edit access on Account to Sales Support</description>
+        <label>Freight AU Account Sharing Rule</label>
+        <sharedTo>
+            <role>QF_Freight_Support_AU</role>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_Asia_AM_Account_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Freight - To give edit access to Asia AM across all Accounts in Asia</description>
+        <label>Freight Asia AM Account Sharing Rule</label>
+        <sharedTo>
+            <group>Freight_Asia_AMs_with_Sales_Support_Role</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_RGM_Asia</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_Asia_Account_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Freight - To give edit access to Asia Sales Support Team</description>
+        <label>Freight Asia Account Sharing Rule</label>
+        <sharedTo>
+            <role>QF_Freight_Support_Asia</role>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_RGM_Asia</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_UK_AM_Account_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <label>Freight UK AM Account Sharing Rule</label>
+        <sharedTo>
+            <group>Freight_UK_AMs_with_Sales_Support_Role</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_RGM</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_UK_Account_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Freight - To give edit access to all UK Accounts</description>
+        <label>Freight UK Account Sharing Rule</label>
+        <sharedTo>
+            <role>QF_Freight_Support_UK</role>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_RGM</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_US_AM_Account_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <label>Freight US AM Account Sharing Rule</label>
+        <sharedTo>
+            <group>Freight_US_AMs_with_Sales_Support_Role</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_RGM_US</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_US_Account_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Freight - To give edit access to US Sales Support Team</description>
+        <label>Freight US Account Sharing Rule</label>
+        <sharedTo>
+            <role>QF_Freight_Support_US</role>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_RGM_US</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>GSA_Account_Shared_to_B2B_Roles_and_Subordinates</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Read</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>Read</opportunityAccessLevel>
+        </accountSettings>
+        <label>GSA Account Shared to B2B Roles and Subordinates</label>
+        <sharedTo>
+            <group>B2B_Roles_and_Subordinates</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>QCC_Consultant_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Read</opportunityAccessLevel>
+        </accountSettings>
+        <description>Restrict or give limited access to Agents for the Contact, Case records.</description>
+        <label>QCC Consultant Sharing Rule</label>
+        <sharedTo>
+            <group>QCC_Agent_Who_Takes_Genesys_Call</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>QCC_Share_Records_to_QF_QDC_Roles_and_Subordinates</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>Read</opportunityAccessLevel>
+        </accountSettings>
+        <description>All records created by customer contact agents should be accessible to the QF-QDC roles and subordinates</description>
+        <label>QCC Share Records to QF-QDC Roles and Subordinates</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>QIS_Team_edit_all_Accounts_owned_by_QIS_team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Read</opportunityAccessLevel>
+        </accountSettings>
+        <label>QIS Team to edit all Accounts owned by QIS team</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Share_all_UK_accounts</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Share all UK accounts among UK users</description>
+        <label>Share all UK accounts</label>
+        <sharedTo>
+            <group>All_UK_Users</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>All_UK_Users</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>To_share_records_with_QIS_Operations</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <label>To share records with QIS Operations</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME_QIS_Operations</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_SND</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

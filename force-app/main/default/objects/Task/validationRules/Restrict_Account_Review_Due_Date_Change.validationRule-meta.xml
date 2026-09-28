@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Account_Review_Due_Date_Change</fullName>
+    <active>true</active>
+    <description>Stop Activity Due Date for Account Review from being updated after Status of the Activity is Completed</description>
+    <errorConditionFormula>AND (
+NOT( $User.ProfileId = &apos;00e90000001wK8z&apos;), /*SysAdmins*/ 
+ISPICKVAL (  Subtype__c , &quot;Account Review&quot;),
+ISPICKVAL (  Status , &quot;Completed&quot;),
+ISCHANGED ( ActivityDate ),
+LEFT(WhatId, 3) = &apos;001&apos;  /*Account RelatedTo only*/
+)</errorConditionFormula>
+    <errorDisplayField>ActivityDate</errorDisplayField>
+    <errorMessage>You are not allow to change the Due Date once the Account Review is Completed. Please contact SHR Salesforce Support for more information.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Replacement_Bag_Type_Complete</fullName>
+    <active>true</active>
+    <description>Ensuring that replacement bag type is populated when replacement bag is the recovery type</description>
+    <errorConditionFormula>IF( ISPICKVAL(Type__c, &apos;Bag Replacement&apos;), 
+ISPICKVAL( Replacement_Bag_Type__c, &apos;&apos; ),false 
+)</errorConditionFormula>
+    <errorDisplayField>Replacement_Bag_Type__c</errorDisplayField>
+    <errorMessage>Complete this field</errorMessage>
+</ValidationRule>

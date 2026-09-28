@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Case</fullName>
+    <availability>online</availability>
+    <description>New case button on signed contracts. 
+01290000001IINI: contract lookup field 
+RecordType : Deal Support Record Type</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Case</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>/500/e?cas4={!Contract__c.Related_Account_Name_f__c}&amp;cas3={!Contract__c.Contract_Recipient_Name_f__c}&amp;CF00N9000000Dg8by={!Contract__c.Name}&amp;CF00N9000000Dg8by_lkid={!Contract__c.Id}&amp;retURL=%2F{!Contract__c.Id}&amp;RecordType=01290000001IINI&amp;ent=Case</url>
+</WebLink>

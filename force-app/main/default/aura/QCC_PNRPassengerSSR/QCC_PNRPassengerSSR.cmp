@@ -1,0 +1,35 @@
+<aura:component >
+    <aura:attribute name="ssrPassengerInfo" type="Object[]"/>
+    <aura:attribute name="mycolumns" type="Object[]"/>
+    <aura:method name="ssrPassengerMethod" action="{!c.getSSRPassengerDetails}"> 
+        <aura:attribute name="ssrPassengerDetail" type="Object[]"/> 
+    </aura:method>
+    <aura:registerEvent name="onSSRSelection" type="c:QCC_PNRSSRSelectionEvent"/>
+    
+    <!--<div class="c-container">-->
+        <lightning:card title="Passenger SSRs" iconName="standard:product_request">
+            <aura:set attribute="title">
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                            <span class="slds-text-heading_small">Passenger SSRs</span>
+                        </a>
+                    </h2>
+                </div>
+            </aura:set>
+            
+            <aura:renderIf isTrue="{!empty(v.ssrPassengerInfo)}">
+                <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg}</div>
+                <aura:set attribute="else">
+                    <lightning:datatable data="{!v.ssrPassengerInfo}" columns="{!v.mycolumns}"
+                                         keyField="keyID"  onrowselection="{!c.getSelectedName}"/>
+                </aura:set>
+            </aura:renderIf>
+            <!--<div>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+            </div>-->
+        </lightning:card>
+    <!--</div>-->
+</aura:component>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Convert_to_Contract</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Convert to Contract</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+
+for(var i = 0; i &lt; document.getElementsByName(&quot;convert_to_contract&quot;).length; i++) {
+document.getElementsByName(&quot;convert_to_contract&quot;)[i].className = &quot;btnDisabled&quot;;
+document.getElementsByName(&quot;convert_to_contract&quot;)[i].disabled = true;
+}
+try{
+
+/*******Start: Proposal related Opportunity Validation *****************/
+
+var isValidOpportunityCriteria = true;
+var OpportunityCriteriaErrorMsg = &apos;&apos;;
+
+var queryToValidateOpportunityCriteri = &quot;SELECT Id, Opportunity__r.Type, Opportunity__r.Sub_Type_Level_1__c, Opportunity__r.Sub_Type_Level_2__c,Opportunity__r.Category__c FROM Proposal__c WHERE Id=\&apos;&quot;+&apos;{!Proposal__c.Id}&apos;+&quot;\&apos; limit 1 &quot;;
+
+var recordsToValidateOpportunityCriteri = sforce.connection.query(queryToValidateOpportunityCriteri);
+var recordsToValidateOpportunityCriteri1 = recordsToValidateOpportunityCriteri.getArray(&apos;records&apos;);
+
+if(recordsToValidateOpportunityCriteri1.length &gt; 0){
+
+if( recordsToValidateOpportunityCriteri1[0].Opportunity__r.Type == &apos;Business and Government&apos; &amp;&amp;
+recordsToValidateOpportunityCriteri1[0].Opportunity__r.Sub_Type_Level_1__c == &apos;Currently In Contract&apos; &amp;&amp;
+recordsToValidateOpportunityCriteri1[0].Opportunity__r.Sub_Type_Level_2__c == &apos;Variation&apos; &amp;&amp;
+(recordsToValidateOpportunityCriteri1[0].Opportunity__r.Category__c == &apos;Corporate Airfares&apos; ||
+recordsToValidateOpportunityCriteri1[0].Opportunity__r.Category__c == &apos;Qantas Business Savings&apos;)){
+
+isValidOpportunityCriteria = false;
+OpportunityCriteriaErrorMsg = &apos;For Variation Type Proposals, you do not have to convert this Proposal to a Contract. Please raise your Deal Support Case on the Renewal Contract.&apos;;
+}
+
+}
+else {
+
+isValidOpportunityCriteria = false;
+OpportunityCriteriaErrorMsg = &apos; Error: Something went wrong, record might be deleted by another user&apos;;
+}
+
+if(!isValidOpportunityCriteria){
+
+alert(OpportunityCriteriaErrorMsg);
+for(var i = 0; i &lt; document.getElementsByName(&quot;convert_to_contract&quot;).length; i++) {
+document.getElementsByName(&quot;convert_to_contract&quot;)[i].className = &quot;btnDisabled&quot;;
+document.getElementsByName(&quot;convert_to_contract&quot;)[i].disabled = true;
+}
+
+}
+/******* End: Proposal related Opportunity Validation *****************/
+
+if(isValidOpportunityCriteria){
+
+var contrQuery = &quot;SELECT Id, Status__c FROM Contract__c where Proposal__c=\&apos;&quot;+&apos;{!Proposal__c.Id}&apos;+&quot;\&apos;&quot;;
+
+var contrRecords = sforce.connection.query(contrQuery);
+
+var contrRecords1 = contrRecords.getArray(&apos;records&apos;);
+var allowContract = true;
+
+for(var i=0; i&lt;contrRecords1.length; i++){
+if(contrRecords1[i].Status__c != &apos;Rejected – Legal&apos; &amp;&amp; contrRecords1[i].Status__c != &apos;Rejected - Customer&apos;){
+allowContract = false;
+}
+}
+
+if(allowContract){
+
+var query = &quot;SELECT Id,Name,Account__c,Commercial_TC__c,Domestic_Annual_Share__c,International_Annual_Share__c,Legal_TC__c,Opportunity__c,Contact__c,Qantas_Annual_Expenditure__c,Status__c,Valid_From_Date__c,Valid_To_Date__c,Standard__c,Additional_Change_Details__c,Deal_Type__c,MCA_Routes_Annual_Share__c,Agent_Name__c,Agent_Fax__c,Agent_Email__c,Agent_Address__c,Frequent_Flyer_Status_Upgrade__c,Frequent_Flyer_Status_Upgrade_Offer__c,Qantas_Club_Discount__c,Qantas_Club_Discount_Offer__c,Qantas_Club_Join_Discount_Offer__c,Forecast_Group_Booking_Expenditure__c,Group_Travel_Offer__c,Group_Travel_Discount__c,TMC_Code__c,Travel_Fund__c,Travel_Fund_Amount__c,Type__c,Proposal_Start_Date__c,Proposal_End_Date__c, (SELECT Id, FareStructure__c, Comment__c, Discount__c, Discount_Threshold_AM__c, Discount_Threshold_NAM__c FROM Fare_Structure_Lists__r),(SELECT Id,Contract_Agreement__c FROM Charter_Flight_Information__r),(SELECT Id, Name FROM Attachments ORDER BY CreatedDate DESC LIMIT 1),(SELECT Id,Amount__c,Paid_As__c,Payment_Criteria__c,Payment_Frequency__c,Type__c,Proposal__c FROM Contract_Payments__r) FROM Proposal__c where Active__c=true AND Status__c=\&apos;Accepted by Customer\&apos; AND Id=\&apos;&quot;+&apos;{!Proposal__c.Id}&apos;+&quot;\&apos; limit 1&quot;;
+
+var records = sforce.connection.query(query);
+
+var records1 = records.getArray(&apos;records&apos;);
+
+// Contract Creation
+if(records1.length&gt;0){
+var contract = new sforce.SObject(&quot;Contract__c&quot;);
+
+contract.Name = records1[0].Name;
+contract.Account__c = records1[0].Account__c;
+contract.Commercial_TC__c = records1[0].Commercial_TC__c;
+contract.Contact__c = records1[0].Contact__c;
+contract.Domestic_Annual_Share__c = records1[0].Domestic_Annual_Share__c;
+contract.International_Annual_Share__c = records1[0].International_Annual_Share__c;
+contract.Legal_TC__c = records1[0].Legal_TC__c;
+contract.Opportunity__c = records1[0].Opportunity__c;
+contract.Qantas_Annual_Expenditure__c = records1[0].Qantas_Annual_Expenditure__c;
+contract.Proposal__c = records1[0].Id;
+contract.Type__c = records1[0].Type__c;
+//contract.Valid_From_Date__c = records1[0].Valid_From_Date__c;
+//contract.Valid_To_Date__c = records1[0].Valid_To_Date__c;
+contract.Travel_Fund__c = records1[0].Travel_Fund__c;
+contract.Travel_Fund_Amount__c = records1[0].Travel_Fund_Amount__c;
+contract.Standard__c = records1[0].Standard__c;
+contract.Additional_Change_Details__c = records1[0].Additional_Change_Details__c;
+contract.Status__c = &apos;Signature Required by Customer&apos;;
+contract.Deal_Type__c = records1[0].Deal_Type__c;
+contract.MCA_Routes_Annual_Share__c = records1[0].MCA_Routes_Annual_Share__c;
+contract.Agent_Name__c = records1[0].Agent_Name__c;
+contract.Agent_Fax__c = records1[0].Agent_Fax__c;
+contract.Agent_Email__c = records1[0].Agent_Email__c;
+contract.Agent_Address__c = records1[0].Agent_Address__c;
+contract.Qantas_Club_Discount__c = records1[0].Qantas_Club_Discount__c;
+contract.Frequent_Flyer_Status_Upgrade__c = records1[0].Frequent_Flyer_Status_Upgrade__c;
+contract.Frequent_Flyer_Status_Upgrade_Offer__c = records1[0].Frequent_Flyer_Status_Upgrade_Offer__c;
+contract.Qantas_Club_Discount__c = records1[0].Qantas_Club_Discount__c;
+contract.Qantas_Club_Discount_Offer__c = records1[0].Qantas_Club_Discount_Offer__c;
+contract.Qantas_Club_Join_Discount_Offer__c = records1[0].Qantas_Club_Join_Discount_Offer__c;
+contract.TMC_Code__c = records1[0].TMC_Code__c;
+contract.Travel_Fund__c = records1[0].Travel_Fund__c;
+contract.Travel_Fund_Amount__c = records1[0].Travel_Fund_Amount__c;
+contract.Contract_Start_Date__c = records1[0].Proposal_Start_Date__c;
+contract.Contract_End_Date__c = records1[0].Proposal_End_Date__c;
+contract.Group_Travel_Offer__c = records1[0].Group_Travel_Offer__c;
+contract.Forecast_Group_Booking_Expenditure__c = records1[0].Forecast_Group_Booking_Expenditure__c;
+contract.Group_Travel_Discount__c = records1[0].Group_Travel_Discount__c;
+var rtype;
+
+if(records1[0].Type__c == &apos;Qantas Business Savings&apos;){
+rtype = &apos;QBS - Legal/Customer Pending&apos;;
+}else if(records1[0].Type__c == &apos;Corporate Airfares&apos;){
+rtype = &apos;CA - Legal/Customer Pending&apos;;
+}else if(records1[0].Type__c == &apos;Adhoc&apos;){
+rtype = &apos;Charters Contract - Legal/Customer Pending&apos;;
+}else if(records1[0].Type__c == &apos;Scheduled&apos;){
+rtype = &apos;Charters Contract - Legal/Customer Pending&apos;;
+}
+
+var queryC = &quot;SELECT Id, Name FROM RecordType where Name like &apos;%&quot;+rtype+&quot;%&apos; AND sObjectType=&apos;Contract__c&apos; limit 1&quot;;
+var rtypes = sforce.connection.query(queryC);
+
+var rtypes1 = rtypes.getArray(&apos;records&apos;);
+contract.RecordTypeId = rtypes1[0].Id;
+
+var result = sforce.connection.create([contract]);
+
+if(result[0].success == &apos;true&apos;){
+
+// Contract Payment Starts
+var contractPayments = records1[0].Contract_Payments__r; 
+if(contractPayments != null){ 
+// contractPayment List Creation 
+var conPay = contractPayments.getArray(&quot;records&quot;); 
+var cps = []; 
+for(var i=0; i&lt;conPay.length; i++){ 
+var cp = new sforce.SObject(&quot;Contract_Payments__c&quot;);
+cp.Id= conPay [i].Id;
+cp.Proposal__c = records1[0].Id; 
+cp.Contract_Agreement__c = result[0].id;
+//cp.Name = conPay[i].Name; 
+//cp.Amount__c = conPay[i].Amount__c; 
+//cp.Contract_Agreement__c = conPay[i].Contract_Agreement__c; 
+//cp.Paid_As__c = conPay[i].Paid_As__c; 
+//cp.Contract_Agreement__c = result[0].id; 
+//cp.Payment_Criteria__c = conPay[i].Payment_Criteria__c; 
+//cp.Payment_Frequency__c = conPay[i].Payment_Frequency__c; 
+//cp.Proposal__c = records1[0].Id; 
+//cp.Type__c= conPay[i].Type__c;
+//alert(&apos;CPs:&apos;+cps);
+cps.push(cp); 
+} 
+var result1 = sforce.connection.update(cps); 
+if(result1[0].success == &apos;false&apos;) { 
+alert(&apos;Exception: &apos;+result1[0].errors.message); 
+} 
+} 
+//Contract Payment Ends
+
+var contractDiscounts = records1[0].Fare_Structure_Lists__r;
+if(contractDiscounts != null){
+// Discount List Creation
+var conDiscounts1 = contractDiscounts.getArray(&quot;records&quot;);
+var discounts = [];
+for(var i=0; i&lt;conDiscounts1.length; i++){
+var discount = new sforce.SObject(&quot;Contract_Discount_List__c&quot;);
+discount.Approval_Comment_NAM__c = conDiscounts1[i].Approval_Comment_NAM__c;
+discount.Approval_Comment_Pricing__c = conDiscounts1[i].Approval_Comment_Pricing__c;
+discount.FareStructure__c = conDiscounts1[i].FareStructure__c;
+discount.Comment__c = conDiscounts1[i].Comment__c;
+discount.Contract__c = result[0].id;
+discount.Discount__c = conDiscounts1[i].Discount__c;
+discount.Discount_Threshold_AM__c = conDiscounts1[i].Discount_Threshold_AM__c;
+discount.Discount_Threshold_NAM__c = conDiscounts1[i].Discount_Threshold_NAM__c;
+discounts.push(discount);
+}
+var result1 = sforce.connection.create(discounts);
+if(result1[0].success == &apos;false&apos;) {
+alert(&apos;Exception: &apos;+result1[0].errors.message);
+}
+}
+
+var charters = records1[0].Charter_Flight_Information__r;
+if(charters != null){
+//Charters creation
+var charters1 = charters.getArray(&quot;records&quot;);
+
+var charterValues = [];
+
+for(var i=0; i&lt;charters1.length; i++){
+var charterValue = new sforce.SObject(&quot;Charter_Flight_Information__c&quot;);
+charterValue.Id = charters1[i].Id;
+charterValue.Contract_Agreement__c = result[0].id;
+charterValues.push(charterValue);
+}
+var result2 = sforce.connection.update(charterValues);
+if(result2[0].success == &apos;false&apos;) {
+alert(&apos;Exception: &apos;+result2[0].errors.message);
+}
+}
+
+if(records1[0].Attachments != null){
+var attQuery = &apos;SELECT Id, Name, Body FROM Attachment where ParentId=\&apos;&apos;+&apos;{!Proposal__c.Id }&apos;+&apos;\&apos; ORDER BY CreatedDate DESC LIMIT 1&apos;;
+var attRecords = sforce.connection.query(attQuery);
+var attRecords1 = attRecords.getArray(&apos;records&apos;);
+var newAttachment = new sforce.SObject(&quot;Attachment&quot;);
+newAttachment.Body = attRecords1[0].Body;
+newAttachment.Name = attRecords1[0].Name;
+newAttachment.ParentId = result[0].id;
+var attchResult = sforce.connection.create([newAttachment]);
+if(attchResult[0].success == &apos;false&apos;) {
+alert(&apos;Exception: &apos;+attchResult[0].errors.message);
+}
+}
+
+window.location.href = &apos;/&apos;+result[0].id+&apos;?retURL=&apos;+result[0].id;
+
+}else{
+alert(&apos;Exception: &apos;+result[0].errors.message);
+}
+}else if(records1.length==0){
+alert(&quot;{!$Label.Convert_Contract_Error}&quot;);
+}
+}else{
+alert(&apos;Contract exist for this Proposal&apos;);
+for(var i = 0; i &lt; document.getElementsByName(&quot;convert_to_contract&quot;).length; i++) {
+document.getElementsByName(&quot;convert_to_contract&quot;)[i].className = &quot;btnDisabled&quot;;
+document.getElementsByName(&quot;convert_to_contract&quot;)[i].disabled = true;
+}
+}
+}
+}
+catch(e){
+alert(&apos;An Error has Occured. Error:&apos; +e);
+}</url>
+</WebLink>

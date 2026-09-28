@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Amendment_IATA_or_PC_related</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+(RecordType.DeveloperName = &apos;Deal_Support_request&apos;), 
+(ISPICKVAL(Type,&apos;Deal Amendment&apos;)), 
+(ISPICKVAL(Sub_Type__c,&apos;IATA or PCC related&apos;)), 
+OR( 
+ISBLANK( New_IATA_Start_Date_DAI__c ), 
+ISBLANK( IATA_DAI__c ), 
+ISBLANK( PCC_Codes_DAI__c ),
+ISBLANK( GDS_DAI__c )
+) 
+)</errorConditionFormula>
+    <errorMessage>Please provide all the details in the &apos;Deal Amendment (IATA &amp; PCC) section.</errorMessage>
+</ValidationRule>

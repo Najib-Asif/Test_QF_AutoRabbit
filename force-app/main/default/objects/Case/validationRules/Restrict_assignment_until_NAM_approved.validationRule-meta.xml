@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_assignment_until_NAM_approved</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+(NOT($Profile.Name=&apos;System Administrator&apos;)),(NOT($Profile.Name=&apos;Qantas System Administrator&apos;)),(NOT($Profile.Name=&apos;Qantas System Admin - Freight&apos;)),(NOT($Profile.Name=&apos;Qantas System Admin - QCC&apos;)),(NOT($Profile.Name=&apos;Qantas System Admin - SND&apos;)),(NOT($Profile.Name=&apos;QL GSA&apos;)), (NOT($Profile.Name=&apos;Sales and Distribution-Sales GSA&apos;)),
+(NOT( $UserRole.Id = &apos;00E90000001P7ax&apos;)),(NOT( $UserRole.Id = &apos;00E90000001P6Kb&apos;)), (NOT( $UserRole.Id = &apos;00E90000001P7am&apos;)),(NOT( $UserRole.Id = &apos;00E90000001P6KM&apos;)),ISPICKVAL($User.CountryCode, &apos;AU&apos;),
+(RecordType.DeveloperName=&apos;Deal_Support_request&apos;),
+OR(ISPICKVAL(Type,&apos;Deal Extension&apos;),
+ISPICKVAL(Type,&apos;Deal Termination&apos;)),
+(NAM_s_Approval__c=false),
+NOT(ISPICKVAL(Status,&quot;Not yet assigned - with Account Manager&quot;))
+)</errorConditionFormula>
+    <errorMessage>Please submit this case for NAM&apos;s approval, before assigning to the Dealing Support Team.</errorMessage>
+</ValidationRule>

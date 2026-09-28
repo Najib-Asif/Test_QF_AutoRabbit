@@ -1,0 +1,375 @@
+<aura:component controller="FreightAWBPopUpController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" access="global">
+    <aura:attribute name="messageError" type="Boolean" default="false"/>
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="showTable" type="boolean" default="false"/>
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    
+    <aura:attribute name="lsList" type="Object[]"/>    
+    <aura:attribute name="ApexController" type="FreightAWBPopUpController"/>	
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="BeforeAWB" type="CampaignMember"/>  
+    
+    <article class="slds-card">
+        
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-contact" title="CampaignMember">
+                        <lightning:icon iconName="standard:CampaignMember" size="small"/>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="CampaignMember Details">
+                            <span class="slds-text-heading_small">Air Waybill Details</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        
+        <aura:if isTrue="{!v.messageError}">
+            <!-- Load error -->
+            <div class="userCreateError">
+                <ui:message title="Error" severity="error" closable="true">
+                    <ui:outputText value="{!v.message}"/>
+                </ui:message>
+            </div>
+        </aura:if>	
+        
+        <div class="slds-card__body">
+            <div class="slds-card__body--inner">
+                <div class="slds-tile">
+                    <div class="slds-tile__detail slds-text-body--small">
+                        
+                        <div class="slds-form slds-form_compound">
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-1">
+                                            <span class="slds-form-element__label">AWB # </span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.BeforeAWB.Freight_AWB_Number__c}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Origin</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">
+                                                    {!v.BeforeAWB.Freight_Origin__c}
+                                                </span>                                           
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Destination</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">
+                                                    {!v.BeforeAWB.Freight_Destination__c}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Pieces</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.BeforeAWB.Freight_AWB_Pieces__c}</span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Weight</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.BeforeAWB.Freight_Weight__c}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Weight Unit</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.BeforeAWB.Freight_AWB_Weight_Unit__c}</span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Unit Type</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.BeforeAWB.Freight_AWB_Unit_Type__c}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-1">
+                                            <span class="slds-form-element__label">Shipment Description</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.BeforeAWB.Freight_AWB_Shipment_Description__c}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-1">
+                                            <span class="slds-form-element__label">Handling Code</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.BeforeAWB.Freight_AWB_Handling_Code__c}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-1">
+                                            <span class="slds-form-element__label">Latest Status</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">
+                                                    <ui:outputDateTime value="{!v.BeforeAWB.Latest_Status__c}" format="DD-MM-YYYY HH:mm"/>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <center>
+                                <ui:button aura:id="button" buttonTitle="Opens AWB iCargo Details" class="slds-button slds-button_brand" label="AWB Refresh" press="{!c.doAWB}"/>
+                            </center>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-spinner_container">
+            <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isOpen}">
+        <!--###### MODAL BOX Start From Here ######--> 
+        <div class="slds">
+            <div aria-hidden="true" role="dialog" class="slds-modal slds-modal--prompt slds-fade-in-open slds-modal_large" tabindex="-1" aria-labelledby="header99">
+                <div class="slds-modal__container">
+                    
+                    <!-- ###### MODAL BOX HEADER Part Start From Here ######-->
+                    <div class="slds-modal__header">
+                        <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModal}">
+                            <lightning:icon iconName="utility:close" size="x-small"/>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        
+                        <h2 id="header99" class="slds-text-heading--medium" style="font-weight:bold;">AWB Details</h2>
+                        
+                    </div>
+                    
+                    <!--###### MODAL BOX BODY Part Start From Here ######-->
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <div class="slds-form slds-form_compound">
+                            
+                            <aura:if isTrue="{!!v.showTable}">
+                                <!-- render Table when the Show table is true -->
+                                <div >
+                                    <ui:message title="Latest Status : Not Available" severity="info" closable="true">
+                                        <ui:outputText value="{!v.message}"/>
+                                    </ui:message>
+                                </div>
+                            </aura:if>
+                            <br />
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-3">
+                                            <span class="slds-form-element__label">AWB #</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.ApexController.ControllerCampaignMember.Freight_AWB_Number__c}</span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-3">
+                                            <span class="slds-form-element__label">Origin</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">
+                                                    {!v.ApexController.ControllerCampaignMember.Freight_Origin__c}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-3">
+                                            <span class="slds-form-element__label">Destination</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">
+                                                    {!v.ApexController.ControllerCampaignMember.Freight_Destination__c}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-3">
+                                            <span class="slds-form-element__label">Weight</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.ApexController.ControllerCampaignMember.Freight_Weight__c}</span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-3">
+                                            <span class="slds-form-element__label">Weight Unit</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">
+                                                    {!v.ApexController.ControllerCampaignMember.Freight_AWB_Weight_Unit__c}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-3">
+                                            <span class="slds-form-element__label">Pieces</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">
+                                                    {!v.ApexController.ControllerCampaignMember.Freight_AWB_Pieces__c}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Handling Code</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.ApexController.ControllerCampaignMember.Freight_AWB_Handling_Code__c}</span>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-2">
+                                            <span class="slds-form-element__label">Unit Type</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.ApexController.ControllerCampaignMember.Freight_AWB_Unit_Type__c}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-1">
+                                            <span class="slds-form-element__label">Shipment Description</span>
+                                            <div class="slds-form-element__control slds-has-divider--bottom">
+                                                <span class="slds-form-element__static">{!v.ApexController.ControllerCampaignMember.Freight_AWB_Shipment_Description__c}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br />
+                            <fieldset class="slds-form-element">
+                                
+                                <aura:if isTrue="{!v.showTable}">
+                                    <!-- render Table when the Show table is true -->
+                                    <legend class="slds-form-element__label legendTitle">Latest Status</legend>
+                                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                        <thead class="tableHead">
+                                            <tr>
+                                                <th scope="col"><div class="slds-truncate" title="Flight Details">Flight Details</div></th>
+                                                <th scope="col"><div class="slds-truncate" title="Milestone">Milestone</div></th>
+                                                <th scope="col"><div class="slds-truncate" title="Pieces">Pieces</div></th>
+                                                <th scope="col"><div class="slds-truncate" title="Shipment Date">Shipment Date</div></th>
+                                                <th scope="col"><div class="slds-truncate" title="Station">Station</div></th>
+                                                <th scope="col"><div class="slds-truncate" title="Unit">Unit</div></th>
+                                                <th scope="col"><div class="slds-truncate" title="Weight">Weight</div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <aura:iteration items="{!v.lsList}" var="wrap">
+                                                <aura:if isTrue="{!or(wrap.eventDetails.uldNumber=='BULK',wrap.eventDetails.uldNumber==Null)}"><!--CRM-8081-->
+                                                    <tr>
+                                                        <!--CRM 6919  <th scope="row"><div class="slds-truncate" title="{!wrap.flightDetails}">{!wrap.flightDetails}</div></th>
+                                                    <th scope="row"><div class="slds-truncate" title="{!wrap.milestone}">{!wrap.milestone}</div></th>-->
+                                                        <!-- <th scope="row"><div class="slds-truncate" title="{!wrap.flightDetails.flightNumber +','+wrap.flightDetails.segmentOrigin  +';'+wrap.flightDetails.segmentDestination +'.'+wrap.flightDetails.flightDepartureDate}">{!wrap.flightDetails.flightNumber +','+wrap.flightDetails.segmentOrigin  +';'+wrap.flightDetails.segmentDestination +'.'} <lightning:formattedDateTime value="{!wrap.flightDetails.flightDepartureDate}" year="numeric" month="short" day="numeric" hour="2-digit" minute="2-digit" hour12="false" timeZone="{! $Locale.timezone }"/></div></th>-->
+                                                        <th scope="row"><div class="slds-truncate" title="{!wrap.flightDetails.flightNumber +','+'DEP:'+wrap.flightDetails.segmentOrigin +','+ wrap.flightDetails.flightDepartureDate +'('+wrap.flightDetails.departureStatus+')'+'ARR'+wrap.flightDetails.segmentDestination +'.'+wrap.flightDetails.flightArrivalDate+'('+wrap.flightDetails.arrivalStatus+')'}">{!wrap.flightDetails.flightNumber +','+'DEP:'+wrap.flightDetails.segmentOrigin  +','}<ui:outputDateTime value="{!wrap.flightDetails.flightDepartureDate}" format="y-MM-dd HH:MM"/>{!'('+wrap.flightDetails.departureStatus+')'+','+'ARR:'+wrap.flightDetails.segmentDestination +'.'}<ui:outputDateTime value="{!wrap.flightDetails.flightArrivalDate}" format="y-MM-dd HH:MM"/>{!'('+wrap.flightDetails.arrivalStatus+')'}</div></th><!--CRM-8081-->
+                                                        <th scope="row"><div class="slds-truncate" title="{!wrap.eventName}">{!wrap.eventName}</div></th>
+                                                        <th scope="row"><div class="slds-truncate" title="{!wrap.pieces}">{!wrap.pieces}</div></th>
+                                                        <!--  <th scope="row"><div class="slds-truncate" title="{!wrap.shipmentdate}">{!wrap.shipmentdate}</div></th>
+                                                    <th scope="row"><div class="slds-truncate" title="{!wrap.station}">{!wrap.station}</div></th>-->
+                                                        <!--<th scope="row"><div class="slds-truncate" title="{!!wrap.flightDetails.flightArrivalDate}"><lightning:formattedDateTime value="{!wrap.flightDetails.flightArrivalDate}" year="numeric" month="short" day="numeric" hour="2-digit" minute="2-digit" second="2-digit" hour12="false" timeZone="{! $Locale.timezone }"/></div></th>
+                                                    <th scope="row"><div class="slds-truncate" title="{!wrap.flightDetails.segmentDestination}">{!wrap.flightDetails.segmentDestination}</div></th>-->
+                                                        <th scope="row"><div class="slds-truncate" title="{!wrap.transactionDate}"> <ui:outputDateTime value="{!wrap.transactionDate}" format="y-MM-dd HH:MM"/><!--<lightning:formattedDateTime value="{!wrap.flightDetails.flightArrivalDate}" year="numeric" month="short" day="numeric" hour="2-digit" minute="2-digit" second="2-digit" hour12="false" timeZone="{! $Locale.timezone }"/>--></div></th>
+                                                        <th scope="row"><div class="slds-truncate" title="{!wrap.airportCode}">{!wrap.airportCode}</div></th>
+                                                        <th scope="row"><div class="slds-truncate" title="{!wrap.eventDetails.uldNumber}"> {!'LOOSE'} </div></th>
+                                                        <th scope="row"><div class="slds-truncate" title="{!wrap.weight}">{!wrap.weight}</div></th>
+                                                    </tr>
+                                                    <aura:set attribute="else">
+                                                        <tr>
+                                                            <!--CRM-6919--> 
+                                                            <th scope="row"><div class="slds-truncate" title="{!wrap.flightDetails.flightNumber +','+'DEP:'+wrap.flightDetails.segmentOrigin +','+ wrap.flightDetails.flightDepartureDate +'('+wrap.flightDetails.departureStatus+')'+'ARR'+wrap.flightDetails.segmentDestination +'.'+wrap.flightDetails.flightArrivalDate+'('+wrap.flightDetails.arrivalStatus+')'}">{!wrap.flightDetails.flightNumber +','+'DEP:'+wrap.flightDetails.segmentOrigin  +','}<ui:outputDateTime value="{!wrap.flightDetails.flightDepartureDate}" format="y-MM-dd HH:MM"/>{!'('+wrap.flightDetails.departureStatus+')'+','+'ARR:'+wrap.flightDetails.segmentDestination +'.'}<ui:outputDateTime value="{!wrap.flightDetails.flightArrivalDate}" format="y-MM-dd HH:MM"/>{!'('+wrap.flightDetails.arrivalStatus+')'}</div></th><!--CRM-8081-->
+                                                            <th scope="row"><div class="slds-truncate" title="{!wrap.eventName}">{!wrap.eventName}</div></th>
+                                                            <th scope="row"><div class="slds-truncate" title="{!wrap.pieces}">{!wrap.pieces}</div></th>
+                                                            <th scope="row"><div class="slds-truncate" title="{!wrap.transactionDate}"> <ui:outputDateTime value="{!wrap.transactionDate}" format="y-MM-dd HH:MM"/><!--<lightning:formattedDateTime value="{!wrap.flightDetails.flightArrivalDate}" year="numeric" month="short" day="numeric" hour="2-digit" minute="2-digit" second="2-digit" hour12="false" timeZone="{! $Locale.timezone }"/>--></div></th>
+                                                            <th scope="row"><div class="slds-truncate" title="{!wrap.airportCode}">{!wrap.airportCode}</div></th>
+                                                            <th scope="row"><div class="slds-truncate" title="{!wrap.eventDetails.uldNumber}">{!wrap.eventDetails.uldNumber} </div></th>
+                                                            <th scope="row"><div class="slds-truncate" title="{!wrap.weight}">{!wrap.weight}</div></th>
+                                                        </tr>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </tbody>
+                                    </table>
+                                </aura:if> 
+                                
+                            </fieldset>
+                            
+                        </div>
+                    </div>
+                    
+                    <!--###### MODAL BOX FOOTER Part Start From Here ######-->
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button--neutral" onclick="{!c.closeModal}" >OK</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--###### MODAL BOX Back Drop ######-->
+            <div class="slds-backdrop slds-backdrop--open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+        </div>
+    </aura:if>
+</aura:component>

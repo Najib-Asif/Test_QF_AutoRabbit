@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Require_Dispute_Type</fullName>
+    <active>false</active>
+    <errorConditionFormula>ISBLANK(TEXT(QCC_Dispute_Type__c))
+&amp;&amp;
+QCC_Disputed_Recovery__c = TRUE</errorConditionFormula>
+    <errorDisplayField>QCC_Dispute_Type__c</errorDisplayField>
+    <errorMessage>Dispute Type must be complete if the recovery has been disputed.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Sales_Offers_Bulk_FF_Request_Notification</name>
+        <label>Sales Offers - Bulk FF Request Notification</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <stringValue>BusGovSalesSolutions@qantas.com.au</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>salesforcesupport@qantas.com.au</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Sales Offer Case {!CaseRecord.CaseNumber} - Bulk Request</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailMessageTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>relatedRecordId</name>
+            <value>
+                <elementReference>CaseRecord.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>60.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>CheckIfTheRecordTypeSalesOffersReq</name>
+        <label>CheckIfTheRecordTypeSalesOffersReq</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>RecordTypeIsSalesOffers</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CaseRecord.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sales Offers Request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>CaseRecord.Bulk_Frequent_Flyer_Request__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>CaseRecord.Approved__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Sales_Offers_Bulk_FF_Request_Notification</targetReference>
+            </connector>
+            <label>RecordTypeIsSalesOffers</label>
+        </rules>
+    </decisions>
+    <description>For Sales Offers Cases, Bulk Request = TRUE, email notification will be sent to SHR BUSGOV(Platform change). Deactivated as a part of CRM-9324</description>
+    <environments>Default</environments>
+    <interviewLabel>CaseAfterTriggerSubFlow-OtherRecordType {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-OtherRecordTypeSalesOffer-BulkRequestNotification</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>CheckIfTheRecordTypeSalesOffersReq</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <textTemplates>
+        <name>EmailMessageTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi
+
+{!CaseRecord.CreatedById} has raised a Bulk Request Frequent Flyer Case in Salesforce
+
+Case Number: {!CaseRecord.CaseNumber}
+Account Name: {!CaseRecord.Account.Name}
+Type: {!CaseRecord.Type}
+Sub Type: {!CaseRecord.Sub_Type__c}
+Number of Frequent Flyer Requested: {!CaseRecord.Number_of_Frequent_Flyer_Request__c}
+Last Approved By: {!CaseRecord.Most_Recent_Approver__c} {!CaseRecord.Approval_Date_Time__c}
+Justification: {!CaseRecord.Justification__c}
+
+URL: https://qantas.my.salesforce.com/{!CaseRecord.Id}
+
+Thanks,
+Salesforce Support Team</text>
+    </textTemplates>
+    <variables>
+        <name>CaseRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

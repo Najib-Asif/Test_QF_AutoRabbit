@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_PreventPassengerUpdateOnClosedEvent</fullName>
+    <active>true</active>
+    <description>QCC: Prevent Passenger from editing once the Event is closed</description>
+    <errorConditionFormula>AND(Text(Event__r.Status__c) == &apos;Closed&apos;, 	
+				NOT(ISCHANGED(RecoveryIsCreated__c)),
+ PRIORVALUE(Passenger__c) != Null, 
+ISCHANGED( Passenger__c))</errorConditionFormula>
+    <errorMessage>Passenger Record can&apos;t be Edited on a closed Flight Event. Please Re-Open the Flight Event to update Passenger Record.</errorMessage>
+</ValidationRule>

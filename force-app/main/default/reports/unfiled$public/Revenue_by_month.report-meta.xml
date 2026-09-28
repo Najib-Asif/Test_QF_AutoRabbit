@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_47339424</developerName>
+        <masterLabel>Domestic MS %</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Account.QF_Domestic_Market_Share__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>1</to>
+            </sourceValues>
+            <value>No MS</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>1</from>
+                <to>79</to>
+            </sourceValues>
+            <value>Below 80%</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>79</from>
+                <to>89</to>
+            </sourceValues>
+            <value>80%-89%</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>89</from>
+            </sourceValues>
+            <value>90% and above</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_90746791</developerName>
+        <masterLabel>Teams</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account.Account_Owner_Role__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-New Business</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-New Business-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-New Business &amp; Development</sourceValue>
+            </sourceValues>
+            <value>Development &amp; New Business</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Charter</sourceValue>
+            </sourceValues>
+            <value>Resources</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-A&amp;G</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-A&amp;G-Lead Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-A&amp;G-Lead Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-A&amp;G-Lead Account Manager5</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager10</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager6</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-Sr Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager5</sourceValue>
+            </sourceValues>
+            <value>Mid-Market</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Lead</sourceValue>
+            </sourceValues>
+            <value>Strategic</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Account.Qantas_Corporate_Identifier__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account.Contracted__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Revenue by month</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

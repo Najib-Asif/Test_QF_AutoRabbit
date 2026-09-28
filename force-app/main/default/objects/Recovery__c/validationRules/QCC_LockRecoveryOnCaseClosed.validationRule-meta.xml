@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_LockRecoveryOnCaseClosed</fullName>
+    <active>true</active>
+    <description>Restricting creation of recoveries on closed cases, still can edit the existing recoveries on closed case. Jira: CRM-5617
+Update for QCC API Integration user JIRA CRM-5697</description>
+    <errorConditionFormula>AND(
+    RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+    TEXT(Case_Number__r.Status) = &apos;Closed&apos;,
+    ISNEW(),
+    NOT(
+          AND(
+             ($Profile.Name = &apos;QCC API Integration user&apos;),
+              TEXT(Case_Number__r.Origin) = &apos;Red App&apos;)),
+            
+            ($UserRole.Name = &apos;QF-QDC&apos;)
+)</errorConditionFormula>
+    <errorMessage>This case is either closed or the recovery finalised or submitted for finalisation</errorMessage>
+</ValidationRule>

@@ -1,0 +1,23 @@
+<template>
+    <div class="slds-p-right_small">
+        <div class={dynamicClass} >
+            <button class="slds-button slds-button_icon slds-m-right_x-small slds-p-top_xx-small" title={flghtEvntItem.accordianTitle}  aria-expanded="true" onclick={handleToggle}>
+                <lightning-icon icon-name={dynamicChevron} alternative-text="Connected" size="xx-small" title=""> </lightning-icon>
+            </button>
+            <div>
+                <div class="slds-summary-detail__title">
+                    <div class="slds-grid">
+                        <h3 class="slds-text-heading_small slds-truncate " style="font-size: 16px;font-weight: 510;line-height: 24px;color:#080707;"
+                            title="summary title">{flghtEvntItem.accordianTitle}</h3>
+                            <template lwc:if={flghtEvntItem.showDelay} >
+                            <span class="slds-badge slds-theme_error" style="margin-left:auto;" >{flghtEvntItem.delayFailurecode}</span>
+                            </template>
+                    </div>                        
+                </div>
+                <div class="slds-summary-detail__content " >
+                    <c-qcc-flight-event-detail flght-evnt={flghtEvntItem} card-name="body"></c-qcc-flight-event-detail> 
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

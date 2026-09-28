@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>If a record is approved, notification should be sent to Manager&apos;s Manager notification</description>
+        <name>Approved_Manager_s_Manager_notification</name>
+        <label>Approved - Manager&apos;s Manager notification</label>
+        <locationX>50</locationX>
+        <locationY>458</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Check_Status_is_Complete_Pending_PRISM_Deal_Load_send_notification_to_creator</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ApprovalnotificationforQISrolecheck</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.CreatedBy.Manager.Manager.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>NotificationtoCasecreator</name>
+        <label>NotificationtoCasecreator</label>
+        <locationX>402</locationX>
+        <locationY>842</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>NotificationtoCasecreatorMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Notify_Case_Creator_when_Niche_Fares_Case_is_Closed</name>
+        <label>Notify Case Creator when Niche Fares Case is Closed</label>
+        <locationX>930</locationX>
+        <locationY>950</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ChatterPostforNicheCaseClosedMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Notify_Case_Creator_when_Niche_Fares_case_is_created</name>
+        <label>Notify Case Creator when Niche Fares case is created</label>
+        <locationX>666</locationX>
+        <locationY>950</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ChatterPostforNicheCaseCreatedMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Record_approval_post_to_the_case_requester</name>
+        <label>Record approval post to the case requester</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Check_Role_and_Deal_Termination</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>CaseStatusApprovedChatterMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Record_Rejection_post_to_the_case_requester</name>
+        <label>Record Rejection post to the case requester</label>
+        <locationX>754</locationX>
+        <locationY>242</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Check_Role_and_Deal_Termination</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>CaseStatusRejectedChatterMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Reject_Manager_s_Manager_notification</name>
+        <label>Reject - Manager&apos;s Manager notification</label>
+        <locationX>314</locationX>
+        <locationY>458</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Check_Status_is_Complete_Pending_PRISM_Deal_Load_send_notification_to_creator</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>RejectnotificationforQISrolecheck</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.CreatedBy.Manager.Manager.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Case_type_check_with_status_as_approved</name>
+        <label>Case type check with status as approved</label>
+        <locationX>666</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>Check_Status_is_Complete_Pending_PRISM_Deal_Load_send_notification_to_creator</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE Case type check with status as approved</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Case_type_check_with_status_as_approved</name>
+            <conditionLogic>1 AND (2 OR 3) AND 4 AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Support Request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Extension</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Termination</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Approval_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Approval_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Record_approval_post_to_the_case_requester</targetReference>
+            </connector>
+            <label>TRUE Case type check with status as approved</label>
+        </rules>
+        <rules>
+            <name>TRUE_Case_type_check_with_status_as_Rejected</name>
+            <conditionLogic>1 AND (2 OR 3) AND 4 AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Support Request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Extension</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Termination</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Approval_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reject</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Approval_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Reject</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Record_Rejection_post_to_the_case_requester</targetReference>
+            </connector>
+            <label>TRUE Case type check with status as Rejected</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>This decision will check role and deal termination record type and send a chatter notification to user reporting manager&apos;s manager</description>
+        <name>Check_Role_and_Deal_Termination</name>
+        <label>Check Role and Deal Termination</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <defaultConnector>
+            <targetReference>Check_Status_is_Complete_Pending_PRISM_Deal_Load_send_notification_to_creator</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Approval_Role_Check</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.CreatedBy.Manager.UserRole.Name</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>QIS</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Termination</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Approval_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Approved_Manager_s_Manager_notification</targetReference>
+            </connector>
+            <label>Approval Role Check</label>
+        </rules>
+        <rules>
+            <name>Rejection_Role_Check</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.CreatedBy.Manager.UserRole.Name</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>QIS</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Approval_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reject</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal Termination</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Reject_Manager_s_Manager_notification</targetReference>
+            </connector>
+            <label>Rejection Role Check</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Status_is_Complete_Pending_PRISM_Deal_Load_send_notification_to_creator</name>
+        <label>Check Status is Complete – Pending PRISM Deal Load send notification to creator</label>
+        <locationX>666</locationX>
+        <locationY>734</locationY>
+        <defaultConnector>
+            <targetReference>Notify_Case_Creator_when_Niche_Fares_case_is_created_Or_closed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Status_is_Complete_Pending_PRISM_Deal_Load_send_notification_to_creator</name>
+            <conditionLogic>1 AND 2 AND 3 AND (4 OR 5)</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal_Support_request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Complete - Pending PRISM Deal Load</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Account.BillingCountry</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>US</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Complete - Pending PRISM Deal Load</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Account.BillingCountry</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>US</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NotificationtoCasecreator</targetReference>
+            </connector>
+            <label>TRUE Status is Complete – Pending PRISM Deal Load send notification to creator</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Notify_Case_Creator_when_Niche_Fares_case_is_created_Or_closed</name>
+        <label>Notify Case Creator when Niche Fares case is created Or closed</label>
+        <locationX>930</locationX>
+        <locationY>842</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Case_Created</name>
+            <conditionLogic>1 AND 2 AND 3 AND (4 OR 5)</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal_Support_request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Niche Fares</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>with AU Sales Support</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>with AU Sales Support</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Type</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Niche Fares</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Notify_Case_Creator_when_Niche_Fares_case_is_created</targetReference>
+            </connector>
+            <label>Case Created</label>
+        </rules>
+        <rules>
+            <name>Case_Closed</name>
+            <conditionLogic>1 AND 2 AND 3 AND (4 OR 5)</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Deal_Support_request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Niche Fares</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Closed - Deal Implemented</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue> Closed - Deal Implemented</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Type</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Niche Fares</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Notify_Case_Creator_when_Niche_Fares_Case_is_Closed</targetReference>
+            </connector>
+            <label>Case Closed</label>
+        </rules>
+    </decisions>
+    <description>Migrated from the Case - On Record Create Process Builder process using multiple criteria.
+CCC value for exception queue(Platform change)</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>BaseUrl</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!$Api.Partner_Server_URL_260}, FIND( &apos;/services&apos;, {!$Api.Partner_Server_URL_260})) &amp; {!objNewCase.Id}</expression>
+    </formulas>
+    <interviewLabel>CaseAfterTriggerSubFlow-OtherDealSuuportCaseOnRecordCreateProcessBuilder {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-OtherDealSuuportCaseOnRecordCreateProcessBuilder</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>540</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Case_type_check_with_status_as_approved</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>ApprovalnotificationforQISrolecheck</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi @[{!objNewCase.CreatedBy.Manager.Manager.Id}], record - {!objNewCase.Id} approved by @[{!objNewCase.CreatedBy.Manager.Id}]. Please find the record link - {!BaseUrl}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>CaseStatusApprovedChatterMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hello @[{!objNewCase.CreatedBy.Id}], your request for this case has been approved. Please proceed to update this case if required.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>CaseStatusRejectedChatterMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hello @[{!objNewCase.CreatedBy.Id}], your Case has been rejected by the approver.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ChatterPostforNicheCaseClosedMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi @[{!objNewCase.CreatedBy.Id}],Niche Fare case:{![Case].CaseNumber} has been closed. Thanks.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ChatterPostforNicheCaseCreatedMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi @[{!objNewCase.CreatedBy.Id}], Niche Fare case:{![Case].CaseNumber} has been created. Thanks.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>NotificationtoCasecreatorMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hello @[{!objNewCase.CreatedBy.Id}],Please proceed to generate your Deal Sheet and send it to your Customer and Audit. Thanks.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>RejectnotificationforQISrolecheck</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi @[{!objNewCase.CreatedBy.Manager.Manager.Id}], record - {!objNewCase.Id}, rejected by @[{!objNewCase.CreatedBy.Manager.Id}]. Please find the record link - {!BaseUrl}</text>
+    </textTemplates>
+    <variables>
+        <description>trigger.new</description>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>trigger.old</description>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

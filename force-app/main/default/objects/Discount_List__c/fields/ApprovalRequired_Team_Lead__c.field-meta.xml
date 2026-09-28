@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ApprovalRequired_Team_Lead__c</fullName>
+    <description>ApprovalRequired Team Lead for QBS</description>
+    <formula>AND( OR( ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Mainline - Red e-Deal + Q&apos;), 
+ISPICKVAL(Fare_Combination__c, &apos;Mainline - Flex Only Deal&apos;),ISPICKVAL(Fare_Combination__c, &apos;Regional&apos;), 
+ISPICKVAL(Fare_Combination__c, &apos;DOM Route Deal&apos;), ISPICKVAL(Fare_Combination__c, &apos;International&apos;),ISPICKVAL(Fare_Combination__c, &apos;Propeller&apos;)), Discount__c &gt; Discount_Threshold_AM__c, 
+ISPICKVAL(Proposal_Type__c, &apos;Qantas Business Savings&apos;), NOT(TeamLead_Approved__c),NOT(IsApproved__c), NOT(TeamLead_Rejected__c),NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>ApprovalRequired Team Lead</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

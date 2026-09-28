@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="">
+        <div class="slds-p-bottom_medium">
+            <!-- Parent Picklist -->
+            <lightning-combobox
+                label="Cost Centre/Account Number"
+                value={selectedCostCentre}
+                options={costCentre}
+                onchange={handleCostCentreChange}
+                required
+            ></lightning-combobox>
+        </div>
+        
+        <div class="slds-p-bottom_medium">
+
+             <!-- Child Picklist 1 -->
+             <lightning-combobox
+                label="Refund Cost Centre"
+                value={selectedRefundCostCentre}
+                options={refundCostCentreOptions}
+                disabled={disableChildPicklists} 
+                onchange={handlechangeRCC}
+                required               
+            ></lightning-combobox>
+        </div>
+        
+        <div class="slds-p-bottom_medium">
+
+            <!-- Child Picklist 2 -->
+            <lightning-combobox
+                label="Refund Account"
+                value={selectedRefundAccount}
+                options={refundAccountOptions}
+                disabled={disableChildPicklists} 
+                onchange={handlechangeRAC}
+                required               
+            ></lightning-combobox>
+            
+        </div>
+    </lightning-card>
+</template>

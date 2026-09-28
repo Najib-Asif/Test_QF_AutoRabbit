@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Significant Event messaging</masterLabel>
+    <promptVersions>
+        <actionButtonLabel>View KiQ article</actionButtonLabel>
+        <actionButtonLink>https://qantas.lightning.force.com/articles/Knowledge/National-Memo-16-31-May-2025</actionButtonLink>
+        <body>&lt;p&gt;Urgent information please read latest National Memo. &lt;/p&gt;</body>
+        <customApplication>Qantas_Customer_Connect_20</customApplication>
+        <delayDays>2</delayDays>
+        <description>messaging for significant events</description>
+        <dismissButtonLabel>OK</dismissButtonLabel>
+        <displayPosition>TopCenter</displayPosition>
+        <displayType>FloatingPanel</displayType>
+        <endDate>2025-07-31</endDate>
+        <experience>Lightning</experience>
+        <imageAltText>koala icon.</imageAltText>
+        <imageLocation>Left</imageLocation>
+        <isPublished>false</isPublished>
+        <masterLabel>Significant Event messaging</masterLabel>
+        <shouldDisplayActionButton>true</shouldDisplayActionButton>
+        <shouldIgnoreGlobalDelay>true</shouldIgnoreGlobalDelay>
+        <startDate>2025-06-12</startDate>
+        <themeColor>Theme3</themeColor>
+        <themeSaturation>Dark</themeSaturation>
+        <timesToDisplay>2</timesToDisplay>
+        <title>Significant Event</title>
+        <uiFormulaRule>
+            <criteria>
+                <leftValue>{!$Permission.CustomPermission.QCC_Receive_Service_Delivery_Messages}</leftValue>
+                <operator>EQUAL</operator>
+                <rightValue>TRUE</rightValue>
+            </criteria>
+        </uiFormulaRule>
+        <userAccess>SpecificPermissions</userAccess>
+        <userProfileAccess>Everyone</userProfileAccess>
+        <versionNumber>1</versionNumber>
+    </promptVersions>
+</Prompt>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Flight Event</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Flight Events</value>
+    </caseValues>
+    <fieldSets>
+        <label><!-- QCC_GlobalHeadsUp_SearchableFields --></label>
+        <name>QCC_GlobalHeadsUp_SearchableFields</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- QCC_SearchableFields --></label>
+        <name>QCC_SearchableFields</name>
+    </fieldSets>
+    <recordTypes>
+        <description><!-- QCC: Active Flight Events --></description>
+        <label><!-- Flight Event - Active --></label>
+        <name>Active_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Flight Event - Closed --></label>
+        <name>Closed_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Offload Passengers from flight --></description>
+        <label><!-- Flight Event - Offload --></label>
+        <name>FlightEventOffload</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- QCC: Global Flight Event --></description>
+        <label><!-- Global Event --></label>
+        <name>GlobalEvent</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Possible global disruption event as communicated by CJM to QANTAS VIP Service Team --></description>
+        <label><!-- Global Heads Up --></label>
+        <name>QCC_Global_Heads_Up</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Possible disruption event as communicated by CJM to QANTAS VIP Service Team --></description>
+        <label><!-- Heads Up --></label>
+        <name>QCC_Heads_Up</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please enter Close Action to close event --></errorMessage>
+        <name>Donot_close_event_with_out_close_action</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Assign back the Event to using &apos;Assign Back to IOC&apos; and edit the event. --></errorMessage>
+        <name>PreventCJMUpdatingAssignedEvent</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Event cannot be directly assign to a Customer Care user, please use the &apos;Assign to Customer Care&apos; button --></errorMessage>
+        <name>QCC_CannotManuallyAssignToCCC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Flight number is not in a valid format, please enter it in the following format: AA1234 --></errorMessage>
+        <name>QCC_FlightNumberCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Local Start Date and End Dates must be within the same Date. --></errorMessage>
+        <name>QCC_GlobalHeadsUp_must_be_on_one_day</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Flight Event is Linked to a Global Event, Please Remove the association to edit the Flight Event. --></errorMessage>
+        <name>QCC_PreventFltEvtEditingOnceLinkedtoGE</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Root cause and Primary cause cannot be edited --></errorMessage>
+        <name>QCC_PrimaryRootCauseNonEditable</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Event cannot be edited while closed, please reopen to edit the event --></errorMessage>
+        <name>QCC_UnableToUpdateOwnerWhenClosed</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Add_to_Global_Event --></label>
+        <name>Add_to_Global_Event</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Affected_Passengers_Report --></label>
+        <name>Affected_Passengers_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Composer_Flight_Event --></label>
+        <name>Conga_Composer_Flight_Event</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Flight_event_checklist --></label>
+        <name>Flight_event_checklist</name>
+    </webLinks>
+</CustomObjectTranslation>

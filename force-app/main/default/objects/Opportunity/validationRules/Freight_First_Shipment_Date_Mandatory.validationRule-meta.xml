@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_First_Shipment_Date_Mandatory</fullName>
+    <active>true</active>
+    <description>Freight - First Shipment Propose Date is mandatory when a Freight Opportunity is Closed-Accepted</description>
+    <errorConditionFormula>AND($RecordType.DeveloperName = &quot;Freight&quot;,   ISPICKVAL(StageName, &apos;Closed - Accepted&apos;), ISBLANK(Freight_First_Shipment_Propose_Date__c ))</errorConditionFormula>
+    <errorDisplayField>Freight_First_Shipment_Propose_Date__c</errorDisplayField>
+    <errorMessage>Please enter First Shipment Propose Date</errorMessage>
+</ValidationRule>

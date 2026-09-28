@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IATA_GDS_Code__c</fullName>
+    <description>CRM-9244: New field on Deal Sheets
+Introducing this field to display IATA code on DOM/INT Deal sheet Conga templates.</description>
+    <externalId>false</externalId>
+    <formula>CASE( GDS__c,
+ &quot;Amadeus&quot;, &quot;1A&quot;,
+ &quot;Sabre Asia Pacific&quot;, &quot;1B&quot;,
+ &quot;Travelsky&quot;, &quot;1E&quot;,
+ &quot;Infini&quot;, &quot;1F&quot;,
+ &quot;Galileo&quot;, &quot;1G&quot;,
+ &quot;Axess&quot;, &quot;1J&quot;,
+ &quot;Worldspan&quot;, &quot;1P&quot;,
+ &quot;Sabre&quot;, &quot;1S&quot;,
+ &quot;Apollo&quot;, &quot;1V&quot;,
+ &quot;F1&quot;
+)</formula>
+    <label>IATA GDS Code</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

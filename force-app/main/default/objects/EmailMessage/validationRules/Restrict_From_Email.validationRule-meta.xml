@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_From_Email</fullName>
+    <active>true</active>
+    <description>Restricting the from email address from the chatter email on email message</description>
+    <errorConditionFormula>AND(
+NOT(Incoming), 
+NOT(CONTAINS($Label.QCC_VIP_Email_Senders ,FromAddress)),
+OR(
+$Profile.Name == &apos;Qantas CC Consultant&apos;,
+$Profile.Name == &quot;QCC Contact Center Agent Hobart&quot;,
+$Profile.Name == &quot;QCC Contact Center Agent Manila&quot;,
+$Profile.Name == &quot;QCC Contact Center Agent Capetown&quot;,
+$Profile.Name == &quot;QCC Contact Center Agent Suva&quot;,
+$Profile.Name == &quot;QCC Contact Center Agent Auckland&quot;,
+$Profile.Name == &quot;QCC Contact Center Agent Mumbai&quot;,
+$Profile.Name == &apos;Qantas CC Operational Manager&apos;,
+$Profile.Name == &quot;QCC Operational Manager&quot;,
+$Profile.Name == &apos;Qantas CC Team Lead&apos; ,
+$Profile.Name == &apos;Qantas CC Journey Manager&apos;,
+$Profile.Name == &quot;QCC Customer Journey Manager&quot;,
+$Profile.Name == &apos;Qantas Pre Journey CC Consultant&apos;,
+$Profile.Name == &apos;Qantas CC Customer Specific Needs&apos;,
+$Profile.Name == &quot;QCC Specific Needs Agent&quot;
+),
+OR(Parent.RecordType.DeveloperName = &apos;CCC_Baggage&apos;, Parent.RecordType.DeveloperName = &apos;CCC_Complaints&apos;, Parent.RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+Parent.RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;, Parent.RecordType.DeveloperName = &apos;CCC_Event&apos;, Parent.RecordType.DeveloperName = &apos;CCCOffload&apos;,
+Parent.RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;, Parent.RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+Parent.RecordType.DeveloperName = &apos;CCC_Medical&apos;, Parent.RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;, Parent.RecordType.DeveloperName = &apos;CCC_Query&apos;,
+Parent.RecordType.DeveloperName = &apos;QCC_Assistance&apos;, Parent.RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;, Parent.RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;))</errorConditionFormula>
+    <errorMessage>Please select From address as &apos;Qantas Customer Connect&apos;</errorMessage>
+</ValidationRule>

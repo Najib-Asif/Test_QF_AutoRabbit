@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Check_DateTimeFormat_ActDepArrival</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(NOT( 
+OR( 
+ISBLANK(Actual_Departure_Date_Time__c), 
+REGEX( Actual_Departure_Date_Time__c , &quot;(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/(19|2[0-9])[0-9]{2} (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])&quot;) 
+) 
+) 
+, 
+NOT( 
+OR( 
+ISBLANK(Actual_Arrival_Date_Time__c), 
+REGEX( Actual_Arrival_Date_Time__c , &quot;(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/(19|2[0-9])[0-9]{2} (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])&quot;) 
+) 
+) 
+)
+&amp;&amp; $Permission.QCC_Bypass_Account_Contact_Case_Triggers = False</errorConditionFormula>
+    <errorMessage>Actual Departure Date/Time or Actual Arrival Date/Time is not in the required format dd/MM/yyyy HH:mm:ss. Please enter the valid format</errorMessage>
+</ValidationRule>

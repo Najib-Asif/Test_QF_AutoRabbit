@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_57481317</developerName>
+        <masterLabel>Jenelles&apos;s Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>OWNER</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Helena Sloan</sourceValue>
+            </sourceValues>
+            <value>Helena Sloan</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Losana Naulu</sourceValue>
+            </sourceValues>
+            <value>Losana Naulu</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Shana Bourke</sourceValue>
+            </sourceValues>
+            <value>Shana Bourke</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Stella Sedlak</sourceValue>
+            </sourceValues>
+            <value>Stella Sedlak</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Jenelle Lymer</sourceValue>
+            </sourceValues>
+            <value>Jenelle Lymer</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Etivise Sikulu</sourceValue>
+            </sourceValues>
+            <value>Etivise Sikulu</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>PRIORITY</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>ORIGIN</field>
+    </columns>
+    <columns>
+        <field>TYPE</field>
+    </columns>
+    <columns>
+        <field>Case.Sub_Type__c</field>
+    </columns>
+    <columns>
+        <field>Case.Sub_Type_1__c</field>
+    </columns>
+    <columns>
+        <field>Case.Freight_Port__c</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>AGE</field>
+    </columns>
+    <columns>
+        <field>CREATED</field>
+    </columns>
+    <columns>
+        <field>Case.Freight_AWB_Number__c</field>
+    </columns>
+    <columns>
+        <field>Case.Freight_AWB_Status__c</field>
+    </columns>
+    <columns>
+        <field>CONTACT.NAME</field>
+    </columns>
+    <columns>
+        <field>Case.Contact_Fullname__c</field>
+    </columns>
+    <columns>
+        <field>Case.On_hold_Reason__c</field>
+    </columns>
+    <columns>
+        <field>CLOSED_DATEONLY</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.QCC_Reopened_flag__c</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Service Case only</description>
+    <filter>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5) AND 6</booleanFilter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.Freight_Track_Trace_Exceptions,Case.Qantas_Freight,Case.Freight_Claims,Case.Freight_Feedback,Case.Freight_Query,Case.Freight_Shipment,Case.Freight_Email_to_Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CLOSED</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Freight CSU AU Queue</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Case_Owner_Team__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>CSU</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Case_Owner_Team__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Customer Service Unit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_57481317</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Helena Sloan,Losana Naulu,Shana Bourke,Stella Sedlak,Jenelle Lymer,Etivise Sikulu</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_57481317</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Freight Service My Team&apos;s Cases Jenelle</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>useronly</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <sortColumn>PRIORITY</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

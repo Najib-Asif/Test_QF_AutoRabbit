@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_87769709</developerName>
+        <masterLabel>Teams</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>ROLLUP_DESCRIPTION</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Manager</sourceValue>
+            </sourceValues>
+            <value>Strategic</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Charter</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA-Manager</sourceValue>
+            </sourceValues>
+            <value>Resources</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-New Business</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-New Business &amp; Development</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-New Business-Manager</sourceValue>
+            </sourceValues>
+            <value>Den &amp; New Business</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager10</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager11</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager6</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-SME Callout</sourceValue>
+            </sourceValues>
+            <value>SME</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <aggregate>Average</aggregate>
+            <axisBinding>y</axisBinding>
+            <column>Account.No_of_Days_Since_Last_Created_Activity__c</column>
+        </chartSummaries>
+        <chartType>HorizontalBar</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>BucketField_87769709</groupingColumn>
+        <location>CHART_BOTTOM</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.QF_Revenue__c</field>
+    </columns>
+    <columns>
+        <field>Account.Last_Completed_Account_Review__c</field>
+    </columns>
+    <columns>
+        <field>Account.Last_Activity_Date__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Account_Review_Completed_Last_90_Days__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>Account.No_of_Days_Since_Last_Created_Activity__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account.Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Contracted__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ROLLUP_DESCRIPTION</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>B&amp;G,R&amp;G</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ROLLUP_DESCRIPTION</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>regional</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ROLLUP_DESCRIPTION</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>A&amp;G,regional</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_87769709</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>USERS.NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Account &amp; Last Activities</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Account.Account_Review_Completed_Last_90_Days__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

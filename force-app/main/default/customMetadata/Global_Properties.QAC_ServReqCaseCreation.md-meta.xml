@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>QAC_ServReqCaseCreation</label>
+    <protected>false</protected>
+    <values>
+        <field>Category__c</field>
+        <value xsi:type="xsd:string">Integration</value>
+    </values>
+    <values>
+        <field>Static_Long_Values__c</field>
+        <value xsi:type="xsd:string">[
+	{&quot;Origin&quot;: &quot;QDP&quot;, &quot;lstFieldMappin&quot;: [
+		{&quot;FieldAPI&quot;:&quot;RecordTypeId&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;QAC Contact Us Support&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;RecordTypeName&quot;},
+		{&quot;FieldAPI&quot;:&quot;Subject&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;subject&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Description&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;description&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Status&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestStatus&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Type&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;QDP&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Group__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;QDP Portal&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Category__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestType&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Sub_Category__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestSubType1&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Consultants_Name__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentName&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Consultant_Email__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentEmail&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Consultant_Phone__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentPhone&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;External_System_Reference_Id__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;correlationId&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Created_From_Website__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;QDP&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Origin&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;Web&quot;, &quot;RequestParam&quot;:&quot;&quot;,&quot;type&quot;:&quot;text&quot;}]
+	},
+	{&quot;Origin&quot;: &quot;QAC Website&quot;, &quot;lstFieldMappin&quot;: [
+		{&quot;FieldAPI&quot;:&quot;RecordTypeId&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;Service Request&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;RecordTypeName&quot;},
+		{&quot;FieldAPI&quot;:&quot;Subject&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;subject&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Description&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;description&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Status&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestStatus&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Consultants_Name__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentName&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Consultant_Email__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentEmail&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Consultant_Phone__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentPhone&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;External_System_Reference_Id__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;correlationId&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;QAC_Request_Country__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestCountryCode&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Type&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestType&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Origin&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestOrigin&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Problem_Type__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestSubType1&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Waiver_Sub_Type__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestSubType2&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Remark_Category__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;remarkCategory&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Total_Attachments__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;totalAttachments&quot;, &quot;type&quot;:&quot;Decimal&quot;},
+		{&quot;FieldAPI&quot;:&quot;Reason_for_Waiver__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestReason&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Request_Reason_Sub_Type__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestReasonSubType&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Request_Reason_Others__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;otherReason&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Authority_Status__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;authorityStatus&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Additional_Requirements__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;additionalRequirements&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Justification__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;Not Applicable&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Created_From_Website__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;QAC&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;PNR_number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.bookingReference&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Old_PNR_Number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.oldBookingReference&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Passenger_Name__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.surname&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Ticket_Number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.ticketNumber&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;EMD_Number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.emdNumber&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;IATA__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.bookingAgencyReference&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;PCC_DI__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.pseudoCityCode&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Point_Of_Sale__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.pointOfSale&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;ABN_Tax_Reference__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.abn&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Qantas_Corporate_Identifier__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.qantasCorporateIdentifier&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Number_of_Passengers__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.numberOfPassengers&quot;, &quot;type&quot;:&quot;Decimal&quot;},
+		{&quot;FieldAPI&quot;:&quot;Travel_Type__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.travelType&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;First_Flight_Date__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.nextTravelDate&quot;, &quot;type&quot;:&quot;date&quot;},
+		{&quot;FieldAPI&quot;:&quot;Waiver_Date__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.waiverDate&quot;, &quot;type&quot;:&quot;date&quot;},
+		{&quot;FieldAPI&quot;:&quot;GDS_Job_Reference__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.gdsJobReference&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Ticketing_Time_Limit__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.ticketingTimeLimit&quot;, &quot;type&quot;:&quot;date&quot;},
+		{&quot;FieldAPI&quot;:&quot;Frequent_Flyer_Number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.FrequentFlyerReference&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Fare_basis_value__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.fareBasis&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Fare_Type__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;fareDetails.fareType&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Private_Fare_Basis__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;fareDetails.privateFareCode&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Region_Code__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;fareDetails.regionCode&quot;, &quot;type&quot;:&quot;text&quot;}]
+	},
+	
+	{&quot;Origin&quot;: &quot;NDC&quot;, &quot;lstFieldMappin&quot;: [
+        {&quot;FieldAPI&quot;:&quot;RecordTypeId&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;QAC Contact Us Support&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;RecordTypeName&quot;},
+        {&quot;FieldAPI&quot;:&quot;Subject&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;subject&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Description&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;description&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;QAC_Request_Country__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestCountryCode&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Language&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestLanguage&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Status&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestStatus&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Type&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;NDC&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Group__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;NDC Portal&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Category__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestType&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Sub_Category__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestSubType1&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultants_Name__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentName&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultant_Email__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentEmail&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultant_Phone__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentPhone&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;External_System_Reference_Id__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;correlationId&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Created_From_Website__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;NDC&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Origin&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;Qantas NDC Contact Form&quot;, &quot;RequestParam&quot;:&quot;&quot;,&quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;QAC_Request_Country__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestCountryCode&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;GDS_DI__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.gds&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;PCC_DI__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.pseudoCityCode&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Resolve_Case_Number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.gdsJobReference&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Booking_PNR__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.bookingReference&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;PNR_number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.affectedCount&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Ticket_Number__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;bookingDetails.ticketNumber&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Fare_basis_value__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;fareDetails.fareBasis&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Fare_Total__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;fareDetails.fareWithTax&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Priority&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;Low&quot;, &quot;RequestParam&quot;:&quot;&quot;, &quot;type&quot;:&quot;text&quot;}]
+}, 
+{&quot;Origin&quot;: &quot;EOI&quot;, &quot;lstFieldMappin&quot;: [
+        {&quot;FieldAPI&quot;:&quot;RecordTypeId&quot;,&quot;Value&quot;:&quot;QAC Contact Us Support&quot;, &quot;type&quot;:&quot;RecordTypeName&quot;},
+        {&quot;FieldAPI&quot;: &quot;EntitlementId&quot;, &quot;Value&quot;: &quot;550Mo00000VghBZIAZ&quot;, &quot;type&quot;: &quot;text&quot;},
+        {&quot;FieldAPI&quot;: &quot;OwnerId&quot;, &quot;Value&quot;: &quot;00GMo000003CU73MAG&quot;, &quot;type&quot;: &quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Subject&quot;,&quot;Value&quot;:&quot;EOI Request&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Description&quot;, &quot;RequestParam&quot;:&quot;description&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;QAC_Request_Country__c&quot;, &quot;RequestParam&quot;:&quot;requestCountryCode&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Status&quot;, &quot;RequestParam&quot;:&quot;requestStatus&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Type&quot;,&quot;Value&quot;:&quot;EOI&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultants_Name__c&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentName&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultant_Email__c&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentEmail&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultant_Phone__c&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentPhone&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;External_System_Reference_Id__c&quot;, &quot;RequestParam&quot;:&quot;correlationId&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Created_From_Website__c&quot;,&quot;Value&quot;:&quot;EOI&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Origin&quot;,&quot;Value&quot;:&quot;Web&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Priority&quot;,&quot;Value&quot;:&quot;Low&quot;, &quot;type&quot;:&quot;text&quot;}]
+},
+{&quot;Origin&quot;: &quot;Gateway&quot;, &quot;lstFieldMappin&quot;: [
+        {&quot;FieldAPI&quot;:&quot;RecordTypeId&quot;,&quot;Value&quot;:&quot;Gateway Support&quot;, &quot;type&quot;:&quot;RecordTypeName&quot;},
+        {&quot;FieldAPI&quot;: &quot;OwnerId&quot;, &quot;Value&quot;: &quot;00GMo000007D8QLMA0&quot;, &quot;type&quot;: &quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Subject&quot;,&quot;Value&quot;:&quot;Gateway Portal Request&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Description&quot;, &quot;RequestParam&quot;:&quot;description&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Status&quot;, &quot;RequestParam&quot;:&quot;requestStatus&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Type&quot;,&quot;Value&quot;:&quot;Gateway&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Group__c&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestSubType1&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Category__c&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestSubType2&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;QAC_Request_Country__c&quot;, &quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;requestCountryCode&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Agent_Organisation_Name__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;remarkCategory&quot;, &quot;type&quot;:&quot;text&quot;},
+		{&quot;FieldAPI&quot;:&quot;Additional_Requirements__c&quot;,&quot;ObjectAPI&quot;:&quot;Case&quot;,&quot;Value&quot;:&quot;&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentPingId&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultants_Name__c&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentName&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultant_Email__c&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentEmail&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Consultant_Phone__c&quot;, &quot;RequestParam&quot;:&quot;agencyIdentification.agentPhone&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;External_System_Reference_Id__c&quot;, &quot;RequestParam&quot;:&quot;correlationId&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Created_From_Website__c&quot;,&quot;Value&quot;:&quot;Gateway&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Origin&quot;,&quot;Value&quot;:&quot;Web&quot;, &quot;type&quot;:&quot;text&quot;},
+        {&quot;FieldAPI&quot;:&quot;Priority&quot;,&quot;Value&quot;:&quot;Low&quot;, &quot;type&quot;:&quot;text&quot;}]
+}
+]</value>
+    </values>
+    <values>
+        <field>Static_Values__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

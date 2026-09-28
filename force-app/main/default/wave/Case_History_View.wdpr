@@ -1,0 +1,332 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "MasterRecordId", "CaseNumber", "ContactId", "AccountId", "ParentId", "Type", "RecordTypeId", "Status", "Reason", "Origin", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "IsEscalated", "OwnerId", "CreatedDate", "LastModifiedDate", "Frequent_Flyer_Number__c", "Contact_Fullname__c", "Power_of_One_Case__c", "Sub_Type_1__c", "Sub_Type_2__c", "Created_by_Role__c", "Aircraft_Type_Code__c", "Booking_PNR__c", "Category__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Owner_City__c", "Record_Type__c", "Recovery_Quantity__c", "Recovery_Value__c", "Sub_Category__c", "Case_Owner_Manager__c", "CCC_R1_CCAT_Type__c", "Case_Status__c", "CCC_And_B_Case_Type__c", "Case_Number__c", "Is_QCC_Case__c", "Is_CCAT_User__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "DeveloperName", "NamespacePrefix", "Description", "BusinessProcessId", "SobjectType", "IsActive", "CreatedById", "CreatedDate", "LastModifiedById", "LastModifiedDate", "SystemModstamp" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "IsPublished", "CommentBody", "CreatedById", "CreatedDate" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseComment",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseComment"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Comment",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ProfileId", "UserRoleId", "FirstName", "IsActive", "UserRole.ParentRoleId", "Profile.Name", "UserRole.Name", "Name", "UserRole.Id", "Profile.Name_bucket", "Profile.Id", "Id", "LastName", "UserRole.Name_bucket", "UserRole.DeveloperName", "Id_formula_formula_formula_bucket" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET4", "JOIN1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "RIGHT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Final",
+        "rightKeys" : [ "Comment.CreatedById" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Final.Is_QCC_Case__c",
+          "operator" : "EQUAL",
+          "operands" : [ "true" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Final.RecordType.DeveloperName",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC_Voice" ]
+        } ],
+        "filterBooleanLogic" : "1 OR 2"
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case History View",
+          "name" : "Case_History_View"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "TO_MEASURE0" : {
+      "action" : "typeCast",
+      "sources" : [ "FILTER0" ],
+      "schema" : {
+        "fields" : [ {
+          "name" : "Final.Frequent_Flyer_Number__c_to_measure",
+          "newProperties" : {
+            "name" : "Final.Frequent_Flyer_Number__c"
+          }
+        } ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Final.Frequent_Flyer_Number__c" ]
+        }
+      },
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Final.Frequent_Flyer_Number__c",
+          "newProperties" : {
+            "label" : "Frequent Flyer Number",
+            "name" : "Final.Frequent_Flyer_Number__c_to_measure",
+            "typeProperties" : {
+              "type" : "NUMBER",
+              "scale" : 2,
+              "precision" : 18
+            }
+          }
+        } ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "TO_MEASURE0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Final.Type_bucket",
+          "label" : "Case Type Bucket",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Non Proactive",
+            "nullBucketValue" : null,
+            "isPassthroughEnabled" : false,
+            "algorithm" : null,
+            "sourceField" : {
+              "name" : "Final.Type",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Proactive",
+              "sourceValues" : [ "Air Turn Back", "Diversion", "Domestic Delay", "PNR Health Check", "PNR Health Check - Watchlist", "Potential Downgrade", "Pre-Flight Watchlist Check", "Quarterly Health Check Call", "Retain Platinum One", "Watch list is Expiring", "Welcome to Life Time Platinum", "Welcome to Platinum One", "Welcome to SSU" ]
+            } ]
+          }
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "LOAD_DATASET3" : {
+        "label" : "CaseComment",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Join 1",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Basic User Master",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 532
+      },
+      "FILTER0" : {
+        "label" : "Filter 0",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 672
+      },
+      "OUTPUT0" : {
+        "label" : "Case History View",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 952
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 812,
+        "graph" : {
+          "TO_MEASURE0" : {
+            "label" : "To Number"
+          },
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "TO_MEASURE0",
+          "target" : "BUCKET0"
+        } ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "FILTER0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "TRANSFORM0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

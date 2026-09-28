@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flight_Number_accept_4_digits_only</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+NOT(ISNUMBER( QCC_Flight_No__c )),
+LEN( QCC_Flight_No__c ) &lt;&gt; 4
+)</errorConditionFormula>
+    <errorMessage>Flight Number must contain 4 digits</errorMessage>
+</ValidationRule>

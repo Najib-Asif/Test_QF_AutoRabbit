@@ -1,0 +1,341 @@
+{
+  "version" : "65.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Conversation_Id", "Date_Key", "Queue_Group", "Call_Type_Name", "Transferred_Consult", "FCR_Achieved", "Inbound_Alerted", "Inbound_Handle_Time", "Inbound_Wrap_Time", "Transferred", "CSAT_Surveys", "Inbound_Talk_Time", "CES", "Inbound_Not_Responding", "Session_Order", "FCR", "CSAT_Achieved", "Transferred_Blind", "Inbound_Hold_Time", "CES_Achieved", "CSAT" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025 Jul - Sep Call Data",
+          "name" : "X2025_Jul_Sep_Call_Data"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "computeRelative",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "partitionBy" : [ "Conversation_Id" ],
+        "orderBy" : [ {
+          "fieldName" : "Session_Order",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "IVR_Path",
+          "label" : "IVR Path",
+          "formulaExpression" : "first_value(Call_Type_Name)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "partitionBy" : [ "Conversation_Id" ],
+        "orderBy" : [ {
+          "fieldName" : "Session_Order",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Landing_Queue",
+          "label" : "Landing Queue",
+          "formulaExpression" : "first_value(Queue_Group)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "partitionBy" : [ "Conversation_Id" ],
+        "orderBy" : [ {
+          "fieldName" : "Session_Order",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Previous_Call_Handle_Time",
+          "label" : "Previous Call Handle Time",
+          "formulaExpression" : "lag(Inbound_Handle_Time)",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025 Jul - Sep Data Processed",
+          "name" : "X2025_Jul_Sep_Data_Processed",
+          "folderName" : "NEO_CALL_TRANSFER_OPTIMIZATION"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Conversation_Id", "Transfer_Note" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025 Sep Transfer Notes",
+          "name" : "X2025_Sep_Transfer_Notes"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Conversation_Id" ],
+        "rightQualifier" : "TransferNotes",
+        "rightKeys" : [ "Conversation_Id" ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CreatedDate", "Created_Date_Time_System__c", "CallObject" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Task",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Task"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ "1756598400000", "1759190400000" ]
+        } ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FORMULA2", "DROP_FIELDS0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Conversation_Id" ],
+        "rightQualifier" : "TaskObj",
+        "rightKeys" : [ "CallObject" ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "computeRelative",
+      "sources" : [ "FILTER0" ],
+      "parameters" : {
+        "partitionBy" : [ "CallObject" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "First_Call_Creation_Timestamp",
+          "label" : "First Call Creation Timestamp",
+          "formulaExpression" : "first_value(CreatedDate)",
+          "format" : "yyyy-MM-dd HH:mm:ss",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "CreatedDate", "Created_Date_Time_System__c" ]
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "2025 Jul - Sep Call Data",
+        "type" : "LOAD_DATASET",
+        "top" : 250.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "TRANSFORM0" : {
+        "label" : "Call Grouping",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 250.2,
+        "left" : 252,
+        "graph" : {
+          "FORMULA0" : {
+            "label" : "IVR Path"
+          },
+          "FORMULA1" : {
+            "label" : "Landing Queue"
+          },
+          "FORMULA2" : {
+            "label" : "Previous Call Handle Time"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "FORMULA2"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "2025 Jul - Sep Data Processed",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252.39999999999998,
+        "left" : 673.1
+      },
+      "LOAD_DATASET1" : {
+        "label" : "2025 Sep Transfer Notes",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 532,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Transfer Notes",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.10000000000002,
+        "left" : 531.9
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Task",
+        "type" : "LOAD_DATASET",
+        "top" : 390.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Sep 25 Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 390.2,
+        "left" : 252
+      },
+      "JOIN1" : {
+        "label" : "Call Creation Time",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 250.2,
+        "left" : 392
+      },
+      "TRANSFORM1" : {
+        "label" : "First Call Creation Timestamp",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392,
+        "left" : 392,
+        "graph" : {
+          "FORMULA3" : {
+            "label" : "First Call Creation Timestamp"
+          },
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA3",
+          "target" : "DROP_FIELDS0"
+        } ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "FILTER0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "FILTER0",
+      "target" : "TRANSFORM1"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

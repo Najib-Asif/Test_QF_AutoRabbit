@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Related_to_Object__c</columns>
+    <columns>Component__c</columns>
+    <columns>JIRA_number__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Deployed_to_Production__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Related_to_Object__c</field>
+        <operation>equals</operation>
+        <value>Account</value>
+    </filters>
+    <filters>
+        <field>Component__c</field>
+        <operation>equals</operation>
+        <value>Field</value>
+    </filters>
+    <label>All</label>
+</ListView>

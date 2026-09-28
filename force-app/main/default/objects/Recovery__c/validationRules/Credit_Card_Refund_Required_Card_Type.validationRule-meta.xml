@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Credit_Card_Refund_Required_Card_Type</fullName>
+    <active>true</active>
+    <description>Created to ensure Card Type is populated when Recovery Type = Credit Card Refund</description>
+    <errorConditionFormula>AND( $Setup.EnableValidationRule__c.VR_Credit_Card_Refund_Required_Fields__c=TRUE, 
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+    AND(ISPICKVAL(Type__c, &apos;Credit Card Refund&apos;),
+												ISPICKVAL(Card_Type__c, &apos;&apos;)
+												))</errorConditionFormula>
+    <errorDisplayField>Card_Type__c</errorDisplayField>
+    <errorMessage>Please complete this field</errorMessage>
+</ValidationRule>

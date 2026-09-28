@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Sales_Support_Team_Payments</fullName>
+    <columns>NAME</columns>
+    <columns>Company_Name__c</columns>
+    <columns>ABN__c</columns>
+    <columns>Amount__c</columns>
+    <columns>Paid__c</columns>
+    <columns>Payment_Date__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>RECORDTYPE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Payment Processed,Pending with Sales Support Team</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Invoices__c.New_Corporate_Payments,Invoices__c.Approved_Corporate_Payments</value>
+    </filters>
+    <label>All Sales Support Team Payments</label>
+</ListView>

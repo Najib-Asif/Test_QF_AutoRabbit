@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Groups_ApprovalRequired_ClosingCase</fullName>
+    <active>true</active>
+    <description>If Type=&apos;Group Waivers&apos; or &apos;SBT&apos; then users are not supposed to Close Caseif Approval Status = &apos;Pending&apos;</description>
+    <errorConditionFormula>AND ( 
+RecordType.Name==&quot;Service Request&quot;, 
+ISPICKVAL(Status,&apos;Closed&apos;), 
+
+OR(ISPICKVAL(Type,&apos;Group Waivers&apos;), ISPICKVAL(Type,&apos;SBT&apos;)), 
+
+
+ISPICKVAL( Approval_Status__c,&apos; &apos;) 
+)
+
+/*AND ( 
+RecordType.Name==&quot;Service Request&quot;, 
+OR(ISPICKVAL(Type,&apos;Group Waivers&apos;), ISPICKVAL(Type,&apos;SBT&apos;)), 
+ISPICKVAL( Approval_Status__c,&apos;Pending&apos; ),ISPICKVAL(Status,&apos;Closed&apos;))*/</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Please submit your Case for approval before closing your Case.</errorMessage>
+</ValidationRule>

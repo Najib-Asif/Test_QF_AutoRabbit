@@ -1,0 +1,112 @@
+<template>
+  <lightning-record-view-form
+  record-id={recordId}
+  object-api-name="Contact"
+  columns="2"
+  mode="readonly"
+  layout-type="Compact">
+  <div>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <lightning-icon icon-name="standard:contact" alternative-text="Contact" title="Contact Details" style="width: min-content;"></lightning-icon>
+            &nbsp; <b>Contact Details</b>
+          </td>
+          <td>
+            <template lwc:if={QFFWebLoginDisabled}> 
+              <lightning-icon icon-name="utility:lock" alternative-text="Web Login Locked" title="Web Login Locked" style="width: min-content;"></lightning-icon>
+              &nbsp; <b>Web Login Locked</b> 
+          </template>
+            <!--<template lwc:else> 
+                <lightning-icon icon-name="utility:unlock" alternative-text="Account Unlocked" title="Account Unlocked" style="width: min-content;"></lightning-icon>
+              &nbsp; <b>Account Unlocked</b> 
+            </template>-->
+          </td>
+         </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr class="slds-border_bottom">
+          <td>
+            <p class="slds-form-element_horizontal">Name: <br>
+              <lightning-formatted-text value={FFName}>
+              </lightning-formatted-text>
+            </p>
+            
+          </td>
+          <td>
+            <p class="slds-form-element_horizontal">Preferred Name:<br>
+              <lightning-formatted-text value={PrefName}></lightning-formatted-text>
+            </p>
+          </td>
+        </tr>
+        <tr class="slds-border_bottom">
+          <td>
+            <p class="slds-form-element_horizontal">Frequent Flyer Number: <br>
+              <lightning-formatted-text value={FrequentFlyerNumber}></lightning-formatted-text>
+            </p>
+          </td>
+          <td>
+            <p class="slds-form-element_horizontal">Status Credits:  <br>
+              <lightning-formatted-text value={StatusCredits}></lightning-formatted-text>
+            </p>
+          </td>
+        </tr>
+        <tr class="slds-border_bottom">
+          <td>
+            <p class="slds-form-element_horizontal">Tier:  <br>
+              <img src={imgSrc} height={imgHeight} width={imgWidth}/>
+            </p>
+          </td>
+          <td>
+            <p class="slds-form-element_horizontal">Status Credits Till Next Level:  <br>
+              <lightning-formatted-text value={statusCreditTillNxtLvl}></lightning-formatted-text>
+            </p>
+          </td>
+        </tr>
+        <tr class="slds-border_bottom">
+          <td>
+            <p class="slds-form-element_horizontal">Points Balance:  <br>
+              <lightning-formatted-text value={pointsBalance}></lightning-formatted-text>
+            </p>
+          </td>
+          <td>
+            <p class="slds-form-element_horizontal">Tier Anniversary Date:  <br>
+              <lightning-formatted-text value={TierAnniversaryDate}></lightning-formatted-text>
+            </p>
+          </td>
+        </tr>
+        <tr class="slds-border_bottom">
+          <td>
+            <p class="slds-form-element_horizontal">Phone Number:  <br>
+              <lightning-click-to-dial value={phone}></lightning-click-to-dial>
+            </p>
+          </td>
+          <td>
+            <p class="slds-form-element_horizontal">Email:  <br>
+              <lightning-formatted-text value={email}></lightning-formatted-text>
+            </p>
+          </td>
+        </tr>
+        <!--CRM-8740-->
+        <template lwc:if={lifeTimeStatus}> 
+          <tr class="slds-border_bottom">
+            <td>
+              <p class="slds-form-element_horizontal">Lifetime Status:  <br>
+                <img src={lifetimeTierImgSrc} height={lifetimeTierImgHeight} width={lifetimeTierImgWidth}/>
+              </p>
+            </td>
+            <td>
+              <p class="slds-form-element_horizontal">
+              </p>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+   </div>
+</lightning-record-view-form>
+   
+</template>

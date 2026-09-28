@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email_Action_1</name>
+        <label>Send Email Action 1</label>
+        <locationX>578</locationX>
+        <locationY>492</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>ToRecipient</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <elementReference>SenderEmailAddress</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailBodyForReminderEmail</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>useLineBreaks</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>relatedRecordId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>ccRecipientAddressList</name>
+            <value>
+                <elementReference>CCRecipients</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>attachmentId</name>
+            <value>
+                <elementReference>Get_Quote_attachment_from_Quote.ContentDocument.LatestPublishedVersionId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_if_Quote_status_is_still_Presented</name>
+        <label>Check if Quote status is still Presented?</label>
+        <locationX>710</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Presented</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Presented</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Quote_attachment_from_Quote</targetReference>
+            </connector>
+            <label>Presented</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Create_Task</name>
+        <label>Create Task</label>
+        <locationX>182</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Create_task_on_Status_Change</name>
+            <conditionLogic>2 AND 3 AND (1 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.BillingCountryCode</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>AU</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Presented</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.MaximumTrackDate__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.BillingCountryCode</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NZ</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task1</targetReference>
+            </connector>
+            <label>Create task on Status Change</label>
+        </rules>
+    </decisions>
+    <description>This flow is used to create task when quote status is presented for more than or equal to 4 days.
+CRM-9760</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>CCRecipients</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Opportunity.Owner.Email}</expression>
+    </formulas>
+    <formulas>
+        <name>DueDateReminder</name>
+        <dataType>Date</dataType>
+        <expression>TODAY() + 2</expression>
+    </formulas>
+    <formulas>
+        <name>DynamicQuoteSubject</name>
+        <dataType>String</dataType>
+        <expression>&apos;Follow-up Quote &apos;+{!$Record.Name}+&apos; with &apos;+{!$Record.Opportunity.Account.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>EmailBody</name>
+        <dataType>String</dataType>
+        <expression>&apos;Hello &apos; + {!$Record.Freight_Contact_Name__c} + &apos;, &lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Re recent quote&apos; + &apos; &apos; + {!$Record.QuoteNumber} +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Following on from the recent quote we sent you (copy attached).  If you need any help or have questions regarding the quote or would like to accept the quote, please let me know as soon as possible.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;A reminder that quotes have limited validity and may change or need to be requoted if not accepted within the original validity period, noted on the quote document.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;In order to secure capacity please make a booking online and ensure the Freight Sales Support team are advised of the AWB number by email to &lt;a href=&quot;mailto:freightsalessupport@qantas.com.au&quot;&gt;freightsalessupport@qantas.com.au&lt;/a&gt;.  Please note Spot Rates cannot be applied retrospectively.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Please let me know if you have any questions.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Regards&apos;+&apos;&lt;br/&gt;&apos;+
+{!$Record.Owner:User.FirstName} + &apos; &apos; + {!$Record.Owner:User.LastName}</expression>
+    </formulas>
+    <formulas>
+        <name>EmailBodyForReminderEmail</name>
+        <dataType>String</dataType>
+        <expression>IF (ISPICKVAL({!$Record.Owner:User.CountryCode}, &apos;NZ&apos;), {!EmailBodyNZ}, {!EmailBody})</expression>
+    </formulas>
+    <formulas>
+        <name>EmailBodyNZ</name>
+        <dataType>String</dataType>
+        <expression>&apos;Hello &apos; + {!$Record.Freight_Contact_Name__c} + &apos;, &lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Re recent quote&apos; + &apos; &apos; + {!$Record.QuoteNumber} +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Following on from the recent quote we sent you (copy attached).  If you need any help or have questions regarding the quote or would like to accept the quote, please let me know as soon as possible.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;A reminder that quotes have limited validity and may change or need to be requoted if not accepted within the original validity period, noted on the quote document.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;In order to secure capacity please make a booking online and ensure the Freight Sales Support team are advised of the AWB number by email to &lt;a href=&quot;mailto:aucklandfreight@qantas.com.au&quot;&gt;aucklandfreight@qantas.com.au&lt;/a&gt;.  Please note Spot Rates cannot be applied retrospectively.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Please let me know if you have any questions.&apos; +&apos;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&apos;+
+&apos;Regards&apos;+&apos;&lt;br/&gt;&apos;+
+{!$Record.Owner:User.FirstName} + &apos; &apos; + {!$Record.Owner:User.LastName}</expression>
+    </formulas>
+    <formulas>
+        <name>HistoryTrackDateValue</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <formulas>
+        <name>MaximumDate</name>
+        <dataType>Boolean</dataType>
+        <expression>TODAY() - {!$Record.History_Track_Date__c} &gt;=1</expression>
+    </formulas>
+    <formulas>
+        <name>SenderEmailAddress</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Owner:Group.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>Subject</name>
+        <dataType>String</dataType>
+        <expression>&apos;Re recent quote&apos; + &apos; &apos;  +{!$Record.QuoteNumber}</expression>
+    </formulas>
+    <formulas>
+        <name>subject1</name>
+        <dataType>String</dataType>
+        <expression>&quot;Rate valid after acceptance to &quot; &amp;
+IF(
+    ISBLANK({!$Record.Rate_Valid_after_acceptance_until__c}),
+    &quot;&quot;,
+    TEXT({!$Record.Rate_Valid_after_acceptance_until__c})
+)</expression>
+    </formulas>
+    <formulas>
+        <name>taskduedate</name>
+        <dataType>Date</dataType>
+        <expression>today()+30</expression>
+    </formulas>
+    <formulas>
+        <name>ToRecipient</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Opportunity.Contact__r.Email}</expression>
+    </formulas>
+    <interviewLabel>Freight Create Task on Status Change {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Freight Create Task on Status Change</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Task1</name>
+        <label>Create Task</label>
+        <locationX>50</locationX>
+        <locationY>384</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>DueDateReminder</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>DynamicQuoteSubject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subtype__c</field>
+            <value>
+                <stringValue>Opportunity Generation</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Task_type__c</field>
+            <value>
+                <stringValue>Freight</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_for_Rate_of_Use</name>
+        <label>Create Task for Rate of Use</label>
+        <locationX>1106</locationX>
+        <locationY>276</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>taskduedate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>subject1</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subtype__c</field>
+            <value>
+                <stringValue>Rate Book Update</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Task_type__c</field>
+            <value>
+                <stringValue>Freight</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <description>Get Quote attachment from Quote</description>
+        <name>Get_Quote_attachment_from_Quote</name>
+        <label>Get Quote attachment from Quote</label>
+        <locationX>578</locationX>
+        <locationY>384</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Send_Email_Action_1</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LinkedEntityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ContentDocumentLink</object>
+        <sortField>SystemModstamp</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>518</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Task</targetReference>
+        </connector>
+        <object>Quote</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Send_Quote_email_after_14_days</name>
+            <connector>
+                <targetReference>Check_if_Quote_status_is_still_Presented</targetReference>
+            </connector>
+            <label>Send Quote email after 14 days</label>
+            <offsetNumber>14</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>History_Track_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>Create_Task_before_Rate_of_Validity_Date</name>
+            <connector>
+                <targetReference>Create_Task_for_Rate_of_Use</targetReference>
+            </connector>
+            <label>Create Task before Rate of Validity Date</label>
+            <offsetNumber>-30</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Rate_Valid_after_acceptance_until__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>task</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+</Flow>

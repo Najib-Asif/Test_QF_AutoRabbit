@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overall_Customer_Experience__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (ISPICKVAL(Score__c , &quot;O&quot;),IMAGE(&apos;https://qantas.lightning.force.com/resource/1469693900000/Q6&apos;, &apos;Six Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;2&quot;),IMAGE(&apos;https://qantas.lightning.force.com/resource/1469693900000/Q2&apos;, &apos;Two Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;3&quot;),IMAGE(&apos;https://qantas.lightning.force.com/resource/1469693900000/Q3&apos;, &apos;Three Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;4&quot;),IMAGE(&apos;https://qantas.lightning.force.com/resource/1469693900000/Q4&apos;, &apos;Four Star&apos;),
+IF (ISPICKVAL(Score__c , &quot;5&quot;),IMAGE(&apos;https://qantas.lightning.force.com/resource/1469693900000/Q5&apos;, &apos;Five Star&apos;),
+IMAGE(&apos;https://qantas.lightning.force.com/resource/1469693900000/Q1&apos;, &apos;One Star&apos;))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Overall Customer Experience</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

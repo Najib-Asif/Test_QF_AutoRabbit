@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Specific_Needs_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Specific Needs Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_OM_SN_TL</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Need</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Specific_Needs_Sharing_Rule_for_Advocacy</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Specific Needs Sharing Rule for Advocacy</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_Advocacy</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Need</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Specific_Needs_Sharing_Rule_for_OM</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Specific Needs Sharing Rule for OM</label>
+        <sharedTo>
+            <role>QF_QDC_OM</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Need</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Specific_Needs_Sharing_Rule_for_QDC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Specific Needs Sharing Rule for QDC</label>
+        <sharedTo>
+            <role>QF_QDC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Need</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Specific_Needs_Sharing_Rule_for_SN</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Specific Needs Sharing Rule for SN</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_SN</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Need</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

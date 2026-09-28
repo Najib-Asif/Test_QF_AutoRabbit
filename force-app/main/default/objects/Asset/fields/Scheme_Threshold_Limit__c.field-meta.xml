@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheme_Threshold_Limit__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Scheme_Age__c  == &apos;1&apos;, VALUE($Label.Threshold_Limit_First_Year) ,
+IF(Scheme_Age__c == &apos;2&apos;, VALUE($Label.Threshold_Limit_Second_Year) ,
+IF(Scheme_Age__c == &apos;3&apos; || Scheme_Age__c == &apos;3+&apos;, VALUE($Label.Threshold_Limit_ThreePlus_Year) ,NULL)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Scheme Threshold Limit</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

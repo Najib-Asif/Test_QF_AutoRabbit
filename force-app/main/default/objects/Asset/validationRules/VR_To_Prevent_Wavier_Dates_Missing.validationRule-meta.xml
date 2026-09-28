@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Prevent_Wavier_Dates_Missing</fullName>
+    <active>true</active>
+    <description>Check if Start Date and End Date both present.</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Prevent_Wavier_Dates_Missing__c &amp;&amp;
+RecordType.DeveloperName =&apos;Corporate_Scheme&apos; &amp;&amp;(NOT(ISNULL(Waiver_Start_Date__c)) &amp;&amp; 
+ISNULL(Waiver_End_Date__c)) || (ISNULL(Waiver_Start_Date__c) &amp;&amp; NOT(ISNULL(Waiver_End_Date__c)))</errorConditionFormula>
+    <errorMessage>Both Override /Waiver Start Date and Override / Waiver End Date needs to be populated.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <field>Case.WorkOrders$Name</field>
+    </columns>
+    <columns>
+        <field>Case.WorkOrders$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case.WorkOrders$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <field>Case$Owner</field>
+    </columns>
+    <columns>
+        <field>Case.WorkOrders$Status</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Case$Owner</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>,SARAH BURKITT,Kritika Nair,Zendell Martinez,Robbie Tiati,Ria Tafeaga,Fleur Josling,Rebekah Browning,Simone Rainbird,Sheree Tamua,Sophie Otene,Gus Feachnie,Agustina Torales,Angela Lofaro,CCC_R1_Advocacy_Q,CCC_R1_Critical_Q,Chrystal Deair,EU_Compensation_Queue_High,ExCo_Queue_High,Hanan Mccrea,Karin Edwards,Louise Bradley,Melanie Newman,Philippa Hannay,QCC_Specific_Needs_Email_Enquiries,QCC_Specific_Needs_Waiting_for_Internal,Rebecca Fox,Rhonda Fong,Dianne Palmer,Valeriia Kosenko</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Refunds,Short Refunded</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Closed,Pending Recovery</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Complaints,Case.CCC_Query</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>CC Refund - Work Orders Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Work_Orders__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

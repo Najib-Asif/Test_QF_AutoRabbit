@@ -1,0 +1,37 @@
+<template>
+    <div class="prechat-container">
+        <div class="form-container slds-p-around_medium">
+            <template  for:each={fields} for:item="field">
+                <c-custom-pre-chat-form-field  key={field.name}
+                                            field-info={field}  >
+                </c-custom-pre-chat-form-field>
+            </template>
+            <template if:true={termsAndConditions}>
+                <div>
+                <lightning-formatted-rich-text value={termsAndConditions}></lightning-formatted-rich-text>
+                </div>
+                <div>
+                    <lightning-input 
+                        type="checkbox" 
+                        label="I accept" 
+                        name="inputCheckbox1"
+                        message-when-value-missing="This field is required."
+                        required>
+
+                    </lightning-input>
+            </div>
+            </template>
+        </div>
+        <div class="footer slds-p-around_medium">
+        <button
+            label={startConversationLabel}
+            class="slds-button slds-button_brand start-button"
+            title={startConversationLabel}
+            onclick={onStartConversationClick}
+            disabled={isSubmitButtonDisabled}
+            type="button">
+            <span class="slds-button__label">Start Chatting</span>
+        </button>
+        </div>
+    </div>
+</template>

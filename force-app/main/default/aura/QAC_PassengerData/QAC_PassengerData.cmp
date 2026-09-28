@@ -1,0 +1,249 @@
+<!--QAC project-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="pnrInformation" type="QAC_PNRDetailsWrapper" access="global"/>
+    <aura:registerEvent name="bubblingEvent" type="c:QAC_NavigateEvent"/>    
+    <aura:handler event="c:QAC_DataSharingEvent" action="{!c.handleApplicationEvent}"/>
+    <aura:attribute name="isDisabled" type="boolean" access="global" default="false"/>
+    <aura:attribute name="showButtons" type="boolean" access="global" default="true"/>
+    <aura:attribute name="isSectionHidden" type="boolean" access="global"/>
+    <aura:attribute name="activeSections" type="List" default="['A','B','C','D']" />
+    <aura:attribute name="localCases" type="Case[]" access="global"/>
+    <aura:attribute name="onCase" type="Case" access="global"/>
+    <lightning:workspaceAPI aura:id="workspace"/>    
+    
+    <div class="slds-box slds-theme_default c-container">
+        
+        <lightning:accordion aura:id="accordion"
+                             allowMultipleSectionsOpen="true"
+                             activeSectionName="{! v.activeSections }">
+            
+            <div aura:id="localCasesSecDiv" class="toggle slds-p-around_large slds-border_bottom slds-border_right slds-border_left slds-border_top">
+                <lightning:accordionSection name="A" label="Similar Salesforce Cases">
+                    <!-- <aura:if isTrue="{!!empty(v.localCases)}"> -->
+                        <lightning:layout>
+                            <!-- Case Information Table -->
+                            <table class="slds-table slds-table--striped slds-table--cell-buffer slds-table--fixed-layout slds-table_cell-buffer slds-border_bottom slds-border_right slds-border_left slds-border_top">
+                                <thead>
+                                    <tr class="slds-text-heading--label slds-border_bottom">
+                                        <th scope="col"><div class="slds-truncate" title="Case Number">Case Number</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Account Name">Account Name</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="QIC Id">QIC Id</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Created Date">Created Date</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Waiver Type">Waiver Type</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Case Status">Case Status</div></th>  
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Use the Apex model and controller to fetch server side data -->
+                                    <aura:iteration items="{!v.localCases}" var="wrap"> 
+                                        <tr>
+                                            <td><div class="slds-truncate" title="{!wrap.CaseNumber}">
+                                                <!-- <a href="{!'/' + wrap.Id}" target="_blank">{!wrap.CaseNumber}</a> -->
+                                                <a data-custom="{!wrap.Id}" onclick="{!c.openTab}">{!wrap.CaseNumber}</a>
+                                                </div></td>
+                                            <td><div class="slds-truncate" title="{!wrap.Account.Name}"> {!wrap.Account.Name} </div></td>
+                                            <td><div class="slds-truncate" title="{!wrap.Account.Qantas_Industry_Centre_ID__c}"> {!wrap.Account.Qantas_Industry_Centre_ID__c} </div></td>
+                                            <td><div class="slds-truncate" title="{!wrap.CreatedDate}">
+                                                <ui:outputDateTime value="{!wrap.CreatedDate}" format="DD-MM-YYYY HH:mm"/>
+                                                </div></td>
+                                            <td><div class="slds-truncate" title="{!wrap.Problem_Type__c}"> {!wrap.Problem_Type__c} </div></td>
+                                            <td><div class="slds-truncate" title="{!wrap.Status}">{!wrap.Status}</div></td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                            
+                        </lightning:layout>
+                    <!-- </aura:if> -->
+                </lightning:accordionSection>
+            </div>
+            <br/>
+            
+            <div aura:id="capSecDiv" class="toggle">
+            <!-- <aura:if isTrue="{!!v.isSectionHidden}"> -->
+                <!-- Point of Sales Section -->
+                <div class="slds-p-around_large slds-border_bottom slds-border_right slds-border_left slds-border_top">
+                    <lightning:accordionSection name="B" label="Booking Details">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-3">
+                                <span>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        PNR: {!v.pnrInformation.caseFields.pnrNumber}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <span><lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                    Passenger Name: {!v.pnrInformation.caseFields.passengerName}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <span>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        No of Passenger: {!v.pnrInformation.caseFields.passengerCount}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-3">
+                                <span>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        Booking Agency: {!v.pnrInformation.caseFields.travelAgentId}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <span>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        Agency Name: {!v.pnrInformation.caseFields.iataAccount.Name}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <span>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        GDS: {!v.pnrInformation.pointSales.pointOfSales.creatorDetails.companyId}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-3">
+                                <span>
+                                    <lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                        PCC: {!v.pnrInformation.pointSales.pointOfSales.creatorDetails.inHouseIdentification}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <span><lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                    ABN: {!v.pnrInformation.caseFields.abnNumber}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <span><lightning:layoutItem padding="around-small" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                    QCI: {!v.pnrInformation.caseFields.qciCode}
+                                    </lightning:layoutItem>
+                                </span>
+                            </div>
+                        </div>                    
+                    </lightning:accordionSection>
+                </div> 
+                <br/>
+                
+                <!-- Flight Information Section -->
+                <div class="slds-p-around_large slds-border_bottom slds-border_right slds-border_left slds-border_top"	>
+                    <lightning:accordionSection name="C" label="Flight Information">
+                        <lightning:layout>
+                            
+                            <!-- Flight Table -->
+                            <table class="slds-table  slds-table--striped slds-table--cell-buffer slds-table--fixed-layout slds-table_cell-buffer slds-border_bottom slds-border_right slds-border_left slds-border_top">
+                                <thead>
+                                    <tr class="slds-text-heading--label slds-border_bottom">
+                                        <th scope="col"><div class="slds-truncate" title="ID">
+                                            <ui:inputCheckbox class="slds-checkbox" aura:id="allCheckFL" change="{!c.selectAllFL}"/>
+                                            </div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Flight">Flight</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Cabin">Cabin</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Reservation Class">Reservation Class</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Departure Airport">Departure Airport</div></th>  
+                                        <th scope="col"><div class="slds-truncate" title="Arrival Airport">Arrival Airport</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Departure Time">Departure Time</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Arrival Time">Arrival Time</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Use the Apex model and controller to fetch server side data -->
+                                    <aura:iteration items="{!v.pnrInformation.flightDetailsWrapper}" var="flightRec"> 
+                                        <tr>
+                                            
+                                            <td><div class="slds-truncate" title="{!flightRec.checkSelected}">
+                                                <ui:inputCheckbox class="slds-checkbox" value="{!flightRec.selectedFlight}" aura:id="eachRowCheckFL"/>
+                                                </div></td>
+                                            <td><div class="slds-truncate" title="{!(flightRec.flightDetails.marketingCarrierAlphaCode+ '' +flightRec.flightDetails.marketingFlightNumber)}">{!flightRec.flightDetails.marketingCarrierAlphaCode}{!flightRec.flightDetails.marketingFlightNumber}</div></td>
+                                            <td><div class="slds-truncate" title="{!flightRec.flightDetails.departureAirportCode}"> {!flightRec.flightDetails.bookedCabinClass} </div></td>
+                                            <td><div class="slds-truncate" title="{!flightRec.flightDetails.bookedReservationClass}"> {!flightRec.flightDetails.bookedReservationClass} </div></td>
+                                            <td><div class="slds-truncate" title="{!flightRec.flightDetails.departureAirportCode}">{!flightRec.flightDetails.departureAirportCode}</div></td>
+                                            <td><div class="slds-truncate" title="{!flightRec.flightDetails.arrivalAirportCode}">{!flightRec.flightDetails.arrivalAirportCode}</div></td>
+                                            <td><div class="slds-truncate" title="{!(flightRec.flightDetails.departureLocalDate+ '-' +flightRec.flightDetails.departureLocalTime)}">
+                                                {!flightRec.flightDetails.departureLocalDate} - {!flightRec.flightDetails.departureLocalTime}</div></td>  
+                                            <td><div class="slds-truncate" title="{!(flightRec.flightDetails.arrivalLocalDate+ '-' +flightRec.flightDetails.arrivalLocalTime)}">
+                                                {!flightRec.flightDetails.arrivalLocalDate} - {!flightRec.flightDetails.arrivalLocalTime}</div></td>
+                                            
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                                
+                            </table>
+                            
+                        </lightning:layout>
+                    </lightning:accordionSection>
+                </div>
+                <br/>
+                
+                <!-- Passenger Information Section -->
+                <div class="slds-p-around_large slds-border_bottom slds-border_right slds-border_left slds-border_top">
+                    <lightning:accordionSection name="D" label="Passenger Information">
+                        <lightning:layout>
+                            
+                            <table class="slds-table slds-table--striped slds-table--cell-buffer slds-table--fixed-layout slds-border_bottom slds-border_right slds-border_left slds-border_top">
+                                <thead>
+                                    <tr class="slds-text-heading--label slds-border_bottom">
+                                        <th scope="col"><div class="slds-truncate" title="ID">
+                                            <ui:inputCheckbox class="slds-checkbox" aura:id="allCheckPAX" change="{!c.selectAllPAX}"/>
+                                            </div></th>
+                                        <th scope="col"><div class="slds-truncate" title="First Name">First Name</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Last Name">Last Name</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Type">Type</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Passenger Sequence">Passenger Sequence</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Qantas Frequent Flyer Number">Qantas Frequent Flyer Number</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Use the Apex model and controller to fetch server side data -->
+                                    <aura:iteration items="{!v.pnrInformation.passengerDetailsWrapper}" var="passRec"> 
+                                        <tr>
+                                            
+                                            <td><div class="slds-truncate" title="{!passRec.checkSelected}">
+                                                <ui:inputCheckbox class="slds-checkbox" value="{!passRec.selectedFlight}" aura:id="eachRowCheckPAX"/>
+                                                </div></td>
+                                            <td><div class="slds-truncate" title="{!passRec.passengerDetails.firstName}">{!passRec.passengerDetails.firstName} </div></td>
+                                            <td><div class="slds-truncate" title="{!passRec.passengerDetails.lastName}">{!passRec.passengerDetails.lastName} </div></td>
+                                            <td><div class="slds-truncate" title="{!passRec.passengerDetails.typeCode}">{!passRec.passengerDetails.typeCode} </div></td>
+                                            <td><div class="slds-truncate" title="{!passRec.passengerDetails.passengerTattoo}">{!passRec.passengerDetails.passengerTattoo}</div></td>
+                                            <td><div class="slds-truncate" title="{!passRec.passengerDetails.qantasFFNo}">{!passRec.passengerDetails.qantasFFNo}</div></td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </lightning:layout>
+                    </lightning:accordionSection>
+                </div>
+            <!-- </aura:if> -->
+            </div>
+            
+        </lightning:accordion>
+        <br/>
+        <aura:if isTrue="{!empty(v.onCase)}">
+        <center>
+            <lightning:layout class="slds-align_absolute-center slds-p-around_medium slds-text-heading_small">
+                <lightning:button variant="brand" label="Back" onclick="{!c.handleBack}"/>
+                <lightning:button variant="brand" label="Next" onclick="{!c.showCaseSR}" disabled="{!(v.isDisabled || v.isSectionHidden)}"/>                   
+                
+            </lightning:layout>
+        
+            <aura:if isTrue="{!(v.isDisabled || v.isSectionHidden)}">
+                <div class="slds-text-color_error">
+                    Note: Next button will be enabled only if 
+                    PNR Information found in CAP (or)
+                    Agency found in Salesforce 
+                </div>
+            </aura:if>
+        </center>    
+    </aura:if>
+    </div>
+</aura:component>

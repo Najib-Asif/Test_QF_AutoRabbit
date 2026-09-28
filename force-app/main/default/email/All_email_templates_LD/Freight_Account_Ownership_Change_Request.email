@@ -1,0 +1,116 @@
+<p>
+    Hi,
+</p>
+<p>
+    Please note the following <b> Account Owner </b> change, raise a RITM request and assign it to Taurus team:  
+</p>
+<table border="1" cellspacing="0" cellpadding="0">
+    <tbody><tr>
+            <td width="350" valign="top">
+                <p>
+                    <strong>Account Type (FCI)</strong>
+                </p>
+            </td>
+            <td width="412" valign="top">
+                <p>
+                    {!Account.Type}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="350" valign="top">
+                <p>
+                    <strong>Global Customer Code (FCI)</strong>
+                </p>
+            </td>
+            <td width="412" valign="top">
+                <p>
+                    {!Account.Freight_Corporate_Identifier__c}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="350" valign="top">
+                <p>
+                    <strong>Billing Country</strong>
+                </p>
+            </td>
+            <td width="412" valign="top">
+                <p>
+                    {!Account.BillingCountry}
+                </p>
+            </td>
+        </tr>
+        <td width="350" valign="top">
+                <p>
+                    <strong>Account Name*</strong>
+                </p>
+            </td>
+            <td width="460" valign="top">
+                <p>
+                    {!Account.Name}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="350" valign="top">
+                <p>
+                    <strong>New Account Owner</strong>
+                </p>
+            </td>
+            <td width="412" valign="top">
+                <p>
+                    {!Account.OwnerFullName}
+                </p>
+            </td>
+        </tr>
+		<tr>
+            <td width="350" valign="top">
+                <p>
+                    <strong>Customer Type</strong>
+                </p>
+            </td>
+            <td width="412" valign="top">
+                <p>
+                    {!Account.Freight_Revenue_Stream__c} 
+                </p>
+            </td>
+        </tr>
+		<tr>
+            <td width="350" valign="top">
+                <p>
+                    <strong>Customer#</strong>
+                </p>
+            </td>
+            <td width="412" valign="top">
+                <p>
+                     {!Account.Freight_eQ_Reference__c} 
+                </p>
+            </td>
+        </tr>
+		<tr>
+            <td width="350" valign="top">
+                <p>
+                    <strong>Customer Code</strong>
+                </p>
+            </td>
+            <td width="412" valign="top">
+                <p>
+                    {!Account.Freight_Customer_Code__c}
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    *Please ignore the [ ] in the Account Name
+</p>
+<p>
+    Thanks,
+</p>
+<p>
+    {!Account.OwnerFullName}
+</p>
+<p>
+    {!Account.OwnerEmail}
+</p>

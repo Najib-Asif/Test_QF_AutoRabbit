@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_QFAudit_Team_to_close_non_CCA</fullName>
+    <active>true</active>
+    <description>Prevent QF Rate Audit team from closing Non Freight Invoicing record type cases - CRM-8116</description>
+    <errorConditionFormula>AND(
+OR(
+TEXT(Status) = &apos;Closed - Completed&apos;,
+TEXT(Status) = &apos;Closed - Rejected&apos;,
+TEXT(Status) = &apos;Closed&apos;
+),
+TEXT($User.Freight_Department__c) = &apos;Freight Audit&apos;)</errorConditionFormula>
+    <errorMessage>You do not have permission to update the case.</errorMessage>
+</ValidationRule>

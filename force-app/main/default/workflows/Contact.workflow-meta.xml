@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>CountryNameUpdate</fullName>
+        <description>sdfsdgsdg</description>
+        <field>CountryName__c</field>
+        <formula>CASE(MailingCountryCode,
+&apos;AF&apos;,&apos;Afghanistan&apos;,
+&apos;AX&apos;,&apos;Aland Islands&apos;,
+&apos;AL&apos;,&apos;Albania&apos;,
+&apos;DZ&apos;,&apos;Algeria&apos;,
+&apos;AD&apos;,&apos;Andorra&apos;,
+&apos;AO&apos;,&apos;Angola&apos;,
+&apos;AI&apos;,&apos;Anguilla&apos;,
+&apos;AQ&apos;,&apos;Antarctica&apos;,
+&apos;AG&apos;,&apos;Antigua and Barbuda&apos;,
+&apos;AR&apos;,&apos;Argentina&apos;,
+&apos;AM&apos;,&apos;Armenia&apos;,
+&apos;AW&apos;,&apos;Aruba&apos;,
+&apos;AU&apos;,&apos;Australia&apos;,
+&apos;AT&apos;,&apos;Austria&apos;,
+&apos;AZ&apos;,&apos;Azerbaijan&apos;,
+&apos;BS&apos;,&apos;Bahamas&apos;,
+&apos;BH&apos;,&apos;Bahrain&apos;,
+&apos;BD&apos;,&apos;Bangladesh&apos;,
+&apos;BB&apos;,&apos;Barbados&apos;,
+&apos;BY&apos;,&apos;Belarus&apos;,
+&apos;BE&apos;,&apos;Belgium&apos;,
+&apos;BZ&apos;,&apos;Belize&apos;,
+&apos;BJ&apos;,&apos;Benin&apos;,
+&apos;BM&apos;,&apos;Bermuda&apos;,
+&apos;BT&apos;,&apos;Bhutan&apos;,
+&apos;BW&apos;,&apos;Botswana&apos;,
+&apos;BV&apos;,&apos;Bouvet Island&apos;,
+&apos;BR&apos;,&apos;Brazil&apos;,
+&apos;BN&apos;,&apos;Brunei Darussalam&apos;,
+&apos;BG&apos;,&apos;Bulgaria&apos;,
+&apos;BF&apos;,&apos;Burkina Faso&apos;,
+&apos;BI&apos;,&apos;Burundi&apos;,
+&apos;KH&apos;,&apos;Cambodia&apos;,
+&apos;CM&apos;,&apos;Cameroon&apos;,
+&apos;CA&apos;,&apos;Canada&apos;,
+&apos;CV&apos;,&apos;Cape Verde&apos;,
+&apos;KY&apos;,&apos;Cayman Islands&apos;,
+&apos;TD&apos;,&apos;Chad&apos;,
+&apos;CL&apos;,&apos;Chile&apos;,
+&apos;CN&apos;,&apos;China&apos;,
+&apos;CX&apos;,&apos;Christmas Island&apos;,
+&apos;CO&apos;,&apos;Colombia&apos;,
+&apos;KM&apos;,&apos;Comoros&apos;,
+&apos;CG&apos;,&apos;Congo&apos;,
+&apos;CK&apos;,&apos;Cook Islands&apos;,
+&apos;CR&apos;,&apos;Costa Rica&apos;,
+&apos;CI&apos;,&apos;Cote dIvoire&apos;,
+&apos;HR&apos;,&apos;Croatia&apos;,
+&apos;CU&apos;,&apos;Cuba&apos;,
+&apos;CY&apos;,&apos;Cyprus&apos;,
+&apos;CZ&apos;,&apos;Czech Republic&apos;,
+&apos;DK&apos;,&apos;Denmark&apos;,
+&apos;DJ&apos;,&apos;Djibouti&apos;,
+&apos;DM&apos;,&apos;Dominica&apos;,
+&apos;DO&apos;,&apos;Dominican Republic&apos;,
+&apos;EC&apos;,&apos;Ecuador&apos;,
+&apos;EG&apos;,&apos;Egypt&apos;,
+&apos;SV&apos;,&apos;El Salvador&apos;,
+&apos;GQ&apos;,&apos;Equatorial Guinea&apos;,
+&apos;ER&apos;,&apos;Eritrea&apos;,
+&apos;EE&apos;,&apos;Estonia&apos;,
+&apos;ET&apos;,&apos;Ethiopia&apos;,
+&apos;FO&apos;,&apos;Faroe Islands&apos;,
+&apos;FJ&apos;,&apos;Fiji&apos;,
+&apos;FI&apos;,&apos;Finland&apos;,
+&apos;FR&apos;,&apos;France&apos;,
+&apos;GF&apos;,&apos;French Guiana&apos;,
+&apos;PF&apos;,&apos;French Polynesia&apos;,
+&apos;GA&apos;,&apos;Gabon&apos;,
+&apos;GM&apos;,&apos;Gambia&apos;,
+&apos;GE&apos;,&apos;Georgia&apos;,
+&apos;DE&apos;,&apos;Germany&apos;,
+&apos;GH&apos;,&apos;Ghana&apos;,
+&apos;GI&apos;,&apos;Gibraltar&apos;,
+&apos;GR&apos;,&apos;Greece&apos;,
+&apos;GL&apos;,&apos;Greenland&apos;,
+&apos;GD&apos;,&apos;Grenada&apos;,
+&apos;GP&apos;,&apos;Guadeloupe&apos;,
+&apos;GT&apos;,&apos;Guatemala&apos;,
+&apos;GG&apos;,&apos;Guernsey&apos;,
+&apos;GN&apos;,&apos;Guinea&apos;,
+&apos;GW&apos;,&apos;Guinea-Bissau&apos;,
+&apos;GY&apos;,&apos;Guyana&apos;,
+&apos;HT&apos;,&apos;Haiti&apos;,
+&apos;HN&apos;,&apos;Honduras&apos;,
+&apos;HK&apos;,&apos;Hong Kong&apos;,
+&apos;HU&apos;,&apos;Hungary&apos;,
+&apos;IS&apos;,&apos;Iceland&apos;,
+&apos;IN&apos;,&apos;India&apos;,
+&apos;ID&apos;,&apos;Indonesia&apos;,
+&apos;IR&apos;,&apos;Iran&apos;,
+&apos;IQ&apos;,&apos;Iraq&apos;,
+&apos;IE&apos;,&apos;Ireland&apos;,
+&apos;IM&apos;,&apos;Isle of Man&apos;,
+&apos;IL&apos;,&apos;Israel&apos;,
+&apos;IT&apos;,&apos;Italy&apos;,
+&apos;JM&apos;,&apos;Jamaica&apos;,
+&apos;JP&apos;,&apos;Japan&apos;,
+&apos;JE&apos;,&apos;Jersey&apos;,
+&apos;JO&apos;,&apos;Jordan&apos;,
+&apos;KZ&apos;,&apos;Kazakhstan&apos;,
+&apos;KE&apos;,&apos;Kenya&apos;,
+&apos;KI&apos;,&apos;Kiribati&apos;,
+&apos;KR&apos;,&apos;Korea&apos;,
+&apos;KW&apos;,&apos;Kuwait&apos;,
+&apos;KG&apos;,&apos;Kyrgyzstan&apos;,
+&apos;LV&apos;,&apos;Latvia&apos;,
+&apos;LB&apos;,&apos;Lebanon&apos;,
+&apos;LS&apos;,&apos;Lesotho&apos;,
+&apos;LR&apos;,&apos;Liberia&apos;,
+&apos;LY&apos;,&apos;Libya&apos;,
+&apos;LI&apos;,&apos;Liechtenstein&apos;,
+&apos;LT&apos;,&apos;Lithuania&apos;,
+&apos;LU&apos;,&apos;Luxembourg&apos;,
+&apos;MO&apos;,&apos;Macao&apos;,
+&apos;MG&apos;,&apos;Madagascar&apos;,
+&apos;MW&apos;,&apos;Malawi&apos;,
+&apos;MY&apos;,&apos;Malaysia&apos;,
+&apos;MV&apos;,&apos;Maldives&apos;,
+&apos;ML&apos;,&apos;Mali&apos;,
+&apos;MT&apos;,&apos;Malta&apos;,
+&apos;MQ&apos;,&apos;Martinique&apos;,
+&apos;MR&apos;,&apos;Mauritania&apos;,
+&apos;MU&apos;,&apos;Mauritius&apos;,
+&apos;YT&apos;,&apos;Mayotte&apos;,
+&apos;MX&apos;,&apos;Mexico&apos;,
+&apos;MC&apos;,&apos;Monaco&apos;,
+&apos;MN&apos;,&apos;Mongolia&apos;,
+&apos;ME&apos;,&apos;Montenegro&apos;,
+&apos;MS&apos;,&apos;Montserrat&apos;,
+&apos;MA&apos;,&apos;Morocco&apos;,
+&apos;MZ&apos;,&apos;Mozambique&apos;,
+&apos;MM&apos;,&apos;Myanmar&apos;,
+&apos;NA&apos;,&apos;Namibia&apos;,
+&apos;NR&apos;,&apos;Nauru&apos;,
+&apos;NP&apos;,&apos;Nepal&apos;,
+&apos;NL&apos;,&apos;Netherlands&apos;,
+&apos;NC&apos;,&apos;New Caledonia&apos;,
+&apos;NZ&apos;,&apos;New Zealand&apos;,
+&apos;NI&apos;,&apos;Nicaragua&apos;,
+&apos;NE&apos;,&apos;Niger&apos;,
+&apos;NG&apos;,&apos;Nigeria&apos;,
+&apos;NU&apos;,&apos;Niue&apos;,
+&apos;NO&apos;,&apos;Norway&apos;,
+&apos;OM&apos;,&apos;Oman&apos;,
+&apos;PK&apos;,&apos;Pakistan&apos;,
+&apos;PS&apos;,&apos;Palestine&apos;,
+&apos;PA&apos;,&apos;Panama&apos;,
+&apos;PY&apos;,&apos;Paraguay&apos;,
+&apos;PE&apos;,&apos;Peru&apos;,
+&apos;PH&apos;,&apos;Philippines&apos;,
+&apos;PN&apos;,&apos;Pitcairn&apos;,
+&apos;PL&apos;,&apos;Poland&apos;,
+&apos;PT&apos;,&apos;Portugal&apos;,
+&apos;QA&apos;,&apos;Qatar&apos;,
+&apos;RE&apos;,&apos;Reunion&apos;,
+&apos;RO&apos;,&apos;Romania&apos;,
+&apos;RU&apos;,&apos;Russian Federation&apos;,
+&apos;RW&apos;,&apos;Rwanda&apos;,
+&apos;LC&apos;,&apos;Saint Lucia&apos;,
+&apos;WS&apos;,&apos;Samoa&apos;,
+&apos;SM&apos;,&apos;San Marino&apos;,
+&apos;ST&apos;,&apos;Sao Tome and Principe&apos;,
+&apos;SA&apos;,&apos;Saudi Arabia&apos;,
+&apos;SN&apos;,&apos;Senegal&apos;,
+&apos;RS&apos;,&apos;Serbia&apos;,
+&apos;SC&apos;,&apos;Seychelles&apos;,
+&apos;SL&apos;,&apos;Sierra Leone&apos;,
+&apos;SG&apos;,&apos;Singapore&apos;,
+&apos;SK&apos;,&apos;Slovakia&apos;,
+&apos;SI&apos;,&apos;Slovenia&apos;,
+&apos;SO&apos;,&apos;Somalia&apos;,
+&apos;ZA&apos;,&apos;South Africa&apos;,
+&apos;SS&apos;,&apos;South Sudan&apos;,
+&apos;ES&apos;,&apos;Spain&apos;,
+&apos;LK&apos;,&apos;Sri Lanka&apos;,
+&apos;SD&apos;,&apos;Sudan&apos;,
+&apos;SR&apos;,&apos;Suriname&apos;,
+&apos;SZ&apos;,&apos;Swaziland&apos;,
+&apos;SE&apos;,&apos;Sweden&apos;,
+&apos;CH&apos;,&apos;Switzerland&apos;,
+&apos;TW&apos;,&apos;Taiwan&apos;,
+&apos;TJ&apos;,&apos;Tajikistan&apos;,
+&apos;TH&apos;,&apos;Thailand&apos;,
+&apos;TG&apos;,&apos;Togo&apos;,
+&apos;TN&apos;,&apos;Tunisia&apos;,
+&apos;TR&apos;,&apos;Turkey&apos;,
+&apos;TM&apos;,&apos;Turkmenistan&apos;,
+&apos;TV&apos;,&apos;Tuvalu&apos;,
+&apos;UG&apos;,&apos;Uganda&apos;,
+&apos;UA&apos;,&apos;Ukraine&apos;,
+&apos;AE&apos;,&apos;United Arab Emirates&apos;,
+&apos;GB&apos;,&apos;United Kingdom&apos;,
+&apos;US&apos;,&apos;United States&apos;,
+&apos;UY&apos;,&apos;Uruguay&apos;,
+&apos;UZ&apos;,&apos;Uzbekistan&apos;,
+&apos;VU&apos;,&apos;Vanuatu&apos;,
+&apos;VN&apos;,&apos;Viet Nam&apos;,
+&apos;WF&apos;,&apos;Wallis and Futuna&apos;,
+&apos;EH&apos;,&apos;Western Sahara&apos;,
+&apos;YE&apos;,&apos;Yemen&apos;,
+&apos;ZM&apos;,&apos;Zambia&apos;,
+&apos;ZW&apos;,&apos;Zimbabwe&apos;,&apos;&apos; )</formula>
+        <name>CountryNameUpdate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Init_caps_first_name</fullName>
+        <description>To have the first letter, letter after hyphen, and letter after space as caps</description>
+        <field>FirstName</field>
+        <formula>IF 
+( 
+CONTAINS( FirstName , &quot; &quot;), 
+( 
+UPPER(MID( FirstName , 1,1) ) 
+&amp; 
+LOWER(MID(FirstName,2, FIND(&quot; &quot;, FirstName) -2)) 
+&amp; 
+UPPER(MID (FirstName, FIND(&quot; &quot;, FirstName),2)) 
+&amp; 
+LOWER(MID(FirstName, FIND(&quot; &quot;, FirstName) +2, 255 )) 
+), 
+
+IF 
+( 
+CONTAINS( FirstName , &quot;-&quot;), 
+( 
+UPPER(MID( FirstName , 1,1) ) 
+&amp; 
+LOWER(MID(FirstName,2, FIND(&quot;-&quot;, FirstName) -2)) 
+&amp; 
+UPPER(MID (FirstName, FIND(&quot;-&quot;, FirstName),2)) 
+&amp; 
+LOWER(MID(FirstName, FIND(&quot;-&quot;, FirstName) +2, 255 )) 
+), 
+IF 
+( 
+CONTAINS( FirstName , &quot;&apos;&quot;), 
+( 
+UPPER(MID( FirstName , 1,1) ) 
+&amp; 
+LOWER(MID(FirstName,2, FIND(&quot;&apos;&quot;, FirstName) -2)) 
+&amp; 
+UPPER(MID (FirstName, FIND(&quot;&apos;&quot;, FirstName),2)) 
+&amp; 
+LOWER(MID(FirstName, FIND(&quot;&apos;&quot;, FirstName) +2, 255 )) 
+), 
+UPPER(LEFT( FirstName,1))+LOWER(MID(FirstName,2,80))	
+) 
+) 
+)</formula>
+        <name>Init caps first name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Init_caps_last_name</fullName>
+        <description>To have the first letter, letter after hyphen, and letter after space as caps</description>
+        <field>LastName</field>
+        <formula>IF 
+( 
+CONTAINS( LastName , &quot; &quot;), 
+( 
+UPPER(MID( LastName , 1,1) ) 
+&amp; 
+LOWER(MID(LastName,2, FIND(&quot; &quot;, LastName) -2)) 
+&amp; 
+UPPER(MID (LastName, FIND(&quot; &quot;, LastName),2)) 
+&amp; 
+LOWER(MID(LastName, FIND(&quot; &quot;, LastName) +2, 255 )) 
+), 
+
+IF 
+( 
+CONTAINS( LastName , &quot;-&quot;), 
+( 
+UPPER(MID( LastName , 1,1) ) 
+&amp; 
+LOWER(MID(LastName,2, FIND(&quot;-&quot;, LastName) -2)) 
+&amp; 
+UPPER(MID (LastName, FIND(&quot;-&quot;, LastName),2)) 
+&amp; 
+LOWER(MID(LastName, FIND(&quot;-&quot;, LastName) +2, 255 )) 
+), 
+IF 
+( 
+CONTAINS( LastName , &quot;&apos;&quot;), 
+( 
+UPPER(MID( LastName , 1,1) ) 
+&amp; 
+LOWER(MID(LastName,2, FIND(&quot;&apos;&quot;, LastName) -2)) 
+&amp; 
+UPPER(MID (LastName, FIND(&quot;&apos;&quot;, LastName),2)) 
+&amp; 
+LOWER(MID(LastName, FIND(&quot;&apos;&quot;, LastName) +2, 255 )) 
+), 
+UPPER(LEFT( LastName,1))+LOWER(MID(LastName,2,80)) 
+) 
+) 
+)</formula>
+        <name>Init caps last name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_B2B_Contact_RecordType</fullName>
+        <description>Based on Account Type, Update B2B Contact RT</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Non_Agency_Contact</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update B2B Contact RecordType</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_GA_Contact_to_true</fullName>
+        <description>Update GA Contact to true for Account owner.role = QF-Government Affairs</description>
+        <field>GA_Contact__c</field>
+        <literalValue>1</literalValue>
+        <name>Update GA Contact to true</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_business_type_as_loyalty</fullName>
+        <description>This field update will change the value of Business Type to loyalty</description>
+        <field>Business_Types__c</field>
+        <literalValue>Loyalty</literalValue>
+        <name>Update the business type as loyalty</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_business_type_value_to_Agency</fullName>
+        <description>This field update will change the value of Business Type to &apos;Agency&apos;.</description>
+        <field>Business_Types__c</field>
+        <literalValue>Agency</literalValue>
+        <name>Update the business type value to Agency</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_business_type_value_to_B_G</fullName>
+        <description>This field update will change the value of Business Type to &apos;B&amp;G&apos;.</description>
+        <field>Business_Types__c</field>
+        <literalValue>B&amp;G</literalValue>
+        <name>Update the business type value to B&amp;G</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_business_type_value_to_Charte</fullName>
+        <description>This field update will change the value of Business Type to &apos;Charter&apos;.</description>
+        <field>Business_Types__c</field>
+        <literalValue>Charter</literalValue>
+        <name>Update the business type value to Charte</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Init caps first name</fullName>
+        <actions>
+            <name>Init_caps_first_name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notContain</operation>
+            <value>Administrator</value>
+        </criteriaItems>
+        <description>To have the first letter, letter after hyphen, and letter after space as caps</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Init caps last name</fullName>
+        <actions>
+            <name>Init_caps_last_name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notContain</operation>
+            <value>Administrator</value>
+        </criteriaItems>
+        <description>To have the first letter, letter after hyphen, and letter after space as caps</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QCC_Update_ContactCountry_FullName</fullName>
+        <actions>
+            <name>CountryNameUpdate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.MailingCountryCode</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Individual Contact</value>
+        </criteriaItems>
+        <description>Contact Country Full name Updating</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Restrict GA Contact Visibility</fullName>
+        <actions>
+            <name>Update_GA_Contact_to_true</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Account.GMC_Accounts__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Contact</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Prospect Account,Customer Account,Agency Account,Other Account,Charter Account,Regional Account</value>
+        </criteriaItems>
+        <description>Restrict GA&apos;s Contact Visibility to all Roles except &apos;QF-Government Affairs&apos; role users. Set GA Contact field = true</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Contact RT for B2B Contacts</fullName>
+        <actions>
+            <name>Update_B2B_Contact_RecordType</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Update Contact B2B RT based on Account Type</description>
+        <formula>AND(OR(ISPICKVAL(Account.Account_Type__c,&apos;Agency Account&apos;),ISPICKVAL(Account.Account_Type__c,&apos;Customer Account&apos;),ISPICKVAL(Account.Account_Type__c,&apos;Prospect Account&apos;),ISPICKVAL(Account.Account_Type__c,&apos;Charter Account&apos;),ISPICKVAL(Account.Account_Type__c,&apos;Other Account&apos;)), RecordType.DeveloperName &lt;&gt;&apos;Non_Agency_Contact&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the business type value to Agency</fullName>
+        <actions>
+            <name>Update_the_business_type_value_to_Agency</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow will update the Business Type value to &apos;Agency&apos; when the Account record type is &apos;Agency Account&apos;.</description>
+        <formula>AND(Owner.Profile_Name__c &lt;&gt; &quot;Qantas Loyalty -Commercial Sales&quot;, Account.RecordType.Name = &quot;Agency Account&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the business type value to B%26G</fullName>
+        <actions>
+            <name>Update_the_business_type_value_to_B_G</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow will update the Business Type value to &apos;B&amp;G&apos; when the Account record type is &apos;Customer Account&apos; or &apos;Prospect Account&apos;.</description>
+        <formula>AND(Owner.Profile_Name__c &lt;&gt; &quot;Qantas Loyalty -Commercial Sales&quot;, OR(Account.RecordType.Name = &quot;Customer Account&quot;, Account.RecordType.Name = &quot;Prospect Account&quot;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the business type value to Charter</fullName>
+        <actions>
+            <name>Update_the_business_type_value_to_Charte</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow will update the Business Type value to &apos;Charter&apos; when the Account record type is &apos;Charter Account&apos;.</description>
+        <formula>AND(Owner.Profile_Name__c &lt;&gt; &quot;Qantas Loyalty -Commercial Sales&quot;,Account.RecordType.Name = &quot;Charter Account&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the business type value to Loyalty</fullName>
+        <actions>
+            <name>Update_the_business_type_as_loyalty</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>his workflow will update the Business Type value to &apos;loyalty&apos; when the Account record type is &apos;Customer Account&apos; , &apos;Prospect Account&apos;,Agency Account,Charter Account</description>
+        <formula>AND(Owner.Profile_Name__c = &quot;Qantas Loyalty -Commercial Sales&quot;, OR(Account.RecordType.Name = &quot;Customer Account&quot;, Account.RecordType.Name = &quot;Agency Account&quot;, Account.RecordType.Name = &quot;Prospect Account&quot;, Account.RecordType.Name = &quot;Charter Account&quot; ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

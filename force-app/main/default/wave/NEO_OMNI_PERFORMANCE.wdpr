@@ -1,0 +1,1479 @@
+{
+  "version" : "67.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "OwnerId", "IsDeleted", "Name", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "UserId", "WorkItemId", "Status", "ServiceChannelId", "OriginalQueueId", "CapacityWeight", "CapacityPercentage", "RequestDateTime", "AcceptDateTime", "DeclineDateTime", "CloseDateTime", "SpeedToAnswer", "AgentCapacityWhenDeclined", "PendingServiceRoutingId", "PushTimeout", "PushTimeoutDateTime", "HandleTime", "ActiveTime", "DeclineReason", "CancelDateTime", "ShouldSkipCapacityCheck", "RoutingType", "RoutingModel", "RoutingPriority", "AssignedDateTime", "PreferredUserId", "IsStatusChangeInitiated", "IsOwnerChangeInitiated", "CapacityModel", "OriginalGroupId", "SecondaryRoutingPriority", "IsPreferredUserRequired", "AfterConversationActualTime", "BotId", "IsInterruptible", "AgentIntCapacityWhenDeclined", "AcwExtensionCount", "AcwExtensionDuration", "AbandonedDateTime", "PausedCapacityWeight", "PausedCapacityPercentage", "TransferRequesterId", "BotType", "TargetAcceptDateTime", "ScheduledRoutingDateTime", "IndividualHandleTime__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "AgentWork",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "AgentWork",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "UserRoleId", "ProfileId", "Location__c", "Profile_Name__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "APPEND1", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "Role",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Role.Name",
+          "newProperties" : {
+            "label" : "Role",
+            "name" : "Role.Name"
+          }
+        } ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Group",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Group",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Case_Age__c", "Id", "CaseNumber", "RecordTypeId", "Status", "Subject", "Priority", "OwnerId", "CreatedDate", "Category__c", "Group__c", "OwnerName__c", "Sub_Category__c", "CCC_And_B_Case_Type__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET4", "LOAD_DATASET5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "CaseRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "OriginalQueueId" ],
+        "rightQualifier" : "Queue",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "EDIT_ATTRIBUTES2", "JOIN12" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "WorkItemId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "EDIT_ATTRIBUTES0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "Agent",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN9" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Omni Performance",
+          "name" : "Omni_Performance",
+          "folderName" : "NEO_OMNI_PERFORMANCE"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "DROP_FIELDS0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Case.CaseNumber",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "AHT",
+          "label" : "AHT",
+          "formulaExpression" : "IF(\nStatus = 'Closed',\nHandleTime / 60,\n\nIF(\nStatus = 'Canceled',\n(to_unix_timestamp(CancelDateTime) - to_unix_timestamp(AcceptDateTime))/60,\n\nNULL\n)\n)",
+          "precision" : 16,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "partitionBy" : [ "Case.Id" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Most_Recent_Handling",
+          "label" : "Most Recent Handling",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES3" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Case.CreatedDate",
+          "newProperties" : {
+            "label" : "Case Created Date",
+            "name" : "Case.CreatedDate"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CaseRecordType.Name",
+          "newProperties" : {
+            "label" : "Case Record Type",
+            "name" : "CaseRecordType.Name"
+          }
+        } ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "AssignedDateTime",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1769558400000" ]
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1769558400000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Old_Value__c",
+          "operator" : "EQUAL",
+          "operands" : [ "On Hold", "On hold – VIP" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "OwnerId", "CreatedDate", "Case__c", "Total_Case_Status_Duration_in_minutes__c", "New_Value__c", "Old_Value__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case_value_changes__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case_value_changes__c",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "EDIT_ATTRIBUTES3", "JOIN5" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "OwnerId",
+          "bottom" : "OwnerId"
+        }, {
+          "top" : "CreatedDate",
+          "bottom" : "CreatedDate"
+        }, {
+          "top" : "Case.Id",
+          "bottom" : "Case__c"
+        }, {
+          "top" : "Case.CaseNumber",
+          "bottom" : "CaseValue.CaseNumber"
+        }, {
+          "top" : "Case.Status",
+          "bottom" : "CaseValue.Status"
+        }, {
+          "top" : "Case.Subject",
+          "bottom" : "CaseValue.Subject"
+        }, {
+          "top" : "Case.Priority",
+          "bottom" : "CaseValue.Priority"
+        }, {
+          "top" : "Case.Category__c",
+          "bottom" : "CaseValue.Category__c"
+        }, {
+          "top" : "Case.Group__c",
+          "bottom" : "CaseValue.Group__c"
+        }, {
+          "top" : "Case.Sub_Category__c",
+          "bottom" : "CaseValue.Sub_Category__c"
+        }, {
+          "top" : "Case.CCC_And_B_Case_Type__c",
+          "bottom" : "CaseValue.CCC_And_B_Case_Type__c"
+        }, {
+          "top" : "Case.CaseRecordType.Id",
+          "bottom" : "CaseValue.CaseRecordType.Id"
+        }, {
+          "top" : "Case.CaseRecordType.Name",
+          "bottom" : "CaseValue.CaseRecordType.Name"
+        }, {
+          "top" : "Case.CaseOwner.Location__c",
+          "bottom" : "ChangeOwner.Location__c"
+        }, {
+          "top" : "Agent.Id",
+          "bottom" : "ChangeOwner.Id"
+        }, {
+          "top" : "Agent.Name",
+          "bottom" : "ChangeOwner.Name"
+        }, {
+          "top" : "Agent.Location__c",
+          "bottom" : "ChangeOwner.Location__c"
+        }, {
+          "top" : "Agent.Role.Id",
+          "bottom" : "ChangeOwner.Role.Id"
+        }, {
+          "top" : "Agent.Role.Name",
+          "bottom" : "ChangeOwner.Role.Name"
+        }, {
+          "top" : "AHT",
+          "bottom" : "On_Hold_Negative"
+        }, {
+          "bottom" : "Old_Value__c"
+        }, {
+          "bottom" : "Total_Case_Status_Duration_in_minutes__c"
+        } ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucketV2",
+      "sources" : [ "APPEND0" ],
+      "parameters" : {
+        "buckets" : [ {
+          "value" : "Yes",
+          "terms" : [ {
+            "operator" : "IS_NOT_NULL",
+            "opType" : "TEXT",
+            "operands" : [ ]
+          } ]
+        }, {
+          "value" : "No",
+          "terms" : [ {
+            "operator" : "IS_NULL",
+            "opType" : "TEXT",
+            "operands" : [ ]
+          } ]
+        } ],
+        "passthroughEnabled" : true,
+        "multiValueResult" : false,
+        "sourceField" : "Old_Value__c",
+        "targetField" : {
+          "name" : "Case_Went_On_Hold",
+          "label" : "Allocation Has On Hold"
+        }
+      }
+    },
+    "FORMULA5" : {
+      "action" : "computeRelative",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "partitionBy" : [ "Case.CaseNumber" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "First_Allocation_Count",
+          "label" : "First Allocation Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "JOIN6", "EDIT_ATTRIBUTES1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Case__c" ],
+        "rightQualifier" : "CaseValue",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN6" : {
+      "action" : "join",
+      "sources" : [ "FORMULA7", "EDIT_ATTRIBUTES0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "OwnerId" ],
+        "rightQualifier" : "ChangeOwner",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EDIT_ATTRIBUTES2" : {
+      "action" : "schema",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Queue.Name",
+          "newProperties" : {
+            "label" : "Queue Name",
+            "name" : "Queue.Name"
+          }
+        } ]
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "CaseRecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Baggage", "CCC Complaints", "CCC Compliment", "CCC Insurance Letter Case", "CCC Query", "QCC Elite Process", "CCC VIP Assistance" ]
+        } ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "CaseOwner.Role.Id", "CaseOwner.Email" ]
+        }
+      }
+    },
+    "JOIN8" : {
+      "action" : "join",
+      "sources" : [ "FILTER3", "EDIT_ATTRIBUTES0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "OwnerId" ],
+        "rightQualifier" : "CaseOwner",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "APPEND1" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET1", "LOAD_DATASET3" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "Id",
+          "bottom" : "Id"
+        }, {
+          "top" : "Name",
+          "bottom" : "Name"
+        } ]
+      }
+    },
+    "FILTER4" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "First_Allocation_Count",
+          "operator" : "EQUAL",
+          "operands" : [ "1" ]
+        } ]
+      }
+    },
+    "DROP_FIELDS1" : {
+      "action" : "schema",
+      "sources" : [ "FILTER4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "SELECT",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Case.CaseNumber", "Queue.Name", "Case.Id" ]
+        }
+      }
+    },
+    "JOIN9" : {
+      "action" : "join",
+      "sources" : [ "FORMULA5", "DROP_FIELDS1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Case.Id" ],
+        "rightQualifier" : "FirstQueue",
+        "rightKeys" : [ "Case.Id" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN12" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Omni Backlog",
+          "name" : "Omni_Backlog",
+          "folderName" : "NEO_OMNI_PERFORMANCE"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "CaseId", "CreatedById", "CreatedDate", "Field", "DataType", "OldValue", "NewValue" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseHistory",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseHistory",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN10" : {
+      "action" : "join",
+      "sources" : [ "FILTER5", "JOIN12" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CaseId" ],
+        "rightQualifier" : "SlaBreach",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER5" : {
+      "action" : "filter",
+      "sources" : [ "FILTER6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "NewValue",
+          "operator" : "EQUAL",
+          "operands" : [ "SLA" ]
+        } ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "JOIN11" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "SLA Breach",
+          "name" : "SLA_Breach",
+          "folderName" : "NEO_OMNI_PERFORMANCE"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER6" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET7" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1769558400000" ]
+        } ]
+      }
+    },
+    "FILTER7" : {
+      "action" : "filter",
+      "sources" : [ "FILTER6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "NewValue",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Baggage Tracing Queue", "CCC Damaged Baggage Queue", "CCC Delayed Baggage Queue", "CCC Omni Flight Disruption", "Qantas VIP Disruption Queue", "Qantas VIP General Queue", "Qantas VIP Milestone Queue", "Qantas VIP Post Travel Queue", "Qantas VIP Pre Flight Queue", "VIP Email Enquiries" ]
+        } ]
+      }
+    },
+    "FORMULA6" : {
+      "action" : "computeRelative",
+      "sources" : [ "FILTER7" ],
+      "parameters" : {
+        "partitionBy" : [ "CaseId" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "First_Queue_Count",
+          "label" : "First Queue Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "JOIN11" : {
+      "action" : "join",
+      "sources" : [ "JOIN10", "EDIT_ATTRIBUTES4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "SlaBreach.Id" ],
+        "rightQualifier" : "FirstQueue",
+        "rightKeys" : [ "CaseId" ]
+      }
+    },
+    "FILTER8" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "First_Queue_Count",
+          "operator" : "EQUAL",
+          "operands" : [ "1" ]
+        } ]
+      }
+    },
+    "DROP_FIELDS2" : {
+      "action" : "schema",
+      "sources" : [ "FILTER8" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "SELECT",
+          "ignoreMissingFields" : true,
+          "fields" : [ "CaseId", "NewValue" ]
+        }
+      }
+    },
+    "EDIT_ATTRIBUTES4" : {
+      "action" : "schema",
+      "sources" : [ "DROP_FIELDS2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "NewValue",
+          "newProperties" : {
+            "label" : "First Queue",
+            "name" : "NewValue"
+          }
+        } ]
+      }
+    },
+    "JOIN12" : {
+      "action" : "join",
+      "sources" : [ "JOIN8", "EDIT_ATTRIBUTES4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "FirstQueue",
+        "rightKeys" : [ "CaseId" ]
+      }
+    },
+    "FORMULA7" : {
+      "action" : "formula",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "On_Hold_Negative",
+          "label" : "On Hold Negative Minutes",
+          "formulaExpression" : "Total_Case_Status_Duration_in_minutes__c - Total_Case_Status_Duration_in_minutes__c * 2",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "FILTER7" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Test First Queue",
+          "name" : "Test_First_Queue",
+          "folderName" : "NEO_OMNI_PERFORMANCE"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT4" : {
+      "action" : "save",
+      "sources" : [ "FILTER6" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Test First Queue 2",
+          "name" : "Test_First_Queue_2",
+          "folderName" : "NEO_OMNI_PERFORMANCE"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT5" : {
+      "action" : "save",
+      "sources" : [ "JOIN12" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Omni Backlog No Data Source Connection",
+          "name" : "Omni_Backlog_No_Data_Source_Connection",
+          "folderName" : "NEO_OMNI_PERFORMANCE"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "AgentWork",
+        "type" : "LOAD_DATASET",
+        "top" : 811.9,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 951.9,
+        "left" : 532,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 811.9,
+        "left" : 532,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Get User Role",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 951.9,
+        "left" : 672
+      },
+      "TRANSFORM0" : {
+        "label" : "Rename Role Column",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 951.9,
+        "left" : 812,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Rename Role Name"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Group",
+        "type" : "LOAD_DATASET",
+        "top" : 671.9,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 531.9,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET5" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 391.9,
+        "left" : 392,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Get Case Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 531.9,
+        "left" : 392
+      },
+      "JOIN2" : {
+        "label" : "Get Queue Name",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 671.9,
+        "left" : 532
+      },
+      "JOIN3" : {
+        "label" : "Get Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 531.9,
+        "left" : 952
+      },
+      "JOIN4" : {
+        "label" : "Get Agent Details",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 951.9,
+        "left" : 952
+      },
+      "OUTPUT0" : {
+        "label" : "Omni Performance",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 811.9,
+        "left" : 1512
+      },
+      "FILTER0" : {
+        "label" : "QCC Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 531.9,
+        "left" : 1512
+      },
+      "TRANSFORM1" : {
+        "label" : "AHT",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 951.9,
+        "left" : 1092,
+        "graph" : {
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "AHT"
+          },
+          "FORMULA4" : {
+            "label" : "Most Recent Handling"
+          },
+          "EDIT_ATTRIBUTES3" : {
+            "label" : "Case Created Date"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA3",
+          "target" : "FORMULA4"
+        }, {
+          "source" : "FORMULA4",
+          "target" : "EDIT_ATTRIBUTES3"
+        } ]
+      },
+      "TRANSFORM3" : {
+        "label" : "Rename Record Type",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 531.9,
+        "left" : 532,
+        "graph" : {
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Rename Record Type"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER1" : {
+        "label" : "From Omni VIP Launch",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 811.9,
+        "left" : 392
+      },
+      "FILTER2" : {
+        "label" : "After Omni VIP Launch",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 1092,
+        "left" : 1232
+      },
+      "LOAD_DATASET6" : {
+        "label" : "Case_value_changes__c",
+        "type" : "LOAD_DATASET",
+        "top" : 1092,
+        "left" : 1092,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND0" : {
+        "label" : "Append On Hold",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 671.9,
+        "left" : 1512
+      },
+      "TRANSFORM4" : {
+        "label" : "Bucket On Hold",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 811.9,
+        "left" : 1372,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Allocation Has On Hold"
+          },
+          "FORMULA5" : {
+            "label" : "First Allocation Count"
+          }
+        },
+        "connectors" : [ {
+          "source" : "BUCKET0",
+          "target" : "FORMULA5"
+        } ]
+      },
+      "JOIN5" : {
+        "label" : "Get Case for Value Change",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 951.9,
+        "left" : 1652
+      },
+      "JOIN6" : {
+        "label" : "Get Value Change Owner Details",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 1091.9,
+        "left" : 1512
+      },
+      "TRANSFORM5" : {
+        "label" : "Queue Name",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 671.9,
+        "left" : 672,
+        "graph" : {
+          "EDIT_ATTRIBUTES2" : {
+            "label" : "Queue Name"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER3" : {
+        "label" : "QCC Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 531.9,
+        "left" : 672
+      },
+      "TRANSFORM6" : {
+        "label" : "Drop Columns",
+        "description" : "Drop unwanted columns after getting case owner.",
+        "type" : "TRANSFORM",
+        "top" : 531.9,
+        "left" : 1092,
+        "graph" : {
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "JOIN8" : {
+        "label" : "Get Case Owner Details",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 531.9,
+        "left" : 812
+      },
+      "APPEND1" : {
+        "label" : "For Owner Is Queue",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 1091.9,
+        "left" : 672
+      },
+      "FILTER4" : {
+        "label" : "First Allocation Count Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 811.9,
+        "left" : 1232
+      },
+      "TRANSFORM7" : {
+        "label" : "Keep 2 Columns Only",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 951.9,
+        "left" : 1232,
+        "graph" : {
+          "DROP_FIELDS1" : {
+            "label" : "Keep Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "JOIN9" : {
+        "label" : "Get First Allocation Queue",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 951.9,
+        "left" : 1372
+      },
+      "OUTPUT1" : {
+        "label" : "Omni Backlog",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 111.80000000000001,
+        "left" : 812.3
+      },
+      "LOAD_DATASET7" : {
+        "label" : "CaseHistory",
+        "type" : "LOAD_DATASET",
+        "top" : 391.9,
+        "left" : 952,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN10" : {
+        "label" : "SLA Breach",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 251.3,
+        "left" : 1372
+      },
+      "FILTER5" : {
+        "label" : "SLA Breach",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 391.9,
+        "left" : 1232
+      },
+      "OUTPUT2" : {
+        "label" : "SLA Breach",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 1652
+      },
+      "FILTER6" : {
+        "label" : "After Omni VIP Launch",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 251.2,
+        "left" : 1092
+      },
+      "FILTER7" : {
+        "label" : "First Owner Is Queue",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 111.19999999999999,
+        "left" : 1092
+      },
+      "TRANSFORM8" : {
+        "label" : "First Queue Count",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 1232,
+        "graph" : {
+          "FORMULA6" : {
+            "label" : "First Queue Count"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "JOIN11" : {
+        "label" : "First Allocation Queue",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 1512
+      },
+      "FILTER8" : {
+        "label" : "First Queue Count Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 111.30000000000001,
+        "left" : 1372
+      },
+      "TRANSFORM9" : {
+        "label" : "Keep 2 Columns Only",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112.4,
+        "left" : 1512,
+        "graph" : {
+          "DROP_FIELDS2" : {
+            "label" : "Drop Columns"
+          },
+          "EDIT_ATTRIBUTES4" : {
+            "label" : "Edit Attributes"
+          }
+        },
+        "connectors" : [ {
+          "source" : "DROP_FIELDS2",
+          "target" : "EDIT_ATTRIBUTES4"
+        } ]
+      },
+      "JOIN12" : {
+        "label" : "First Allocation Queue",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 1652
+      },
+      "TRANSFORM10" : {
+        "label" : "On Hold Negative",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 1091.9,
+        "left" : 1372,
+        "graph" : {
+          "FORMULA7" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "On Hold Negative Minutes"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "OUTPUT3" : {
+        "label" : "Test First Queue",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 531.9,
+        "left" : 1232
+      },
+      "OUTPUT4" : {
+        "label" : "Test First Queue 2",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 672,
+        "left" : 1232
+      },
+      "OUTPUT5" : {
+        "label" : "Omni Backlog No Data Source Connection",
+        "description" : "Used for backlog count faceting only, should not be connected as Data Source in dash.",
+        "type" : "OUTPUT",
+        "top" : 112.6,
+        "left" : 1792
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "APPEND1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM5",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN12",
+      "target" : "JOIN3"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN4"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN4",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER1"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "FILTER2"
+    }, {
+      "source" : "TRANSFORM6",
+      "target" : "FILTER0"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "APPEND0"
+    }, {
+      "source" : "JOIN5",
+      "target" : "APPEND0"
+    }, {
+      "source" : "APPEND0",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "JOIN6",
+      "target" : "JOIN5"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "JOIN5"
+    }, {
+      "source" : "TRANSFORM10",
+      "target" : "JOIN6"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN6"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM5"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "FILTER3"
+    }, {
+      "source" : "FILTER3",
+      "target" : "JOIN8"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN8"
+    }, {
+      "source" : "JOIN3",
+      "target" : "TRANSFORM6"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "APPEND1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "APPEND1"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "FILTER4"
+    }, {
+      "source" : "FILTER4",
+      "target" : "TRANSFORM7"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "JOIN9"
+    }, {
+      "source" : "TRANSFORM7",
+      "target" : "JOIN9"
+    }, {
+      "source" : "JOIN9",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN12",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "FILTER5",
+      "target" : "JOIN10"
+    }, {
+      "source" : "JOIN12",
+      "target" : "JOIN10"
+    }, {
+      "source" : "FILTER6",
+      "target" : "FILTER5"
+    }, {
+      "source" : "JOIN11",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "FILTER6"
+    }, {
+      "source" : "FILTER6",
+      "target" : "FILTER7"
+    }, {
+      "source" : "FILTER7",
+      "target" : "TRANSFORM8"
+    }, {
+      "source" : "JOIN10",
+      "target" : "JOIN11"
+    }, {
+      "source" : "TRANSFORM9",
+      "target" : "JOIN11"
+    }, {
+      "source" : "TRANSFORM8",
+      "target" : "FILTER8"
+    }, {
+      "source" : "FILTER8",
+      "target" : "TRANSFORM9"
+    }, {
+      "source" : "JOIN8",
+      "target" : "JOIN12"
+    }, {
+      "source" : "TRANSFORM9",
+      "target" : "JOIN12"
+    }, {
+      "source" : "FILTER2",
+      "target" : "TRANSFORM10"
+    }, {
+      "source" : "FILTER7",
+      "target" : "OUTPUT3"
+    }, {
+      "source" : "FILTER6",
+      "target" : "OUTPUT4"
+    }, {
+      "source" : "JOIN12",
+      "target" : "OUTPUT5"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

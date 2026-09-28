@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body data-new-gr-c-s-loaded="14.1045.0" style="height: auto; min-height: auto;"><br />
+Thanks for contacting Qantas Freight. We’ve received your request and your reference number is {!Case.CaseNumber}.
+<br />
+<br/>
+This email is to let you know we've received your intent to claim. All the details outlined in your claim are below for reference.
+<br/>
+<br/>
+<b>Shipments within Australia-</b> Please note, Qantas Freight is not liable for any loss, damage, delay or penalty which the carrier may incur, as per our <a href="http://www.qantas.com.au/cargo/pdf/conditions-of-carriage-australian-domestic.pdf">domestic conditions of carriage</a>. Qantas does not provide transit insurance coverage, which is why we recommend you source private insurance.
+<br/>
+<br />
+You can still have your incident investigated further by emailing <a href="frtclaims@qantas.com.au">frtclaims@qantas.com.au</a>
+<br/>
+<br/>
+<b>International claims-</b> If your incident is covered and adheres to the time frames outlined in our <a href="http://www.qantas.com.au/cargo/pdf/conditionsOfCarriage.pdf">international conditions of carriage</a> please continue with your formal claim. This can be lodged in writing at your local Qantas Freight office or the ground handling agent from where the freight was collected. All our locations are available on <a href="https://freight.qantas.com/">qantasfreight.com</a>.The written formal claim must include the:
+<br/>
+<br/>
+<li>Reason for lodging the claim</li>
+<li>Number of affected pieces</li>
+<li>Weight of the affected pieces</li>
+<li>Amount claimed (value)</li>
+<br/>
+<br/>
+<br/>
+More information on <a href="https://freight.qantas.com/help/claims.html">how to submit a claim</a> is available at qantasfreight.com.
+<br/>
+<br/>
+<b>Your intent to claim</b>
+<br/>
+<br/>
+<br/>
+<table>
+<tr>
+<td>Air Waybill :</td>
+<td>{!Case.Freight_AWB_Number__c}</td>
+</tr>
+<tr>
+<td>House Air Waybill :</td>
+<td>{!Case.Freight_House_AWB_Num__c}</td>
+</tr>
+<tr>
+<td>Lodgment Reason : </td>
+<td>{!Case.Request_Reason__c}</td>
+</tr>
+<tr>
+<td>Supplementary Lodgment Reason :</td>
+<td>{!Case.Description}</td>
+</tr>
+<tr>
+<td>Estimated Damages :</td>
+<td>{!Case.Refund_Amount__c}</td>
+</tr>
+<tr>
+<td>Number of Affected Pieces :</td>
+<td>{!Case.freight_num_of_Affected_Pieces__c}</td>
+</tr>
+<tr>
+<td>Weight of Affected Pieces :</td>
+<td>{!Case.Freight_Weight__c}</td>
+</tr>
+<tr>
+<td>Return Email Address : </td>
+<td>{!Case.SuppliedEmail}</td>
+</tr>
+<tr>
+<td>Claimant Name :</td>
+<td>{!Case.SuppliedName}</td>
+</tr>
+<tr>
+<td>Contact Telephone Number :	</td>
+<td>{!Case.SuppliedPhone}</td>
+</tr>
+<tr>
+<td>Company Name : </td>
+<td>{!Case.SuppliedCompany}</td>
+</tr>
+</table>
+         
+<br/>
+<br/>
+Thank You<br />
+Qantas Freight<br />
+<br />
+<font color="white">{!Case.Thread_Token}</font> <br/>
+<footer><img src="https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0159000000FHvlL&oid=00D8s00000IDoz7&lastMod=1521233610000" alt="Freight Logo" 
+/></footer>
+</body>
+</html>

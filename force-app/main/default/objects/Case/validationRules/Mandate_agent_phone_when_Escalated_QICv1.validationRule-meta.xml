@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_agent_phone_when_Escalated_QICv1</fullName>
+    <active>false</active>
+    <description>To make agents phone or email mandatory when escalating to QIC or sale support.</description>
+    <errorConditionFormula>AND 
+( 
+RecordType.Name==&quot;Service Request&quot;, 
+OR( ISPICKVAL( Escalate_To__c , &apos;QAC AU Escalation Queue&apos;) , 
+ISPICKVAL( Escalate_To__c , &apos;AU Sales Support Queue&apos;)), 
+LEN(Consultant_Phone__c &amp; Consultant_Email__c )&lt;1 
+)</errorConditionFormula>
+    <errorDisplayField>Consultant_Phone__c</errorDisplayField>
+    <errorMessage>Please provide the agent&apos;s phone number OR email address to escalate this case.</errorMessage>
+</ValidationRule>

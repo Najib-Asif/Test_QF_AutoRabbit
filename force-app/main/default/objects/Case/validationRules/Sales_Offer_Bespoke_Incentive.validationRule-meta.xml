@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offer_Bespoke_Incentive</fullName>
+    <active>false</active>
+    <description>Sales Offer Bespoke Incentive Mandatory fields.</description>
+    <errorConditionFormula>AND( 
+RecordType.DeveloperName = &apos;Sales_Offers_Request&apos;, 
+ NOT (   $UserRole.Id   = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/
+ISPICKVAL (  Type , &quot;Bespoke Incentive&quot;),
+NOT ( CONTAINS ( $User.Level__c , &quot;SO(SME)&quot;)),
+
+
+OR (
+ISBLANK( Objective__c ),
+ISBLANK( Key_Messages__c ),
+ISBLANK( What_does_the_Customer_hope_to_achieve__c ),
+ISPICKVAL (  Initial_Customer_conversation_completed__c ,&quot;&quot;),
+ISPICKVAL ( Included_in_your_Strategic_Account_Plan__c , &quot;&quot;)
+)
+
+)</errorConditionFormula>
+    <errorMessage>Please complete all the fields in the Bespoke Incentive Information section.</errorMessage>
+</ValidationRule>

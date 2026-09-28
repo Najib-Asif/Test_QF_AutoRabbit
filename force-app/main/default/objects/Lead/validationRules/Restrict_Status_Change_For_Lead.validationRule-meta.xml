@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Status_Change_For_Lead</fullName>
+    <active>true</active>
+    <description>Restrict status change when system admin case is present CRM-7365
+To Avoid Restriction For System Admin CRM-7811</description>
+    <errorConditionFormula>AND(Is_System_Admin_Case__c = True , ISCHANGED( Status ) , $Setup.EnableValidationRule__c.VR_To_Restrict_Status_Change_For_Lead__c  )</errorConditionFormula>
+    <errorMessage>Please note that a System Admin Case has been created for a manual conversion</errorMessage>
+</ValidationRule>

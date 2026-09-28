@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dashboard_Bucket__c</fullName>
+    <description>Please change the FY value next Year
+
+Used for QIS reporting</description>
+    <externalId>false</externalId>
+    <formula>IF( (BEGINS(Account_Owner_Role__c,&quot;QF-DOM-Sales-SME-QIS-R&amp;G&quot;) &amp;&amp;  Contracted__c == True),&quot;Retention&quot;,
+IF( (BEGINS(Account_Owner_Role__c,&quot;QF-DOM-Sales-SME-QIS-A&amp;G&quot;) &amp;&amp;  Contracted__c == True  &amp;&amp; (Contract_Commencement_Date__c &lt; Date(2018,06,30) ||  Contract_Start_Date__c &lt; Date(2018,06,30)  )),&quot;Realisation&quot;,
+IF( (BEGINS(Account_Owner_Role__c,&quot;QF-DOM-Sales-SME-QIS-A&amp;G&quot;) &amp;&amp;  Contracted__c == True  &amp;&amp; (Contract_Commencement_Date__c &gt; Date(2018,06,30) ||  Contract_Start_Date__c &gt; Date(2018,06,30)  ) ),&quot;Acquisition&quot;,&quot;NA&quot;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Dashboard Bucket</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

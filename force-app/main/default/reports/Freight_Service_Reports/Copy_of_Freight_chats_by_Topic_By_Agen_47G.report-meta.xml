@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_69940840</developerName>
+        <masterLabel>Owner Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>LiveChatTranscript$Owner</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Daniela Zingovski</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>David Koutsouki</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salwa Sukkar</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sandra Tomasella</sourceValue>
+            </sourceValues>
+            <value>Daniela&apos;s Team</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Jenelle Lymer</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Losana Naulu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Shana Bourke</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Stella Sedlak</sourceValue>
+            </sourceValues>
+            <value>Jenelle&apos;s Team</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Barry Annesley</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Lorenza Foundoukakis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Victor Henderson</sourceValue>
+            </sourceValues>
+            <value>John&apos;s Team</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>LiveChatTranscript$Name</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Case</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Contact</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Owner</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>LiveChatTranscript$Freight_Chat_Topic__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>LiveChatTranscript$Owner.FirstName</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>Automated</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>LiveChatTranscript$Freight_Chat_Topic__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_69940840</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Freight chats by Topic - By Agents</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Live_Chat__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>LiveChatTranscript$LastModifiedDate</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

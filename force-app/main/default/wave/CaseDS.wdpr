@@ -1,0 +1,38 @@
+{
+  "version" : "67.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "MasterRecordId", "CaseNumber", "ContactId", "AccountId", "BusinessHoursId", "ParentId", "SuppliedEmail", "Type", "RecordTypeId", "Status", "Reason", "Origin", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "IsEscalated", "OwnerId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "ContactPhone", "ContactEmail", "Frequent_Flyer_Number__c", "Sub_Type__c", "flight_itinerary__c", "Contact_Fullname__c", "Flight_Number_With_Code__c", "Airlines__c", "CRM_Number__c", "First_Name__c", "Last_Name__c", "User_s_Email__c", "Case_Age__c", "Carrier__c", "Created_By_Name__c", "Email__c", "Power_of_One_Case__c", "Sub_Type_1__c", "Sub_Type_2__c", "Freight_AWB_Number__c", "Freight_Origin__c", "Created_by_Role__c", "Aircraft_Type_Code__c", "Airline__c", "Arrival_Airport_Code__c", "Arrival_Airport__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      }
+    },
+    "connectors" : [ ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

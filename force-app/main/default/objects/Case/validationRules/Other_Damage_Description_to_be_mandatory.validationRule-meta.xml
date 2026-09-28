@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other_Damage_Description_to_be_mandatory</fullName>
+    <active>true</active>
+    <description>This rule mandates the other damage description to be filled when &apos;Other&apos; is selected in damage sustained reason.</description>
+    <errorConditionFormula>AND(INCLUDES(Damage_Sustained__c , &quot;Other&quot;), ISBLANK(Other_Damage_Description__c))
+&amp;&amp; $Permission.QCC_Bypass_Account_Contact_Case_Triggers = False</errorConditionFormula>
+    <errorDisplayField>Other_Damage_Description__c</errorDisplayField>
+    <errorMessage>Please complete this field.</errorMessage>
+</ValidationRule>

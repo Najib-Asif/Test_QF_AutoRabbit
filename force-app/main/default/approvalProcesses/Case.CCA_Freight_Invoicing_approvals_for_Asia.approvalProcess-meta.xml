@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>Freight_AWB_Number__c</field>
+        <field>Total_Adjustment_Due__c</field>
+        <field>Justification__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>AM_s_Manager__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Account Manager Approval</label>
+        <name>Account_Manager_Approval</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Reports_To__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Regional Verification</label>
+        <name>Regional_Verification</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Requested_By__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>OR( Account.BillingCountry =&apos;CN&apos;, Account.BillingCountry =&apos;TH&apos;, Account.BillingCountry =&apos;SG&apos;)</formula>
+        </entryCriteria>
+        <label>Regional Approval</label>
+        <name>Regional_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>This approval process is designed for handling the three levels of approvals for Freight Invoicing Cases concerned with Asia regions.</description>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+ISPICKVAL( Status , &apos;In Progress&apos;),
+Approved__c != true,
+Owner:Queue.QueueName !=&apos;Freight Invoices Queue&apos;,
+OR( ISPICKVAL( Freight_Shipment__c , &apos;Domestic&apos;),
+ISPICKVAL( Freight_Shipment__c , &apos;International&apos;)),
+RecordType.Name =&apos;Freight Invoicing&apos;,
+Owner:Queue.QueueName != &apos;Freight Global Sales Optimisation Queue&apos;,
+OR( ISPICKVAL( Type, &apos;Claims&apos;),
+ISPICKVAL( Type, &apos;Billing Discrepancy&apos;)),
+OR(Account.BillingCountry = &apos;IN&apos; ,
+Account.BillingCountry = &apos;HK&apos;, Account.BillingCountry = &apos;CN&apos; , Account.BillingCountry = &apos;ID&apos; , Account.BillingCountry = &apos;PH&apos; ,Account.BillingCountry = &apos;TH&apos; ,
+Account.BillingCountry = &apos;SG&apos; ,Account.BillingCountry = &apos;MY&apos; , Account.BillingCountry = &apos;VN&apos; , Account.BillingCountry = &apos;TW&apos; , Account.BillingCountry = &apos;KR&apos; ,
+Account.BillingCountry = &apos;PG&apos; , Account.BillingCountry = &apos;SB&apos; , Account.BillingCountry = &apos;IL&apos; , Account.BillingCountry = &apos;LK&apos; , Account.BillingCountry = &apos;JP&apos; ,
+Account.BillingCountry = &apos;MO&apos; , Account.BillingCountry = &apos;PK&apos; , Account.BillingCountry = &apos;SA&apos; , Account.BillingCountry = &apos;EG&apos; , Account.BillingCountry = &apos;QA&apos; ,
+Account.BillingCountry = &apos;OM&apos; , Account.BillingCountry = &apos;KE&apos; , Account.BillingCountry = &apos;KW&apos; , Account.BillingCountry = &apos;LB&apos; , Account.BillingCountry = &apos;KH&apos; ,
+Account.BillingCountry = &apos;BH&apos; , Account.BillingCountry = &apos;KZ&apos; , Account.BillingCountry = &apos;JO&apos; , Account.BillingCountry = &apos;BD&apos; , Account.BillingCountry = &apos;CY&apos; ,
+Account.BillingCountry = &apos;ET&apos; , Account.BillingCountry = &apos;TN&apos; , Account.BillingCountry = &apos;BN&apos; , Account.BillingCountry = &apos;PF&apos; , Account.BillingCountry = &apos;WS&apos; , Account.BillingCountry = &apos;VU&apos; , Account.BillingCountry = &apos;GU&apos; , Account.BillingCountry = &apos;CK&apos; ,
+Account.BillingCountry = &apos;TO&apos; , Account.BillingCountry = &apos;WF&apos; , Account.BillingCountry = &apos;LA&apos;)
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Check_the_Approved_checkbox</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_to_QF_Rate_Audit</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Update_Status_as_Pending_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>CCA/Freight Invoicing approvals for Asia</label>
+    <processOrder>37</processOrder>
+    <recallActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

@@ -1,0 +1,119 @@
+<!-- Created By : Ajay Bharathan | TCS | Cloud Developer -->
+<aura:component controller="QAC_FulfillmentController" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />    
+    
+    <aura:attribute name="AllFulfillments" type="Case_Fulfilment__c[]" />
+    <aura:attribute name="eachFulfillment" type="Case_Fulfilment__c" />
+    <aura:attribute name="numberOfRecordsVisible" type="Integer" default="3"/>
+    <aura:attribute name="totalRecords" type="Integer" default="0"/>
+    <aura:attribute name="toggleCount" type="Integer" default="3"/>
+    <aura:attribute name="buttonstate" type="Boolean" default="false"/>    
+    
+    <aura:if isTrue="{!(v.AllFulfillments.length > 0)}">
+    <article class="slds-card">
+        
+        <div class="slds-card__header slds-grid">
+            
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-contact" title="fulfillment">
+                        <lightning:icon iconName="custom:custom48" size="small"/>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <span class="slds-text-heading_small">Fulfilment Status</span>
+                    </h2>
+                </div>
+                
+                <!-- Refresh Icon --> 
+                <div class="slds-no-flex">
+                    <button onclick="{!c.refresh}" class="slds-button refreshButton" title="Refresh">
+                        <img src="{!$Resource.QACResources +'/QAC_RefreshIcon.png'}"/>	
+                    </button>
+                </div>
+            </header>
+        </div>        
+        
+        <div class="slds-card__body">
+            <div class="slds-card__body--inner">
+                <div class="slds-tile">
+                    <table aura:id="ffTable" class="slds-table slds-table_bordered slds-table_cell-buffer">
+                        <thead class="tableHead">
+                            <tr>
+                                <th scope="col"><div class="slds-truncate" title="Type">Type</div></th>
+                                <th scope="col"><div class="slds-truncate" title="Date/Time">Date/Time</div></th>
+                                <th scope="col"><div class="slds-truncate" title="Status">Status</div></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.AllFulfillments}" var="wrap" indexVar="idx" end="{!v.toggleCount}">
+                                <tr>
+                                    <th scope="row"><div class="slds-truncate" title="{!wrap.Category__c}">{!wrap.Category__c}</div></th>
+                                    <th scope="row"><div class="slds-truncate" title="{!wrap.Timestamp__c}">
+                                        <ui:outputDateTime class="slds-truncate" value="{!wrap.Timestamp__c}" format="DD-MMM-YY HH:mm"/>
+                                        </div></th>
+                                    
+                                    <th scope="row">
+                                        <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-truncate">
+                                            <aura:if isTrue="{!wrap.Status__c != 'Success'}">
+                                                <button id="convertButton" class="slds-button slds-button_icon slds-button_icon-medium" 
+                                                        aria-haspopup="true" title="Mark as Complete"
+                                                        onclick="{!c.convert}" data-custom="{!idx}">
+                                                    
+                                                    <span class="slds-icon_container" title="{!wrap.Status__c + ' -> Success'}">
+                                                        <aura:unescapedHtml value="{!wrap.Status_Flag__c}" />
+                                                    </span>
+                                                    
+                                                    <!--
+                                                    <div id="buttonContainer" class="slds-truncate">
+                                                        <div id="solidIcon">
+                                                            <span class="slds-icon_container" title="{!wrap.Status__c}">
+                                                                <aura:unescapedHtml value="{!wrap.Status_Flag__c}" />
+                                                            </span>
+                                                        </div>
+                                                        <div id="gifIcon">
+                                                            <span class="slds-icon_container" title="Convert to Success">
+                                                                <aura:unescapedHtml value="{!wrap.Status_GIFs__c}" />
+                                                            </span>
+                                                        </div>
+                                                    </div>
+													-->
+                                                    
+                                                </button>
+                                                <aura:set attribute="else">
+                                                    <span class="slds-icon_container" title="{!wrap.Status__c}">
+                                                        <aura:unescapedHtml value="{!wrap.Status_Flag__c}" />
+                                                    </span>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>    
+                                    </th>
+                                    
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+                <aura:if isTrue="{!(v.AllFulfillments.length > v.numberOfRecordsVisible)}">
+                    
+                    <lightning:buttonStateful labelWhenOff="Show More"
+                                              labelWhenOn="Show Less"
+                                              labelWhenHover=""
+                                              iconNameWhenOff="utility:chevrondown"
+                                              iconNameWhenOn="utility:chevronup"
+                                              iconNameWhenHover=""
+                                              state="{!v.buttonstate}"
+                                              onclick="{!c.toggleTable}"
+                                              class="stateClass slds-align_absolute-center slds-button__icon_right"
+                                              />                    
+                </aura:if>
+            </div>
+        </div>                
+    </article>
+    </aura:if>
+    
+</aura:component>

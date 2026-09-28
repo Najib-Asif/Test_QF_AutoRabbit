@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Account Classifications</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Account Classifications</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- Preferred Carrier, Travel Policy, OBT, Multi POS, Strategic Priority, Account Tier --></description>
+        <label><!-- Account Classifications --></label>
+        <name>Account_Classifications</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Current spend details for creating new Opportunity --></description>
+        <label><!-- Account Onboarding --></label>
+        <name>Account_Onboarding</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Loyalty Commercial - Partner Update --></description>
+        <label><!-- Loyalty Commercial - Partner Update --></label>
+        <name>Loyalty_Commercial_Partner_Update</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Qantas SATC (Standard Agency Terms &amp; Conditions) related Compliance matters --></description>
+        <label><!-- Non Compliance --></label>
+        <name>Non_Compliance</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please comment the reason for choosing &apos;Other&apos; in the Sub Classification. --></errorMessage>
+        <name>Comments_mandatory_if_Other_chosen</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Only system Admin has access to select the Agency Tier/SME Tier info! --></errorMessage>
+        <name>Restrict_Account_Classification_Access</name>
+    </validationRules>
+</CustomObjectTranslation>

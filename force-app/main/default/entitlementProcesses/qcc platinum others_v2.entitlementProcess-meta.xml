@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitlementProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <SObjectType>Case</SObjectType>
+    <active>true</active>
+    <description>Entitlement process for Complaint, Query, Further Action Required, Insurance Letter, Compliment QCC Cases</description>
+    <entryStartDateField>Case.CreatedDate</entryStartDateField>
+    <exitCriteriaFilterItems>
+        <field>Case.IsClosed</field>
+        <operation>equals</operation>
+        <value>true</value>
+    </exitCriteriaFilterItems>
+    <isVersionDefault>false</isVersionDefault>
+    <milestones>
+        <milestoneCriteriaFilterItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Reply Received</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>QCC Accept Case post response to case</milestoneName>
+        <minutesToComplete>5</minutesToComplete>
+        <timeTriggers>
+            <actions>
+                <name>QCC_Set_Case_Priority_to_Urgent</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>QCC_Set_Case_to_In_Progress</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>true</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <milestoneCriteriaFilterItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Waiting for Internal</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>QCC Wait for Internal</milestoneName>
+        <minutesToComplete>1440</minutesToComplete>
+        <timeTriggers>
+            <actions>
+                <name>QCC_Set_Case_Priority_Internal</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>true</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <milestoneCriteriaFilterItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Waiting for Customer</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>QCC Wait for Customer</milestoneName>
+        <minutesToComplete>10080</minutesToComplete>
+        <timeTriggers>
+            <actions>
+                <name>QCC_Set_Case_Status_to_Resolved</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <timeTriggers>
+            <timeLength>-3</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <timeTriggers>
+            <actions>
+                <name>QCC_7_days_Closure_email</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <timeTriggers>
+            <actions>
+                <name>QCC_Send_a_Reminder_after_3_days</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>-4</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>true</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <milestoneName>QCC Total Close Time</milestoneName>
+        <minutesToComplete>4320</minutesToComplete>
+        <useCriteriaStartTime>false</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <milestoneCriteriaFormula>ISPICKVAL(Status, &apos;New&apos;) &amp;&amp; BEGINS(OwnerId, &quot;00G&quot;)</milestoneCriteriaFormula>
+        <milestoneName>QCC Case on Queue</milestoneName>
+        <minutesToComplete>2880</minutesToComplete>
+        <timeTriggers>
+            <actions>
+                <name>QCC_Update_Case_Priority_to_High</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>false</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <milestoneCriteriaFormula>ISPICKVAL(Status, &apos;New&apos;) &amp;&amp; BEGINS(OwnerId, &quot;005&quot;)</milestoneCriteriaFormula>
+        <milestoneName>QCC Accept Case</milestoneName>
+        <minutesToComplete>5</minutesToComplete>
+        <timeTriggers>
+            <actions>
+                <name>QCC_Set_Case_to_In_Progress</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>true</useCriteriaStartTime>
+    </milestones>
+    <name>QCC Platinum Others</name>
+    <versionMaster>552O00000004G6X</versionMaster>
+    <versionNumber>2</versionNumber>
+</EntitlementProcess>

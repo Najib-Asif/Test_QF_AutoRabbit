@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>PCC Exclusion</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>PCC Exclusion</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- This is being used by Qantas Channel Support who will maintain the PCC list that should be excluded from processing in the inbound/GDS file. --></description>
+        <label><!-- Agency Channel --></label>
+        <name>Agency_Channel</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- GDS PCC length should be between Max length and Min length from GDS Reference --></errorMessage>
+        <name>PCC_Length_according_to_GDS_Reference</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- PCC should not contain Special characters or spaces --></errorMessage>
+        <name>Restrict_PCC_To_AlphaNumeric</name>
+    </validationRules>
+</CustomObjectTranslation>

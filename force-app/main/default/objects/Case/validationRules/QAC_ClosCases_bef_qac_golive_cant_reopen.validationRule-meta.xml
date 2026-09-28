@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_ClosCases_bef_qac_golive_cant_reopen</fullName>
+    <active>true</active>
+    <description>Closed cases can&apos;t be reopened on or before 30-Aug (QAC go-live)</description>
+    <errorConditionFormula>AND(
+$Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - Freight&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - QCC&apos;,
+$Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;QAC API Integration Profile&apos;,
+RecordType.Name == &apos;Service Request&apos;,
+IsClosed=true,ISCHANGED(Status),ISPICKVAL(Status,&apos;Reopened&apos;),DATEVALUE(ClosedDate) &lt; DATEVALUE(&apos;2018-08-30&apos;)
+)</errorConditionFormula>
+    <errorMessage>You cannot Reopen the Service Request cases which are closed before 30-Aug-2018</errorMessage>
+</ValidationRule>

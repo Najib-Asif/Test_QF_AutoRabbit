@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Review_Completed__c</fullName>
+    <description>Returns whether Account Review Activity Date was 
+Platinum &lt;90
+Gold&lt; 30,
+Silver &lt; 90</description>
+    <externalId>false</externalId>
+    <formula>IF ( AND( ISPICKVAL ( Customer_Category__c , &quot;Industry - Platinum&quot;),
+TODAY() -  Last_Account_Review_Date__c &lt; 30) , 1 ,
+IF( AND ( ISPICKVAL ( Customer_Category__c , &quot;Industry - Gold&quot;),
+TODAY() -  Last_Account_Review_Date__c &lt; 30 ), 1,
+IF ( AND ( ISPICKVAL ( Customer_Category__c , &quot;Industry - Silver&quot;),
+TODAY() -  Last_Account_Review_Date__c &lt; 90) , 1, 0 )))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Account Review Completed?</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

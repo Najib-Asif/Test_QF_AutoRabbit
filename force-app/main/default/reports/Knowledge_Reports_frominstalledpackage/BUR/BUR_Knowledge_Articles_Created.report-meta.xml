@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Knowledge__ka.Knowledge__kav$Title</field>
+    </columns>
+    <columns>
+        <field>Knowledge__ka$FirstPublishedDate</field>
+    </columns>
+    <columns>
+        <field>Knowledge__ka$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <field>Knowledge__ka.Knowledge__kav$PublishStatus</field>
+    </columns>
+    <columns>
+        <field>Knowledge__ka$LastPublishedDate</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Used to populate the Created / Updated Knowledge Article volumes for the Monthly CCR BUR.</description>
+    <filter>
+        <criteriaItems>
+            <column>Knowledge__ka.Knowledge__kav$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Knowledge__kav.Informational_Article,Knowledge__kav.Marketing_and_Promotional,Knowledge__kav.Policy,Knowledge__kav.Process_and_Procedure,Knowledge__kav.Triage_Article,Knowledge__kav.Internal_Knowledge_QCC_Article,Knowledge__kav.Internal_Noticeboard,Knowledge__kav.Public_Knowledge_FAQ_s,Knowledge__kav.QCC_Article</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Knowledge__ka.Knowledge__kav$PublishStatus</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>2,3</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>BUR_Knowledge Articles_Created</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Knowledge_Kav__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Knowledge__ka$FirstPublishedDate</dateColumn>
+        <endDate>2026-08-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2026-08-01</startDate>
+    </timeFrameFilter>
+</Report>

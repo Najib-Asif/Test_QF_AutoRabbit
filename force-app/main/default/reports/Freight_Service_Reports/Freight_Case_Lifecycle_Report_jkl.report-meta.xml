@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_10518801</developerName>
+        <masterLabel>Bucket duration</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>DURATION</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>20</to>
+            </sourceValues>
+            <value>LT 20 hrs</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>20</from>
+            </sourceValues>
+            <value>Over 20hrs</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_85991277</developerName>
+        <masterLabel>CSU Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>HOWNERNAME</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Daniela Zingovski</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>David Koutsouki</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salwa Sukkar</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sandra Tomasella</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Arunvarman Selvanathan</sourceValue>
+            </sourceValues>
+            <value>Daniela&apos;s Team</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Jenelle Lymer</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Helena Sloan</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Losana Naulu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Shana Bourke</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Stella Sedlak</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Etivise Sikulu</sourceValue>
+            </sourceValues>
+            <value>Jenelle&apos;s Team</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>John Hatzipetros</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Barry Annesley</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Gayleen Karabellas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Lorenza Foundoukakis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Victor Henderson</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Janelle Wise</sourceValue>
+            </sourceValues>
+            <value>John&apos;s Team</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_23486109</developerName>
+        <masterLabel>Open_Closed</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>HSTATUS</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>closed</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>resolved</sourceValue>
+            </sourceValues>
+            <value>Closed</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>open</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>new</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>assigned</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>reopened</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Reply Received</sourceValue>
+            </sourceValues>
+            <value>Open</value>
+        </values>
+    </buckets>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Power_of_One_Case__c</field>
+    </columns>
+    <columns>
+        <field>HSTATUS</field>
+    </columns>
+    <columns>
+        <field>HLASTUPDATEBY</field>
+    </columns>
+    <columns>
+        <field>HLAST_UPDATE</field>
+    </columns>
+    <columns>
+        <field>HOWNERNAME</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>DURATION</field>
+    </columns>
+    <columns>
+        <field>AGE</field>
+    </columns>
+    <columns>
+        <field>Case.Freight_Port__c</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CLOSED</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.QCC_Reopened_flag__c</field>
+    </columns>
+    <columns>
+        <field>Case.Reopened_Date__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Case_Status_Counter__c</field>
+    </columns>
+    <columns>
+        <field>RECORDTYPE</field>
+    </columns>
+    <columns>
+        <field>OWNER_ROLE</field>
+    </columns>
+    <columns>
+        <field>BucketField_10518801</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Open cases</description>
+    <filter>
+        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5 AND 6 AND 7</booleanFilter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.Qantas_Freight,Case.Freight_Claims,Case.Freight_Feedback,Case.Freight_Query,Case.Freight_Shipment,Case.Freight_Email_to_Case,Case.Freight_Invoicing</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Freight CSU AU Queue</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Case_Owner_Team__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>CSU</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Case_Owner_Team__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Customer Service Unit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>LAST_UPDATEONLY</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>THIS_MONTH</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_85991277</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Daniela&apos;s Team,Jenelle&apos;s Team,John&apos;s Team</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_23486109</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Closed,Open</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_23486109</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>TYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_85991277</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Freight Case Lifecycle Report</name>
+    <params>
+        <name>units</name>
+        <value>d</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseHistory</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <sortColumn>HLAST_UPDATE</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

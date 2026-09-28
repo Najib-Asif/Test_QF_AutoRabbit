@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submit_to_Admin__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( RecordType.DeveloperName = &apos;CCC_Query&apos; &amp;&amp; ISPICKVAL(Type, &apos;Claims and Reimbursements&apos;) &amp;&amp; ISPICKVAL(Group__c, &apos;Flight Disruptions&apos;) &amp;&amp; ISPICKVAL(Reason, &apos;Auto-Approved&apos;), IMAGE(&quot;/resource/QCC_GW_Images/Automated.svg&quot;, &quot;Automated&quot;), IF( RecordType.DeveloperName = &apos;CCC_Query&apos; &amp;&amp; ISPICKVAL(Type, &apos;Claims and Reimbursements&apos;) &amp;&amp; ISPICKVAL(Group__c, &apos;Flight Disruptions&apos;) &amp;&amp; NOT(ISPICKVAL(Reason, &apos;Auto-Approved&apos;)), IMAGE(&quot;/resource/QCC_GW_Images/ManualReview.svg&quot;, &quot;Manual Review&quot;), 
+
+
+If (OR(ISPICKVAL(Status ,&quot;Closed - Approved&quot;),ISPICKVAL(Status ,&quot;Closed - Rejected&quot;)), (IMAGE(&quot;/resource/CaseSubmissionIcons/Closed.jpg&quot;, &quot;Closed&quot;, 20,80)), CASE( Owner:Queue.QueueName, 
+&apos;System Admin Request Queue&apos;, IMAGE(&quot;resource/CaseSubmissionIcons/Submitted.jpg&quot;, &quot;Submitted&quot;, 20,80) , IMAGE(&quot;resource/CaseSubmissionIcons/Pending.jpg&quot;, &quot;Not_Submitted&quot;, 20,80)))))</formula>
+    <label>Submission Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

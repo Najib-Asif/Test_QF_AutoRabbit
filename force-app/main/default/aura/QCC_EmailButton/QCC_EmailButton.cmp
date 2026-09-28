@@ -1,0 +1,50 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="QCC_EmailButtonController">
+
+    <aura:attribute name="case" type="Object" />
+    <aura:attribute name="caseF" type="Object" />
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="sessionId" type="String" />
+    <aura:attribute name="serverUrl" type="String" />
+    <aura:attribute name="OrgWideAddress" type="String" />
+    <aura:attribute name="RecType" type="Boolean"/>
+    <aura:attribute name="CaseEmail" type="String" />
+    <aura:attribute name="contactId" type="Id" />
+    <aura:attribute name="templateIdCS" type="String" />
+    <aura:attribute name="lstOfEmailTemplate" type="Object[]" access="private"/>
+    <aura:attribute name="emailTemplateName" type="String" default="" access="private"/>
+    <aura:attribute name="sfEmailTemplateName" type="String" default="" access="private"/>
+    <aura:attribute name="sfEmailTemplateId" type="String" default="" access="private"/>
+    <aura:attribute name="congaTemplateId" type="String" default="" access="private"/>
+    <aura:attribute name="autoCloseOnEmailSent" type="String" default="true" access="private"/>
+    <aura:attribute name="recoveryInprogress" type="String" default="false" access="private"/>
+    <aura:attribute name="affectedPassCongaQueryId" type="String" default="" access="private"/>
+
+<!--     <aura:attribute name="hasAffectedPassenger" type="String" default="false" access="private"/>
+ -->    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:QCC_EmailTemplateEvent" action="{!c.selectEmailTemplate}" />
+
+    <force:recordData aura:id="caseRecord"
+                        recordId="{!v.recordId}"
+                        layoutType="FULL"
+                        fields="CaseNumber,Email_Template__c,Conga_Template_ID__c,Conga_Email_Template_ID__c,Group__c,Type,Category__c,Sub_Category__c,Auto_Close_on_Email_Sent__c,Classification__c,ContactId,ContactEmail,Contact_Email__c,CreatedById,Created_By_Name__c,Ticket_Status__c, Refund_Type__c,RecordType.Name,Status"
+                        targetRecord="{!v.case}"
+                        targetFields="{!v.caseF}"
+                        targetError="{!v.message}" 
+                        mode="VIEW" />
+    <!--<aura:renderIf isTrue="{!v.RecType}">-->
+    <aura:renderIf isTrue="{!v.caseF.Type == 'Insurance Letter'}">
+        <!--<lightning:button variant="neutral" label="Manual Insurance Letter" onclick="{!c.requestInfo}" />-->
+        <lightning:button variant="neutral" label="Manual Insurance Letter" onclick="{!c.selectManualInsuranceLetter}" disabled="{!v.caseF.Status == 'Closed'}"/>
+    </aura:renderIf>
+    <!--<lightning:button variant="neutral" label="Email Customer(Original)" onclick="{!c.handleEmail}" />-->
+    <lightning:overlayLibrary aura:id="overlayLib1"/>  
+    <lightning:button variant="neutral" label="Email Customer" onclick="{!c.showEmailTemplateList}" disabled="{!v.caseF.Status == 'Closed'}"/>
+    <!--<lightning:button variant="neutral" label="Validate" onclick="{!c.ValidateCase}" />-->
+    
+      <aura:if isTrue="{!v.message}">
+                    <div class="slds-text-color--error">{!v.message}</div>
+       </aura:if>
+
+</aura:component>

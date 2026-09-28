@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QIC_Level_6_Escalation_Queue_Case</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.ESCALATION_STATE</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>PNR_number__c</columns>
+    <columns>Passenger_Name__c</columns>
+    <columns>Approval_Status__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>In Progress,New,Open,On Hold,Reopened</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>notEqual</operation>
+        <value>Group Waivers,SBT</value>
+    </filters>
+    <label>QAC AU Escalation Queue</label>
+    <queue>QIC_Level_6_Escalation_Queue</queue>
+    <sharedTo>
+        <role>QF_Support_QIC</role>
+        <role>QF_Support_QIC_Member</role>
+    </sharedTo>
+</ListView>

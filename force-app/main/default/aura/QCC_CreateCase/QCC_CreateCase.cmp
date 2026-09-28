@@ -1,0 +1,13 @@
+<aura:component access="global" controller="QCC_LookupFrequentFlyerController">
+    <aura:method name="contactInfo" action="{!c.getContact}"> 
+        <aura:attribute name="contactDetail" type="Contact"/> 
+    </aura:method>
+    <aura:attribute name="objCon" type="Contact"  default="{ 'sobjectType' : 'Contact' }"/>
+    <aura:attribute name="con" type="Contact" default="{ 'sobjectType' : 'Contact' }"/>
+    
+    <lightning:spinner aura:id="mySpinner" class="slds-hide" variant="brand" />
+    <!--<lightning:layout horizontalAlign="end">-->
+        <lightning:overlayLibrary aura:id="overlayLib"/>
+        <lightning:button variant="neutral" label="Create Case" onclick="{!c.showRecordType}"/>
+   <!--</lightning:layout>-->
+</aura:component>

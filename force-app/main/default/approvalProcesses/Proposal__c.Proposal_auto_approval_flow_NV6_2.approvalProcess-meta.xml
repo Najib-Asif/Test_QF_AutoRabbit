@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Domestic_Annual_Share__c</field>
+        <field>International_Annual_Share__c</field>
+        <field>Qantas_Annual_Expenditure__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Last_Actioned_By</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Special_Condition_Approved_RM</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>kourosh.koushanfar@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>stevan.sipka@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>yen.chau@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>1 OR 2 OR 3 OR 4 OR 5 OR 6</booleanFilter>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>Additional Baggage</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>Penalties</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>Advance Res/Ticketing</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>Block Fare</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>Fixed Fare</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.Group_Booking__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Special Condition Approval - Revenue Management</label>
+        <name>Special_Condition_Approval_Revenue_Management</name>
+        <rejectionActions>
+            <action>
+                <name>Last_Actioned_By</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Special_Condition_Rejected_RM</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Special_Condition_Approved_DO</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>kourosh.koushanfar@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>stevan.sipka@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>yen.chau@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>1 OR 2 OR 3 OR 4</booleanFilter>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>JQ Inclusion</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>Incentive Fare</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.QEC_Approval_Condition__c</field>
+                <operation>contains</operation>
+                <value>Route Deal</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Proposal__c.EK_Stock__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Special Condition Approval - Deal Optimization</label>
+        <name>Special_Condition_Approval_Deal_Optimization</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+        <rejectionActions>
+            <action>
+                <name>Special_Condition_Rejected_DO</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>Auto approval process for proposal within guidelines with Special Conditions NV6_2
+Updated User Ian Mahoney with Stevan Sipka - CRM 11544</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+OR(
+AND(Approval_Required_Deal_Optimization__c = False, Approval_Required_Pricing__c = False, Approval_Required_NAM__c = False, Approval_Required_Team_Lead__c = False, Approval_Required_Manager_SBD__c = False, Approval_Required_TL__c = False, Approval_Required_SBD__c = False, Active__c = True, No_of_Cps__c &lt;&gt; 0, ISPICKVAL(Travel_Fund__c, &apos;Yes&apos;), No_of_Cps__c &lt;&gt; null, ISPICKVAL(Type__c, &apos;Corporate Airfares&apos;), Mandate_Business_Case__c = False),
+
+AND(Approval_Required_Deal_Optimization__c = False, Approval_Required_Pricing__c = False, Approval_Required_NAM__c = False, Approval_Required_Team_Lead__c = False, Approval_Required_Manager_SBD__c = False, Approval_Required_TL__c = False, Approval_Required_SBD__c = False, Active__c = True, ISPICKVAL(Travel_Fund__c, &apos;No&apos;), ISPICKVAL(Type__c, &apos;Corporate Airfares&apos;), Mandate_Business_Case__c = False),
+
+AND(Approval_Required_Deal_Optimization__c = False, Approval_Required_Pricing__c = False, Approval_Required_NAM__c = False, Approval_Required_Team_Lead__c = False, Approval_Required_Manager_SBD__c = False, Approval_Required_TL__c = False, Approval_Required_SBD__c = False, Active__c = True, ISPICKVAL(Type__c, &apos;Qantas Business Savings&apos;), Mandate_Business_Case__c = False)
+),
+OR(NOT(ISBLANK(QEC_Approval_Condition__c )), Group_Booking__c = True, EK_Stock__c = True ), Opportunity__r.Owner.Country = &apos;AU&apos;)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Completion_Date_TIme</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Proposal_Approval_Response_to_Submitter_Approved</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Proposal_Status_Update_AR_Customer</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Recalled_to_Not_Recalled</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Status_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Approval_Completion_Date_TIme</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Proposal_Approval_Response_to_Submitter_Rejected</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Proposal_Rejected_Internal</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Recalled_to_Not_Recalled</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Status_to_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Proposal_Status_Update_AR_Internal</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Status_to_Submitted</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Proposal_Submission_Date</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Proposal - Special Condition Approval</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>user__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>3</processOrder>
+    <recallActions>
+        <action>
+            <name>Set_Approval_Recalled_to_Recalled</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Approval_Status_to_Not_Required</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Proposal_status_to_Draft</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Record_Type_to_Draft</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

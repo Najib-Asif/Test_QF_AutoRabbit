@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount_and_Next_Review_Date_Mandatory</fullName>
+    <active>true</active>
+    <description>Amount and Next Review Date Mandatory when Performance Bonus is selected</description>
+    <errorConditionFormula>AND( 
+(Performance_Bonus__c = TRUE), 
+(OR(ISBLANK( Amount__c), 
+(ISBLANK( Next_Review_Date__c )))) 
+)</errorConditionFormula>
+    <errorMessage>Please enter the value for Performance Bonus Amount and Next Review Date</errorMessage>
+</ValidationRule>

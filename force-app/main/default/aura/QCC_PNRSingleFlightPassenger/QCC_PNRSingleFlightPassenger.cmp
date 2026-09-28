@@ -1,0 +1,30 @@
+<aura:component >
+    <aura:attribute name="flgPassengerInfo" type="Object[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:method name="flgPassengerMethod" action="{!c.getFlgPassengerDetails}"> 
+        <aura:attribute name="flgPassengerDetail" type="Object[]"/> 
+    </aura:method>
+    <aura:registerEvent name="onLegSelection" type="c:QCC_PNRLegSelectionEvent"/>
+    
+    <!--<div class="c-container">-->
+        <lightning:card title="Flight Passenger Details" iconName="standard:contact">
+            <aura:set attribute="title">
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                            <span class="slds-text-heading_small">Flight Passenger Details</span>
+                        </a>
+                    </h2>
+                </div>
+            </aura:set>
+            
+            <aura:renderIf isTrue="{!empty(v.flgPassengerInfo)}">
+                <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg}</div>
+                <aura:set attribute="else">
+                    <lightning:datatable data="{!v.flgPassengerInfo}" columns="{!v.mycolumns}" 
+                                         keyField="legId" onrowselection="{!c.getSelectedName }"/>
+                </aura:set>
+            </aura:renderIf>
+        </lightning:card>
+    <!--</div>-->
+</aura:component>

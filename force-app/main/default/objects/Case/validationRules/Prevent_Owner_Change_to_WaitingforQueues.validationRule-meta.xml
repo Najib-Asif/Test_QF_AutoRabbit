@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Owner_Change_to_WaitingforQueues</fullName>
+    <active>false</active>
+    <description>Stop users from using the Change functionality to assign cases to the following Queues: Waiting for Customer &amp; Waiting for Internal, as this bypasses the existing automation setup.</description>
+    <errorConditionFormula>AND(
+OR(
+OwnerName__c = &apos;QCC_Waiting_for_Internal&apos;,
+OwnerName__c = &apos;QCC_Waiting_for_Customer&apos;
+),
+
+($Profile.Name != &apos;System Administrator&apos;),
+($Profile.Name != &apos;Qantas System Administrator&apos;),
+($Profile.Name != &apos;Qantas System Admin - Freight&apos;),
+($Profile.Name != &apos;Qantas System Admin - QCC&apos;),
+($Profile.Name != &apos;Qantas System Admin - SND&apos;),
+($Profile.Name != &apos;Qantas CC Operational Manager&apos;),
+($Profile.Name != &apos;QCC Operational Manager&apos;),
+$Setup.EnableValidationRule__c.Prevent_Owner_Change_to_WaitingforQueues__c = TRUE,
+OR(
+RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+RecordType.DeveloperName = &apos;CCC_Query&apos;,
+RecordType.DeveloperName = &apos;Contact_Center&apos;,
+RecordType.DeveloperName = &apos;Service_Delivery&apos;,
+RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;,
+RecordType.DeveloperName = &apos;CCC_Refund&apos;,
+RecordType.DeveloperName = &apos;CCC_Event&apos;,
+RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;,
+RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;,
+RecordType.DeveloperName = &apos;QCC_Disruption&apos;,
+RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+RecordType.DeveloperName = &apos;QCC_Sensitive_Case&apos;
+),
+NOT(
+OR(
+ISPICKVAL(Status, &apos;Waiting for Customer&apos;),
+ISPICKVAL(Status, &apos;Waiting for Internal&apos;)
+)
+)
+)</errorConditionFormula>
+    <errorMessage>You cannot change the owner to Waiting For Customer or Waiting for Internal. Please change Status.</errorMessage>
+</ValidationRule>

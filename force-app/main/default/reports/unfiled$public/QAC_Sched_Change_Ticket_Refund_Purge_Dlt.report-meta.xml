@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_ACC_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Flight__c.Flight_Number__c</field>
+    </columns>
+    <columns>
+        <field>FK_CASE_OWNER_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_$Case.Problem_Type__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Case.Waiver_Sub_Type__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Case.Reason_for_Waiver__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>FK_CASE_ORIGIN</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>QAC Website</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Case.Problem_Type__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Schedule Change</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Case.Waiver_Sub_Type__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Ticket Refund</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Case.Reason_for_Waiver__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>purged pnr</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_CASE_CREATED_DATEONLY</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>1/1/2021 12:00 AM</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <field>FK_CASE_CREATED_DATEONLY</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>QAC Sched Chng/Tkt Rfnd/Purged PNR</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Flight__c@Flight__c.Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>FK_NAME</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Flight__c.Flight_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

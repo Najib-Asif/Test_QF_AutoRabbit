@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_MandatoryCheck_WaiverStartDate</fullName>
+    <active>true</active>
+    <description>On Corporate Scheme record type 
+
+If &quot;Override / Waiver Start Date&quot; field is populated, then the following fields are mandatory 
+- Override / Waiver End Date 
+- Qantas Club Join Discount Offer 
+- Qantas Club Member Discount Offer</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_MandatoryCheck_WaiverStartDate__c, 
+    AND(
+    RecordType.DeveloperName = &apos;Corporate_Scheme&apos;, 
+    NOT(ISBLANK(Waiver_Start_Date__c)),
+    OR(
+       ISBLANK(Waiver_End_Date__c),
+       ISBLANK(Qantas_Club_Join_Discount__c), 
+       ISBLANK(Member_Fee_Discount__c)
+      )
+   )
+   )</errorConditionFormula>
+    <errorMessage>Please fill-in ALL fields in the Override Section</errorMessage>
+</ValidationRule>

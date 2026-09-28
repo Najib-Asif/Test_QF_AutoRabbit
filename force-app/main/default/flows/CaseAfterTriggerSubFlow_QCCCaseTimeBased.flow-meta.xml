@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Acknowledgement</name>
+        <label>Send Acknowledgement</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>Case.QCC_Send_out_Acknowledgement_email_alert</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>myRule_1_A2</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Case.QCC_Send_out_Acknowledgement_email_alert</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Acknowledgement_for_Critical_queue_high_hot_words</name>
+        <label>Send Acknowledgement for Critical queue high hot words</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <actionName>Case.QCC_Send_out_Acknowledgement_email_alert_for_Hot_words_Critical_Queue_High</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Log_Activity_for_Email_message</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Case.QCC_Send_out_Acknowledgement_email_alert_for_Hot_words_Critical_Queue_High</nameSegment>
+    </actionCalls>
+    <apiVersion>59.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Acknowledgment_Sent_field_for_Hot_words</name>
+        <label>Assign Acknowledgment Sent field for Hot words</label>
+        <locationX>50</locationX>
+        <locationY>458</locationY>
+        <assignmentItems>
+            <assignToReference>objNewCase.Acknowledgement_Sent__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Acknowledgment_Sent_field</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Case_Acknowledgement_Letter</name>
+        <label>Case Acknowledgement Letter</label>
+        <locationX>248</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>Case_Acknowledgement_Letter_for_Critical_Queue_High_hot_words</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_Case Acknowledgement Letter</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Case_Acknowledgement_Letter</name>
+            <conditionLogic>( 1 OR 2 OR 3 ) AND 4</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.FCR__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>objOldCase.FCR__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.ContactId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>objOldCase.ContactId</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>formula_TRUE_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Acknowledgement</targetReference>
+            </connector>
+            <label>TRUE_Case Acknowledgement Letter</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Case_Acknowledgement_Letter_for_Critical_Queue_High_hot_words</name>
+        <label>Case Acknowledgement Letter for Critical Queue High hot words</label>
+        <locationX>446</locationX>
+        <locationY>242</locationY>
+        <defaultConnectorLabel>FALSE_Case Acknowledgement Letter for Critical Queue High hot words</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Case_Acknowledgement_Letter_for_Critical_Queue_High_hot_words</name>
+            <conditionLogic>1 AND ( 2 OR 3 OR 4 )</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_TRUE_myRule_113</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.FCR__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>objOldCase.FCR__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.ContactId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>objOldCase.ContactId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Acknowledgement_for_Critical_queue_high_hot_words</targetReference>
+            </connector>
+            <label>TRUE_Case Acknowledgement Letter for Critical Queue High hot words</label>
+        </rules>
+    </decisions>
+    <description>Migrated from the QCC_CaseTimeBased process using multiple criteria.
+QCC: Case Email Alerts to be sent for compliment and non compliment records(Platform change)</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>formula_1_myRule_1_A2_4397095086</name>
+        <dataType>String</dataType>
+        <expression>{!$Label.Org_Wide_Email_Address}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_2_myRule_1_A2_5433161568</name>
+        <dataType>String</dataType>
+        <expression>&apos;Dear &apos;+ BLANKVALUE({!objNewCase.First_Name__c}, &apos;&apos;)  + &apos;, &lt;br/&gt;&lt;br/&gt;&apos;+ {!$Label.Acknowledgement_Letter_5} +&apos; &apos;+ {!objNewCase.CaseNumber} + &apos;&lt;br/&gt;&lt;br/&gt;&apos;+{!$Label.Acknowledgement_Letter_6}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_3_myRule_1_A2_8275265420</name>
+        <dataType>String</dataType>
+        <expression>&apos;Qantas Customer Care - &apos;+{!objNewCase.CaseNumber}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_4_myRule_113_A2_1357731391</name>
+        <dataType>String</dataType>
+        <expression>{!$Label.Org_Wide_Email_Address}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_5_myRule_113_A2_0511031394</name>
+        <dataType>String</dataType>
+        <expression>&apos;Dear &apos;+ BLANKVALUE({!objNewCase.First_Name__c}, &apos;&apos;)  + &apos;, &lt;br/&gt;&lt;br/&gt;&apos;+ {!$Label.Acknowledgement_Letter_1} +&apos; &apos;+ {!objNewCase.CaseNumber} + &apos;&lt;br/&gt;&lt;br/&gt;&apos;+{!$Label.Acknowledgement_Letter_4}+ &apos; &apos; + {!$Label.Acknowledgement_Letter_3}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_6_myRule_113_A2_4062421772</name>
+        <dataType>String</dataType>
+        <expression>&apos;Qantas Customer Care - &apos;+{!objNewCase.CaseNumber}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_TRUE_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+{!objNewCase.Hot_words_check__c} =FALSE,
+NOT(ISBLANK({!objNewCase.ContactId})),
+NOT(ISBLANK({!objNewCase.Contact_Email__c})),
+NOT(ISPICKVAL({!objNewCase.Status} , &apos;Closed&apos;)),
+NOT(ISPICKVAL({!objNewCase.Origin}, &apos;Red App&apos; )),
+OR({!objNewCase.RecordType.DeveloperName} = &apos;CCC_Complaints&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Baggage&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Further_Action_Required&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;QCC_Insurance_Letter_Case&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Query&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Medical&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Refund&apos; ),  NOT(ISPICKVAL({!objNewCase.Type},&apos;On the Spot Recovery&apos;)),
+IF(ISPICKVAL({!objNewCase.Type}, &apos;Insurance Letter&apos;) &amp;&amp; {!objNewCase.FCR__c} &lt;&gt; true , true, IF(NOT(ISPICKVAL({!objNewCase.Type}, &apos;Insurance Letter&apos;)), true, false)),
+ISPICKVAL({!objNewCase.Is_Response_Requested__c}, &apos;Yes&apos;),
+NOT({!objNewCase.Acknowledgement_Sent__c}),
+ISBLANK({!objNewCase.ParentId}))</expression>
+    </formulas>
+    <formulas>
+        <name>formula_TRUE_myRule_113</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+{!objNewCase.Hot_words_check__c} =TRUE,
+NOT(ISBLANK({!objNewCase.ContactId})),
+NOT(ISBLANK({!objNewCase.Contact_Email__c})),
+NOT(ISPICKVAL({!objNewCase.Status} , &apos;Closed&apos;)),
+NOT(ISPICKVAL({!objNewCase.Origin}, &apos;Red App&apos; )),
+OR({!objNewCase.RecordType.DeveloperName} = &apos;CCC_Complaints&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Baggage&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Further_Action_Required&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;QCC_Insurance_Letter_Case&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Query&apos;, {!objNewCase.RecordType.DeveloperName} = &apos;CCC_Medical&apos; ),  NOT(ISPICKVAL({!objNewCase.Type},&apos;On the Spot Recovery&apos;)),
+IF(ISPICKVAL({!objNewCase.Type}, &apos;Insurance Letter&apos;) &amp;&amp; {!objNewCase.FCR__c} &lt;&gt; true , true, IF(NOT(ISPICKVAL({!objNewCase.Type}, &apos;Insurance Letter&apos;)), true, false)),
+ISPICKVAL({!objNewCase.Is_Response_Requested__c}, &apos;Yes&apos;),
+NOT({!objNewCase.Acknowledgement_Sent__c}),
+ISBLANK({!objNewCase.ParentId}))</expression>
+    </formulas>
+    <interviewLabel>CaseAfterTriggerSubFlow-QCCCaseTimeBased {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-QCCCaseTimeBased</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Log_Activity_for_Email_message</name>
+        <label>Log Activity for Email message</label>
+        <locationX>314</locationX>
+        <locationY>458</locationY>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Assign_Acknowledgment_Sent_field_for_Hot_words</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>FromAddress</field>
+            <value>
+                <elementReference>formula_4_myRule_113_A2_1357731391</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>HtmlBody</field>
+            <value>
+                <elementReference>formula_5_myRule_113_A2_0511031394</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RelatedToId</field>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>3</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>formula_6_myRule_113_A2_4062421772</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>To_Addresss__c</field>
+            <value>
+                <elementReference>objNewCase.Contact_Email__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>EmailMessage</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>myRule_1_A2</name>
+        <label>Log Activity</label>
+        <locationX>50</locationX>
+        <locationY>350</locationY>
+        <connector>
+            <targetReference>Assign_Acknowledgment_Sent_field_for_Hot_words</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>FromAddress</field>
+            <value>
+                <elementReference>formula_1_myRule_1_A2_4397095086</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>HtmlBody</field>
+            <value>
+                <elementReference>formula_2_myRule_1_A2_5433161568</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RelatedToId</field>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>3</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>formula_3_myRule_1_A2_8275265420</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ToAddress</field>
+            <value>
+                <elementReference>objNewCase.Contact_Email__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>EmailMessage</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordUpdates>
+        <name>Update_Acknowledgment_Sent_field</name>
+        <label>Update Acknowledgment Sent field</label>
+        <locationX>50</locationX>
+        <locationY>566</locationY>
+        <inputReference>objNewCase</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>122</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Case_Acknowledgement_Letter</targetReference>
+        </connector>
+    </start>
+    <status>Obsolete</status>
+    <variables>
+        <description>trigger.new</description>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>trigger.old</description>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

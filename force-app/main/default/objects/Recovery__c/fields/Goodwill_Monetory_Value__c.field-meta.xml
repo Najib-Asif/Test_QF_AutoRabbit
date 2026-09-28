@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Goodwill_Monetory_Value__c</fullName>
+    <description>This is a reporting field</description>
+    <formula>IF(ISPICKVAL(Type__c,&quot;Business Lounge Passes&quot;),Value__c, 
+IF(ISPICKVAL(Type__c,&quot;Qantas Points&quot;),Amount__c*0.01, 
+IF(ISPICKVAL(Type__c,&quot;Qantas club lounge passes&quot;),Value__c, 
+IF(ISPICKVAL(Type__c,&quot;Bag Replacement&quot;),Recovery_Baggage_Cost__c*Amount__c, 
+IF(ISPICKVAL(Type__c,&quot;International Business Lounge Passes&quot;),Amount__c*40, 
+IF(ISPICKVAL(Type__c,&quot;Domestic Qantas Club Lounge Passes&quot;),Amount__c*20, 
+IF(AND(ISPICKVAL(Type__c,&quot;Valet Parking or Carwash&quot;),NOT(ISPICKVAL(Case_Number__r.Origin,&apos;Red App&apos;))),Amount__c*80, 
+IF(AND(ISPICKVAL(Type__c,&quot;Valet Parking or Carwash&quot;),ISPICKVAL(Case_Number__r.Origin,&apos;Red App&apos;)),Value__c, 
+IF(OR(ISPICKVAL(Type__c,&quot;Space available upgrade&quot;),ISPICKVAL(Type__c,&quot;Firm space upgrade&quot;)),0, 
+IF(OR(ISPICKVAL(Type__c,&quot;Credit Card Refund&quot;),ISPICKVAL(Type__c,&quot;EFT Refund&quot;),ISPICKVAL(Type__c,&quot;Dinner vouchers&quot;),ISPICKVAL(Type__c,&quot;Flowers&quot;),ISPICKVAL(Type__c,&quot;Wine&quot;),ISPICKVAL(Type__c,&quot;Travel vouchers&quot;)),Value__c, 
+0))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Goodwill Monetory Value</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Performance_Bonus_Criteria</fullName>
+    <active>true</active>
+    <description>Performance Bonus Criteria is mandatory when performance bonus is ticked</description>
+    <errorConditionFormula>AND(Performance_Bonus__c = TRUE, ISBLANK(Performance_Bonus_Criteria__c))</errorConditionFormula>
+    <errorDisplayField>Performance_Bonus_Criteria__c</errorDisplayField>
+    <errorMessage>Please enter Performance Bonus Criteria</errorMessage>
+</ValidationRule>

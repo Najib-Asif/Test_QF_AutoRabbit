@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Depreciation_Value__c</fullName>
+    <description>Depreciation Value</description>
+    <formula>IF(AND(Age_of_Bag__c &gt; 0 , Age_of_Bag__c &lt; 1) , Assessed_Purchase_Price__c, 
+IF(AND(Age_of_Bag__c &gt;= 1 , Age_of_Bag__c &lt; 2) , Assessed_Purchase_Price__c * 0.8, 
+IF(AND(Age_of_Bag__c &gt;= 2 , Age_of_Bag__c &lt; 3) , Assessed_Purchase_Price__c * 0.6, 
+IF(AND(Age_of_Bag__c &gt;= 3 , Age_of_Bag__c &lt; 6) , Assessed_Purchase_Price__c * 0.5, 
+IF(AND(Age_of_Bag__c &gt;= 6 , Age_of_Bag__c &lt; 10), IF(Assessed_Purchase_Price__c &lt; 500 , Assessed_Purchase_Price__c * 0.25 , Assessed_Purchase_Price__c * 0.4), 
+IF(Age_of_Bag__c &gt; 9 , IF(Assessed_Purchase_Price__c &lt; 100 , 0 , Assessed_Purchase_Price__c * 0.25), 0))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Depreciation Value</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

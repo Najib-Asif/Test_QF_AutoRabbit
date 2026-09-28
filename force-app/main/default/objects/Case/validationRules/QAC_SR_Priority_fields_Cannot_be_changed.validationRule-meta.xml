@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_SR_Priority_fields_Cannot_be_changed</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+RecordType.Name==&quot;Service Request&quot;,
+OR(ISPICKVAL(Status, &quot;Closed&quot;)),
+IsClosed!= True, 
+OR(AND(NOT(ISBLANK(First_Flight_Date__c)), ISBLANK(PRIORVALUE(First_Flight_Date__c))), 
+AND(NOT(ISBLANK(First_Flight_Date__c)), PRIORVALUE(First_Flight_Date__c) != First_Flight_Date__c),
+AND(NOT(ISBLANK(Ticketing_Time_Limit__c)), ISBLANK(PRIORVALUE(Ticketing_Time_Limit__c))), 
+AND(NOT(ISBLANK(Ticketing_Time_Limit__c)), PRIORVALUE(Ticketing_Time_Limit__c) != Ticketing_Time_Limit__c),
+AND(NOT(ISBLANK(TEXT(Customer_Tier__c))),ISBLANK(TEXT(PRIORVALUE(Customer_Tier__c)))),
+AND(NOT(ISBLANK(TEXT(Customer_Tier__c))),TEXT(PRIORVALUE(Customer_Tier__c)) != TEXT(Customer_Tier__c))) 
+)</errorConditionFormula>
+    <errorMessage>When changes are made to the below fields you are required to “SAVE” the case first and then initiate “CLOSE” :
+
+&quot;First Flight Date&quot; ,
+&quot;Ticketing Time Limit&quot;
+&quot;Customer Tier&quot;</errorMessage>
+</ValidationRule>

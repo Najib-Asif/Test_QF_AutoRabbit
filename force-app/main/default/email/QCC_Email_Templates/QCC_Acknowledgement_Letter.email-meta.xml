@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>QCC: Acknowledgement Letter to send out on Case creation CRM-8664</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QCC_Acknowledgement_Letter</name>
+    <style>none</style>
+    <subject>Qantas Customer Care - {!Case.CaseNumber}</subject>
+    <textOnly>Hi {!Case.First_Name__c},
+
+Thank you for contacting Qantas Customer Care. Your feedback is very important to us.
+
+Your case number is: {!Case.CaseNumber}
+
+One of our Customer Care Consultants will reach out to you as soon as possible.
+
+If you need to provide further information relating to your case, you can respond directly to this email.
+
+Find out about our complaints process and what to expect.
+
+Kind regards,
+
+Qantas Customer Care
+
+
+
+
+{!Case.Thread_Token} Qantas Airways Limited, ABN 16 009 661 901
+10 Bourke Road Mascot NSW 2020 Australia</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

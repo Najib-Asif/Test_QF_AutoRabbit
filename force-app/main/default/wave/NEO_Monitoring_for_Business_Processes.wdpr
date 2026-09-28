@@ -1,0 +1,905 @@
+{
+  "version" : "61.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "Freight_Origin__c", "Id", "CaseNumber", "ContactId", "AccountId", "ParentId", "Type", "RecordTypeId", "Status", "Subject", "Description", "IsClosed", "ClosedDate", "OwnerId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "ContactPhone", "ContactEmail", "Frequent_Flyer_Number__c", "Contact_Fullname__c", "First_Name__c", "Last_Name__c", "Created_By_Name__c", "Power_of_One_Case__c", "Freight_AWB_Number__c", "Created_by_Role__c", "Contact_Phone__c", "Frequent_Flyer_Tier__c", "OwnerName__c", "Owner_City__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1719792000000" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "RecordTypeId", "RecordType.Id" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "CaseId", "CreatedById", "CreatedDate", "Field", "DataType", "OldValue", "NewValue" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseHistory",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseHistory"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1719792000000" ]
+        } ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "JOIN0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Id", "CaseId", "CreatedById", "Case.OwnerId", "Case.Id", "Case.CreatedById", "Case.LastModifiedById" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CaseId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case Histories since FY 2025",
+          "name" : "Case_Histories_since_FY_2025",
+          "folderName" : "BUSINESS_PROCESS_MONITORING"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Cases since FY 2025",
+          "name" : "Cases_since_FY_2025",
+          "folderName" : "BUSINESS_PROCESS_MONITORING"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "EXCEPTION_TYPE", "EXCEPTION_CATEGORY", "TIMESTAMP_DERIVED", "EVENT_TYPE", "TIMESTAMP", "EXCEPTION_MESSAGE", "REQUEST_ID", "STACK_TRACE", "ORGANIZATION_ID" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "ApexUnexpectedException",
+          "name" : "ApexUnexpectedException1"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "EXCEPTION_TYPE", "EXCEPTION_CATEGORY", "TIMESTAMP_DERIVED", "EVENT_TYPE", "EXCEPTION_MESSAGE", "REQUEST_ID", "STACK_TRACE", "ORGANIZATION_ID", "TIMESTAMP" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Apex Unexpected Exception 2024-08-22 to 2024-09-21",
+          "name" : "Apex_Unexpected_Exception_2024_08_22_to_2024_09_21"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET3", "LOAD_DATASET4" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "EXCEPTION_TYPE",
+          "bottom" : "EXCEPTION_TYPE"
+        }, {
+          "top" : "EXCEPTION_CATEGORY",
+          "bottom" : "EXCEPTION_CATEGORY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "EXCEPTION_MESSAGE",
+          "bottom" : "EXCEPTION_MESSAGE"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "STACK_TRACE",
+          "bottom" : "STACK_TRACE"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        } ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "APPEND0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Apex Exceptions Appended",
+          "name" : "Apex_Exceptions_Appended",
+          "folderName" : "BUSINESS_PROCESS_MONITORING"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Type", "RecordTypeId" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Account",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Account"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET5", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "AccountRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "AccountId" ],
+        "rightQualifier" : "AccountToCase",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordType.Name",
+          "newProperties" : {
+            "label" : "Case Record Type",
+            "name" : "RecordType.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "AccountToCase.AccountRecordType.Name",
+          "newProperties" : {
+            "label" : "Account Record Type",
+            "name" : "AccountToCase.AccountRecordType.Name"
+          }
+        } ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Type", "RecordTypeId", "ParentId", "OwnerId", "Active__c", "Contract_Commencement_Date__c", "Contract_Expiry_Date__c", "Contracted_Previously__c", "Contracted__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Account",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Account"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "AccountId", "Id", "LastName", "FirstName", "Name", "RecordTypeId", "Phone", "Email", "CreatedDate", "CreatedById", "Frequent_Flyer_Number__c", "Membership_Current_Tier_f__c", "Tier_f__c", "Frequent_Flyer_Tier__c", "QCC_Contact_Full_Name__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET7", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "ContactRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "First_Last_Email_Phone",
+          "label" : "First + Last + Email + Phone",
+          "formulaExpression" : "concat(FirstName, ' , ' , LastName, ' , ', Email, ' , ', TRIM(Phone, '+'))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Last_Email_Phone",
+          "label" : "Last + Email + Phone",
+          "formulaExpression" : "concat(LastName, ' , ', Email, ' , ', TRIM(Phone, '+'))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "First_Last_Email",
+          "label" : "First + Last + Email",
+          "formulaExpression" : "concat(FirstName, ' , ', LastName, ' , ', Email)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "First_Last_Phone",
+          "label" : "First + Last + Phone",
+          "formulaExpression" : "concat(FirstName, ' , ', LastName, ' , ', TRIM(Phone, '+'))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "partitionBy" : [ "Frequent_Flyer_Number__c" ],
+        "orderBy" : [ {
+          "fieldName" : "Frequent_Flyer_Number__c",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Duplicate_FF_Count",
+          "label" : "Duplicate FF Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "partitionBy" : [ "First_Last_Email_Phone" ],
+        "orderBy" : [ {
+          "fieldName" : "First_Last_Email_Phone",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Four_Way_Duplicate",
+          "label" : "4-Way Duplicate Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "JOIN5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Duplicate Contacts",
+          "name" : "Duplicate_Contacts",
+          "folderName" : "BUSINESS_PROCESS_MONITORING"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "FORMULA5", "JOIN7" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "AccountId" ],
+        "rightQualifier" : "Account",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN6" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET6", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "AccountRecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET8" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Username" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN7" : {
+      "action" : "join",
+      "sources" : [ "JOIN6", "LOAD_DATASET8" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "OwnerId" ],
+        "rightQualifier" : "Owner",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT4" : {
+      "action" : "save",
+      "sources" : [ "JOIN7" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Accounts with Owner",
+          "folderName" : "BUSINESS_PROCESS_MONITORING",
+          "name" : "Accounts_with_Owner"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Cases since FY 2025",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112.1,
+        "left" : 392.1
+      },
+      "LOAD_DATASET1" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 392,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Get Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.4,
+        "left" : 532.1
+      },
+      "LOAD_DATASET2" : {
+        "label" : "CaseHistory",
+        "type" : "LOAD_DATASET",
+        "top" : 533.3,
+        "left" : 392,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER1" : {
+        "label" : "Case Histories since FY 2025",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 532
+      },
+      "JOIN1" : {
+        "label" : "Get Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 251.89999999999998,
+        "left" : 672
+      },
+      "OUTPUT0" : {
+        "label" : "Case Histories since FY 2025",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 251.8,
+        "left" : 812
+      },
+      "OUTPUT1" : {
+        "label" : "Cases since FY 2025",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 812
+      },
+      "LOAD_DATASET3" : {
+        "label" : "ApexUnexpectedException",
+        "type" : "LOAD_DATASET",
+        "top" : 532.3,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Apex Unexpected Exception 2024-08-22 to 2024-09-21",
+        "type" : "LOAD_DATASET",
+        "top" : 670,
+        "left" : 112.30000000000001,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND0" : {
+        "label" : "Exception Append",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 532,
+        "left" : 252.2
+      },
+      "OUTPUT2" : {
+        "label" : "Apex Exceptions Appended",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 673.3,
+        "left" : 392
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Account",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Account Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 252
+      },
+      "JOIN3" : {
+        "label" : "AccountToCase",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.1,
+        "left" : 252
+      },
+      "TRANSFORM0" : {
+        "label" : "Rename and Drop",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 672,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Edit Attributes"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "EDIT_ATTRIBUTES1"
+        } ]
+      },
+      "LOAD_DATASET6" : {
+        "label" : "Account",
+        "type" : "LOAD_DATASET",
+        "top" : 672.4,
+        "left" : 672.3,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET7" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 672,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN4" : {
+        "label" : "Get Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 812
+      },
+      "TRANSFORM1" : {
+        "label" : "Duplicate Rules",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532,
+        "left" : 952,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "First + Last + Email + Phone"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Last + Email + Phone"
+          },
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "First + Last + Email"
+          },
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "First + Last + Phone"
+          },
+          "FORMULA4" : {
+            "label" : "Mark Repeated FF"
+          },
+          "FORMULA5" : {
+            "label" : "Mark Repeated 4-Way"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "FORMULA2"
+        }, {
+          "source" : "FORMULA2",
+          "target" : "FORMULA3"
+        }, {
+          "source" : "FORMULA3",
+          "target" : "FORMULA4"
+        }, {
+          "source" : "FORMULA4",
+          "target" : "FORMULA5"
+        } ]
+      },
+      "OUTPUT3" : {
+        "label" : "Duplicate Contacts",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 1232
+      },
+      "JOIN5" : {
+        "label" : "Get Account",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 531.9,
+        "left" : 1092
+      },
+      "JOIN6" : {
+        "label" : "Get Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672,
+        "left" : 812
+      },
+      "LOAD_DATASET8" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 812,
+        "left" : 672.4,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN7" : {
+        "label" : "Get Account Owner",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672,
+        "left" : 952
+      },
+      "OUTPUT4" : {
+        "label" : "Accounts with Owner",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 671.6,
+        "left" : 1092
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET7",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN3",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "APPEND0"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "APPEND0"
+    }, {
+      "source" : "APPEND0",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN4",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "JOIN5",
+      "target" : "OUTPUT3"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "JOIN5"
+    }, {
+      "source" : "JOIN7",
+      "target" : "JOIN5"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "JOIN6"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN6"
+    }, {
+      "source" : "JOIN6",
+      "target" : "JOIN7"
+    }, {
+      "source" : "LOAD_DATASET8",
+      "target" : "JOIN7"
+    }, {
+      "source" : "JOIN7",
+      "target" : "OUTPUT4"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QIS_Portfolio_Dealing_QLD</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>PARENT_NAME</columns>
+    <columns>Qantas_Corporate_Identifier__c</columns>
+    <columns>ABN_Tax_Reference__c</columns>
+    <columns>ACCOUNT.ADDRESS1_CITY</columns>
+    <columns>ACCOUNT.INDUSTRY</columns>
+    <columns>ACCOUNT.LAST_ACTIVITY</columns>
+    <columns>Last_Completed_Account_Review__c</columns>
+    <columns>AMEX__c</columns>
+    <columns>QF_Domestic_Market_Share__c</columns>
+    <columns>QF_Domestic_Revenue__c</columns>
+    <columns>QF_International_Market_Share__c</columns>
+    <columns>QF_International_Revenue__c</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <columns>CORE.USERS.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Account.Customer_Account</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>ACCOUNT.OWNERSHIP</field>
+        <operation>equals</operation>
+        <value>Retention,Opportunity,Acquisition</value>
+    </filters>
+    <filters>
+        <field>ACCOUNT.ADDRESS1_COUNTRY_CODE</field>
+        <operation>equals</operation>
+        <value>AU</value>
+    </filters>
+    <filters>
+        <field>Contracted__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>ACCOUNT.ADDRESS1_STATE_CODE</field>
+        <operation>equals</operation>
+        <value>QLD</value>
+    </filters>
+    <label>QIS Portfolio Dealing - QLD</label>
+    <sharedTo>
+        <role>QF_DOM_Sales_AP_Agency_Development</role>
+        <roleAndSubordinatesInternal>QF_DOM_Sales_SME_QIS</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

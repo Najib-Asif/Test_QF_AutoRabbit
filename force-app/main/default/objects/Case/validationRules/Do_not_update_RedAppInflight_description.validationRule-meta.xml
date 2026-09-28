@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_not_update_RedAppInflight_description</fullName>
+    <active>false</active>
+    <description>QCC: Donot update Inflight description from RedApp</description>
+    <errorConditionFormula>AND(ISCHANGED(Description), PRIORVALUE(Description) &lt;&gt;  &apos;&apos;,RecordType.DeveloperName = &apos;QCC_Case&apos;, TEXT(Type) = &apos;Medical Assistance&apos;,TEXT(Origin)= &apos;RedApp&apos;,TEXT(Group__c)= &apos;In-Flight&apos;,  OR( TEXT(Category__c) = &apos;Medical - Assistance Provided&apos;,  TEXT(Category__c) = &apos;Medical Patient&apos;))</errorConditionFormula>
+    <errorMessage>Description can&apos;t be changed for Inflight Medical cases</errorMessage>
+</ValidationRule>

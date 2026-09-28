@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Type_to_Parent_Case_Type</fullName>
+    <active>true</active>
+    <description>QCC: Restricts Type value to Parent Case Type</description>
+    <errorConditionFormula>TEXT(Type__c ) &lt;&gt;  TEXT(Case__r.Type)</errorConditionFormula>
+    <errorMessage>Case Category Type should be of parent Case Type</errorMessage>
+</ValidationRule>

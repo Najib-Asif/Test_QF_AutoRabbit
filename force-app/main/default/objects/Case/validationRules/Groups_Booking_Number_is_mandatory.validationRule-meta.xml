@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Groups_Booking_Number_is_mandatory</fullName>
+    <active>true</active>
+    <description>Groups Waivers -  Group Booking Number is mandatory</description>
+    <errorConditionFormula>AND(ISPICKVAL( Status , &apos;closed&apos;), RecordTypeId = &apos;01290000001IINO&apos;, ISBLANK(TEXT(Group_Booking_Number__c)), NOT ( $Profile.Id = &apos;00e90000001wK8z&apos; ) ,  OR(ISPICKVAL( Type , &apos;Group Waivers&apos;) ,ISPICKVAL( Type , &apos;SBT&apos;)))</errorConditionFormula>
+    <errorMessage>Please fill in Group Booking Number.</errorMessage>
+</ValidationRule>

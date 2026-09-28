@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Account_Business_Type_Validation</fullName>
+    <active>true</active>
+    <description>Freight - If no Parent Account is selected, user must choose either &quot;Freight Forwarder&quot;, &quot;Buyer&quot;, &quot;Shipper&quot;, &quot;Partner Airline&quot;, &quot;GSA&quot;. If a Parent Account is selected, user must choose &quot;Branch&quot; as the Account Business Type.</description>
+    <errorConditionFormula>OR(AND( ISPICKVAL( New_Account_Type__c, &quot;Freight-Branch&quot;) , NOT(ISBLANK(Parent_Account__c)), NOT(ISPICKVAL( Freight_Account_Business_Type__c , &quot;Branch&quot;))), 
+
+(AND( ISPICKVAL( New_Account_Type__c, &quot;Freight-Branch&quot;), ISBLANK(Parent_Account__c),OR(ISPICKVAL( Freight_Account_Business_Type__c , &quot;&quot;),ISPICKVAL( Freight_Account_Business_Type__c , &quot;Branch&quot;)),
+NOT ( $Profile.Id = &apos;00e90000001wK8z&apos; ) /*system Administrator*/)))</errorConditionFormula>
+    <errorDisplayField>Parent_Account__c</errorDisplayField>
+    <errorMessage>If Branch is selected as “Account Business Type”, please provide Parent Account Name (Country level Account)</errorMessage>
+</ValidationRule>

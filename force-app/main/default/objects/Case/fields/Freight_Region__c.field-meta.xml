@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Region__c</fullName>
+    <externalId>false</externalId>
+    <formula>/* Freight UKEA */
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-UK&quot;), &quot;UKEA&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-UK-Account Manager&quot;), &quot;UKEA&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Support-UK&quot;), &quot;UKEA&quot;,
+
+
+/* Freight Asia */
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Asia&quot;), &quot;Asia&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Asia-Account Manager&quot;), &quot;Asia&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Support-Asia&quot;), &quot;Asia&quot;,
+IF (( Owner:Queue.QueueName == &quot;Freight CSS Asia Queue&quot;), &quot;Asia&quot;,
+
+/* Freight US */
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-US&quot;), &quot;US&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-US-Account Manager&quot;), &quot;US&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Support-US&quot;), &quot;US&quot;,
+IF (( Owner:Queue.QueueName == &quot;Freight CSS Americas Queue&quot;), &quot;US&quot;,
+
+
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-AU&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-AU-Account Manager&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Customer-Service-Support&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Customer-Service-Support-Team&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Customer-Service-Unit&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Customer-Service-Unit-Team&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:User.UserRole.Name == &quot;QF-Freight-Support-AU&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_CSU_AU_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Sales_Support_AU_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Claims_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Invoices_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_CSS_AU_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_FPO_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Fulfilment_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Claims_Coordinator_approvals&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Australia_Sales_Manager_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Inside_Sales_AU_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Sales_Account_Manager_Queue&quot;), &quot;AU/NZ&quot;,
+IF (( Owner:Queue.DeveloperName == &quot;Freight_Sales_NZ_Queue&quot;), &quot;AU/NZ&quot;,
+
+
+
+
+&quot;&quot;)))))))))))))))))))))))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Freight Region</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

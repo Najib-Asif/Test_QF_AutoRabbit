@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_MandatoryCheck_Active_Scheme_Contact</fullName>
+    <active>true</active>
+    <description>To check the Madatory Data on Contact Details for Active Schemes. As per CRM-5827 included Draft Status in Error Condition Formula.</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_MandatoryCheck_Active_Scheme_Contact__c &amp;&amp;
+(RecordType.DeveloperName =&apos;Public_Scheme&apos; || RecordType.DeveloperName =&apos;Corporate_Scheme&apos; ) &amp;&amp;
+(ISPICKVAL(Status ,&apos;Complete – Pending Activation&apos;) || ISPICKVAL(Status ,&apos;Active&apos;) || ISPICKVAL( Status , &quot;Draft&quot;) ) &amp;&amp; 
+(ISBLANK(Title_f__c) || ISBLANK(First_Name_f__c) || 
+ISBLANK(Last_Name_f__c) || ISBLANK(Job_Role_f__c) || ISBLANK(Email_f__c) || ISBLANK(Country_Code_f__c) || 
+ISBLANK(Phone_Number_f__c) || ISBLANK(Mailing_Country_f__c) || ISBLANK(Mailing_Street_f__c) || ISBLANK(Mailing_City_f__c) || ISBLANK(Mailing_State_f__c) || ISBLANK(Mailing_PostalCode_f__c) || ISBLANK(Salutation_f__c))</errorConditionFormula>
+    <errorDisplayField>X1_Year_Membership_Fee_Gross__c</errorDisplayField>
+    <errorMessage>Please check your Key Coordinator in your asset. The below fields are mandatory for iFly: Salutation,First Name,Last Name,Job Title,Job Role,Email,Phone,Mailing Address (ensure fields are correctly filled, only street address should be in Street Address)</errorMessage>
+</ValidationRule>

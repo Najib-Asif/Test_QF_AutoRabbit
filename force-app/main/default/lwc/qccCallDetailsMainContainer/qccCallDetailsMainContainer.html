@@ -1,0 +1,53 @@
+<template>
+    <template if:true={isActive}>
+        <lightning-card>
+            <template if:true={showIVRDetails}>
+                <lightning-formatted-text 
+                class="slds-card__header-link slds-text-heading_small"
+                style="margin: 1em;"
+                value={title} 
+                 ></lightning-formatted-text>
+                <c-qcc-call-interaction-info 
+                    interaction-id={ssInteractionId} 
+                    authentication-status={authenticationStatus} 
+                    qff-number={qffNumber} 
+                    pnr={pnr}
+                    pnr-contains={pnrContains}
+                    pnr-creation-date={pnrCreationDate}
+                    ivr-selection={ivrSelection}
+                    queue-name={queueName}
+                    caller-name={callerName}
+                    phone-number={phoneNumber}
+                    qff-tier={qffTier}
+                    caller-location={callerLocation}
+                    caller-queued-wait-time={waitTime} 
+                    payment-type={paymentType}
+                    travel-type={travelType}
+                    query-description={queryDescription}
+                >
+                </c-qcc-call-interaction-info>
+            </template> 
+            <template if:true={showFlow} >
+                <lightning-flow 
+                    flow-api-name={flowName}
+                    flow-input-variables={inputVariables}
+                    onstatuschange={handleStatusChange}
+                >
+                </lightning-flow>
+            </template>
+        </lightning-card>
+        <template if:true={showFlow}>
+            <template if:true={pnrNumberOutput}>
+                <template if:true={confirmationScreen}>
+                    <div style=" display: flex; padding:1 rem; background-color: var(--lwc-colorBackgroundBrand);">
+                        <lightning-card class="custom-card" style="margin-top: 1em;">
+                            <c-qcc-additional-p-n-r
+                                record-id={recordId}>
+                            </c-qcc-additional-p-n-r>
+                        </lightning-card>
+                    </div>
+                </template>
+            </template>
+        </template>
+    </template>
+</template>

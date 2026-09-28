@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Group_Agent_Name_and_Email</fullName>
+    <active>true</active>
+    <description>Mandate Group Agent Name and Group Agent Email if value of Relationship is &quot;Group Travel Manager of&apos;</description>
+    <errorConditionFormula>AND(ISPICKVAL(Relationship__c , &apos;Group Travel Manager Of&apos;),
+OR(ISBLANK(Group_Agent_Name__c),
+ISBLANK( Group_Agent_Email__c)))</errorConditionFormula>
+    <errorMessage>Please enter the value for Group Agent Name and Group Agent Email</errorMessage>
+</ValidationRule>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>afl__afl_Article_Feedback__c$Name</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Article_Title__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Article_Number__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Feedback_Vote_Description__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Community_Name__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$Vote__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Feedback_Status__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$CreatedBy</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$CreatedBy.Location__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Article feedback created for Internal Knowledge Articles and Noticeboard</description>
+    <filter>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <column>afl__afl_Article_Feedback__c$afl__Record_Type__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Policy,Informational Article,Triage Article,Process and Procedure,Marketing and Promotional</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>afl__afl_Article_Feedback__c$afl__Feedback_Source__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Internal</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <field>afl__afl_Article_Feedback__c$CreatedDate</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>afl__afl_Article_Feedback__c$afl__Record_Type__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>New IA.KiQ Article Feedback Created</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Article_Feedback__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>afl__afl_Article_Feedback__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2023-05-07</startDate>
+    </timeFrameFilter>
+</Report>

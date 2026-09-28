@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_BankAccountNumber_Alphanumeric</fullName>
+    <active>true</active>
+    <description>QCC: Bank Account Number must only contain alphanumeric</description>
+    <errorConditionFormula>AND( $Setup.EnableValidationRule__c.VR_QCC_Recovery_BankAccountNumber__c=TRUE, 
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+NOT(REGEX(Bank_Account_Number__c,&quot;^[a-zA-Z0-9_]*$&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>Bank_Account_Number__c</errorDisplayField>
+    <errorMessage>Bank Account Number must only contain alphanumeric characters. i.e. must not contain dashes, slashes, spaces, etc.</errorMessage>
+</ValidationRule>

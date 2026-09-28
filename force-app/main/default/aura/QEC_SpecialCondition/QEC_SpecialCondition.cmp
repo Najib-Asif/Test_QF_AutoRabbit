@@ -1,0 +1,102 @@
+<aura:component controller="QEC_SpecialConditionController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="destinations" type="sObject[]" />
+    <!--<aura:attribute name="recordId" type="Id" />-->
+    <aura:attribute name="origin" type="sObject" />
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:attribute name="origins" type="sObject[]" />
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:attribute name="conditionTypes" type="String[]" /> 
+    <aura:attribute name="selectedType" type="String" />
+    <aura:attribute name="fieldMap" type="Map" />
+    <aura:attribute name="specialConditionMap" type="Map" />
+    <aura:attribute name="pickListMap" type="Map" />
+    <aura:attribute name="fareOptions" type="List" />
+    <aura:attribute name="selectedFare" type="String" />
+    <aura:attribute name="cabinOptions" type="List" />
+    <aura:attribute name="selectedCabin" type="String" />
+    <aura:attribute name="objectType" type="String" />
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:attribute name="originCountP" type="Integer" />
+    <aura:attribute name="destinationCountP" type="Integer" />
+    <aura:attribute name="originEnDiP" type="string"/>
+    <aura:attribute name="destinationEnDiP" type="string"/>
+    <aura:attribute name="setBoolO" type="boolean"/>
+    <aura:attribute name="setBoolD" type="boolean"/>
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:handler name="refreshDataEvent" event="c:QEC_refreshDataEvent" action="{!c.handleRefresh}" />
+    <aura:handler name="enabledisable" event="c:QEC_EnaDisInputText" action="{!c.handleInputText}"/>
+    
+    <aura:html tag="style">
+        .slds-modal__container {
+        max-width: 500rem !important;
+        width:98% !important;
+        }
+    </aura:html>
+    <!--Start of existing special condition record viewer-->
+    <aura:if isTrue="{!not(empty(v.specialConditionMap))}">
+        <div class="slds-align_absolute-center slds-m-around_small slds-text-heading_medium">
+            Existing Special Conditions
+        </div>
+        <lightning:tabset variant="vertical">
+            <aura:iteration items="{!v.conditionTypes}" var="type">
+                <lightning:tab label="{!type}">
+                    <c:QEC_SpecialConditionView specialConditionMap="{!v.specialConditionMap}" type="{!type}" fieldMap="{!v.fieldMap}" />
+                </lightning:tab>
+            </aura:iteration>
+        </lightning:tabset>
+    </aura:if>
+    <!--End of existing special condition record viewer-->
+    
+    <!--Start of form to create new special conditon records-->
+    <!--<aura:if isTrue="{!v.objectType == 'Proposal__c'}">-->
+    <div class="slds-align_absolute-center slds-m-around_small slds-text-heading_medium slds-p-top_small">
+        Add New Special Conditions
+    </div>
+    <div class="slds-grid slds-gutters slds-p-around_large">
+        <div class="slds-col">
+            <c:customLookup aura:id = "Origin" objectAPIName="Airport_Code__c" IconName="custom:custom20" selectedRecord="{!v.origin}" selectedRecords="{!v.origins}" label="Origin(s)" Name="Origin" originCountC="{!v.originCountP}" destinationCountC="{!v.destinationCountP}" originEnDiC="{!v.originEnDiP}" setBoolO="{!v.setBoolO}"/>
+        </div>
+        <div class="slds-col">
+            <c:customLookup aura:id = "Destination" objectAPIName="Airport_Code__c" IconName="custom:custom20" selectedRecords="{!v.destinations}" label="Destination(s)" Name="Destination" originCountC="{!v.originCountP}" destinationCountC="{!v.destinationCountP}" destinationEnDiC="{!v.destinationEnDiP}" setBoolD="{!v.setBoolD}"/>
+        </div>
+        <div class="slds-col">
+            <div class="slds-form-element__label ">
+                Cabin Class
+                <lightning:dualListbox name="Classes"  
+                                       label= "Cabin Class" 
+                                       sourceLabel="Available"
+                                       variant="label-hidden"
+                                       size="3"
+                                       selectedLabel="Selected" 
+                                       options="{!v.cabinOptions}" 
+                                       onchange="{! c.cabinChange }"/>
+            </div>      
+        </div>
+        <div class="slds-col">
+            <div class="slds-form-element__label ">
+                Booking Class
+                <lightning:dualListbox name="Classes"  
+                                       label= "Booking Class" 
+                                       sourceLabel="Available"
+                                       variant="label-hidden"
+                                       size="3"
+                                       selectedLabel="Selected" 
+                                       options="{!v.fareOptions}" 
+                                       onchange="{! c.fareChange }"/>
+            </div>
+        </div>    
+    </div>
+    <aura:if isTrue="{!and(not(empty(v.origins)), not(empty(v.destinations)))}">
+        <lightning:tabset variant="vertical">
+            <aura:iteration items="{!v.conditionTypes}" var="type">
+                <lightning:tab label="{!type}">
+                    <c:QEC_SpecialConditionForm origin="{!v.origin}" origins="{!v.origins}" destinations="{!v.destinations}" fieldMap="{!v.fieldMap}" type="{!type}" pickListMap="{!v.pickListMap}" selectedFare="{!v.selectedFare}" recordId="{!v.recordId}" objectType="{!v.objectType}" selectedCabin="{!v.selectedCabin}"/>
+                </lightning:tab>
+            </aura:iteration>
+        </lightning:tabset>
+    </aura:if>
+    <!--</aura:if>-->
+    <!--Start of form to create new special conditon records-->
+</aura:component>
+<!-- Component  --><!-- Component  -->

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aquire_End_Date_more_than_Today</fullName>
+    <active>true</active>
+    <description>Validation to check Aquire Override End Date is not Blank and greater than Today</description>
+    <errorConditionFormula>IF(OR(AND(ISPICKVAL(PRIORVALUE(Aquire_Override__c),&quot;Y&quot;),OR(ISNULL(Aquire_Override_End_Date__c),Aquire_Override_End_Date__c &lt; TODAY())), 
+
+AND(ISPICKVAL(PRIORVALUE(Aquire_Override__c),&quot;N&quot;),ISPICKVAL(Aquire_Override__c,&quot;Y&quot;),OR(ISNULL(Aquire_Override_End_Date__c),Aquire_Override_End_Date__c &lt; TODAY())) 
+), 
+
+true, 
+
+false)</errorConditionFormula>
+    <errorDisplayField>Aquire_Override_End_Date__c</errorDisplayField>
+    <errorMessage>The Aquire Override End Date Field should be more than Today.</errorMessage>
+</ValidationRule>

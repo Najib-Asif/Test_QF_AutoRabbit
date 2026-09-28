@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>To be sent out due to inflight recoveries</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Qantas Points Recovery Survey</name>
+    <style>none</style>
+    <subject>Qantas Points have been credited to your account</subject>
+    <textOnly>Hi {!Contact.Name},
+
+We apologise that your recent experience with us was not to the standard we’ve long held ourselves to. In 	acknowledgement of this we&apos;ve credited {!Case.Recovery_Quantity__c} Qantas Points to your Qantas Frequent Flyer 	account.
+
+If you have any questions regarding your Qantas Points, please contact the Qantas Frequent Flyer team on 13 13 13.
+
+We appreciate your continued support.
+
+Thank you,
+
+The Qantas Frequent Flyer Team
+
+
+Overall, how does receiving these points make you feel about Qantas?
+
+Less positive   More positive
+
+0       1       2       3       4       5       6       7       8       9       10
+
+
+
+
+{!Case.Thread_Token}
+Qantas Airways Limited, ABN 16 009 661 901
+10 Bourke Road Mascot NSW 2020 Australia</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

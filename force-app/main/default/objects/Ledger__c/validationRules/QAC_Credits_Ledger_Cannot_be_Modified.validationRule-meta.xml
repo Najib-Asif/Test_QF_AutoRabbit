@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Credits_Ledger_Cannot_be_Modified</fullName>
+    <active>true</active>
+    <description>To ensure that all QAC Credit Ledger records should not be modified after it is created.</description>
+    <errorConditionFormula>AND( 
+$Setup.EnableValidationRule__c.VR_QAC_Credits_Ledger_Cannot_be_Modified__c,
+RecordType.DeveloperName = &apos;Agency_Credit&apos;, 
+NOT(ISNEW()), 
+OR(ISCHANGED( OwnerId ),  ISCHANGED(Account__c) ,  ISCHANGED(CurrencyIsoCode) ,  ISCHANGED(Asset__c) ,  ISCHANGED(Case__c) ,  ISCHANGED(Reason__c) ,  ISCHANGED(Transaction_Type__c) ,  ISCHANGED(User__c) ,  ISCHANGED(Transaction_Frequency__c) ,  ISCHANGED(Total_Credit_value__c) ,  ISCHANGED(Transaction_date__c) ,  ISCHANGED(Total_Outstanding_credits__c) ), 
+NOT(OR($Profile.Name = &quot;QAC API Integration Profile&quot;, $Profile.Name = &quot;Data Administrator&quot; )) 
+)</errorConditionFormula>
+    <errorMessage>You cannot modify Agency Credit Ledger records.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,32 @@
+<aura:component access="global" controller="QCC_LookupFrequentFlyerController">
+    <aura:method name="contactInfo" action="{!c.getContact}"> 
+        <aura:attribute name="contactDetail" type="Contact"/> 
+    </aura:method>
+    <aura:attribute name="objCon" type="Contact"  default="{ 'sobjectType' : 'Contact' }"/>
+    <aura:attribute name="con" type="Contact" default="{ 'sobjectType' : 'Contact' }"/>
+
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="flowModalEnabled" type="Boolean" default="false"/>
+    <aura:handler event="force:refreshView" action="{!c.refresh}" />
+
+
+    
+    <aura:if isTrue="{! v.isLoading}">
+        <lightning:spinner variant="brand" alternativeText="Searching..."/>
+    </aura:if>
+    <!--<lightning:layout horizontalAlign="end">-->
+        <aura:if isTrue="{! v.flowModalEnabled}">
+            <div class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" >
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <div>
+                            <lightning:flow aura:id="flowCreateCase" />  
+                        </div>
+                    </div>                                                                   
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open" id="backGroundSectionId"></div>           
+        </aura:if>
+        <lightning:button variant="neutral" label="Create Case" onclick="{!c.createCase}"/>
+   <!--</lightning:layout>-->
+</aura:component>

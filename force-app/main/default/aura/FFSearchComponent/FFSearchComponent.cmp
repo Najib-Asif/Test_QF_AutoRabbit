@@ -1,0 +1,194 @@
+<aura:component controller="FreqFlyerSearchController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!-- CREATE ATTRIBUTE/VARIABLE-->
+    <aura:attribute name="searchResult" type="List" description="use for store and display account list return from server"/>
+    <aura:attribute name="Message" type="boolean" default="false" description="use for display no record found message"/>
+    <aura:attribute name="TotalNumberOfRecord" type="integer" default="0" description="use for display Number of records"/>
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>     
+    <aura:attribute name="ffnumber" type="String"/>
+    <aura:attribute name="CaseId" type="String" />
+    <aura:attribute name="AccountId" type="String" />   
+    <aura:attribute name="RecordType" type="String" />
+    <aura:attribute name="freqFlyerList" type="Object[]" />
+    <aura:attribute name="selectedFlyers" type="Object[]" />  
+    <!-- <aura:attribute name="freqFlyerList" type="List"/> -->  
+    <aura:attribute name="isSelectAll" type="boolean" default="false"/>
+    <aura:attribute name="ListtoString" type="Object"/>
+    
+    <!-- SHOW LOADING SPINNER--> 
+    <lightning:spinner variant="brand" size="large" aura:id="Id_spinner" class="slds-hide" />
+    <div class="slds-m-around_xx-large">
+        <aura:if isTrue="{!v.isOpen}">	
+            <!--###### MODAL BOX Start######--> 
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large slds-list-builder" aria-labelledby="id-of-modalheader-h2" aria-modal="true" aria-describedby="modal-content-id-1">  
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModal }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add Frequent Flyers</h2>
+                    </header>
+                    
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <!-- SEARCH INPUT AND SEARCH BUTTON--> 
+                        <lightning:layout>
+                            <lightning:layoutItem size="8" padding="around-small">
+                                <lightning:input value="{!v.ffnumber}"
+                                                 required="true"
+                                                 placeholder="search Frequent Flyers.."
+                                                 aura:id="searchField"
+                                                 label="Frequent Flyer Number"/>
+                            </lightning:layoutItem>
+                            <div style="padding-top: 25px;">
+                                <lightning:layoutItem size="0" padding="around-small" >
+                                    <lightning:button onclick="{!c.Search}"
+                                                      variant="brand"
+                                                      label="Search"
+                                                      iconName="utility:search"/> 
+                                </lightning:layoutItem>
+                            </div>
+                        </lightning:layout>
+                        
+                        <aura:if isTrue="{!v.showSpinner}">
+                            <lightning:spinner aura:id="spinner" variant="brand" size="medium" class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative"  role="alert"/>
+                        </aura:if>
+                        <aura:if isTrue="{!v.Message}">
+                            <div class="slds-notify_container slds-is-relative">
+                                <div class="slds-notify slds-notify_toast slds-theme_error" role="alert">
+                                    <div class="slds-notify__content">
+                                        <h2 class="slds-text-heading_small">No Records Found...</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:if>
+                        <!--Frequent Flyer List Table-->
+                        <table class="slds-table slds-table--bordered slds-table--cell-buffer" role="grid">      
+                            <thead>  
+                                <tr class="slds-text-title--caps">
+                                    <th>           
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckbox value="{!v.isSelectAll}" aura:id="selectAll"  change="{!c.handleSelectAllFF}"/>
+                                            <span class="slds-checkbox--faux" />
+                                            <span class="slds-form-element__label"></span>
+                                        </label>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-grid" title="Freq Flyer Name">Freq Flyer Name</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-grid" title="Freq Flyer No">Freq Flyer No</div>
+                                    </th>
+                                    
+                                    <th scope="col">
+                                        <div class="slds-grid" title="Freq Flyer Email">Freq Flyer Email</div>
+                                    </th>
+                                    
+                                    <th scope="col">
+                                        <div class="slds-grid" title="Current Tier">Current Tier</div>
+                                    </th>
+                                    
+                                    <th scope="col">
+                                        <div class="slds-grid" title="Freq Flyer Expiry Date">Freq Flyer Expiry Date</div>
+                                    </th>
+                                    <aura:if isTrue="{!v.RecordType == 'Frequent Flyer Request'}" > 
+                                        <th scope="col">
+                                            <div class="slds-grid" title="Request Type">Request Type</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-grid" title="Upgrade Tier">Upgrade Tier</div>
+                                        </th>
+                                    </aura:if>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.freqFlyerList}" var="wrap" indexVar="idx">
+                                    <tr>
+                                        <th>
+                                            <label class="slds-checkbox">
+                                                <ui:inputCheckbox aura:id="checkFreqFlyer" value=""  text="{!idx}"/> 
+                                                <span class="slds-checkbox--faux" />
+                                                <span class="slds-form-element__label"></span>
+                                            </label>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!wrap.key1}">{!wrap.key1}</div>
+                                        </th>
+                                        <td class="slds-truncate">
+                                            {!wrap.key2}
+                                        </td>
+                                        <td class="slds-truncate">
+                                            {!wrap.key3}
+                                        </td> 
+                                        <td class="slds-truncate">
+                                            {!wrap.key4}
+                                        </td>
+                                        <td class="slds-truncate">
+                                            {!wrap.key5}
+                                        </td> 
+                                        <aura:if isTrue="{!v.RecordType == 'Frequent Flyer Request'}" > 
+                                          <div class="slds-hide">
+                                            <td class="slds-truncate">
+                                                <!--    <lightning:combobox id="comboBox_id" name="progress" label="Status" value="inProgress" placeholder="Select Progress" options="{! v.options }" onchange="{! c.handleChange }" data-index-number="0"/> -->
+                                                <lightning:input aura:id="ReqType" name="select" label="Select a Value" required="true" messageWhenValueMissing="Please select a value!" value="{!wrap.key6}">
+                                                    <option value="">Please select</option>
+                                                    <option value="Manual Tier Upgrade">Manual Tier Upgrade</option>
+                                                    <option value="Status Match">Status Match</option>
+                                                    <option value="Tier Retain – Mbr can only be retained in Exp Month">Tier Retain – Mbr can only be retained in Exp Month</option>
+                                                </lightning:input> 
+                                            </td>
+                                            </div>
+                                            <td class="slds-truncate">
+                                                <!--    <lightning:combobox id="comboBox_id" name="progress" label="Status" value="inProgress" placeholder="Select Progress" options="{! v.options }" onchange="{! c.handleChange }" data-index-number="0"/> -->
+                                                <lightning:select aura:id="ReqType" name="select" label="Select a Value" required="true" value="{!wrap.key6}">
+                                                    <option value="">Please select</option>
+                                                    <option value="Manual Tier Upgrade">Manual Tier Upgrade</option>
+                                                    <option value="Status Match">Status Match</option>
+                                                    <option value="Tier Retain – Mbr can only be retained in Exp Month">Tier Retain – Mbr can only be retained in Exp Month</option>
+                                                </lightning:select> 
+                                            </td>
+                                        </aura:if>
+                                        <aura:if isTrue="{!v.RecordType == 'Frequent Flyer Request'}" > 
+                                          <div class="slds-hide">
+                                            <td class="slds-truncate">
+                                                <lightning:input aura:id="UpgradeTierPicklist" label="Select a Value" required="true" value="{!wrap.key7}">
+                                                    <option value="">Please select</option>
+                                                    <option value="Silver">Silver</option>
+                                                    <option value="Gold">Gold</option>
+                                                    <option value="Platinum">Platinum</option>
+                                                </lightning:input> 
+                                            </td>  
+                                          </div>
+                                            <td class="slds-truncate">
+                                                <lightning:select aura:id="UpgradeTierPicklist" label="Select a Value" required="true" value="{!wrap.key7}">
+                                                    <option value="">Please select</option>
+                                                    <option value="Silver">Silver</option>
+                                                    <option value="Gold">Gold</option>
+                                                    <option value="Platinum">Platinum</option>
+                                                </lightning:select> 
+                                            </td>	
+                                        </aura:if>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table> 
+                    </div>          
+                    
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button label="Submit" class="slds-button_brand"  onclick="{!c.handleSelectedFFs}" />
+                        <lightning:button variant="brand" 
+                                          label="Close"
+                                          title="Close"
+                                          onclick="{!c.closeModal}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->            
+        </aura:if>
+    </div>  
+</aura:component>

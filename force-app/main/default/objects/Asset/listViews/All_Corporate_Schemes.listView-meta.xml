@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Corporate_Schemes</fullName>
+    <columns>ASSET.NAME</columns>
+    <columns>Scheme_Number_f__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Scheme_Type__c</columns>
+    <columns>CONTACT.NAME</columns>
+    <columns>Scheme_End_Date_f__c</columns>
+    <columns>Scheme_Active_Member_Count__c</columns>
+    <columns>ASSET.STATUS</columns>
+    <columns>ASSET.CREATED_DATE</columns>
+    <columns>Country_Code_f__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ASSET.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Asset.Corporate_Scheme</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>ASSET.STATUS</field>
+        <operation>equals</operation>
+        <value>Active</value>
+    </filters>
+    <filters>
+        <field>ASSET.CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>8/31/2026 12:00 AM</value>
+    </filters>
+    <label>All Corporate Schemes</label>
+</ListView>

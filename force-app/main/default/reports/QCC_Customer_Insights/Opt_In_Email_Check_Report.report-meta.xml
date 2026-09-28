@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact.Cases$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Status</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$RecordType</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Resolution_Method__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Owner</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>report to return status of all cases to run check against opt in email for progress update</description>
+    <filter>
+        <criteriaItems>
+            <column>Contact.Cases$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Query</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Origin</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Red App,Red</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Opt In Email Check Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Contacts_with_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Cases$CreatedDate</dateColumn>
+        <endDate>2022-03-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-03-01</startDate>
+    </timeFrameFilter>
+</Report>

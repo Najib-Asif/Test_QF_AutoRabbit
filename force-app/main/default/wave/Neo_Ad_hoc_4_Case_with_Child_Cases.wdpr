@@ -1,0 +1,539 @@
+{
+  "version" : "65.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Group__c", "RecordTypeId", "Type", "Subject", "ParentId", "CaseNumber", "Id" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Baggage", "CCC Complaints", "CCC Compliment", "CCC Further Action Required", "CCC Insurance Letter Case", "CCC Medical", "CCC On The Spot Recovery", "CCC Query", "CCC Refund", "CCC Voice", "QCC Elite Process", "QCC Migrated Case", "QCC Sensitive Case", "CCC VIP Assistance", "CCC Cover Refund Approval", "CCC Event", "CCC Offload" ]
+        } ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER2", "FILTER0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ParentId" ],
+        "rightQualifier" : "N1Parent",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "computeRelative",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "partitionBy" : [ "N1Parent.Id" ],
+        "orderBy" : [ {
+          "fieldName" : "CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Count_of_N1_Child",
+          "label" : "Count of #1 Child",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "partitionBy" : [ "N1Parent.Id" ],
+        "orderBy" : [ {
+          "fieldName" : "CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Max_of_N1_Child_formula",
+          "label" : "Max of #1 Child Formula",
+          "formulaExpression" : "last_value(Count_of_N1_Child)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case with Child Cases",
+          "name" : "Case_with_Child_Cases"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "FILTER0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "ParentId",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "N1Parent.Id",
+          "newProperties" : {
+            "label" : "The P Case ID",
+            "name" : "N1Parent.Id"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CaseNumber",
+          "newProperties" : {
+            "label" : "The Child Case Number",
+            "name" : "CaseNumber"
+          }
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "DROP_FIELDS0", "FILTER0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "N1Parent.ParentId" ],
+        "rightQualifier" : "N2Parent",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Group__c", "RecordTypeId", "Type", "Subject", "ParentId", "CaseNumber", "Id", "RecordType.Id", "RecordType.Name" ]
+        }
+      }
+    },
+    "FORMULA2" : {
+      "action" : "computeRelative",
+      "sources" : [ "EDIT_ATTRIBUTES5" ],
+      "parameters" : {
+        "partitionBy" : [ "N2Parent.Id" ],
+        "orderBy" : [ {
+          "fieldName" : "N1Parent.CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Count_N2_Child",
+          "label" : "Count #2 Child",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "partitionBy" : [ "N2Parent.Id" ],
+        "orderBy" : [ {
+          "fieldName" : "N1Parent.CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Max_of_N2_Child",
+          "label" : "Max of #2 Child",
+          "formulaExpression" : "last_value(Count_N2_Child)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Test N2 Child",
+          "name" : "Test_N2_Child"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "EDIT_ATTRIBUTES2" : {
+      "action" : "schema",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "N1Parent.CaseNumber",
+          "newProperties" : {
+            "label" : "N2 Child Case Number",
+            "name" : "N1Parent.CaseNumber"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES3" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "N1Parent.ParentId",
+          "newProperties" : {
+            "label" : "N2 Child Case ID",
+            "name" : "N1Parent.ParentId"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES4" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES3" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "N2Parent.CaseNumber",
+          "newProperties" : {
+            "label" : "N2 Parent Case Number",
+            "name" : "N2Parent.CaseNumber"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES5" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES4" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "N2Parent.ParentId",
+          "newProperties" : {
+            "label" : "N2 Parent Case ID",
+            "name" : "N2Parent.ParentId"
+          }
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 391.6,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 531.6,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 391.6,
+        "left" : 252.2
+      },
+      "FILTER0" : {
+        "label" : "QCC Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 391.6,
+        "left" : 392.2
+      },
+      "JOIN1" : {
+        "label" : "#1 Parent Joining",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 391.7,
+        "left" : 532.2
+      },
+      "TRANSFORM0" : {
+        "label" : "Count #1 Child",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 391.6,
+        "left" : 812.2,
+        "graph" : {
+          "FORMULA0" : {
+            "label" : "Formula"
+          },
+          "FORMULA1" : {
+            "label" : "Max of #1 Child"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "Case with Child Cases",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 1512.6
+      },
+      "FILTER2" : {
+        "label" : "Has Parent",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 531.7,
+        "left" : 532.2
+      },
+      "TRANSFORM1" : {
+        "label" : "Rename Fields",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 391.6,
+        "left" : 672.2,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Edit Attributes"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "EDIT_ATTRIBUTES1"
+        } ]
+      },
+      "JOIN2" : {
+        "label" : "N2 Parent",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 1092.2
+      },
+      "TRANSFORM2" : {
+        "label" : "Drop N1 Child",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392,
+        "left" : 952.2,
+        "graph" : {
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM4" : {
+        "label" : "Count #2 Child",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392,
+        "left" : 1372.6,
+        "graph" : {
+          "FORMULA2" : {
+            "label" : "Formula"
+          },
+          "FORMULA3" : {
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA2",
+          "target" : "FORMULA3"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Test N2 Child",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 533.8,
+        "left" : 1232
+      },
+      "TRANSFORM5" : {
+        "label" : "Rename Fields",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392.4,
+        "left" : 1232,
+        "graph" : {
+          "EDIT_ATTRIBUTES2" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES3" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES4" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES5" : {
+            "label" : "Edit Attributes"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES2",
+          "target" : "EDIT_ATTRIBUTES3"
+        }, {
+          "source" : "EDIT_ATTRIBUTES3",
+          "target" : "EDIT_ATTRIBUTES4"
+        }, {
+          "source" : "EDIT_ATTRIBUTES4",
+          "target" : "EDIT_ATTRIBUTES5"
+        } ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "TRANSFORM2",
+      "target" : "JOIN2"
+    }, {
+      "source" : "FILTER2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "FILTER0",
+      "target" : "FILTER2"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "JOIN1",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN2",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM5"
+    }, {
+      "source" : "TRANSFORM5",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN2"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

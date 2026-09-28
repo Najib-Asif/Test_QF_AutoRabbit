@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_6506574</developerName>
+        <masterLabel>OwnerbyRegion_c</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>OWNER</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Freight Claims Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Freight CSU AU Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Freight Inside Sales AU Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Freight Sales Support AU Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Freight CSS Queue</sourceValue>
+            </sourceValues>
+            <value>AU</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Freight CSS Americas Queue</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Freight Invoices US Queue</sourceValue>
+            </sourceValues>
+            <value>US</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Freight Sales NZ Queue</sourceValue>
+            </sourceValues>
+            <value>NZ</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Freight CSS Asia Queue</sourceValue>
+            </sourceValues>
+            <value>asia</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Freight Invoices Queue</sourceValue>
+            </sourceValues>
+            <value>TCS</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Freight FPO Queue</sourceValue>
+            </sourceValues>
+            <value>FPO</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.COUNTRY_CODE</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>CLOSED</field>
+    </columns>
+    <columns>
+        <field>Case.Case_Owner_Team__c</field>
+    </columns>
+    <columns>
+        <field>CREATED</field>
+    </columns>
+    <columns>
+        <field>ORIGIN</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>to show cases by location</description>
+    <filter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.Freight_Claims,Case.Freight_Email_to_Case,Case.Freight_Feedback,Case.Freight_Invoicing,Case.Freight_Query,Case.Freight_Shipment,Case.Freight_Track_Trace_Exceptions,Case.Qantas_Freight</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ACCOUNT.COUNTRY_CODE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>AU,CN,HK,MY,NZ,SG,VN</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>TYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_6506574</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>RECORDTYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Year</dateGranularity>
+        <field>CREATED_DATEONLY</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>FRT Cases by location</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

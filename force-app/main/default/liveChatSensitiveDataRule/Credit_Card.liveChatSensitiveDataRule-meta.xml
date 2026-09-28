@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LiveChatSensitiveDataRule xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <actionType>Replace</actionType>
+    <description>To mask Credit Card details</description>
+    <enforceOn>2</enforceOn>
+    <isEnabled>true</isEnabled>
+    <pattern>^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|↵3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$
+^(?:4[0-9]{12}(?:[0-9]{3})? |5[1-5][0-9]{14} | 6(?:011|5[0-9][0-9])[0-9]{12} | 3[47][0-9]{13} | 3(?:0[0-5]|[68][0-9])[0-9]{11} | (?:2131|1800|35\d{3})\d{11} )$</pattern>
+    <priority xsi:nil="true"/>
+    <processingType xsi:nil="true"/>
+    <replacement>XXXX-XXXX-XXXX-XXXX</replacement>
+    <version xsi:nil="true"/>
+</LiveChatSensitiveDataRule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AWB_Agent_Can_Override_the_Port</fullName>
+    <active>false</active>
+    <description>To restrict updation in PORT field value when the override flag is disabled. CRM - 8544</description>
+    <errorConditionFormula>AND( NOT(ISNEW()),
+ISCHANGED(Freight_Port__c),Port_Override_Flag__c=False ,   Freight_AWB_Number__c &lt;&gt; &apos;&apos;,
+ NOT( ISCHANGED( Freight_AWB_Number__c ) ) ,
+ IsPortEnabled__c = False,
+$Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+$User.FirstName&lt;&gt;&apos;System Admin&apos;
+)</errorConditionFormula>
+    <errorMessage>If PORT change required, please tick Port-Override-flag.</errorMessage>
+</ValidationRule>

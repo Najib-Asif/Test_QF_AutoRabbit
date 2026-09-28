@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Start_Date_if_Active_QBD_true</fullName>
+    <active>true</active>
+    <description>Start date &amp; End Date are mandatory if  Active QBD Record is true</description>
+    <errorConditionFormula>AND(Active_QBD_Record__c = true, OR(ISNULL( Start_Date__c )))</errorConditionFormula>
+    <errorMessage>Please enter Start Date  &amp; End Date</errorMessage>
+</ValidationRule>

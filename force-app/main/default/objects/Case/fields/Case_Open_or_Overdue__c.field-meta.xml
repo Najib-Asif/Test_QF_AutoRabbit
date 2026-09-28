@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Open_or_Overdue__c</fullName>
+    <description>QCC: OM Reports</description>
+    <externalId>false</externalId>
+    <formula>IF((TEXT(Status) != &apos;Closed&apos; &amp;&amp;  Due_Date__c &lt; TODAY()) ,&apos;Overdue&apos;, IF(TEXT(Status) != &apos;Closed&apos;, &apos;Open&apos;, &apos;&apos;))</formula>
+    <label>Case Open or Overdue</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

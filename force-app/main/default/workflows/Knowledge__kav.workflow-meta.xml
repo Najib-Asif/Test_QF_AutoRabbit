@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Update_Question_with_Classname</fullName>
+        <description>classname to be added to the question content</description>
+        <field>QuestionWithClass__c</field>
+        <formula>&quot;&lt;p class=\&quot;kmQuestion\&quot;&gt;&quot; + Question__c + &quot;&lt;/p&gt;&quot;</formula>
+        <name>Update Question with Classname</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <knowledgePublishes>
+        <fullName>Publish_Article</fullName>
+        <action>PublishAsNew</action>
+        <label>Publish Article</label>
+        <language>en_US</language>
+        <protected>false</protected>
+    </knowledgePublishes>
+    <rules>
+        <fullName>Add Styling for Question</fullName>
+        <actions>
+            <name>Update_Question_with_Classname</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Add &apos;kmQuestion&apos; class for the Question field</description>
+        <formula>OR(AND(ISNEW(),CONTAINS($Label.KM_Public_Articles_Record_Types,RecordType.Name)),  AND(ISCHANGED( Question__c ), NOT(CONTAINS(Question__c,&apos;kmQuestion&apos;)),CONTAINS($Label.KM_Public_Articles_Record_Types,RecordType.Name)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Auto Publish Articles</fullName>
+        <actions>
+            <name>Publish_Article</name>
+            <type>KnowledgePublish</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Knowledge__kav.PublishStatus</field>
+            <operation>equals</operation>
+            <value>Draft</value>
+        </criteriaItems>
+        <description>Automatically publish articles.  This should be used ONLY during Knowledge Article import. Please disable after import.
+
+***Activate this workflow rule whenever new articles are to be loaded into the Knowledge base.***
+TO BE DEACTIVATED OTHERWISE</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

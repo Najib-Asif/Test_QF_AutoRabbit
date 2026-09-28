@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TransactionSecurityPolicy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <action>
+        <block>false</block>
+        <endSession>false</endSession>
+        <freezeUser>false</freezeUser>
+        <notifications>
+            <inApp>false</inApp>
+            <sendEmail>true</sendEmail>
+            <user>belindalloyd@qantas.com.au</user>
+        </notifications>
+        <twoFactorAuthentication>false</twoFactorAuthentication>
+    </action>
+    <active>false</active>
+    <customEmailContent>&lt;p&gt;{{event.Username}} tried to export a report that exceeds the 10,000 row limit. Use this event information to start your investigation.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Organisation ID - {{policy.OrganizationId}}&lt;/li&gt;&lt;li&gt;User ID - {{event.UserId}}&lt;/li&gt;&lt;li&gt;User Name - {{event.Username}}&lt;/li&gt;&lt;li&gt;Report ID - {{event.ReportId}}&lt;/li&gt;&lt;li&gt;Rows Processed - {{event.RowsProcessed}}&lt;/li&gt;&lt;li&gt;Event Date - {{event.EventDate}}&lt;/li&gt;&lt;li&gt;Description - {{event.Description}}&lt;/li&gt;&lt;li&gt;Dashboard ID - {{event.DashboardId}}&lt;/li&gt;&lt;li&gt;Dashboard Name - {{event.DashboardName}}&lt;/li&gt;&lt;li&gt;Source IP - {{event.SourceIp}}&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Additional Information&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Displayed Field Entities - {{event.DisplayedFieldEntities}}&lt;/li&gt;&lt;li&gt;Event Name - {{event.Name}}&lt;/li&gt;&lt;li&gt;Event Source - {{event.EventSource}}&lt;/li&gt;&lt;li&gt;Format - {{event.Format}}&lt;/li&gt;&lt;li&gt;Is Scheduled - {{event.IsScheduled}}&lt;/li&gt;&lt;li&gt;Name - {{policy.MasterLabel}}&lt;/li&gt;&lt;li&gt;Name of Columns - {{event.ColumnHeaders}}&lt;/li&gt;&lt;li&gt;Name of Grouped Columns - {{event.GroupedColumnHeaders}}&lt;/li&gt;&lt;li&gt;Number of Columns - {{event.NumberOfColumns}}&lt;/li&gt;&lt;li&gt;Operation - {{event.Operation}}&lt;/li&gt;&lt;li&gt;Owner ID - {{event.OwnerId}}&lt;/li&gt;&lt;li&gt;Queried Entities - {{event.QueriedEntities}}&lt;/li&gt;&lt;li&gt;Policy Type - {{policy.Type}}&lt;/li&gt;&lt;li&gt;Scope - {{event.Scope}}&lt;/li&gt;&lt;li&gt;Session Level - {{event.SessionLevel}}&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</customEmailContent>
+    <description>When a user exports more than 10000 rows of data, an email notification is to be triggered.</description>
+    <developerName>ReportDataExtract</developerName>
+    <eventName>ReportEvent</eventName>
+    <flow>PolicyCondition_NjIcyYMjyWZOadgjHHTi</flow>
+    <masterLabel>ReportDataExtract</masterLabel>
+    <type>CustomConditionBuilderPolicy</type>
+</TransactionSecurityPolicy>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Proposal Fare Discount</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Proposal Fare Discounts</value>
+    </caseValues>
+    <recordTypes>
+        <label><!-- Approved - Customer --></label>
+        <name>Approved_Customer</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Proposal Fare Discount cannot be edited for the above proposal --></errorMessage>
+        <name>Lock_Proposalfarediscount_Higher_Disc</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Value change is not allowed --></errorMessage>
+        <name>Restrict_Modifying_BookingClass</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Value change is not allowed --></errorMessage>
+        <name>Restrict_Modifying_Discount</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t change the discount for International products in QBS --></errorMessage>
+        <name>Restrict_Modifying_for_International</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Tier 1 should be less than Tier 2 --></errorMessage>
+        <name>Tier_1_should_be_less_than_Tier_2</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Add_Discount_List --></label>
+        <name>Add_Discount_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Composer_Generate_Proposal --></label>
+        <name>Conga_Composer_Generate_Proposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Composer_discounts --></label>
+        <name>Conga_Composer_discounts</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>PermissionSetAssignment$Id</field>
+    </columns>
+    <columns>
+        <field>PermissionSetAssignment$PermissionSetGroup</field>
+    </columns>
+    <columns>
+        <field>PermissionSetAssignment$Assignee</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>PermissionSetAssignment$Assignee.IsActive</field>
+    </columns>
+    <currency>AUD</currency>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>PermissionSetAssignment$PermissionSet</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Active Permission Set Assignments</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Permission_Set_Assignments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>PermissionSetAssignment$PermissionSetGroup</sortColumn>
+    <sortOrder>Desc</sortOrder>
+</Report>

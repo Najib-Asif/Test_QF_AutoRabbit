@@ -1,0 +1,314 @@
+{
+  "version" : "59.0",
+  "nodes" : {
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "ActivityId", "CreatedById", "CreatedDate", "Headers", "Subject", "FromName", "ValidatedFromAddress", "ToAddress", "Incoming", "Status", "MessageIdentifier", "ThreadIdentifier", "ClientThreadIdentifier", "RelatedToId", "IsBounced", "TextBody" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "EmailMessage",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "EmailMessage"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Frequent_Flyer_Number__c", "Frequent_Flyer_Tier__c", "Id", "MasterRecordId", "CaseNumber", "ContactId", "ParentId", "Type", "RecordTypeId", "Description", "CreatedDate", "Booking_PNR__c", "Category__c", "Group__c", "Sub_Category__c", "Case_Status__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER4" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Incoming",
+          "operator" : "EQUAL",
+          "operands" : [ "true" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "ParentId",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ {
+            "argument" : 0,
+            "type" : "N_QUARTERS"
+          }, {
+            "argument" : 0,
+            "type" : "N_QUARTERS"
+          } ]
+        } ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Location__c", "Id", "Name" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FORMULA0", "LOAD_DATASET5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "BasicUserM",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER5" : {
+      "action" : "filter",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "BasicUserM.Location__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "FILTER4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Mention",
+          "label" : "Mention",
+          "formulaExpression" : "case\r\nWhen contains(TextBody,'salesforce') then 'True'\r\nelse 'False'\r\nend\r\n",
+          "precision" : 255,
+          "defaultValue" : "131313 mention"
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER5", "LOAD_DATASET4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "ParentId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "FILTER6" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Salesforce mention",
+          "name" : "salesforce_mention"
+        }
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN2", "LOAD_DATASET4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Case.ParentId" ],
+        "rightQualifier" : "parent",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER6" : {
+      "action" : "filter",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Mention",
+          "operator" : "NOT",
+          "operands" : [ "False" ]
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET3" : {
+        "label" : "EmailMessage",
+        "type" : "LOAD_DATASET",
+        "top" : 251.5,
+        "left" : 111.9,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER4" : {
+        "label" : "Filter 4",
+        "type" : "FILTER",
+        "top" : 252.7,
+        "left" : 252
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Basic User Master",
+        "type" : "LOAD_DATASET",
+        "top" : 391.5,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Join 1",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 392
+      },
+      "FILTER5" : {
+        "label" : "Filter 5",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 532
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 392,
+        "left" : 252,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 672
+      },
+      "OUTPUT2" : {
+        "label" : "Salesforce mention",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1092
+      },
+      "JOIN3" : {
+        "label" : "Parent Case Join",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 812
+      },
+      "FILTER6" : {
+        "label" : "Filter 6",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 952
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET3",
+      "target" : "FILTER4"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "FILTER5"
+    }, {
+      "source" : "FILTER4",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "FILTER5",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN2"
+    }, {
+      "source" : "FILTER6",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN3",
+      "target" : "FILTER6"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

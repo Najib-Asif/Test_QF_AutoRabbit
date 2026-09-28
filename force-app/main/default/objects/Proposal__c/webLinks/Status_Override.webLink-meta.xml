@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Override</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Status Override</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+try{ 
+if(&apos;{!NOT(ISPICKVAL($User.CountryCode,&apos;AU&apos;))}&apos; == &apos;true&apos;){ 
+if(&apos;{!Proposal__c.Active__c}&apos; == 1){ 
+
+var proposal = new sforce.SObject(&quot;Proposal__c&quot;); 
+proposal.id = &apos;{!Proposal__c.Id}&apos;; 
+proposal.status__c = &apos;Acceptance Required - Customer&apos;; 
+var result = sforce.connection.update([proposal]); 
+window.location.reload(); 
+
+}else if(&apos;{!Proposal__c.Active__c}&apos; == 0){ 
+alert(&apos;Proposal should be Active!&apos;); 
+} 
+}else{ 
+alert(&quot;This status override button can only be used by the International (non-AU) Account Managers / Sales Users.&quot;); 
+} 
+}catch(e){ 
+alert(&apos;An Error has Occured. Error:&apos; +e); 
+}</url>
+</WebLink>

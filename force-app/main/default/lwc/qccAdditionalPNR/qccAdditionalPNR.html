@@ -1,0 +1,76 @@
+<template>
+    <lightning-card title="Additional PNR">
+        <template for:each={pnrs} for:item="pnr">
+            <div key={pnr.id} class="pnr-container">
+                <lightning-layout>
+                    <lightning-layout-item size="12" small-size="6">
+                        <div class="input-delete-container">
+                            <lightning-input
+                            label="Additional PNR"
+                                class="pnr-input"
+                                value={pnr.value}
+                                disabled={pnr.saved}
+                                data-id={pnr.id}
+                                onchange={handleInputChange}
+                                max-length="6"
+                            ></lightning-input>
+                        </div>
+                        <div>
+                        <template if:true={pnr.saved}>
+                            <div class="delete-container">
+                                <lightning-button
+                                    label="Delete"
+                                    data-id={pnr.id}
+                                    onclick={handleDelete}
+                                    variant="destructive-text"
+                                ></lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item size="6" class = "button-container">
+                            <template if:false={pnr.addAnotherPNR}>
+                                <template if:true={pnr.saved}>
+                                <lightning-button
+                                    label="Add another PNR"
+                                    data-id={pnr.id}
+                                    onclick={handleSaveAndAdd}
+                                    variant="destructive-text"
+                                    class ="add-another-pnr"
+                                ></lightning-button>
+                            </template>
+                        </template>
+                            <template if:false={pnr.saved}>
+                                <lightning-button
+                                    label="Add another PNR"
+                                    data-id={pnr.id}
+                                    onclick={handleSaveAndAdd}
+                                    variant="destructive-text"
+                                ></lightning-button>
+                            </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" class = "button-container-right">
+                            <template if:false={pnr.saved}>
+                                <lightning-button
+                                    label="Save"
+                                    variant="destructive"
+                                    data-id={pnr.id}
+                                    onclick={handleSave}
+                                    class ="custom-button"
+                                ></lightning-button>
+                            </template>
+                    </lightning-layout-item>
+                </lightning-layout> 
+                <lightning-layout>   
+                    <lightning-layout-item>
+                        <template if:true={isSaving}>
+                            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+    </lightning-card>
+</template>

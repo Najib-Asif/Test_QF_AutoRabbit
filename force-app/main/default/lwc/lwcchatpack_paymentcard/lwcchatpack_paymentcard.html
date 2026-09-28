@@ -1,0 +1,14 @@
+<template>
+    <div>
+        <h2>Please Enter Payment Card Details</h2>
+        <lightning-input name="pcnumber" value={pcnumber} onchange={handlePCNumberChange} maxlength="25"
+            placeholder="XXXX-XXXX-XXXX-XXXX" label="Card Number">
+        </lightning-input>
+        <p>
+            Your Card Number: <br />{pcnumber}
+        </p>
+
+        <lightning-button label="Submit" title="Non-primary action" onclick={handleClick} class="slds-m-left_x-small">
+        </lightning-button>
+    </div>
+</template>

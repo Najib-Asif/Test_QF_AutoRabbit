@@ -1,0 +1,229 @@
+{
+  "version" : "62.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "Name", "CurrencyIsoCode", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "LastActivityDate", "LastViewedDate", "LastReferencedDate", "Account_Name__c", "AA_RPK_LY__c", "AA_RPK__c", "AA_Revenue_LY__c", "AA_Revenue__c", "AA_Yield_LY__c", "AA_Yield__c", "EK_RPK_LY__c", "EK_RPK__c", "EK_Revenue_LY__c", "EK_Revenue__c", "EK_Yield_LY__c", "EK_Yield__c", "JQ_RPK_LY__c", "JQ_RPK__c", "JQ_Revenue_LY__c", "JQ_Revenue__c", "JQ_Yield_LY__c", "JQ_Yield__c", "LY_Date__c", "LY_Month__c", "Month_No__c", "Month_Year__c", "Network__c", "O_D_Pair__c", "Period_Month__c", "Period_Year__c", "QCI_ID__c", "QF_Average_Fare_LY__c", "QF_Average_Fare_VLY_Perc__c", "QF_Average_Fare_VLY__c", "QF_Average_Fare__c", "QF_Cancellation_Rate_LY__c", "QF_Cancellation_Rate__c", "QF_Capacity_Share_LY__c", "QF_Capacity_Share__c", "QF_Flights_LY__c", "QF_Flights_Share_LY__c", "QF_Flights_Share_VLY_PPTS__c", "QF_Flights_Share_VLY__c", "QF_Flights_Share__c", "QF_Flights_VLY_Perc__c", "QF_Flights__c", "QF_MCA_RPK_LY__c", "QF_MCA_RPK__c", "QF_MCA_Revenue_LY__c", "QF_MCA_Revenue__c", "QF_MCA_Yield_LY__c", "QF_MCA_Yield__c", "QF_On_Time_Arrivals_LY__c", "QF_On_Time_Arrivals__c", "QF_On_Time_Departures_LY__c", "QF_On_Time_Departures__c", "QF_RPK_LY__c", "QF_RPK__c", "QF_Revenue_LY__c", "QF_Revenue_Market_Share_LY__c", "QF_Revenue_Market_Share_VLY__c", "QF_Revenue_Market_Share__c", "QF_Revenue_VLY_PPTS__c", "QF_Revenue_VLY__c", "QF_Revenue__c", "QF_VA_Cancellations_Variance_LY__c", "QF_VA_Cancellations_Variance__c", "QF_VA_On_Time_Arrivals_Variance_LY__c", "QF_VA_On_Time_Arrivals_Variance__c", "QF_VA_On_Time_Departures_Variance_LY__c", "QF_VA_On_Time_Departures_Variance__c", "QF_Yield_LY__c", "QF_Yield_VLY__c", "QF_Yield__c", "Region__c", "Route_Sort__c", "TY_Date__c", "TY_Month__c", "Total_Air_Travel_Spend_LY__c", "Total_Air_Travel_Spend__c", "Total_Flights_LY__c", "Total_Flights__c", "Total_RPK_LY__c", "Total_RPK__c", "Total_Yield_LY__c", "Total_Yield__c", "Travel_Month__c", "Travel_Month_f__c", "VA_Cancellation_Rate_LY__c", "VA_Cancellation_Rate__c", "VA_Capacity_Share_LY__c", "VA_Capacity_Share__c", "VA_On_Time_Arrivals_LY__c", "VA_On_Time_Arrivals__c", "VA_On_Time_Departures_LY__c", "VA_On_Time_Departures__c", "YY_RPK_LY__c", "YY_RPK__c", "YY_Revenue_LY__c", "YY_Revenue__c", "YY_Yield_LY__c", "YY_Yield__c", "Yield_Premium_LY__c", "Yield_Premium_VLY__c", "Yield_Premium__c", "deletethis__c", "O_D_City__c", "State__c", "DOM_Share_Target_This_FY__c", "INT_Share_Target_This_FY__c", "AA_Flights_LY__c", "AA_Flights__c", "EK_Flights_LY__c", "EK_Flights__c", "JQ_Flights_LY__c", "JQ_Flights__c", "YY_Flights_LY__c", "YY_Flights__c", "Domestic_Type__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Routes__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Routes__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Qantas_Corporate_Identifier__c", "Type", "OwnerId", "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Account",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Account"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Account_Name__c" ],
+        "rightQualifier" : "Account",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "S&D Revenue performance",
+          "name" : "Sndrevenueperformance"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Routes__c",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Account",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "OUTPUT0" : {
+        "label" : "S&D Prism revenue Data",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 392
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ {
+      "fieldName" : "VA_Capacity_Share__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "VA_On_Time_Arrivals_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "VA_On_Time_Arrivals__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "VA_On_Time_Departures_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "VA_On_Time_Departures__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_RPK_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_RPK__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_Revenue_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_Revenue__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_Yield_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_Yield__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "Yield_Premium_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "Yield_Premium_VLY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "Yield_Premium__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "deletethis__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "O_D_City__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "State__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "DOM_Share_Target_This_FY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "INT_Share_Target_This_FY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "AA_Flights_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "AA_Flights__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "EK_Flights_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "EK_Flights__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "JQ_Flights_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "JQ_Flights__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_Flights_LY__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "YY_Flights__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    }, {
+      "fieldName" : "Domestic_Type__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Routes__c"
+    } ]
+  },
+  "runMode" : "full"
+}

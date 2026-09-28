@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PNR_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(Booking_PNR__c)),
+OR(
+NOT(LEN(Booking_PNR__c) = 6 ),
+NOT( REGEX( Booking_PNR__c , &quot;^[A-Za-z0-9]+$&quot;) )
+)
+)</errorConditionFormula>
+    <errorDisplayField>Booking_PNR__c</errorDisplayField>
+    <errorMessage>PNR must be exactly 6 alphanumeric characters (A-Z, 0-9) and should not contain any special characters.</errorMessage>
+</ValidationRule>

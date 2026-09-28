@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CCA_Approval_Level_Check_new__c</fullName>
+    <description>CRM-7053,CRM 9332[added Vicki Park]</description>
+    <externalId>false</externalId>
+    <formula>IF(Account_Owner_asper_RelatedAcct__c=&apos;Chris McBride&apos;, 1, 
+IF( OR(Account_Owner_asper_RelatedAcct__c=&apos;Eloise Tsoukas&apos;, Account_Owner_asper_RelatedAcct__c=&apos;Mai Pham&apos; , Account_Owner_asper_RelatedAcct__c=&apos;Vicki Park&apos;)  , 2, 0))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CCA  Approval Level Check</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

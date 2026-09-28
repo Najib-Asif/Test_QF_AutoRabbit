@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>QAC_Agency_Credit_ledger_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QAC</description>
+        <label>QAC Agency Credit ledger Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_Agency_Credit_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Credit</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

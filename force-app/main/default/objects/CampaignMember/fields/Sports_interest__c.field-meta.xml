@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sports_interest__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (INCLUDES (Contact.Sports_interest__c, &quot;Australian Rules football&quot; ), &quot;Australian Rules football;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Basketball&quot; ), &quot;Basketball;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Cricket&quot; ), &quot;Cricket;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Motorsports&quot; ), &quot;Motorsports;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Netball&quot; ), &quot;Netball;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Olympics&quot; ), &quot;Olympics;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Rugby League&quot; ), &quot;Rugby League;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Rugby Union&quot; ), &quot;Rugby Union;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Soccer/Football&quot; ), &quot;Soccer/Football;&quot;,null) &amp;
+IF (INCLUDES (Contact.Sports_interest__c, &quot;Tennis&quot; ), &quot;Tennis;&quot;,null)</formula>
+    <label>Sports interest</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

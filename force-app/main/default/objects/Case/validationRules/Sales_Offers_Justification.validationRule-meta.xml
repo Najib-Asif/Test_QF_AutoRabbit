@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Justification</fullName>
+    <active>true</active>
+    <description>For Sales Offers, if Justification = Other, Justification/Escalation Reasons can&apos;t be blank</description>
+    <errorConditionFormula>AND (
+ RecordType.DeveloperName = &quot;Sales_Offers_Request&quot;,
+ ISPICKVAL( Justification_p__c , &quot;Other&quot;),
+ ISBLANK ( Justification__c )
+
+)</errorConditionFormula>
+    <errorDisplayField>Justification__c</errorDisplayField>
+    <errorMessage>Justification/Escalation Reasons cannot be blank if Justification is &apos;Other&apos;</errorMessage>
+</ValidationRule>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_RestrictUseOfActiveAssignmentRules</fullName>
+    <active>true</active>
+    <description>You are not allowed to edit this checkbox
+CRM-6821
+
+CRM-6927: Waiting for customer case should route via a routing table, when reply received.</description>
+    <errorConditionFormula>AND(
+ISCHANGED(Assign_using_active_assignment_rules__c) ,
+Assign_using_active_assignment_rules__c,
+NOT(isNEW()),
+NOT(ISCHANGED(Type)),
+NOT(ISPICKVAL(Type, &quot;SSU Email Enquiries&quot;)),
+NOT(ISPICKVAL(Type, &quot;VIP Email Enquiries&quot;)),
+QCC_enableAssignmentRules__c = true,
+NOT(ischanged(RecordTypeId)),
+NOT(ISBLANK(PRIORVALUE(Description))),
+NOT(TEXT(PRIORVALUE(Status))=&quot;Waiting for Customer&quot;),
+NOT(ISPICKVAL(Status,&quot;Reply Received&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>Assign_using_active_assignment_rules__c</errorDisplayField>
+    <errorMessage>This checkbox can only be ticked on case creation</errorMessage>
+</ValidationRule>

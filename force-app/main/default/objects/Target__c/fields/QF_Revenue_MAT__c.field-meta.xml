@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QF_Revenue_MAT__c</fullName>
+    <formula>IF( is_Current_FY__c=true, 
+IF( ISPICKVAL(Network__c, &quot;Domestic&quot;),
+ Account_Name__r.QF_Domestic_Revenue__c ,  Account_Name__r.QF_International_Revenue__c ), null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Moving Annual Total Qantas revenue by network</inlineHelpText>
+    <label>QF Revenue (MAT)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

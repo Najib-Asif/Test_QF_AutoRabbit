@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_41999301</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account$Account_Owner_Role__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Charter</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Development-Other States-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional ACT</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional ACT-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional Development-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional QLD</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional QLD-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional VIC/TAS</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional VIC/TAS-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Regional WA/SA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources NSW/VIC-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Resources WA-Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-B&amp;G-Strategic Accounts-Manager</sourceValue>
+            </sourceValues>
+            <value>Large Market</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager10</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-R&amp;G-Account Manager6</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS-Sr Manager</sourceValue>
+            </sourceValues>
+            <value>Mid Market</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME-QIS</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF-DOM-Sales-SME</sourceValue>
+            </sourceValues>
+            <value>New Business</value>
+        </values>
+    </buckets>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account$Contracted__c</field>
+    </columns>
+    <columns>
+        <field>Account.Contracts__r.Special_Conditions__r$Name</field>
+    </columns>
+    <columns>
+        <field>Account.Contracts__r.Special_Conditions__r$QEC_Type__c</field>
+    </columns>
+    <columns>
+        <field>Account$Owner</field>
+    </columns>
+    <columns>
+        <field>Account.Contracts__r.Special_Conditions__r$QEC_Origin__c</field>
+    </columns>
+    <columns>
+        <field>Account.Contracts__r.Special_Conditions__r$QEC_Destination__c</field>
+    </columns>
+    <columns>
+        <field>Account.Contracts__r.Special_Conditions__r$QEC_Conditions__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account$Contracted__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Contracts__r.Special_Conditions__r$QEC_Type__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>JQ Inclusion</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Contracts__r$Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_41999301</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Special Conditions - JQ Inclusion</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_Contracts_with_Special_Condtions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Account.Contracts__r.Special_Conditions__r$QEC_Destination__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Account$At_Risk_Since__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

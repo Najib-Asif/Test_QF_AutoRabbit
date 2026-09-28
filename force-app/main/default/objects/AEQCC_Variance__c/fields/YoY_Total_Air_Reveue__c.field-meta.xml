@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>YoY_Total_Air_Reveue__c</fullName>
+    <formula>IF(   LYTD_Total_Air_Revenue__c != 0,((  YTD_Total_Air_Revenue__c -LYTD_Total_Air_Revenue__c ) / LYTD_Total_Air_Revenue__c ),null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>YoY Total Air Revenue</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

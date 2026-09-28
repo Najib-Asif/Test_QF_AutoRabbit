@@ -1,0 +1,221 @@
+<aura:component
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,lightning:isUrlAddressable,force:lightningQuickAction,lightning:availableForFlowScreens"
+    access="global" controller="ViewAllFilesController">
+
+    <!--Attributes-->
+    <!--<aura:attribute name="cdList" type="List"/>-->
+    <aura:attribute name="cdList" type="List" />
+    <aura:attribute name="caseId" type="String" />
+    <aura:attribute name="docConId" type="String" />
+    <aura:attribute name="message" type="String" />
+
+    <!--Boolean attribute to indicate if modal is open or not 
+    default value is false as modal is closed when page is loaded 
+-->
+    <aura:attribute name="isModalOpen" type="boolean" default="false" />
+    <aura:attribute name="isRemove" type="boolean" default="false" />
+    <aura:attribute name="isDelete" type="boolean" default="false" />
+    <!--Handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" access="global" />
+    <aura:handler event="force:showToast" action="{!c.doInit}" />
+    <!--Component Start-->
+
+    <div class="slds-p-top_small">
+    <lightning:button variant="neutral" label="View All Files" title="View All Files" onclick="{! c.viewAllFiles }"
+        class="slds-align_absolute-center" />
+    </div>
+
+    <aura:if isTrue="{!v.isModalOpen}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width: 60rem;width:100%">
+                <lightning:spinner aura:id="mySpinner" alternativeText="Processing.." title="Processing.." variant="brand"
+            size="medium" class="slds-hide" />
+                <!-- Modal/Popup Box Header Starts here-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeAllFiles }"
+                        alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">All Related Files</h2>
+                </header>
+                <!--Modal/Popup Box Body Starts here-->
+                <div class="slds-modal__content slds-p-around_medium slds-text-align_center" id="modal-content-id-1">
+                    <aura:if isTrue="{!v.cdList}">
+                        <div class="slds-table--header-fixed_container">
+                            <div class="slds-scrollable_y" style="max-height:460px;">
+                                <table
+                                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_header-fixed">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="slds-text-title" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed slds-align_absolute-center" title="Title" style="padding-left: 0.5rem;">Title</div>
+                                            </th>
+                                            <th class="slds-text-title" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed slds-align_absolute-center" title="Owner" style="padding-left: 0.5rem;">Owner</div>
+                                            </th>
+                                            <th class="slds-text-title" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed slds-align_absolute-center" title="Owner" style="padding-left: 0.5rem;">Last Modified
+                                                </div>
+                                            </th>
+                                            <th class="slds-text-title" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed slds-align_absolute-center" title="Size" style="padding-left: 0.5rem;">Size</div>
+                                            </th>
+                                            <th class="slds-text-title" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed slds-align_absolute-center" title="Source" style="padding-left: 0.5rem;">Source</div>
+                                            </th>
+                                            <th class="slds-text-title" scope="col" style="width:3.25rem;">
+                                                <div class="slds-truncate slds-cell-fixed slds-align_absolute-center" title="Actions">Actions</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <aura:iteration items="{!v.cdList}" var="item">
+                                            <tr>
+                                                <td scope="row">
+                                                    <div class="slds-truncate" title="{!item.cd.Title}">
+                                                        <a onclick="{!c.handleSelectedDocPreview}"
+                                                            data-Id="{!item.cd.Id}">
+                                                            <!--<lightning:icon iconName="doctype:image"  /> &nbsp;{!item.cd.Title}-->
+                                                            <lightning:icon iconName="{!item.docType}" />
+                                                            &nbsp;{!item.cd.Title}
+                                                            <!--<lightning:icon iconName="{!item.docType}"  /> &nbsp;{!item.cd.Title}-->
+                                                            <!--<lightning:icon iconName="{!item.docType!='pdf' ? 'doctype:image' : 'doctype:pdf'}"  /> &nbsp;{!item.cd.Title}-->
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <div class="slds-truncate" title="Owner">
+                                                        <a onclick="{!c.handleRedirectToUserRecord}"
+                                                            data-Id="{!item.cd.OwnerId}">{!item.cd.Owner.Name}</a>
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <div class="slds-truncate" title="Last Modified">
+                                                        {!item.lastModifiedDate}
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <div class="slds-truncate" title="{!item.cd.ContentSize}">
+                                                        {!item.fileSize}
+                                                        <!--<a onclick="{!c.handleRedirectToUserRecord}" data-Id="{!cd.ContentSize}"></a>-->
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <div class="slds-truncate" title="Source">
+                                                        <a onclick="{!c.handleRedirectToRecord}"
+                                                            data-Id="{!item.entityId}">
+                                                            <aura:if isTrue="{!item.isCase}">
+                                                                <lightning:icon iconName="standard:case" size="small" />
+                                                                &nbsp;
+                                                                <aura:set attribute="else">
+                                                                    <lightning:icon iconName="standard:email"
+                                                                        size="small" /> &nbsp;
+                                                                </aura:set>
+                                                            </aura:if>
+                                                            {!item.label}
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td scope="row">
+                                                    <lightning:buttonMenu alternativeText="Show menu" iconSize="small"
+                                                        menuAlignment="auto" onselect="{!c.handleSelectedAction}"
+                                                        value="{!item.cd.Id}">
+                                                        <lightning:menuItem value="Download" class="custom-color"
+                                                            label="Download" iconName="utility:download"
+                                                            title="Download" />
+                                                        <lightning:menuItem value="View" class="custom-color"
+                                                            label="View File Details" iconName="utility:preview"
+                                                            title="View File Details" />
+                                                        <lightning:menuItem value="Edit" class="custom-color"
+                                                            label="Edit File Details" iconName="utility:edit"
+                                                            title="Edit File Details" />
+                                                        <!--<lightning:menuItem value="Remove" class="custom-color"
+                                                            label="Remove from Record" iconName="utility:cut"
+                                                            title="Remove from Record" />
+                                                        <lightning:menuItem value="Delete" class="custom-color"
+                                                            label="Delete" iconName="utility:delete" title="Delete" />-->
+                                                    </lightning:buttonMenu>
+                                                </td>
+                                            </tr>
+                                        </aura:iteration>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <aura:set attribute="else">
+                            No Files
+                        </aura:set>
+                    </aura:if>
+                </div>
+                <!--Modal/Popup Box Footer Starts here-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Refresh" title="Refresh" onclick="{!c.doInit}" />
+                    <lightning:button variant="destructive" label="Close" title="Close" onclick="{!c.closeAllFiles}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!--Use aura:if tag to display/hide popup based on isRemove value-->
+    <aura:if isTrue="{!v.isRemove}">
+        <div class="slds-m-around_xx-large">
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeDeleteModel }"
+                            alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Remove file?</h2>
+                    </header>
+                    <!--Modal/Popup Box Body Starts here-->
+                    <div class="slds-modal__content slds-p-around_medium slds-text-align_center"
+                        id="modal-content-id-1">
+                        <p>The file will be removed from the record, but not deleted.</p>
+                    </div>
+                    <!--Modal/Popup Box Footer Starts here-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" label="Cancel" title="Cancel"
+                            onclick="{! c.closeDeleteModel }" />
+                        <lightning:button variant="destructive" label="Remove from Record" title="Remove from Record"
+                            onclick="{!c.removeFromRecord}" />
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+
+    <!--Use aura:if tag to display/hide popup for delete operation-->
+
+    <aura:if isTrue="{!v.isDelete}">
+        <div class="slds-m-around_xx-large">
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeDeleteModel }"
+                            alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete File?</h2>
+                    </header>
+                    <!--Modal/Popup Box Body Starts here-->
+                    <div class="slds-modal__content slds-p-around_medium slds-text-align_center"
+                        id="modal-content-id-1">
+                        <p>Deleting a file also removes it from any records or posts it's attached to.</p>
+                    </div>
+                    <!--Modal/Popup Box Footer Starts here-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" label="Cancel" title="Cancel"
+                            onclick="{! c.closeDeleteModel }" />
+                        <lightning:button variant="destructive" label="Delete Record" title="Delete Record"
+                            onclick="{!c.deleteDocument}" />
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+    <!--Component End-->
+</aura:component>

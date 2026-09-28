@@ -1,0 +1,175 @@
+<aura:component controller="QEC_AddTMCPCCController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:handler name="init" action="{!c.loadTMCPCC}" value="{!this}" />
+    <aura:attribute name="noteMsg" type="String"/>
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="TMCArray" type="QEC_AddTMCPCCWrapper[]" />
+    <aura:attribute name="searchResultArray" type="Object"/>
+    <aura:attribute name="removedArray" type="Object"/>
+    <aura:attribute name="addedArray" type="Object"/>
+    <aura:attribute name="linkedArray" type="list"/>
+    <aura:attribute name="HistoryTable" type="QEC_AddTMCPCCWrapper[]"/>
+    <aura:attribute name="initialTable" type="boolean" default="false" />
+    <aura:attribute name="basetable" type="boolean" default="false"/>
+    <aura:attribute name="searchData" type="String" />
+    <aura:attribute name="searchResultsFlag" type="boolean" default="false"/>
+    <aura:attribute name="isContract" type="boolean" default="true"/> <!--CRM-5688-->
+    <aura:attribute name="emailDistribution" type="String"/>
+    <aura:attribute name="activeTab" type="String"/>
+    <aura:attribute name="isHistoryEditable" type="boolean" default="false"/>
+    
+    <aura:html tag="style">
+        .slds-modal__container {
+        max-width: 500rem !important;
+        width:70% !important;
+        }
+    </aura:html>
+    <lightning:spinner aura:id="mySpinner" />
+    <!--Existing records table starts-->
+    <lightning:tabset selectedTabId="one">
+        <aura:if isTrue="{!v.isContract}">
+            <lightning:input type="email" aura:id="distributionemail" required="true" name="distributionemail" placeholder="Type your email" label="Distribution Email" value="{!v.emailDistribution}" />
+            
+        </aura:if>
+        <lightning:tab label="Add TMC" id="one" onactive="{!c.tmctab}">
+            <aura:if isTrue="{!v.basetable}">
+                <div>
+                    <p align="center">Existing TMC/PCC</p><!--style="font-weight: 300;font-size: 1.25rem;line-height: 1.25;"-->
+                </div><br/>
+                
+                <!--Already Linked PCC records starts-->
+                
+                <div style="overflow-y: scroll;">
+                    
+                    <table  role="grid" style="overflow:auto" class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+                        <thead title="Search Results">
+                            <tr class="slds-text-heading_label">
+                                <th scope="col"><div title="Account Name">Name</div></th>
+                                <th scope="col"><div title="PCC">PCC</div></th>
+                                <th scope="col"><div class="slds-truncate" title="Active">Active</div></th>
+                                <th scope="col"><div title="GDS">GDS</div></th>
+                                <th scope="col"><div title="Start Date">Start Date</div></th>
+                                <th scope="col"><div title="End Date">End Date</div></th>
+                                <th scope="col"><div title="IATA/TIDS">IATA/TIDS</div></th>
+                                <!--<th scope="col"><div title="Remove"></div></th>-->
+                                <th scope="col"><div class="slds-truncate" title="History">History</div></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.TMCArray}" var="wrapper" indexVar="index">
+                                <tr>
+                                    <td><div>{!wrapper.accountName}</div></td>
+                                    <td><div>{!wrapper.pcc}</div></td>
+                                    <td><div class="slds-truncate"><ui:outputCheckbox value="{!wrapper.active}"/></div></td>
+                                    <td><div>{!wrapper.gds}</div></td>
+                                    <td><div>{!wrapper.sdate}</div></td>
+                                    <td><div><lightning:input type="Date" value="{!wrapper.edate}" format="dd/mm/yyyy"/></div></td>
+                                    <td><div>{!wrapper.iata}</div></td>
+                                    <!--<td>
+                                        <div>
+                                            <a onclick="{!c.removeRecords}" data-recId="{!wrapper.tmcId}">Remove
+                                            </a>
+                                        </div>
+                                    </td>-->
+                                    <td><div class="slds-truncate"><ui:inputCheckbox value="{!wrapper.history}" disabled="{!not(v.isHistoryEditable)}"/></div></td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table><br/></div></aura:if>
+            <lightning:layout verticalAlign="end">
+                <lightning:layoutItem>
+                    <lightning:input type="search" label="Enter QIC ID/PCC and Search" name="searchTxt" aura:id="searchTxt" placeholder="Type here..." value="{!v.searchData}"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem class="slds-p-left_x-small">
+                    <lightning:button variant="brand" label="Search" onclick="{!c.handleClick}" />
+                </lightning:layoutItem>
+            </lightning:layout><br></br>
+            <!--Existing records ends-->
+            <div>
+                <!--Existing records table ends-->
+                <aura:if isTrue="{!v.searchResultsFlag}">
+                    <div>
+                        <p align="center">Search results not found. Please search with valid PCC/QIC ID</p>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.initialTable}">
+                    <div>
+                        <br/>
+                        <div>
+                            <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+                                <thead>
+                                    <tr class="slds-text-heading_label">
+                                        <th scope="col">Select</th>
+                                        <th scope="col"><div class="slds-truncate" title="PCC">PCC</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Active">Active</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="GDS">GDS</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="Start Date">Start Date</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="End Date">End Date</div></th>
+                                        <th scope="col"><div class="slds-truncate" title="IATA/TIDS">IATA/TIDS</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.searchResultArray}" var="a" indexVar="index">
+                                        <tr>
+                                            <td><div class="slds-columnWidth"><ui:inputCheckbox aura:id="checkbox1" change="{!c.selectCurrentRow}" name="{!index}" text="{!a.tmcId}"/></div></td><!--value="{!wrapper.chkbox}"-->
+                                            <td><div class="slds-truncate">{!a.pcc}</div></td>
+                                            <td><div class="slds-truncate"><ui:outputCheckbox value="{!a.active}"/></div></td>
+                                            <td><div class="slds-truncate">{!a.gds}</div></td>
+                                            <td><div class="slds-truncate"><lightning:input type="Date" value="{!a.sdate}" format="dd/mm/yyyy"/></div></td>
+                                            <td><div class="slds-datepicker"><lightning:input type="Date" value="{!a.edate}" format="dd/mm/yyyy"/></div></td>
+                                            <td><div class="slds-truncate">{!a.iata}</div></td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table><br/></div></div></aura:if></div>
+            
+            <!--TMC-->
+            <div>
+                <footer>
+                    <div>
+                        <lightning:button label="Save" onclick="{!c.saveRecords}" />
+                        <lightning:button label="Cancel" onclick="{!c.closeModal}" />
+                    </div>
+                </footer>
+            </div>
+        </lightning:tab>
+        <lightning:tab label="History" id="two" onactive="{!c.histroytab}">
+            <table  style="overflow:auto" class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+                <thead title="Search Results">
+                    <tr class="slds-text-heading_label">
+                        <th scope="col"><div class="slds-truncate" title="Account Name">Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="IATA/QIC ID">IATA/TIDS</div></th>
+                        <th scope="col"><div class="slds-truncate" title="PCC">PCC</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Active">Active</div></th>
+                        <th scope="col"><div class="slds-truncate" title="GDS">GDS</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Start Date">Start Date</div></th>
+                        <th scope="col"><div class="slds-truncate" title="End Date">End Date</div></th>
+                        <th scope="col"><div class="slds-truncate" title="History">History</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.HistoryTable}" var="history" indexVar="index">
+                        <tr>
+                            <td><div class="slds-truncate">{!history.accountName}</div></td>
+                            <td><div class="slds-truncate">{!history.iata}</div></td>
+                            <td><div class="slds-truncate">{!history.pcc}</div></td>
+                            <td><div class="slds-truncate"><ui:outputCheckbox value="{!history.active}"/></div></td>
+                            <td><div class="slds-truncate">{!history.gds}</div></td>
+                            <td><div class="slds-truncate">{!history.sdate}</div></td>
+                            <td><div class="slds-truncate">{!history.edate}</div></td>
+                            <td><div class="slds-truncate"><ui:inputCheckbox value="{!history.history}"  disabled="{!not(v.isHistoryEditable)}"/></div></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table><br/>
+            <div>
+                <footer>
+                    <div>
+                        <lightning:button label="Save" onclick="{!c.saveRecords}" />
+                        <lightning:button label="Cancel" onclick="{!c.closeModal}" />
+                    </div>
+                </footer>
+            </div>
+        </lightning:tab>
+        <div class="slds-box slds-box_small slds-theme_shade slds-theme_info customLabel"> Note : {!v.noteMsg} </div> 
+    </lightning:tabset> 
+</aura:component>

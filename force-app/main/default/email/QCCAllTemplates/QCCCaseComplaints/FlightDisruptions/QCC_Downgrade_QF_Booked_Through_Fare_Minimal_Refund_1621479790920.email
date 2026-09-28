@@ -1,0 +1,88 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body style="height: auto; min-height: auto;">Ref No: {{{Case.Case_Number__c}}}<br />
+<br />
+Hi {{{Case.First_Name__c}}},&nbsp;<br />
+<br />
+Thank you for contacting Qantas Customer Care regarding your experience in {{DEPARTURE_AIRPORT}} on {{{Case.Email_Departure_Date_Time__c}}}.<br />
+<br />
+<em><strong>-If overbooking use:-</strong></em><br />
+<br />
+<strong>Things don’t always go to plan</strong><br />
+<br />
+I'm sorry to hear to that your cabin was changed on our QF{{{Case.Flight_Number__c}}} flight. I understand how disappointing this must have been and would like to apologise for the inconvenience caused.<br />
+<br />
+Airlines sometimes overbook to accommodate as many passengers as possible and maintain lower fares. While customers’ travel needs are carefully taken into consideration, our estimates can occasionally be incorrect.<br />
+<br />
+In these cases, we’ll offer alternatives such as rebooking on other flights, refunding fare differences for downgraded cabins, or full refunds if travel plans change.<br />
+<br />
+<em><strong>-If aircraft downgrade use:-</strong></em><br />
+<br />
+<strong>Things don’t always go to plan</strong><br />
+<br />
+I was sorry to learn that your cabin was changed on our QF{{{Case.Flight_Number__c}}} flight. I understand how disappointing this must have been.<br />
+<br />
+The original aircraft you were on developed a mechanical problem and we needed to change planes to get you on your way.<br />
+<br />
+Configurations can vary from service to service and the only alternative aircraft available had less seats in the -First/Business/Premium Economy- Class cabin.<br />
+<br />
+<em><strong>-If rebooked due delayed inbound use:-</strong></em><br />
+<br />
+<strong>Things don’t always go to plan</strong><br />
+<br />
+I was sorry to learn about your delayed flight in to {{{Case.Arrival_City__c}}}, and the impact this had on your connecting flight to -final destination-.<br />
+<br />
+To get you on your way the only alternative was in -DOWNGRADED- Class. I understand how disappointing this must have been.<br />
+<br />
+You’ll need to speak to -your travel agent/AIRLINE- regarding your fare. As they issued your tickets, they will need to calculate if there is any refundable fare differential between the original ticket purchased and the class flown.<br />
+<br />
+<em><strong>-If no refund add:-</strong></em><br />
+<br />
+<strong>We’re here to help</strong><br />
+<br />
+On this occasion, no refund is available for the downgraded domestic sector, as the conditions of the fare you purchased do allow travel in lower cabins at nil discount where the higher cabin is not available.<br />
+<br />
+Although we’re unable to offer compensation, you may still be able to claim any unexpected costs through your personal travel insurance. I’d be happy to provide you with all the information you need to make a claim.<br />
+<br />
+<em><strong>-If delayed inbound was other carrier:-</strong></em><br />
+<br />
+You may wish to contact -American Airlines/British Airways/LAN etc- directly, or your travel insurer, to see if they can provide any compensation in this instance.<br />
+<br />
+<em><strong>-If minimal refund add:-</strong></em><br />
+<br />
+I’ve arranged a refund of the difference in fare between your original ticket purchased and the class flown.<br />
+<br />
+A credit of {{{Case.Recovery_Value__c}}} will be made to the original form of payment and this should reflect in your account balance in 7 business days.<br />
+<br />
+<em><strong>-If downgrade comp provided add:-</strong></em><br />
+<br />
+I can see that our airport staff have already arranged ${{{Case.Recovery_Value__c}}} downgrade compensation for you as a token of our appreciation.<br />
+<br />
+<em><strong>-If EMD issued by airport needs to be refunded:-</strong></em><br />
+<br />
+I can see that our airport staff have arranged a ${{{Case.Recovery_Value__c}}} voucher as downgrade compensation. We’d be happy to process the payment for you and I‘ve attached a form for you to provide your bank account details.<br />
+<br />
+When returning the completed form, please reply to this email to make sure your information is attached to your file and processed as soon as possible.<br />
+<br />
+<em><strong>-If downgrade comp not provided and through-fare add:-<br />
+<br />
+-If a Frequent Flyer:-</strong></em><br />
+<br />
+As a gesture of goodwill, I’ve credited {{{Case.Recovery_Quantity__c}}} Qantas Points to your Frequent Flyer account.<br />
+<br />
+<br />
+<em><strong>-If not a Frequent Flyer:-&nbsp;</strong></em><br />
+<br />
+As a gesture of goodwill, I’d like to arrange a credit of {{{Case.Recovery_Quantity__c}}} Qantas Points to you.<br />
+<br />
+Please can you let me know your Frequent Flyer number by replying to this email so I can credit points to your account. If you’re not already a member you can use this&nbsp;<a href="https://www.qantas.com/en-au/frequent-flyer/join/code/familyfree">link</a>&nbsp;to join free of charge.<br />
+<br />
+<strong>We value your opinion</strong><br />
+<br />
+Customer feedback plays an important role in our continuous improvement process so that we can provide you with exceptional service from start to finish.<br />
+<br />
+I wanted to assure you that I’ve passed your comments on to the relevant team. Thank you again for telling us about your experience.<br />
+&nbsp;</body>
+</html>

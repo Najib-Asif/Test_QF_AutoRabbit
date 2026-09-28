@@ -1,0 +1,63 @@
+{
+  "version" : "66.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "KnowledgeArticleId", "OwnerId", "IsDeleted", "ValidationStatus", "PublishStatus", "VersionNumber", "IsLatestVersion", "IsVisibleInApp", "IsVisibleInPkb", "IsVisibleInCsp", "IsVisibleInPrm", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "Language", "Title", "UrlName", "CurrencyIsoCode", "ArchivedDate", "ArchivedById", "Summary", "NextReviewDate", "LargeLanguageModel", "KnowledgeGenerationSrc", "ArticleNumber", "FirstPublishedDate", "LastPublishedDate", "ArticleArchivedById", "ArticleArchivedDate", "ArticleCaseAttachCount", "ArticleCreatedById", "ArticleCreatedDate", "ArticleTotalViewCount", "SourceId", "RecordTypeId", "AssignedToId", "AssignedById", "AssignmentDate", "AssignmentDueDate", "AssignmentNote", "MigratedToFromArticleVersion", "Content__c", "Team_Coach_Team_Leader_Information__c", "Additional_Information__c", "Answer__c", "CJO_All__c", "CJO_SU__c", "Chot_Bot_Answers__c", "Contact_Center_Information__c", "POSST_SSU__c", "Question__c", "Ticketing_Team__c", "QuestionWithClass__c", "Announcement__c", "Article_Overview__c", "Flow_Update__c", "Promotion__c", "Public_Facing_Information__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__kav",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__kav",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "KAV Direct",
+          "name" : "KAV_Direct"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Knowledge__kav",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "KAV Direct",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 252
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

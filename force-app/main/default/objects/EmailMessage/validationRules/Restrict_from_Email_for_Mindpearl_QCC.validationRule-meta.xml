@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_from_Email_for_Mindpearl_QCC</fullName>
+    <active>true</active>
+    <description>No access to send Email for Mindpearl Users from Customer Connect Cases</description>
+    <errorConditionFormula>AND(
+$Permission.Mindpearl_Permission, 
+	OR(
+	Parent.RecordType.DeveloperName = &apos;CCC_Baggage&apos;, 
+	Parent.RecordType.DeveloperName = &apos;CCC_Complaints&apos;, 
+	Parent.RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+	Parent.RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;, 
+	Parent.RecordType.DeveloperName = &apos;CCC_Event&apos;, 
+	Parent.RecordType.DeveloperName = &apos;CCCOffload&apos;,
+	Parent.RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;, 
+	Parent.RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;, 
+	Parent.RecordType.DeveloperName = &apos;CCC_Medical&apos;, 
+	Parent.RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;, 
+	Parent.RecordType.DeveloperName = &apos;CCC_Query&apos;,
+	Parent.RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;,
+	Parent.RecordType.DeveloperName = &apos;QCC_Disruption&apos;,
+	Parent.RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+	Parent.RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;
+	)
+)</errorConditionFormula>
+    <errorMessage>Insufficient Privileges to send Email from Customer Connect Case</errorMessage>
+</ValidationRule>

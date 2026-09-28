@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Editing_Agency_Tier_update</fullName>
+    <active>true</active>
+    <description>Restrict_Editing_Agency_Tier_update.</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.Restrict_Agency_Tier__c = False &amp;&amp; ISCHANGED(Customer_Category__c) &amp;&amp;  RecordType.DeveloperName =&apos;Agency_Account&apos;</errorConditionFormula>
+    <errorDisplayField>Customer_Category__c</errorDisplayField>
+    <errorMessage>You are not allowed to edit the Account Tier Information!</errorMessage>
+</ValidationRule>

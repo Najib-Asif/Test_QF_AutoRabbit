@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_60606263</developerName>
+        <masterLabel>Tier</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Case.Frequent_Flyer_Tier__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge</sourceValue>
+            </sourceValues>
+            <value>1. Chair/Plat1</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Platinum</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Gold</sourceValue>
+            </sourceValues>
+            <value>2. Plat/Gold</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas Club Bronze</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Club Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Bronze</sourceValue>
+            </sourceValues>
+            <value>3. Sil/Bnze</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_5427792</developerName>
+        <masterLabel>Within or Over SLA</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Case.No_of_Days_Case_is_Due_In__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>-1</to>
+            </sourceValues>
+            <value>Over SLA</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>-1</from>
+            </sourceValues>
+            <value>Within SLA</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>TYPE</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Case.Due_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case.Case_Open_Time_Days__c</field>
+    </columns>
+    <columns>
+        <field>Case.No_of_Days_Case_is_Due_In__c</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>Case.Group__c</field>
+    </columns>
+    <columns>
+        <field>Case.Category__c</field>
+    </columns>
+    <columns>
+        <field>ORIGIN</field>
+    </columns>
+    <columns>
+        <field>Case.QCC_Dispute_Type__c</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>CONTACT.NAME</field>
+    </columns>
+    <columns>
+        <field>Case.First_Name__c</field>
+    </columns>
+    <columns>
+        <field>Case.Last_Name__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <booleanFilter>1 AND 2 AND ((3 AND 4 AND 5) OR 6)</booleanFilter>
+        <criteriaItems>
+            <column>STATUS</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Open,New,In Progress,Waiting for Approval,Reopened,Open - Pending Investigation,Pending Other Department,Pending Customer,Awaiting Customer Callout,Awaiting Goodwill Approval,Goodwill Fulfilled,Waiting for Customer,Waiting for Internal,Reply Received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.QCC_Assistance,Case.QCC_Disruption,Case.QCC_Elite_Process,Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Compliment,Case.CCC_Further_Action_Required,Case.CCC_Medical,Case.CCC_On_The_Spot_Recovery,Case.CCC_Query,Case.QCC_Insurance_Letter_Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Group__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Other</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Other</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Sub_Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>EU Compensation,Fair Trading,General,ACA,APPR Compensation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ORIGIN</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>ACA Website</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>OWNER</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_5427792</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Regulatory and ACA Open cases</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseHistory</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>CASE_NUMBER</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

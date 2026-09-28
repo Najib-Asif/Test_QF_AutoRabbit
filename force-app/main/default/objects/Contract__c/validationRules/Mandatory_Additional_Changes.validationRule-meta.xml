@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Additional_Changes</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( ISPICKVAL( Standard__c, &apos;Yes&apos;), ISBLANK( Additional_Change_Details__c) )</errorConditionFormula>
+    <errorDisplayField>Additional_Change_Details__c</errorDisplayField>
+    <errorMessage>Please specify additional changes.</errorMessage>
+</ValidationRule>

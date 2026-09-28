@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Status</name>
+        <label>Assign Status</label>
+        <locationX>50</locationX>
+        <locationY>458</locationY>
+        <assignmentItems>
+            <assignToReference>getCase.Ticket_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Reason</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_2_of_Assign_Status</name>
+        <label>Copy 2 of Assign Status</label>
+        <locationX>314</locationX>
+        <locationY>458</locationY>
+        <assignmentItems>
+            <assignToReference>getCase.Ticket_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Copy_1_of_Reason</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <name>With_Distribution_Team</name>
+        <choiceText>With Distribution Team</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With Distribution Team</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>With_Price_Distribution_Team</name>
+        <choiceText>With Price Distribution Team</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With Price Distribution Team</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>With_QAC_policy_Team</name>
+        <choiceText>With QAC policy Team</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With QAC policy Team</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>With_QDP_Team</name>
+        <choiceText>With QDP Team</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With QDP Team</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>With_Trade_Comms_Team</name>
+        <choiceText>With Trade Comms Team</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With Trade Comms Team</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>With_Travel_Agent</name>
+        <choiceText>With Travel Agent</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With Travel Agent</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>WithOtherDepartment</name>
+        <choiceText>With Other Department</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With Other Department</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>WithQACSiteTeam</name>
+        <choiceText>With QAC Site Team&lt;p&gt;&lt;br&gt;&lt;/p&gt;</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>With QAC Site Team</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <name>Check_Status</name>
+        <label>Check Status</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>On_Hold</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>On Hold</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Reason</targetReference>
+            </connector>
+            <label>On Hold</label>
+        </rules>
+        <rules>
+            <name>Escalated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Escalated</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_1_of_Update_Reason</targetReference>
+            </connector>
+            <label>Escalated</label>
+        </rules>
+    </decisions>
+    <description>This screen flow is to update the Ticket status field in QAC Contact Us Record Type cases</description>
+    <environments>Default</environments>
+    <interviewLabel>QAC Update Case Reason For OnHold and Escalated {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QAC Update Case Reason For OnHold and Escalated</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>getCase</name>
+        <label>getCase</label>
+        <locationX>314</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Status</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Case</name>
+        <label>Update Case</label>
+        <locationX>314</locationX>
+        <locationY>650</locationY>
+        <inputReference>getCase</inputReference>
+    </recordUpdates>
+    <screens>
+        <name>Copy_1_of_Update_Reason</name>
+        <label>Copy 1 of Update Reason</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Copy_2_of_Assign_Status</targetReference>
+        </connector>
+        <fields>
+            <name>Copy_1_of_Reason</name>
+            <choiceReferences>With_Distribution_Team</choiceReferences>
+            <choiceReferences>WithOtherDepartment</choiceReferences>
+            <choiceReferences>With_Price_Distribution_Team</choiceReferences>
+            <choiceReferences>With_QAC_policy_Team</choiceReferences>
+            <choiceReferences>With_QDP_Team</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Reason</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Save</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Update_Reason</name>
+        <label>Update Reason</label>
+        <locationX>50</locationX>
+        <locationY>350</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Assign_Status</targetReference>
+        </connector>
+        <fields>
+            <name>Reason</name>
+            <choiceReferences>WithOtherDepartment</choiceReferences>
+            <choiceReferences>WithQACSiteTeam</choiceReferences>
+            <choiceReferences>With_Trade_Comms_Team</choiceReferences>
+            <choiceReferences>With_Travel_Agent</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Reason</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Save</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>getCase</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,113 @@
+<!-- Created By : Ajay Bharathan | TCS | Cloud Developer 
+ Purpose : To embed this component to FLOW - Qantas Payments Contract Creation
+-->
+<aura:component controller="QP_ContractPaymentController" implements="lightning:availableForFlowScreens" access="global">
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:attribute name="successMessage" type="String"/>
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="contType" type="String" />
+    <aura:attribute name="startDate" type="Date" />
+    <aura:attribute name="endDate" type="Date" />
+    
+    <aura:attribute name="opptyRTId" type="String" />
+    <aura:attribute name="quoteRTId" type="String" />
+    <aura:attribute name="cpIncentiveRTId" type="String" />
+    <aura:attribute name="cpTechFundRTId" type="String" />
+    <aura:attribute name="contractRTId" type="String" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <lightning:flow aura:id="flowId" onstatuschange="{!c.handleStatusChange}" />
+    
+    <!-- Attributes for File Component on the flow screen -->
+    <aura:attribute name="confirmSuccess" type="Boolean" default="false" description="to denote the end user clicked Confirm button"/>
+    
+    <!-- Attributes for File Component on the flow screen -->
+    <aura:attribute name="FileRecordId" type="string" description="Id of the record File needs to be attached"/>
+    <!-- NOTE: we can't upload files with the following file extensions: .htm, .html, .htt, .htx, .mhtm, .mhtml, .shtm, .shtml, .acgi, .svg -->
+    <aura:attribute name="accept" type="List" default="['.doc','.pdf','.docx']" description="include the formats to support"/>  
+    <aura:attribute name="multiple" type="Boolean" default="false"/>      
+    <aura:attribute name="contentDocumentRecId" type="string" description="Id of the File Stored in Contract"/>
+    
+    <!-- Attributes for lookup Component on the flow screen -->
+    <aura:attribute name="objectApiName" type="String" access="public" />
+    <aura:attribute name="fieldName" type="String" access="public" />
+    <aura:attribute name="selectedLookupId" type="String" access="public" />
+    <aura:attribute name="fileName" type="String" />
+    
+    <div class="slds">  
+        <lightning:notificationsLibrary aura:id="notifLib"/>
+        
+        <!--<div class="slds-modal__content slds-p-around_medium">
+            <div class="slds-form slds-form_compound">
+                <lightning:recordEditForm objectApiName="{!v.objectApiName}">
+                    <center>
+                        <label>Contract Group</label>
+                        <lightning:inputField class="myLookup" fieldName="{!v.fieldName}" disabled="{!v.confirmSuccess}" onchange="{!c.handleOnChange}" aura:id="lookupId" variant="label-hidden"/>
+                        <div tabindex="-1" id="lookupErr" aura:id="lookupErr" lightning-input_input="" data-help-message="true" role="alert" class="none">
+                            Complete this field.
+                        </div>
+                    </center>
+                </lightning:recordEditForm>
+            </div>
+        </div>-->
+        <br/>
+        
+        <div class="contentbox">
+            <div class="slds-page-header header">Contract Creation</div>
+            <div class="slds-modal__content slds-p-around_medium">
+                <div class="slds-form slds-form_compound">
+                    <div class="slds-align_absolute-center">
+                        <p>Click the Validate button to validate against existing Contracts for this Agency.</p>
+                    </div>
+                    <br/>
+                    <div class="slds-align_absolute-center">
+                        <!--<lightning:button label="Cancel" onclick="{!c.handleCancel}" disabled="{!v.confirmSuccess}"/>-->
+                        <lightning:button variant="brand" label="Validate" onclick="{!c.handleConfirm}" disabled="{!v.confirmSuccess}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        
+        <!--<aura:if isTrue="{!v.confirmSuccess}">
+            <p style="font: 11px/30px Georgia, serif; color:green;">
+                {!v.successMessage}
+            </p>
+        </aura:if>-->
+        
+        <aura:if isTrue="{!!empty(v.FileRecordId)}"> 
+            <div class="contentbox">  
+                <div class="slds-page-header header">Contract File Upload</div>  
+                <div class="slds-grid">  
+                    <div style="width:100%">  
+                        <center>
+                            <lightning:fileUpload label="Upload Contract File (.doc, .docx, .pdf)" multiple="{!v.multiple}"   
+                                                  accept="{!v.accept}" recordId="{!v.FileRecordId}"   
+                                                  onuploadfinished="{!c.UploadFinished}" aura:id="fileId" class="slds-p-around_x-small"/>
+                            <aura:if isTrue="{!v.fileName == null}">
+                                <div tabindex="-1" id="fileErr" aura:id="fileErr" role="alert" class="slds-p-around_x-small">
+                                    Upload the contract file to proceed.
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!v.fileName != null}">
+                                <div class="slds-text-body_medium slds-p-bottom_x-small">{!v.fileName}
+                                    <a name="Delete" onclick="{!c.removeFile}" class="slds-p-around_small">
+                                        <lightning:icon variant="error" iconName="action:delete" size="xx-small" alternativeText="icon"/>
+                                        <span class="slds-assistive-text">Delete Icon</span>
+                                    </a>
+                                </div>
+                            </aura:if>
+                        </center>
+                    </div>  
+                </div>
+            </div>
+        </aura:if> 
+        
+        <aura:if isTrue="{!v.showSpinner}">
+            <div class="slds-spinner_container">
+                <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+            </div>
+        </aura:if>    
+        
+    </div>  
+</aura:component>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valiadate_Only_Active_Accounts_Selected</fullName>
+    <active>true</active>
+    <errorConditionFormula>Account.Active__c = False</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>The opportunity record is being added to an inactive account. Please check if the correct account is added or raise a System Admin case requesting to reactivate the account</errorMessage>
+</ValidationRule>

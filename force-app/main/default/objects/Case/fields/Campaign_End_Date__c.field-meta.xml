@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Campaign_End_Date__c</fullName>
+    <description>Sales Offer - used to automatically calculate the Campaign End Date based on the criteria</description>
+    <formula>IF ( 
+ISPICKVAL ( Sub_Type__c , &quot;FOC Qantas Club Waiver&quot;) , 
+DATE( Year( Campaign_Start_Date__c )+floor((MONTH( Campaign_Start_Date__c) + 1 - 1) / 12) , 
+mod(MONTH(Campaign_Start_Date__c) + 1 -1, 12) + 1 , 
+day(Campaign_Start_Date__c) 
+) - 1 , 
+IF ( NOT(ISNULL (Override_Date__c)), Override_Date__c, 
+
+DATE( Year( Campaign_Start_Date__c )+floor((MONTH( Campaign_Start_Date__c) + 3 - 1) / 12) , 
+mod(MONTH(Campaign_Start_Date__c) + 3 -1, 12) + 1 , 
+day(Campaign_Start_Date__c) 
+) - 1
+
+)
+)</formula>
+    <inlineHelpText>For Gold Accelerate, Platinum Accelerate &amp; 50% Bonus Status Credits Campaigns, the Campaign End Date is 3 months after the Campaign Start Date.
+For FOC QC Waiver Campaigns, the Campaign End Date will be defaulted to 1 month after the Campaign Start Date.</inlineHelpText>
+    <label>Campaign End Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

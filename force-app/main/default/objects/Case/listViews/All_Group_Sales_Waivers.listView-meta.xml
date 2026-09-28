@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Group_Sales_Waivers</fullName>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.ESCALATION_STATE</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>Team_Lead__c</columns>
+    <columns>Agent_Organisation_Name__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>Reason_for_Waiver__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>Cost_of_Sale__c</columns>
+    <columns>Number_of_Passengers__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.QIC_Service_request</value>
+    </filters>
+    <filters>
+        <field>Number_of_Passengers__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Problem_Type__c</field>
+        <operation>equals</operation>
+        <value>Lounge Access - Qantas Club</value>
+    </filters>
+    <label>All Group Sales Waivers</label>
+    <sharedTo>
+        <group>QF</group>
+        <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

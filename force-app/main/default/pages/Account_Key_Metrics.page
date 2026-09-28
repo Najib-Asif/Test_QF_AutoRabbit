@@ -1,0 +1,544 @@
+<apex:page standardController="Account"  showheader="false"  applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script>
+   $(document).ready(function(){
+        $(".bPageBlock").css("background-color","white");
+       $(".bPageBlock").css("border-color","white");
+    });
+    </script>
+
+<!-- Jun 29 css
+<style type="text/css">
+     tbody{text-align:center}
+    .col1 {width:100px; text-align:center;}
+    .col2 {width:150px; text-align:center;}
+    .col3 {width:200px; text-align:center;}   
+    .col4 {width:150px; text-align:center;}     
+</style>   -->
+
+
+    <apex:form title="Key Metrics" > 
+     <!--  <apex:panelGrid columns="4" columnClasses="col1, col2, col3,col4"  cellpadding="0" cellspacing="30" width="100%"> -->
+        <apex:pageblock >
+                
+                <apex:pageBlockSection columns="4">
+                
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel style="float: left;width:150px;">  <b> <font color="blue"></font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                                        
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:10px;">
+                        <apex:outputLabel title="Year till Date"> <b> <font color="blue">TY QDM MAT</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:10px;">
+                        <apex:outputLabel title="Last Year"> <b> <font color="blue">LY QDM MAT</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:10px;">
+                        <apex:outputLabel title="Last Year"> <b> <font color="blue">Pre-Covid QDM</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:10px;">
+                        <apex:outputLabel style="float: left;width:150px;" title="To be captured by the Account Manager/Team if there are no actuals or if estimated is different from actuals "> <b> <font color="blue">Estimated</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Total Air Travel Spend</font> </b></apex:outputLabel>
+                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.Total_Air_Travel_Spend__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                        <apex:outputField value="{!account.Total_Air_Travel_Spend_LY__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                        
+                    </apex:pageBlockSectionItem>
+                   
+                <!-- JIRA 5163 starts-->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                        <apex:outputField value="{!account.CP19_Total_Air_Travel_Spend__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                        
+                    </apex:pageBlockSectionItem>
+                <!-- JIRA 5163 Ends-->
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.Estimated_Total_Air_Travel_Spend__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Total QF Revenue *</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.Total_QF_Revenue_TY__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+              
+                 <!-- JIRA 5163 starts-->
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.CP19_Total_QF_Revenue_TY__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                <!-- JIRA 5163 Ends-->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.Total_QF_Revenue_LY__c}" >
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.Estimated_Total_Annual_Revenue__c}" >
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic Air Travel Spend</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.Domestic_Air_Travel_Spend__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+        <!-- JIRA 2185  Starts   -->                                                
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                       <apex:outputField value="{!account.Domestic_Air_Travel_Spend_LY__c}">
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem> 
+                  
+          <!-- JIRA 5163 starts -->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.CP19_Domestic_Air_Travel_Spend__c}">
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+            <!-- JIRA 5163 ends -->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputLabel >N/A</apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+        <!-- JIRA 2185   Ends  --> 
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic QF Revenue</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.QF_Domestic_Revenue__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.QF_Domestic_Revenue_LY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 5163 starts -->
+                    
+                      <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.CP19_QF_Domestic_Revenue__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 5163 ends-->
+                                        
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">
+                        <apex:outputField value="{!account.Estimated_Total_QF_Dom_Annual_Revenue__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                         <apex:outputLabel > <b> <font color="#7b2b48">International Air Travel Spend</font> </b></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.International_Air_Travel_Spend__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 2185 -->
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.International_Air_Travel_Spend_LY__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                   
+                   <!-- JIRA 2185 -->
+                    
+                   <!-- JIRA 5163 starts-->
+                     <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.CP19_International_Air_Travel_Spend__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 5163 ends-->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputLabel > N/A </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel > <b> <font color="#7b2b48">International QF Revenue *</font> </b></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.Intl_QF_EK_Revenue_TY__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.Intl_QF_EK_Revenue_LY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+              <!-- JIRA 5163 starts-->      
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.CP19_Intl_QF_EK_Revenue_TY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+              <!-- JIRA 5163 ends -->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.Estimated_Total_QF_Int_Annual_Revenue__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+ <!-- JIRA 3236 -->
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel rendered="{!IF(OR(account.Intl_Non_MCA_Air_Travel_Spend_TY__c!=null,account.Intl_Non_MCA_Air_Travel_Spend_LY__c!=null,account.CP19_Intl_Non_MCA_Air_Travel_Spend_TY__c!=null),true,false)}"> <b> <font color="#7b2b48">Non-MCA Air Travel Spend</font> </b></apex:outputLabel> 
+                   </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.Intl_Non_MCA_Air_Travel_Spend_TY__c!=null}" value="{!account.Intl_Non_MCA_Air_Travel_Spend_TY__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.Intl_Non_MCA_Air_Travel_Spend_LY__c!=null}" value="{!account.Intl_Non_MCA_Air_Travel_Spend_LY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                   <!-- JIRA 5163 starts-->
+                     <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.CP19_Intl_Non_MCA_Air_Travel_Spend_TY__c!=null}" value="{!account.CP19_Intl_Non_MCA_Air_Travel_Spend_TY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                   <!-- JIRA 5163 Ends-->
+
+                     <apex:pageBlockSectionItem datastyle="text-align:left;">   
+                        <apex:outputLabel > </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                     <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel rendered="{!IF(OR(account.Intl_Non_MCA_QF_Revenue_TY__c!=null,account.Intl_Non_MCA_QF_Revenue_LY__c!=null,account.CP19_Intl_Non_MCA_QF_Revenue_TY__c!=null),true,false)}"> <b> <font color="#7b2b48">Non-MCA QF Revenue</font> </b></apex:outputLabel> 
+                   </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.Intl_Non_MCA_QF_Revenue_TY__c!=null}" value="{!account.Intl_Non_MCA_QF_Revenue_TY__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.Intl_Non_MCA_QF_Revenue_LY__c!=null}" value="{!account.Intl_Non_MCA_QF_Revenue_LY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 5163 Starts-->
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.CP19_Intl_Non_MCA_QF_Revenue_TY__c!=null}" value="{!account.CP19_Intl_Non_MCA_QF_Revenue_TY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    <!-- JIRA 5163 Ends-->
+                    
+                     <apex:pageBlockSectionItem datastyle="text-align:left;">   
+                        <apex:outputLabel > </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+<!-- JIRA 3236 -->
+
+                     <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel rendered="{!IF(OR(account.International_MCA_Air_Travel_Spend__c!=null,account.International_MCA_Air_Travel_Spend_LY__c!=null,account.CP19_International_MCA_Air_Travel_Spend__c!=null),true,false)}"> <b> <font color="#7b2b48">MCA Air Travel Spend</font> </b></apex:outputLabel> 
+                   </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.International_MCA_Air_Travel_Spend__c!=null}" value="{!account.International_MCA_Air_Travel_Spend__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.International_MCA_Air_Travel_Spend_LY__c!=null}" value="{!account.International_MCA_Air_Travel_Spend_LY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 5163 Starts-->
+                     <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.CP19_International_MCA_Air_Travel_Spend__c!=null}" value="{!account.CP19_International_MCA_Air_Travel_Spend__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+
+                    <!-- JIRA 5163 Ends-->
+                    
+                 
+                     <apex:pageBlockSectionItem datastyle="text-align:left;">   
+                        <apex:outputLabel > </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                         <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel rendered="{!IF(OR(account.QF_EK_MCA_Revenue__c!=null,account.QF_EK_MCA_Revenue_LY__c!=null,account.CP19_QF_EK_MCA_Revenue__c!=null),true,false)}"> <b> <font color="#7b2b48">MCA QF/EK Revenue</font> </b></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.QF_EK_MCA_Revenue__c!=null}" value="{!account.QF_EK_MCA_Revenue__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.QF_EK_MCA_Revenue_LY__c!=null}" value="{!account.QF_EK_MCA_Revenue_LY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 5163 Starts-->
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.CP19_QF_EK_MCA_Revenue__c!=null}" value="{!account.CP19_QF_EK_MCA_Revenue__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                  <!-- JIRA 5163 Ends-->
+                     <apex:pageBlockSectionItem datastyle="text-align:left;">   
+                     <apex:outputLabel > </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    
+                   <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic QF Market Share</font> </b></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.QF_Domestic_Market_Share__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 2185 Starts -->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.QF_Domestic_Market_Share_LY__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 2185 Ends -->
+                    
+                    <!-- JIRA 5163 starts-->
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.CP19_QF_Domestic_Market_Share__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- JIRA 5163 Ends-->
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.Estimated_QF_Dom_Market_Share__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel > <b> <font color="#7b2b48">International QF Market Share *</font> </b></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.QF_International_Market_Share__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+            <!-- JIRA 2185 Starts -->
+            
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.QF_International_Market_Share_LY__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                   
+             <!-- JIRA 2185 Ends -->
+                    
+             <!-- JIRA 5163 starts-->
+                     <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.CP19_QF_International_Market_Share__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+              <!-- JIRA 5163 Ends-->
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.Estimated_Int_Market_Share__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+ <!-- JIRA 3236 -->
+                    <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel rendered="{!IF(OR(account.Intl_Non_MCA_QF_Market_Share_TY__c!=null,account.Intl_Non_MCA_QF_Market_Share_LY__c!=null,account.CP19_Intl_Non_MCA_QF_Market_Share_TY__c!=null),true,false)}"> <b> <font color="#7b2b48">Non-MCA QF Market Share</font> </b></apex:outputLabel> 
+                   </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.Intl_Non_MCA_QF_Market_Share_TY__c!=null}" value="{!account.Intl_Non_MCA_QF_Market_Share_TY__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.Intl_Non_MCA_QF_Market_Share_LY__c!=null}" value="{!account.Intl_Non_MCA_QF_Market_Share_LY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField rendered="{!account.CP19_Intl_Non_MCA_QF_Market_Share_TY__c!=null}" value="{!account.CP19_Intl_Non_MCA_QF_Market_Share_TY__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                     <apex:pageBlockSectionItem datastyle="text-align:left;">   
+                        <apex:outputLabel > </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>                    
+<!-- JIRA 3236 -->                   
+       <!--  International QF/EK MCA Market Share Starts    -->   
+       
+         <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;"> 
+                        <apex:outputLabel > <b> <font color="#7b2b48"> MCA QF/EK Market Share </font> </b></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.International_QF_EK_MCA_Market_Share__c}"> 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                              
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.International_QF_EK_MCA_Market_Share_LY__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                  
+              <!-- JIRA 5163 Starts-->      
+                     <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                       <apex:outputField value="{!account.CP19_International_MCA_QF_EK_Market_Shar__c}"> 
+                        <apex:inlineEditSupport />
+                       </apex:outputField>
+                    </apex:pageBlockSectionItem>
+              <!-- JIRA 5163 Ends-->
+                    
+      <!--  International QF/EK MCA Market Share Ends   --> 
+                  
+                    <apex:pageBlockSectionItem datastyle="text-align:left;">   
+                    <apex:outputLabel > </apex:outputLabel>                     
+                    </apex:pageBlockSectionItem>          
+                    
+                    <!-- Carbon Tonns field addition starts -->       
+                     <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Tonnes Carbon</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                     <apex:pageBlockSectionItem datastyle="text-align:left;" > 
+                        <apex:outputField value="{!account.Tonnes_Carbon__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem> 
+                    
+                     <apex:pageBlockSectionItem datastyle="text-align:left;" > 
+                        <apex:outputLabel > -- </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                     <apex:pageBlockSectionItem datastyle="text-align:left;" > 
+                        <apex:outputField value="{!account.Tonnes_Carbon__c}" > 
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem> 
+                    
+                     <apex:pageBlockSectionItem datastyle="text-align:left;" > 
+                        <apex:outputLabel > -- </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                       
+            <!-- Carbon Tonns field addition ends -->      
+
+                    <apex:pageBlockSectionItem > 
+                        <apex:outputLabel style="float:left;" title="Date when the revenue and share figures were last updated"> <font color="red"> <i>**As At</i></font></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>    
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:left;"> 
+                        <apex:outputField value="{!account.Latest_Period_Date__c}">  
+                        <apex:inlineEditSupport />
+                        </apex:outputField>
+                    </apex:pageBlockSectionItem>             
+                                  
+                    <apex:pageBlockSectionItem datastyle="height:10px;"> 
+                        <apex:outputLabel > </apex:outputLabel> 
+                    </apex:pageBlockSectionItem>
+                    
+                </apex:pageBlockSection>
+                            
+            <div align="center" draggable="false"> 
+                <apex:commandLink value="Save Estimations" action="{!save}" target="_parent" styleClass="btn" style="text-decoration:none;padding:4px;"/> 
+                <apex:commandLink value="Reset Estimations" action="{!cancel}" target="_parent" styleClass="btn" style="text-decoration:none;padding:4px;"/>
+            </div><br/>
+            <apex:pageBlockSection columns="1">
+                
+                <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;" rendered="{!Account.billingcountrycode <>'AU' }">
+                    <apex:outputLabel > <b> <font color="#7b2b48">Note on QDM Data:</font> </b><font color="black" size="2">The Data in the Key Metrics section is an aggregated representation of numbers applicable for this Point of Sale only. If you suspect the numbers are inaccurate it could be due to: 1)TMC not submitting the complete set of data (including all subsidiaries) before the PRISM cut-off 2)Data getting filtered out due to no DRA in the PRISM system. Please consult TMC to ensure accuracy of data.</font> </apex:outputLabel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1">
+            <apex:pageBlockSectionItem datastyle="text-align:left; height:10px;" rendered="{!Account.billingcountrycode =='AU' }">
+                    <apex:outputLabel > <b> <font color="#7b2b48">Note on QDM Data:</font> </b><font color="black" size="2">* Included both QF and EK marketed revenue on MCA routes .</font> </apex:outputLabel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+      
+        
+      </apex:form> 
+      <apex:outputLabel > <font color="black" size="2"><b>Note:</b> To update the 'Estimated' Revenue figures: (1) Double click on the cell. (2) Change the Revenue. (3) Press 'ENTER' key on the keyboard. (4) Confirm if the values turn to <font color="orange"><b>ORANGE COLOR</b></font>. (5) Click on 'Save Estimations'. </font> </apex:outputLabel>
+
+</apex:page>

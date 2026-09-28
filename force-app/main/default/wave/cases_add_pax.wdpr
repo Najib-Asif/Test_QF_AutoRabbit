@@ -1,0 +1,171 @@
+{
+  "version" : "60.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "MasterRecordId", "CaseNumber", "ContactId", "ParentId", "Type", "RecordTypeId", "Status", "Reason", "Origin", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "IsEscalated", "OwnerId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "ContactEmail", "Frequent_Flyer_Number__c", "Contact_Fullname__c", "Power_of_One_Case__c", "Sub_Type_1__c", "Sub_Type_2__c", "Created_by_Role__c", "Aircraft_Type_Code__c", "Arrival_Airport_Code__c", "Arrival_Airport__c", "Booking_PNR__c", "Category__c", "ClosedByLocation__c", "Departure_Airport_Code__c", "Departure_Airport__c", "Flight_Number__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Owner_City__c", "Passenger_Id__c", "Record_Type__c", "Recovery_Quantity__c", "Recovery_Value__c", "Sub_Category__c", "Case_Owner_Manager__c", "CCC_R1_CCAT_Type__c", "CCC_And_B_Case_Type__c", "Case_Number__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Type",
+          "operator" : "EQUAL",
+          "operands" : [ "Complaint" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Category__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Accommodation/Reimbursement of Expenses" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "IsClosed",
+          "operator" : "EQUAL",
+          "operands" : [ "false" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1713052800000" ]
+        } ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "FILTER1" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Booking_PNR__c" ],
+        "rightQualifier" : "Affected_P",
+        "rightKeys" : [ "PNR__c" ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CreatedDate", "Id", "OwnerId", "Name", "Event__c", "FF_Tier__c", "FlightNumber__c", "FrequentFlyerNumber__c", "FrequentFlyerTier__c", "PNR__c", "Passenger__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Affected_Passenger__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Affected_Passenger__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1704067200000" ]
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Cases with aff pax",
+          "name" : "Cases_with_aff_pax"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Case Filter",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Affected_Passenger__c",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER1" : {
+        "label" : "Filter 1",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 252.3
+      },
+      "OUTPUT0" : {
+        "label" : "Cases_add_pax",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 532
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

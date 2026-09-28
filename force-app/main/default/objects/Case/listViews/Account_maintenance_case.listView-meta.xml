@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_maintenance_case</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>Country__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Account_Maintenance</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>In Progress,New,Open</value>
+    </filters>
+    <label>QAC Account Maintenance Open Cases</label>
+    <sharedTo>
+        <group>Sales_Support_Team_US</group>
+        <role>QF_Support_QIC_Member</role>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,174 @@
+<aura:component implements="lightning:availableForFlowScreens"
+                access="global">
+
+    <aura:attribute name="navigationType1" type="String" default="back"/>
+    <aura:attribute name="disabledFlag1" type="Boolean" default="false" />
+    <aura:attribute name="fire1" type="Boolean" default="false" />
+    <aura:attribute name="displayButton1" type="Boolean" default="true" />
+
+    <aura:attribute name="navigationType2" type="String" default="next"/>
+    <aura:attribute name="disabledFlag2" type="Boolean" default="true" />
+    <aura:attribute name="fire2" type="Boolean" default="false" />
+    <aura:attribute name="displayButton2" type="Boolean" default="true" />
+
+    <aura:attribute name="displayButtons" type="Boolean" default="false" />
+    <aura:attribute name="enableButtons" type="Boolean" default="true" />
+    <aura:attribute name="h_navigationType" type="String" />
+                        
+    <!-- call doInit function on component load -->  
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+    
+    <!-- aura attributes-->  
+    <aura:attribute name="L1Values" type="list" default="[]" description="to store controller field values"/>
+    <aura:attribute name="L2Values" type="list" default="['--- None ---']" description="to store dependent field values"/>
+    <aura:attribute name="L3Values" type="list" default="['--- None ---']" description="to store dependent field values"/>
+    <aura:attribute name="L4Values" type="list" default="['--- None ---']" description="to store dependent field values"/>
+    <aura:attribute name="L5Values" type="list" default="['--- None ---']" description="to store dependent field values"/>
+    
+    <aura:attribute name="L2FieldMap" type="map" description="map to store dependent values with controlling value"/>
+    <aura:attribute name="L3FieldMap" type="map" description="map to store sub dependent values with controlling value"/>
+    <aura:attribute name="L4FieldMap" type="map" description="map to store sub dependent values with controlling value"/>
+    <aura:attribute name="L5FieldMap" type="map" description="map to store sub dependent values with controlling value"/>
+
+    <aura:attribute name="bDisabledL2Fld" type="boolean" default="true"/> 
+    <aura:attribute name="bDisabledL3Fld" type="boolean" default="true"/> 
+    <aura:attribute name="bDisabledL4Fld" type="boolean" default="true"/> 
+    <aura:attribute name="bDisabledL5Fld" type="boolean" default="true"/> 
+    
+    
+    <aura:attribute name="objDetail" type="Case" default="{'sobjectType' : 'Case'}"/>
+    <aura:attribute name="L1FieldAPI" type="string" default="Type" description="store field API name of Controller field"/>
+    <aura:attribute name="L2FieldAPI" type="string" default="Group__c" description="store field API name of dependent field"/>
+    <aura:attribute name="L3FieldAPI" type="string" default="Category__c" description="store field API name of sub dependent field"/>
+    <aura:attribute name="L4FieldAPI" type="string" default="Sub_Category__c" description="store field API name of sub sub dependent field"/>
+    <aura:attribute name="L5FieldAPI" type="string" default="Classification__c" description="store field API name of sub sub dependent field"/>
+    
+    <aura:attribute name="L1FieldValue" type="String" access="global" default=""/>
+    <aura:attribute name="L2FieldValue" type="String" access="global" default=""/>
+    <aura:attribute name="L3FieldValue" type="String" access="global" default=""/>
+    <aura:attribute name="L4FieldValue" type="String" access="global" default=""/>
+    <aura:attribute name="L5FieldValue" type="String" access="global" default=""/>
+
+
+    <aura:attribute name="L1FieldOutput" type="String" access="global" default=""/>
+    <aura:attribute name="L2FieldOutput" type="String" access="global" default=""/>
+    <aura:attribute name="L3FieldOutput" type="String" access="global" default=""/>
+    <aura:attribute name="L4FieldOutput" type="String" access="global" default=""/>
+    <aura:attribute name="L5FieldOutput" type="String" access="global" default=""/>
+
+    <aura:attribute name="requiredL1Field" type="Boolean" default="false" />
+    <aura:attribute name="requiredL2Field" type="Boolean" default="false" />
+    <aura:attribute name="requiredL3Field" type="Boolean" default="false" />
+    <aura:attribute name="requiredL4Field" type="Boolean" default="false" />
+    <aura:attribute name="requiredL5Field" type="Boolean" default="false" />
+
+    <aura:attribute name="validate" type="Aura.Action" description="Validation funtion for flow"/>
+    
+
+    <aura:attribute name="L1DisplayErrorMessage" type="Boolean" default="false" />
+    <aura:attribute name="L2DisplayErrorMessage" type="Boolean" default="false" />
+    <aura:attribute name="L3DisplayErrorMessage" type="Boolean" default="false" />
+    <aura:attribute name="L4DisplayErrorMessage" type="Boolean" default="false" />
+    <aura:attribute name="L5DisplayErrorMessage" type="Boolean" default="false" />
+
+    <aura:attribute name="displayL2Field" type="Boolean" default="true" />
+    <aura:attribute name="displayL3Field" type="Boolean" default="true" />
+    <aura:attribute name="displayL4Field" type="Boolean" default="true" />
+    <aura:attribute name="displayL5Field" type="Boolean" default="true" />
+
+<!--
+    <aura:attribute name="showL2Field" type="Boolean" default="false" />
+    <aura:attribute name="showL3Field" type="Boolean" default="false" />
+    <aura:attribute name="showL4Field" type="Boolean" default="false" />
+    <aura:attribute name="showL5Field" type="Boolean" default="false" />
+-->
+    <aura:attribute name="isValid" type="Boolean" default="false" />
+    <aura:attribute name="showDebug" type="Boolean" default="false" />
+    <aura:attribute name="recordTypeId" type="String" default="01290000000ukanAAA" />
+    <aura:attribute name="minimumHeight" type="String"  default="500px"/>
+
+    <aura:attribute name="messageWhenValueMissing" type="String" access="global" default="Value is required in this field" />
+
+    <aura:attribute name="L1AttributeAlreadySet" type="Boolean" default="false" />
+
+    
+    <!--L1 Field-->
+
+<aura:html tag="style">
+    :root {
+        --contentMinimumheight: {!v.minimumHeight};
+    }
+
+    .slds-modal__container{ 
+        max-height : 90%;  
+      } 
+</aura:html>
+
+<div>
+    <lightning:recordEditForm class="FieldEditForm" objectApiName="{!v.objDetail.sobjectType}" recordTypeId="{!v.recordTypeId}" onload="{!c.handleOnload}" >
+        <lightning:messages />
+            <lightning:inputField   aura:id="L1Field"
+                                    fieldName="{!v.L1FieldAPI}" 
+                                    value="{!v.L1FieldOutput}" 
+                                    required="{!v.requiredL1Field}" 
+                                    variant="label-stacked"
+                                    onchange="{!c.onFieldChange}"/>
+        <aura:if isTrue="{!v.displayL2Field}">
+            <lightning:inputField   fieldName="{!v.L2FieldAPI}" 
+                                    value="{!v.L2FieldOutput}" 
+                                    required="{!v.requiredL2Field}" 
+                                    variant="label-stacked"
+                                    onchange="{!c.onFieldChange}"/>
+        </aura:if>
+        <aura:if isTrue="{!v.displayL3Field}">
+            <lightning:inputField   fieldName="{!v.L3FieldAPI}" 
+                                    value="{!v.L3FieldOutput}" 
+                                    required="{!v.requiredL3Field}" 
+                                    variant="label-stacked"
+                                    onchange="{!c.onFieldChange}"/>
+        </aura:if>
+        <aura:if isTrue="{!v.displayL4Field}">
+            <lightning:inputField   fieldName="{!v.L4FieldAPI}" 
+                                    value="{!v.L4FieldOutput}" 
+                                    required="{!v.requiredL4Field}" 
+                                    variant="label-stacked"
+                                    onchange="{!c.onFieldChange}"/>
+        </aura:if>
+        <aura:if isTrue="{!v.displayL5Field}">
+            <lightning:inputField   fieldName="{!v.L5FieldAPI}" 
+                                    value="{!v.L5FieldOutput}" 
+                                    required="{!v.requiredL5Field}" 
+                                    variant="label-stacked"
+                                    onchange="{!c.onFieldChange}"/>
+        </aura:if>
+    </lightning:recordEditForm>
+    <aura:if isTrue="{! and(v.displayButtons, v.enableButtons)}">
+        <div class="container slds-float_right slds-p-top_large">
+            <lightning:button name="Previous" variant="destructive-text" label="Previous" disabled="{!v.disabledFlag1}" onclick="{!c.handleButtonClick1}" />
+            <lightning:button type="submit" name="Submit" variant="brand" label="Next" disabled="{!v.disabledFlag2}" onclick="{!c.handleButtonClick2}" />
+        </div>
+    </aura:if>
+    <div aura:id="LoadingSpinner" class="spinner">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </div>
+
+    <aura:if isTrue="{!v.showDebug}">
+        <div>
+            L1FieldOutput : {!v.L1FieldOutput}
+        </div> 
+        <div>
+            L2FieldOutput : {!v.L2FieldOutput}
+        </div> 
+        <div>
+            L3FieldOutput : {!v.L3FieldOutput}
+        </div> 
+        <div>
+            L4FieldOutput : {!v.L4FieldOutput}
+        </div> 
+        <div>
+            L5FieldOutput : {!v.L5FieldOutput}
+        </div> 
+    </aura:if> 
+</div>   
+
+</aura:component>

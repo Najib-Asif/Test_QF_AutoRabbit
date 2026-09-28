@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>CRM-9695 This email template is for US Web-to-case NCR form</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Freight USA Web Auto Response Template NCR</name>
+    <style>none</style>
+    <subject>Qantas Freight Customer Support – Case No {!Case.CaseNumber}</subject>
+    <textOnly>Thanks for contacting Qantas Freight. We’ve received your request and your case number is {!Case.CaseNumber}.
+
+Your query details:
+
+Type:  {!Case.Type}
+Air Way Bill:  {!Case.Freight_AWB_Number__c}
+Connote:  {!Case.Connote__c}
+Subject:  {!Case.Subject}
+Product:  {!Case.Product__c}
+Origin:  {!Case.Freight_Origin__c}
+Destination:  {!Case.Freight_Destination__c}
+Let us know how we can help:  {!Case.Description}
+Return Email Address:  {!Case.SuppliedEmail}
+Contact Name:  {!Case.SuppliedName}
+Contact Telephone Number:  {!Case.SuppliedPhone}
+Company Name:  {!Case.SuppliedCompany}
+
+
+
+We’ll do our best to get back to you as soon as we can. If you need immediate support, we recommend you call us on +1 800 227 0290 (Toll free within USA only) or email us on qffreightusa@qantas.com.au adding your case number in the subject line.
+
+
+Thanks for your patience,
+The Qantas Freight Team
+
+{!Case.Thread_Token}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

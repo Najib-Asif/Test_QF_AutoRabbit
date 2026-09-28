@@ -1,0 +1,1628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>QCC_Qantas_Caller_Task</compactLayoutAssignment>
+    <description>Default Record type for all non &apos;Risk&apos; object</description>
+    <label>Master</label>
+    <picklistValues>
+        <picklist>Analyst__c</picklist>
+        <values>
+            <fullName>QA1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA7</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Outcome__c</picklist>
+        <values>
+            <fullName>FCR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FPO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TER</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Checklist_Attributes__c</picklist>
+        <values>
+            <fullName>IATA-PCC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting Planned%2FBooked</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OTHER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TMC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VARIATION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>YES</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>QCC_Authentication_Status__c</picklist>
+        <values>
+            <fullName>Authenticated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unauthenticated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>QCC_Call_Reason__c</picklist>
+        <values>
+            <fullName>Airport Customers %26 Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baggage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Disconnects %26 Transfers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Existing Booking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flight Credits %26 Travel Passes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Booking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound Call Unsuccessful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refunds</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>QCC_Caller_Verified__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Applicable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>QCC_Classification__c</picklist>
+        <values>
+            <fullName>ACCC Remediation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Add Frequent Flyer number</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ancil - baggage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ancil - other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ancil - special needs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistance booking online</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistance checking in</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistance locating%2C resending%2C using</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baggage added%2F changed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call reason not listed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complaint - create%2C follow up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Compliment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirm flight status%2C schedule change</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Do not use - system use only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dupe booking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extending validity of flight credit%2F Qantas Pass</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow up - incorrect amount refunded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow up - incorrect%2F no points refunded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow up - lost baggage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow up - other customer care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow up - refund not yet received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow up - reimbursement%2F compensation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow up - ticketing and itinerary status</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General query - airport%2C aircraft%2C lost property</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General query - carry on%2C baggage and SSRs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General query - connection times</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General query - lounge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gift voucher - create%2C locate and use</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Group bookings servicing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Infant pax added</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Infant queries %26 booking changes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insurance claim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Involuntary Change - Ancils %26 SSRs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Link bookings as Total Complete Party</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost baggage case creation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manage invol on partner carrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manage upgrade%2F downgrade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Name change%2Fcorrection</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-imminent travel agent booking - advised could not service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offline booking made - booking fee charged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offline booking made due to error booking online</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other SSR added %2F changed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner airline ancil%2FSSR queries %26 changes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment and ticketing issue - other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment and ticketing issue - unticketed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Premium customer Classic Reward flight request</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Provide%2F confirm FOP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas cash enquiries</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query and%2For dispute - balance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - SSR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - aircraft%2C specific needs%2C travel requirements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - baggage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - eligibility%2C fare rules%2C expiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - eligibility%2C refund amount</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - flight options</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - flight options%2C adcol%2C upgrade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - flight status</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query only - other questions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Query%2Fquote only - availability%2C dates%2C fare rules</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Redeeming flight credit%2FQantas Pass</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refund request - ancils</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refund request - dupe booking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refund request - expired%2C purged%2C cover refunds</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refund request - involuntary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refund request - voluntary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reinstate or request other ancils%2F SSRs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reinstate or request seats</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request for refund - voluntary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request or manage downgrade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request or manage upgrade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request to unrestrict seats</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Requesting flight credit%2F Qantas Pass - involuntary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Requesting flight credit%2F Qantas Pass - voluntary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Requesting refund of flight credit%2F Qantas Pass</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resend tax invoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Residual voucher creation%2F follow up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seats selected%2F changed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeking compensation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Split booking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stat%2E dec%2E for different FOP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Successful change - date%2Ftime</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Successful change - route</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Successful change of flight - involuntary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Successful change of flight - voluntary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transferring flight credit to different name%2Fpax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Travel agent booking - advised could not service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Update contact details</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Update passenger details - APIS etc</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Requirement__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Score__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>13</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>16</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>17</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>18</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>19</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>22</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>24</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>26</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>27</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>28</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>31</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>32</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>33</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>34</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>35</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>36</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>37</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>38</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>39</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>40</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>41</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>42</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>43</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>44</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>46</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>47</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>48</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>49</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>51</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>52</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>53</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>54</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>55</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>56</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>57</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>58</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>59</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>61</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>62</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>63</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>64</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>65</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>66</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>67</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>68</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>69</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>70</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>71</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>72</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>73</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>74</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>75</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>76</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>77</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>78</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>79</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>80</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>81</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>82</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>83</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>84</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>85</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>86</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>87</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>88</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>89</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>91</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>92</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>93</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>94</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>95</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>96</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>97</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>98</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>99</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deferred</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Started</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Waiting on someone else</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On Hold</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subject</picklist>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Quote</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weekly Headlines</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subtype__c</picklist>
+        <values>
+            <fullName>Accompanying Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Business Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Transfer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Accounts Query</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Action</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Action Taken</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Action To Close</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Activity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approval obtained</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Briefing Notes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CC_ADDITIONAL_INFO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CL Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CST-Database Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CTA Report Sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Callback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Campaign%2FIncentive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Changes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Company and TMC advised of Termination</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conference%2FEvent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conference%2FEvent%2FTours</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Inbound%2E Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Inbound%2E Email%2FFax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Inbound%2E Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Inbound%2E Enquiry to follow-up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - New prospect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Campaign</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Campaign Follow-up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Client development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Email%2FFax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Follow-up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Opportunity follow-up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Travel Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Outbound%2E Travel Manager Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact - Qantas%2Ecom Ad</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact Inbound - AEQCC Platinum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Authority Signature</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Info - Excess Baggage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Info - Upgrade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Info - Waiver</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract%2FBSA Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Interaction Inbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Interaction Outbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DOM Tariff 2015 Note Logged against the customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DRA Obtained or requested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deal Load</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email%2FPhone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engagement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enhancement Request</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enhancement Request Business Justification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enhancement Request Response</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Event</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FF Status update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Feedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow-up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Future Strategy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GMC Priority Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General Note</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General Note on person%2Fclient</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Headline</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Headline Logged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heads up pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incentive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Industry Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information from TMC obtained</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Introduction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Issues</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Justification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Appointed Travel Agents</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Contract Extension Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Negotiation Feedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Performance Reports</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Presentations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - RFP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - RFP Response</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Reports</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Reviews</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Strategy%2FActionplan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Termination Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Ticketing Instructions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNS - Travel Policy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manager Approval Obtained</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Market Intelligence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maximum Attempts Reached</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monthly Account Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Next Steps</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online Booking Tool %28OBT%29 Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operational Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opportunity Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opportunity Generation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out of Guidelines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Preferred Rate Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pricing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prospect Follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QBD Add Arranger</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QBD Profile Administration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QBD Registration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Business Essentials</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Interaction Inbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Interaction Outbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quality Assurance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quest Customer record updated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rate Book Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relationship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reporting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Risk Brief</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Risk Level</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SLA Activity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SME Deal Note</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales Visit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Senior Executive Action</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Signed DRA received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Source of Prospect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stakeholder Engagement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Switch on off AEQCC rebate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TMC Meeting %28for B%26G accounts%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TMC Notified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical Workshop</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text - Business Telephone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text - Home Telephone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text - Mobile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text - Other Telephone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Training</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Travel Policy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Traveller%2FEmployee Forum Agency Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Type of Amendment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Use Cases</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Task_type__c</picklist>
+        <values>
+            <fullName>Customer Interaction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Journey Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DPP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freight Service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Future Planet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loyalty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Market Intel%2FHeadlines%2FFeedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Risk</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SME Callout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Strategic Account Management</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

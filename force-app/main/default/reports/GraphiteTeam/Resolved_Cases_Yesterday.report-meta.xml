@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_61448923</developerName>
+        <masterLabel>Service Type</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>TYPE</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>PNR Health Check</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PNR Health Check - Watchlist</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to SSU</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to Life Time Platinum</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Air Turn Back</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Diversion</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Domestic Delay</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Pre-Flight Watchlist Check</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Potential Downgrade</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Quarterly Health Check Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Retain Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Watch list is Expiring</sourceValue>
+            </sourceValues>
+            <value>Proactive</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Case.Resolve_Closeddate__c</field>
+    </columns>
+    <columns>
+        <field>BucketField_61448923</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>CDF1</field>
+    </columns>
+    <currency>AUD</currency>
+    <customDetailFormulas>
+        <calculatedFormula>(Case.Resolve_Closeddate__c-CREATED_DATE)*24</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>Resolve rate</description>
+        <developerName>CDF1</developerName>
+        <label>Resolve rate (hrs)</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <description>Excluding Proactive</description>
+    <filter>
+        <booleanFilter>((1 OR 2) AND 3 AND (4 OR 5) AND 6 AND 7) OR ((1 OR 2) AND 3 AND (4 OR 5) AND 6 AND 8)</booleanFilter>
+        <criteriaItems>
+            <column>Case.Resolve_Closeddate__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>YESTERDAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CLOSED_DATE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>YESTERDAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Data UpdatesUser</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.FF_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Platinum One,Chairmans Lounge,Chairmans Lounge Platinum One,Chairman&apos;s Lounge,Chairman&apos;s Lounge Platinum One</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Frequent_Flyer_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Chairman,One</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.QCC_Reopened_flag__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_61448923</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Proactive</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>TYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case.FF_Tier__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>TYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Closed Cases - Yesterday</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

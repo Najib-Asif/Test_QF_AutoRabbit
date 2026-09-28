@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_GW_Expense_Assesment_Outcome</fullName>
+    <active>true</active>
+    <description>Expense Assessment Outcome should align with the correct Status</description>
+    <errorConditionFormula>( ISPICKVAL( Status ,&apos;Approved&apos;) || ISPICKVAL( Status ,&apos;Rejected&apos;)) &amp;&amp;  
+NOT(CONTAINS( TEXT(Expense_Assessment_Outcome__c) ,TEXT(Status)))</errorConditionFormula>
+    <errorDisplayField>Expense_Assessment_Outcome__c</errorDisplayField>
+    <errorMessage>The Expense Assessment Outcome must reflect the Status chosen.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,1673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Account</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>QL_US_Customer_Account</compactLayoutAssignment>
+    <description>To be used for all non-Agency accounts having a contract with Qantas - this covers Corporate &amp; Government, University Consortiums, SMEs &amp; Multi-national accounts</description>
+    <label>Customer Account</label>
+    <picklistValues>
+        <picklist>Ability_to_Influence__c</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AccountSource</picklist>
+        <values>
+            <fullName>Advertisement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>External Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner Platform</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public Relations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminar - Internal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminar - Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TMC Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trade Show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Word of mouth</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Account_Chain_Code__c</picklist>
+        <values>
+            <fullName>AC - American Express Consumer Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BT - BTI Australia</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Account_Skill_Group__c</picklist>
+        <values>
+            <fullName>ALPHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRAVO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHARLIE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ECHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOXTROT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GOLF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HUGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDIGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KILO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LIMA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAPA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Account_Type__c</picklist>
+        <values>
+            <fullName>Corporate %28customer%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Industry %28agency%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AccreditationStatus__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Suspended</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AccreditationType__c</picklist>
+        <values>
+            <fullName>ARC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IATA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TIDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VTC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Agency_Category__c</picklist>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93  Ethnic Market Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Consolidator</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Entertainment Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Fly Cruise Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 General Sales Agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Groups Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Inbound Tour Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Leisure Agency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Marine Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 SME Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Student Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Travel Management Company</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Partnerships %E2%80%93 Wholesale Specialist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Direct</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Agency_Product_Fare__c</picklist>
+        <values>
+            <fullName>Tier 4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Agency_Type__c</picklist>
+        <values>
+            <fullName>GSA Agent %28Route%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IATA Agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non IATA Agent</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Agency__c</picklist>
+        <values>
+            <fullName>N</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Y</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Annual_Domestic_Flights__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1-10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>101-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11-20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>201-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21-50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>300%2B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>51-100</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Annual_International_Flights__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1-10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>101-200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11-20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>201-300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21-50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>300%2B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>51-100</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Aquire_Override_Reason__c</picklist>
+        <values>
+            <fullName>Company affiliated with a Company with the principal operation is to sell or resell travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Member of%2F Affiliated with%2C a company that has a Qantas Corporate Airfares Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other %28full explanation required in SME Override Note%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Principal place of business is outside of Australia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Receiving third-party private airfares%2C discounts or rebates from Qantas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Travel using the registered ABN is for leisure</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Aquire_Override__c</picklist>
+        <values>
+            <fullName>N</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Y</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Brand__c</picklist>
+        <values>
+            <fullName>FC - Campus Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Corporate Traveller %28FCM%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Cruisabout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Escape Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - FCm Travel Solutions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Flight Centre Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Flight Centre Business Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Flight Centre Limited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Flight Centre Retail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Infinity Holidays</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - My Adventure Store%C2%A0%C2%A0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Stage %26 Screen Travel Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Student Flights</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FC - Travel Associates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - Air Tickets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - Concorde Agency Network</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - Helloworld</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - Helloworld Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - QBT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - Qantas Holidays</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - helloworld Affiliates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - helloworld Associate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - helloworld Branded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HW - helloworld for Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IN - Independent Agents</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IN - Independent Travel Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - American Express Global Business Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - BCD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - BCD Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - CT Partners</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - CT Partners Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - CTG Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - CTM Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - CWT Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Carlson Wagonlit Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Consolidated Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Corporate Travel Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Express Travel Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Express Travel Group Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - HRG - Hogg Robinson Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - HRG Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Independent Travel Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Key Partners</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Magellan Travel Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Magellan Travel Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - QANTAS Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - QF Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - STA Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - STA Travel Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Select</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Select Travel Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Travellers Choice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Travellers Choice Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Voyager Travel Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - Voyager travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KP - iTalk Travel</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Category__c</picklist>
+        <values>
+            <fullName>AVI</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Sub_Type__c</picklist>
+        <values>
+            <fullName>Consortium%2FGroup</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Individual University</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non WOAG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QBR and QFF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Business Rewards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Frequent Flyer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>State Government</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WOAG</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Type__c</picklist>
+        <values>
+            <fullName>Business Events</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Corporate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Groups</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Joint QF%2FAA Deal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loyalty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QF Standalone Deal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>University</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Cycle_Category__c</picklist>
+        <values>
+            <fullName>Category A</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category C</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category D</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category F</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category G</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category H</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Category I</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Competitor_Airline__c</picklist>
+        <values>
+            <fullName>Aer Lingus</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aeropelican</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air Canada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air China</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air France</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air India</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air Mauritius</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air New Zealand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air Niugini</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air North</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>All Nippon Airways</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>American Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Asiana</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>British Airways</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cathay Pacific</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>China Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>China Eastern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>China Southern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delta Air</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emirates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Etihad Airways</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Eva Airways</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finnair</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garuda Indonesia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hawaiian Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KLM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Korean Air</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAN Chile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lan Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lufthansa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Malaysian Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Philippine Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qatar%C2%A0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regional Express</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Royal Brunei Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Singapore Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skyteam Alliance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skywest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South African Airways</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Star Alliance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Swiss</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Thai Airways International</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>United Airlines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Virgin Atlantic Airways</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Virgin Australia</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Customer_Category__c</picklist>
+        <values>
+            <fullName>Industry - Gold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Industry - Platinum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Industry - Silver</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Dealing_Flag__c</picklist>
+        <values>
+            <fullName>N</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Y</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Eligible_for_SME_Campaigns__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Form_of_Payment__c</picklist>
+        <values>
+            <fullName>AX%2FQF Corporate Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amex Business Travel Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amex Corporate Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bankcard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cash</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cheque</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diners Club</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mastercard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Organised through Head Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Airline Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QF Charge Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Travel Agent Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visa Card</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>GST_Registered__c</picklist>
+        <values>
+            <fullName>N</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Y</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IATA_BSP_Level__c</picklist>
+        <values>
+            <fullName>Go Global</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Go Light</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Go Standard</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Industry</picklist>
+        <values>
+            <fullName>Accommodation and Food Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Accounting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Administrative and Support Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agriculture%2C Forestry %26 Fishing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arts and Recreation Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Association</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Construction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consulting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Education and Training</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electricity%2C Gas%2C Water %26 Waste Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Entertainment%2FMedia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial and Insurance Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Food %26 Beverage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government %26 Affiliates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Health Care and Social Assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information Media and Telecommunications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insurance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investment %26 Fund Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manufacturing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mining</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mining %26 Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oil%2C Gas%2C %26 Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Financial Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Professional Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pharmaceuticals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pharmaceuticals %26 Health</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Professional%2C Scientific %26 Tech Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Property %26 Asset Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public Administration and Safety</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rental%2C Hiring and Real Estate Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resource Construction Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retail Trade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sport</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>State Government</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology %26 Telecommunications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport %26 Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport%2C Postal and Warehousing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Travel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WOAG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wholesale Trade</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Internal_Business_Unit_Interests__c</picklist>
+        <values>
+            <fullName>Coalition Partnerships%C2%A0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Services%C2%A0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QBR%C2%A0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retail Offers</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loyalty_Partnership_Value__c</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Multi_national_Type__c</picklist>
+        <values>
+            <fullName>European</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Global</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Local</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>New_Account_Type__c</picklist>
+        <values>
+            <fullName>Agency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prospect</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Note_Type__c</picklist>
+        <values>
+            <fullName>Headlines - Corporate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales Visit</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Office_Type__c</picklist>
+        <values>
+            <fullName>Branch Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Head Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Airline Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Office</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Overall_Value_to_Qantas_Loyalty__c</picklist>
+        <values>
+            <fullName>Large</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Small</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Ownership</picklist>
+        <values>
+            <fullName>Acquisition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opportunity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Private</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>R%26G-Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retention</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Subsidiary</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Ownership_Type__c</picklist>
+        <values>
+            <fullName>Franchise</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wholly Owned</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rating</picklist>
+        <values>
+            <fullName>Cold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warm</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Regional_Segment__c</picklist>
+        <values>
+            <fullName>NSW - Coastal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NSW - Regional</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QLD - Coastal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QLD - Regional</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South Australia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tasmania</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Western Australia</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Relationships__c</picklist>
+        <values>
+            <fullName>Airline Partnerships</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Business Rewards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Freight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Frequent Flyer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Risk_Level__c</picklist>
+        <values>
+            <fullName>Moderate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Severe</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sentiment__c</picklist>
+        <values>
+            <fullName>Negative</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skill_Group__c</picklist>
+        <values>
+            <fullName>ALPHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRAVO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHARLIE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ECHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOXTROT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GOLF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HUGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDIGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KILO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LIMA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAPA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage_Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Strategic_Importance__c</picklist>
+        <values>
+            <fullName>Focus</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Strategic_Influence__c</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Type__c</picklist>
+        <values>
+            <fullName>Consortium%2FGroup</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Global Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inbound Tour Operators %28ITOs%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Individual University</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Linked%2FAlligned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Local Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-WOAG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pan European</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qantas Standalone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WOAG</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Travel_Policy_Adherence__c</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Agency Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Account</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Other Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prospect Account</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Verified_Customer_Override_Reason__c</picklist>
+        <values>
+            <fullName>Customer being investigated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer is a travel agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer manually verified</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

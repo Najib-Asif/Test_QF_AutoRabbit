@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_62059910</developerName>
+        <masterLabel>CSU Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>CREATED</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Daniela Zingovski</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>David Koutsouki</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Kristy Newell</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salwa Sukkar</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sandra Tomasella</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Simone Marashlian</sourceValue>
+            </sourceValues>
+            <value>Daniela&apos;s Team</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Jenelle Lymer</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Helena Sloan</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Joanne Garnham</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Losana Naulu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Samantha Turner</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Shana Bourke</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Stella Sedlak</sourceValue>
+            </sourceValues>
+            <value>Jenelle&apos;s Team</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>John Hatzipetros</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Barry Annesley</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Gayleen Karabellas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Lorenza Foundoukakis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Victor Henderson</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Tuitavake Lea</sourceValue>
+            </sourceValues>
+            <value>John&apos;s Team</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_422580</developerName>
+        <masterLabel>Open_Closed</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>STATUS</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Open</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>New</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Assigned</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>On Hold</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>In Progress</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Reopened</sourceValue>
+            </sourceValues>
+            <value>Open</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Closed</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Resolved</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QF Rate Audit</sourceValue>
+            </sourceValues>
+            <value>Closed</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CASE_OWNER</field>
+    </columns>
+    <columns>
+        <field>CREATED</field>
+    </columns>
+    <columns>
+        <field>field_key</field>
+    </columns>
+    <columns>
+        <field>OLDVAL</field>
+    </columns>
+    <columns>
+        <field>NEWVAL</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Power_of_One_Case__c</field>
+    </columns>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>PRIORITY</field>
+    </columns>
+    <columns>
+        <field>CLOSED_DATE</field>
+    </columns>
+    <columns>
+        <field>CASE_CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>CLOSED_DATEONLY</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.Freight_Track_Trace_Exceptions,Case.Qantas_Freight,Case.Freight_Claims,Case.Freight_Feedback,Case.Freight_Query,Case.Freight_Shipment,Case.Freight_Email_to_Case,Case.Freight_Invoicing</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CASE_OWNER</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Freight CSU AU Queue</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Case_Owner_Team__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>CSU</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Case_Owner_Team__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Customer Service Unit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_62059910</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Daniela&apos;s Team,Jenelle&apos;s Team,John&apos;s Team</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_62059910</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_422580</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>TYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Freight Service Case Lifecycle - Report</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseAuditHistory</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>CREATED_DATE</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

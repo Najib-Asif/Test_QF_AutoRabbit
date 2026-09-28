@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DonotchangeRecoveryinApprovalProcess</fullName>
+    <active>true</active>
+    <description>QCC: Don&apos;t change Recovery details when Recovery is in approval process</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_Donot_changeRecoverydetailsonceAppro__c, 
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+Text(Status__c) = &apos;Awaiting Approval&apos;,
+Text(PRIORVALUE(Type__c)) &lt;&gt; Text(Type__c) 
+)</errorConditionFormula>
+    <errorDisplayField>Account_Type__c</errorDisplayField>
+    <errorMessage>Type can&apos;t be changed.</errorMessage>
+</ValidationRule>

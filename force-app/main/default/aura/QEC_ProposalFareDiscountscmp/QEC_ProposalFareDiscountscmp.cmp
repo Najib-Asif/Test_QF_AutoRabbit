@@ -1,0 +1,67 @@
+<aura:component controller="QEC_ProposalFareDiscountsController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:handler name="init" action="{!c.getProposalList}" value="{!this}" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="fareDiscountsList" type="Discount_List__c[]" />
+    <aura:attribute name="modifiedList" type="List" />
+    <aura:html tag="style">
+        .slds-modal__container {
+        max-width: 500rem !important;
+        width:98% !important;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around–medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__footer{
+        overflow-y:hidden !important;
+        
+        }
+    </aura:html>
+    <div>
+    <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+        <thead>
+            <tr class="slds-text-heading_label">
+                <th scope="col"><div class="slds-truncate" title="Booking Class">Booking Class</div></th>
+                <th scope="col"><div class="slds-truncate" title="Network">Network</div></th>
+                <th scope="col"><div class="slds-truncate" title="Market">Market</div></th>
+                <th scope="col"><div class="slds-truncate" title="Tier 1/Offering" style="width: 100px;">Tier 1/Offering</div></th> <!--Added as a part of CRM-8071-->
+                <th scope="col"><div class="slds-truncate" title="Tier 2/Max" style="width: 100px;">Tier 2/Max</div></th>
+                <th scope="col"><div class="slds-truncate" title="Category">Category</div></th>
+                <th scope="col"><div class="slds-truncate" title="Fare Combination">Fare Combination</div></th>
+                <th scope="col"><div class="slds-truncate" title="Route O-D">Route O-D</div></th>
+                <th scope="col"><div class="slds-truncate" title="Discount">Discount Threshold (AM)</div></th>
+                <th scope="col"><div class="slds-truncate" title="Discount">Discount Threshold (TL)</div></th>
+                <th scope="col"><div class="slds-truncate" title="Discount">Discount Threshold (NAM)</div></th>
+                <th scope="col"><div class="slds-truncate" title="Discount">Discount Threshold (DO)</div></th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.fareDiscountsList}" var="fareDiscounts" indexVar="index">
+                <tr>
+                    <td><div class="slds-truncate">{!fareDiscounts.Booking_Class_Name__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Network__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Market__c}</div></td>
+                    <td><input data-selected-Index="{!index}" type="text" value="{!fareDiscounts.QL_Tier_1_Offering__c}" name="Tier1" onchange="{!c.addToList}" style="width: 100px;"></input></td>
+                    <td><input data-selected-Index="{!index}" type="text" value="{!fareDiscounts.Discount__c}" name="Tier2" onchange="{!c.addToList}" style="width: 100px;"></input></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Category__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Fare_Combination__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Route_O_D__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Discount_Threshold_AM__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Discount_Threshold_TL__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Discount_Threshold_NAM__c}</div></td>
+                    <td><div class="slds-truncate">{!fareDiscounts.Discount_Threshold_DO__cDiscount_Threshold_NAM__c}</div></td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+        </table><br/></div>
+    <div>
+        <footer>
+            <div class="slds-docked-form-footer">
+                <lightning:button label="Save Discounts" onclick="{!c.saveFareDiscounts}" />
+        		<lightning:button label="Cancel" onclick="{!c.closeModal}" />
+            </div>
+        </footer>
+    </div>
+</aura:component>

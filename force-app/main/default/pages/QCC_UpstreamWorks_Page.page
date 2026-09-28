@@ -1,0 +1,19 @@
+<!-- ***This page is created fo the Upstreamworks Chat Tool connectivity*** -->
+
+<apex:page >
+  <apex:includeLightning /> 
+  <div id="lightning"></div>
+  <script>
+    try {
+      $Lightning.use("c:QCC_LiveEngage_LightningOutV2", function() {
+          $Lightning.createComponent("c:QCC_CaseSearchCreateLtngOut", { objectName: "Contact" }, "lightning", function(cmp) {
+            console.log("QCC component was created");
+          
+          });
+        }
+      );
+    } catch (err) {
+      console.error('QantasTest, error', err.message);
+    }
+  </script>
+</apex:page>

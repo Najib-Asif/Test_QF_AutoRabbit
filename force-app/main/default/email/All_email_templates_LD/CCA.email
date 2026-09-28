@@ -1,0 +1,124 @@
+<messaging:emailTemplate subject="Cargo Correction Advice (CCA) Request for AWB number {!relatedTo.Freight_AWB_Number__c}" recipientType="Contact" relatedToType="case">
+<messaging:htmlEmailBody >
+<html>
+<STYLE type="text/css">
+size: A4 Portrait;
+    TH {font-size: 11px; font-face: arial;background: #CCCCCC;
+             border: 1px solid black;  text-align: center }
+          TD  {font-size: 11px;border: 1px solid black;font-face: verdana }
+          TABLE { border: 1px solid black;border-collapse: collapse;cellspacing: 0}
+          TR {border: solid #CCCCCC; border-width: 1; border: 1; cellspacing: 0}
+        </STYLE>
+        <font face="arial" size="2">
+<P>Dear QF Rate Audit Team,</P>
+<br></br>
+<P><b>Case#:</b>     {!relatedTo.casenumber}</P>
+<P><b>Status:</b>     {!relatedTo.status}</P>
+<P><b>Date:</b>      {!Today()}</P>
+<br></br>
+<P>Please process the following Cargo Correction Advice.</P>
+<P>Once processed, please email back to 0F990000000M7IwCAK@post.9-10ookea2.ap1.chatter.salesforce.com and cc freightsalessupport@qantas.com.au</P>
+<br></br>
+<P><b>Agent Name:</b> {!relatedTo.Consultants_Name__c}</P>
+<P><b>IATA:</b> {!relatedTo.IATA_DAT__c}</P>
+<br></br>        
+
+<table class="tg">
+  <tr>
+    <th class="tg-0lax">AWB</th>
+    <th class="tg-0lax">Origin</th>
+    <th class="tg-0lax">Destination</th>
+    <th class="tg-0lax">Weight</th>
+    <th class="tg-0lax">Method of Pay</th>
+    <th class="tg-0lax">Currency</th>
+    </tr>
+
+<apex:repeat var="cx" value="{!relatedTo.case__r}" rows="1">
+<tr>
+<td><apex:outputField value="{!relatedTo.Freight_AWB_Number__c}"/></td>
+<td><apex:outputField value="{!relatedTo.Freight_Origin__c}"/></td>
+<td><apex:outputField value="{!relatedTo.Freight_Destination__c}"/></td>
+<td><apex:outputField value="{!relatedTo.Freight_Weight__c}"/></td>
+<td><apex:outputField value="{!cx.Method_of_Payment__c}"/></td>
+<td><apex:outputField value="{!relatedTo.CurrencyIsoCode}"/></td>
+</tr>
+</Apex:repeat>
+ </table>
+<br>
+</br>
+
+<table class="tg">
+  <tr>
+    <th class="tg-0lax">Charges</th>
+    <th class="tg-0lax">Freight Amount (Wgt Charge) GRO</th>
+    <th class="tg-0lax">Valuation Charges</th>
+    <th class="tg-0lax">Discount</th>
+    <th class="tg-0lax">Commission</th>
+    <th class="tg-0lax">Nett</th>
+    <th class="tg-0lax">Fuel Surcharges</th>
+    <th class="tg-0lax">Insurance Surcharges</th>
+    <th class="tg-0lax">Other Surcharges</th>
+    <th class="tg-0lax">Other Charges due Agent (OCDA)</th>
+    <th class="tg-0lax">CCA Fee (if Applicable)</th>
+    <th class="tg-0lax">Amount Charged</th>
+    </tr>
+<apex:repeat var="cx" value="{!relatedTo.case__r}">
+<tr>
+
+<td><apex:outputField value="{!cx.Charges__c}"/></td>
+<td><apex:outputField value="{!cx.Freight_Amount__c}"/></td>
+<td><apex:outputField value="{!cx.Valuation_Charges__c}"/></td>
+<td><apex:outputField value="{!cx.Discount__c}"/></td>
+<td><apex:outputField value="{!cx.Commission__c}"/></td>
+<td><apex:outputField value="{!cx.Nett__c}"/></td>
+<td><apex:outputField value="{!cx.Fuel_Surcharges__c}"/></td>
+<td><apex:outputField value="{!cx.Insurance__c}"/></td>
+<td><apex:outputField value="{!cx.Other__c}"/></td>
+<td><apex:outputField value="{!cx.Other_Charges_due_Agent__c}"/></td>
+<td><apex:outputField value="{!cx.CCA_Fee_If_Applicable__c}"/></td>
+<td><apex:outputField value="{!cx.Amount_Charged__c}"/></td>
+</tr>
+
+
+
+ </Apex:repeat>
+</table>
+<br>
+</br>
+<P><b>Total Adjustment Due:</b> {!relatedTo.CurrencyIsoCode}&nbsp;{!relatedTo.Total_Adjustment_Due__c}</P>
+<br>
+</br>
+<P><b>Reasons for Credit and Action taken:</b> {!relatedTo.Reasons_for_Credit_and_Action_Taken__c}</P>
+<br>
+</br>
+<P><b>Justification:</b> {!relatedTo.Justification__c}</P>
+<br>
+</br>
+</font>
+<apex:image id="theImage" value="https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0159000000GHZ1Q&oid=00D900000010OOK" width="400" height="50"/>
+</html>
+</messaging:htmlEmailBody>
+
+
+<messaging:plainTextEmailBody >
+Dear QF Rate Audit Team,
+
+Case#:     {!relatedTo.casenumber}
+Status:     {!relatedTo.status}
+Date:      {!Today()}
+
+Please process the following Cargo Correction Advice.
+Once processed, please email back to freightsalessupport@qantas.com.au
+Agent Name: {!relatedTo.Consultants_Name__c}
+IATA: {!relatedTo.IATA_DAT__c}
+        
+
+
+Total Adjustment Due:{!relatedTo.CurrencyIsoCode}&nbsp;{!relatedTo.Total_Adjustment_Due__c}
+
+Reasons for credit and Action taken: {!relatedTo.Reasons_for_Credit_and_Action_Taken__c}
+
+Justification: {!relatedTo.Justification__c}
+
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

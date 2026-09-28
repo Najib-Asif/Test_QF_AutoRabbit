@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_AWB_Number_Format_Validation</fullName>
+    <active>false</active>
+    <description>Freight - checks the AWB# entered is in a correct format &quot;XXX-XXXXXXXX&quot;</description>
+    <errorConditionFormula>AND(
+	CONTAINS(RecordType.DeveloperName,&apos;Freight&apos;),
+	NOT(ISBLANK(Freight_AWB_Number__c)),
+	NOT(REGEX( Freight_AWB_Number__c ,&quot;[0-9]{3}-[0-9]{8}&quot; )),
+	Not ((AND ((ISNEW()),  ISPICKVAL(Origin, &quot;Web&quot;)))),
+        FCR__c = FALSE,
+        NOT ( $Profile.Id = &apos;00e90000001yRSS&apos; ) /*Data Administrator*/
+	)</errorConditionFormula>
+    <errorDisplayField>Freight_AWB_Number__c</errorDisplayField>
+    <errorMessage>AWB # must be in &quot;XXX-XXXXXXXX&quot; number format</errorMessage>
+</ValidationRule>

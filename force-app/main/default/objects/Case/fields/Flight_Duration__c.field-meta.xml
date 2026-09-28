@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flight_Duration__c</fullName>
+    <externalId>false</externalId>
+    <formula>(floor((Arrival_UTC_Date_Time__c - Departure_UTC_Date_Time__c)*24)) 
+
++ 
+
+(((((Arrival_UTC_Date_Time__c - Departure_UTC_Date_Time__c)*24)-floor((Arrival_UTC_Date_Time__c - Departure_UTC_Date_Time__c)*24))*60)/100)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Flight Duration</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

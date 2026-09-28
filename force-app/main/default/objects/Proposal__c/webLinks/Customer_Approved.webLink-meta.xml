@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Approved</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Customer Accepted</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+try{ 
+if(&apos;{!Proposal__c.Active__c}&apos; == 1){ 
+var conf = confirm(&apos;Please ensure that you’ve synced or uploaded the customer approval email with this proposal&apos;); 
+if(conf == true){ 
+var proposal = new sforce.SObject(&quot;Proposal__c&quot;); 
+proposal.id = &apos;{!Proposal__c.Id}&apos;; 
+proposal.status__c = &apos;Accepted by Customer&apos;; 
+var result = sforce.connection.update([proposal]); 
+window.location.reload(); 
+} 
+}else if(&apos;{!Proposal__c.Active__c}&apos; == 0){ 
+alert(&apos;Proposal should be Active!&apos;); 
+} 
+}catch(e){ 
+alert(&apos;An Error has Occured. Error:&apos; +e); 
+}</url>
+</WebLink>

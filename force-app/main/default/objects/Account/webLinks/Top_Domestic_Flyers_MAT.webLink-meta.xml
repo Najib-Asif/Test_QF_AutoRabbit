@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Top_Domestic_Flyers_MAT</fullName>
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Top Domestic Flyers (MAT)</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!IF($User.UIThemeDisplayed=&quot;Theme4d&quot;, URLFOR(&quot;#/sObject/00O90000008vh4R/view?fv0=&quot;&amp;Account.Id),URLFOR(&quot;/00O90000008vh4R?pv0=&quot;&amp;Account.Id))}</url>
+</WebLink>

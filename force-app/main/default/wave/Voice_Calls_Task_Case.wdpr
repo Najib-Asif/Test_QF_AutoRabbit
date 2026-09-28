@@ -1,0 +1,662 @@
+{
+  "version" : "57.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "WhatId", "WhoCount", "Subject", "ActivityDate", "Status", "Priority", "OwnerId", "IsClosed", "CreatedDate", "LastModifiedDate", "CallDurationInSeconds", "CallType", "CallDisposition", "CallObject", "TaskSubtype", "Number_of_Activities__c", "QCC_Interaction_Recording__c", "QCC_Authentication_Status__c", "QCC_Call_Reason__c", "QCC_Caller_Full_Name__c", "QCC_Caller_Location__c", "QCC_Caller_Phone__c", "QCC_Caller_Verified__c", "QCC_IVR_Selection__c", "QCC_On_Behalf_Caller_Type__c", "QCC_PNR__c", "QCC_PhoneCaller__c", "QCC_Post_Call_Survey_Sent__c", "QCC_Queue_Type__c", "QCC_Wrap_Up_Notes__c", "TECH_Genesys_Participant_Id__c", "TECH_Original_Case_Id__c", "QCC_Classification__c", "TECH_Genesys_Wrapup_URL__c", "WhatCount" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Task",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Task"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "JOIN1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "WhatId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Power_of_One_Case__c", "Id", "MasterRecordId", "CaseNumber", "ContactId", "AccountId", "ParentId", "Type", "RecordTypeId", "Status", "Reason", "Origin", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "IsEscalated", "OwnerId", "CreatedDate", "LastModifiedDate", "Frequent_Flyer_Number__c", "Contact_Fullname__c", "Sub_Type_1__c", "Sub_Type_2__c", "Created_by_Role__c", "Aircraft_Type_Code__c", "Booking_PNR__c", "Category__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Owner_City__c", "Record_Type__c", "Recovery_Quantity__c", "Recovery_Value__c", "Sub_Category__c", "Case_Owner_Manager__c", "CCC_R1_CCAT_Type__c", "Case_Status__c", "CCC_And_B_Case_Type__c", "Case_Number__c", "Is_QCC_Case__c", "Is_CCAT_User__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Id_formula",
+          "label" : "Wrap Up time",
+          "formulaExpression" : "(to_unix_timestamp(LastModifiedDate)-to_unix_timestamp(CreatedDate))-CallDurationInSeconds",
+          "precision" : 5,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CallDurationInSeconds",
+          "newProperties" : {
+            "label" : "Call Time",
+            "name" : "CallDurationInSeconds"
+          }
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "CallDurationInSeconds_formula",
+          "label" : "Handled Time (Seconds)",
+          "formulaExpression" : "to_unix_timestamp(LastModifiedDate)-to_unix_timestamp(CreatedDate)",
+          "precision" : 5,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "QCC_PNR__c",
+          "newProperties" : {
+            "label" : "PNR from IVR",
+            "name" : "QCC_PNR__c"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES2" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Case.Booking_PNR__c",
+          "newProperties" : {
+            "label" : "Case PNR",
+            "name" : "Case.Booking_PNR__c"
+          }
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Calculated_PNR",
+          "label" : "Calculated PNR",
+          "formulaExpression" : "Case When \"Case.Booking_PNR__c\" is not null then upper(\"Case.Booking_PNR__c\") \r\n    else upper(\"QCC_PNR__c\")\r\nend",
+          "precision" : 15,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CallType_bucket",
+          "label" : "Interaction Type",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "nullBucketValue" : "Non Voice",
+            "isPassthroughEnabled" : true,
+            "sourceField" : {
+              "name" : "CallType",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Inbound",
+              "sourceValues" : [ "Inbound" ]
+            }, {
+              "value" : "Outbound",
+              "sourceValues" : [ "Outbound" ]
+            }, {
+              "value" : "Non Voice",
+              "sourceValues" : [ "N/A" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Tasks with QCC Cases",
+          "name" : "Tasks_with_Cases"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "WhatId",
+          "operator" : "STARTS_WITH",
+          "operands" : [ "500" ]
+        } ]
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "COUNT",
+          "source" : "Calculated_PNR",
+          "name" : "COUNT_Calculated_PNR",
+          "label" : "#PNR"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Case.CaseNumber",
+          "name" : "UNIQUE_Case.CaseNumber",
+          "label" : "Number of Cases"
+        }, {
+          "action" : "COUNT",
+          "source" : "Id",
+          "name" : "COUNT_Id",
+          "label" : "Number of Interactions"
+        }, {
+          "action" : "SUM",
+          "source" : "Case.Power_of_One_Case__c",
+          "name" : "SUM_Case.Power_of_One_Case__c",
+          "label" : "#Number of Cases"
+        } ],
+        "groupings" : [ "Calculated_PNR" ],
+        "pivots" : [ ],
+        "pivot_v2" : {
+          "sourceFields" : [ "CallType" ],
+          "valueCombinations" : [ [ "Inbound" ], [ "Outbound" ] ],
+          "pivotFieldsInfo" : {
+            "COUNT_Id" : [ {
+              "name" : "COUNT_Id_Inbound",
+              "label" : "Number of Interactions by Inbound"
+            }, {
+              "name" : "COUNT_Id_Outbound",
+              "label" : "Number of Interactions by Outbound"
+            } ],
+            "UNIQUE_Case.CaseNumber" : [ {
+              "name" : "UNIQUE_Case.CaseNumber_Inbound",
+              "label" : "Number of Cases by Inbound"
+            }, {
+              "name" : "UNIQUE_Case.CaseNumber_Outbound",
+              "label" : "Number of Cases by Outbound"
+            } ],
+            "COUNT_Calculated_PNR" : [ {
+              "name" : "COUNT_Calculated_PNR_Inbound",
+              "label" : "#PNR by Inbound"
+            }, {
+              "name" : "COUNT_Calculated_PNR_Outbound",
+              "label" : "#PNR by Outbound"
+            } ],
+            "SUM_Case.Power_of_One_Case__c" : [ {
+              "name" : "SUM_Case.Power_of_One_Case__c_Inbound",
+              "label" : "#Number of Cases by Inbound"
+            }, {
+              "name" : "SUM_Case.Power_of_One_Case__c_Outbound",
+              "label" : "#Number of Cases by Outbound"
+            } ]
+          }
+        },
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "PNR Group",
+          "name" : "pnr_group"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET1", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "DeveloperName" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ManagerId", "Id", "Name", "UserRoleId", "Profile_Name__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "ParentRoleId", "RollupDescription", "OpportunityAccessForAccountOwner", "CaseAccessForAccountOwner", "ContactAccessForAccountOwner", "ForecastUserId", "MayForecastManagerShare", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "DeveloperName", "PortalAccountId", "PortalType", "PortalAccountOwnerId" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET4", "LOAD_DATASET5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "UserRole",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN2", "LOAD_DATASET4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ManagerId" ],
+        "rightQualifier" : "Mgr",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "UserRole.ParentRoleId", "UserRole.RollupDescription", "UserRole.OpportunityAccessForAccountOwner", "UserRole.CaseAccessForAccountOwner", "UserRole.ContactAccessForAccountOwner", "UserRole.MayForecastManagerShare", "UserRole.LastModifiedDate", "UserRole.LastModifiedById", "UserRole.SystemModstamp", "UserRole.PortalAccountId", "UserRole.PortalType", "UserRole.PortalAccountOwnerId" ]
+        }
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "DROP_FIELDS0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Profile_Name__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Qantas CC Consultant", "Qantas CC Customer Specific Needs", "Qantas CC Journey Manager", "Qantas CC Operational Manager", "Qantas CC Team Lead", "Qantas Pre Journey CC Consultant" ]
+        } ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "user and user roles",
+          "name" : "user_and_user_roles"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Task",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 672,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Edit Attributes"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES2" : {
+            "label" : "Edit Attributes"
+          },
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "EDIT_ATTRIBUTES0"
+        }, {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "EDIT_ATTRIBUTES1"
+        }, {
+          "source" : "EDIT_ATTRIBUTES1",
+          "target" : "EDIT_ATTRIBUTES2"
+        }, {
+          "source" : "EDIT_ATTRIBUTES2",
+          "target" : "FORMULA2"
+        }, {
+          "source" : "FORMULA2",
+          "target" : "BUCKET0"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "Cases with Tasks",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 952
+      },
+      "FILTER1" : {
+        "label" : "Filter 1",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "AGGREGATE0" : {
+        "label" : "Aggregate 0",
+        "type" : "AGGREGATE",
+        "top" : 252.10000000000002,
+        "left" : 812.1,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "PNR Group",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 952
+      },
+      "JOIN1" : {
+        "label" : "Join 1",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 252
+      },
+      "LOAD_DATASET3" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 391.7,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET5" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 672,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 252
+      },
+      "JOIN3" : {
+        "label" : "Join 3",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 392
+      },
+      "TRANSFORM1" : {
+        "label" : "Transform 1",
+        "type" : "TRANSFORM",
+        "top" : 532,
+        "left" : 532,
+        "graph" : {
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER2" : {
+        "label" : "Filter 2",
+        "type" : "FILTER",
+        "top" : 532,
+        "left" : 672
+      },
+      "OUTPUT2" : {
+        "label" : "Output 2",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 812
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER1"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN3",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "FILTER2"
+    }, {
+      "source" : "FILTER2",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "AGGREGATE0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

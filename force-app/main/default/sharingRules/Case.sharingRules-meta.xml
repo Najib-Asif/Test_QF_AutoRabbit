@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>AAQ_Read_Only</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Read Only of Ask a Question for entire QDC group</description>
+        <label>AAQ Read Only</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Knowledge Request,Ask A Question: Service Delivery,Service Delivery</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Access_to_Accelya_vendor_for_ADM_ACM_Cases</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Access to External Vendor &quot;Accelya&quot; for Service Request ADM/ACM cases</description>
+        <label>Access to Accelya vendor for ADM ACM Cases</label>
+        <sharedTo>
+            <role>QF_Support_Agency_Support_Accelya</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Vendor__c</field>
+            <operation>equals</operation>
+            <value>Accelya</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Access_to_Nikki_Suters_Sly</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Access to Nikki Suters Sly</label>
+        <sharedTo>
+            <group>Access_to_Nikki_Suters</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Dealing Model Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Status</field>
+            <operation>equals</operation>
+            <value>with Deal Optimisation for processing,with Deal Optimisation - INT Model</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Access_to_Specific_Needs</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Access to Specific Needs</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_SN</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Needs</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Access_to_WNS_Vendor_for_ADM_ACM_cases</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Access to external vendor &quot;WNS&quot; for Service Request ADM/ACM cases</description>
+        <label>Access to WNS Vendor for ADM ACM cases</label>
+        <sharedTo>
+            <role>QF_Support_Agency_Support_WNS</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Vendor__c</field>
+            <operation>equals</operation>
+            <value>WNS (World Network Services)</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Corporate_Scheme</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Corporate Scheme</label>
+        <sharedTo>
+            <group>Sales_Solution_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Sales Offers Request,Corporate Scheme Service Request,Frequent Flyer Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Freight_Case_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Freight - Allow all Service users to have read/write access to Freight cases</description>
+        <label>Freight Case Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Freight Track &amp; Trace Exceptions,Freight Shipment,Freight Email to Case,Qantas Freight,Freight Claims,Freight Query,Freight Feedback</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>GSA_Case_Sharing_to_GSA_Roles_Subordinates</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>GSA Case Sharing to GSA Roles &amp; Subordinates</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>User_Type__c</field>
+            <operation>equals</operation>
+            <value>GSA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>GSA_Deal_Support_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>GSA Deal Support Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_Deal_Support</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Deal Support Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Type__c</field>
+            <operation>equals</operation>
+            <value>GSA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Non_QCC_Read_Only</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>All cases for Non Customer Connect Record Type to be shared as Read Only with Non Customer Customer Roles and Subordinates</description>
+        <label>Non QCC Read Only</label>
+        <sharedTo>
+            <group>Non_QCC</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>CCC Insurance Letter Case,CCC VIP Assistance,QCC Elite Process,CCC Complaints,CCC Compliment,CCC Medical,CCC On The Spot Recovery,CCC Query,QCC Migrated Case,CCC Baggage,CCC Further Action Required,Specific Needs</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Owner_in_Group_All_UK_Users</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Owner in Group: All UK Users</label>
+        <sharedTo>
+            <group>All_UK_Users</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Freight Track &amp; Trace Exceptions,Freight Claims,Freight Query,Freight Shipment,Freight Email to Case,Freight Feedback</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>CCC Insurance Letter Case,CCC Email Bounced Back,CCC VIP Assistance,QCC Elite Process,CCC Compliment,CCC Query,QCC Migrated Case,CCC Further Action Required,Specific Needs,CCC Complaints,CCC Medical,CCC On The Spot Recovery,CCC Baggage</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Owner_in_Role_and_Subordinates_QF_INT_Sales_North_America_NZ</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Owner in Role and Subordinates: QF-INT-Sales-North America-NZ</label>
+        <sharedTo>
+            <group>NZ_Sales_Support</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Freight Track &amp; Trace Exceptions,Freight Claims,Freight Query,Freight Shipment,Freight Email to Case,Freight Feedback</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>CCC Insurance Letter Case,CCC Email Bounced Back,CCC VIP Assistance,QCC Elite Process,CCC Compliment,CCC Query,QCC Migrated Case,CCC Further Action Required,Specific Needs,CCC Complaints,CCC Medical,CCC On The Spot Recovery,CCC Baggage</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Agency_Credit_Case_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QAC</description>
+        <label>QAC Agency Credit Case Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_Agency_Credit_Approval_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Account Maintenance</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_CaseQICTransferAccess</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CaseQICTransferAccess</label>
+        <sharedTo>
+            <group>All_Groups_QIC</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Master Operational Waiver,Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QANTAS_VIP_Team_Cases</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Elite Process and Assistance Recordtypes  should only be visible and edited by  VIP Team</description>
+        <label>QANTAS_VIP_Team_Cases</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC VIP Assistance,QCC Elite Process</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Read_Only_Access_For_CCC_Voice</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>QCC Read Only Access For CCC Voice</label>
+        <sharedTo>
+            <group>Qantas_CC_Journey_Manager_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Voice</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Read_Only_for_non_Sensitive_Case</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>QCC: grant read only access to Account Managers for QCC Cases that have not been marked as Sensitive</description>
+        <label>QCC Read Only for non Sensitive Case</label>
+        <sharedTo>
+            <group>Non_QCC_Account_Managers</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Insurance Letter Case,CCC Offload,CCC Complaints,CCC Compliment,CCC Medical,CCC On The Spot Recovery,CCC Event,CCC Query,QCC Migrated Case,CCC Baggage,CCC Further Action Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Read_Only_for_non_Sensitive_Case_SND</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>QCC: grant read only access to Account Managers for QCC Cases that have not been marked as Sensitive</description>
+        <label>QCC Read Only for non Sensitive Case</label>
+        <sharedTo>
+            <group>Non_QCC_Account_Managers</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Insurance Letter Case,CCC VIP Assistance,CCC Compliment,CCC Event,CCC Query,QCC Migrated Case,CCC Further Action Required,Specific Needs,CCC Offload,CCC Complaints,CCC Medical,CCC On The Spot Recovery,CCC Baggage</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Non_Sensitive_Cases_to_Non_QCC_Users</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>QCC Share Non Sensitive Cases to Non QCC Users</label>
+        <sharedTo>
+            <group>QCC_Cases_for_Non_QCC_Users_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Insurance Letter Case,CCC Offload,CCC Email Bounced Back,CCC Complaints,CCC Compliment,CCC Medical,CCC On The Spot Recovery,CCC Event,CCC Query,QCC Migrated Case,CCC Baggage,CCC Further Action Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Specific_Needs_Cases</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share Specific Needs Case to Specific Needs roles and subordinates</description>
+        <label>QCC Share Specific Needs Cases</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_OM_SN_TL</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Needs</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_read_write_access_to_all_subordinates_of_QF_QDC_OM</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>All QCC and CCC record types shared with roles and subordinates of QF-QDC-OM. Built as part of CRM-5553</description>
+        <label>QCC read write access to all subordinates of QF-QDC-OM</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_OM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Insurance Letter Case,CCC Offload,CCC Email Bounced Back,QCC Sensitive Case,QCC Elite Process,CCC Compliment,CCC Complaints,CCC Medical,CCC On The Spot Recovery,CCC Query,CCC Baggage,CCC Further Action Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_QDC_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QF-QDC Case Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Insurance Letter Case,CCC Compliment,CCC Event,CCC Query,CCC Further Action Required,CCC Voice,CCC Offload,CCC Complaints,CCC Medical,CCC On The Spot Recovery,Disruption,CCC Baggage,CCC Cover Refund Approval</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_QDC_OM_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QF-QDC-OM Case Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_OM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Insurance Letter Case,CCC Offload,CCC Compliment,CCC Complaints,CCC On The Spot Recovery,CCC Event,CCC Query,CCC Baggage,CCC Further Action Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>notEqual</operation>
+            <value>00G900000039BhkEAE,00G900000039BhlEAE,00G900000039BhmEAE,00G900000039BhnEAE,00G900000039BiSEAU,00G900000039BiTEAU,00G900000039BiUEAU,00G900000039BiVEAU,00G900000039BiWEAU,00G900000039BiXEAU,00G900000039BicEAE,00G900000039BidEAE,00G900000039</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>notEqual</operation>
+            <value>00G2v000003RfvwEAC,00G2v000003RfvyEAC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Sensitive_Case_for_VIP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>If Sensitive Cases are checked, share with VIP</description>
+        <label>Sensitive Case for VIP</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Service_Delivery</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Full access of Service Delivery Cases just for the team only</description>
+        <label>Service Delivery</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_Service_Delivery</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Knowledge Request,Ask A Question: Service Delivery,Service Delivery</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Service_Delivery_Team_leads_access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Service Delivery Team leads access</label>
+        <sharedTo>
+            <group>Service_Delivery_Read_Write</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Ask A Question: Service Delivery</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_CCC_VIP_Assistance_with_QCC</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>To share CCC VIP Assistance, case records</description>
+        <label>Share CCC VIP Assistance with QCC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC VIP Assistance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_QCC_cases_with_QCC_team_Leaders</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>To share QCC cases with Team Leaders</description>
+        <label>Share QCC cases with QCC team Leaders</label>
+        <sharedTo>
+            <group>QCC_Team_Leaders</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Insurance Letter Case,CCC VIP Assistance,QCC Elite Process,CCC Compliment,CCC Query,CCC Further Action Required,CCC Offload,CCC Complaints,CCC Medical,CCC On The Spot Recovery,Disruption,CCC Baggage,CCC Cover Refund Approval</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Sensitive_Parent_Case_To_All_Consultants</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>CRM-6185: Sensitive Case Visibility</description>
+        <label>Share Sensitive Parent Case To All Consultants</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>QCC Sensitive Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CCC_And_B_Case_Type__c</field>
+            <operation>equals</operation>
+            <value>Parent</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Specific_Needs_Cases_With_CC_Journey_Manager_Profile</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>JIra: CRM-6548 Flight Events and Specific Needs Access</description>
+        <label>Share Specific Needs Cases With CC Journey Manager Profile</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_CJM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Specific Needs</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_VIP_Assistance_Cases_to_Sydney_CCAT_Users</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>CRM-6547: Provide VIP Assistance cases visibility to SYD CCAT users</description>
+        <label>Share VIP Assistance Cases to Sydney CCAT Users</label>
+        <sharedTo>
+            <group>CCAT_Sydney_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC VIP Assistance</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_sensitive_cases_with_CCAT_and_Fulfilment</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share sensitive cases with CCAT and Fulfilment</label>
+        <sharedTo>
+            <group>CCAT_and_Fulfilment_Team</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>QCC Sensitive Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Sharing_Cases_for_SBT_type_to_group_Groups_SBT</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Sharing Cases for SBT type to group Groups SBT</label>
+        <sharedTo>
+            <group>Groups_SBT</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Type</field>
+            <operation>equals</operation>
+            <value>SBT</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>System_Admin_Cases_share_with_GSA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>System Admin Cases share with GSA</description>
+        <label>System Admin Cases share with GSA</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Type</field>
+            <operation>equals</operation>
+            <value>Service Request,System Enhancement,System Issues</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sub_Type_1__c</field>
+            <operation>equals</operation>
+            <value>Sales and Distribution</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>To_share_records_with_QIS_Operations_team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>To share records with QIS Operations team</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME_QIS_Operations</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>DRA Request,Agency Development,PRISM Request,Frequent Flyer Request,Dealing Model Request,Chairmans Lounge Renewal,Gateway Support,SME Customer Support,Ticketing Authority,Account Handover,Account Review Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sensitive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_QF_DOM_Sales_AP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Access to QF-DOM-Sales-AP</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_AP_Regional</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_AP_Regional</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_Sys_Enhancement_Queue</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Access to Sys Enhancement Queue</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_OM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <queue>QCC_Enhancements_Review</queue>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_US_Sales_Support_to_view_edit_each_other_s_Cases</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Access to US Sales Support to view/edit each other&apos;s Cases</label>
+        <sharedTo>
+            <group>All_US_Users</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>All_US_Users</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Case_Sharing_with_QIS_QA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Case Sharing with QIS QA for cases owned by QIS members</description>
+        <label>Case Sharing with QIS QA</label>
+        <sharedTo>
+            <group>QIS_QA_Group</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>SME</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>NZ_Sales_Support_Edit_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>NZ - Sales Support to have access to edit each other&apos;s Cases</description>
+        <label>NZ - Sales Support Edit Access</label>
+        <sharedTo>
+            <group>NZ_Sales_Support</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>NZ_Sales_Support</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

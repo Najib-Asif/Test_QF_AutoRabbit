@@ -1,0 +1,94 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" controller="QL_ContractHealthIndicatorController" access="global">
+    <aura:attribute name="sObjectName" type="String" default="Contract__c" description="API name of record on which this component is hosted." />
+    <aura:attribute name="Legend" type="String" description="Legend to display" />
+    
+    <aura:attribute name="perText" type="String" default="0%" description="Text to display inside circle. It is auto calculated field and used internally." />
+    <aura:attribute name="cirDeg" type="String" default="0" description="Degree of Progress to show. It is auto calculated field and used internally." />
+    
+    <aura:attribute name="theme" type="String" default="green" description="Theme of Circular Progress Bar. Possible values are blue, green, orange." />
+    <aura:attribute name="size" type="String" default="small" description="Size of Circular Progress Bar. Possible values are small, medium, big." />
+    
+    <!-- attributes for health indicator calculation-->
+    <aura:attribute name="dealCase" type="String"/>
+    <aura:attribute name="attachment" type="String"/>
+    <aura:attribute name="grpTravelOffer" type="String"/>
+    <aura:attribute name="contractPayment" type="String"/>
+    <aura:attribute name="contractExist" type="String"/>
+    <aura:attribute name="conType" type="String"/>
+    <aura:attribute name="proposalType" type="String"/>
+    <aura:attribute name="assetExist" type="String"/>
+    
+    <!--aura system init event handler-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    
+    <lightning:card >
+	<div style="padding-left:30px">
+	<lightning:layout>
+        <!-- div for progress circle-->
+       
+         <div class="slds-align_absolute-left slds-text-title_caps slds-p-bottom_large slds-p-top_large" style="font-size:14px;color:#0000FF;">  
+            <div class="{! ( v.cirDeg >
+                        209 ) ? 'container p50plus '+v.theme+' '+v.size : 'container '+v.theme +' '+v.size }">
+                <span>{!v.perText}</span> 
+                
+                <div class="slice">
+                    
+                    <div class="bar" style="{! '-webkit-transform: rotate('+v.cirDeg+'deg); -moz-transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg); -o-transform: rotate('+v.cirDeg+'deg); transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg);'}"></div>
+                    
+                    <div class="fill"></div>
+                </div>
+            </div>  
+       </div> 
+        <!-- div for progress legend-->
+         <div class="slds-m-left_small legend slds-m-right_small" style="padding-top: 19px;"> 
+            
+            <aura:if isTrue= "{!or(v.proposalType == 'Corporate Airfares',v.proposalType == 'Qantas Business Savings')}">
+                
+                <aura:if isTrue="{!v.conType == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                     <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>                           
+                        
+                    </aura:set>
+                </aura:if> Signed by Customer<br/>
+				
+				<aura:if isTrue="{!v.attachment == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                    </aura:set>
+                </aura:if>Signed Contract Attached<br/>
+				
+                <aura:if isTrue="{!v.dealCase  == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                    </aura:set>
+                </aura:if>Deal Load Case Exists<br/>                
+                
+                
+                <aura:if isTrue="{!v.assetExist == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+						<aura:if isTrue="{!v.assetExist == '0'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/greyimage.png'}"/>
+                            </aura:set>
+                        </aura:if>
+                    </aura:set>
+                </aura:if>Asset Exists<br/>           
+                                   
+              
+                               
+            </aura:if>
+                         
+        </div> 
+		
+		</lightning:layout>
+       </div>
+	   
+    </lightning:card>
+    
+</aura:component>

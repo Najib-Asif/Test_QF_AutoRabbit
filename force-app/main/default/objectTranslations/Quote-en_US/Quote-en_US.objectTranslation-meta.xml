@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <recordTypes>
+        <label><!-- Agency Partnerships --></label>
+        <name>Agency_Partnerships</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type for Freight related Quote --></description>
+        <label><!-- Freight_Quote --></label>
+        <name>Freight_Quote</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- A loyalty commercial quote --></description>
+        <label><!-- Loyalty Commercial --></label>
+        <name>Loyalty_Commercial</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- If the quote is for an Engine as reflective by the tick on Engine flag, its mandatory for you to supply the Engine number and would be great if Stand number is also supplied. --></errorMessage>
+        <name>Freight_Engine_mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- An Accepted Quote already exists for this Opportunity. --></errorMessage>
+        <name>Freight_QuoteAcceptanceCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Quote should not be modified once Opportunity is Closed. --></errorMessage>
+        <name>Freight_QuoteChangedRestriction</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Photos or drawings of Cargo are mandatory on the record given the shipment is deemed oversized, please attach to receive quote. --></errorMessage>
+        <name>Freight_photo_mandate</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the sky pallet id. --></errorMessage>
+        <name>Sky_Pallet_ID</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Coalition_Partnerships --></label>
+        <name>Coalition_Partnerships</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Contract_Execution_Certificate --></label>
+        <name>Contract_Execution_Certificate</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Financial_Services --></label>
+        <name>Financial_Services</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Quote --></label>
+        <name>Generate_Quote</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Hotel_Contract --></label>
+        <name>Hotel_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- QBR --></label>
+        <name>QBR</name>
+    </webLinks>
+</CustomObjectTranslation>

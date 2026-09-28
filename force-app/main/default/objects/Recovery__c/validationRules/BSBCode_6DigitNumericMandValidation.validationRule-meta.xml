@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BSBCode_6DigitNumericMandValidation</fullName>
+    <active>true</active>
+    <description>Branch number should be 6 digit numeric for Payment currencies AUD and NZD</description>
+    <errorConditionFormula>AND(
+ISCHANGED(Branch_Number_BSB_Sort_Code__c),
+Payment_Details_Added_Manually__c,
+    $Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+    $Profile.Name &lt;&gt; &quot;Qantas System Administrator&quot;,
+    $Profile.Name &lt;&gt; &quot;Qantas System Admin - Freight&quot;,
+    $Profile.Name &lt;&gt; &quot;Qantas System Admin - QCC&quot;,
+    $Profile.Name &lt;&gt; &quot;Qantas System Admin - SND&quot;,
+    OR(
+        ISPICKVAL(Type__c, &apos;Payment (EFT)&apos;),
+        ISPICKVAL(Type__c, &apos;Ticket Refund EFT&apos;)
+    ),
+    OR(
+        ISPICKVAL(Original_Currency__c, &apos;AUD Australian Dollar&apos;),
+        ISPICKVAL(Original_Currency__c, &apos;NZD New Zealand Dollar&apos;)
+    ),
+    OR(ISBLANK(Branch_Number_BSB_Sort_Code__c),
+    NOT(REGEX(Branch_Number_BSB_Sort_Code__c, &apos;^[0-9]{6}$&apos;)))
+)</errorConditionFormula>
+    <errorDisplayField>Branch_Number_BSB_Sort_Code__c</errorDisplayField>
+    <errorMessage>Branch number should be 6 digits for the selected country</errorMessage>
+</ValidationRule>

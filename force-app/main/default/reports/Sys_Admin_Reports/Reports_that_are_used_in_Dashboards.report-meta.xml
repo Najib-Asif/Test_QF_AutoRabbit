@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Report$Name</field>
+    </columns>
+    <columns>
+        <field>Report.DashboardComponents$Dashboard</field>
+    </columns>
+    <columns>
+        <field>Report.DashboardComponents$DashboardColumn</field>
+    </columns>
+    <columns>
+        <field>Report.DashboardComponents$Id</field>
+    </columns>
+    <crossFilters>
+        <operation>with</operation>
+        <primaryTableColumn>Report$Id</primaryTableColumn>
+        <relatedTable>DashboardComponent</relatedTable>
+        <relatedTableJoinColumn>CustomReport</relatedTableJoinColumn>
+    </crossFilters>
+    <currency>AUD</currency>
+    <description>All reports that are referred in dashboards.</description>
+    <format>Tabular</format>
+    <name>Reports that are used in Dashboards</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Reports_used_in_Dashboards__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Report$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

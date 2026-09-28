@@ -1,0 +1,527 @@
+{
+  "version" : "62.0",
+  "nodes" : {
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "QCC_IVR_Selection__c", "WhoId", "WhatId", "Subject", "Status", "Description", "CreatedDate", "CallType", "Subtype__c", "Task_type__c", "Status__c", "QCC_Call_Reason__c", "QCC_Classification__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Task",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Task"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "MasterRecordId", "CaseNumber", "ContactId", "AccountId", "ParentId", "Type", "RecordTypeId", "Status", "Reason", "Origin", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "IsEscalated", "OwnerId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "ContactEmail", "Frequent_Flyer_Number__c", "Contact_Fullname__c", "Power_of_One_Case__c", "Sub_Type_1__c", "Sub_Type_2__c", "Created_by_Role__c", "Aircraft_Type_Code__c", "Arrival_Airport_Code__c", "Arrival_Airport__c", "Booking_PNR__c", "Category__c", "ClosedByLocation__c", "Departure_Airport_Code__c", "Departure_Airport__c", "Flight_Number__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Owner_City__c", "Passenger_Id__c", "Record_Type__c", "Recovery_Quantity__c", "Recovery_Value__c", "Sub_Category__c", "Case_Owner_Manager__c", "CCC_R1_CCAT_Type__c", "Case_Status__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1683244800000" ]
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1683244800000" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Voice" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "CommentBody", "CreatedDate" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseComment",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseComment"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER3", "FILTER2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Task",
+        "rightKeys" : [ "WhatId" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case w/wo Tasks",
+          "name" : "Case_w_wo_Tasks"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER4" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET4" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1683244800000" ]
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER3", "FILTER4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Comment",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case w/wo Comments",
+          "name" : "Case_w_wo_Comments"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "FILTER2" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Task",
+        "rightKeys" : [ "WhatId" ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "CreatedDate", "Flight_Event__c", "Case__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case_Flight_Event__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case_Flight_Event__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "CreatedDate" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Event__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Event__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET5", "FILTER5" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Flight_Event__c" ],
+        "rightQualifier" : "Event",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FILTER5" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1732492800000" ]
+        } ]
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "JOIN3", "JOIN4" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "FlightEvent",
+        "rightKeys" : [ "Case__c" ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "JOIN5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case with Flight Event and Task",
+          "name" : "Case_with_Flight_Event_and_Task"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET1" : {
+        "label" : "Task",
+        "type" : "LOAD_DATASET",
+        "top" : 532.3,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Cases Since ADT",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 392,
+        "left" : 252
+      },
+      "FILTER2" : {
+        "label" : "Tasks since ADT",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532.3,
+        "left" : 252.2
+      },
+      "LOAD_DATASET3" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 252.3,
+        "left" : 112.4,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 392
+      },
+      "FILTER3" : {
+        "label" : "Voice Cases",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 392,
+        "left" : 672
+      },
+      "LOAD_DATASET4" : {
+        "label" : "CaseComment",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Task to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 812
+      },
+      "OUTPUT0" : {
+        "label" : "Case w/wo Tasks",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 952
+      },
+      "FILTER4" : {
+        "label" : "Comments since ADT",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "JOIN2" : {
+        "label" : "Comments to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 813.6
+      },
+      "OUTPUT1" : {
+        "label" : "Case w/wo Comments",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 953.6
+      },
+      "JOIN3" : {
+        "label" : "Task to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 671.4,
+        "left" : 531.1
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Case_Flight_Event__c",
+        "type" : "LOAD_DATASET",
+        "top" : 672.3,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET6" : {
+        "label" : "Event__c",
+        "type" : "LOAD_DATASET",
+        "top" : 812.3,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN4" : {
+        "label" : "Flight Event Name",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672,
+        "left" : 252
+      },
+      "FILTER5" : {
+        "label" : "Since 2024 11 26",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 812,
+        "left" : 253.3
+      },
+      "JOIN5" : {
+        "label" : "Flight Event to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 811.9,
+        "left" : 532.2
+      },
+      "OUTPUT2" : {
+        "label" : "Case with Flight Event and Task",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 812,
+        "left" : 672
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER2"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER3",
+      "target" : "JOIN1"
+    }, {
+      "source" : "FILTER2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "FILTER4"
+    }, {
+      "source" : "FILTER4",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN1",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN2",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN3"
+    }, {
+      "source" : "FILTER2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER3"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN4"
+    }, {
+      "source" : "FILTER5",
+      "target" : "JOIN4"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "FILTER5"
+    }, {
+      "source" : "JOIN3",
+      "target" : "JOIN5"
+    }, {
+      "source" : "JOIN4",
+      "target" : "JOIN5"
+    }, {
+      "source" : "JOIN5",
+      "target" : "OUTPUT2"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

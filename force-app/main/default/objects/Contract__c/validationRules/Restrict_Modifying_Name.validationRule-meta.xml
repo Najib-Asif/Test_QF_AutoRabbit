@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Modifying_Name</fullName>
+    <active>true</active>
+    <description>Once the Contract is signed by customer, name change is not allowed.</description>
+    <errorConditionFormula>AND( 
+NOT($Setup.EnableValidationRule__c.VR_Restrict_Modifying_Name__c),
+OR(
+ISPICKVAL( Status__c , &apos;Signed by Customer&apos;), 
+ISPICKVAL( Status__c , &apos;Rejected - Customer&apos;), 
+ISPICKVAL( Status__c , &apos;Rejected – Legal&apos;), 
+ISPICKVAL( Status__c , &apos;Rejected - Internal&apos;)
+), 
+ISCHANGED( Name ),
+NOT ($Profile.Name = &apos;System Administrator&apos;), /*System Administrator*/
+NOT ($Profile.Name = &apos;Qantas System Administrator&apos;), 
+NOT ($Profile.Name = &apos;Qantas System Admin - Freight&apos;), 
+NOT ($Profile.Name = &apos;Qantas System Admin - QCC&apos;), 
+NOT ($Profile.Name = &apos;Qantas System Admin - SND&apos;), 
+NOT ( $Profile.Id = &apos;00e90000001PjFd&apos;) /*QL Qantas Sales*/
+)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Can&apos;t change the Name since the record is locked</errorMessage>
+</ValidationRule>

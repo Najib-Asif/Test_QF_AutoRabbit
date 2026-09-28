@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Article__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( RecordType.DeveloperName = &apos;Informational_Article&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1657672234000/Informational&quot;, &apos;Informational&apos;),
+IF( RecordType.DeveloperName = &apos;Qantas_S_D&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1657672234000/Informational&quot;, &apos;Informational&apos;),
+IF(RecordType.DeveloperName = &apos;Marketing_and_Promotional&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1657764472000/MarketingPromo?&quot;, &apos;MarketingPromo&apos;),
+IF(RecordType.DeveloperName = &apos;Internal_Noticeboard&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1659090689000/Natmemo?&quot;, &apos;Natmemo&apos;),
+IF(RecordType.DeveloperName = &apos;Policy&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1657774515000/Policy?&quot;, &apos;Policy&apos;),
+IF(RecordType.DeveloperName = &apos;Process_and_Procedure&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1657764430000/Process?&quot;,&apos;Process&apos; ),
+IF(RecordType.DeveloperName = &apos;Triage_Article&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1657764413000/Triage?&quot;,&apos;Triage&apos;),
+IF(RecordType.DeveloperName = &apos;Public_Knowledge_FAQ_s&apos;, IMAGE(LEFT( $Api.Partner_Server_URL_260,FIND( &apos;/services&apos;,$Api.Partner_Server_URL_260))+&quot;resource/1689063652000/PublicFacingFAQ?&quot;,&apos;PublicFacingFAQ&apos;),&apos;Noimage&apos;))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Article</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

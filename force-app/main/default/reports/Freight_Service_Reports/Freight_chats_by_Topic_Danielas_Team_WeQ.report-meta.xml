@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_69940840</developerName>
+        <masterLabel>Daniela&apos;s Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>LiveChatTranscript$Owner</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Daniela Zingovski</sourceValue>
+            </sourceValues>
+            <value>Daniela Zingovski</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>David Koutsouki</sourceValue>
+            </sourceValues>
+            <value>David Koutsouki</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Kristy Newell</sourceValue>
+            </sourceValues>
+            <value>Kristy Newell</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Salwa Sukkar</sourceValue>
+            </sourceValues>
+            <value>Salwa Sukkar</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Sandra Tomasella</sourceValue>
+            </sourceValues>
+            <value>Sandra Tomasella</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Simone Marashlian</sourceValue>
+            </sourceValues>
+            <value>Simone Marashlian</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>LiveChatTranscript$Name</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Case</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Contact</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Owner</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>LiveChatTranscript$Freight_Chat_Topic__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>LiveChatTranscript$Owner.FirstName</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>Automated</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_69940840</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Daniela Zingovski,David Koutsouki,Kristy Newell,Salwa Sukkar,Sandra Tomasella,Simone Marashlian</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>LiveChatTranscript$Freight_Chat_Topic__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_69940840</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Freight chats by Topic - Daniela&apos;s Team</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Live_Chat__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>LiveChatTranscript$LastModifiedDate</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>QCC_BlankLetterhead</letterhead>
+    <name>EFT Authorisation - No Receipts</name>
+    <style>freeForm</style>
+    <subject>Qantas Customer Care - {!Case.CaseNumber}</subject>
+    <textOnly>Ref No: {!Case.CaseNumber}
+
+
+
+Dear {!Case.First_Name__c},
+
+
+Thank you for contacting us.
+
+
+
+-If delay within QF control use:-
+
+
+
+We regret the unexpected expense you incurred while delayed overnight and would be happy to look at this cost for you, up to a total of AU$200 per room for accommodation and AU$50 per person for meals, transfers or incidentals.
+
+
+
+-If cancellation or delay due to weather or air traffic control use:-
+
+
+
+We regret that your flight was delayed overnight due to weather/air traffic control problems.  As these disruptions were outside Qantas’ control, we are unable to reimburse you for the cost of accommodation and meals.  Your travel insurance policy may cover these sorts of situations.  Refer to your insurer to see if you are able to make a claim.  We are happy to assist with providing additional information, if required, about the &lt;cancellation/delay&gt; of your flight if wish to make an insurance claim.
+
+
+
+Again, we would like to apologise for this disruption and any inconvenience it has caused.
+
+
+
+I have attached a form for you to provide your bank account details, so that we can process any reimbursement. When returning the completed form and any supporting documentation, please reply to this email to ensure your information is attached to your current file for processing.
+
+
+
+
+
+Kind regards
+
+
+{!User.FirstName}
+
+
+Qantas Customer Care
+
+
+
+
+
+
+{!Case.Thread_Token}
+
+Qantas Airways Limited, ABN 16 009 661 901
+
+10 Bourke Road Mascot NSW 2020 Australia
+
+
+
+***************************** PLEASE CONSIDER OUR ENVIRONMENT BEFORE PRINTING *****************************
+
+*********************************************** Confidentiality and Privilege Notice **********************************************
+
+This e-mail is intended only to be read or used by the addressee. It is confidential and may contain legally privileged information. If you are not the addressee indicated in this message (or responsible for delivery of the message to such person), you may not copy or deliver this message to anyone, and you should destroy this message and kindly notify the sender by reply e-mail. Confidentiality and legal privilege are not waived or lost by reason of mistaken delivery to you. Qantas Airways Limited ABN 16 009 661 901
+
+***************************************************************************************************************************************</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

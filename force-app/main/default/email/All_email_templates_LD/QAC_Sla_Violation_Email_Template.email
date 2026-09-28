@@ -1,0 +1,49 @@
+<messaging:emailTemplate subject="QAC Case Closure Violation Notification for Case :{!relatedTo.CaseNumber}" recipientType="User" relatedToType="Case" >
+<messaging:htmlEmailBody >
+<p>Hi QACSPVR Team,
+      Below QAC Service Request case has been violated</p>
+<html>
+<style type="text/css">
+            body {font-family: Courier; size: 12pt;}
+            table {
+            border-width: 2px;
+            border-spacing: 5px;
+            border-style: solid;
+            border-color: #000000;
+            background-color: #FFFFFF;
+        }
+        td {
+            border-width: 1px;
+            padding: 4px;
+            border-style: solid;
+            border-color: #000000;
+            background-color: #FFEECC;
+        }
+        th {
+            color: #000000;
+            border-width: 1px ;
+            padding: 4px ;
+            border-style: solid ;
+            border-color: #000000;
+            background-color: #FFFFF0;
+        }
+</style>
+
+ <body>
+  <table border="0">
+   <tr>
+    <th>Case Number</th><th>Account Name</th><th>Origin</th><th>Case Priority</th><th>Case Owner Name</th><th>Status</th><th>Type</th><th>Waiver Type</th>
+   </tr>
+   <tr>
+    <td><a href = "https://qantas.lightning.force.com/{!relatedTo.id}">{!relatedTo.CaseNumber}</a></td><td><a href = "https://qantas.lightning.force.com/{!relatedTo.AccountId}">{!relatedTo.Account.Name}</a></td><td>{!relatedTo.Origin}</td><td>{!relatedTo.Priority}</td><td>{!relatedTo.Owner.Name}</td><td>{!relatedTo.Status}</td><td>{!relatedTo.Type}</td><td>{!relatedTo.Problem_Type__c}</td>
+   </tr>
+  </table>
+  <center>
+    <apex:outputLink value="https://qantas.lightning.force.com">
+      For more detailed information login to Salesforce.com
+    </apex:outputLink>
+  </center>
+ </body>
+</html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

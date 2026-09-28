@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_61541955</developerName>
+        <masterLabel>Teams</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account.Opportunities$Owner.Reporting_Team__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>B&amp;G - Business - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Business Development - Yosu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Government - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - National Manager - Business - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - National Manager - Development &amp; New Business - Yosu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - New Business - Yosu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Darren) - Dean</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Paul) - Dean</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Tim) - Dean</sourceValue>
+            </sourceValues>
+            <value>B&amp;G</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QIS - Acquisition and Growth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS - Retention and Growth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS - Senior Manager</sourceValue>
+            </sourceValues>
+            <value>QIS</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Account$Qantas_Corporate_Identifier__c</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Sub_Type_Level_2__c</field>
+    </columns>
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Owner</field>
+    </columns>
+    <columns>
+        <field>Account$Contract_Start_Date__c</field>
+    </columns>
+    <columns>
+        <field>Account$Contract_End_Date__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Amount</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Incremental_Revenue__c</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Proposed_Market_Share__c</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Proposed_International_Market_Share__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>All New Contract Opportunity starting this FY</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.Opportunities$StageName</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Closed - Accepted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Sub_Type_Level_2__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>New Contract</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>All New Contract Opportunity from thisFY</name>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>Accounts_with_Opportunities__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account$Contract_Start_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2023-06-01</startDate>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Monetary_Refund_Currency_Des</fullName>
+    <active>true</active>
+    <description>when recovery type = Cover Refund, Monetary Value Refund Currency and Description fields are required</description>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+ISPICKVAL( Type__c , &apos;Cover Refund&apos;),
+OR( ISBLANK(Monetary_Value__c),
+ISPICKVAL(Original_Currency__c,&apos;&apos;),ISBLANK(Description__c) )
+)</errorConditionFormula>
+    <errorMessage>Please complete the field Monetary Value, Refund Currency and Description</errorMessage>
+</ValidationRule>

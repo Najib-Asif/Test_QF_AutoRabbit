@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader"  controller="QCC_UpdateEventFlightInfoController" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isVisible" type="boolean" default="true"/>
+    <aura:attribute name="msg" type="String" />
+    
+    <lightning:card title="Flight Information" iconName="utility:info">
+        <aura:set attribute="title">
+            <div class="slds-media__body">
+                <h2>
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                        <span class="slds-text-heading_small">Passenger Information</span>
+                    </a>
+                </h2>
+            </div>
+        </aura:set>
+        
+        <div class="slds-media__body"> 
+            <aura:renderIf isTrue="{!v.isVisible}">
+                <ui:message title="Information" severity="info" closable="false">
+                    {!v.msg}
+                </ui:message>
+                <aura:set attribute="else">
+                    <ui:message title="Error" severity="error" closable="false">
+                        {!v.msg}
+                    </ui:message>	
+                </aura:set>
+            </aura:renderIf>
+        </div>
+    </lightning:card>
+    
+    
+</aura:component>

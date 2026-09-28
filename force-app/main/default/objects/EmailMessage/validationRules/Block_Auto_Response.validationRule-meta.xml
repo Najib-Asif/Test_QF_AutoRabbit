@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block_Auto_Response</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(CONTAINS(Subject, &apos;Out of Office&apos;), CONTAINS( Subject, &apos;Thank you for contacting Glenn Butcher, Member for Gladstone&apos;),  CONTAINS(Subject, &apos;Thank you for contacting the State-Wide Equipment Program (SWEP)&apos;),CONTAINS(Subject, &apos;Auto Response&apos;),CONTAINS(Subject, &apos;Jetstar – We didn t receive your email&apos;),CONTAINS(Subject, &apos;IPTAS receipt&apos;), CONTAINS(Subject, &apos;***AUTO RESPONSE***&apos;), CONTAINS( HtmlBody, &apos;out of the Office&apos;),CONTAINS(Subject, &apos;People and Culture – thank you for your email. [SEC=OFFICIAL]&apos;), CONTAINS(Subject, &apos;Alaska Airlines Customer Care&apos;))</errorConditionFormula>
+    <errorMessage>This is an auto response rule, please ignore.</errorMessage>
+</ValidationRule>

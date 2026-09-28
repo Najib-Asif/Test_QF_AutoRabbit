@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Asia_Budgets</fullName>
+    <columns>CAMPAIGN.NAME</columns>
+    <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+    <columns>CAMPAIGN.START_DATE</columns>
+    <columns>CAMPAIGN.END_DATE</columns>
+    <columns>Total_Campaign_Budgeted_Cost__c</columns>
+    <columns>TOT_BUDGETED_COST</columns>
+    <columns>TOT_ACTUAL_COST</columns>
+    <columns>CAMPAIGN.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CAMPAIGN.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Campaign.Marketing_Parent</value>
+    </filters>
+    <filters>
+        <field>CAMPAIGN.START_DATE</field>
+        <operation>equals</operation>
+        <value>LAST_FISCAL_YEAR,THIS_FISCAL_YEAR</value>
+    </filters>
+    <filters>
+        <field>CAMPAIGN.NAME</field>
+        <operation>contains</operation>
+        <value>FY26 - Sales Support,FY26 - Incentive,FY26 - QF Led,FY27 - Sales Support,FY27 - Incentive,FY27 - QF Led</value>
+    </filters>
+    <label>All Asia Budgets</label>
+</ListView>

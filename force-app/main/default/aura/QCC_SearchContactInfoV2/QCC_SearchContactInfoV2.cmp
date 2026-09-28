@@ -1,0 +1,111 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="QCC_SearchContactInfoController" >
+    <aura:attribute name="firstName" type="String" default=""/>
+    <aura:attribute name="lastName" type="String" default=""/>
+    <aura:attribute name="ffNumber" type="String"/>
+    <aura:attribute name="ffTier" type="String"/>
+    <aura:attribute name="pNR" type="String" default=""/>
+    <aura:attribute name="isdisabled" type = "boolean" default="false"/>
+
+    <aura:attribute name="phone" type="String" default=""/>
+    <aura:attribute name="phone_Country_Code__c" type="String" />
+    <aura:attribute name="phone_Area_Code__c" type="String"/>
+    <aura:attribute name="phone_Line_Number__c" type="String"/>
+    <aura:attribute name="checked" type="boolean" default="false"/>
+    
+    <aura:attribute name="email" type="String" default=""/>
+    <aura:attribute name="capId" type="String"/>
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="cases" type="Case[]"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="address" type="Object"/>
+    <aura:attribute name="ffTierSF" type="String"/>
+    <aura:attribute name="isLivePerson" type="Boolean" default="false"/>
+    <aura:attribute name="flowModalEnabled" type="Boolean" default="false"/>
+    <aura:attribute name="caseDetails" type="Case" default="{sobjectType:'Case'}" />
+    
+    <aura:attribute name="isDisableFFInfo" type="Boolean" default="true"/>
+    <aura:attribute name="isError" type="Boolean" default="false"/>
+    
+    <aura:attribute name="isPhoneNumber" type="Boolean" default="true"/>
+    
+    <aura:registerEvent name="showCaseEvent" type="c:QCC_ShowCasesEvent"/>
+    <aura:registerEvent name="resetEvent" type="c:QCC_ResetEvent"/>
+    <aura:registerEvent name="newCaseEvent" type="c:QCC_CaseSelect_LiveEngage"/>
+    
+    <aura:handler event="c:QCC_ContactInfoEvent" action="{! c.addContactInfo}"/>
+    <aura:handler event="c:QCC_CreateRecordEvent" action="{! c.createRecord}"/>
+    <aura:handler event="c:QCC_ResetFormEvent" action="{! c.doReset}"/>
+    
+    
+    <c:QCC_ShowModal showModal="{! v.showModal}" header="Error" content="Please enter all required fields"/>
+    
+    <aura:if isTrue="{! v.isLoading}">
+        <lightning:spinner variant="brand" alternativeText="Searching..."/>
+    </aura:if>
+    <lightning:card>
+        <aura:set attribute="title">
+            <b>Contact Details Flow</b>
+        </aura:set>
+        <div class="slds-p-around_small">
+            <aura:if isTrue="{! v.isError}">
+                <ui:message title="Error" severity="error" closable="true">
+                    Issue in finding the contact, Please contact Admin.
+                </ui:message>
+            </aura:if>
+            <lightning:input aura:id="firstName" value="{! v.firstName}" label="* First Name"/>
+            <lightning:input aura:id="lastName" value="{! v.lastName}" label="* Last Name"/>
+            <lightning:input aura:id="email" value="{! v.email}" label="Email" type="email" onchange="{! c.removeMsg}"/>
+            <fieldset  aura:id="phoneArea" class="slds-box slds-theme--default flag">
+                <legend id="newsearchform" class="slds-text-heading--small slds-p-vertical--small" style="padding: 5px;">
+                    Phone Details
+                </legend>
+                <div class="slds-form-element__control slds-is-required phone">
+                    <div class="slds-grid slds-grid_pull-padded-medium" style="padding-top: 0px;">
+                        <div class="slds-cols slds-p-horizontal_medium">
+                            <ui:inputRadio aura:id="r0" name="others" label="Mobile" labelClass="slds-radio__label" class="slds-radio" change="{!c.onSelect}" value="{!!v.isPhoneNumber}"/>
+                        </div>
+                        <div class="slds-cols slds-p-horizontal_medium">
+                            <ui:inputRadio aura:id="r1" name="others" label="Phone Number" labelClass="slds-radio__label" class="slds-radio" change="{!c.onSelect}" value="{!v.isPhoneNumber}"/>
+                        </div>
+                    </div>
+                    <div class="slds-form-element__control ">
+                        <div class="slds-grid slds-grid_pull-padded-medium">
+                            <div class="slds-cols slds-p-horizontal_medium">
+                                <lightning:input type="tel" label="Country Code" aura:id="phone1" placeholder="61" value="{!v.phone_Country_Code__c}" onchange="{!c.onPhoneChange}" pattern="[0-9]*" messageWhenPatternMismatch="Numerical Field Only." />
+                            </div>
+                            <div class="slds-cols slds-p-horizontal_medium">
+                                <lightning:input type="tel" label="Area Code" aura:id="phone2" value="{!v.phone_Area_Code__c}" disabled="{!v.checked}" onchange="{!c.onPhoneChange}" pattern="[0-9]*" messageWhenPatternMismatch="Numerical Field Only." />
+                            </div>
+                            <div class="slds-cols slds-p-horizontal_medium">
+                                <lightning:input type="tel" label="Phone Number" aura:id="phone3" value="{!v.phone_Line_Number__c}" onchange="{!c.onPhoneChange}" pattern="[0-9]*" messageWhenPatternMismatch="Numerical Field Only." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <lightning:input aura:id="phone" value="{! v.phone}" disabled="{!v.isDisableFFInfo}" label="Phone Number" type="tel" onchange="{! c.removeMsg}"/>
+            <lightning:input value="{! v.ffNumber}" label="Frequent Flyer Number" disabled="{!v.isDisableFFInfo}"/>
+            <lightning:input value="{! v.ffTierSF}" label="Frequent Flyer Tier" disabled="{!v.isDisableFFInfo}"/>
+        </div>
+        <div class="slds-p-around_small slds-align_absolute-center">
+            <lightning:button label="Reset Form" variant="brand" onclick="{! c.doReset}"/>
+            <lightning:button label="Search Cases" variant="brand" onclick="{! c.doSearch}"/>
+            <aura:if isTrue="{! v.ffNumber}">
+                <lightning:button label="View Contact" variant="brand" disabled="{!v.isdisabled}" onclick="{! c.doOpenContact}"/>
+            </aura:if>
+        </div>
+        <aura:if isTrue="{! v.flowModalEnabled}">
+            <div class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" >
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <div>
+                            <lightning:flow aura:id="flowCreateCase" />  
+                        </div>
+                    </div>                                                                   
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open" id="backGroundSectionId"></div>           
+        </aura:if>
+    </lightning:card>
+    <div aura:id="overlayLib" />
+</aura:component>

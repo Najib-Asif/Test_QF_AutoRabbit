@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_Notification_regarding_Contract_Expiry_in_3_months</fullName>
+        <description>Email Notification regarding Contract Expiry in 3 months</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contract_Owner__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Email_Notification_regarding_Contract_Expiry_in_3_months</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Notification_regarding_Contract_Expiry_in_6_Months</fullName>
+        <description>Email Notification regarding Contract Expiry in 6 Months</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contract_Owner__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantasloyalty.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Email_Notification_regarding_Contract_Expiry_in_6_months</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Account_Owner_of_the_new_agency_contract</fullName>
+        <description>Notify Account Owner of the new agency contract</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>QantasPayments/Contract_Creation_Notification</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Active_Flag_Off1</fullName>
+        <field>Active__c</field>
+        <literalValue>0</literalValue>
+        <name>Active Flag Off1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Active_Flag_On</fullName>
+        <field>Active__c</field>
+        <literalValue>1</literalValue>
+        <name>Active Flag On</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Approve_Rejected_Date</fullName>
+        <field>Approved_Rejected_Date__c</field>
+        <name>Clear Approve/Rejected Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contract_Contracted_Flag_Update</fullName>
+        <field>Contracted__c</field>
+        <literalValue>1</literalValue>
+        <name>Contract Contracted Flag Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contract_Contracted_Flag_Update1</fullName>
+        <description>Make Contracted flag Off</description>
+        <field>Contracted__c</field>
+        <literalValue>0</literalValue>
+        <name>Contract Contracted Flag Update1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contract_Record_Type_Change_AR_LC_QBS</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Qantas_Business_Savings</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Contract Record Type Change AR- L/C(QBS)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contract_Record_Type_Change_AR_L_C_Adh</fullName>
+        <description>Update record type once, the status changes to Approval Required – Legal/ Signature Required by Customer</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Charters_Contract_Legal_Customer_Pending</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Contract Record Type Change AR- L/C(Adh)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contract_Record_Type_Change_Signed_Adho</fullName>
+        <description>Signed by customer &amp; change record type to Charters Contract - Signed by Customer</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Charters_Contract_Signed_by_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Contract Record Type Change Signed(Adho)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contract_Record_Type_Change_Signed_QBS</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>QBS_Signed_by_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Contract Record Type Change Signed(QBS)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contract_Record_Type_Change_Singed_Agen</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Agency_Signed_by_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Contract Record Type Change Singed(Agen)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copy_original_contract_end_date</fullName>
+        <field>Original_Contract_End_Date__c</field>
+        <formula>PRIORVALUE(Contract_End_Date__c)</formula>
+        <name>Copy original contract end date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Increment_Number_of_Extensions</fullName>
+        <description>Incriment Number of Extensions based on date</description>
+        <field>Number_of_Extensions__c</field>
+        <formula>IF(Number_of_Extensions__c&gt;0, Number_of_Extensions__c +1, 1)</formula>
+        <name>Increment Number of Extensions</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QC_Contract_Status_field_update</fullName>
+        <field>Status__c</field>
+        <literalValue>Terminated</literalValue>
+        <name>QC Contract Status field update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QEC_Update_Contract_Status_to_Draft</fullName>
+        <description>update contract status to draft</description>
+        <field>Status__c</field>
+        <literalValue>Draft</literalValue>
+        <name>QEC_Update_Contract_Status_to_Draft</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SeT_Contract_ReportType_As_Legal_Custom</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Corporate_Airfares</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>SeT Contract ReportType As  Legal/Custom</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Contract_Record_type_Signed_by_Cust</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>CA_Signed_by_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Contract Record type-Signed by Cust</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Extended_flag</fullName>
+        <field>Extended__c</field>
+        <literalValue>1</literalValue>
+        <name>Set Extended flag</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_contract_status_to_Approval_Required</fullName>
+        <field>Status__c</field>
+        <literalValue>Approval Required – Legal</literalValue>
+        <name>Set contract status to Approval Required</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_contract_status_to_Rejected_Leagal</fullName>
+        <field>Status__c</field>
+        <literalValue>Rejected – Legal</literalValue>
+        <name>Set contract status to Rejected - Leagal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_status_approved</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Update Approval status to approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Contract_Status</fullName>
+        <description>Update status to Expired</description>
+        <field>Status__c</field>
+        <literalValue>Expired</literalValue>
+        <name>Update Contract Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Valid_Until_Date</fullName>
+        <field>Valid_Until_Date__c</field>
+        <formula>DATE( YEAR( Contract_Start_Date__c) + FLOOR( ( MONTH ( Contract_Start_Date__c ) + 6 - 1 ) / 12 ), MOD( MONTH ( Contract_Start_Date__c ) + 6 - 1 + IF( DAY ( Contract_Start_Date__c) &gt; CASE( MOD( MONTH( Contract_Start_Date__c ) + 6 - 1, 12 ) + 1, 2, 28, 4, 30, 6, 30, 9, 30, 11, 30, 31 ), 1, 0 ), 12 ) + 1, IF( DAY( Contract_Start_Date__c ) &gt; CASE( MOD( MONTH( Contract_Start_Date__c ) + 6 - 1, 12 ) + 1, 2, 28, 4, 30, 6, 30, 9, 30, 11, 30, 31 ), 1, DAY( Contract_Start_Date__c ) ) )</formula>
+        <name>Update Valid Until Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_approval_status_Rejected</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Update approval status to Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_approval_status_to_Recalled</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Recalled</literalValue>
+        <name>Update approval status to Recalled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_approval_status_to_pending</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Update approval status to pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_to_rejected_internal</fullName>
+        <field>Status__c</field>
+        <literalValue>Rejected - Internal</literalValue>
+        <name>Update status to rejected internal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_effective_tier_change_date</fullName>
+        <description>Proposal 2 Tier changes CRM-5209</description>
+        <field>QL_Effective_Tier_Change_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Update the effective tier change date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_to_approval_required_internal</fullName>
+        <field>Status__c</field>
+        <literalValue>Approval Required - Internal</literalValue>
+        <name>Update to approval required internal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>clear_approved_submission_date_date</fullName>
+        <field>Approval_Submission_Date__c</field>
+        <name>clear approved submission date date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>contract_status_on_legal_status_clear</fullName>
+        <field>Status__c</field>
+        <literalValue>Signature Required by Customer</literalValue>
+        <name>contract status on legal status clear</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>QL_Sales_Gen_Deal_Sheet_By_Conga_Trigger</fullName>
+        <apiVersion>64.0</apiVersion>
+        <description>It will invoke the Conga Server, and generate the merge document, and attached the generated document to the Contract record.</description>
+        <endpointUrl>https://workflow.congamerge.com/OBMListener.ashx</endpointUrl>
+        <fields>Conga_Trigger_URL__c</fields>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>congatriggerintegrationuser@qantas.com.au</integrationUser>
+        <name>QL Sales Gen Deal Sheet By Conga Trigger</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Clear Contract legal date fields</fullName>
+        <actions>
+            <name>Clear_Approve_Rejected_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>clear_approved_submission_date_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>contract_status_on_legal_status_clear</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Clear date fields if legal approval is none</description>
+        <formula>AND(ISCHANGED(Legal_Approval__c ),  ISPICKVAL(Legal_Approval__c , &apos;&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Make Account Contracted</fullName>
+        <actions>
+            <name>Active_Flag_On</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Contract_Contracted_Flag_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>&apos;Current&apos; picklist value for status is been used by Loyalty commercial</description>
+        <formula>AND( Contract_Start_Date__c &lt;= TODAY(), Contract_End_Date__c &gt;= TODAY(), OR(ISPICKVAL( Status__c , &apos;Signed by Customer&apos;), ISPICKVAL( Status__c , &apos;Current&apos;)) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Active_Flag_Off1</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Contract_Contracted_Flag_Update1</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Contract__c.Contract_End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Contract Make Account Contracted Flag Off</fullName>
+        <actions>
+            <name>Active_Flag_Off1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Contract_Contracted_Flag_Update1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND( OR(ISPICKVAL( Status__c , &apos;Signed by Customer&apos;),  ISPICKVAL( Status__c , &apos;Signature Required by Customer&apos;)), NOT(AND(TODAY() &gt;= Contract_Start_Date__c, TODAY() &lt;= Contract_End_Date__c)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Make Account Contracted Flag On</fullName>
+        <actions>
+            <name>Active_Flag_On</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Contract_Contracted_Flag_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <description>&apos;Current&apos; value for status is been used by Loyalty commercial</description>
+        <formula>AND(TODAY() &gt;= Contract_Start_Date__c, TODAY() &lt;= Contract_End_Date__c,OR(ISPICKVAL( Status__c , &apos;Signed by Customer&apos;), ISPICKVAL( Status__c , &apos;Current&apos;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Make Account Contracted Scheduled v1</fullName>
+        <active>false</active>
+        <description>&apos;Current&apos; picklist value for status is been used by Loyalty commercial</description>
+        <formula>AND(Contract_End_Date__c &gt;= TODAY(), OR(ISPICKVAL( Status__c , &apos;Signed by Customer&apos;), ISPICKVAL( Status__c , &apos;Current&apos;)) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Active_Flag_On</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Contract_Contracted_Flag_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Contract__c.Contract_Start_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Active_Flag_Off1</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Contract_Contracted_Flag_Update1</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Contract__c.Contract_End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Contract Record Type Change For Approval Pending %28Agency%29</fullName>
+        <actions>
+            <name>Contract_Record_Type_Change_Singed_Agen</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2 OR 4) AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected – Legal</value>
+        </criteriaItems>
+        <description>CRM - 353 once the status is Approval Required - Legal/ Signature required by Customer</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Record Type Change For Customer Or Legal Approval%28Adhoc%29</fullName>
+        <actions>
+            <name>Contract_Record_Type_Change_AR_L_C_Adh</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND (3 OR 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required – Legal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signature Required by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Adhoc</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Account_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Record Type Change For Customer Or Legal Approval%28CA%29</fullName>
+        <actions>
+            <name>SeT_Contract_ReportType_As_Legal_Custom</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required – Legal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signature Required by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Account_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Approval Required - Legal/ Signature required by Customer</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Record Type Change For Customer Or Legal Approval%28QBS%29</fullName>
+        <actions>
+            <name>Contract_Record_Type_Change_AR_LC_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required – Legal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signature Required by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Account_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Approval Required - Legal/ Signature required by Customer</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Record Type Change For Signed By Customer%28Adhoc%29</fullName>
+        <actions>
+            <name>Contract_Record_Type_Change_Signed_Adho</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2 OR 3) AND (4 OR 5) AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected – Legal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Adhoc</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Account_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Record Type Change For Signed By Customer%28CA%29</fullName>
+        <actions>
+            <name>Set_Contract_Record_type_Signed_by_Cust</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2 OR 3) AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected – Legal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Account_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Signed By Customer, Rejected - Customer &amp; Rejected – Legal</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contract Record Type Change For Signed By Customer%28QBS%29</fullName>
+        <actions>
+            <name>Contract_Record_Type_Change_Signed_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2 OR 3) AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signed by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected – Legal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Account_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Signed By Customer, Rejected - Customer &amp; Rejected – Legal</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Increment Number of Extensions</fullName>
+        <actions>
+            <name>Increment_Number_of_Extensions</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Increment Number of Extensions based on date</description>
+        <formula>AND(ISCHANGED(Contract_End_Date__c), NOT(ISNULL(PRIORVALUE(Contract_End_Date__c))),ISPICKVAL(Status__c, &apos;Signed by Customer&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Notify account owner of the new agency contract</fullName>
+        <actions>
+            <name>Notify_Account_Owner_of_the_new_agency_contract</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contract__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency - Signed by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Contract_Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Channel Incentive,Qantas Channel Tech Fund</value>
+        </criteriaItems>
+        <description>Notify the account owner of the new agency contract created by the sales performance manager</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Populate Valid Until Date</fullName>
+        <actions>
+            <name>Update_Valid_Until_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Contract_Start_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Override_Valid_Until_Date__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Populate valid until date for 6 months from contract start date</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QC Contract Termination Status</fullName>
+        <actions>
+            <name>QC_Contract_Status_field_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( RecordType.DeveloperName =&apos;Agency_Signed_by_Customer&apos;,NOT(ISBLANK( Termination_Reason__c ))     )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>QL Update the effective tier change date</fullName>
+        <actions>
+            <name>Update_the_effective_tier_change_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Proposal 2 Tier changes CRM-5209</description>
+        <formula>ISCHANGED( QL_Effective_Tier__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Reminder for Agency Contract Approval Required Pending</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Contract__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </criteriaItems>
+        <description>This is to send the reminder to Approver for Agency Contract which is waiting for action to be taken last 7 days.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Set Email Notification and Assign Task</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Contract__c.Contract_End_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Expired,Terminated</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type_Loyalty__c</field>
+            <operation>equals</operation>
+            <value>Qantas Frequent Flyer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Type_Loyalty__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Rewards</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contract__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Send email notification to Commercial manager  6 &amp; 3 months before contract due to expire.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Email_Notification_regarding_Contract_Expiry_in_6_Months</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Contract_is_due_to_expire</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Contract__c.Contract_End_Date__c</offsetFromField>
+            <timeLength>-180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Email_Notification_regarding_Contract_Expiry_in_3_months</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Contract__c.Contract_End_Date__c</offsetFromField>
+            <timeLength>-90</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Contract_Status</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Contract__c.Contract_End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Set First Time Extension Fields</fullName>
+        <actions>
+            <name>Copy_original_contract_end_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Extended_flag</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Set First Time Extension Fields</description>
+        <formula>AND(ISCHANGED(Contract_End_Date__c), NOT(ISNULL(PRIORVALUE(Contract_End_Date__c))), Extended__c = false, ISPICKVAL(Status__c, &apos;Signed by Customer&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set contract status to Approval Required %E2%80%93 Legal on Legal Approval change</fullName>
+        <actions>
+            <name>Set_contract_status_to_Approval_Required</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contract__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Required</value>
+        </criteriaItems>
+        <description>Set contract status to Approval Required – Legal  on Legal Approval change to Pending</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set contract status to Rejected %E2%80%93 Legal on Legal Approval change</fullName>
+        <actions>
+            <name>Set_contract_status_to_Rejected_Leagal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contract__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <description>Set contract status to Rejected – Legal  on Legal Approval change to Pending</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set contract status to Signature Required by Customer on legal approval change</fullName>
+        <actions>
+            <name>contract_status_on_legal_status_clear</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contract__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <description>Set contract status to Signature Required by Customer on legal approval change to Not Required or Approved</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Contract_is_due_to_expire</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>-1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Contract__c.Contract_End_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Contract is due to expire</subject>
+    </tasks>
+</Workflow>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Contracts_Agreements</fullName>
+    <availability>online</availability>
+    <description>Custom button to be used in Agency Agreements Opportunity</description>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>New Contracts &amp; Agreements</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+var rtype = &apos;Agency - Approval Pending&apos;; 
+
+var query = &quot;SELECT Id, Name FROM RecordType where Name like &apos;%&quot;+rtype+&quot;%&apos; AND sObjectType=&apos;Contract__c&apos; limit 1&quot;; 
+var records = sforce.connection.query(query); 
+var records1 = records.getArray(&apos;records&apos;); 
+var amnt = &apos;{!Opportunity.Amount}&apos;; 
+amnt = amnt.substring(3,amnt.length);
+
+window.top.location.href =&apos;/a08/e?CF00N9000000Dg8UE=&apos;+encodeURIComponent(&quot;{!Opportunity.Name}&quot;)+&apos;&amp;CF00N9000000Dg8UE_lkid={!Opportunity.Id}&amp;CF00N9000000Dg8fG_lkid={!Opportunity.AccountId}&amp;CF00N9000000Dg8fG=&apos;+encodeURIComponent(&quot;{!Opportunity.Account}&quot;)+&apos;&amp;00N9000000Dg8fy=&apos;+amnt+&apos;&amp;00N9000000Dg8fi={!Opportunity.Proposed_Market_Share__c}&amp;00N9000000Dg8fo={!Opportunity.Proposed_International_Market_Share__c}&amp;00N9000000Dg8fh={!Opportunity.Deal_Type__c}&amp;00N9000000Dg8fr={!Opportunity.Proposed_MCA_Routes_Market_Share__c}&amp;RecordType=&apos;+records1[0].Id+&apos;&amp;00N9000000Dg8gG={!Opportunity.Category__c}&amp;retURL={!Opportunity.Id}&amp;nooverride=1&amp;CF00N9000000Dg8fZ=&apos;+encodeURIComponent(&quot;{!Opportunity.Contact__c}&quot;)+&apos;&amp;CF00N9000000Dg8fZ_lkid={!Opportunity.ContactId__c}&amp;nooverride=1&apos;;</url>
+</WebLink>

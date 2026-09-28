@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contracts_Expiring_in_6_Months</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Contract_End_Date__c</columns>
+    <columns>Account__c</columns>
+    <columns>Status__c</columns>
+    <columns>Variation_In_Place__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Contract_End_Date__c</field>
+        <operation>lessOrEqual</operation>
+        <value>NEXT_N_DAYS:180</value>
+    </filters>
+    <filters>
+        <field>Type_Loyalty__c</field>
+        <operation>equals</operation>
+        <value>Qantas Business Rewards</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Superceded,Expired,Terminated</value>
+    </filters>
+    <filters>
+        <field>Contract_End_Date__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>QBR Contracts Expiring in 6 Months</label>
+</ListView>

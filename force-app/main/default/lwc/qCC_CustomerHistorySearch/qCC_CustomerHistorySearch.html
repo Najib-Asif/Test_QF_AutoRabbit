@@ -1,0 +1,46 @@
+<!-- qCC_CustomerHistorySearch.html -->
+<template>
+    <div class="slds-m-around_medium" style="display:block;">
+        <div onkeyup={handleKeyChange}>
+            <lightning-input type="search" class="slds-m-bottom_small" label="Search" value={searchKey}></lightning-input>
+        </div>
+        <template if:true={returnList.data}>
+            <template for:each={returnList.data} for:item="retlist">
+                <lightning-card variant="Narrow" key={keyCounter} title={retlist.tableName} icon-name={retlist.tableIcon}>
+                    <template if:true={retlist.tableVisibility}>
+                        <div key={keyCounter} class={retlist.tableClass}>
+                            <template if:true={retlist.isInfiniteLoadingEnabled}>
+                                <lightning-datatable
+                                    data-id={retlist.tableId}
+                                    key={keyCounter}
+                                    key-field="Id"
+                                    data={retlist.tableData}
+                                    columns={retlist.tableColumns}
+                                    hide-checkbox-column
+                                    show-row-number-column
+                                    enable-infinite-loading
+                                    onloadmore={loadMoreData}>
+                                </lightning-datatable>
+                            </template>
+                            <template if:false={retlist.isInfiniteLoadingEnabled}>
+                                <lightning-datatable
+                                    data-id={retlist.tableId}
+                                    key={keyCounter}
+                                    key-field="Id"
+                                    data={retlist.tableData}
+                                    columns={retlist.tableColumns}
+                                    hide-checkbox-column
+                                    show-row-number-column>
+                                </lightning-datatable>
+                            </template>
+                        </div>
+                        <div key={keyCounter} class="slds-align_absolute-center slds-p-top_small">
+                            {retlist.loadMoreStatusMessage}
+                        </div>
+                    </template>
+                </lightning-card>
+                <br key={keyCounter}/>
+            </template>
+        </template>
+    </div>
+</template>

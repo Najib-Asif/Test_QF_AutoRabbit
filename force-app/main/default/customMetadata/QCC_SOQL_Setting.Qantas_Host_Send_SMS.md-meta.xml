@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Qantas Host Send SMS</label>
+    <protected>false</protected>
+    <values>
+        <field>Batch_Size__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>Filter_Condition__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Module_Name__c</field>
+        <value xsi:type="xsd:string">Qantas Host Send SMS</value>
+    </values>
+    <values>
+        <field>Query_String__c</field>
+        <value xsi:type="xsd:string">SELECT Id, QCC_Cabin__c, QCC_First_Host_Contact__c, QCC_First_Host_Contact__r.QCC_Top_Platinum_One__c, QCC_First_Host_Contact__r.QCC_Qantas_Host_Always_Call__c, QCC_First_Host_Contact__r.Frequent_Flyer_Tier__c, QCC_First_Host_Contact__r.QCC_Tier_Effective_Tier__c, QCC_Departure_Airport__c, QCC_Flight_No__c, QCC_First_Host_Contact__r.QCC_Preferred_Contact_Channel__c, QCC_First_Host_Contact__r.QCC_TECH_TravelSMSPhoneCountryCode__c, QCC_First_Host_Contact__r.QCC_TECH_TravelSMSPhoneNumber__c, QCC_First_Host_Contact__r.QCC_Travel_Email__c FROM QCC_First_Host__c WHERE QCC_TECH_SMS_Need_To_Send__c = true AND QCC_First_Host_Contact__c != null AND QCC_First_Host_Contact__r.QCC_Preferred_Contact_Channel__c = &apos;SMS&apos;</value>
+    </values>
+    <values>
+        <field>Target_Object__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Target_Record_Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

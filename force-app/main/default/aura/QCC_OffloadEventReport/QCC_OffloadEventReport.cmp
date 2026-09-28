@@ -1,0 +1,45 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" 
+                controller="QCC_OffloadEventReportController">
+    <aura:attribute name="gridData" type="List" default="[]"/>    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    
+    <!-- auto refresh section -->
+    <aura:attribute name="record" type="Object" 
+                    description="The record object to be displayed"/>
+    <aura:attribute name="simpleRecord" type="Object" 
+                    description="A simplified view record object to be displayed"/>
+    <aura:attribute name="recordError" type="String" 
+                    description="An error message bound to force:recordData"/>
+    <force:recordData aura:id="record"
+                      layoutType="FULL"
+                      recordId="{!v.recordId}"
+                      targetError="{!v.recordError}"
+                      targetRecord="{!v.record}"
+                      targetFields ="{!v.simpleRecord}"
+                      mode="VIEW"
+                      recordUpdated="{!c.doInit}" />
+    
+    <div class="slds">
+        <table class="slds-table slds-table--bordered">    	
+            <thead>
+                <tr class="slds-text-heading--label">            	
+                    <th ><lightning:buttonIcon iconName="utility:refresh" variant="bare" onclick="{! c.doInit }" alternativeText="Refresh" /></th>  
+                    <th >Target Number</th>  
+                    <th >Accepted</th>  
+                    <th >Pending Number</th>  
+                </tr>        	 
+            </thead>
+            <tbody>       
+                <aura:iteration items="{!v.gridData}" var="row">
+                    <tr class="slds-hint-parent"> 
+                        <td class="firstCol">{!row.cabinClass}</td> 
+                        <td class="col">{!row.targetNumber}</td> 
+                        <td class="col">{!row.accepted}</td> 
+                        <td class="col">{!row.pendingNumber}</td> 
+                    </tr>
+                </aura:iteration>
+                
+            </tbody>    
+        </table>
+    </div>
+</aura:component>

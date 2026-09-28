@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deal_Optimization_can_override_the_Date</fullName>
+    <active>false</active>
+    <description>Only the Deal Optimization can override the Expected completion date</description>
+    <errorConditionFormula>AND(ISCHANGED(Expected_Completion_Date__c), 
+NOT($UserRole.Id = &apos;00E90000001P6KH&apos;),  
+NOT($User.Id = &apos;00590000004hkhl&apos;),   
+NOT($Profile.Name = &quot;System Administrator&quot;), 
+NOT($Profile.Name = &quot;Qantas System Administrator&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - Freight&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - QCC&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - SND&quot;),
+OR(ISPICKVAL(Status,&quot;with Deal Optimisation for processing&quot;),  ISPICKVAL(Status,&quot;with Deal Optimisation - INT Model&quot;)),
+RecordType.DeveloperName == &apos;Dealing_Model_Request&apos;
+)</errorConditionFormula>
+    <errorMessage>Only the Deal Optimization team can override the Expected completion Date</errorMessage>
+</ValidationRule>

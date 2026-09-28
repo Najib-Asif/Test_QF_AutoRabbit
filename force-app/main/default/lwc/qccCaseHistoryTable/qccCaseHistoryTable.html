@@ -1,0 +1,83 @@
+<template>
+    
+
+    <template if:true={isHistoryTypeCon}>
+        <div class="slds-page-header__name-title">
+            <h1 class="slds-p-top_medium slds-p-bottom_large slds-p-left_x-small">
+                <span class="slds-page-header__title" title="CONTACT">CONTACT: {conName}</span>
+            </h1>
+        </div>
+    </template>
+
+
+        <template if:true={caseData}>
+            <template if:true={visible}>
+                <!-- <template lwc:if={isHistoryTypeCon}>
+                        <c-qcc-booking-table
+                            key-field="Id"
+                            data={caseData}
+                            columns={columns}
+                            hide-checkbox-column="true"
+                            sorted-by ={sortedBy}
+                            sorted-direction={sortDirection}
+                            onsort={onHandleSort}
+                            wrap-text-max-lines = "20"
+                            enable-infinite-loading
+                            onloadmore={handleLoadMoreRecords}>            
+                            </c-qcc-booking-table>
+                    </template>
+                    <template lwc:else> -->
+                        <!--<div class="wrapper1">
+                            <div class="div1"></div>
+                        </div>-->
+                        <div class="wrapper2">
+                            <div class="div2">
+                              <!-- Content Here -->
+                                <template lwc:if={isHistoryTypeCon}>
+                                    <c-qcc-booking-table key-field="UniqueNum" data={contactData} columns={columns}
+                                        hide-checkbox-column="true" sorted-by={sortedBy} sorted-direction={sortDirection}
+                                        onsort={onHandleSortContact} wrap-text-max-lines="100" 
+                                        enable-infinite-loading={enableInfineLoading}
+                                        onloadmore={handleLoadMoreRecords} >
+                                    </c-qcc-booking-table>
+                                </template>
+
+                                <template lwc:if={isHistoryTypePNR}>  
+                                    <template lwc:if={caseData}> 
+                                    <template for:each={caseData} for:item="pnrHistory" >
+                                        <div key={pnrHistory.pnrNumber} >
+                                            <h2 class="pnr-number">PNR: {pnrHistory.pnrNumber}</h2>
+                                            <c-qcc-booking-table key-field={pnrHistory.pnrNumber} data={pnrHistory.caseComments} columns={columns}
+                                                hide-checkbox-column="true" sorted-by={sortedBy} sorted-direction={sortDirection}
+                                                onsort={onHandleSort} wrap-text-max-lines="100" enable-infinite-loading={enableInfiniteLoading}
+                                                onloadmore={handleLoadMoreRecords} >
+                                            </c-qcc-booking-table>
+                                        </div>
+                                    </template>  
+                                </template>  
+                                </template>
+
+                            <template if:true={noPNR}>
+                                <template lwc:if={isHistoryTypePNR}>  
+                                    <template lwc:if={caseCommentsData}>
+                                        <div >
+                                            <c-qcc-booking-table key-field="CaseNumber" data={caseCommentsData} columns={columns}
+                                                hide-checkbox-column="true" sorted-by={sortedBy} sorted-direction={sortDirection}
+                                                onsort={onHandleSort} wrap-text-max-lines="100" enable-infinite-loading={enableInfiniteLoading}
+                                                onloadmore={handleLoadMoreRecords} >
+                                            </c-qcc-booking-table>
+                                        </div>
+                                    </template>   
+                                </template>
+                            </template>
+                            </div>
+                        </div>
+                <!-- </template> -->
+            </template>
+        </template>
+    
+    <template if:true={norecord}>
+        <div class="slds-align_absolute-center" style="height:10rem">{displayText}</div>
+    </template>
+
+</template>

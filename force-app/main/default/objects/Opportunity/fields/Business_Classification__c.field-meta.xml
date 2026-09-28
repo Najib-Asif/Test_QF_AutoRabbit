@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Business_Classification__c</fullName>
+    <defaultValue>&quot;New Business&quot;</defaultValue>
+    <description>To capture type of opportunity by account manager</description>
+    <inlineHelpText>New Business - Totally new to this customer and QF, used to be with SQ
+
+Channel Shift - Move one from forwarder to another forwarder  
+
+Retained Business - Existing business won again/retained by customer</inlineHelpText>
+    <label>Business Classification</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New Business</fullName>
+                <default>false</default>
+                <label>New Business</label>
+            </value>
+            <value>
+                <fullName>Retained Business</fullName>
+                <default>false</default>
+                <label>Retained Business</label>
+            </value>
+            <value>
+                <fullName>Channel Shift</fullName>
+                <default>false</default>
+                <label>Channel Shift</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

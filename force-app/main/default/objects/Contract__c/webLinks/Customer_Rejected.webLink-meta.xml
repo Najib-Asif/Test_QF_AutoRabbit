@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Rejected</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Customer Rejected</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+try{ 
+if(&apos;Approval Required – Legal&apos; == &apos;{!Contract__c.Status__c}&apos;){
+        alert(&apos;Legal Approval Required&apos;); 
+}else{
+var conf = confirm(&apos;Please ensure that you’ve synced or uploaded the customer approval email with this contract&apos;); 
+if(conf == true){ 
+    var contract = new sforce.SObject(&quot;Contract__c&quot;);
+    contract.id = &apos;{!Contract__c.Id}&apos;;
+    contract.status__c = &apos;Rejected - Customer&apos;;
+    var result = sforce.connection.update([contract]);
+    window.location.reload();
+}
+}
+}catch(e){ 
+alert(&apos;An Error has Occured. Error:&apos; +e); 
+}</url>
+</WebLink>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>S_D_Service_Request_Queue</fullName>
+    <booleanFilter>(1 AND 2 AND 3 AND 4 AND 5 AND 6)  OR (7 AND 6 AND 1)</booleanFilter>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CRM_Number__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>On_hold_Reason__c</columns>
+    <columns>Created_By_Name__c</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.LAST_UPDATE</columns>
+    <columns>Due_Date__c</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.CLOSED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Service Request,System Issues</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Assigned,Closed,Closed - Completed,Closed - Actioned,Closed - Approved,Closed-Approved</value>
+    </filters>
+    <filters>
+        <field>Created_By_Name__c</field>
+        <operation>notContain</operation>
+        <value>Automated MigrationUser,API Integration</value>
+    </filters>
+    <filters>
+        <field>Sub_Type_1__c</field>
+        <operation>equals</operation>
+        <value>Agency Connect,Sales and Distribution</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>contains</operation>
+        <value>S&amp;D Queue,Katherine Mudge,Rosie Vadala,Tahnee Fomai,Raj Sharma</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Account_Handover</value>
+    </filters>
+    <label>S&amp;D Service Request &amp; System Issues</label>
+    <sharedTo>
+        <role>QF_Support_Commercial_Development</role>
+        <roleAndSubordinatesInternal>QF_Support_Commercial_Development</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

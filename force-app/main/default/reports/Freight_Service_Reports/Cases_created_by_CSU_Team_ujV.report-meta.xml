@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_82029205</developerName>
+        <masterLabel>Duration</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>DURATION</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>3</to>
+            </sourceValues>
+            <value>0 to 3 days</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>3</from>
+                <to>7</to>
+            </sourceValues>
+            <value>4 to 7 days</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>7</from>
+                <to>10</to>
+            </sourceValues>
+            <value>7 to 10 days</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>10</from>
+            </sourceValues>
+            <value>10+ days</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Cases created by CSU Team</description>
+    <filter>
+        <booleanFilter>(1 AND (2 OR 3) AND 4 AND 5) OR 6</booleanFilter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.Freight_Track_Trace_Exceptions,Case.Qantas_Freight,Case.Freight_Claims,Case.Freight_Feedback,Case.Freight_Query,Case.Freight_Shipment,Case.Freight_Email_to_Case,Case.Freight_Invoicing</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CREATED</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Automated Process,System Admin,JOHN HATZIPETROS,DANIELA ZINGOVSKI,JENELLE LYMER,ANTONY GRADY,LOSANA NAULU,MATHEW HOWARD,DAVID KOUTSOUKI,TONI TRPKOVSKI,SANDRA TOMASELLA,STELLA SEDLAK,TINA TRAJKOVSKI,JESMOND SPITERI,NICK MUSOVSKI,SALWA SUE) SUKKAR,KRISTY NEWELL,SIMONE MARASHLIAN,JOANNA EATOCK,VICTOR HENDERSON,BARRY ANNESLEY,LORENZA FOUNDOUKAKIS,SAMANTHA TURNER,JOANNE GARNHAM,GENNARO MEOLI,GAYLEEN KARABELAS,HELENA SLOAN</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Freight CSU AU Queue</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>TYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Freight_Resolve_Comments__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Chat Customer Left Chat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>WEBEMAIL</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>freightcustomerservice@qantas.com.au</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>ORIGIN</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CREATED</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>OWNER</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Cases created by CSU Team</name>
+    <params>
+        <name>units</name>
+        <value>d</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseHistory</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CURFY</interval>
+    </timeFrameFilter>
+</Report>

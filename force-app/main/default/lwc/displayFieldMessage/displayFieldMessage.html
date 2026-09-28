@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Sensitive Contact Message" hide-header lwc:if={contactId}>
+        <lightning-record-edit-form object-api-name="Contact" record-id={contactId} onsubmit={handleSubmit} onsuccess={handleSuccess} onerror={handleError} onload={handleOnload}>
+            <lightning-spinner lwc:if={showSpinner} alternative-text="Loading" size="small"></lightning-spinner>
+            <lightning-messages> </lightning-messages>
+            <template lwc:if={editMode}>
+                <!--<lightning-input-field field-name="Sensitive_Contact_Message__c" class="slds-hide"> </lightning-input-field>-->
+                <lightning-input-rich-text value={richTextVal} onchange={handleRichChange} formats={allowedFormats} label="Sensitive Contact Message" label-visible 
+                    placeholder="Set sensitve contact message here"></lightning-input-rich-text>
+                 <lightning-input-field  field-name="Schedule_Sensitive_Message__c" class="salesforceDateTime" onchange={handleDateTimeChange}></lightning-input-field> 
+                <template lwc:if={showDateValidationMsg}>
+                   <p style="color: red;"> Value must be {dateTime} or later</p>
+                </template>
+                    
+               <!-- <lightning-input type="datetime"  onchange={handleDateTimeChange} name="dateTime" label="Enter Sensitive Message Schedule Date and Time" min={dateTime} timezone="GMT+11:00" value={previousSelectedDateTime}></lightning-input> -->
+                 
+                <lightning-input-field field-name="Sensitive_Contact__c"> </lightning-input-field>
+                <div class="slds-m-top_medium slds-align_absolute-center">
+                    <lightning-button class="slds-m-top_small" label="Cancel" onclick={handleReset}></lightning-button>
+                    <lightning-button class="slds-m-left_small slds-m-top_small" type="submit"
+                        label="Save"></lightning-button>
+                </div>
+            </template>
+            <template lwc:else>
+                <lightning-button-icon lwc:if={hasEditPermission} icon-name="utility:edit"
+                            alternative-text="Edit" variant="bare" class="slds-float_right" title="Edit"
+                            onclick={enableEdit}></lightning-button-icon>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_12-of-12">
+                        <div class="slds-hide"><lightning-output-field field-name="Sensitive_Contact__c" variant="label-hidden"></lightning-output-field></div>
+                       
+                        <template lwc:if={showPlaceholder}>
+                            
+                            <lightning-formatted-text value="Set sensitve contact message here" ></lightning-formatted-text>
+                        </template>
+                        <template lwc:else>
+                          
+                            <lightning-output-field field-name="Sensitive_Contact_Message__c" variant="label-hidden"></lightning-output-field>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </lightning-record-edit-form>
+    </lightning-card>
+
+</template>

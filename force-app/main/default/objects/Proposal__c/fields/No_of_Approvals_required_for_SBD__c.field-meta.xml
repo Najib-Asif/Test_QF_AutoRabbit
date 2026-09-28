@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_Approvals_required_for_SBD__c</fullName>
+    <description>No of Approvals required for SBD for QBS</description>
+    <label>No of Approvals required for SBD</label>
+    <summaryFilterItems>
+        <field>Discount_List__c.Approval_Required_SBD_QBS__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Discount_List__c.Proposal__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

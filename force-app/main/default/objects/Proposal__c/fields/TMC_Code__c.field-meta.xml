@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TMC_Code__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <inlineHelpText>Please use this to select the customer&apos;s TMC which is relevant for this proposal/contract. For the required TMC to appear here for selection, it must be associated with the Customer Account.</inlineHelpText>
+    <label>TMC Relation Code</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Account_Relation__c.Related_Account__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Account__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Account_Relation__c.Relationship__c</field>
+            <operation>equals</operation>
+            <value>Travel Manager Of</value>
+        </filterItems>
+        <filterItems>
+            <field>Account_Relation__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <infoMessage>Please click on &apos;All Fields&apos; option and search for either the TMC Account Name (Primary Account) or Customer Account Name (Related Account) to get the list of all TMCs associated with this Account</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account_Relation__c</referenceTo>
+    <relationshipLabel>Proposals</relationshipLabel>
+    <relationshipName>Proposals</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

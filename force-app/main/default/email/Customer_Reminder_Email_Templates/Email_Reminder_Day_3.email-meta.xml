@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>CRM-8664</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email Reminder - Day 3</name>
+    <style>none</style>
+    <subject>We are waiting to hear from you regarding your case number {!Case.Case_Number__c}</subject>
+    <textOnly>Hi {!Contact.FirstName},
+We’re here to help
+We&apos;re following up as we sent you an email 3 days ago requesting additional information for Customer Care Case {!Case.CaseNumber}.
+As we haven’t heard back from you, let us know if you need more time or If you&apos;re having trouble finding the email we sent.
+If we don&apos;t hear from you within 7 days, your case will be closed automatically.
+We&apos;re committed to resolving your case quickly and efficiently.
+Kind Regards,
+Qantas Customer Care
+
+We look forward to hearing from you soon. Kind regards, Qantas Customer Care
+Qantas Airways Limited, ABN 16 009 661 901 10 Bourke Road Mascot NSW 2020 Australia
+************PLEASE CONSIDER OUR ENVIRONMENT BEFORE PRINTING************ ***************************Confidentiality and Privilege Notice******************************* This e-mail is intended only to be read or used by the addressee. It is confidential and may contain legally privileged information. If you are not the addressee indicated in this message (or responsible for delivery of the message to such person), you may not copy or deliver this message to anyone, and you should destroy this message and kindly notify the sender by reply e-mail. Confidentiality and legal privilege are not waived or lost by reason of mistaken delivery to you. Qantas Airways Limited ABN 16 009 661 901 {!Case.Thread_Token}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

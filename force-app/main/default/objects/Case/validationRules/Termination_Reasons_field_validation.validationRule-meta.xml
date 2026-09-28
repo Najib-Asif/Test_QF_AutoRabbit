@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Termination_Reasons_field_validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPICKVAL(Type  , &apos;Deal Termination&apos;),
+
+OR(ISPICKVAL(ReasonsForTermination__c , &apos;&apos;),
+
+ISBLANK( Reasons_for_Termination__c ),
+ISBLANK( End_Date__c ) ))</errorConditionFormula>
+    <errorMessage>If Type is Deal Termination, Reasons for Termination, Termination Date and Further Justification is mandatory.</errorMessage>
+</ValidationRule>

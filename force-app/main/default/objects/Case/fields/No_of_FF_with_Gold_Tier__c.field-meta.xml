@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_FF_with_Gold_Tier__c</fullName>
+    <description>Field to capture the number of Frequent flyer with Gold Tier</description>
+    <label>No of FF with Gold Tier</label>
+    <summaryFilterItems>
+        <field>Frequent_Flyer_Information__c.Upgrade_Tier_Requested__c</field>
+        <operation>equals</operation>
+        <value>Gold</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Frequent_Flyer_Information__c.Case__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>CRM-9695 This email template is for US Web-to-case Special Moves/Casket form</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Freight USA Web Special Moves/Casket Acknowledgement email</name>
+    <style>none</style>
+    <subject>Qantas Freight Customer Support – Ref No {!Case.CaseNumber}</subject>
+    <textOnly>Thanks for contacting Qantas Freight
+
+We know that saying goodbye to a loved one is hard, and we appreciate how difficult this time will be for the family.
+
+With the added stress of being away from home, we’re here to provide all the support needed to arrange this very sensitive trip.
+
+Rest assured, we&apos;ll arrange to fly the family&apos;s loved one back home and ensure they’re treated with the utmost dignity while in our care and travel with the highest priority throughout the journey.
+
+Because of the nature of this special shipment, we need you to complete the declaration in the attached Human Remains – Special Handling Policy. Simply reply to this email, attaching your completed declaration and we’ll be in touch. You’ll need to include the completed declaration with the casket when you lodge your shipment, so please keep a copy.
+
+We’ve created a reference number for you, {!Case.CaseNumber}. Please quote this if you need to contact us urgently. Our number is +1 800 227 0290 (Toll free within USA only), and we’re available during business hours, or you can email us on qffreightusa@qantas.com.au.
+
+For reference, here are the details you’ve provided us with so far:
+
+Type:  {!Case.Type}
+Subject:  {!Case.Subject}
+Origin:  {!Case.Freight_Origin__c}
+Destination:  {!Case.Freight_Destination__c}
+Lodgement Date and Time:  {!Case.Freight_Lodgement_Date_Time__c}
+Shipment Details:  {!Case.Team_Position__c}
+No. of pieces:  {!Case.Freight_AWB_Pieces__c}
+Est. weight (inc. packaging):  {!Case.Freight_Weight__c}
+Length:  {!Case.FreightLength__c}
+Width:  {!Case.FreightWidth__c}
+Height:  {!Case.FreightHeight__c}
+Passenger Accompanying:  {!Case.No_New_Team__c}
+Let us know how we can help:  {!Case.Description}
+Sender name:  {!Case.SuppliedName}
+Sender number:  {!Case.Business_Phone_Number__c}
+Sender Email:  {!Case.Email__c}
+Receiver name:  {!Case.Assessor_Name__c}
+Receiver number:  {!Case.Default_Business_Phone__c}
+Receiver Email:  {!Case.User_s_Email__c}
+Booking Name:  {!Case.Freight_Customer_Name__c}
+Booking Number:  {!Case.Consultant_Phone__c}
+Booking Email:  {!Case.Consultant_Email__c}
+Booking Account Number:  {!Case.Freight_Customer_No__c}
+Company Name:  {!Case.SuppliedCompany}
+Date/time of Query Submission:  {!Case.CreatedDate}
+
+
+
+
+Thanks for choosing us to help manage this special movement.
+
+
+The Qantas Freight Team
+
+{!Case.Thread_Token}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

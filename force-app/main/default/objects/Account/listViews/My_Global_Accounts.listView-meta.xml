@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Global_Accounts</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Account.Global_Account</value>
+    </filters>
+    <label>My Global Accounts</label>
+    <language>en_US</language>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_DOM_Sales_B_G</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

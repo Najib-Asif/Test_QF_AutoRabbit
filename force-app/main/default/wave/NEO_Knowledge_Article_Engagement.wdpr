@@ -1,0 +1,2483 @@
+{
+  "version" : "66.0",
+  "nodes" : {
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "KnowledgeArticleId", "VersionNumber", "Title", "UrlName", "ArticleNumber", "RecordTypeId" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__kav",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__kav"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN17" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Knowledge_ID_15",
+          "label" : "Knowledge ID 15",
+          "formulaExpression" : "substr(Id, 1, 15)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Knowledge_Article_ID_15",
+          "label" : "Knowledge Article ID 15",
+          "formulaExpression" : "substr(KnowledgeArticleId, 1, 15)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "FORMULA2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "ARTICLE_ID" ],
+        "rightQualifier" : "ArticleDetails",
+        "rightKeys" : [ "Knowledge_Article_ID_15" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET8" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "USER_TYPE",
+          "operator" : "EQUAL",
+          "operands" : [ "A", "G" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Operational_Group__c", "Id", "Username", "LastName", "FirstName", "Name", "IsActive", "UserRoleId", "Location__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FORMULA1", "BUCKET0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "UserRole",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "USER_ID_DERIVED" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "APPEND0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Article Engagement",
+          "name" : "Knowledge_Article_Engagement",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucketV2",
+      "sources" : [ "LOAD_DATASET4" ],
+      "parameters" : {
+        "buckets" : [ {
+          "value" : "Sydney",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-SYD-TL", "QF-QDC-OM-SYD-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Manila",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-MNL-TL", "QF-QDC-OM-MNL-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Suva",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-SUV-TL", "QF-QDC-OM-SUV-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Cape Town",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-CPT-TL", "QF-QDC-OM-CPT-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Hobart",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-HBA-TL", "QF-QDC-OM-HBA-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Special Needs",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-SN-TL", "QF-QDC-OM-SN-TL-USR" ]
+          } ]
+        }, {
+          "value" : "VIP",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-VIP-TL", "QF-QDC-OM-VIP-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Customer Ops",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-Customer Ops", "QF-QDC-Customer Ops-TL", "QF-QDC-Customer Ops-USR" ]
+          } ]
+        }, {
+          "value" : "Commercial Ops",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-Commercial Ops", "QF-QDC-Commercial Ops-TL", "QF-QDC-Commercial Ops-USR" ]
+          } ]
+        }, {
+          "value" : "Service Delivery",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-Service Delivery", "QF-QDC-Service Delivery-TL", "QF-QDC-Service Delivery-TL-USR" ]
+          } ]
+        }, {
+          "value" : "CJM",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-CJM" ]
+          } ]
+        }, {
+          "value" : "Auckland",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-AKL-TL", "QF-QDC-OM-AKL-TL-USR" ]
+          } ]
+        } ],
+        "nullBucket" : "Other",
+        "defaultBucket" : "Other",
+        "passthroughEnabled" : false,
+        "sourceField" : "Name",
+        "targetField" : {
+          "name" : "CallCenter",
+          "label" : "Call Centers"
+        }
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "TIMESTAMP", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "SearchClick",
+          "name" : "SearchClick"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "JOIN9" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Knowledge.Knowledge_Article_ID_15",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "USER_ID" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "User_ID_15" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "APPEND1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Search Clicks",
+          "name" : "Knowledge_Search_Clicks",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "User_ID_15",
+          "label" : "User ID 15",
+          "formulaExpression" : "substr(Id, 1, 15)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "EDIT_ATTRIBUTES9" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "User.LastName",
+          "operator" : "NOT",
+          "operands" : [ "Site Guest User" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "PREVPAGE_ENTITY_ID", "EVENT_TYPE", "PREVPAGE_ENTITY_TYPE", "USER_ID", "TIMESTAMP_DERIVED", "USER_TYPE", "USER_ID_DERIVED", "PAGE_ENTITY_TYPE", "PAGE_URL", "PAGE_ENTITY_ID" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "LightningPageView",
+          "name" : "LightningPageView"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "USER_TYPE",
+          "operator" : "EQUAL",
+          "operands" : [ "Standard" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "PAGE_ENTITY_TYPE",
+          "operator" : "EQUAL",
+          "operands" : [ "Knowledge__ka", "Knowledge__kav" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "PREVPAGE_ENTITY_TYPE",
+          "operator" : "EQUAL",
+          "operands" : [ "Knowledge__ka", "Knowledge__kav" ]
+        } ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN19" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "CLIENT_IP", "USER_TYPE", "USER_ID", "Previous.Knowledge_Article_ID_15", "Previous.Knowledge_ID_15", "Previous.ArticleRecordType.Id", "Previous.RecordTypeId", "Current.Knowledge_Article_ID_15", "Current.Knowledge_ID_15", "User.UserRole.Id", "User.User_ID_15", "User.TimeZoneSidKey", "User.UserRoleId", "User.Id", "PAGE_ENTITY_TYPE", "PREVPAGE_ENTITY_TYPE", "Previous.ArticleRecordType.DeveloperName", "Previous.ArticleRecordType.Name", "Current.ArticleRecordType.DeveloperName", "Current.ArticleRecordType.Name", "Current.ArticleRecordType.Id", "Current.RecordTypeId", "PREVPAGE_ENTITY_ID", "USER_ID_DERIVED", "PAGE_ENTITY_ID", "Current.Id", "Current.KnowledgeArticleId", "Current.Knowledge_Article_Version_ID_15", "Previous.Id", "Previous.KnowledgeArticleId", "Previous.Knowledge_Article_Version_ID_15", "RecordType.Id", "RecordType.KnowledgeArticleId", "RecordType.RecordTypeId", "RecordType.RecordType.Id" ]
+        }
+      }
+    },
+    "SPLIT0" : {
+      "action" : "split",
+      "sources" : [ "EDIT_ATTRIBUTES8" ],
+      "parameters" : {
+        "sourceField" : "PAGE_URL",
+        "delimiter" : "#",
+        "targetFields" : [ {
+          "name" : "Current_URL",
+          "label" : "Current URL"
+        }, {
+          "name" : "In_Page_Redirection",
+          "label" : "In Page Redirection"
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES7" : {
+      "action" : "schema",
+      "sources" : [ "DROP_FIELDS0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordType.RecordType.Name",
+          "newProperties" : {
+            "label" : "Record Type Name",
+            "name" : "RecordType.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES8" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES7" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "User.UserRole.Name",
+          "newProperties" : {
+            "label" : "Role Name",
+            "name" : "UserRole.Name"
+          }
+        } ]
+      }
+    },
+    "JOIN8" : {
+      "action" : "join",
+      "sources" : [ "JOIN11", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "USER_ID" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "User_ID_15" ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "FORMULA12" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Click-Through",
+          "name" : "Knowledge_Click_Through",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "KnowledgeArticle.UrlName", "InnerChildKnowledgeArticleVersionAllStates.Id", "KnowledgeArticle.ArticleNumber", "KnowledgeArticle.Title", "KnowledgeArticle.Id", "KnowledgeArticle.VersionNumber" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "All Knowledge Article Versions",
+          "name" : "All_Knowledge_Article_Versions_MQa"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES5" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Knowledge_Article_Version_ID_15",
+          "label" : "Knowledge Article Version ID 15",
+          "formulaExpression" : "substr(Id, 1, 15)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Knowledge_Article_ID_15",
+          "label" : "Knowledge Article ID 15",
+          "formulaExpression" : "substr(KnowledgeArticleId, 1, 15)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "JOIN9" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET5", "FORMULA5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CLICKED_RECORD_ID" ],
+        "rightQualifier" : "Knowledge",
+        "rightKeys" : [ "Knowledge_Article_Version_ID_15" ]
+      }
+    },
+    "BUCKET3" : {
+      "action" : "bucketV2",
+      "sources" : [ "JOIN18" ],
+      "parameters" : {
+        "buckets" : [ {
+          "value" : "Call Guide",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "000005765", "000005767", "000005772", "000005773", "000005781", "000005927", "000005934", "000005935", "000005938", "000005941", "000005946", "000005959", "000005967", "000005968", "000005971", "000005972", "000005976", "000005979", "000005983", "000005984", "000005985", "000005986", "000005987", "000005988", "000005989", "000005991", "000005992", "000006017", "000006018", "000006021", "000006023", "000000064", "000006025", "000006073", "000006074", "000006098", "000006190", "000006214", "000006236", "000006244", "000006256", "000006257", "000006295", "000006314", "000006323", "000006326", "000006330", "000015938", "000026069", "000035935", "000045967", "000055946", "000065934" ]
+          } ]
+        } ],
+        "nullBucket" : "Other",
+        "defaultBucket" : "Other",
+        "passthroughEnabled" : false,
+        "multiValueResult" : false,
+        "sourceField" : "Knowledge.ArticleNumber",
+        "targetField" : {
+          "name" : "Article_Group",
+          "label" : "Article Group"
+        }
+      }
+    },
+    "DROP_FIELDS3" : {
+      "action" : "schema",
+      "sources" : [ "BUCKET3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "CLICKED_RECORD_ID", "USER_ID", "ORGANIZATION_ID", "Knowledge.Id", "Knowledge.Knowledge_Article_Version_ID_15", "User.UserRoleId", "User.Id", "Knowledge.Knowledge_Article_ID_15", "User.User_ID_15", "Knowledge.KnowledgeArticleId", "User.UserRole.Id", "RecordType.Id", "RecordType.KnowledgeArticleId", "RecordType.RecordTypeId", "RecordType.RecordType.Id" ]
+        }
+      }
+    },
+    "EDIT_ATTRIBUTES6" : {
+      "action" : "schema",
+      "sources" : [ "DROP_FIELDS3" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordType.RecordType.Name",
+          "newProperties" : {
+            "label" : "Record Type Name",
+            "name" : "RecordType.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES9" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES6" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "User.UserRole.Name",
+          "newProperties" : {
+            "label" : "Role Name",
+            "name" : "UserRole.Name"
+          }
+        } ]
+      }
+    },
+    "JOIN10" : {
+      "action" : "join",
+      "sources" : [ "FILTER3", "FORMULA5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "PAGE_ENTITY_ID" ],
+        "rightQualifier" : "Current",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN11" : {
+      "action" : "join",
+      "sources" : [ "JOIN10", "FORMULA5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "PREVPAGE_ENTITY_ID" ],
+        "rightQualifier" : "Previous",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "BUCKET4" : {
+      "action" : "bucketV2",
+      "sources" : [ "SPLIT0" ],
+      "parameters" : {
+        "buckets" : [ {
+          "value" : "Call Guide",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "000005765", "000005767", "000005772", "000005773", "000005781", "000005927", "000005934", "000005935", "000005938", "000005941", "000005946", "000005959", "000005967", "000005968", "000005971", "000005972", "000005976", "000005979", "000005983", "000005984", "000005985", "000005986", "000005987", "000005988", "000005989", "000005991", "000005992", "000006017", "000006018", "000006021", "000006023", "000000064", "000065934", "000055946", "000045967", "000035935", "000026069", "000015938", "000006330", "000006326", "000006323", "000006314", "000006295", "000006257", "000006256", "000006244", "000006236", "000006214", "000006190", "000006098", "000006074", "000006073", "000006025" ]
+          } ]
+        } ],
+        "nullBucket" : "Other",
+        "defaultBucket" : "Other",
+        "passthroughEnabled" : false,
+        "multiValueResult" : false,
+        "sourceField" : "Previous.ArticleNumber",
+        "targetField" : {
+          "name" : "Previous.Article_Group",
+          "label" : "Previous Article Group"
+        }
+      }
+    },
+    "FORMULA6" : {
+      "action" : "formula",
+      "sources" : [ "BUCKET4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Actual_Redirection",
+          "label" : "Actual Redirection",
+          "formulaExpression" : "IF(\"In_Page_Redirection\" is Null, \"Current.Title\", concat(\"In_Page_Redirection\", ' FROM ', \"Current.Title\"))",
+          "precision" : 1000,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "LOAD_DATASET7" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "KnowledgeArticle.UrlName",
+          "newProperties" : {
+            "label" : "URL Name",
+            "name" : "UrlName"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "InnerChildKnowledgeArticleVersionAllStates.Id",
+          "newProperties" : {
+            "label" : "Knowledge Article Version ID",
+            "name" : "Id"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES2" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "KnowledgeArticle.ArticleNumber",
+          "newProperties" : {
+            "label" : "Article Number",
+            "name" : "ArticleNumber"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES3" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "KnowledgeArticle.Title",
+          "newProperties" : {
+            "label" : "Title",
+            "name" : "Title"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES4" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES3" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "KnowledgeArticle.VersionNumber",
+          "newProperties" : {
+            "label" : "Version Number",
+            "name" : "VersionNumber"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES5" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES4" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "KnowledgeArticle.Id",
+          "newProperties" : {
+            "label" : "Knowledge Article ID",
+            "name" : "KnowledgeArticleId"
+          }
+        } ]
+      }
+    },
+    "LOAD_DATASET8" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "ARTICLE_VERSION_ID", "ARTICLE_STATUS", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "ARTICLE_ID", "USER_ID_DERIVED", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "KnowledgeArticleView",
+          "name" : "KnowledgeArticleView"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "BUCKET5" : {
+      "action" : "bucketV2",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "buckets" : [ {
+          "value" : "Call Guide",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "000005765", "000005767", "000005772", "000005773", "000005781", "000005927", "000005934", "000005935", "000005938", "000005941", "000005946", "000005959", "000005967", "000005968", "000005971", "000005972", "000005976", "000005979", "000005983", "000005984", "000005985", "000005986", "000005987", "000005988", "000005989", "000005991", "000005992", "000006017", "000006018", "000006021", "000006023", "000006025", "000006073", "000006074", "000006098", "000006190", "000006214", "000006236", "000006244", "000006256", "000006257", "000006295", "000006314", "000006323", "000006326", "000006330", "000015938", "000026069", "000035935", "000045967", "000055946", "000065934", "000000064" ]
+          } ]
+        } ],
+        "nullBucket" : "Other",
+        "defaultBucket" : "Other",
+        "passthroughEnabled" : false,
+        "multiValueResult" : false,
+        "sourceField" : "ArticleDetails.ArticleNumber",
+        "targetField" : {
+          "name" : "Article_Group",
+          "label" : "Article Group"
+        }
+      }
+    },
+    "DROP_FIELDS4" : {
+      "action" : "schema",
+      "sources" : [ "BUCKET5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "LANGUAGE", "USER_ID", "ARTICLE_VERSION_ID", "ARTICLE_ID", "ArticleDetails.Id", "ArticleDetails.RecordTypeId", "ArticleDetails.Knowledge_ID_15", "ArticleDetails.Knowledge_Article_ID_15", "ArticleDetails.RecordType.Id", "User.UserRoleId", "User.User_ID_15", "User.UserRole.Id", "ArticleDetails.KnowledgeArticleId", "User.Id", "USER_ID_DERIVED" ]
+        }
+      }
+    },
+    "EDIT_ATTRIBUTES10" : {
+      "action" : "schema",
+      "sources" : [ "DROP_FIELDS4" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "ArticleDetails.RecordType.Name",
+          "newProperties" : {
+            "label" : "Record Type Name",
+            "name" : "RecordType.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES11" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES10" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "User.UserRole.Name",
+          "newProperties" : {
+            "label" : "Role Name",
+            "name" : "UserRole.Name"
+          }
+        } ]
+      }
+    },
+    "FILTER6" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET10" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1688169600000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "CallType",
+          "operator" : "EQUAL",
+          "operands" : [ "Inbound" ]
+        } ]
+      }
+    },
+    "JOIN13" : {
+      "action" : "join",
+      "sources" : [ "JOIN16", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "UserRole",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "DROP_FIELDS2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Inbound Calls since Call Guide",
+          "name" : "Voice_Cases_since_Call_Guide",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET10" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "QCC_Classification__c", "Id", "WhoId", "WhatId", "CreatedDate", "CreatedById", "CallDurationInSeconds", "CallType", "QCC_IVR_Selection__c", "QCC_PNR__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Task",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Task"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET11" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "RecordTypeId", "Frequent_Flyer_Number__c", "Frequent_Flyer_Tier__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FILTER7" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET11" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordTypeId",
+          "operator" : "EQUAL",
+          "operands" : [ "0122v000001NlG6AAK" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Frequent_Flyer_Number__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN15" : {
+      "action" : "join",
+      "sources" : [ "FILTER6", "FILTER7" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "WhoId" ],
+        "rightQualifier" : "Contact",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "UPPERCASE0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN15" ],
+      "schema" : {
+        "fields" : [ {
+          "name" : "QCC_PNR__c_uppercase",
+          "newProperties" : {
+            "name" : "QCC_PNR__c"
+          }
+        } ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "QCC_PNR__c" ]
+        }
+      },
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "QCC_PNR__c_uppercase",
+          "label" : "PNR",
+          "formulaExpression" : "upper(QCC_PNR__c)",
+          "precision" : 255
+        } ]
+      }
+    },
+    "FORMULA7" : {
+      "action" : "formula",
+      "sources" : [ "UPPERCASE0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "FF_PNR_IVR",
+          "label" : "FF + PNR + IVR",
+          "formulaExpression" : "concat(\"Contact.Frequent_Flyer_Number__c\", ' + ', QCC_PNR__c, ' + ', QCC_IVR_Selection__c)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA8" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA7" ],
+      "parameters" : {
+        "partitionBy" : [ "FF_PNR_IVR" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Calling_Back_Count",
+          "label" : "Calling Back Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER8" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA8" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "Calling_Back_Count",
+          "operator" : "EQUAL",
+          "operands" : [ "2" ]
+        } ]
+      }
+    },
+    "JOIN16" : {
+      "action" : "join",
+      "sources" : [ "FORMULA8", "FILTER8" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "FF_PNR_IVR" ],
+        "rightQualifier" : "MarkCallbackTrue",
+        "rightKeys" : [ "FF_PNR_IVR" ]
+      }
+    },
+    "FORMULA9" : {
+      "action" : "formula",
+      "sources" : [ "DROP_FIELDS1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "First_Call_Agent",
+          "label" : "First Call Agent",
+          "formulaExpression" : "If(Calling_Back_Count = 1, \"UserRole.Username\", '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA10" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA9" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "First_Call_Call_Center",
+          "label" : "First Call Call Center",
+          "formulaExpression" : "If(Calling_Back_Count = 1, \"UserRole.UserRole.CallCenter\", '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA11" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA10" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "First_Call_Date",
+          "label" : "First Call Date",
+          "formulaExpression" : "If(Calling_Back_Count = 1, CreatedDate, '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "DROP_FIELDS1" : {
+      "action" : "schema",
+      "sources" : [ "JOIN13" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "UserRole.User_ID_15", "UserRole.TimeZoneSidKey", "UserRole.IsActive", "MarkCallbackTrue.QCC_IVR_Selection__c", "MarkCallbackTrue.Id", "MarkCallbackTrue.WhoId", "MarkCallbackTrue.WhatId", "MarkCallbackTrue.CreatedDate", "MarkCallbackTrue.CreatedById", "MarkCallbackTrue.CallDurationInSeconds", "MarkCallbackTrue.CallType", "MarkCallbackTrue.Contact.Id", "MarkCallbackTrue.Contact.Name", "MarkCallbackTrue.Contact.RecordTypeId", "MarkCallbackTrue.Contact.Frequent_Flyer_Number__c", "MarkCallbackTrue.Contact.Frequent_Flyer_Tier__c", "MarkCallbackTrue.QCC_PNR__c", "MarkCallbackTrue.FF_PNR_IVR", "UserRole.Id", "UserRole.UserRole.Id" ]
+        }
+      }
+    },
+    "OUTPUT4" : {
+      "action" : "save",
+      "sources" : [ "DROP_FIELDS5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "First Call Resolution (FF Only)",
+          "name" : "First_Call_Resolution_FF_Only",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "DROP_FIELDS2" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA11" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "First_Call_Agent", "First_Call_Call_Center", "First_Call_Date", "Contact.Id", "Contact.Frequent_Flyer_Number__c", "Contact.Frequent_Flyer_Tier__c", "Contact.Name" ]
+        }
+      }
+    },
+    "LOAD_DATASET12" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN17" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET1", "LOAD_DATASET12" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN18" : {
+      "action" : "join",
+      "sources" : [ "JOIN5", "JOIN17" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Knowledge.KnowledgeArticleId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "KnowledgeArticleId" ]
+      }
+    },
+    "JOIN19" : {
+      "action" : "join",
+      "sources" : [ "JOIN8", "JOIN17" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Previous.KnowledgeArticleId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "KnowledgeArticleId" ]
+      }
+    },
+    "LOAD_DATASET13" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "DataCategoryGroupName", "DataCategoryName", "CreatedDate", "CreatedById", "IsDeleted", "SystemModstamp" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__DataCategorySelection",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__DataCategorySelection"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN20" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET13", "LOAD_DATASET7" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ParentId" ],
+        "rightQualifier" : "Knowledge",
+        "rightKeys" : [ "InnerChildKnowledgeArticleVersionAllStates.Id" ]
+      }
+    },
+    "OUTPUT5" : {
+      "action" : "save",
+      "sources" : [ "JOIN20" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Article and Data Category",
+          "name" : "Knowledge_Article_and_Data_Category",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET14" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ArticleDetails.ArticleNumber", "User.FirstName", "User.Name", "EVENT_TYPE", "User.UserRole.CallCenter", "User.LastName", "UserRole.Name", "ArticleDetails.Title", "RecordType.Name", "ARTICLE_STATUS", "Article_Group", "User.Location__c", "ENTITY", "TIMESTAMP_DERIVED", "User.IsActive", "User.Username", "ArticleDetails.UrlName", "USER_TYPE", "ArticleDetails.VersionNumber", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Article Engagement 2024-09-12",
+          "name" : "Knowledge_Article_Engagement_2024_09_12"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET14", "EDIT_ATTRIBUTES11" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "ArticleDetails.ArticleNumber",
+          "bottom" : "ArticleDetails.ArticleNumber"
+        }, {
+          "top" : "User.FirstName",
+          "bottom" : "User.FirstName"
+        }, {
+          "top" : "User.Name",
+          "bottom" : "User.Name"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "User.UserRole.CallCenter",
+          "bottom" : "User.UserRole.CallCenter"
+        }, {
+          "top" : "User.LastName",
+          "bottom" : "User.LastName"
+        }, {
+          "top" : "UserRole.Name",
+          "bottom" : "UserRole.Name"
+        }, {
+          "top" : "ArticleDetails.Title",
+          "bottom" : "ArticleDetails.Title"
+        }, {
+          "top" : "RecordType.Name",
+          "bottom" : "RecordType.Name"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "Article_Group",
+          "bottom" : "Article_Group"
+        }, {
+          "top" : "User.Location__c",
+          "bottom" : "User.Location__c"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "User.IsActive",
+          "bottom" : "User.IsActive"
+        }, {
+          "top" : "User.Username",
+          "bottom" : "User.Username"
+        }, {
+          "top" : "ArticleDetails.UrlName",
+          "bottom" : "ArticleDetails.UrlName"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ArticleDetails.VersionNumber",
+          "bottom" : "ArticleDetails.VersionNumber"
+        }, {
+          "top" : "ARTICLE_VERSION",
+          "bottom" : "ARTICLE_VERSION"
+        }, {
+          "bottom" : "User.Operational_Group__c"
+        } ]
+      }
+    },
+    "LOAD_DATASET15" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "User.FirstName", "User.Name", "EVENT_TYPE", "User.UserRole.CallCenter", "User.LastName", "UserRole.Name", "RecordType.Name", "Knowledge.Title", "Article_Group", "User.Location__c", "TIMESTAMP_DERIVED", "User.IsActive", "RecordType.ArticleNumber", "User.Username", "Knowledge.ArticleNumber", "Knowledge.UrlName", "RecordType.Title", "RecordType.UrlName", "RANK", "Knowledge.VersionNumber", "RecordType.VersionNumber" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Search Clicks 2024-09-12",
+          "name" : "Knowledge_Search_Clicks_2024_09_12"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "APPEND1" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET15", "FILTER2" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "User.FirstName",
+          "bottom" : "User.FirstName"
+        }, {
+          "top" : "User.Name",
+          "bottom" : "User.Name"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "User.UserRole.CallCenter",
+          "bottom" : "User.UserRole.CallCenter"
+        }, {
+          "top" : "User.LastName",
+          "bottom" : "User.LastName"
+        }, {
+          "top" : "UserRole.Name",
+          "bottom" : "UserRole.Name"
+        }, {
+          "top" : "RecordType.Name",
+          "bottom" : "RecordType.Name"
+        }, {
+          "top" : "Knowledge.Title",
+          "bottom" : "Knowledge.Title"
+        }, {
+          "top" : "Article_Group",
+          "bottom" : "Article_Group"
+        }, {
+          "top" : "User.Location__c",
+          "bottom" : "User.Location__c"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "User.IsActive",
+          "bottom" : "User.IsActive"
+        }, {
+          "top" : "RecordType.ArticleNumber",
+          "bottom" : "RecordType.ArticleNumber"
+        }, {
+          "top" : "User.Username",
+          "bottom" : "User.Username"
+        }, {
+          "top" : "Knowledge.ArticleNumber",
+          "bottom" : "Knowledge.ArticleNumber"
+        }, {
+          "top" : "Knowledge.UrlName",
+          "bottom" : "Knowledge.UrlName"
+        }, {
+          "top" : "RecordType.Title",
+          "bottom" : "RecordType.Title"
+        }, {
+          "top" : "RecordType.UrlName",
+          "bottom" : "RecordType.UrlName"
+        }, {
+          "top" : "RANK",
+          "bottom" : "RANK"
+        }, {
+          "top" : "Knowledge.VersionNumber",
+          "bottom" : "Knowledge.VersionNumber"
+        }, {
+          "top" : "RecordType.VersionNumber",
+          "bottom" : "RecordType.VersionNumber"
+        }, {
+          "bottom" : "User.Operational_Group__c"
+        } ]
+      }
+    },
+    "LOAD_DATASET16" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "User.FirstName", "EVENT_TYPE", "Current.Title", "Actual_Redirection", "UserRole.Name", "RecordType.Name", "In_Page_Redirection", "User.Location__c", "User.IsActive", "RecordType.ArticleNumber", "User.Username", "Current.ArticleNumber", "Previous.Article_Group", "RecordType.UrlName", "User.Name", "User.UserRole.CallCenter", "User.LastName", "PAGE_URL", "Current_URL", "Previous.ArticleNumber", "Previous.UrlName", "TIMESTAMP_DERIVED", "Current.UrlName", "Previous.Title", "RecordType.Title", "Current.VersionNumber", "RecordType.VersionNumber", "Previous.VersionNumber" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Click-Through 2024-09-12",
+          "name" : "Knowledge_Click_Through_2024_09_12"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "APPEND2" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET16", "FORMULA6" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "User.FirstName",
+          "bottom" : "User.FirstName"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "Current.Title",
+          "bottom" : "Current.Title"
+        }, {
+          "top" : "Actual_Redirection",
+          "bottom" : "Actual_Redirection"
+        }, {
+          "top" : "UserRole.Name",
+          "bottom" : "UserRole.Name"
+        }, {
+          "top" : "RecordType.Name",
+          "bottom" : "RecordType.Name"
+        }, {
+          "top" : "In_Page_Redirection",
+          "bottom" : "In_Page_Redirection"
+        }, {
+          "top" : "User.Location__c",
+          "bottom" : "User.Location__c"
+        }, {
+          "top" : "User.IsActive",
+          "bottom" : "User.IsActive"
+        }, {
+          "top" : "RecordType.ArticleNumber",
+          "bottom" : "RecordType.ArticleNumber"
+        }, {
+          "top" : "User.Username",
+          "bottom" : "User.Username"
+        }, {
+          "top" : "Current.ArticleNumber",
+          "bottom" : "Current.ArticleNumber"
+        }, {
+          "top" : "Previous.Article_Group",
+          "bottom" : "Previous.Article_Group"
+        }, {
+          "top" : "RecordType.UrlName",
+          "bottom" : "RecordType.UrlName"
+        }, {
+          "top" : "User.Name",
+          "bottom" : "User.Name"
+        }, {
+          "top" : "User.UserRole.CallCenter",
+          "bottom" : "User.UserRole.CallCenter"
+        }, {
+          "top" : "User.LastName",
+          "bottom" : "User.LastName"
+        }, {
+          "top" : "PAGE_URL",
+          "bottom" : "PAGE_URL"
+        }, {
+          "top" : "Current_URL",
+          "bottom" : "Current_URL"
+        }, {
+          "top" : "Previous.ArticleNumber",
+          "bottom" : "Previous.ArticleNumber"
+        }, {
+          "top" : "Previous.UrlName",
+          "bottom" : "Previous.UrlName"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "Current.UrlName",
+          "bottom" : "Current.UrlName"
+        }, {
+          "top" : "Previous.Title",
+          "bottom" : "Previous.Title"
+        }, {
+          "top" : "RecordType.Title",
+          "bottom" : "RecordType.Title"
+        }, {
+          "top" : "Current.VersionNumber",
+          "bottom" : "Current.VersionNumber"
+        }, {
+          "top" : "RecordType.VersionNumber",
+          "bottom" : "RecordType.VersionNumber"
+        }, {
+          "top" : "Previous.VersionNumber",
+          "bottom" : "Previous.VersionNumber"
+        }, {
+          "bottom" : "User.Operational_Group__c"
+        } ]
+      }
+    },
+    "FORMULA12" : {
+      "action" : "formula",
+      "sources" : [ "APPEND2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Redirection",
+          "label" : "Redirection",
+          "formulaExpression" : "IF(\"In_Page_Redirection\" is Null, concat(\"Current.Title\", ' FROM ', \"Previous.Title\"), concat(\"In_Page_Redirection\", ' FROM ', \"Current.Title\"))",
+          "precision" : 1000,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "DROP_FIELDS5" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA11" ],
+      "parameters" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Contact.Frequent_Flyer_Tier__c", "Contact.Id", "Contact.Name" ]
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET1" : {
+        "label" : "Knowledge__kav",
+        "type" : "LOAD_DATASET",
+        "top" : 1373.4,
+        "left" : 952,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "TRANSFORM0" : {
+        "label" : "Knowledge Article Processing",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 1092,
+        "left" : 952,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Knowledge Version ID 15"
+          },
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Knowledge Article ID 15"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA2"
+        } ]
+      },
+      "JOIN1" : {
+        "label" : "Get Article Details",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 952,
+        "left" : 392
+      },
+      "FILTER0" : {
+        "label" : "Keep Internal Users",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 952,
+        "left" : 252.10000000000002
+      },
+      "LOAD_DATASET3" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 1232,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 1372,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Get User Role",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 1372.6,
+        "left" : 392
+      },
+      "JOIN3" : {
+        "label" : "Get User Detail",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 950.2,
+        "left" : 812
+      },
+      "OUTPUT0" : {
+        "label" : "Knowledge Article Engagement",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 952.1,
+        "left" : 1232.3
+      },
+      "TRANSFORM1" : {
+        "label" : "Call Centers",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 1370.2,
+        "left" : 252,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Call Centers"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET5" : {
+        "label" : "SearchClick",
+        "type" : "LOAD_DATASET",
+        "top" : 1652.6,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER1" : {
+        "label" : "Keep Knowledge",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 1512,
+        "left" : 392
+      },
+      "JOIN5" : {
+        "label" : "Get User Detail",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 1512.1,
+        "left" : 532.1
+      },
+      "OUTPUT1" : {
+        "label" : "Knowledge Search Clicks",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 1512,
+        "left" : 1232
+      },
+      "TRANSFORM3" : {
+        "label" : "User ID 15",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 1230.2,
+        "left" : 252,
+        "graph" : {
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "User ID 15"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER2" : {
+        "label" : "Drop Guest Users",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 1512,
+        "left" : 952.1
+      },
+      "LOAD_DATASET6" : {
+        "label" : "LightningPageView",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 112.4,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "FILTER3" : {
+        "label" : "Knowledge Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532,
+        "left" : 252.39999999999998
+      },
+      "TRANSFORM4" : {
+        "label" : "Drop Columns",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392.3,
+        "left" : 952.1,
+        "graph" : {
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          },
+          "SPLIT0" : {
+            "label" : "Split Current"
+          },
+          "EDIT_ATTRIBUTES7" : {
+            "label" : "Record Type Name Attribute"
+          },
+          "EDIT_ATTRIBUTES8" : {
+            "label" : "Role Name Attribute"
+          }
+        },
+        "connectors" : [ {
+          "source" : "DROP_FIELDS0",
+          "target" : "EDIT_ATTRIBUTES7"
+        }, {
+          "source" : "EDIT_ATTRIBUTES8",
+          "target" : "SPLIT0"
+        }, {
+          "source" : "EDIT_ATTRIBUTES7",
+          "target" : "EDIT_ATTRIBUTES8"
+        } ]
+      },
+      "JOIN8" : {
+        "label" : "Get User Detail",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 672.3
+      },
+      "OUTPUT2" : {
+        "label" : "Knowledge Click-Through",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 1512
+      },
+      "LOAD_DATASET7" : {
+        "label" : "All Knowledge Article Versions",
+        "type" : "LOAD_DATASET",
+        "top" : 671.9,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "TRANSFORM6" : {
+        "label" : "Knowledge ID 15",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 531.7,
+        "left" : 392,
+        "graph" : {
+          "FORMULA4" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Version ID 15"
+          },
+          "FORMULA5" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Article ID 15"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA4",
+          "target" : "FORMULA5"
+        } ]
+      },
+      "JOIN9" : {
+        "label" : "Get Knowledge",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 1510.2,
+        "left" : 252
+      },
+      "TRANSFORM7" : {
+        "label" : "Article Group",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 1512,
+        "left" : 812.1,
+        "graph" : {
+          "BUCKET3" : {
+            "label" : "Article Group"
+          },
+          "DROP_FIELDS3" : {
+            "label" : "Drop Columns"
+          },
+          "EDIT_ATTRIBUTES6" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES9" : {
+            "label" : "Role Name Attribute"
+          }
+        },
+        "connectors" : [ {
+          "source" : "BUCKET3",
+          "target" : "DROP_FIELDS3"
+        }, {
+          "source" : "DROP_FIELDS3",
+          "target" : "EDIT_ATTRIBUTES6"
+        }, {
+          "source" : "EDIT_ATTRIBUTES6",
+          "target" : "EDIT_ATTRIBUTES9"
+        } ]
+      },
+      "JOIN10" : {
+        "label" : "Get Current Article",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 391.9
+      },
+      "JOIN11" : {
+        "label" : "Get Previous Article",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 532.3
+      },
+      "TRANSFORM8" : {
+        "label" : "Article Group",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392.3,
+        "left" : 1092.1,
+        "graph" : {
+          "BUCKET4" : {
+            "label" : "Article Group"
+          },
+          "FORMULA6" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Actual Redirection"
+          }
+        },
+        "connectors" : [ {
+          "source" : "BUCKET4",
+          "target" : "FORMULA6"
+        } ]
+      },
+      "TRANSFORM9" : {
+        "label" : "Rename Fields",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 672,
+        "left" : 252,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "URL Name"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Version ID"
+          },
+          "EDIT_ATTRIBUTES2" : {
+            "label" : "Article Number"
+          },
+          "EDIT_ATTRIBUTES3" : {
+            "label" : "Title"
+          },
+          "EDIT_ATTRIBUTES4" : {
+            "label" : "Version Number"
+          },
+          "EDIT_ATTRIBUTES5" : {
+            "label" : "Knowledge Article ID"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "EDIT_ATTRIBUTES1"
+        }, {
+          "source" : "EDIT_ATTRIBUTES1",
+          "target" : "EDIT_ATTRIBUTES2"
+        }, {
+          "source" : "EDIT_ATTRIBUTES2",
+          "target" : "EDIT_ATTRIBUTES3"
+        }, {
+          "source" : "EDIT_ATTRIBUTES3",
+          "target" : "EDIT_ATTRIBUTES4"
+        }, {
+          "source" : "EDIT_ATTRIBUTES4",
+          "target" : "EDIT_ATTRIBUTES5"
+        } ]
+      },
+      "LOAD_DATASET8" : {
+        "label" : "KnowledgeArticleView",
+        "type" : "LOAD_DATASET",
+        "top" : 952.1,
+        "left" : 111.80000000000001,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "TRANSFORM10" : {
+        "label" : "Article Group",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 952,
+        "left" : 952,
+        "graph" : {
+          "BUCKET5" : {
+            "label" : "Article Group"
+          },
+          "DROP_FIELDS4" : {
+            "label" : "Drop Columns"
+          },
+          "EDIT_ATTRIBUTES10" : {
+            "label" : "Record Type Name Attribute"
+          },
+          "EDIT_ATTRIBUTES11" : {
+            "label" : "Role Name Attribute"
+          }
+        },
+        "connectors" : [ {
+          "source" : "BUCKET5",
+          "target" : "DROP_FIELDS4"
+        }, {
+          "source" : "DROP_FIELDS4",
+          "target" : "EDIT_ATTRIBUTES10"
+        }, {
+          "source" : "EDIT_ATTRIBUTES10",
+          "target" : "EDIT_ATTRIBUTES11"
+        } ]
+      },
+      "FILTER6" : {
+        "label" : "Voice Case since 2023 Jul 01",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 252.2
+      },
+      "JOIN13" : {
+        "label" : "Get User Info",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.10000000000002,
+        "left" : 1231.1
+      },
+      "OUTPUT3" : {
+        "label" : "Inbound Calls since Call Guide",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1792
+      },
+      "LOAD_DATASET10" : {
+        "label" : "Task",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET11" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER7" : {
+        "label" : "QCC Frequent Flyer Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 111.80000000000001,
+        "left" : 252.2
+      },
+      "JOIN15" : {
+        "label" : "Get Contact to Task",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.19999999999999,
+        "left" : 392.1
+      },
+      "TRANSFORM11" : {
+        "label" : "Upper Case",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112.19999999999999,
+        "left" : 532.1,
+        "graph" : {
+          "UPPERCASE0" : {
+            "parameters" : {
+              "type" : "UPPER_UI"
+            },
+            "label" : "PNR Upper Case"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM12" : {
+        "label" : "Calling about Same Case",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112.19999999999999,
+        "left" : 672.1,
+        "graph" : {
+          "FORMULA7" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "FF Number + PNR + IVR Selection"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM13" : {
+        "label" : "Count Calling Back",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112.19999999999999,
+        "left" : 812.1,
+        "graph" : {
+          "FORMULA8" : {
+            "label" : "Count Calling Back"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER8" : {
+        "label" : "Calling Back Is True",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112.19999999999999,
+        "left" : 952.1
+      },
+      "JOIN16" : {
+        "label" : "Mark Callback True",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.4,
+        "left" : 1092.1
+      },
+      "TRANSFORM14" : {
+        "label" : "First Call Agent",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 1512,
+        "graph" : {
+          "FORMULA9" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "First Call Agent"
+          },
+          "FORMULA10" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "First Call Call Center"
+          },
+          "FORMULA11" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "First Call Date"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA9",
+          "target" : "FORMULA10"
+        }, {
+          "source" : "FORMULA10",
+          "target" : "FORMULA11"
+        } ]
+      },
+      "TRANSFORM15" : {
+        "label" : "Drop Columns",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 1372,
+        "graph" : {
+          "DROP_FIELDS1" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "OUTPUT4" : {
+        "label" : "First Call Resolution (FF Only)",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 1652
+      },
+      "TRANSFORM16" : {
+        "label" : "Drop Columns",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 1652,
+        "graph" : {
+          "DROP_FIELDS2" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET12" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 1373.5,
+        "left" : 1092,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN17" : {
+        "label" : "Get Record Types",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 1232,
+        "left" : 952.2
+      },
+      "JOIN18" : {
+        "label" : "Get Record Types",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 1512,
+        "left" : 672
+      },
+      "JOIN19" : {
+        "label" : "Get Record Types",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392.1,
+        "left" : 812
+      },
+      "LOAD_DATASET13" : {
+        "label" : "Knowledge__DataCategorySelection",
+        "type" : "LOAD_DATASET",
+        "top" : 812,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN20" : {
+        "label" : "Knowledge to Data Category",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 812,
+        "left" : 252
+      },
+      "OUTPUT5" : {
+        "label" : "Knowledge Article and Data Category",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 811.7,
+        "left" : 392
+      },
+      "LOAD_DATASET14" : {
+        "label" : "Knowledge Article Engagement 2024-09-12",
+        "type" : "LOAD_DATASET",
+        "top" : 812.1,
+        "left" : 1092,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND0" : {
+        "label" : "Append Knowledge Views",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 952,
+        "left" : 1092.1
+      },
+      "LOAD_DATASET15" : {
+        "label" : "Knowledge Search Clicks 2024-09-12",
+        "type" : "LOAD_DATASET",
+        "top" : 1652,
+        "left" : 1092,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND1" : {
+        "label" : "Append Search Clicks",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 1512,
+        "left" : 1092
+      },
+      "LOAD_DATASET16" : {
+        "label" : "Knowledge Click-Through 2024-09-12",
+        "type" : "LOAD_DATASET",
+        "top" : 531.8,
+        "left" : 1092,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND2" : {
+        "label" : "Append 2",
+        "type" : "APPEND",
+        "top" : 532,
+        "left" : 1232
+      },
+      "TRANSFORM17" : {
+        "label" : "Redirection",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532,
+        "left" : 1372,
+        "graph" : {
+          "FORMULA12" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Redirection"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM18" : {
+        "label" : "Drop Columns",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392,
+        "left" : 1512.1,
+        "graph" : {
+          "DROP_FIELDS5" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "JOIN16",
+      "target" : "JOIN13"
+    }, {
+      "source" : "JOIN11",
+      "target" : "JOIN8"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN5"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN5"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "FILTER3"
+    }, {
+      "source" : "JOIN19",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN8"
+    }, {
+      "source" : "TRANSFORM9",
+      "target" : "TRANSFORM6"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN9"
+    }, {
+      "source" : "TRANSFORM6",
+      "target" : "JOIN9"
+    }, {
+      "source" : "JOIN9",
+      "target" : "FILTER1"
+    }, {
+      "source" : "JOIN18",
+      "target" : "TRANSFORM7"
+    }, {
+      "source" : "TRANSFORM7",
+      "target" : "FILTER2"
+    }, {
+      "source" : "FILTER3",
+      "target" : "JOIN10"
+    }, {
+      "source" : "TRANSFORM6",
+      "target" : "JOIN10"
+    }, {
+      "source" : "JOIN10",
+      "target" : "JOIN11"
+    }, {
+      "source" : "TRANSFORM6",
+      "target" : "JOIN11"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "TRANSFORM8"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "TRANSFORM9"
+    }, {
+      "source" : "JOIN3",
+      "target" : "TRANSFORM10"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN13"
+    }, {
+      "source" : "TRANSFORM16",
+      "target" : "OUTPUT3"
+    }, {
+      "source" : "LOAD_DATASET10",
+      "target" : "FILTER6"
+    }, {
+      "source" : "FILTER6",
+      "target" : "JOIN15"
+    }, {
+      "source" : "FILTER7",
+      "target" : "JOIN15"
+    }, {
+      "source" : "JOIN17",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET11",
+      "target" : "FILTER7"
+    }, {
+      "source" : "JOIN15",
+      "target" : "TRANSFORM11"
+    }, {
+      "source" : "TRANSFORM11",
+      "target" : "TRANSFORM12"
+    }, {
+      "source" : "TRANSFORM12",
+      "target" : "TRANSFORM13"
+    }, {
+      "source" : "TRANSFORM13",
+      "target" : "FILTER8"
+    }, {
+      "source" : "TRANSFORM13",
+      "target" : "JOIN16"
+    }, {
+      "source" : "FILTER8",
+      "target" : "JOIN16"
+    }, {
+      "source" : "TRANSFORM15",
+      "target" : "TRANSFORM14"
+    }, {
+      "source" : "JOIN13",
+      "target" : "TRANSFORM15"
+    }, {
+      "source" : "TRANSFORM14",
+      "target" : "TRANSFORM16"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN17"
+    }, {
+      "source" : "LOAD_DATASET12",
+      "target" : "JOIN17"
+    }, {
+      "source" : "JOIN5",
+      "target" : "JOIN18"
+    }, {
+      "source" : "JOIN17",
+      "target" : "JOIN18"
+    }, {
+      "source" : "JOIN8",
+      "target" : "JOIN19"
+    }, {
+      "source" : "JOIN17",
+      "target" : "JOIN19"
+    }, {
+      "source" : "LOAD_DATASET13",
+      "target" : "JOIN20"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "JOIN20"
+    }, {
+      "source" : "JOIN20",
+      "target" : "OUTPUT5"
+    }, {
+      "source" : "LOAD_DATASET8",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET14",
+      "target" : "APPEND0"
+    }, {
+      "source" : "TRANSFORM10",
+      "target" : "APPEND0"
+    }, {
+      "source" : "APPEND0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET15",
+      "target" : "APPEND1"
+    }, {
+      "source" : "FILTER2",
+      "target" : "APPEND1"
+    }, {
+      "source" : "APPEND1",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET16",
+      "target" : "APPEND2"
+    }, {
+      "source" : "TRANSFORM8",
+      "target" : "APPEND2"
+    }, {
+      "source" : "TRANSFORM17",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "TRANSFORM18",
+      "target" : "OUTPUT4"
+    }, {
+      "source" : "APPEND2",
+      "target" : "TRANSFORM17"
+    }, {
+      "source" : "TRANSFORM14",
+      "target" : "TRANSFORM18"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

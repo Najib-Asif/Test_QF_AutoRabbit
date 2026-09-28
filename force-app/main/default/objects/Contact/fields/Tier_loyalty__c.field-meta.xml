@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tier_loyalty__c</fullName>
+    <description>deletethis</description>
+    <externalId>false</externalId>
+    <formula>CASE( 
+UPPER(TEXT(Profile_Membership_Current_Tier__c )), 
+&quot;CHAIRMANS LOUNGE PLATINUM ONE&quot;,&quot;Platinum One&quot;, 
+&quot;CHAIRMANS LOUNGE&quot;,&quot;&quot;, 
+&quot;FF BRONZE&quot;,&quot;Bronze&quot;, 
+&quot;FF GOLD&quot;,&quot;Gold&quot;, 
+&quot;FF PLATINUM&quot;,&quot;Platinum&quot;, 
+&quot;FF PLATINUM ONE&quot;,&quot;Platinum One&quot;, 
+&quot;FF SILVER&quot;,&quot;Silver&quot;, 
+&quot;QC BRONZE&quot;,&quot;Bronze&quot;, 
+&quot;QC SILVER&quot;,&quot;Silver&quot;, 
+&quot;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tier (deprecated)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

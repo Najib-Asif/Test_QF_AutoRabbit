@@ -1,0 +1,700 @@
+{
+  "version" : "61.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "TIMESTAMP", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "SearchClick",
+          "name" : "SearchClick"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "TIMESTAMP", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2024 06 1-11 Search Clicks",
+          "name" : "X2024_06_1_11_Search_Clicks"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "TIMESTAMP", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2024 04 Search Clicks",
+          "name" : "X2024_04_Search_Clicks"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "CLICKED_RECORD_ID",
+          "bottom" : "CLICKED_RECORD_ID"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "QUERY_ID",
+          "bottom" : "QUERY_ID"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "RANK",
+          "bottom" : "RANK"
+        } ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "TIMESTAMP", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Search Clicks 2024 05 Master",
+          "name" : "Search_Clicks_2024_05_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND1" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND0", "LOAD_DATASET3" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "CLICKED_RECORD_ID",
+          "bottom" : "CLICKED_RECORD_ID"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "QUERY_ID",
+          "bottom" : "QUERY_ID"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "RANK",
+          "bottom" : "RANK"
+        } ]
+      }
+    },
+    "APPEND2" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND1", "LOAD_DATASET2" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "CLICKED_RECORD_ID",
+          "bottom" : "CLICKED_RECORD_ID"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "QUERY_ID",
+          "bottom" : "QUERY_ID"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "RANK",
+          "bottom" : "RANK"
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "APPEND6" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Search Clicks Appended",
+          "name" : "Knowledge_Search_Clicks_Appended",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "PARENT_UI_ELEMENT", "CONNECTION_TYPE", "PREVPAGE_ENTITY_ID", "EVENT_TYPE", "APP_NAME", "PREVPAGE_ENTITY_TYPE", "USER_ID", "OS_NAME", "CLIENT_GEO", "ORGANIZATION_ID", "EFFECTIVE_PAGE_TIME_DEVIATION_REASON", "PAGE_APP_NAME", "CLIENT_ID", "BROWSER_VERSION", "DEVICE_PLATFORM", "SDK_VERSION", "TIMESTAMP", "DEVICE_MODEL", "USER_AGENT", "PAGE_CONTEXT", "TARGET_UI_ELEMENT", "PREVPAGE_CONTEXT", "TIMESTAMP_DERIVED", "EFFECTIVE_PAGE_TIME_DEVIATION_ERROR_TYPE", "UI_EVENT_ID", "USER_TYPE", "BROWSER_NAME", "DEVICE_ID", "SDK_APP_VERSION", "UI_EVENT_SOURCE", "PREVPAGE_APP_NAME", "GRANDPARENT_UI_ELEMENT", "REQUEST_ID", "PREVPAGE_URL", "USER_ID_DERIVED", "PAGE_ENTITY_TYPE", "SESSION_KEY", "DEVICE_SESSION_ID", "EFFECTIVE_PAGE_TIME_DEVIATION", "PAGE_URL", "PAGE_ENTITY_ID", "OS_VERSION", "LOGIN_KEY", "SDK_APP_TYPE", "UI_EVENT_TIMESTAMP", "EFFECTIVE_PAGE_TIME", "PAGE_START_TIME", "UI_EVENT_SEQUENCE_NUM", "DURATION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "LightningPageView",
+          "name" : "LightningPageView"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "PARENT_UI_ELEMENT", "CONNECTION_TYPE", "PREVPAGE_ENTITY_ID", "EVENT_TYPE", "APP_NAME", "PREVPAGE_ENTITY_TYPE", "USER_ID", "OS_NAME", "CLIENT_GEO", "ORGANIZATION_ID", "EFFECTIVE_PAGE_TIME_DEVIATION_REASON", "PAGE_APP_NAME", "CLIENT_ID", "DEVICE_PLATFORM", "SDK_VERSION", "DEVICE_MODEL", "USER_AGENT", "PAGE_CONTEXT", "TARGET_UI_ELEMENT", "PREVPAGE_CONTEXT", "TIMESTAMP_DERIVED", "EFFECTIVE_PAGE_TIME_DEVIATION_ERROR_TYPE", "UI_EVENT_ID", "USER_TYPE", "BROWSER_NAME", "DEVICE_ID", "SDK_APP_VERSION", "UI_EVENT_SOURCE", "PREVPAGE_APP_NAME", "GRANDPARENT_UI_ELEMENT", "REQUEST_ID", "PREVPAGE_URL", "USER_ID_DERIVED", "PAGE_ENTITY_TYPE", "SESSION_KEY", "DEVICE_SESSION_ID", "EFFECTIVE_PAGE_TIME_DEVIATION", "PAGE_URL", "PAGE_ENTITY_ID", "LOGIN_KEY", "SDK_APP_TYPE", "CLIENT_IP", "UI_EVENT_TIMESTAMP", "EFFECTIVE_PAGE_TIME", "BROWSER_VERSION", "TIMESTAMP", "PAGE_START_TIME", "UI_EVENT_SEQUENCE_NUM", "OS_VERSION", "DURATION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Lightning Page View 2024 06 1-10",
+          "name" : "Lightning_Page_View_2024_06_1_10"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND3" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET4", "LOAD_DATASET5" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "PARENT_UI_ELEMENT",
+          "bottom" : "PARENT_UI_ELEMENT"
+        }, {
+          "top" : "CONNECTION_TYPE",
+          "bottom" : "CONNECTION_TYPE"
+        }, {
+          "top" : "PREVPAGE_ENTITY_ID",
+          "bottom" : "PREVPAGE_ENTITY_ID"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "APP_NAME",
+          "bottom" : "APP_NAME"
+        }, {
+          "top" : "PREVPAGE_ENTITY_TYPE",
+          "bottom" : "PREVPAGE_ENTITY_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "OS_NAME",
+          "bottom" : "OS_NAME"
+        }, {
+          "top" : "CLIENT_GEO",
+          "bottom" : "CLIENT_GEO"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "EFFECTIVE_PAGE_TIME_DEVIATION_REASON",
+          "bottom" : "EFFECTIVE_PAGE_TIME_DEVIATION_REASON"
+        }, {
+          "top" : "PAGE_APP_NAME",
+          "bottom" : "PAGE_APP_NAME"
+        }, {
+          "top" : "CLIENT_ID",
+          "bottom" : "CLIENT_ID"
+        }, {
+          "top" : "DEVICE_PLATFORM",
+          "bottom" : "DEVICE_PLATFORM"
+        }, {
+          "top" : "SDK_VERSION",
+          "bottom" : "SDK_VERSION"
+        }, {
+          "top" : "DEVICE_MODEL",
+          "bottom" : "DEVICE_MODEL"
+        }, {
+          "top" : "USER_AGENT",
+          "bottom" : "USER_AGENT"
+        }, {
+          "top" : "PAGE_CONTEXT",
+          "bottom" : "PAGE_CONTEXT"
+        }, {
+          "top" : "TARGET_UI_ELEMENT",
+          "bottom" : "TARGET_UI_ELEMENT"
+        }, {
+          "top" : "PREVPAGE_CONTEXT",
+          "bottom" : "PREVPAGE_CONTEXT"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "EFFECTIVE_PAGE_TIME_DEVIATION_ERROR_TYPE",
+          "bottom" : "EFFECTIVE_PAGE_TIME_DEVIATION_ERROR_TYPE"
+        }, {
+          "top" : "UI_EVENT_ID",
+          "bottom" : "UI_EVENT_ID"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "BROWSER_NAME",
+          "bottom" : "BROWSER_NAME"
+        }, {
+          "top" : "DEVICE_ID",
+          "bottom" : "DEVICE_ID"
+        }, {
+          "top" : "SDK_APP_VERSION",
+          "bottom" : "SDK_APP_VERSION"
+        }, {
+          "top" : "UI_EVENT_SOURCE",
+          "bottom" : "UI_EVENT_SOURCE"
+        }, {
+          "top" : "PREVPAGE_APP_NAME",
+          "bottom" : "PREVPAGE_APP_NAME"
+        }, {
+          "top" : "GRANDPARENT_UI_ELEMENT",
+          "bottom" : "GRANDPARENT_UI_ELEMENT"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "PREVPAGE_URL",
+          "bottom" : "PREVPAGE_URL"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        }, {
+          "top" : "PAGE_ENTITY_TYPE",
+          "bottom" : "PAGE_ENTITY_TYPE"
+        }, {
+          "top" : "SESSION_KEY",
+          "bottom" : "SESSION_KEY"
+        }, {
+          "top" : "DEVICE_SESSION_ID",
+          "bottom" : "DEVICE_SESSION_ID"
+        }, {
+          "top" : "EFFECTIVE_PAGE_TIME_DEVIATION",
+          "bottom" : "EFFECTIVE_PAGE_TIME_DEVIATION"
+        }, {
+          "top" : "PAGE_URL",
+          "bottom" : "PAGE_URL"
+        }, {
+          "top" : "PAGE_ENTITY_ID",
+          "bottom" : "PAGE_ENTITY_ID"
+        }, {
+          "top" : "LOGIN_KEY",
+          "bottom" : "LOGIN_KEY"
+        }, {
+          "top" : "SDK_APP_TYPE",
+          "bottom" : "SDK_APP_TYPE"
+        }, {
+          "top" : "UI_EVENT_TIMESTAMP",
+          "bottom" : "UI_EVENT_TIMESTAMP"
+        }, {
+          "top" : "EFFECTIVE_PAGE_TIME",
+          "bottom" : "EFFECTIVE_PAGE_TIME"
+        }, {
+          "top" : "PAGE_START_TIME",
+          "bottom" : "PAGE_START_TIME"
+        }, {
+          "top" : "UI_EVENT_SEQUENCE_NUM",
+          "bottom" : "UI_EVENT_SEQUENCE_NUM"
+        }, {
+          "top" : "DURATION",
+          "bottom" : "DURATION"
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "APPEND3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Page View Appended",
+          "name" : "Knowledge_Page_View_Appended",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "TIMESTAMP", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2024 03 18-31 Search Clicks",
+          "name" : "X2024_03_18_31_Search_Clicks"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND4" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND2", "LOAD_DATASET6" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "CLICKED_RECORD_ID",
+          "bottom" : "CLICKED_RECORD_ID"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "QUERY_ID",
+          "bottom" : "QUERY_ID"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "RANK",
+          "bottom" : "RANK"
+        } ]
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "TIMESTAMP", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2024 02 Search Clicks",
+          "name" : "X2024_02_Search_Clicks"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND5" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND4", "LOAD_DATASET7" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "CLICKED_RECORD_ID",
+          "bottom" : "CLICKED_RECORD_ID"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "QUERY_ID",
+          "bottom" : "QUERY_ID"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "RANK",
+          "bottom" : "RANK"
+        } ]
+      }
+    },
+    "LOAD_DATASET8" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "TIMESTAMP_DERIVED", "CLICKED_RECORD_ID", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "QUERY_ID", "ORGANIZATION_ID", "TIMESTAMP", "RANK" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2024 01 Search Clicks",
+          "name" : "X2024_01_Search_Clicks"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND6" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND5", "LOAD_DATASET8" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "CLICKED_RECORD_ID",
+          "bottom" : "CLICKED_RECORD_ID"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "QUERY_ID",
+          "bottom" : "QUERY_ID"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "RANK",
+          "bottom" : "RANK"
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "SearchClick",
+        "type" : "LOAD_DATASET",
+        "top" : 112.19999999999999,
+        "left" : 112.30000000000001,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "2024 06 1-11 Search Clicks",
+        "type" : "LOAD_DATASET",
+        "top" : 112.30000000000001,
+        "left" : 252.10000000000002,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "2024 04 Search Clicks",
+        "type" : "LOAD_DATASET",
+        "top" : 112.30000000000001,
+        "left" : 531.2,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "APPEND0" : {
+        "label" : "Append 0",
+        "type" : "APPEND",
+        "top" : 251.8,
+        "left" : 252.10000000000002
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Search Clicks 2024 05 Master",
+        "type" : "LOAD_DATASET",
+        "top" : 112.1,
+        "left" : 392,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND1" : {
+        "label" : "Append 1",
+        "type" : "APPEND",
+        "top" : 252.10000000000002,
+        "left" : 532
+      },
+      "APPEND2" : {
+        "label" : "Append 2",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 672
+      },
+      "OUTPUT0" : {
+        "label" : "Knowledge Search Clicks Appended",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1232
+      },
+      "LOAD_DATASET4" : {
+        "label" : "LightningPageView",
+        "type" : "LOAD_DATASET",
+        "top" : 393.3,
+        "left" : 112.1,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Lightning Page View 2024 06 1-10",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND3" : {
+        "label" : "Append 3",
+        "type" : "APPEND",
+        "top" : 531.9,
+        "left" : 252.10000000000002
+      },
+      "OUTPUT1" : {
+        "label" : "Knowledge Page View Appended",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 392
+      },
+      "LOAD_DATASET6" : {
+        "label" : "2024 03 18-31 Search Clicks",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 672,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND4" : {
+        "label" : "Append 4",
+        "type" : "APPEND",
+        "top" : 251.3,
+        "left" : 812
+      },
+      "LOAD_DATASET7" : {
+        "label" : "2024 02 Search Clicks",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 812.2,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND5" : {
+        "label" : "Append 5",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 952.2
+      },
+      "LOAD_DATASET8" : {
+        "label" : "2024 01 Search Clicks",
+        "type" : "LOAD_DATASET",
+        "top" : 112.1,
+        "left" : 952,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND6" : {
+        "label" : "Append 6",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 1092
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "APPEND0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "APPEND0"
+    }, {
+      "source" : "APPEND0",
+      "target" : "APPEND1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "APPEND1"
+    }, {
+      "source" : "APPEND1",
+      "target" : "APPEND2"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "APPEND2"
+    }, {
+      "source" : "APPEND6",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "APPEND3"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "APPEND3"
+    }, {
+      "source" : "APPEND3",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "APPEND2",
+      "target" : "APPEND4"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "APPEND4"
+    }, {
+      "source" : "APPEND4",
+      "target" : "APPEND5"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "APPEND5"
+    }, {
+      "source" : "APPEND5",
+      "target" : "APPEND6"
+    }, {
+      "source" : "LOAD_DATASET8",
+      "target" : "APPEND6"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

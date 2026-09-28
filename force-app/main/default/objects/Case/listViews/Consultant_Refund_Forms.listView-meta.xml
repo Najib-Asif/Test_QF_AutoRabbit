@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consultant_Refund_Forms</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Booking_PNR__c</field>
+        <operation>equals</operation>
+        <value>AAABBB</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.CCC_Query</value>
+    </filters>
+    <label>Consultant Refund Forms</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_QDC_OM</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

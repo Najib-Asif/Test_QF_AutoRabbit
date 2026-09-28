@@ -1,0 +1,25 @@
+<template>
+    <template lwc:if={isShowModal}>
+   
+    <lightning-quick-action-panel >
+       <div class="bold-header">Deal-Support case creation</div>
+        <br>
+    <div class ="list-color">
+    <div>By creating a new Deal Support case, you are confirming that you have:</div>
+        <ol class="slds-list_ordered">
+            <li>Contacted Travel Agent to confirm all IATA's & PCC's are correct</li>
+            <li>Added any new IATA's & PCC's through the contract in 'Manage TMC/PCC' tab</li>
+            <li>Checked in Salesforce contract that all IATA's & PCC's are listed</li>
+            <li>Discounts in Salesforce are the same as the signed contract</li>
+            <li>Contract start & end dates are correct</li>   
+          </ol>
+    </div>
+    <div slot="footer">
+        <div class="checkbox-container">
+        <lightning-input label ="Confirming all points are correct in the checklist" type="checkbox" required onchange={checkboxhandler}></lightning-input>
+        <lightning-button variant="brand" label="Next" onclick={handleCase}></lightning-button>         
+        </div>
+    </div>
+    </lightning-quick-action-panel>
+    </template>
+</template>

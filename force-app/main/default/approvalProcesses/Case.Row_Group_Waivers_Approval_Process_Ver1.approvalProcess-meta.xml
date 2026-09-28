@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>AM_s_Manager__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>NZ,GB,CA,MX,IN,HK,CN,ID,PH,TH,SG,MY,VN,TW,KR,JP,NC,PF,US,IE,LK,MN,DE,FR,NL,BE,IT,BR,CL,CH,AR,PG,FJ,AT,GR,SE,FI,AE,IL</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approvalv1</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Reports_To__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>1 AND 2</booleanFilter>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>NZ,GB,ZA,CA,MX,IN,HK,CN,ID,PH,TH,SG,MY,VN,TW,KR,PG,SB,JP,NC,PF,US,IE,LK,MN,DE,FR,NL,BE,IT,BR,CL,FJ,CH,TO,WS,BW,NA,ZM,ZW,AR,AT,GR,SE,FI,AE,IL</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Cancellation Fees,Deposit Amount,Excess Baggage,Minimum Group Size,Name Change Fee,No - Shows,Fare Waiver – BART (price match),Fare Waiver – P&amp;Y (price match),Groups - Change Fee,Groups - Refund,Groups - Booking Fee</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Group Waiver Approvals when condition not met -CRM-8529 &amp; CRM-8644 &amp;&amp; CRM-8821
+Added additional sales regions CRM-10824</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>RecordType.DeveloperName = &apos;QIC_Service_request&apos;  &amp;&amp;
+ISPICKVAL(Type, &apos;Group Waivers&apos;) &amp;&amp;  ISPICKVAL(Condition_Met__c, &apos;No&apos;) &amp;&amp; NOT(ISPICKVAL(Approval_Status__c,&apos;Approved&apos;) || ISPICKVAL(Approval_Status__c,&apos;Reject&apos;)) &amp;&amp; Account.BillingCountry   != &apos;AU&apos;</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Last_Approved_By_update</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Authority_Status_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Row Group Waivers Approval Process V1</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>5</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

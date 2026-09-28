@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Aquire_Override_reason</fullName>
+    <active>true</active>
+    <description>CRM_725 - Make Aquire Override reason field mandatory if the Aquire Flag is true.</description>
+    <errorConditionFormula>ISPICKVAL( Aquire_Override__c , &apos;Y&apos;)
+&amp;&amp;
+ISPICKVAL( Aquire_Override_Reason__c , &quot;&quot;)
+&amp;&amp;($Profile.Name != &apos;System Administrator&apos;)
+&amp;&amp;($Profile.Name != &apos;Qantas System Administrator&apos;) 
+&amp;&amp;($Profile.Name != &apos;Qantas System Admin - Freight&apos;) 
+&amp;&amp;($Profile.Name != &apos;Qantas System Admin - QCC&apos;) 
+&amp;&amp;($Profile.Name != &apos;Qantas System Admin - SND&apos;) 
+&amp;&amp; ($Profile.Name != &apos;Data Administrator&apos;)
+&amp;&amp; ( NOT (ISCHANGED ( Last_Completed_Account_Review__c )) 
+&amp;&amp; ( NOT (ISCHANGED ( Last_Activity_Created_Date__c )) 
+))</errorConditionFormula>
+    <errorDisplayField>Aquire_Override_Reason__c</errorDisplayField>
+    <errorMessage>Please select the value for Aquire Override reason field.</errorMessage>
+</ValidationRule>

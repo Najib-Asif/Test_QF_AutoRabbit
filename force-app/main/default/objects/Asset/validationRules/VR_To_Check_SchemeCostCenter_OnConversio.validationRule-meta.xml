@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Check_SchemeCostCenter_OnConversio</fullName>
+    <active>true</active>
+    <description>Enforce Scheme Cost Center not to have Public on the conversion of Public Scheme to Corporate Scheme</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Check_SchemeCostCenter_OnConversio__c &amp;&amp; 
+RecordType.DeveloperName =&apos;Corporate_Scheme&apos; &amp;&amp; Scheme_Cost_Center__c ==&apos;Public&apos;</errorConditionFormula>
+    <errorMessage>Please check Scheme Cost Center value as you are trying to move from Public Scheme to Corporate Scheme.Please hover on Scheme Cost center Help Text for any further details</errorMessage>
+</ValidationRule>

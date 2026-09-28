@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Refund_Ticketing_More_Info_Needed</fullName>
+    <columns>Name</columns>
+    <columns>RecordType</columns>
+    <columns>Subtype__c</columns>
+    <columns>PNR__c</columns>
+    <columns>Status</columns>
+    <columns>CreatedDate</columns>
+    <columns>Owner</columns>
+    <columns>Case</columns>
+    <columns>CreatedBy</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RecordType</field>
+        <operation>equals</operation>
+        <value>WorkOrder.QCC_Refund_Request,WorkOrder.QCC_Ticketing_Request</value>
+    </filters>
+    <filters>
+        <field>Status</field>
+        <operation>equals</operation>
+        <value>More information needed</value>
+    </filters>
+    <filters>
+        <field>WO_Owner_Location__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Refund &amp; Ticketing - More Info Needed</label>
+</ListView>

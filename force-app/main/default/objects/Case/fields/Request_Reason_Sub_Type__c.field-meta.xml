@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Request_Reason_Sub_Type__c</fullName>
+    <description>Used in QAC for service requests record type.</description>
+    <label>Request Reason Sub Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Reason_for_Waiver__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Correction three or less characters</fullName>
+                <default>false</default>
+                <label>Correction three or less characters</label>
+            </value>
+            <value>
+                <fullName>Correction more than three characters</fullName>
+                <default>false</default>
+                <label>Correction more than three characters</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Refund</fullName>
+                <default>false</default>
+                <label>Refund</label>
+            </value>
+            <value>
+                <fullName>Orgin and Destination Changed</fullName>
+                <default>false</default>
+                <label>Orgin and Destination Changed</label>
+            </value>
+            <value>
+                <fullName>Imminent departure</fullName>
+                <default>false</default>
+                <label>Imminent Departure</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Married to Maiden or Vice versa</controllingFieldValue>
+            <controllingFieldValue>Transposed Name</controllingFieldValue>
+            <controllingFieldValue>Typing Error in FirstName</controllingFieldValue>
+            <controllingFieldValue>Typing Error in LastName</controllingFieldValue>
+            <controllingFieldValue>Typing Error in Name</controllingFieldValue>
+            <valueName>Refund</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Compassionate</controllingFieldValue>
+            <controllingFieldValue>Consultant Error</controllingFieldValue>
+            <controllingFieldValue>Major Disruption</controllingFieldValue>
+            <controllingFieldValue>Wheelchair</controllingFieldValue>
+            <valueName>Orgin and Destination Changed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Compassionate</controllingFieldValue>
+            <controllingFieldValue>Consultant Error</controllingFieldValue>
+            <controllingFieldValue>Major Disruption</controllingFieldValue>
+            <controllingFieldValue>Wheelchair</controllingFieldValue>
+            <valueName>Imminent departure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Typing Error in FirstName</controllingFieldValue>
+            <controllingFieldValue>Typing Error in LastName</controllingFieldValue>
+            <controllingFieldValue>Typing Error in Name</controllingFieldValue>
+            <valueName>Correction three or less characters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Typing Error in FirstName</controllingFieldValue>
+            <controllingFieldValue>Typing Error in LastName</controllingFieldValue>
+            <controllingFieldValue>Typing Error in Name</controllingFieldValue>
+            <valueName>Correction more than three characters</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

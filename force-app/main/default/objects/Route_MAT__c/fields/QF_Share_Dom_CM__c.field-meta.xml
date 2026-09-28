@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QF_Share_Dom_CM__c</fullName>
+    <formula>IF(CM_Total_Revenue_Dom__c = 0,NULL, (CM_QF_Revenue_Dom__c  /  CM_Total_Revenue_Dom__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>QF Share Dom CM</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

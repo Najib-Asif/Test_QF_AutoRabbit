@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>State_Code_is_mandatory_for_AU_Agency</fullName>
+    <active>true</active>
+    <description>Created for To avoid Lead Convert Error for Agency</description>
+    <errorConditionFormula>AND(ISPICKVAL( New_Account_Type__c , &quot;Agency&quot;), Country   = &quot;AU&quot;, ISBLANK( TEXT(StateCode ) ) )</errorConditionFormula>
+    <errorMessage>Please provide State/Province</errorMessage>
+</ValidationRule>

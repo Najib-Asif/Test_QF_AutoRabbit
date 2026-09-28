@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Restrict_PNR_Len_6</fullName>
+    <active>false</active>
+    <description>QAC Service request cases can have PNR of length=6</description>
+    <errorConditionFormula>AND( RecordType.Name == &apos;Service Request&apos; , 
+     NOT(ISBLANK(PNR_number__c)),
+     NOT(LEN( PNR_number__c) == 6))</errorConditionFormula>
+    <errorMessage>PNR Number should be 6 characters</errorMessage>
+</ValidationRule>

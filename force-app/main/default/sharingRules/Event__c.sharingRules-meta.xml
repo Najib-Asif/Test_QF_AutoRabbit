@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>FlightEventCCReadAccess</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>QCC: Customer Care Users can see all Flight Events.</description>
+        <label>Flight Event CC - Read Access</label>
+        <sharedTo>
+            <group>QCC_CCPublicGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Flight Event - Closed,Flight Event - Active,Global Event</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>FlightEventCCReadWriteAccess</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: Only Few CC users can edit the Flight Event. When Status is assigned.</description>
+        <label>Flight Event CC - Read/Write Access</label>
+        <sharedTo>
+            <group>QCC_CCEventsGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Flight Event - Closed,Flight Event - Active,Global Event</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Assigned,Closed</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>FlightEventCJMReadWriteAccess</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: CJM Can Edit all Flight Events</description>
+        <label>Flight Event CJM - Read/Write Access</label>
+        <sharedTo>
+            <group>QCC_CJMPublicGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Global Event,Flight Event - Closed,Flight Event - Active,Flight Event - Offload</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>FlightEventOffloadCCReadWriteAccess</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>IOC: Offload Event Can be edited by Pre-Travel Consultants</description>
+        <label>Flight Event Offload CC - Read/Write Access</label>
+        <sharedTo>
+            <group>IOC_OFFLoadCCGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Flight Event - Offload</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In-Progress,Assigned,Closed</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Flight_Event_to_VIP_Service_Team</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>QCC Share Flight Event to VIP Service Team</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Global Heads Up,Flight Event - Active,Heads Up</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>S_D_Read_Only</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>To Open up access</description>
+        <label>S&amp;D Read Only</label>
+        <sharedTo>
+            <group>B2B_Roles_and_Subordinates</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Flight Event - Closed,Global Event,Flight Event - Active</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>KnowledgeiQ_Guest_User_Flight_Events</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Sharing rule to allow Knowledge iQ guest user to access flight events</description>
+        <label>KnowledgeiQ Guest User Flight Events</label>
+        <sharedTo>
+            <guestUser>Knowledge_iQ</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Flight Event - Closed,Global Event,Flight Event - Active</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+</SharingRules>

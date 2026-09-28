@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>FreightSharingRuleForAutomatedProcess</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>This rule extends read only access of the case records owned by automated process user.</description>
+        <label>FreightSharingRuleForAutomatedProcess</label>
+        <sharedTo>
+            <group>Freight_Service_Users_For_Autmated_Proce</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000003YwlzAAC</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Freight_Chat_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Freight Chat Sharing rule</description>
+        <label>Freight Chat Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_Customer_Service_Unit</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

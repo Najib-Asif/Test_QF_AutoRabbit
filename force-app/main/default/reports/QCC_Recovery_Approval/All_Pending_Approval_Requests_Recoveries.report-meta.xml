@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CreatedDate</field>
+    </columns>
+    <columns>
+        <field>SubmittedBy</field>
+    </columns>
+    <columns>
+        <field>CurrentNode.Description</field>
+    </columns>
+    <columns>
+        <field>CreatedBy</field>
+    </columns>
+    <columns>
+        <field>TargetEntity</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>CCB Recovery Approval Requests</description>
+    <filter>
+        <criteriaItems>
+            <column>ProcessName</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>QCC Recovery Approval Process V1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Actor</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Nicholas Gardner</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Actor</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>OriginalActor</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>All Pending Approval Requests Recoveries</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AllPendingWorkitems</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

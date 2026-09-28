@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Type_Loyalty__c</fullName>
+    <description>Used as a sub type field for loyalty based on type</description>
+    <label>Sub Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Coalition</fullName>
+                <default>false</default>
+                <label>Coalition</label>
+            </value>
+            <value>
+                <fullName>Financial Services</fullName>
+                <default>false</default>
+                <label>Financial Services</label>
+            </value>
+            <value>
+                <fullName>QBR</fullName>
+                <default>false</default>
+                <label>QBR</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Qantas Frequent Flyer</controllingFieldValue>
+            <valueName>Coalition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Qantas Frequent Flyer</controllingFieldValue>
+            <valueName>Financial Services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Qantas Business Rewards</controllingFieldValue>
+            <valueName>QBR</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

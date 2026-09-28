@@ -1,0 +1,70 @@
+<template>
+    <lightning-card title="Add or Edit Payment Details" icon-name="custom:custom63">
+        <div class="slds-p-horizontal_medium">
+            <lightning-record-edit-form object-api-name="Recovery__c" record-id={recordId} onsuccess={handleSuccess} onsubmit={handleSubmit} onerror={handleError}>
+                
+                <lightning-messages></lightning-messages>
+
+                
+                <lightning-layout>
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Refund_POS_Country__c" required onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Bank_Account_Name__c" required onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                </lightning-layout>
+                
+                <lightning-layout>
+                    
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Bank_Name__c"  onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Branch_Number_BSB_Sort_Code__c"  onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <lightning-layout>
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Bank_Account_Number__c" required onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Branch_Swift_BIC_Code__c" onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                    
+                </lightning-layout>
+                
+
+                
+                <lightning-layout>
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="IBAN__c" onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Account_Type__c" onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <lightning-layout>
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="TAX_Id_VAT_Reg_No__c"  onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="horizontal-small">
+                        <lightning-input-field field-name="Branch_Name__c" onchange={handleChnage}></lightning-input-field>
+                    </lightning-layout-item>
+                    
+                    
+                </lightning-layout>
+
+                <!-- Action Buttons -->
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button variant="neutral" label="Cancel" onclick={handleCancel} class="slds-m-right_small"></lightning-button>
+                    <lightning-button variant="brand" type="submit" label="Save" disabled={isButtonDisabled}></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>

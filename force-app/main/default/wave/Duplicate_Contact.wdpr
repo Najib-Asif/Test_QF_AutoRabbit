@@ -1,0 +1,559 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CreatedDate", "Id", "LastName", "FirstName", "Name", "RecordTypeId", "Phone", "Email", "Frequent_Flyer_Number__c", "Membership_Current_Tier_f__c", "Frequent_Flyer_Tier__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "B2B Contacts with Keys",
+          "name" : "Duplicate_Contacts_by_Name",
+          "folderName" : "Duplicate_Contacts"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "LOAD_DATASET0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "RecordTypeId" ]
+        }
+      },
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordTypeId_bucket",
+          "label" : "Contact Type",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Placeholder Contact",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "RecordTypeId",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "B2B Contact",
+              "sourceValues" : [ "01290000001IINQAA4" ]
+            }, {
+              "value" : "B2C Contact",
+              "sourceValues" : [ "0122v000001NlG6AAK" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordTypeId_bucket",
+          "operator" : "EQUAL",
+          "operands" : [ "B2B Contact" ]
+        } ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "FILTER0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ThreePtKeyB2B",
+          "label" : "3 Point Key",
+          "formulaExpression" : "concat(FirstName,\r\nLastName,Frequent_Flyer_Number__c)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ThreePtKeyemail_B2B",
+          "label" : "3 Point Key Email",
+          "formulaExpression" : "concat(FirstName, LastName,Email)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "TRIM0" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA1" ],
+      "schema" : {
+        "fields" : [ {
+          "name" : "Phone_trim",
+          "newProperties" : {
+            "name" : "Phone"
+          }
+        } ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Phone" ]
+        }
+      },
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Phone_trim",
+          "label" : "Business Phone",
+          "formulaExpression" : "trim(Phone)",
+          "precision" : 255
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "TRIM0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ThreePtKey_Phone_B2B",
+          "label" : "3PtKeyPhone",
+          "formulaExpression" : "concat(FirstName, LastName,Phone)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordTypeId_bucket",
+          "operator" : "EQUAL",
+          "operands" : [ "B2C Contact" ]
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "FILTER1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Three_Pt_Check_QFF_B2C",
+          "label" : "3 Point Check QFF",
+          "formulaExpression" : "concat(FirstName,LastName,Frequent_Flyer_Number__c)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA6" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ThreePtKeyEmail_B2C",
+          "label" : "3PtKeyEmailB2C",
+          "formulaExpression" : "concat(FirstName,LastName,Email)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ThreePtKeyPhone_B2C",
+          "label" : "3Pt Key Phone",
+          "formulaExpression" : "concat(FirstName,LastName,trim(Phone))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA6" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "FourPtKeyB2C",
+          "label" : "4 Pt Key B2C",
+          "formulaExpression" : "concat(FirstName,LastName,trim(Phone),Email)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "B2C Contacts",
+          "name" : "B2C_Contacts",
+          "folderName" : "Duplicate_Contacts"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "ThreePtKeyB2B",
+          "name" : "UNIQUE_ThreePtKeyB2B",
+          "label" : "Unique 3 Point Key"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "ThreePtKeyemail_B2B",
+          "name" : "UNIQUE_ThreePtKeyemail_B2B",
+          "label" : "Unique 3 Point Key Email"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "ThreePtKey_Phone_B2B",
+          "name" : "UNIQUE_ThreePtKey_Phone_B2B",
+          "label" : "Unique 3PtKeyPhone"
+        } ],
+        "groupings" : [ "Name" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "B2B Aggegate",
+          "name" : "B2B_Aggegate",
+          "folderName" : "Duplicate_Contacts"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "EXTRACT1" : {
+      "action" : "extractGrains",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE3" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT1" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "Three_Pt_Check_QFF_B2C",
+          "name" : "UNIQUE_Three_Pt_Check_QFF_B2C",
+          "label" : "Unique 3 Point Check QFF"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "ThreePtKeyPhone_B2C",
+          "name" : "UNIQUE_ThreePtKeyPhone_B2C",
+          "label" : "Unique 3Pt Key Phone"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "ThreePtKeyEmail_B2C",
+          "name" : "UNIQUE_ThreePtKeyEmail_B2C",
+          "label" : "Unique 3PtKeyEmailB2C"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "FourPtKeyB2C",
+          "name" : "UNIQUE_FourPtKeyB2C",
+          "label" : "Unique 4 Pt Key B2C"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Frequent_Flyer_Number__c",
+          "name" : "UNIQUE_Frequent_Flyer_Number__c",
+          "label" : "Unique Frequent Flyer Number"
+        } ],
+        "groupings" : [ "Name" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "B2C Contact Aggregate",
+          "name" : "B2C_Contact_Aggregate",
+          "folderName" : "Duplicate_Contacts"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "B2B Contacts",
+        "description" : "Aggregated by Name",
+        "type" : "OUTPUT",
+        "top" : 112.30000000000001,
+        "left" : 810.1
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 252,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER0" : {
+        "label" : "B2B",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112.1,
+        "left" : 392
+      },
+      "TRANSFORM1" : {
+        "label" : "Keys",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112.19999999999999,
+        "left" : 532.1,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "TRIM0" : {
+            "parameters" : {
+              "type" : "TRIM_UI"
+            },
+            "label" : "Trim"
+          },
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "TRIM0"
+        }, {
+          "source" : "TRIM0",
+          "target" : "FORMULA2"
+        } ]
+      },
+      "FILTER1" : {
+        "label" : "B2C",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 391.9,
+        "left" : 392
+      },
+      "TRANSFORM2" : {
+        "label" : "Transform 2",
+        "type" : "TRANSFORM",
+        "top" : 392,
+        "left" : 532,
+        "graph" : {
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA4" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA5" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA6" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA3",
+          "target" : "FORMULA5"
+        }, {
+          "source" : "FORMULA6",
+          "target" : "FORMULA4"
+        }, {
+          "source" : "FORMULA5",
+          "target" : "FORMULA6"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "B2C Contacts",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 390.5,
+        "left" : 812
+      },
+      "AGGREGATE0" : {
+        "label" : "Aggregate by keys",
+        "description" : "",
+        "type" : "AGGREGATE",
+        "top" : 251.8,
+        "left" : 672,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "OUTPUT2" : {
+        "label" : "B2B Aggregate",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 812
+      },
+      "AGGREGATE2" : {
+        "label" : "Aggregate 2",
+        "type" : "AGGREGATE",
+        "top" : 531.9,
+        "left" : 532,
+        "graph" : {
+          "EXTRACT1" : null,
+          "AGGREGATE3" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT1",
+          "target" : "AGGREGATE3"
+        } ]
+      },
+      "OUTPUT3" : {
+        "label" : "B2C Aggregate",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 812.2
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "AGGREGATE0"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "AGGREGATE2"
+    }, {
+      "source" : "AGGREGATE2",
+      "target" : "OUTPUT3"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Business_Sub_Type__c</fullName>
+    <description>Freight - To capture the Business Sub-Type for a Freight Account. This field will always default to &quot;New Business&quot; for new Accounts.</description>
+    <inlineHelpText>Freight: As a guide, Annual QF Freight revenue
+Strategic &gt;AU$1M
+Development AU$1M - $250K
+Inside Sales &lt;AU$250K
+New Business - New account</inlineHelpText>
+    <label>Business Sub-Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New Business</fullName>
+                <default>true</default>
+                <label>New Business</label>
+            </value>
+            <value>
+                <fullName>Qantas Business Rewards</fullName>
+                <default>false</default>
+                <label>Qantas Business Rewards</label>
+            </value>
+            <value>
+                <fullName>Qantas Frequent Flyer</fullName>
+                <default>false</default>
+                <label>Qantas Frequent Flyer</label>
+            </value>
+            <value>
+                <fullName>QBR and QFF</fullName>
+                <default>false</default>
+                <label>QBR and QFF</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

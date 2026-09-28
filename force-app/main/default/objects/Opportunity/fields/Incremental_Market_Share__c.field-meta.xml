@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Incremental_Market_Share__c</fullName>
+    <formula>IF( RecordType.DeveloperName == &apos;Currently_In_Contract&apos; ,Proposed_Market_Share__c - Current_Market_Share__c, 
+IF( RecordType.DeveloperName == &apos;Currently_Not_In_Contract&apos; ,Proposed_Market_Share__c - Estimated_Current_Market_Share__c ,0 ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Calculated market share increment for the opportunity.</inlineHelpText>
+    <label>Incremental Market Share %</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <type>Percent</type>
+</CustomField>

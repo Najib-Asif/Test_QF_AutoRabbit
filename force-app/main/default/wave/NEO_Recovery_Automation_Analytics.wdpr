@@ -1,0 +1,1586 @@
+{
+  "version" : "64.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ParentId", "Id", "CaseNumber", "RecordTypeId", "Status", "CreatedDate", "Case_Age__c", "CCC_And_B_Case_Type__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "IsDeleted", "CaseId", "CreatedById", "CreatedDate", "Field", "DataType", "OldValue", "NewValue" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseHistory",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseHistory"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1704067200000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Field",
+          "operator" : "EQUAL",
+          "operands" : [ "Status" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "IsDeleted",
+          "operator" : "EQUAL",
+          "operands" : [ "false" ]
+        } ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1704067200000" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "JOIN0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Case.Id", "Case.RecordTypeId", "Case.RecordType.Id" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CaseId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case with Case History 2024",
+          "name" : "Case_with_Case_History_2024",
+          "folderName" : "NEO_RECOVERY_AUTOMATION_ANALYTICS"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "partitionBy" : [ "CaseId" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Count_History",
+          "label" : "Count History",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "partitionBy" : [ "CaseId" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "Previous_Status_Date",
+          "label" : "Previous Status Date",
+          "formulaExpression" : "lag(CreatedDate)",
+          "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Reply_Received_Case_Hours",
+          "label" : "Reply Received Case Hours",
+          "formulaExpression" : "if(\"OldValue\" = 'Reply Received' AND \"Count_History\" = 1, (to_unix_timestamp(CreatedDate) - to_unix_timestamp(\"Case.CreatedDate\"))/3600, 0)\r\n",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA16" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Hours_Between",
+          "label" : "Hours Between",
+          "formulaExpression" : "if(\"Reply_Received_Case_Hours\" = 0, (to_unix_timestamp(CreatedDate) - to_unix_timestamp(Previous_Status_Date))/3600, \"Reply_Received_Case_Hours\")\r\n",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA6" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Reply_Received_Hours",
+          "label" : "Reply Received Hours",
+          "formulaExpression" : "If(OldValue = 'Reply Received',Hours_Between,0)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA7" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA8" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Waiting_for_Customer_Hours",
+          "label" : "Waiting for Customer Hours",
+          "formulaExpression" : "If(OldValue = 'Waiting for Customer',Hours_Between,0)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA8" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA6" ],
+      "parameters" : {
+        "partitionBy" : [ "Case_Number_Reply_Received" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Reply_Received_Hours_One_Case",
+          "label" : "Reply Received Hours One Case",
+          "formulaExpression" : "sum(Reply_Received_Hours)",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA9" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA7" ],
+      "parameters" : {
+        "partitionBy" : [ "Case_Number_Waiting_For_Customer" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Waiting_for_Customer_Hours_One_Case",
+          "label" : "Waiting for Customer Hours One Case",
+          "formulaExpression" : "sum(Waiting_for_Customer_Hours)",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA12" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Case_Number_Reply_Received",
+          "label" : "Case Number + Reply Received",
+          "formulaExpression" : "if(\"OldValue\" = 'Reply Received', concat(\"Case.CaseNumber\", ' - ', OldValue), '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA13" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA15" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Case_Number_Waiting_For_Customer",
+          "label" : "Case Number + Waiting For Customer",
+          "formulaExpression" : "if(\"OldValue\" = 'Waiting for Customer', concat(\"Case.CaseNumber\", ' - ', OldValue), '')\r\n",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA15" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA12" ],
+      "parameters" : {
+        "partitionBy" : [ "Case_Number_Reply_Received" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Reply_Received_Count",
+          "label" : "Reply Received Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA16" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA13" ],
+      "parameters" : {
+        "partitionBy" : [ "Case_Number_Waiting_For_Customer" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Waiting_for_Customer_Count",
+          "label" : "Waiting for Customer Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA19" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA9" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Pending_Recovery_Case_Hours",
+          "label" : "Pending Recovery Case Hours",
+          "formulaExpression" : "if(\"OldValue\" = 'Pending Recovery' AND \"Count_History\" = 1, (to_unix_timestamp(CreatedDate) - to_unix_timestamp(\"Case.CreatedDate\"))/3600, 0)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA20" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA19" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Case_Number_Pending_Recovery",
+          "label" : "Case Number + Pending Recovery",
+          "formulaExpression" : "if(\"OldValue\" = 'Pending Recovery', concat(\"Case.CaseNumber\", ' - ', OldValue), '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA21" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA20" ],
+      "parameters" : {
+        "partitionBy" : [ "Case_Number_Pending_Recovery" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Pending_Recovery_Count",
+          "label" : "Pending Recovery Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA22" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA21" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Pending_Recovery_Hours",
+          "label" : "Pending Recovery Hours",
+          "formulaExpression" : "If(OldValue = 'Pending Recovery',Hours_Between,0)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA23" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA22" ],
+      "parameters" : {
+        "partitionBy" : [ "Case_Number_Pending_Recovery" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Pending_Recovery_Hours_One_Case",
+          "label" : "Pending Recovery Hours One Case",
+          "formulaExpression" : "sum(Pending_Recovery_Hours)",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "ParentId", "CreatedById", "CreatedDate", "Field", "DataType", "OldValue", "NewValue" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Recovery__History",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Recovery__History"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1730160000000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Field",
+          "operator" : "EQUAL",
+          "operands" : [ "Status__c" ]
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "partitionBy" : [ "ParentId" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "Previous_Status_Date",
+          "label" : "Previous Status Date",
+          "formulaExpression" : "lag(CreatedDate)",
+          "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA17" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Hours_Between",
+          "label" : "Hours Between",
+          "formulaExpression" : "(to_unix_timestamp(CreatedDate) - to_unix_timestamp(Previous_Status_Date))/3600",
+          "precision" : 10,
+          "scale" : 5,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA10" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Awaiting_Customer_Hours",
+          "label" : "Awaiting Customer Hours",
+          "formulaExpression" : "If(OldValue = 'Awaiting Customer',Hours_Between,0)",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA11" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA10" ],
+      "parameters" : {
+        "partitionBy" : [ "Recovery_Number_Awaiting_Customer" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Awaiting_Customer_Hours_One_Recovery",
+          "label" : "Awaiting Customer Hours One Recovery",
+          "formulaExpression" : "sum(Awaiting_Customer_Hours)",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA14" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Recovery_Number_Awaiting_Customer",
+          "label" : "Recovery Number + Awaiting Customer",
+          "formulaExpression" : "if(\"OldValue\" = 'Awaiting Customer', concat(\"Recovery.Name\", ' - ', OldValue), '')\r\n",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA17" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA14" ],
+      "parameters" : {
+        "partitionBy" : [ "Recovery_Number_Awaiting_Customer" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Recovery_Number_Awaiting_Customer_Count",
+          "label" : "Recovery Number + Awaiting Customer Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA26" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA11" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Rejected_Hours",
+          "label" : "Rejected Hours",
+          "formulaExpression" : "If(NewValue = 'Rejected',Hours_Between,0)",
+          "precision" : 10,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA27" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA26" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Pending_Approval_Hours",
+          "label" : "Pending Approval Hours",
+          "formulaExpression" : "If(NewValue = 'Approved',(to_unix_timestamp(CreatedDate) - to_unix_timestamp(\"Recovery.CreatedDate\"))/3600,0)",
+          "precision" : 10,
+          "scale" : 5,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "FORMULA27" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Recovery History Post Automation",
+          "name" : "Recovery_History_Post_Automation",
+          "folderName" : "NEO_RECOVERY_AUTOMATION_ANALYTICS"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Recovery_Reason__c", "Recovery_by_Location__c", "Id", "Name", "CreatedDate", "Case_Number__c", "Status__c", "Type__c", "Value__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Recovery__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Recovery__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET4" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1704067200000" ]
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER2", "FILTER5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ParentId" ],
+        "rightQualifier" : "Recovery",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "CreatedDate", "FromAddress", "ValidatedFromAddress", "ToAddress", "Incoming", "Status", "IsBounced" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "EmailMessage",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "EmailMessage"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER4" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET5" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1704067200000" ]
+        } ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "FILTER6" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Recovery",
+        "rightKeys" : [ "Case_Number__c" ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "JOIN3", "FILTER4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Email",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "FORMULA18" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Recoveries with Emails Post Automation",
+          "name" : "Recoveries_with_Emails_Post_Automation",
+          "folderName" : "NEO_RECOVERY_AUTOMATION_ANALYTICS"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER5" : {
+      "action" : "filter",
+      "sources" : [ "FILTER3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1730160000000" ]
+        } ]
+      }
+    },
+    "FILTER6" : {
+      "action" : "filter",
+      "sources" : [ "FILTER3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Status__c",
+          "operator" : "DOES_NOT_CONTAIN",
+          "operands" : [ "Cancelled" ]
+        } ]
+      }
+    },
+    "FORMULA18" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "partitionBy" : [ "Id" ],
+        "orderBy" : [ {
+          "fieldName" : "Email.CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Email_Count",
+          "label" : "Email Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "FORMULA23", "FILTER6" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CaseId" ],
+        "rightQualifier" : "HasRec",
+        "rightKeys" : [ "Case_Number__c" ]
+      }
+    },
+    "FILTER7" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "CCC_And_B_Case_Type__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Parent" ]
+        } ]
+      }
+    },
+    "FILTER8" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "CCC_And_B_Case_Type__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Child" ]
+        } ]
+      }
+    },
+    "JOIN6" : {
+      "action" : "join",
+      "sources" : [ "FILTER7", "FILTER8" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Child",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "FORMULA24" : {
+      "action" : "computeRelative",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "partitionBy" : [ "Id" ],
+        "orderBy" : [ {
+          "fieldName" : "Child.CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Count_Child_Cases",
+          "label" : "Count Child Cases",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN6" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Child.CaseNumber",
+          "newProperties" : {
+            "label" : "Child Case Number",
+            "name" : "Child.CaseNumber"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Child.Id",
+          "newProperties" : {
+            "label" : "Child Case Id",
+            "name" : "Child.Id"
+          }
+        } ]
+      }
+    },
+    "JOIN7" : {
+      "action" : "join",
+      "sources" : [ "FORMULA24", "FILTER6" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "ParentRec",
+        "rightKeys" : [ "Case_Number__c" ]
+      }
+    },
+    "JOIN8" : {
+      "action" : "join",
+      "sources" : [ "JOIN7", "FILTER6" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Child.Id" ],
+        "rightQualifier" : "ChildRec",
+        "rightKeys" : [ "Case_Number__c" ]
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "FORMULA25" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case Family Has Recoveries",
+          "name" : "Case_Family_Has_Recoveries",
+          "folderName" : "NEO_RECOVERY_AUTOMATION_ANALYTICS"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA25" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN8" ],
+      "parameters" : {
+        "partitionBy" : [ "Id" ],
+        "orderBy" : [ {
+          "fieldName" : "Child.CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Max_Child_Counts",
+          "label" : "Max Child Counts",
+          "formulaExpression" : "last_value(Count_Child_Cases)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 252.5,
+        "left" : 112.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "CaseHistory",
+        "type" : "LOAD_DATASET",
+        "top" : 392.5,
+        "left" : 672.5,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Post 2024",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 392.5,
+        "left" : 532.5
+      },
+      "FILTER1" : {
+        "label" : "Cases Post 2024",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252.5,
+        "left" : 252.5
+      },
+      "LOAD_DATASET2" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 392.5,
+        "left" : 392.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Case Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.5,
+        "left" : 392.5
+      },
+      "JOIN1" : {
+        "label" : "Case and History",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.5,
+        "left" : 532.5
+      },
+      "OUTPUT0" : {
+        "label" : "Case with Case History 2024",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1232
+      },
+      "TRANSFORM0" : {
+        "label" : "Count History and Lag Dates",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252.5,
+        "left" : 672.5,
+        "graph" : {
+          "FORMULA0" : {
+            "label" : "Count History"
+          },
+          "FORMULA2" : {
+            "label" : "Previous Status Date"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA2"
+        } ]
+      },
+      "TRANSFORM1" : {
+        "label" : "Hours Between",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 952,
+        "graph" : {
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Reply Received Case Hours"
+          },
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Hours Between"
+          },
+          "FORMULA6" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Reply Received Hours"
+          },
+          "FORMULA7" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Waiting for Customer Hours"
+          },
+          "FORMULA8" : {
+            "label" : "Reply Received Hours One Case"
+          },
+          "FORMULA9" : {
+            "label" : "Waiting for Customer Hours One Case"
+          },
+          "FORMULA12" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Case Number + Reply Received"
+          },
+          "FORMULA13" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Case Number + Waiting For Customer"
+          },
+          "FORMULA15" : {
+            "label" : "Reply Received Count"
+          },
+          "FORMULA16" : {
+            "label" : "Waiting for Customer Count"
+          },
+          "FORMULA19" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Pending Recovery Case Hours"
+          },
+          "FORMULA20" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Case Number + Pending Recovery"
+          },
+          "FORMULA21" : {
+            "label" : "Pending Recovery Count"
+          },
+          "FORMULA22" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Pending Recovery Hours"
+          },
+          "FORMULA23" : {
+            "label" : "Pending Recovery Hours One Case"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA3",
+          "target" : "FORMULA6"
+        }, {
+          "source" : "FORMULA8",
+          "target" : "FORMULA7"
+        }, {
+          "source" : "FORMULA6",
+          "target" : "FORMULA8"
+        }, {
+          "source" : "FORMULA7",
+          "target" : "FORMULA9"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "FORMULA12"
+        }, {
+          "source" : "FORMULA15",
+          "target" : "FORMULA13"
+        }, {
+          "source" : "FORMULA16",
+          "target" : "FORMULA3"
+        }, {
+          "source" : "FORMULA13",
+          "target" : "FORMULA16"
+        }, {
+          "source" : "FORMULA9",
+          "target" : "FORMULA19"
+        }, {
+          "source" : "FORMULA12",
+          "target" : "FORMULA15"
+        }, {
+          "source" : "FORMULA19",
+          "target" : "FORMULA20"
+        }, {
+          "source" : "FORMULA20",
+          "target" : "FORMULA21"
+        }, {
+          "source" : "FORMULA21",
+          "target" : "FORMULA22"
+        }, {
+          "source" : "FORMULA22",
+          "target" : "FORMULA23"
+        } ]
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Recovery__History",
+        "type" : "LOAD_DATASET",
+        "top" : 812.5,
+        "left" : 112.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER2" : {
+        "label" : "Recovery Histories Post Automation",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 952.5,
+        "left" : 252.5
+      },
+      "TRANSFORM2" : {
+        "label" : "Hours Between",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 952.3,
+        "left" : 532,
+        "graph" : {
+          "FORMULA4" : {
+            "label" : "Previous Status Date"
+          },
+          "FORMULA5" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Hours Between"
+          },
+          "FORMULA10" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Awaiting Customer Hours"
+          },
+          "FORMULA11" : {
+            "label" : "Awaiting Customer Hours One Recovery"
+          },
+          "FORMULA14" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Recovery Number + Awaiting Customer"
+          },
+          "FORMULA17" : {
+            "label" : "Recovery Number + Awaiting Customer Count"
+          },
+          "FORMULA26" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Rejected Hours"
+          },
+          "FORMULA27" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Pending Approval Hours"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA5",
+          "target" : "FORMULA10"
+        }, {
+          "source" : "FORMULA10",
+          "target" : "FORMULA11"
+        }, {
+          "source" : "FORMULA4",
+          "target" : "FORMULA14"
+        }, {
+          "source" : "FORMULA17",
+          "target" : "FORMULA5"
+        }, {
+          "source" : "FORMULA14",
+          "target" : "FORMULA17"
+        }, {
+          "source" : "FORMULA11",
+          "target" : "FORMULA26"
+        }, {
+          "source" : "FORMULA26",
+          "target" : "FORMULA27"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Recovery History Post Automation",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 812.5,
+        "left" : 672.5
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Recovery__c",
+        "type" : "LOAD_DATASET",
+        "top" : 532.5,
+        "left" : 112.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER3" : {
+        "label" : "Recoveries Post 2024",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 672.5,
+        "left" : 112.5
+      },
+      "JOIN2" : {
+        "label" : "Recovery and History",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 812.5,
+        "left" : 392.5
+      },
+      "LOAD_DATASET5" : {
+        "label" : "EmailMessage",
+        "type" : "LOAD_DATASET",
+        "top" : 532.5,
+        "left" : 392.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER4" : {
+        "label" : "Emails Post 2024",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532.5,
+        "left" : 532.5
+      },
+      "JOIN3" : {
+        "label" : "Case with Recoveries",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672.5,
+        "left" : 392.5
+      },
+      "JOIN4" : {
+        "label" : "Recoveries with Emails",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672.5,
+        "left" : 532.5
+      },
+      "OUTPUT2" : {
+        "label" : "Recoveries with Emails",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 672.5,
+        "left" : 812.5
+      },
+      "FILTER5" : {
+        "label" : "Recoveries Post Automation",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 812.5,
+        "left" : 252.5
+      },
+      "FILTER6" : {
+        "label" : "Cancelled Excluded",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 672.5,
+        "left" : 252.5
+      },
+      "TRANSFORM3" : {
+        "label" : "Count Emails",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 672.5,
+        "left" : 672.5,
+        "graph" : {
+          "FORMULA18" : {
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "JOIN5" : {
+        "label" : "Recovery to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 1092
+      },
+      "FILTER7" : {
+        "label" : "Parent Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 392
+      },
+      "FILTER8" : {
+        "label" : "Child Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "JOIN6" : {
+        "label" : "Case Family",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 532
+      },
+      "TRANSFORM4" : {
+        "label" : "Count Child Cases",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 812,
+        "graph" : {
+          "FORMULA24" : {
+            "label" : "Count Child Cases"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM5" : {
+        "label" : "Attributes",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 672,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Edit Attributes"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "EDIT_ATTRIBUTES1"
+        } ]
+      },
+      "JOIN7" : {
+        "label" : "Parent Has Recovery",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 952
+      },
+      "JOIN8" : {
+        "label" : "Child Has Recovery",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 1092
+      },
+      "OUTPUT3" : {
+        "label" : "Case Family Has Recoveries",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 1372
+      },
+      "TRANSFORM6" : {
+        "label" : "Max Child Counts",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 1232,
+        "graph" : {
+          "FORMULA25" : {
+            "label" : "Max Child Counts"
+          }
+        },
+        "connectors" : [ ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN5",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "FILTER2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "FILTER3"
+    }, {
+      "source" : "FILTER2",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "FILTER4"
+    }, {
+      "source" : "JOIN3",
+      "target" : "JOIN4"
+    }, {
+      "source" : "FILTER4",
+      "target" : "JOIN4"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "FILTER5",
+      "target" : "JOIN2"
+    }, {
+      "source" : "FILTER3",
+      "target" : "FILTER5"
+    }, {
+      "source" : "FILTER3",
+      "target" : "FILTER6"
+    }, {
+      "source" : "FILTER6",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN4",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "JOIN5"
+    }, {
+      "source" : "FILTER6",
+      "target" : "JOIN5"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER7"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER8"
+    }, {
+      "source" : "FILTER7",
+      "target" : "JOIN6"
+    }, {
+      "source" : "FILTER8",
+      "target" : "JOIN6"
+    }, {
+      "source" : "TRANSFORM5",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "JOIN6",
+      "target" : "TRANSFORM5"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "JOIN7"
+    }, {
+      "source" : "FILTER6",
+      "target" : "JOIN7"
+    }, {
+      "source" : "JOIN7",
+      "target" : "JOIN8"
+    }, {
+      "source" : "FILTER6",
+      "target" : "JOIN8"
+    }, {
+      "source" : "TRANSFORM6",
+      "target" : "OUTPUT3"
+    }, {
+      "source" : "JOIN8",
+      "target" : "TRANSFORM6"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

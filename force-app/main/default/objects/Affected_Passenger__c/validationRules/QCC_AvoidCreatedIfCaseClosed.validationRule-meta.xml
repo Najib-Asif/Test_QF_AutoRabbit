@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_AvoidCreatedIfCaseClosed</fullName>
+    <active>true</active>
+    <description>Void Passenger from created if the Case is closed.</description>
+    <errorConditionFormula>AND( NOT(ISBLANK(Case__c)), ISPICKVAL(Case__r.Status, &apos;Closed&apos;), Case__r.RecordType.Name==&apos;CCC Insurance Letter Case&apos;)</errorConditionFormula>
+    <errorMessage>Please reopen the case to add passengers</errorMessage>
+</ValidationRule>

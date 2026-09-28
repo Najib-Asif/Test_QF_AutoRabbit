@@ -1,0 +1,420 @@
+<!---
+**********************************************************************************************
+Author:        Cyrille Jeufo
+Company:       Capgemini
+Description:   QCC Customer search form
+
+************************************************************************************************
+History
+************************************************************************************************
+Oct-2017      Cyrille Jeufo               Initial Design
+**********************************************************************************************
+-->
+<aura:component controller="QCC_CustomerSearchController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <!--[US# 185 Purushotham – END -->
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:attribute name="contacts" type="Contact[]" />
+    <aura:attribute name="pnr" type="String" />
+    <aura:attribute name="contactPnr" type="String" />
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="createContactMessage" type="String" />
+    <aura:attribute name="duplicateDetected" type="String" />
+    <aura:attribute name="caseId" type="String" />
+    <aura:attribute name="myContact" type="Contact" default="{ 'sobjectType': 'Contact' }" />
+    <!-- Used by the modal -->
+    <aura:attribute name="isOpen" type="boolean" default="false" />
+    <aura:attribute name="isCaseOpen" type="boolean" default="false" />
+    <aura:attribute name="displayNewContactBtn" type="boolean" default="false" />
+    <aura:attribute name="displayAssignToCaseBtn" type="boolean" default="false" />
+    <aura:attribute name="displaySearchResults" type="boolean" default="false" />
+    <!-- [US# 185 Purushotham – Start : Defining attributes, which are used for pagination.] -->
+    <aura:attribute name="currentList" type="Contact[]" />
+    <aura:attribute name="pageNumber" type="Integer" default="1" />
+    <aura:attribute name="maxPage" type="Integer" default="1" />
+    <aura:attribute name="duplicateContacts" type="Contact[]"/>
+    <aura:handler name="change" value="{!v.pageNumber}" action="{!c.renderPage}" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:registerEvent name="QCC_Search_Form_LE_Integration" type="c:QCC_Search_Form_LE_Integration" />
+    <!--[US# 185 Purushotham – END -->
+    <!-- [Anupam Start] -->
+    <aura:attribute name="notOnCaseLayout" type="boolean" default="true"/>
+    <aura:attribute name="onCaseLayout" type="boolean" default="false"/>
+    <aura:attribute name="checked" type="boolean" default="false"/>
+    <aura:attribute name="reset" type="boolean" default="false"/>
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="phoneNumber" type="String" />
+    <aura:attribute name="isSearchLocal" Type="boolean" default="false" />
+    <aura:attribute name="tryLocal" Type="boolean" default="false" />
+    <!-- [Anupam End] -->
+    <!-- Making-->
+    <title>Customer Search</title>
+    <div>
+        <!-- PAGE HEADER -->
+        <lightning:layout class="slds-page-header slds-page-header--object-home">
+            <lightning:layoutItem >
+                <lightning:icon iconName="standard:scan_card" alternativeText="Search" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h2 class="slds-text-heading--medium">Customer Search Page</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <!-- / PAGE HEADER -->
+        <!-- SEARCH FORM - Start -->
+        <div class="slds-grid slds-grid_pull-padded-medium" style="margin-bottom:5%;">
+                <lightning:layout class="slds-col slds-p-horizontal_medium">
+                    <lightning:layoutItem class="searchForm pad-bottom">
+                        <div aria-labelledby="newsearchform">
+                            <!-- CREATE NEW ITEM FORM -->
+                            <form class="slds-form--stacked " id="myForm" style="max-width:750px">
+                                        <!-- BOXED AREA 1-->
+                                        <fieldset class="slds-box slds-theme--default newsearchform">
+                                            <legend id="newsearchform" class="slds-text-heading--small 
+                                                slds-p-vertical--medium">
+                                                Customer Search
+                                            </legend>
+                                            <!-- Error Message Section - Start -->
+                                            <aura:if isTrue="{!v.message}">
+                                                <div class="slds-text-color--error "> {!v.message}</div>
+                                            </aura:if>
+                                            <!-- Error Message Section - End -->
+                                            <div class="slds-form-element slds-is-required" onkeyup="{!c.searchOnEnter}">
+                                                <div class="slds-form-element__control">
+                                                    <ui:inputText aura:id="searchForm" label="PNR" class="slds-input" labelClass="slds-form-element__label" value="{!v.pnr}" maxlength="6" disabled="{!v.isSearchLocal}"/>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element slds-is-required" onkeyup="{!c.searchOnEnter}">
+                                                <div class="slds-form-element__control">
+        
+                                                    <ui:inputText aura:id="searchForm" label="First Name" keyup="{!c.searchOnEnter}" class="slds-input" labelClass="slds-form-element__label" value="{!v.myContact.FirstName}" maxlength="60" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element slds-is-required" onkeyup="{!c.searchOnEnter}">
+                                                <div class="slds-form-element__control">
+                                                    <ui:inputText aura:id="searchForm" label="Surname" keyup="{!c.searchOnEnter}" class="slds-input" labelClass="slds-form-element__label" value="{!v.myContact.LastName}" maxlength="60" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element slds-is-required" onkeyup="{!c.searchOnEnter}">
+                                                <div class="slds-form-element__control">
+                                                    <ui:inputText aura:id="searchForm" label="FF Number" keyup="{!c.searchOnEnter}" class="slds-input" labelClass="slds-form-element__label" value="{!v.myContact.Frequent_Flyer_Number__c}" maxlength="24" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element slds-is-required" onkeyup="{!c.searchOnEnter}">
+                                                <div class="slds-form-element__control">
+                                                    <ui:inputText aura:id="searchForm" label="Email" keyup="{!c.searchOnEnter}" class="slds-input" labelClass="slds-form-element__label" value="{!v.myContact.Email}" />
+                                                </div>
+                                            </div>
+                                            <fieldset  aura:id="phoneArea" class="slds-box slds-theme--default flag">
+                                                <legend id="newsearchform" class="slds-text-heading--small 
+                                                    slds-p-vertical--medium">
+                                                    Phone Details
+                                                </legend>
+                                                <div class="slds-form-element__control slds-is-required phone">
+                                                    <div class="slds-grid slds-grid_pull-padded-medium">
+                                                        <div class="slds-cols slds-p-horizontal_medium">
+                                                           <ui:inputRadio aura:id="r0" name="others" label="Mobile" labelClass="slds-radio__label" class="slds-radio" change="{!c.onSelect}"/>
+                                                        </div>
+                                                        <div class="slds-cols slds-p-horizontal_medium">
+                                                           <ui:inputRadio aura:id="r1" name="others" label="Phone Number" labelClass="slds-radio__label" class="slds-radio" change="{!c.onSelect}" disabled="{!v.reset}" value="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-form-element__control " onkeyup="{!c.searchOnEnter}">
+                                                        
+                                                        <div class="slds-grid slds-grid_pull-padded-medium">
+                                                            <div class="slds-cols slds-p-horizontal_medium">
+                                                            	<ui:inputText aura:id="searchForm" placeholder="+61" label="Country Code" class="slds-input" labelClass="slds-form-element__label" value="{!v.myContact.Phone_Country_Code__c}" />
+                                                            </div>
+                                                            <div class="slds-cols slds-p-horizontal_medium">
+                                                            	<ui:inputText aura:id="searchForm" placeholder="" label="Area Code" class="remove slds-input" labelClass="slds-form-element__label" value="{!v.myContact.Phone_Area_Code__c}" disabled="{!v.checked}" />
+                                                            </div>
+                                                            <div class="slds-cols slds-p-horizontal_medium">
+                                                            	<ui:inputText aura:id="searchForm" placeholder="" label="Phone Number" class="slds-input" labelClass="slds-form-element__label" value="{!v.myContact.Phone_Line_Number__c}" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                          
+                                            <!--<div class="submit-btns phone clear">-->
+                                            <div class="slds-grid slds-grid_pull-padded-medium slds-align_absolute-center" style="margin-top:2%;">
+                                                <div class="slds-cols slds-p-horizontal_medium">
+                                                    <aura:if isTrue="{!v.isSearchLocal}">
+                                                        <lightning:button variant="brand" label="Search Local" onclick="{!c.searchCustomer}" />
+                                                        <aura:set attribute="else">
+                                                          <lightning:button variant="brand" label="Search" onclick="{!c.searchCustomer}" />
+                                                      </aura:set>
+                                                  </aura:if> 
+                                                </div>
+                                                <div class="slds-cols slds-p-horizontal_medium">
+                                                    <lightning:button variant="brand" label="Reset Form" onclick="{!c.resetForm}" />
+                                                </div>
+                                                <aura:if isTrue="{!v.displayNewContactBtn}">
+                                                   <div class="slds-cols slds-p-horizontal_medium">    
+                                                        <lightning:button variant="brand" label="New Contact" onclick="{!c.newContact}" />
+                                                   </div>
+                                                </aura:if>
+                                            </div>
+                                            <aura:if isTrue="{!v.tryLocal}" >
+                                                <div>&nbsp;</div>
+                                                <div>&nbsp;</div>
+                                                <div class="slds-align_absolute-center"><a href="javascript:void(0);" onclick="{!c.searchLocal}">Try Local</a></div>
+                                            </aura:if>
+                                        </fieldset>
+                                        <!-- / BOXED ARPEA 1 -->
+                            </form>
+                        </div>
+                        <!-- [Anupam - Start] -->
+                        <aura:if isTrue="{!v.onCaseLayout}">
+                        <aura:if isTrue="{!v.displaySearchResults}">
+                        <table class=" slds-table--bordered slds-max-medium-table--stacked-horizontal pad-bottom" style="max-width:700px">
+                            <!--Table must be responsive-->
+                            <thead>
+                                <tr class="slds-text-heading--label ">
+                                    <th class="slds-is-sortable lastname-col" scope="col">Surname</th>
+                                    <th class="slds-is-sortable firstname-col" scope="col">First Name</th>
+                                    <th class="slds-is-sortable" scope="col">FF#</th>
+                                    <th class="slds-is-sortable" scope="col">Tier</th>
+                                    <th class="slds-is-sortable" scope="col">Email</th>
+                                    <th class="slds-is-sortable" scope="col">Phone</th>
+                                    <aura:if isTrue="{!v.displayAssignToCaseBtn}">
+                                        <th class="slds-is-sortable" scope="col"></th>
+                                    </aura:if>
+                                </tr>
+                            </thead>
+                            <tbody class="cursor">
+                                <aura:iteration items="{!v.currentList}" var="item" indexVar="i">
+                                    <tr class="slds-hint-parent record" data-record="{!i}" onclick="{!c.navigateToRecord}">
+                                        <td class="lastname-col" data-label="Surname"><a href="javascript:void(0);">{!item.LastName}&nbsp;</a></td>
+                                        <td class="firstname-col" data-label="First Name"><a href="javascript:void(0);">{!item.FirstName}&nbsp;</a></td>
+                                        <td data-label="FF#">{!item.Frequent_Flyer_Number__c}&nbsp;</td>
+                                        <td data-label="FF#">{!item.Frequent_Flyer_Tier__c}&nbsp;</td>
+                                        <td data-label="Email" style="width:15px">{!item.Email}&nbsp;</td>
+                                        <td data-label="Phone">{!item.Phone}&nbsp;</td>
+                                        <aura:if isTrue="{!v.displayAssignToCaseBtn}">
+                                            <td>
+                                                <button class="slds-button slds-button--brand" label="Assign To Case" value="{!i}" onclick="{!c.assignToCase}">Assign</button>
+                                            </td>
+                                        </aura:if>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                         <div class="pagination">
+                            <c:QCC_Pagination currentPageNumber="{!v.pageNumber}" maxPageNumber="{!v.maxPage}" />
+                        </div>
+                        </aura:if>
+                       	</aura:if>
+                        <!-- [Anupam - End] -->
+                    </lightning:layoutItem>
+                </lightning:layout>
+        <!-- SEARCH FORM - End -->
+            <div class="slds-col slds-p-horizontal_medium search_results">
+                <aura:if isTrue="{!v.displaySearchResults}">
+                    <lightning:layoutItem class="pad-bottom searchForm">
+                        
+                        <!--************************************************************************************************-->
+                        <aura:if isTrue="{!v.notOnCaseLayout}">
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                          <thead>
+                            <tr class="slds-text-title_caps">
+                              <th scope="col">
+                                <div class="slds-truncate" title="Last Name">Surname</div>
+                              </th>
+                              <th scope="col">
+                                <div class="slds-truncate" title="First Name">First Name</div>
+                              </th>
+                              <th scope="col">
+                                <div class="slds-truncate" title="FF#">FF#</div>
+                              </th>
+                               <th scope="col">
+                                <div class="slds-truncate" title="FF#">Tier</div>
+                              </th>
+                              <th scope="col">
+                                <div class="slds-truncate" title="Email">Email</div>
+                              </th>
+                              <th scope="col">
+                                <div class="slds-truncate" title="Phone">Phone</div>
+                              </th>
+                                <th scope="col">
+                                <div class="slds-truncate" title="PNR">PNR</div>
+                              </th>
+                              <th scope="col">
+                                <div class="slds-truncate" title="Social Media handle">Social Media handle</div>
+                              </th>
+                              <th scope="col">
+                                <div class="slds-truncate" title="Source">Source</div>
+                              </th>
+                              <aura:if isTrue="{!v.displayAssignToCaseBtn}">
+                                 <th scope="col">
+                                 
+                                 </th>
+                              </aura:if>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td data-label="Last Name">
+                                <div class="slds-truncate" title="Surname"></div>
+                              </td>
+                              <th scope="row" data-label="First Name">
+                                <div class="slds-truncate" title="First Name"></div>
+                              </th>
+                              <td data-label="FF#">
+                                <div class="slds-truncate" title="FF#"></div>
+                              </td>
+                              <td data-label="FF#">
+                                <div class="slds-truncate" title="FFT#"></div>
+                              </td>
+                              <td data-label="Email">
+                                <div class="slds-truncate" title="Email"></div>
+                              </td>
+                              <td data-label="Phone">
+                                <div class="slds-truncate" title="Phone"></div>
+                              </td>
+                              <td data-label="handle">
+                                <div class="slds-truncate" title="handle"></div>
+                              </td>
+                              <td data-label="handle">
+                                <div class="slds-truncate" title="handle"></div>
+                              </td>
+                            </tr>  
+                            <aura:iteration items="{!v.currentList}" var="item" indexVar="i">
+                            <tr data-record="{!i}" onclick="{!c.navigateToRecord}">
+                              <td data-label="Last Name">
+                                <div class="slds-truncate" title="Surname"><a href="javascript:void(0);">{!item.LastName}</a></div>
+                              </td>
+                              <th scope="row" data-label="First Name">
+                                <div class="slds-truncate" title="First Name"><a href="javascript:void(0);">{!item.FirstName}</a></div>
+                              </th>
+                              <td data-label="FF#">
+                                <div class="slds-truncate" title="FF#">{!item.Frequent_Flyer_Number__c}</div>
+                              </td>
+                              <td data-label="FF#">
+                                <div class="slds-truncate" title="FF#">{!item.Frequent_Flyer_Tier__c}</div>
+                              </td>
+                              <td data-label="Email">
+                                <div class="slds-truncate" title="Email">{!item.Email}</div>
+                              </td>
+                              <td data-label="Phone">
+                                <div class="slds-truncate" title="Phone">{!item.Phone}</div>
+                              </td>
+                              <td data-label="Phone">
+                                <div class="slds-truncate" title="Phone">{!v.contactPnr}</div>
+                              </td>
+                              <td data-label="handle">
+                                <div class="slds-truncate" title="handle">{!item.Twitter_Handle__c}</div>
+                              </td>
+                              <td data-label="handle">
+                                <div class="slds-truncate" title="handle">{!item.Source__c}</div>
+                              </td>
+                              <aura:if isTrue="{!v.displayAssignToCaseBtn}">
+                                <td data-label="handle">
+                                    <div class="slds-truncate" ><button label="Assign To Case" value="{!i}" onclick="{!c.assignToCase}">Assign To Case</button></div>
+                                </td>
+                                </aura:if>
+                            </tr>
+                            </aura:iteration>
+                            </tbody>
+                        </table>
+                        <!--************************************************************************************************************************************-->
+                        <!-- [US# 185 Purushotham – Start: Calling Pagination component -->
+                        <div class="pagination">
+                            <c:QCC_Pagination currentPageNumber="{!v.pageNumber}" maxPageNumber="{!v.maxPage}" />
+                        </div>
+                        </aura:if>
+                        <!-- [US# 185 Purushotham – End -->
+                    </lightning:layoutItem>
+                </aura:if>
+            </div>
+        </div>
+        <!-- Modal - Start -->
+        <section>
+            <aura:if isTrue="{!v.isOpen}">
+                <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                    <div class="slds-modal__container">>
+                        <div class="slds-modal__header">
+                            <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModal}">
+                                X
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                        <!--###### MODAL BOX BODY Part Start From Here ######-->
+                        <div class="slds-modal__content slds-p-around--medium">
+                            <form>
+                                <aura:if isTrue="{!v.createContactMessage}">
+                                    <div class="slds-text-color--error "> {!v.createContactMessage}</div>
+                                </aura:if>
+                                <div>
+                                    <div class="slds-col">
+                                        <!-- BOXED AREA 1-->
+                                        <fieldset>
+                                            <lightning:layoutItem flexibility="auto" aura:id="layout1">
+                                                <div>
+                                                    <lightning:input aura:id="contactForm" type="String" label="Surname" name="Lastname" value="{!v.myContact.LastName}" maxlength="60" messageWhenBadInput="" />
+                                                </div>
+                                                <div>
+                                                    <lightning:input aura:id="contactForm" type="String" label="First Name" name="Firstname" value="{!v.myContact.FirstName}" maxlength="60" messageWhenBadInput="" />
+                                                </div>
+                                                <!-- <div>
+                                                    <lightning:input aura:id="contactForm" type="String" label="FF Number" name="ffNumber" value="{!v.myContact.Frequent_Flyer_Number__c}" maxlength="" messageWhenBadInput="" />
+                                                </div> -->
+                                                <div>
+                                                    <lightning:input aura:id="contactForm" type="tel" label="Phone" name="phone" value="{!v.phoneNumber}" maxlength="" messageWhenBadInput="" />
+                                                </div>
+                                                <div>
+                                                    <lightning:input aura:id="contactForm" type="email" label="Email" name="email" value="{!v.myContact.Email}" maxlength="" messageWhenBadInput="" />
+                                                </div>
+                                            </lightning:layoutItem>
+                                        </fieldset>
+                                        <!-- / BOXED AREA 2 -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <aura:if isTrue="{!v.duplicateDetected}">
+                            
+                        <div class="duplicates">
+                            <div class="slds-text-color--error "> {!v.duplicateDetected}</div>
+                            
+                            <table class=" slds-table--bordered slds-max-medium-table--stacked-horizontal">
+                                <!--Table must be responsive-->
+                                <thead>
+                                    <tr class="slds-text-heading--label ">
+                                        <th class="slds-is-sortable lastname-col" scope="col">Surname&nbsp;</th>
+                                        <th class="slds-is-sortable firstname-col" scope="col">First Name&nbsp;</th>
+                                        <th class="slds-is-sortable ffNumber-col" scope="col">FF#&nbsp;</th>
+                                        <th class="slds-is-sortable email-col" scope="col">Email&nbsp;</th>
+                                        <th class="slds-is-sortable phone-col" scope="col">Phone&nbsp;</th>
+                                        <th class="slds-is-sortable media-handle-col" scope="col">Social Media handle&nbsp;</th>
+                                        <th class="slds-is-sortable source" scope="col">Source&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.duplicateContacts}" var="item" indexVar="i">
+                                        <tr class="slds-hint-parent record" data-record="{!i}" onclick="{!c.navigateToRecord}">
+                                            <td  data-label="Surname"><a href="javascript:void(0);">{!item.LastName}&nbsp;</a></td>
+                                            <td  data-label="First Name"><a href="javascript:void(0);">{!item.FirstName}&nbsp;</a></td>
+                                            <td class="ffNumber-col" data-label="FF#">{!item.Frequent_Flyer_Number__c}&nbsp;</td>
+                                            <td class="email-col" data-label="Email">{!item.Email}&nbsp;</td>
+                                            <td class="phone-col" data-label="Phone">{!item.Phone}&nbsp;</td>
+                                            <td class="media-handle-col" data-label="handle">{!item.Twitter_Handle__c}&nbsp;</td>
+                                            <td class="source" data-label="handle">{!item.Source__c}&nbsp;</td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </div>
+                        </aura:if>
+                        <div class="slds-modal__footer">
+                            <button class="slds-button slds-button--brand" onclick="{!c.createCustomer}">Submit</button>
+                            <button class="slds-button slds-button--neutral" onclick="{!c.closeModal}">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-backdrop slds-backdrop--open"></div>
+            </aura:if>
+        </section>
+        <!-- Modal - End -->
+    </div>
+</aura:component>

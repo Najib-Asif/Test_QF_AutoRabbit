@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Owner</field>
+        <field>Name</field>
+        <field>BudgetedCost</field>
+        <field>Description</field>
+        <field>Next_Steps__c</field>
+        <field>StartDate</field>
+        <field>EndDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>parvizladha@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>If a user raises a campaign with UKEMEA - GSA in region and Budgeted Cost in Campaign is between 101 and 1000, it should go to Parviz Ladha for approval.</description>
+        <entryCriteria>
+            <booleanFilter>1 AND 2</booleanFilter>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>UKEMEA - GSA</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Budgeted_Cost_System__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>101</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>UKEMEA - GSA Region</label>
+        <name>UKEMEA_GSA_Region</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>natalie.knowles@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>UK &amp; Ireland Region with Leisure Level 1 approval</description>
+        <entryCriteria>
+            <booleanFilter>1 AND 2 AND 3</booleanFilter>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>UK &amp; Ireland</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Target_Audience__c</field>
+                <operation>equals</operation>
+                <value>Leisure</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Budgeted_Cost_System__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>101</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>UK &amp; Ireland Region  with Leisure Level 1</label>
+        <name>UK_Ireland_Region_with_Leisure_Level_1</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>craig.webber@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>UK &amp; Ireland Region with Corporate/TMC Target Audience Level 1approval</description>
+        <entryCriteria>
+            <booleanFilter>1 AND( 2 OR 3) AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>UK &amp; Ireland</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Target_Audience__c</field>
+                <operation>equals</operation>
+                <value>Corporate</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Target_Audience__c</field>
+                <operation>equals</operation>
+                <value>TMC</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Budgeted_Cost_System__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>101</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>UK &amp; Ireland Region with Corporate/TMC Level 1</label>
+        <name>UK_Ireland_Region_with_Corporate_TMC_Level_1</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>stephanieseymour@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>UK &amp; Ireland Region Level 2 approval</description>
+        <entryCriteria>
+            <booleanFilter>1 AND (2 OR 3 OR 4) AND 5</booleanFilter>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>UK &amp; Ireland</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Target_Audience__c</field>
+                <operation>equals</operation>
+                <value>Leisure</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Target_Audience__c</field>
+                <operation>equals</operation>
+                <value>Corporate</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Target_Audience__c</field>
+                <operation>equals</operation>
+                <value>TMC</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Budgeted_Cost_System__c</field>
+                <operation>greaterThan</operation>
+                <value>1000</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>UK &amp; Ireland Region Level 2 approval</label>
+        <name>UK_Ireland_Region_Level_2_approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>cge@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>France &amp; Italy region level 1 approval</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>France &amp; Italy</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Budgeted_Cost_System__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>101</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>France &amp; Italy region level 1 approval</label>
+        <name>France_Italy_region_level_1_approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>stephanieseymour@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>UKEMEA - Sales Support level 1 approval</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>UKEMEA - Sales Support</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Budgeted_Cost_System__c</field>
+                <operation>greaterThan</operation>
+                <value>100</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>UKEMEA - Sales Support level 1 approval</label>
+        <name>UKEMEA_Sales_Support_level_1_approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>stephanieseymour@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>UKEMEA GSA/France/Italy Level 2 Approval</description>
+        <entryCriteria>
+            <booleanFilter>(1 OR 3) AND 2</booleanFilter>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>France &amp; Italy</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Budgeted_Cost_System__c</field>
+                <operation>greaterThan</operation>
+                <value>1000</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>UKEMEA - GSA</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>UKEMEA GSA/France/Italy Level 2 Approval</label>
+        <name>UKEMEA_France_Italy_Level_2_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>UKEMEA Campaign Approval  greater than 100</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Campaign.RecordType</field>
+            <operation>equals</operation>
+            <value>Marketing - Child</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.CurrencyIsoCode</field>
+            <operation>notEqual</operation>
+            <value>AUD</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.CurrencyIsoCode</field>
+            <operation>greaterThan</operation>
+            <value>100</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.Region__c</field>
+            <operation>equals</operation>
+            <value>France &amp; Italy,UK &amp; Ireland,UKEMEA - GSA,UKEMEA - Sales Support</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Update_approval_status_to_Approve</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Update_approval_status_to_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Update_Approval_Status_to_Submit</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>UKEMEA Campaign Approval &gt;100</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>true</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>2</processOrder>
+    <recallActions>
+        <action>
+            <name>Update_approval_status_to_recall</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

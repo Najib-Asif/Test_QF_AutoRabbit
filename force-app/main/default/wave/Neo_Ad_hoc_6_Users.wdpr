@@ -1,0 +1,349 @@
+{
+  "version" : "66.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ProfileId", "Id", "Username", "Name", "Email", "UserRoleId", "EmployeeNumber", "LastLoginDate", "CreatedDate", "Location__c", "CCAT_User__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "Role",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Role.Name",
+          "newProperties" : {
+            "label" : "Role Name",
+            "name" : "Role.Name"
+          }
+        } ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "Last_Login_Custom",
+          "label" : "Last Login Custom",
+          "formulaExpression" : "now()",
+          "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "DROP_FIELDS2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "All Time Users",
+          "name" : "All_Time_Users",
+          "folderName" : "User_login_history"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "FORMULA0", "DROP_FIELDS1" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "Id",
+          "bottom" : "Id"
+        }, {
+          "top" : "Username",
+          "bottom" : "Username"
+        }, {
+          "top" : "Name",
+          "bottom" : "Name"
+        }, {
+          "top" : "Email",
+          "bottom" : "Email"
+        }, {
+          "top" : "UserRoleId",
+          "bottom" : "UserRoleId"
+        }, {
+          "top" : "EmployeeNumber",
+          "bottom" : "EmployeeNumber"
+        }, {
+          "top" : "CreatedDate",
+          "bottom" : "LastLoginDate"
+        }, {
+          "top" : "Location__c",
+          "bottom" : "Location__c"
+        }, {
+          "top" : "CCAT_User__c",
+          "bottom" : "CCAT_User__c"
+        }, {
+          "top" : "Profile.Name",
+          "bottom" : "Profile.Name"
+        }, {
+          "top" : "Role.Id",
+          "bottom" : "Role.Id"
+        }, {
+          "top" : "Role.Name",
+          "bottom" : "Role.Name"
+        }, {
+          "top" : "Last_Login_Custom",
+          "bottom" : "LastLoginDate"
+        } ]
+      }
+    },
+    "DROP_FIELDS1" : {
+      "action" : "schema",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "CreatedDate" ]
+        }
+      }
+    },
+    "DROP_FIELDS2" : {
+      "action" : "schema",
+      "sources" : [ "APPEND0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "LastLoginDate" ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Profile",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Profile",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ProfileId" ],
+        "rightQualifier" : "Profile",
+        "rightKeys" : [ "Id" ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 532.4,
+        "left" : 112.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 672.4,
+        "left" : 112.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Role",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672.4,
+        "left" : 252.5
+      },
+      "TRANSFORM0" : {
+        "label" : "Rename",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532.5,
+        "left" : 392.5,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Edit Attributes"
+          },
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Last Login (Custom)"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "FORMULA0"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "All Time Users",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532.5,
+        "left" : 812.5
+      },
+      "APPEND0" : {
+        "label" : "Last Login Join Created Date",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 532.5,
+        "left" : 532.5
+      },
+      "TRANSFORM1" : {
+        "label" : "Drop Created Date",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 672.5,
+        "left" : 392.5,
+        "graph" : {
+          "DROP_FIELDS1" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM2" : {
+        "label" : "Drop Login",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532.5,
+        "left" : 672.5,
+        "graph" : {
+          "DROP_FIELDS2" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Profile",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Profile",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 531.8,
+        "left" : 252.5
+      }
+    },
+    "connectors" : [ {
+      "source" : "JOIN1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "APPEND0"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "APPEND0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "APPEND0",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

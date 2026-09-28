@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Classification__c</fullName>
+    <description>ADT-8/AC1: Field Dependency in Activity object &gt; QCC_Call_Reason as the Controlling Field and Dependent Field is Classification QCC_Classification__c</description>
+    <label>Classification</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>QCC_Call_Reason__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ACCC Remediation</fullName>
+                <default>false</default>
+                <label>ACCC Remediation</label>
+            </value>
+            <value>
+                <fullName>Redeeming flight credit/Qantas Pass</fullName>
+                <default>false</default>
+                <label>Redeeming flight credit/Qantas Pass</label>
+            </value>
+            <value>
+                <fullName>Refund request - expired, purged, cover refunds</fullName>
+                <default>false</default>
+                <label>Refund request - expired, purged, cover refunds</label>
+            </value>
+            <value>
+                <fullName>Refund request - involuntary</fullName>
+                <default>false</default>
+                <label>Refund request - involuntary</label>
+            </value>
+            <value>
+                <fullName>Requesting flight credit/ Qantas Pass - involuntary</fullName>
+                <default>false</default>
+                <label>Requesting flight credit/ Qantas Pass - involuntary</label>
+            </value>
+            <value>
+                <fullName>Refund request - voluntary</fullName>
+                <default>false</default>
+                <label>Refund request - voluntary</label>
+            </value>
+            <value>
+                <fullName>Requesting flight credit/ Qantas Pass - voluntary</fullName>
+                <default>false</default>
+                <label>Requesting flight credit/ Qantas Pass - voluntary</label>
+            </value>
+            <value>
+                <fullName>Requesting refund of flight credit/ Qantas Pass</fullName>
+                <default>false</default>
+                <label>Requesting refund of flight credit/ Qantas Pass</label>
+            </value>
+            <value>
+                <fullName>Residual voucher creation/ follow up</fullName>
+                <default>false</default>
+                <label>Residual voucher creation/ follow up</label>
+            </value>
+            <value>
+                <fullName>Extending validity of flight credit/ Qantas Pass</fullName>
+                <default>false</default>
+                <label>Extending validity of flight credit/ Qantas Pass</label>
+            </value>
+            <value>
+                <fullName>Transferring flight credit to different name/pax</fullName>
+                <default>false</default>
+                <label>Transferring flight credit to different name/pax</label>
+            </value>
+            <value>
+                <fullName>Assistance locating, resending, using</fullName>
+                <default>false</default>
+                <label>Assistance locating, resending, using</label>
+            </value>
+            <value>
+                <fullName>Query only - eligibility, fare rules, expiry</fullName>
+                <default>false</default>
+                <label>Query only - eligibility, fare rules, expiry</label>
+            </value>
+            <value>
+                <fullName>Query and/or dispute - balance</fullName>
+                <default>false</default>
+                <label>Query and/or dispute - balance</label>
+            </value>
+            <value>
+                <fullName>Refund request - dupe booking</fullName>
+                <default>false</default>
+                <label>Refund request - dupe booking</label>
+            </value>
+            <value>
+                <fullName>Stat. dec. for different FOP</fullName>
+                <default>false</default>
+                <label>Stat. dec. for different FOP</label>
+            </value>
+            <value>
+                <fullName>Follow up - refund not yet received</fullName>
+                <default>false</default>
+                <label>Follow up - refund not yet received</label>
+            </value>
+            <value>
+                <fullName>Follow up - incorrect/ no points refunded</fullName>
+                <default>false</default>
+                <label>Follow up - incorrect/ no points refunded</label>
+            </value>
+            <value>
+                <fullName>Follow up - incorrect amount refunded</fullName>
+                <default>false</default>
+                <label>Follow up - incorrect amount refunded</label>
+            </value>
+            <value>
+                <fullName>Query only - eligibility, refund amount</fullName>
+                <default>false</default>
+                <label>Query only - eligibility, refund amount</label>
+            </value>
+            <value>
+                <fullName>Offline booking made due to error booking online</fullName>
+                <default>false</default>
+                <label>Offline booking made due to error booking online</label>
+            </value>
+            <value>
+                <fullName>Offline booking made - booking fee charged</fullName>
+                <default>false</default>
+                <label>Offline booking made - booking fee charged</label>
+            </value>
+            <value>
+                <fullName>Premium customer Classic Reward flight request</fullName>
+                <default>false</default>
+                <label>Premium customer Classic Reward flight request</label>
+            </value>
+            <value>
+                <fullName>Dupe booking</fullName>
+                <default>false</default>
+                <label>Dupe booking</label>
+            </value>
+            <value>
+                <fullName>Assistance booking online</fullName>
+                <default>false</default>
+                <label>Assistance booking online</label>
+            </value>
+            <value>
+                <fullName>Infant pax added</fullName>
+                <default>false</default>
+                <label>Infant pax added</label>
+            </value>
+            <value>
+                <fullName>Query/quote only - availability, dates, fare rules</fullName>
+                <default>false</default>
+                <label>Query/quote only - availability, dates, fare rules</label>
+            </value>
+            <value>
+                <fullName>Query only - aircraft, specific needs, travel requirements</fullName>
+                <default>false</default>
+                <label>Query only - aircraft, specific needs, travel requirements</label>
+            </value>
+            <value>
+                <fullName>Query only - other questions</fullName>
+                <default>false</default>
+                <label>Query only - other questions</label>
+            </value>
+            <value>
+                <fullName>Update passenger details - APIS etc</fullName>
+                <default>false</default>
+                <label>Update passenger details - APIS etc</label>
+            </value>
+            <value>
+                <fullName>Add Frequent Flyer number</fullName>
+                <default>false</default>
+                <label>Add Frequent Flyer number</label>
+            </value>
+            <value>
+                <fullName>Update contact details</fullName>
+                <default>false</default>
+                <label>Update contact details</label>
+            </value>
+            <value>
+                <fullName>Name change/correction</fullName>
+                <default>false</default>
+                <label>Name change/correction</label>
+            </value>
+            <value>
+                <fullName>Successful change - route</fullName>
+                <default>false</default>
+                <label>Successful change - route</label>
+            </value>
+            <value>
+                <fullName>Successful change - date/time</fullName>
+                <default>false</default>
+                <label>Successful change - date/time</label>
+            </value>
+            <value>
+                <fullName>Request or manage upgrade</fullName>
+                <default>false</default>
+                <label>Request or manage upgrade</label>
+            </value>
+            <value>
+                <fullName>Request or manage downgrade</fullName>
+                <default>false</default>
+                <label>Request or manage downgrade</label>
+            </value>
+            <value>
+                <fullName>Link bookings as Total Complete Party</fullName>
+                <default>false</default>
+                <label>Link bookings as Total Complete Party</label>
+            </value>
+            <value>
+                <fullName>Partner airline ancil/SSR queries &amp; changes</fullName>
+                <default>false</default>
+                <label>Partner airline ancil/SSR queries &amp; changes</label>
+            </value>
+            <value>
+                <fullName>Infant queries &amp; booking changes</fullName>
+                <default>false</default>
+                <label>Infant queries &amp; booking changes</label>
+            </value>
+            <value>
+                <fullName>Baggage added/ changed</fullName>
+                <default>false</default>
+                <label>Baggage added/ changed</label>
+            </value>
+            <value>
+                <fullName>Seats selected/ changed</fullName>
+                <default>false</default>
+                <label>Seats selected/ changed</label>
+            </value>
+            <value>
+                <fullName>Other SSR added / changed</fullName>
+                <default>false</default>
+                <label>Other SSR added / changed</label>
+            </value>
+            <value>
+                <fullName>Request for refund - voluntary</fullName>
+                <default>false</default>
+                <label>Request for refund - voluntary</label>
+            </value>
+            <value>
+                <fullName>Request to unrestrict seats</fullName>
+                <default>false</default>
+                <label>Request to unrestrict seats</label>
+            </value>
+            <value>
+                <fullName>Provide/ confirm FOP</fullName>
+                <default>false</default>
+                <label>Provide/ confirm FOP</label>
+            </value>
+            <value>
+                <fullName>Payment and ticketing issue - unticketed</fullName>
+                <default>false</default>
+                <label>Payment and ticketing issue - unticketed</label>
+            </value>
+            <value>
+                <fullName>Payment and ticketing issue - other</fullName>
+                <default>false</default>
+                <label>Payment and ticketing issue - other</label>
+            </value>
+            <value>
+                <fullName>Ancil - baggage</fullName>
+                <default>false</default>
+                <label>Ancil - baggage</label>
+            </value>
+            <value>
+                <fullName>Ancil - special needs</fullName>
+                <default>false</default>
+                <label>Ancil - special needs</label>
+            </value>
+            <value>
+                <fullName>Ancil - other</fullName>
+                <default>false</default>
+                <label>Ancil - other</label>
+            </value>
+            <value>
+                <fullName>Successful change of flight - involuntary</fullName>
+                <default>false</default>
+                <label>Successful change of flight - involuntary</label>
+            </value>
+            <value>
+                <fullName>Successful change of flight - voluntary</fullName>
+                <default>false</default>
+                <label>Successful change of flight - voluntary</label>
+            </value>
+            <value>
+                <fullName>Query only - flight options, adcol, upgrade</fullName>
+                <default>false</default>
+                <label>Query only - flight options, adcol, upgrade</label>
+            </value>
+            <value>
+                <fullName>Refund request - ancils</fullName>
+                <default>false</default>
+                <label>Refund request - ancils</label>
+            </value>
+            <value>
+                <fullName>Reinstate or request seats</fullName>
+                <default>false</default>
+                <label>Reinstate or request seats</label>
+            </value>
+            <value>
+                <fullName>Reinstate or request other ancils/ SSRs</fullName>
+                <default>false</default>
+                <label>Reinstate or request other ancils/ SSRs</label>
+            </value>
+            <value>
+                <fullName>Query only - SSR</fullName>
+                <default>false</default>
+                <label>Query only - SSR</label>
+            </value>
+            <value>
+                <fullName>Query only - baggage</fullName>
+                <default>false</default>
+                <label>Query only - baggage</label>
+            </value>
+            <value>
+                <fullName>Manage upgrade/ downgrade</fullName>
+                <default>false</default>
+                <label>Manage upgrade/ downgrade</label>
+            </value>
+            <value>
+                <fullName>Manage invol on partner carrier</fullName>
+                <default>false</default>
+                <label>Manage invol on partner carrier</label>
+            </value>
+            <value>
+                <fullName>Seeking compensation</fullName>
+                <default>false</default>
+                <label>Seeking compensation</label>
+            </value>
+            <value>
+                <fullName>Confirm flight status, schedule change</fullName>
+                <default>false</default>
+                <label>Confirm flight status, schedule change</label>
+            </value>
+            <value>
+                <fullName>Query only - flight options</fullName>
+                <default>false</default>
+                <label>Query only - flight options</label>
+            </value>
+            <value>
+                <fullName>Query only - other</fullName>
+                <default>false</default>
+                <label>Query only - other</label>
+            </value>
+            <value>
+                <fullName>Non-imminent travel agent booking - advised could not service</fullName>
+                <default>false</default>
+                <label>Non-imminent travel agent booking - advised could not service</label>
+            </value>
+            <value>
+                <fullName>Involuntary Change - Ancils &amp; SSRs</fullName>
+                <default>false</default>
+                <label>Involuntary Change - Ancils &amp; SSRs</label>
+            </value>
+            <value>
+                <fullName>Lost baggage case creation</fullName>
+                <default>false</default>
+                <label>Lost baggage case creation</label>
+            </value>
+            <value>
+                <fullName>Insurance claim</fullName>
+                <default>false</default>
+                <label>Insurance claim</label>
+            </value>
+            <value>
+                <fullName>Complaint - create, follow up</fullName>
+                <default>false</default>
+                <label>Complaint - create, follow up</label>
+            </value>
+            <value>
+                <fullName>Resend tax invoice</fullName>
+                <default>false</default>
+                <label>Resend tax invoice</label>
+            </value>
+            <value>
+                <fullName>Follow up - ticketing and itinerary status</fullName>
+                <default>false</default>
+                <label>Follow up - ticketing and itinerary status</label>
+            </value>
+            <value>
+                <fullName>Follow up - reimbursement/ compensation</fullName>
+                <default>false</default>
+                <label>Follow up - reimbursement/ compensation</label>
+            </value>
+            <value>
+                <fullName>Follow up - lost baggage</fullName>
+                <default>false</default>
+                <label>Follow up - lost baggage</label>
+            </value>
+            <value>
+                <fullName>Follow up - other customer care</fullName>
+                <default>false</default>
+                <label>Follow up - other customer care</label>
+            </value>
+            <value>
+                <fullName>General query - carry on, baggage and SSRs</fullName>
+                <default>false</default>
+                <label>General query - carry on, baggage and SSRs</label>
+            </value>
+            <value>
+                <fullName>General query - lounge</fullName>
+                <default>false</default>
+                <label>General query - lounge</label>
+            </value>
+            <value>
+                <fullName>General query - connection times</fullName>
+                <default>false</default>
+                <label>General query - connection times</label>
+            </value>
+            <value>
+                <fullName>General query - airport, aircraft, lost property</fullName>
+                <default>false</default>
+                <label>General query - airport, aircraft, lost property</label>
+            </value>
+            <value>
+                <fullName>Gift voucher - create, locate and use</fullName>
+                <default>false</default>
+                <label>Gift voucher - create, locate and use</label>
+            </value>
+            <value>
+                <fullName>Qantas cash enquiries</fullName>
+                <default>false</default>
+                <label>Qantas cash enquiries</label>
+            </value>
+            <value>
+                <fullName>Group bookings servicing</fullName>
+                <default>false</default>
+                <label>Group bookings servicing</label>
+            </value>
+            <value>
+                <fullName>Query only - flight status</fullName>
+                <default>false</default>
+                <label>Query only - flight status</label>
+            </value>
+            <value>
+                <fullName>Travel agent booking - advised could not service</fullName>
+                <default>false</default>
+                <label>Travel agent booking - advised could not service</label>
+            </value>
+            <value>
+                <fullName>Call reason not listed</fullName>
+                <default>false</default>
+                <label>Call reason not listed</label>
+            </value>
+            <value>
+                <fullName>Do not use - system use only</fullName>
+                <default>false</default>
+                <label>Do not use - system use only</label>
+            </value>
+            <value>
+                <fullName>Outbound Call Unsuccessful</fullName>
+                <default>false</default>
+                <label>Outbound Call Unsuccessful</label>
+            </value>
+            <value>
+                <fullName>Successful Change - Voluntary</fullName>
+                <default>false</default>
+                <label>Successful Change - Voluntary</label>
+            </value>
+            <value>
+                <fullName>Successful Change - Involuntary</fullName>
+                <default>false</default>
+                <label>Successful Change - Involuntary</label>
+            </value>
+            <value>
+                <fullName>Query Only - Flights Not Changed</fullName>
+                <default>false</default>
+                <label>Query Only - Flights Not Changed</label>
+            </value>
+            <value>
+                <fullName>Split booking</fullName>
+                <default>false</default>
+                <label>Split booking</label>
+            </value>
+            <value>
+                <fullName>Booking Made Using Flight Credit/Travel Pass</fullName>
+                <default>false</default>
+                <label>Booking Made Using Flight Credit/Travel Pass</label>
+            </value>
+            <value>
+                <fullName>Booking Put Into Credit</fullName>
+                <default>false</default>
+                <label>Booking Put Into Credit</label>
+            </value>
+            <value>
+                <fullName>Refunded Flight Credit/Travel Pass</fullName>
+                <default>false</default>
+                <label>Refunded Flight Credit/Travel Pass</label>
+            </value>
+            <value>
+                <fullName>Assistance To - Find, Resend, Use Credit / Travel Pass</fullName>
+                <default>false</default>
+                <label>Assistance To - Find, Resend, Use Credit / Travel Pass</label>
+            </value>
+            <value>
+                <fullName>General Enquiry - Balance, Eligibility, Fare Rules, Expiry etc.</fullName>
+                <default>false</default>
+                <label>General Enquiry - Balance, Eligibility, Fare Rules, Expiry etc.</label>
+            </value>
+            <value>
+                <fullName>Refund Requested - Voluntary</fullName>
+                <default>false</default>
+                <label>Refund Requested - Voluntary</label>
+            </value>
+            <value>
+                <fullName>Refund Requested - Involuntary</fullName>
+                <default>false</default>
+                <label>Refund Requested - Involuntary</label>
+            </value>
+            <value>
+                <fullName>Refund Requested - Seat Selection, Baggage etc.</fullName>
+                <default>false</default>
+                <label>Refund Requested - Seat Selection, Baggage etc.</label>
+            </value>
+            <value>
+                <fullName>Refund Requested - Cabin Downgrade</fullName>
+                <default>false</default>
+                <label>Refund Requested - Cabin Downgrade</label>
+            </value>
+            <value>
+                <fullName>Follow up - Refund Outstanding</fullName>
+                <default>false</default>
+                <label>Follow up - Refund Outstanding</label>
+            </value>
+            <value>
+                <fullName>Follow Up - Dispute/Query Refund Amount</fullName>
+                <default>false</default>
+                <label>Follow Up - Dispute/Query Refund Amount</label>
+            </value>
+            <value>
+                <fullName>General Enquiry Refund - Eligibility, Advice etc.</fullName>
+                <default>false</default>
+                <label>General Enquiry Refund - Eligibility, Advice etc.</label>
+            </value>
+            <value>
+                <fullName>PNR Created - Fee Charged</fullName>
+                <default>false</default>
+                <label>PNR Created - Fee Charged</label>
+            </value>
+            <value>
+                <fullName>PNR Created - Fee Waived</fullName>
+                <default>false</default>
+                <label>PNR Created - Fee Waived</label>
+            </value>
+            <value>
+                <fullName>Passenger Details - Name, Contacts, API, Add FF Number etc.</fullName>
+                <default>false</default>
+                <label>Passenger Details - Name, Contacts, API, Add FF Number etc.</label>
+            </value>
+            <value>
+                <fullName>Upgrades - Request or Query</fullName>
+                <default>false</default>
+                <label>Upgrades - Request or Query</label>
+            </value>
+            <value>
+                <fullName>UMNR</fullName>
+                <default>false</default>
+                <label>UMNR</label>
+            </value>
+            <value>
+                <fullName>GN / Premium Request - Successful</fullName>
+                <default>false</default>
+                <label>GN / Premium Request - Successful</label>
+            </value>
+            <value>
+                <fullName>GN / Premium Request - Unsuccessful</fullName>
+                <default>false</default>
+                <label>GN / Premium Request - Unsuccessful</label>
+            </value>
+            <value>
+                <fullName>Assist With Online Products - Points Plus Pay, Combo Classic Reward etc.</fullName>
+                <default>false</default>
+                <label>Assist With Online Products - Points Plus Pay, Combo Classic Reward etc.</label>
+            </value>
+            <value>
+                <fullName>General Enquiry - Quote, Availability, Dates, Fare Rules etc.</fullName>
+                <default>false</default>
+                <label>General Enquiry - Quote, Availability, Dates, Fare Rules etc.</label>
+            </value>
+            <value>
+                <fullName>Special Service Request - WHCR etc.</fullName>
+                <default>false</default>
+                <label>Special Service Request - WHCR etc.</label>
+            </value>
+            <value>
+                <fullName>Seat Selection - Add/Change/Query</fullName>
+                <default>false</default>
+                <label>Seat Selection - Add/Change/Query</label>
+            </value>
+            <value>
+                <fullName>Baggage - Allowance, Excess, Through Check etc.</fullName>
+                <default>false</default>
+                <label>Baggage - Allowance, Excess, Through Check etc.</label>
+            </value>
+            <value>
+                <fullName>Meals - Add/Change/Query</fullName>
+                <default>false</default>
+                <label>Meals - Add/Change/Query</label>
+            </value>
+            <value>
+                <fullName>Tax Invoice</fullName>
+                <default>false</default>
+                <label>Tax Invoice</label>
+            </value>
+            <value>
+                <fullName>Follow Up E-ticket</fullName>
+                <default>false</default>
+                <label>Follow Up E-ticket</label>
+            </value>
+            <value>
+                <fullName>Referred Back To Travel Agent For Servicing</fullName>
+                <default>false</default>
+                <label>Referred Back To Travel Agent For Servicing</label>
+            </value>
+            <value>
+                <fullName>General Enquiry - Existing Booking</fullName>
+                <default>false</default>
+                <label>General Enquiry - Existing Booking</label>
+            </value>
+            <value>
+                <fullName>Delayed Baggage</fullName>
+                <default>false</default>
+                <label>Delayed Baggage</label>
+            </value>
+            <value>
+                <fullName>Damaged Baggage</fullName>
+                <default>false</default>
+                <label>Damaged Baggage</label>
+            </value>
+            <value>
+                <fullName>Complaint - New</fullName>
+                <default>false</default>
+                <label>Complaint - New</label>
+            </value>
+            <value>
+                <fullName>Complaint - Follow-up</fullName>
+                <default>false</default>
+                <label>Complaint - Follow-up</label>
+            </value>
+            <value>
+                <fullName>Insurance Letter</fullName>
+                <default>false</default>
+                <label>Insurance Letter</label>
+            </value>
+            <value>
+                <fullName>Compliment</fullName>
+                <default>false</default>
+                <label>Compliment</label>
+            </value>
+            <value>
+                <fullName>Lost Property</fullName>
+                <default>false</default>
+                <label>Lost Property</label>
+            </value>
+            <value>
+                <fullName>General Enquiry - Baggage</fullName>
+                <default>false</default>
+                <label>General Enquiry - Baggage</label>
+            </value>
+            <value>
+                <fullName>Payment / Ticketing Issue</fullName>
+                <default>false</default>
+                <label>Payment / Ticketing Issue</label>
+            </value>
+            <value>
+                <fullName>Ancil - Baggage / Seating</fullName>
+                <default>false</default>
+                <label>Ancil - Baggage / Seating</label>
+            </value>
+            <value>
+                <fullName>General Airport Enquiry</fullName>
+                <default>false</default>
+                <label>General Airport Enquiry</label>
+            </value>
+            <value>
+                <fullName>Assistance checking in</fullName>
+                <default>false</default>
+                <label>Assistance checking in</label>
+            </value>
+            <value>
+                <fullName>Change Flight - Involuntary</fullName>
+                <default>false</default>
+                <label>Change Flight - Involuntary</label>
+            </value>
+            <value>
+                <fullName>Change Flight - Voluntary</fullName>
+                <default>false</default>
+                <label>Change Flight - Voluntary</label>
+            </value>
+            <value>
+                <fullName>UMNR Assistance Fee</fullName>
+                <default>false</default>
+                <label>UMNR Assistance Fee</label>
+            </value>
+            <value>
+                <fullName>Call Failed - Did Not Connect</fullName>
+                <default>false</default>
+                <label>Call Failed - Did Not Connect</label>
+            </value>
+            <value>
+                <fullName>Call Dropped Out (Couldn&apos;t Hear)</fullName>
+                <default>false</default>
+                <label>Call Dropped Out (Couldn&apos;t Hear)</label>
+            </value>
+            <value>
+                <fullName>Customer Hung Up</fullName>
+                <default>false</default>
+                <label>Customer Hung Up</label>
+            </value>
+            <value>
+                <fullName>Call Transferred - Frequent Flyer Service Centre, JetStar, Other</fullName>
+                <default>false</default>
+                <label>Call Transferred - Frequent Flyer Service Centre, JetStar, Other</label>
+            </value>
+            <value>
+                <fullName>No Answer / Voicemail</fullName>
+                <default>false</default>
+                <label>No Answer / Voicemail</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Airport Customers &amp; Staff</controllingFieldValue>
+            <valueName>Payment / Ticketing Issue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Airport Customers &amp; Staff</controllingFieldValue>
+            <valueName>Ancil - Baggage / Seating</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Airport Customers &amp; Staff</controllingFieldValue>
+            <valueName>General Airport Enquiry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Airport Customers &amp; Staff</controllingFieldValue>
+            <valueName>Assistance checking in</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Airport Customers &amp; Staff</controllingFieldValue>
+            <valueName>Change Flight - Involuntary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Airport Customers &amp; Staff</controllingFieldValue>
+            <valueName>Change Flight - Voluntary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Airport Customers &amp; Staff</controllingFieldValue>
+            <valueName>UMNR Assistance Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Flight Credits &amp; Travel Passes</controllingFieldValue>
+            <valueName>Booking Made Using Flight Credit/Travel Pass</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Flight Credits &amp; Travel Passes</controllingFieldValue>
+            <valueName>Booking Put Into Credit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Flight Credits &amp; Travel Passes</controllingFieldValue>
+            <valueName>Refunded Flight Credit/Travel Pass</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Flight Credits &amp; Travel Passes</controllingFieldValue>
+            <valueName>Assistance To - Find, Resend, Use Credit / Travel Pass</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Flight Credits &amp; Travel Passes</controllingFieldValue>
+            <valueName>General Enquiry - Balance, Eligibility, Fare Rules, Expiry etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outbound Call Unsuccessful</controllingFieldValue>
+            <valueName>No Answer / Voicemail</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>ACCC Remediation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>Refund Requested - Voluntary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>Refund Requested - Involuntary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>Refund Requested - Seat Selection, Baggage etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>Refund Requested - Cabin Downgrade</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>Follow up - Refund Outstanding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>Follow Up - Dispute/Query Refund Amount</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Refunds</controllingFieldValue>
+            <valueName>General Enquiry Refund - Eligibility, Advice etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Booking</controllingFieldValue>
+            <valueName>PNR Created - Fee Charged</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Booking</controllingFieldValue>
+            <valueName>PNR Created - Fee Waived</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Booking</controllingFieldValue>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>UMNR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Booking</controllingFieldValue>
+            <valueName>GN / Premium Request - Successful</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Booking</controllingFieldValue>
+            <valueName>GN / Premium Request - Unsuccessful</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Booking</controllingFieldValue>
+            <valueName>Assist With Online Products - Points Plus Pay, Combo Classic Reward etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Booking</controllingFieldValue>
+            <valueName>General Enquiry - Quote, Availability, Dates, Fare Rules etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Successful Change - Voluntary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Successful Change - Involuntary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Query Only - Flights Not Changed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Split booking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Passenger Details - Name, Contacts, API, Add FF Number etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Upgrades - Request or Query</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Special Service Request - WHCR etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Seat Selection - Add/Change/Query</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <controllingFieldValue>Baggage</controllingFieldValue>
+            <valueName>Baggage - Allowance, Excess, Through Check etc.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Meals - Add/Change/Query</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Tax Invoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Follow Up E-ticket</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>Referred Back To Travel Agent For Servicing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Existing Booking</controllingFieldValue>
+            <valueName>General Enquiry - Existing Booking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Baggage</controllingFieldValue>
+            <valueName>Delayed Baggage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Baggage</controllingFieldValue>
+            <valueName>Damaged Baggage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Baggage</controllingFieldValue>
+            <controllingFieldValue>Customer Care</controllingFieldValue>
+            <valueName>Lost Property</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Baggage</controllingFieldValue>
+            <valueName>General Enquiry - Baggage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customer Care</controllingFieldValue>
+            <valueName>Complaint - New</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customer Care</controllingFieldValue>
+            <valueName>Complaint - Follow-up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customer Care</controllingFieldValue>
+            <valueName>Insurance Letter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customer Care</controllingFieldValue>
+            <valueName>Compliment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Call Disconnects &amp; Transfers</controllingFieldValue>
+            <valueName>Call Failed - Did Not Connect</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Call Disconnects &amp; Transfers</controllingFieldValue>
+            <valueName>Call Dropped Out (Couldn&apos;t Hear)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Call Disconnects &amp; Transfers</controllingFieldValue>
+            <valueName>Customer Hung Up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Call Disconnects &amp; Transfers</controllingFieldValue>
+            <valueName>Call Transferred - Frequent Flyer Service Centre, JetStar, Other</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

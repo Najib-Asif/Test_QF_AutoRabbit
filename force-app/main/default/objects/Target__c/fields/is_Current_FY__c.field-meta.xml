@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>is_Current_FY__c</fullName>
+    <formula>(
+RIGHT(TEXT(IF(Month(Today())&gt;6, YEAR(Today()) +1, YEAR(Today()))),2)
+==
+RIGHT(TEXT(IF(Month(Target_Date__c)&gt;6, YEAR(Target_Date__c) +1, YEAR(Target_Date__c))),2)
+)
+&amp;&amp;
+Month(Target_Date__c) == Month(Today())
+&amp;&amp;
+(Year(Target_Date__c )-1) == (Year(Today())-1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>is Current FY</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_CSU_AU_Queue1</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+    <columns>CASES.PRIORITY</columns>
+    <columns>Product__c</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Freight_AWB_Number__c</columns>
+    <columns>Freight_Unresolved_Time__c</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.ORIGIN</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
+    <columns>Freight_AWB_Shipment_Description__c</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Freight_Claims,Case.Freight_Email_to_Case,Case.Freight_Feedback,Case.Freight_Invoicing,Case.Freight_Query,Case.Freight_Shipment,Case.Freight_Track_Trace_Exceptions,Case.Qantas_Freight</value>
+    </filters>
+    <filters>
+        <field>CASES.CLOSED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Freight CSU AU Queue</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>notEqual</operation>
+        <value>Invalid Case</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>On Hold</value>
+    </filters>
+    <label>Freight CSU AU Queue</label>
+</ListView>

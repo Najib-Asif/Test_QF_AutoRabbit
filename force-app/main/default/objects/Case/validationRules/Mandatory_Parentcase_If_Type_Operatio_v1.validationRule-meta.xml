@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Parentcase_If_Type_Operatio_v1</fullName>
+    <active>true</active>
+    <description>Make the Parent case lookup field mandatory if we select the type as &quot;Operational Waiver&quot;.</description>
+    <errorConditionFormula>AND(RecordType.Name == &apos;Service Request&apos;, ISPICKVAL(Type,&apos;Operational Waiver&apos;) ,ParentId == &apos;&apos;, NOT(ISPICKVAL( Problem_Type__c , &apos;Schedule Change&apos;)) )</errorConditionFormula>
+    <errorDisplayField>ParentId</errorDisplayField>
+    <errorMessage>Please enter the value for Parent Case lookup field</errorMessage>
+</ValidationRule>

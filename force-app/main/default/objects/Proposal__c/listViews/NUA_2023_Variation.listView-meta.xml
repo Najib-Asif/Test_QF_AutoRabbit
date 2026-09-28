@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NUA_2023_Variation</fullName>
+    <columns>Qantas_Annual_Expenditure__c</columns>
+    <columns>Forecast_MCA_Revenue__c</columns>
+    <columns>NAME</columns>
+    <columns>Opportunity__c</columns>
+    <columns>Account__c</columns>
+    <columns>Status__c</columns>
+    <columns>Proposal_Start_Date__c</columns>
+    <columns>Proposal_End_Date__c</columns>
+    <columns>OBJECT_ID</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>startsWith</operation>
+        <value>Variation</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Accepted by Customer</value>
+    </filters>
+    <filters>
+        <field>LAST_UPDATE</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>NUA 2023 Variation</label>
+    <sharedTo>
+        <group>S_D_Opps_BA</group>
+    </sharedTo>
+</ListView>

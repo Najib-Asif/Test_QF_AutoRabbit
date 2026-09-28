@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aquire_Eligibility_f__c</fullName>
+    <description>The customer is registered for with the Qantas Business Rewards loyalty program (previously Aquire). This calculates eligibility for airline discounts
+
+STME-2670 Changes on Eligibility all Amex customers are GST registered and will have an eligible entity type, so therefore we do not need to check this
+
+Changes on Dec 28.12.2016 --&gt; Updated the Dates to (2016,12,12) for simulating the test Records End to End.Need to be changed to (2017,2,1) once testing done</description>
+    <externalId>false</externalId>
+    <formula>IF (
+	NOT(ISPICKVAL(Aquire_Override__c,&apos;Y&apos;)), 
+	IF (
+		Aquire_System__c = true, 
+		IF (
+			ISPICKVAL(Agency__c, &apos;N&apos;),  
+				IF (
+					ISPICKVAL(Dealing_Flag__c, &apos;N&apos;), 
+					IF ( 
+						Aquire_Enrollment_Date_System__c &gt;= DATE(2017,02,01) &amp;&amp; AMEX__c != true , 
+						IF (
+							ISPICKVAL(GST_Registered__c, &apos;N&apos;), 
+							IF (
+								Valid_Entity_Type__c = &apos;N&apos;,
+							&apos;N&apos;, 
+						&apos;Y&apos;), 
+					&apos;Y&apos;), 
+				&apos;Y&apos;), 
+			&apos;N&apos;),  
+		&apos;N&apos;), 
+	&apos;N&apos;), 
+&apos;N&apos;)</formula>
+    <inlineHelpText>Determines eligibility for airline discounts based on Override, QBR Registration, Travel Agency, SME Deal, previous Aquire Membership, GST Registration and Entity Type</inlineHelpText>
+    <label>Airline Eligibility</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

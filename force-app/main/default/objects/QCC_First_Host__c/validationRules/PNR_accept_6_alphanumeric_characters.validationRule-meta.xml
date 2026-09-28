@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PNR_accept_6_alphanumeric_characters</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+  LEN( QCC_PNR__c ) &lt;&gt; 6,
+  AND(
+     ISNEW(),
+     NOT(ISBLANK( QCC_PNR__c )),
+     NOT(REGEX( QCC_PNR__c ,&quot;^[a-zA-Z0-9_]*$&quot;))
+   )
+)</errorConditionFormula>
+    <errorMessage>PNR must contain 6 characters that are alphanumeric only</errorMessage>
+</ValidationRule>

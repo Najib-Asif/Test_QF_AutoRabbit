@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tier_Conga__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( 
+CONTAINS(UPPER(TEXT(Profile_Membership_Current_Tier__c )),&quot;GOLD&quot;),LEFT($Api.Partner_Server_URL_260, FIND( &apos;/services&apos;, $Api.Partner_Server_URL_260))
+&amp;&quot;resource/TierSystem/Gold.PNG&quot;, 
+
+IF(CONTAINS(UPPER(TEXT(Profile_Membership_Current_Tier__c )),&quot;SILVER&quot;),LEFT($Api.Partner_Server_URL_260, FIND( &apos;/services&apos;, $Api.Partner_Server_URL_260))
+&amp;&quot;resource/ContactTier/Silver.PNG&quot;, 
+
+IF(CONTAINS(UPPER(TEXT(Profile_Membership_Current_Tier__c )),&quot;PLATINUM ONE&quot;),LEFT($Api.Partner_Server_URL_260, FIND( &apos;/services&apos;, $Api.Partner_Server_URL_260))
+&amp;&quot;resource/TierSystem/Platinumone.png&quot;,
+
+IF(CONTAINS(UPPER(TEXT(Profile_Membership_Current_Tier__c )),&quot;BRONZE&quot;), LEFT($Api.Partner_Server_URL_260, FIND( &apos;/services&apos;, $Api.Partner_Server_URL_260))
+&amp;&quot;resource/ContactTier/Bronze.PNG&quot;,
+
+IF(CONTAINS(UPPER(TEXT(Profile_Membership_Current_Tier__c )),&quot;PLATINUM&quot;), LEFT($Api.Partner_Server_URL_260, FIND( &apos;/services&apos;, $Api.Partner_Server_URL_260))
+&amp;&quot;resource/TierSystem/Platinum.png&quot;,
+&quot;&quot;)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tier Conga [System]</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

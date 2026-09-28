@@ -1,0 +1,159 @@
+{
+  "version" : "61.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ArticleDetails.ArticleNumber", "User.FirstName", "User.Name", "EVENT_TYPE", "User.UserRole.CallCenter", "User.LastName", "UserRole.Name", "ArticleDetails.Title", "RecordType.Name", "ARTICLE_STATUS", "Article_Group", "User.Location__c", "ENTITY", "TIMESTAMP_DERIVED", "User.IsActive", "User.Username", "ArticleDetails.UrlName", "USER_TYPE", "ArticleDetails.VersionNumber", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Article Engagement",
+          "name" : "Knowledge_Article_Engagement"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "User.FirstName", "User.Name", "EVENT_TYPE", "User.UserRole.CallCenter", "User.LastName", "UserRole.Name", "RecordType.Name", "Knowledge.Title", "Article_Group", "User.Location__c", "TIMESTAMP_DERIVED", "User.IsActive", "RecordType.ArticleNumber", "User.Username", "Knowledge.ArticleNumber", "Knowledge.UrlName", "RecordType.Title", "RecordType.UrlName", "RANK", "Knowledge.VersionNumber", "RecordType.VersionNumber" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Search Clicks",
+          "name" : "Knowledge_Search_Clicks"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "User.FirstName", "EVENT_TYPE", "Current.Title", "Actual_Redirection", "UserRole.Name", "RecordType.Name", "In_Page_Redirection", "User.Location__c", "User.IsActive", "RecordType.ArticleNumber", "User.Username", "Current.ArticleNumber", "Previous.Article_Group", "RecordType.UrlName", "User.Name", "User.UserRole.CallCenter", "User.LastName", "PAGE_URL", "Current_URL", "Previous.ArticleNumber", "Previous.UrlName", "TIMESTAMP_DERIVED", "Current.UrlName", "Previous.Title", "RecordType.Title", "Current.VersionNumber", "RecordType.VersionNumber", "Previous.VersionNumber" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Click-Through",
+          "name" : "Knowledge_Click_Through"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Article Engagement 2024-09-12",
+          "name" : "Knowledge_Article_Engagement_2024_09_12",
+          "folderName" : "NEO_Dataset_Backup"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Search Clicks 2024-09-12",
+          "name" : "Knowledge_Search_Clicks_2024_09_12",
+          "folderName" : "NEO_Dataset_Backup"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "LOAD_DATASET2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Knowledge Click-Through 2024-09-12",
+          "name" : "Knowledge_Click_Through_2024_09_12",
+          "folderName" : "NEO_Dataset_Backup"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Knowledge Article Engagement",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Knowledge Search Clicks",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Knowledge Click-Through",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "Knowledge Article Engagement Backup",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 252
+      },
+      "OUTPUT1" : {
+        "label" : "Knowledge Search Clicks Backup",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 252
+      },
+      "OUTPUT2" : {
+        "label" : "Knowledge Click-Through Backup",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 252
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "OUTPUT2"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

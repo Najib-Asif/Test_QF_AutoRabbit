@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Projected_Billing_This_FY__c</fullName>
+    <description>This field to capture Billing information from Annual Value, Ramp up factor etc and its used by Loyalty Commercial Manager</description>
+    <formula>IF( OR /*If Start Date is in current Financial Year. (Start Date should be after June of Current Year and before (or on) June of next year.) */
+		(
+			AND /*Start Date is next year before June.*/
+				( 
+				MONTH(Start_Date__c) &lt;= 6,
+				YEAR(Start_Date__c) = (YEAR( TODAY())+1)
+				),
+			AND /*Start Date is current year after June.*/
+				( 
+				MONTH(Start_Date__c) &gt; 6,
+				YEAR(Start_Date__c) = YEAR( TODAY())
+				)
+		),
+		
+	IF(
+		MONTH( Start_Date__c ) &gt; 6, /*After June*/
+		(3*VALUE( TEXT( Ramp_up_factor__c ))/100
+			*( Amount /12)) 
+		+ (
+			((19-MONTH( Start_Date__c))-3)
+				*(Amount /12)
+		) ,
+			IF(
+				OR /*Start Date Month &lt;= March*/
+					( 
+					MONTH( Start_Date__c ) &lt; 3,
+					MONTH( Start_Date__c ) = 3
+					) ,
+				(3*VALUE( TEXT( Ramp_up_factor__c ))/100
+					*( Amount /12)) 
+				+ 
+				(
+				((7-MONTH( Start_Date__c))-3)
+					*(Amount /12)
+				),
+				(VALUE( TEXT( Ramp_up_factor__c ))/100) /*Ramp_up_factor__c will not be multiplied by 3 as 3 or less months are left in Financial Year*/
+					*(7-MONTH( Start_Date__c ))
+						*(Amount /12) 
+
+			)
+	), 
+	0
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Billings predicted for this partnership this FY</inlineHelpText>
+    <label>Projected Billing This FY</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

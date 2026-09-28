@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PPD_CC__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Call_Close_Score__c &lt;= 3.00, 1,(IF( Call_Close_Score__c &gt; 3.00&amp;&amp; Call_Close_Score__c &lt;= 4.25, 2,(IF( Call_Close_Score__c &gt; 4.25 &amp;&amp; Call_Close_Score__c &lt;= 4.50, 3,(IF( Call_Close_Score__c &gt; 4.50 &amp;&amp; Call_Close_Score__c &lt;= 4.75, 4,(IF( Call_Close_Score__c &gt; 4.75 &amp;&amp; Call_Close_Score__c &lt;= 4.85,5,6))) ))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>PPD CC</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

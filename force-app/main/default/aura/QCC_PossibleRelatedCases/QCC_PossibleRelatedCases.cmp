@@ -1,0 +1,68 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="QCC_PossibleRelatedCasesController">
+    <aura:attribute name="targetCase" type="Case"/>
+    <aura:attribute name="case" type="Case"/>
+    <aura:attribute name="error" type="String"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="similarCases" type="Case[]"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="casesExist" type="Boolean" default="false"/>
+    <aura:attribute name="actionCompleted" type="Boolean" default="false"/>
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedDirection" type="String"/>
+    <aura:attribute name="pageNumber" type="Integer" default="1" />
+    <aura:attribute name="maxPage" type="Integer" default="1" />
+    <aura:attribute name="currentList" type="Case[]"/>
+    <aura:handler name="init" value="{! this}" action="{! c.doInit}"/>
+    <aura:handler name="change" value="{!v.pageNumber}" action="{!c.renderPage}" />
+    
+    <!--<aura:if isTrue="{! v.isLoading}">
+        <lightning:spinner variant="brand" alternativeText="Loading..."/>
+    </aura:if>-->
+    
+    <force:recordData aura:id="record"
+                      recordId="{!v.recordId}"
+                      layoutType="FULL"
+                      fields="First_Name__c,Last_Name__c,Contact_Phone__c,Contact_Email__c"
+                      mode="VIEW"
+                      targetRecord="{!v.targetCase}"
+                      targetFields="{!v.case}"
+                      targetError="{!v.error}"
+                      recordUpdated="{!c.handleRecordUpdated}"/>
+    
+    <lightning:card iconName="standard:case">
+        <aura:set attribute="title">
+            <div class="slds-media__body">
+                <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="{! $Label.c.QCC_PossibleRelatedCasesHoverText}">
+                    <span class="slds-text-heading_small">{! $Label.c.QCC_SearchResultsAndSameCasesHeading}</span>
+                </a>
+            </div>
+        </aura:set>
+        <aura:if isTrue="{! v.actionCompleted}">
+            <aura:renderIf isTrue="{! v.casesExist}">
+                <lightning:datatable aura:id="searchResults" data="{! v.currentList}" 
+                                     columns="{! v.mycolumns}" 
+                                     keyField="Id"
+                                     resizeColumnDisabled="true"
+                                     onrowaction="{! c.handleRowAction }"
+                                     hideCheckboxColumn="true"
+                                     sortedBy="{! v.sortedBy }"
+                                     sortedDirection="{! v.sortedDirection }"
+                                     onsort="{! c.updateColumnSorting }"
+                                     class="myStyle"/>
+                <br/>
+                <c:QCC_Pagination currentPageNumber="{!v.pageNumber}" maxPageNumber="{!v.maxPage}" />
+                <aura:set attribute="else">
+                    <div class="slds-text-color_error slds-text-align_center">{! $Label.c.NoCaseFound}</div>
+                </aura:set>
+            </aura:renderIf>
+        </aura:if>
+        <aura:if isTrue="{! v.isLoading}">
+            <div class="slds-spinner_container" aura:id="spinner">
+                <div class="slds-spinner_brand slds-spinner slds-spinner_small" aria-hidden="false" role="alert">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </aura:if>
+    </lightning:card>
+</aura:component>

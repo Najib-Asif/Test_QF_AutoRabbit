@@ -1,0 +1,88 @@
+<!--QAC Project-->
+<aura:component controller="QAC_PNRSearch_Controller" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    
+    <aura:attribute name="pnrNumber" type="String"/>
+    <aura:attribute name="lastName" type="String"/>
+    <aura:attribute name="pnrInformation" type="QAC_PNRDetailsWrapper" access="global"/>
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:attribute name="localCases" type="Case[]" access="global"/>
+    <aura:attribute name="localAvailable" type="boolean" default="false"/>
+    <aura:attribute name="capAvailable" type="boolean" default="false"/>
+    <aura:registerEvent name="bubblingEvent" type="c:QAC_NavigateEvent" />    
+    <aura:registerEvent name="QAC_DataSharingEvent" type="c:QAC_DataSharingEvent"/>
+    
+     <!--CRM-8136 Live PNR Details-->
+   <aura:method name="setSearchParams" action="{!c.setSearchParams}" 
+             description="Sample method with parameters"> 
+    <aura:attribute name="pnrNumber" type="String"/> 
+    <aura:attribute name="lastName" type="String" /> 
+</aura:method>
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-spinner_container">
+            <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+        </div>
+    </aura:if>
+    
+    <div class="slds-box slds-p-around_large slds-theme_default">
+        
+        <c:QAC_SectionHeader headerValue="Enter Booking Details" />
+        
+        <lightning:layout class="slds-align_absolute-center slds-p-around_small">
+            <lightning:layoutItem>
+                <div class="slds-text-heading_small"> PNR Number  </div>
+                <lightning:input variant="label-hidden"
+                                 required="true"                        
+                                 name="PnrNumer"
+                                 value="{!v.pnrNumber}"
+                                 minlength="6"
+                                 maxlength="6"
+                                 pattern="[a-zA-Z0-9]+"
+                                 messageWhenPatternMismatch="Enter the 6 Character Booking reference"
+                                 placeholder="2B5DJO"
+                                 type="text"
+                                 onchange="{!c.changeCasePNR}"
+                                 />   
+                
+            </lightning:layoutItem>
+        </lightning:layout >
+        
+        <lightning:layout class="slds-align_absolute-center slds-p-around_small">
+            <lightning:layoutItem>
+                <div class="slds-text-heading_small"> Last Name  </div>
+                <lightning:input                           
+                                 name="lastName"
+                                 value="{!v.lastName}"
+                                 variant="label-hidden"
+                                 required="true"
+                                 pattern="[A-Z ]+"
+                                 messageWhenPatternMismatch="Last Name doesn't look correct"
+                                 placeholder="TAYLOR"
+                                 onchange="{!c.changeCaseLastName}"
+                                 />    
+            </lightning:layoutItem>
+        </lightning:layout> 
+        
+        <lightning:layout class="slds-align_absolute-center slds-p-around_small">
+            <lightning:layoutItem>
+                <div class="slds-m-around--large">
+                    <div class="slds-form-element">
+                        <label class="slds-checkbox_toggle slds-grid">
+                            <span class="slds-form-element__label slds-m-bottom_none">Include Local Search:</span>
+                            <ui:inputCheckbox aura:id="chkbox" class="slds-input"/>
+                            <span id="toggle-desc" class="slds-checkbox_faux_container" aria-live="assertive">
+                                <span class="slds-checkbox_faux"></span>
+                            </span>
+                        </label>
+                    </div> 
+                </div>     
+            </lightning:layoutItem>
+        </lightning:layout> 
+        
+        <lightning:layout class="slds-align_absolute-center slds-p-around_medium slds-text-heading_small" >
+            <lightning:button variant="brand" label="Search" onclick="{!c.searchData}"/>
+            <lightning:button variant="brand" label="Reset" onclick="{!c.resetData}"/>
+        </lightning:layout>
+    </div>
+    
+</aura:component>

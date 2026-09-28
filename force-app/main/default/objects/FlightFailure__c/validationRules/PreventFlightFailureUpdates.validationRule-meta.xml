@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreventFlightFailureUpdates</fullName>
+    <active>true</active>
+    <description>QCC: once the flight event is assigned or linked to Global Event Failures code can not be updated</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_FltEvtEditingOnceLinkedtoGE__c 
+&amp;&amp; (Flight_Event__r.GlobalEvent__c != Null 
+				|| ( EventStatus__c == &apos;Assigned&apos; &amp;&amp; NOT(ISCHANGED(OnlyLeg__c))) 
+				|| EventStatus__c == &apos;Closed&apos;)</errorConditionFormula>
+    <errorMessage>Flight failure cannot be added or edited at this stage. This could be because the event is not assigned to CJM queue or its linked to a Global event</errorMessage>
+</ValidationRule>

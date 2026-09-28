@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Proposal_Creation_ClosedOpty</fullName>
+    <active>false</active>
+    <description>Restrict Proposal being created for closed Opportunity</description>
+    <errorConditionFormula>AND(ISNEW(),OR(ISPICKVAL(Opportunity__r.StageName,&quot;Closed - Accepted&quot;), ISPICKVAL(Opportunity__r.StageName,&quot;Closed - Not Accepted&quot;)))</errorConditionFormula>
+    <errorMessage>Please note that you cannot create a proposal for a closed opportunity!</errorMessage>
+</ValidationRule>

@@ -1,0 +1,75 @@
+<template>
+    <template lwc:if={isTypeChoiceList}>
+        
+        <div class="dropdown_field">
+            <lightning-select
+                value={choiceListDefaultValue}
+                label={fieldInfo.labels.display}
+                options={choiceListOptions}
+                required={fieldInfo.required}
+                message-when-value-missing="This field is required."
+            >
+        </lightning-select>
+        </div>
+        
+
+    </template>
+
+    <template lwc:elseif ={isPhone}>
+        <div class="dropdown_field">
+            
+            <label class="slds-form-element__label" for="phoneNumber">
+            <abbr class="slds-required" title="required">*</abbr>
+            Contact Number
+            </label>
+
+            <div class="slds-grid slds-gutters_xxx-small slds-nowrap">
+            <!-- Country Code -->
+            <div class="slds-col slds-size_3-of-12 ">
+                <lightning-select class=""
+                    variant="label-hidden"
+                    value={countryCode}
+                    options={countryOptions}
+                    onchange={handleCountryChange}
+                    required>
+                </lightning-select>
+            </div>
+    
+            <!-- Phone Number -->
+            <div class="slds-col slds-size_9-of-12">
+                <lightning-input
+                    id="phoneNumber"
+                    aria-label="Phone number"
+                    variant="label-hidden"
+                    type="tel"
+                    value={phoneNumber}
+                    pattern="[0-9]*"
+                    message-when-pattern-mismatch="Enter numbers only"
+                    onchange={handlePhoneChange}
+                    required>
+                </lightning-input>
+            </div>
+    
+        </div>
+        </div>
+        
+    </template>
+    
+    
+    <template lwc:else>
+        <lightning-input key={fieldInfo.name}
+                        type={type}
+                        label={fieldInfo.labels.display}
+                        max-length={fieldInfo.maxLength}
+                        min-length={minlength}
+                        message-when-too-short={minLengthErrorMessage}
+                        pattern={pattern}
+                        message-when-pattern-mismatch={patternMismatchError}
+                        required={fieldInfo.required}
+                        class="slds-m-bottom_medium"
+                        
+        >
+        </lightning-input>
+    </template>
+
+</template>

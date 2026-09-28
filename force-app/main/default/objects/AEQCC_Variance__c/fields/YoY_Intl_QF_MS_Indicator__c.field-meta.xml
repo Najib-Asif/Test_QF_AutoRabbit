@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>YoY_Intl_QF_MS_Indicator__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( YoY_Intl_Qantas_MarketShare__c != 0, 
+IF( 
+(YoY_Intl_Qantas_MarketShare__c &gt;= 0.001), 
+IMAGE(&quot;/resource/Green_Up&quot;, &quot;Up&quot;), 
+IF( 
+(YoY_Intl_Qantas_MarketShare__c &lt;= - 0.001), 
+IMAGE(&quot;/resource/Red_Down&quot;, &quot;Down&quot;), 
+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;) 
+) 
+), 
+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>YoY Intl QF MS Indicator</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

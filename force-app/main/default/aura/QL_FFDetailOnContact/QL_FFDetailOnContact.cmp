@@ -1,0 +1,82 @@
+<!---
+        **********************************************************************************************
+        Author:        Priyadharshini Vellingiri
+        Company:       TCS
+        Description:   Qantas BAU Frequent Flyer Information Component on the Console layout 
+            
+        ************************************************************************************************
+        History
+        ************************************************************************************************
+        24-Apr-2018      Priyadharshini Vellingiri               Initial Design
+        **********************************************************************************************
+        -->
+<aura:component controller="QL_FFDetailsController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+    <aura:attribute name="contactDetail" type="Contact"/> 
+    <aura:attribute name="otherProducts" type="Object[]"/>
+    <aura:attribute name="objCon" type="Contact"  default="{ 'sobjectType' : 'Contact' }"/>
+    <aura:attribute name="lstOtherProducts" type="Object[]" />
+    <aura:attribute name="ffDate" type="Date" />
+    <aura:attribute name="tabId" type="String" default="1" />
+    
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="onContact" type="Boolean" default="false"/>
+    <aura:attribute name="onCase" type="Boolean" default="false"/>
+    <aura:attribute name="isConsultant" type="Boolean" default="false"/>
+    <aura:attribute name="isCaseClosed" type="Boolean" default="false"/>
+    <aura:attribute name="isCaseInQueue" type="Boolean" default="false"/>
+    <aura:attribute name="isContactPresent" type="Boolean" default="true"/>
+    <aura:attribute name="userId" type="Id" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="disruptCount" type="String" default="0"/>
+    <aura:attribute name="disruptRec" type="Object[]"/>
+    
+    <lightning:tabset class="slds-tabs_card tabStyle" selectedTabId="{!v.tabId}">
+        <lightning:tab label="Frequent Flyer" id="1">
+            <lightning:layout horizontalAlign="space">
+                <lightning:layoutItem size="6" flexibility="auto" padding="horizontal-small">
+                    <ul class="slds-list--horizontal slds-has-inline-block-links--space UISpacing">
+                        <li class="slds-text-color_weak LISpacing">Frequent Flyer Number: </li>
+                        <li class="LISpacing" title="Description for second label"><strong>{!v.objCon.Frequent_Flyer_Number__c}</strong></li>
+                    </ul>
+                    <ul class="slds-list--horizontal slds-has-inline-block-links--space UISpacing">
+                        <li class="slds-text-color_weak LISpacing"> Frequent Flyer Tier:  </li>
+                        <li class="LISpacing" title="Description for second label"><Strong>{!v.objCon.Frequent_Flyer_Tier__c}</Strong></li>
+                    </ul>
+                </lightning:layoutItem>
+                
+                <lightning:layoutItem size="6" flexibility="auto" padding="horizontal-small">
+                    
+                    <c:QL_FlightDisruptions Frequentflyernumber = "{!v.objCon.Frequent_Flyer_Number__c}" RecId = "{!v.recordId}" contactDetails ="{!v.objCon}"/>
+                    <ul class="slds-list--horizontal slds-has-inline-block-links--space UISpacing">
+                        <li class="slds-text-color_weak LISpacing"> Tier Anniversary Date: </li>
+                        <li class="LISpacing" title="Description for second label"><strong>{!v.ffDate}</strong></li>
+                    </ul>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </lightning:tab>
+        
+        <lightning:tab label="Other products" id="2">
+            <lightning:layout horizontalAlign="space" multipleRows="true">
+                <aura:renderIf isTrue="{!empty(v.lstOtherProducts)}">
+                    <div class=" slds-text-color_error slds-text-align_center"> <strong>{!$Label.c.QCC_No_OtherProductMsg}</strong></div> 
+                    <aura:set attribute="else">
+                        <aura:iteration items="{!v.lstOtherProducts}" var="obj">                  
+                            <lightning:layoutItem flexibility="auto" padding="around-small" >
+                                <ul class="slds-list--horizontal">
+                                    <li class="slds-list--horizontal__label">Program Name:</li>
+                                    <li class="slds-list--horizontal__detail">
+                                        <div class="slds-p-left--small slds-p-right--xx-large">
+                                            <strong>{!obj.programName}</strong> ({!obj.programCode})
+                                        </div>
+                                    </li>
+                                </ul>                      
+                            </lightning:layoutItem>
+                        </aura:iteration>
+                    </aura:set>
+                </aura:renderIf>
+            </lightning:layout> 	
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

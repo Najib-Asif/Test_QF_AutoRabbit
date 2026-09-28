@@ -1,0 +1,151 @@
+<apex:page standardController="Account" standardStylesheets="false">
+
+<style>
+    .bPageBlock .detailList tr td.dataCol, 
+        .bPageBlock .detailList tr td.labelCol
+        {
+            border-top:1px solid #1797c0;
+            width: 100px;
+            
+        }
+</style>
+
+
+    <apex:form title="Key Metrics" > 
+        <apex:pageblock >
+                
+                <apex:pageBlockSection columns="6">
+                
+                    <apex:pageBlockSectionItem dataStyle="text-align:right;"> 
+                        <apex:outputLabel >  <b> <font color="blue"></font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                                        
+                    <apex:pageBlockSectionItem dataStyle="text-align:center;">
+                        <apex:outputLabel title="Target"> <b> <font color="blue">Target</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center;">
+                        <apex:outputLabel title="Last Year Actuals"> <b> <font color="blue">LY</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center;">
+                        <apex:outputLabel title="Actuals"> <b> <font color="blue">Actuals</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem dataStyle="text-align:center;">
+                        <apex:outputLabel title="Actuals vs Target"> <b> <font color="blue">vs Target</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem dataStyle="text-align:center;">
+                        <apex:outputLabel title="Actuals vs Last Year"> <b> <font color="blue">% vly</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                                                            
+                    <apex:pageBlockSectionItem datastyle="text-align:right;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic Revenue</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.Domestic_Revenue_Target__c}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.QF_Domestic_Revenue_LY__c}" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.QF_Domestic_Revenue__c}" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;"> 
+                        <apex:inputField value="{!account.Domestic_Revenue_vs_Target__c}" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;"> 
+                        <apex:inputField value="{!account.Domestic_Revenue_Actual_vly__c}" />
+                    </apex:pageBlockSectionItem>                                        
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic Share</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.Domestic_Share_Target__c}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.Domestic_Share_LY__c}" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.QF_Agency_Domestic_Market_Share__c}" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;"> 
+                        <apex:inputField value="{!account.Domestic_Share_vs_Target__c}" /> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;"> 
+                        <apex:inputField value="{!account.Domestic_Share_Actual_pts__c}" />
+                    </apex:pageBlockSectionItem>                     
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">International Revenue</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.International_Revenue_Target__c}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.QF_International_Revenue_LY__c}"/>
+                    </apex:pageBlockSectionItem> 
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.QF_International_Revenue__c}"/>
+                    </apex:pageBlockSectionItem>                                         
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.International_Revenue_vs_Target__c}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.International_Revenue_Actual_vly__c}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">International Share</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.International_Share_Target__c}"/> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.International_Share_LY__c}" /> 
+                    </apex:pageBlockSectionItem>                    
+                                        
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:inputField value="{!account.QF_Agency_International_Market_Share__c}" /> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;"> 
+                        <apex:inputField value="{!account.International_Share_vs_Target__c}" /> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;"> 
+                        <apex:inputField value="{!account.International_Share_Actual_pts__c}" />
+                    </apex:pageBlockSectionItem>    
+                    
+                    <apex:pageBlockSectionItem > 
+                        <apex:outputLabel style="float:right;" title="Date when the revenue and share figures were last updated"> <font color="red"> <i>**As At</i></font></apex:outputLabel> 
+                    </apex:pageBlockSectionItem>    
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;"> 
+                        <apex:inputField value="{!account.Latest_Period_Date__c}"/>  
+                    </apex:pageBlockSectionItem> 
+                                        
+                </apex:pageBlockSection>
+           
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

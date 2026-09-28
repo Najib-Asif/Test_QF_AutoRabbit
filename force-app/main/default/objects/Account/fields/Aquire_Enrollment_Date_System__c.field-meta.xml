@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aquire_Enrollment_Date_System__c</fullName>
+    <description>This field is used in Subscription report which helps to exclude Aquire “existing” members who joined since February 2015</description>
+    <label>QBR Enrolment Date</label>
+    <summarizedField>Product_Registration__c.Enrolment_Date__c</summarizedField>
+    <summaryFilterItems>
+        <field>Product_Registration__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Aquire Registration</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Product_Registration__c.Stage_Status__c</field>
+        <operation>equals</operation>
+        <value>Active</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Product_Registration__c.Account__c</summaryForeignKey>
+    <summaryOperation>min</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,14 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" controller="KM_NoticeBoardController" access="global" >
+    <aura:handler name="init" action="{!c.loadArticle}" value="{!this}" />
+    <aura:attribute name="lstKey" type="list[]" default = ""/>
+    <lightning:card >
+    	<div class="slds-p-around_medium rich-text-container" >
+        	<aura:iteration items="{!v.lstKey}"  var ="child">
+            	<b> <lightning:formattedRichText label = "Title" value="{!child.Title}"/></b><br/><br/>
+            	<lightning:formattedDateTime value="{!child.Startdate}" /> - <lightning:formattedDateTime value="{!child.Enddate}" /><br/><br/>
+            	<lightning:formattedRichText value="{!child.Summary}"/>  
+            	<lightning:formattedRichText value="{!child.Content}" class="rich-text-content"/>
+        	</aura:iteration>
+    	</div>
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SnD_ACR_Job_Title</fullName>
+    <active>true</active>
+    <description>To prompt S&amp;D Users to limit the char size of Job title field whe nit exceeds 50 chars for downstrea m impacts.</description>
+    <errorConditionFormula>AND
+(OR($User.Profile_Name__c =&apos;QL_Qantas_Sales&apos;,$User.Profile_Name__c =&apos;Sales and Distribution-Sales&apos;,$User.Profile_Name__c =&apos;Sales and Distribution-Distribution&apos;,$User.Profile_Name__c =&apos;QL_Sales&apos;),LEN( Job_Title__c ) &gt; 50)</errorConditionFormula>
+    <errorDisplayField>Job_Title__c</errorDisplayField>
+    <errorMessage>Job Title has exceeded 50 character limit</errorMessage>
+</ValidationRule>

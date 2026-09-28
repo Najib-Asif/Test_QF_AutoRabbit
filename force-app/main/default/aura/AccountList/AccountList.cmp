@@ -1,0 +1,147 @@
+<aura:component controller="AccountMapController">
+
+    <aura:registerEvent name="accountsLoaded" type="c:AccountsLoaded"/>
+    <aura:attribute name="accounts" type="Account[]"/>
+    <aura:attribute name="selectedRecordType" type="String" />
+    <aura:attribute name="RecordTypes" type="String[]" default="New Account"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+		<div class="colorIndicator" style="">          
+            <table style="colortable">
+            	<tr>
+                	<td class="box Agency_Account"> Agency Account</td>
+           
+                    <td class="box Prospect_Account"> Prospect Account</td>
+             
+                	<td class="box Freight_Account"> Freight Account</td>
+               
+                    <td class="box Customer_Account"> Customer Account</td>
+              
+                    <td class="box Charter_Account"> Charter Account</td>
+                </tr>
+
+            </table>         
+        </div>
+    <div class="accountList">
+       <!-- <ui:inputSelect aura:id="recordtypesAcc" label="RecordTypes " change="{!c.onSelectChange}">
+                <aura:iteration items="{!v.RecordTypes}" var="type">
+                     <ui:inputSelectOption aura:id="selectedPickVal" text="{!type}" label="{!type}"/>
+                </aura:iteration>
+            </ui:inputSelect> -->	
+        <!--<div class="slds-text-heading_medium heading">
+        	        All Accounts
+        </div>-->
+        <div class="slds-text-heading_small heading">
+            <table class="slds-table slds-table--bordered slds-table--striped" style="margin:1em auto;">
+            <!-- <ui:inputCheckbox label="Reimbursed?"/> -->
+            <thead>
+               <tr class="slds-text-heading--label ">	
+                   <th class="slds-cell-shrink" scope="row">
+                       <div class="slds-truncate">
+                           <strong>List View: &nbsp;
+                      	<ui:inputSelect aura:id="ListViewAcc" label="" class="SearchFilterTable" change="{!c.onSelectChange}">                                        
+                            <ui:inputSelectOption aura:id="MyAccounts" text="MyAccounts" label="My Accounts"/>	
+                            <ui:inputSelectOption aura:id="AllAccounts" text="AllAccounts" label="All Accounts"/>                 	
+               			 </ui:inputSelect></strong>
+                       </div>
+                   </th>  
+                   <th class="slds-cell-shrink" scope="row">
+                     <div class="slds-truncate">
+                         <strong>City: &nbsp;</strong>
+                        <ui:inputText   class="textSearch SearchFilterTable"   aura:id="citySearch"/>
+                     </div>
+                   </th> 
+                   <th class="slds-cell-shrink" scope="row">
+                       <div class="slds-truncate">
+                           <strong>Country: &nbsp;</strong>
+                            <ui:inputText   class="textSearch SearchFilterTable"   aura:id="countrySearch"/>
+                       </div>
+                   </th>                    
+                    <th class="slds-cell-shrink" scope="row">
+                       <div class="slds-truncate">
+                           <strong>State: &nbsp;</strong>
+                            <ui:inputText   class="textSearch SearchFilterTable"    aura:id="stateSearch"/>
+                       </div>
+                   </th> 
+                    <th class="slds-cell-shrink" scope="row">
+                       <div class="slds-truncate">
+                           <strong> Zip Code: &nbsp;</strong>
+                           <ui:inputText   class="textSearch SearchFilterTable" aura:id="zipcodeSearch"/> 
+                       </div>
+                   </th> 
+                   <th class="slds-cell-shrink" scope="row">
+                       <div class="slds-truncate">
+                           <ui:button class="slds-button slds-button_brand" label="Search" aura:id="Search" press="{!c.search}"/>
+                       </div>
+                   </th> 
+               </tr>    
+            </thead>
+            </table>
+                
+        
+           
+            
+            	
+           
+            
+            
+            
+                    
+
+            
+          <!--  <lightning:input class="textSearch" aura:id="citySearch" type="text" label="city" name="citySearch"/>
+            <lightning:input class="textSearch" aura:id="countrySearch" type="text" label="country" name="countrySearch"/>
+            <lightning:input class="textSearch" aura:id="stateSearch" type="text" label="state" name="stateSearch"/>
+            <lightning:input class="textSearch" aura:id="zipcodeSearch" type="text" label="zip code" name="zipcodeSearch"/>-->
+        </div>      
+        
+        <br></br>
+    	<table class="slds-table slds-table--bordered slds-table--striped" style="margin:1em auto;">
+            <!-- <ui:inputCheckbox label="Reimbursed?"/> -->
+            <thead>
+               <tr class="slds-text-heading--label ">	
+                   <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Account Name</strong></div></th>  
+                   <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Billing City</strong></div></th> 
+                       <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Locate to Map</strong></div></th>                    
+               </tr>    
+            </thead>
+            <tbody>
+						<aura:iteration items="{!v.accounts}" var="account"> 
+                            
+                            <!--<tr class="{!account.RecordType.name == 'Agency Account' ? 'slds-hint-parent Agency_Account' : 
+                                       account.RecordType.Name == 'Prospect Account'? 'slds-hint-parent Prospect_Account' : 
+                                       account.RecordType.Name == 'Other Account'? 'slds-hint-parent  Other_Account' :
+                                       account.RecordType.Name == 'New Account'? 'slds-hint-parent New_Account' :
+                                       account.RecordType.Name == 'Freight Account'? ' slds-hint-parent Freight_Account' :
+                                       account.RecordType.Name == 'Global Account'? 'slds-hint-parent Global_Account' :
+                                       account.RecordType.Name == 'Customer Account'? 'slds-hint-parent Customer_Account' :
+                                       account.RecordType.Name == 'Charter Account'? ' slds-hint-parent Charter_Account' :
+                                       account.RecordType.Name == 'Regional Account'? 'slds-hint-parent Regional_Account' :'slds-hint-parent Master'}"> -->
+                            <tr>
+                           		<c:AccountListItem account="{!account}"/>                               
+                            </tr>                            
+                        </aura:iteration>                                  
+                   <!-- <aura:if isTrue="{!v.selectedRecordType==null}">
+                        <aura:iteration items="{!v.accounts}" var="account"> 
+                            <tr class="slds-hint-parent"> 
+                           		<c:AccountListItem account="{!account}"/>                                
+                            </tr>                            
+                        </aura:iteration> 
+                        <aura:set attribute="else">
+                            <aura:iteration items="{!v.accounts}" var="account">                 
+                               <aura:if isTrue="{!account.RecordType.Name==v.selectedRecordType}">    
+                                   <tr class="slds-hint-parent"> 
+                                   	 <c:AccountListItem account="{!account}"/>    
+                                   </tr>
+                                </aura:if>
+                             </aura:iteration>
+                        </aura:set>                      
+                    </aura:if> -->
+                
+            </tbody>
+        </table>
+    </div>
+    
+        
+
+</aura:component>

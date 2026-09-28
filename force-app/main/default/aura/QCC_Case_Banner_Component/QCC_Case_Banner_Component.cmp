@@ -1,0 +1,81 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="caseRec" type="Case"/>
+    <!-- <aura:attribute name="recordId" type="Id" default="003N0000018aI5G"/> -->
+    <aura:handler name="init" value="{!this}" action="c.doInit"/>
+
+    
+        <div class="slds-scope"><span id="j_id0:j_id14">
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-3 slds-p-right--x-small">
+                        <div class="slds-box tile-box">
+                            
+                            <span class="slds-text-heading--medium">Contact Name: {!v.caseRec.Contact.FirstName} {!v.caseRec.Contact.LastName}</span><span id="j_id0:j_id16">
+                                <p><i aria-hidden="true" class="fa fa-phone"></i>&nbsp;Contact Mobile:{!v.caseRec.Contact.Mobile}</p></span>
+                            	<p><i aria-hidden="true" class="fa fa-map"></i>&nbsp;Contact Phone:{!v.caseRec.Contact.Preferred_Phone_Number__c}</p><span id="j_id0:j_id20">
+                                <p><i aria-hidden="true" class="fa fa-envelope"></i>&nbsp;Contact Email:{!v.caseRec.Contact.Preferred_Email__c}</p></span>
+                           
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="slds-size--1-of-3 slds-p-right--x-small">
+                        <div class="slds-box tile-box"><span id="j_id0:j_id57">
+                                <span class="slds-text-heading--medium">
+                                    Frequent Flyer Number:{!v.caseRec.Contact.FF_Number__c}
+                                </span>
+                                <p style="padding-bottom: 0.35em;">
+									Frequent Flyer Tier:{!v.caseRec.Contact.Frequent_Flyer_Tier__c}                                    
+                                </p></span>
+                                <p style="padding-bottom: 0.35em;">
+                                    Points Balance:{!v.caseRec.Contact.Points_Balance__c}
+                                </p>
+                                <p style="padding-bottom: 0.35em;">
+                                    FF Status Credits:{!v.caseRec.Contact.Status_Credits__c}
+                                </p>
+                                <p style="padding-bottom: 0.35em;">
+                                    Status Credits till next level:{!v.caseRec.Contact.QCC_Status_credits_till_next_Level__c}
+                                </p>
+                                <p style="padding-bottom: 0.35em;">
+                                    Frequent Flyer Anniversary Date:{!v.caseRec.Contact.QCC_Frequent_Flyer_Anniversary_Date__c}
+                                </p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="slds-size--1-of-3 slds-p-right--x-small">
+                        <div class="slds-box tile-box">
+                                <p style="padding-bottom: 0.35em;">
+                                    # of cases in last 24 months:{!v.caseRec.Contact.QCC_No_of_cases_in_last_24_months__c}
+                                </p>
+                                <p style="padding-bottom: 0.35em;">
+                                    # of disruptions in the last 12 months:{!v.caseRec.Contact.QCC_Discruptions_last_12_months__c}
+                                </p>
+                        </div>
+                    </div>
+                    
+                  
+                </div></span>
+        </div>
+    
+        
+ <!--
+   <pre>
+   <div>{!v.caseRec.Contact.FirstName} {!v.caseRec.Contact.LastName}
+         {!v.caseRec.Contact.Mobile}
+         {!v.caseRec.Contact.Preferred_Phone_Number__c}
+         {!v.caseRec.Contact.Preferred_Email__c}
+        </div>
+        <div>
+    Frequent Flyer Number: {!v.caseRec.Contact.FF_Number__c}
+    Frequent Flyer Tier: {!v.caseRec.Contact.Frequent_Flyer_Tier__c}
+    Points Balance: {!v.caseRec.Contact.Points_Balance__c}
+    FF Status credits: {!v.caseRec.Contact.Status_Credits__c}
+        </div>
+    <div>
+         Status credits till next level: {!v.caseRec.Contact.QCC_Status_credits_till_next_Level__c}
+         Frequent Flyer Anniversary Date: {!v.caseRec.Contact.QCC_Frequent_Flyer_Anniversary_Date__c}
+	</div>
+        </pre>
+-->    
+    
+</aura:component>

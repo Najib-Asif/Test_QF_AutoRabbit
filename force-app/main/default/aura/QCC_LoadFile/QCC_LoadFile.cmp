@@ -1,0 +1,86 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global" controller="QCC_LoadFileController">
+    <aura:attribute name="recordTypeId" type="String" access="public" />
+    <aura:attribute name="caseRecord" type="Case" access="public" />
+    <aura:attribute name="notesToShow" type="Case" access="public" />
+    <aura:attribute name="uploadedFiles" type="ContentDocument[]" />
+    <aura:attribute name="errorList" type="List" default="" />
+    <aura:attribute name="fileUploadRuleObject" type="Object" />
+
+    <lightning:notificationsLibrary aura:id="notifLib" />
+
+    <aura:attribute name="loaded" type="boolean" default="false" />
+
+    <!-- File Upload Attributes -->
+    <aura:attribute name="filetype" type="List"
+        default="['.pdf','.email', '.eml', '.doc', '.docx', '.xls ', '.xlsx', '.xlsm', '.png', '.jpg', '.jpeg', '.txt']" />
+    <aura:attribute name="multiple" type="Boolean" default="true" />
+
+    <aura:if isTrue="{!v.caseRecord.CaseNumber}">
+        <div class="slds-form--compound">
+            <div>
+                <div>
+                    <h1 class="brandColor">
+                        Case Number : {!v.caseRecord.CaseNumber}
+                    </h1>
+                    <br />
+                    <h1 class="brandColor">
+                        File Types accepted: PDF, Email, Word, Excel , Image ( JPEG, BMP, PNG, GIF)and Text.
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+    <div class="contentbox slds-m-top_medium">
+        <div class="slds-page-header slds-p-top_xx-small slds-p-bottom_xx-small">Files</div>
+        <div class="slds-grid">
+            <div style="width:100%">
+                <center>
+                    <lightning:fileUpload label="" multiple="{!v.multiple}" accept="{!v.filetype}"
+                        recordId="{!v.caseRecord.Id}" aura:id="multifileUpload"
+                        onuploadfinished="{!c.handleUploadFinished}" />
+                </center>
+            </div>
+        </div>
+        <br />
+        <aura:if isTrue="{!v.fileUploadRuleObject.validationMessage}">
+            <div class="slds-form--compound">
+                <div>
+                    <div>
+                        <h1 class="brandColor slds-p-left_small">
+                            {!v.fileUploadRuleObject.validationMessage}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <br />
+        <aura:if isTrue="{!not(empty(v.uploadedFiles))}">
+            <div class="slds-form--compound">
+                <table class="slds-table slds-table--bordered">
+                    <!-- hide the table header if file is empty -->
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>File Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.uploadedFiles}" var="file">
+                            <tr>
+                                <td>
+                                    <a href="javascript:void(0)" id="{!file.Id}">
+                                        {!file.Title}
+                                    </a>
+                                </td>
+                                <td>{!file.FileType}</td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </aura:if>
+    </div>
+    <aura:if isTrue="{!v.loaded}">
+        <lightning:spinner class="spins" size="medium" variant="brand" alternativeText="Loading" />
+    </aura:if>
+</aura:component>

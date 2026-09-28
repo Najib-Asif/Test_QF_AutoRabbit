@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Payments</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Payments</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- Record Type for Agency Qantas Channel related payments --></description>
+        <label><!-- Agency Payments --></label>
+        <name>Agency_Payments</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To lock key fields once agency payment has been approved --></description>
+        <label><!-- Approved Agency Payments --></label>
+        <name>Approved_Agency_Payments</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This determines the Invoice records that belong to Approved Corporate Payments --></description>
+        <label><!-- Approved Corporate Payments --></label>
+        <name>Approved_Corporate_Payments</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This determines the Invoice records that belong to New Corporate Payments --></description>
+        <label><!-- New Corporate Payments --></label>
+        <name>New_Corporate_Payments</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please Enter Comment if &apos;Payment Qualified&apos; is No, and &apos;Payment Required&apos; is Yes.! --></errorMessage>
+        <name>Mandatory_Comment_When_Payment_Qualify</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>
+            <!-- Please provide value to the following fields if Payment required is &quot;Yes&quot;.
+*Payment Criteria, 
+*Payment Qualified,
+*Justification/ Reasons -->
+        </errorMessage>
+        <name>Mandatory_PaymentCriteria_Qualified_JR</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot enter an EQ Reference number for a NIL Payment Invoice --></errorMessage>
+        <name>QP_No_EQ_reference_for_Nil_Payment</name>
+    </validationRules>
+</CustomObjectTranslation>

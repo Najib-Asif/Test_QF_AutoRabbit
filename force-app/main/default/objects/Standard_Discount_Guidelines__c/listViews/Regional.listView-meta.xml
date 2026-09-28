@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regional</fullName>
+    <columns>NAME</columns>
+    <columns>Fare_Structure__c</columns>
+    <columns>Fare_Combination__c</columns>
+    <columns>Minimum_Revenue__c</columns>
+    <columns>Maximum_Revenue__c</columns>
+    <columns>Discount_Threshold_AM__c</columns>
+    <columns>Discount_Threshold_NAM__c</columns>
+    <columns>Discount_Threshold_DO__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Fare_Combination__c</field>
+        <operation>equals</operation>
+        <value>Regional</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Regional</label>
+</ListView>

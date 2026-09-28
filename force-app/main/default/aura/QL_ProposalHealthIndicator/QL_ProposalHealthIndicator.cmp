@@ -1,0 +1,112 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" controller="QL_ProposalHealthIndicatorController" access="global">
+    <aura:attribute name="sObjectName" type="String" default="Proposal__c" description="API name of record on which this component is hosted." />
+    <aura:attribute name="Legend" type="String" description="Legend to display" />
+    
+    <aura:attribute name="perText" type="String" default="0%" description="Text to display inside circle. It is auto calculated field and used internally." />
+    <aura:attribute name="cirDeg" type="String" default="0" description="Degree of Progress to show. It is auto calculated field and used internally." />
+    
+    <aura:attribute name="theme" type="String" default="green" description="Theme of Circular Progress Bar. Possible values are blue, green, orange." />
+    <aura:attribute name="size" type="String" default="small" description="Size of Circular Progress Bar. Possible values are small, medium, big." />
+    
+    <!-- attributes for health indicator calculation-->
+    <aura:attribute name="discList" type="String"/>
+    <aura:attribute name="freqFlyStatUpOff" type="String"/>
+    <aura:attribute name="grpTravelOffer" type="String"/>
+    <aura:attribute name="contractPayment" type="String"/>
+    <aura:attribute name="contractExist" type="String"/>
+    <aura:attribute name="businessCase" type="String"/>
+    <aura:attribute name="proposalType" type="String"/>
+    <aura:attribute name="qClubDisc" type="String"/>
+    
+    <!--aura system init event handler-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    <div style="padding-left: 321px">
+           	  <lightning:button  onclick="{!c.doInit}" iconName="utility:refresh"></lightning:button> 
+    </div>
+    <lightning:card >
+	<div style="padding-left:30px">
+	<lightning:layout>
+        <!-- div for progress circle-->
+       
+         <div class="slds-align_absolute-left slds-text-title_caps slds-p-bottom_large slds-p-top_large" style="font-size:14px;color:#0000FF;">  
+            <div class="{! ( v.cirDeg >
+                        209 ) ? 'container p50plus '+v.theme+' '+v.size : 'container '+v.theme +' '+v.size }">
+                <span>{!v.perText}</span> 
+                
+                <div class="slice">
+                    
+                    <div class="bar" style="{! '-webkit-transform: rotate('+v.cirDeg+'deg); -moz-transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg); -o-transform: rotate('+v.cirDeg+'deg); transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg);'}"></div>
+                    
+                    <div class="fill"></div>
+                </div>
+            </div>  
+       </div> 
+        <!-- div for progress legend-->
+         <div class="slds-m-left_small legend slds-m-right_small"> 
+            
+            <aura:if isTrue= "{!or(v.proposalType == 'Corporate Airfares',v.proposalType == 'Qantas Business Savings')}">
+                
+                
+                <aura:if isTrue="{!v.discList == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                    </aura:set>
+                </aura:if>QF/EK Related Discount List Exists<br/>
+                
+                <aura:if isTrue="{!v.businessCase == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <aura:if isTrue="{!v.businessCase == '0'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/greyimage.png'}"/>
+                            </aura:set>
+                        </aura:if>
+                    </aura:set>
+                </aura:if>Business Case Exists<br/>
+                
+                <aura:if isTrue="{!v.qClubDisc == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/greyimage.png'}"/>
+                    </aura:set>
+                </aura:if>Qantas Club Exists<br/>
+                
+                <aura:if isTrue="{!v.freqFlyStatUpOff == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/greyimage.png'}"/>
+                    </aura:set>
+                </aura:if>FF Status Update<br/>
+                
+                <aura:if isTrue="{!v.grpTravelOffer == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/greyimage.png'}"/>
+                    </aura:set>
+                </aura:if>Group Travel Offer<br/>
+                
+                <aura:if isTrue="{!v.contractPayment == '1'}">
+                    <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                    <aura:set attribute="else">
+                        <aura:if isTrue="{!v.contractPayment == '0'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/greyimage.png'}"/>
+                            </aura:set>
+                        </aura:if>
+                    </aura:set>
+                </aura:if>Contract Payment<br/>
+                               
+            </aura:if>
+                         
+        </div> 
+		
+		</lightning:layout>
+       </div>
+	   
+    </lightning:card>
+    
+</aura:component>

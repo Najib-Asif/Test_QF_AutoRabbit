@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Groups_Description_Mandatory</fullName>
+    <active>false</active>
+    <description>For Type = Group Waiver, SBT - the Description field under the Justification section is mandatory</description>
+    <errorConditionFormula>AND ( 
+RecordType.Name==&quot;Service Request&quot;, 
+OR(ISPICKVAL(Type,&apos;Group Waivers&apos;), ISPICKVAL(Type,&apos;SBT&apos;)),
+ISBLANK (Description))</errorConditionFormula>
+    <errorDisplayField>Description</errorDisplayField>
+    <errorMessage>Please enter your Justification for the Waiver in the Description field.</errorMessage>
+</ValidationRule>

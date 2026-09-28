@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RestrictApprovalDateRemoveOnAppOrRej</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( ISCHANGED( Approval_Submission_Date__c ), OR(ISPICKVAL( Legal_Approval__c , &apos;Approved&apos;) ,ISPICKVAL( Legal_Approval__c , &apos;Rejected&apos;)), ISBLANK(Approval_Submission_Date__c))</errorConditionFormula>
+    <errorDisplayField>Approval_Submission_Date__c</errorDisplayField>
+    <errorMessage>Please enter Approval Submission Date</errorMessage>
+</ValidationRule>

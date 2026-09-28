@@ -1,0 +1,16 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+	<aura:attribute name="consoleMessages" type ="String" default=""/>
+    <aura:attribute name="interactionId" type="String" />
+    <aura:attribute name="Consult_ParticipantData_Name" type="String" default="Participant.SoftPhonePop"/>
+    <aura:attribute name="Consult_ParticipantData_UpdVal" type="Boolean" default="true"/>
+    <lightning:messageChannel type="purecloud__ClientEvent__c" aura:id="clientEventMessageChannel" onMessage="{!c.onClientEvent}" scope="APPLICATION"/>
+    <lightning:utilityBarAPI aura:id="utilitybar" />
+
+    <div>
+        <div class="button-set">
+        	<label class="event-label">Subscription Events:</label>
+            <lightning:textarea class="output-console" name="outputConsole" value="{!v.consoleMessages}" updateOn="change" />
+        </div>
+    </div>
+    
+</aura:component>

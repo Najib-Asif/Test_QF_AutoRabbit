@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Invoking QCC_LoyaltyStatusSendSMSInvocable Apex Class, to send the SMS message ,</description>
+        <name>Invoke_Send_SMS_Apex_Logic</name>
+        <label>Invoke Send SMS Apex Logic</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <actionName>QCC_LoyaltyStatusSendSMSInvocable</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Is_Key_Cordinator_Fields_Changed</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Error_Msg</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>contactRecords</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QCC_LoyaltyStatusSendSMSInvocable</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>If tech loyalty type is not empty and channel is SMS, then this will trigger QCC_LoyaltyStatusSendSMSInvocable apex class, to  send the SMS message.</description>
+        <name>Check_to_Invoke_Loyalty_Status_SMS</name>
+        <label>Check to Invoke Loyalty Status SMS</label>
+        <locationX>314</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>Is_Key_Cordinator_Fields_Changed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Invoke_Loyalty_SMS</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>sendSMSCriteria</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Invoke_Send_SMS_Apex_Logic</targetReference>
+            </connector>
+            <label>Invoke Loyalty SMS</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>If any key cordinator fields changed, then this will update the scheme remarks on related active Asset record</description>
+        <name>Is_Key_Cordinator_Fields_Changed</name>
+        <label>Is Key Cordinator Fields Changed?</label>
+        <locationX>314</locationX>
+        <locationY>821</locationY>
+        <defaultConnector>
+            <targetReference>Populate_Do_Not_Call_on_ACR_Check</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Key_Cordinator_Fields_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IsKeyCoordinatorFieldChanged</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Asset_Record</targetReference>
+            </connector>
+            <label>Yes Key Cordinator Fields Changed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Condition to update the do not call fields on related ACR record of contact.</description>
+        <name>Populate_Do_Not_Call_on_ACR_Check</name>
+        <label>Populate Do Not Call on ACR Check</label>
+        <locationX>314</locationX>
+        <locationY>1319</locationY>
+        <defaultConnectorLabel>Do not populate</defaultConnectorLabel>
+        <rules>
+            <name>Populate</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.DoNotCall</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.HasOptedOutOfEmail</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Populate_Do_Not_Call_Value_on_ACR</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Populate</label>
+        </rules>
+    </decisions>
+    <description>Contact Object Process builders migration to Flows</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>AssetSchemeRemarks</name>
+        <dataType>String</dataType>
+        <expression>&apos;Contact Details Updated on&apos; + TEXT(TODAY())</expression>
+    </formulas>
+    <formulas>
+        <name>IsKeyCoordinatorFieldChanged</name>
+        <dataType>Boolean</dataType>
+        <expression>ISCHANGED({!$Record.FirstName})||
+ISCHANGED({!$Record.LastName}) ||
+ISCHANGED({!$Record.Title}) ||
+ISCHANGED({!$Record.Salutation})||
+ISCHANGED({!$Record.MailingCity} )||
+ISCHANGED({!$Record.MailingCountry} )||
+ISCHANGED({!$Record.MailingState} )||
+ISCHANGED({!$Record.MailingPostalCode} )||
+ISCHANGED({!$Record.MailingStreet} )||
+ISCHANGED({!$Record.Phone})||
+ISCHANGED({!$Record.MobilePhone})||
+ISCHANGED({!$Record.Email})||
+ISCHANGED({!$Record.Job_Role__c})</expression>
+    </formulas>
+    <formulas>
+        <description>Formula variable to check the criteria to send SMS or not</description>
+        <name>sendSMSCriteria</name>
+        <dataType>Boolean</dataType>
+        <expression>OR(
+	AND(
+		ISNEW(),
+               NOT(ISBLANK({!$Record.QCC_TECH_Loyalty_Point_Type__c})),
+		TEXT({!$Record.QCC_LoyaltyBonus_Channel__c}) = &apos;SMS&apos;
+	),
+	AND(
+		NOT(ISNEW()),
+                NOT(ISBLANK({!$Record.QCC_TECH_Loyalty_Point_Type__c})),
+		TEXT({!$Record.QCC_LoyaltyBonus_Channel__c}) = &apos;SMS&apos;,
+		OR(
+			ISCHANGED({!$Record.QCC_TECH_Loyalty_Point_Type__c}),
+			ISCHANGED({!$Record.QCC_LoyaltyBonus_Channel__c})
+		)
+	)
+)</expression>
+    </formulas>
+    <interviewLabel>ContactAfterTriggerFlow_V1 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>ContactAfterTriggerFlow_V1</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>This will create a log record, If any exception happened during ACR updation</description>
+        <name>ACR_Record_Update_Error_Msg</name>
+        <label>ACR Record Update Error Msg</label>
+        <locationX>314</locationX>
+        <locationY>1535</locationY>
+        <inputAssignments>
+            <field>Business_Function_Name__c</field>
+            <value>
+                <stringValue>ACR Record Updation</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Error_Message__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Exception_Type__c</field>
+            <value>
+                <stringValue>Get Element Failure</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FailedRecordID__c</field>
+            <value>
+                <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LoggedIn_User__c</field>
+            <value>
+                <elementReference>$User.Username</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>ErrorLogRecordTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Log__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>This will create a log record, If any exception happened during Asset updation</description>
+        <name>Asset_Record_Update_Error_Msg</name>
+        <label>Asset Record Update Error Msg</label>
+        <locationX>314</locationX>
+        <locationY>1037</locationY>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Populate_Do_Not_Call_on_ACR_Check</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Business_Function_Name__c</field>
+            <value>
+                <stringValue>Asset Record Updation</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Error_Message__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Exception_Type__c</field>
+            <value>
+                <stringValue>Get Element Failure</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FailedRecordID__c</field>
+            <value>
+                <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LoggedIn_User__c</field>
+            <value>
+                <elementReference>$User.Username</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>ErrorLogRecordTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Log__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>This will create a log record, If any exception happened during SMS sending Apex logic.</description>
+        <name>Log_Error_Msg</name>
+        <label>Log Error Msg</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Is_Key_Cordinator_Fields_Changed</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Business_Function_Name__c</field>
+            <value>
+                <stringValue>Contact Object Flow</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Error_Message__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Exception_Type__c</field>
+            <value>
+                <stringValue>Get Element Failure</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FailedRecordID__c</field>
+            <value>
+                <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LoggedIn_User__c</field>
+            <value>
+                <elementReference>$User.Username</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>ErrorLogRecordTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Log__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordUpdates>
+        <description>It will update the Do not Call / Email Opt out fields on related ACR record.</description>
+        <name>Populate_Do_Not_Call_Value_on_ACR</name>
+        <label>Populate Do Not Call Value on ACR</label>
+        <locationX>50</locationX>
+        <locationY>1427</locationY>
+        <faultConnector>
+            <targetReference>ACR_Record_Update_Error_Msg</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Do_Not_Call__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Email_Opt_Out__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>AccountContactRelation</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>It will update the scheme remarks field on related active asset record.</description>
+        <name>Update_Asset_Record</name>
+        <label>Update Asset Record</label>
+        <locationX>50</locationX>
+        <locationY>929</locationY>
+        <connector>
+            <targetReference>Populate_Do_Not_Call_on_ACR_Check</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Asset_Record_Update_Error_Msg</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Active__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Active__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Scheme_Remarks__c</field>
+            <value>
+                <elementReference>AssetSchemeRemarks</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Asset</object>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_to_Invoke_Loyalty_Status_SMS</targetReference>
+        </connector>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>ErrorLogRecordTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>012Mo000000Tlht</stringValue>
+        </value>
+    </variables>
+</Flow>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Important information</masterLabel>
+    <promptVersions>
+        <actionButtonLabel>View KIQ/Nat Memo</actionButtonLabel>
+        <actionButtonLink>https://qantas.lightning.force.com/articles/Knowledge/National-Memo-16-31-May-2025</actionButtonLink>
+        <body>&lt;p&gt;Test - Flight delay due to...&lt;/p&gt;</body>
+        <customApplication>Qantas_Customer_Connect_20</customApplication>
+        <delayDays>1</delayDays>
+        <description>Pop up for QCC users to read urgent information KIQ/NM</description>
+        <dismissButtonLabel>Dismiss</dismissButtonLabel>
+        <displayPosition>TopCenter</displayPosition>
+        <displayType>FloatingPanel</displayType>
+        <endDate>2025-06-17</endDate>
+        <experience>Lightning</experience>
+        <imageAltText>kb</imageAltText>
+        <imageLocation>Left</imageLocation>
+        <isPublished>true</isPublished>
+        <masterLabel>Important information</masterLabel>
+        <publishedDate>2025-06-16</publishedDate>
+        <shouldDisplayActionButton>true</shouldDisplayActionButton>
+        <shouldIgnoreGlobalDelay>true</shouldIgnoreGlobalDelay>
+        <startDate>2025-06-16</startDate>
+        <themeColor>Theme3</themeColor>
+        <themeSaturation>Dark</themeSaturation>
+        <timesToDisplay>10</timesToDisplay>
+        <title>Important information</title>
+        <uiFormulaRule>
+            <criteria>
+                <leftValue>{!$Permission.CustomPermission.QCC_Receive_Service_Delivery_Messages}</leftValue>
+                <operator>EQUAL</operator>
+                <rightValue>TRUE</rightValue>
+            </criteria>
+        </uiFormulaRule>
+        <userAccess>SpecificPermissions</userAccess>
+        <userProfileAccess>Everyone</userProfileAccess>
+        <versionNumber>1</versionNumber>
+    </promptVersions>
+</Prompt>

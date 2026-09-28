@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Description_to_100_characters</fullName>
+    <active>true</active>
+    <description>Description field restriction on recovery not to contain more than 100 characters</description>
+    <errorConditionFormula>(LEN(Description__c) &gt; 100) &amp;&amp; RecordType.DeveloperName = &apos;Customer_Connect&apos;</errorConditionFormula>
+    <errorDisplayField>Description__c</errorDisplayField>
+    <errorMessage>100 character limit has been exceeded. Reduce recovery description to 100 characters or less.</errorMessage>
+</ValidationRule>

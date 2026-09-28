@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>close duplicate freight cases.</description>
+        <name>Invoke_freight_Close_Duplicate_Cases_Apex_method</name>
+        <label>Invoke freight Close Duplicate Cases Apex method</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>FreightEmailMessageCloseDuplicateCases</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emails</name>
+            <value>
+                <elementReference>objEmailMessage</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>FreightEmailMessageCloseDuplicateCases</nameSegment>
+    </actionCalls>
+    <apiVersion>60.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>EmailMessageFreightDuplicateCheck(Platform change)</description>
+    <environments>Default</environments>
+    <interviewLabel>EmailMessageFreightDuplicateFlow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>EmailMessageFreightDuplicateCheck</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Invoke_freight_Close_Duplicate_Cases_Apex_method</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>object Email Message</description>
+        <name>objEmailMessage</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>EmailMessage</objectType>
+    </variables>
+</Flow>

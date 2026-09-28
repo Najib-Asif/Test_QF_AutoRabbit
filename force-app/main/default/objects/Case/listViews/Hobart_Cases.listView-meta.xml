@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hobart_Cases</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>Group__c</columns>
+    <columns>Category__c</columns>
+    <columns>Sub_Category__c</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>Due_Date__c</columns>
+    <columns>No_of_Days_Case_is_Due_In__c</columns>
+    <columns>Created_By_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notContain</operation>
+        <value>close,rejected,completed</value>
+    </filters>
+    <filters>
+        <field>Owner_City__c</field>
+        <operation>equals</operation>
+        <value>Hobart</value>
+    </filters>
+    <label>Hobart Cases</label>
+    <sharedTo>
+        <group>Hobart_Delegation_Group</group>
+        <role>QF_QDC_OM</role>
+        <role>QF_QDC_OM_HBA_TL</role>
+    </sharedTo>
+</ListView>

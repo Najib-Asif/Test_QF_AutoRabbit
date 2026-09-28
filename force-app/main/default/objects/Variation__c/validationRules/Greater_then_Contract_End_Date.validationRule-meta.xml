@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Greater_then_Contract_End_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>Contract_End_Date__c  &lt;  Contract_Agreement__r.Contract_End_Date__c</errorConditionFormula>
+    <errorDisplayField>Contract_End_Date__c</errorDisplayField>
+    <errorMessage>Extension end date needs to be greater than the contract end date</errorMessage>
+</ValidationRule>

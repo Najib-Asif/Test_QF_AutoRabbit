@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>QCC_BlankLetterhead</letterhead>
+    <name>QCC_APPRCanadian_Template</name>
+    <style>freeForm</style>
+    <subject>Qantas Customer Care - {!Case.CaseNumber}</subject>
+    <textOnly>Ref No: {!Case.CaseNumber}
+
+
+
+Dear {!Case.First_Name__c},
+
+
+Delay/Cancellation
+
+I would like to apologise on behalf of Qantas for the &lt;cancellation/extended delay&gt; of your journey to {!Case.Arrival_City__c} when flight {!Case.Flight_Number__c} was &lt;delayed/cancelled&gt;.
+
+
+
+&lt;Delays/Cancellations&gt; frustrate us all. However, the safety of our passengers and people will always be our first priority and will always come before schedule. We do understand the impact this had on passengers so your patience throughout this situation has truly been appreciated.
+
+
+If eligible for payment of delay/cancellation compensation add:-
+
+In assessing your claim for compensation  in relation to the Canadian Air Passenger Protection Regulation SOR/2019-150, as {!Case.Flight_Number__c}  was initially &lt;delayed/cancelled&gt; over &lt;insert time of delay or remove for cancellation&gt;, it has been determined that you are eligible for &lt;compensation amount&gt; per person.
+
+
+-If eligible for payment of delay/cancellation compensation and ticket refund add:-
+
+Because you elected not to continue with your travel and receive(d) a refund, the compensation payable is per person. Refund of the air ticket will be made to the original form of payment that was used for the air ticket.
+
+
+-if ineligible for claim for delay/cancellation compensation add:-
+
+In assessing your claim for compensation in relation to the Canadian Air Passenger Protection Regulation SOR/2019-150 (APPR), as {!Case.Flight_Number__c} was delayed/cancelled for reason outside of Qantas&apos; control, it has been determined that you are not eligible for compensation under the APPR because [insert reason: {!Case.Flight_Number__c} was &lt;delayed/cancelled&gt; for &lt;reason outside of Qantas&apos; control OR {!Case.Flight_Number__c} was delayed/cancelled for &lt;reason outside of Qantas&apos; control / your arrival at your final destination was delayed by less than three hours].
+
+
+Denied Boarding ONLY
+
+Customer receiving payment of denied boarding where airports where not able to process add:-
+
+I would like to apologise on behalf of Qantas that you were unable to travel on your planned journey to {!Case.Arrival_City__c}  on flight {!Case.Flight_Number__c}.
+
+
+
+Under the Canadian Air Passenger Protection Regulation SOR/2019-150, it has been determined that you are eligible for &lt;compensation amount&gt; per person.
+
+
+
+
+
+Payment of compensation
+
+- if compensation is being paid add:-
+
+
+The compensation will be paid to the eligible customer and directly into your nominated bank account. Please complete the attached Customer Care payment form. This can take up to two weeks to finalise.
+
+
+
+Kind regards
+
+{!User.FirstName}
+
+Qantas Customer Care
+
+
+
+
+{!Case.Thread_Token}
+
+Qantas Airways Limited, ABN 16 009 661 901
+
+10 Bourke Road Mascot NSW 2020 Australia
+
+
+
+***************************** PLEASE CONSIDER OUR ENVIRONMENT BEFORE PRINTING *****************************
+
+*********************************************** Confidentiality and Privilege Notice **********************************************
+
+This e-mail is intended only to be read or used by the addressee. It is confidential and may contain legally privileged information. If you are not the addressee indicated in this message (or responsible for delivery of the message to such person), you may not copy or deliver this message to anyone, and you should destroy this message and kindly notify the sender by reply e-mail. Confidentiality and legal privilege are not waived or lost by reason of mistaken delivery to you. Qantas Airways Limited ABN 16 009 661 901
+
+***************************************************************************************************************************************</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case$Origin</field>
+    </columns>
+    <columns>
+        <field>Case$Status</field>
+    </columns>
+    <columns>
+        <field>Case.CaseComments$CreatedBy</field>
+    </columns>
+    <columns>
+        <field>Case$Booking_PNR__c</field>
+    </columns>
+    <columns>
+        <field>Case.CaseComments$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case.CaseComments$CommentBody</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>CCR0259 - Call Data For Cancellations. This report is based on the same filters applied in the complaint report but uses the agent comments. 
+Filter - comments contains - 24 hours, cancel for any reason, cancelled within</description>
+    <filter>
+        <criteriaItems>
+            <column>Case$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Voice</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.CaseComments$CreatedBy</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>QCC API Integration user</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.CaseComments$CommentBody</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>24 hours,cancel for any reason,canceled within</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Cancel For Any Reason Complaints - Voice</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Comments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <endDate>2026-06-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2025-07-01</startDate>
+    </timeFrameFilter>
+</Report>

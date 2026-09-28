@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Set_Customer_Response</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Set Customer Response</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>if({!ISPICKVAL( Proposal__c.Status__c , &apos;Approval Required- Customer&apos;)}){
+     window.location.href=&quot;/apex/Aprove_reject_Proposal?id={!Proposal__c.Id}&quot;;
+}else{
+  alert(&quot;Proposal not available for Approve/Reject!&quot;);
+}</url>
+</WebLink>

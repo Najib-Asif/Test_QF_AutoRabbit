@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>AccountRelationship_Active_flag_Inactive</fullName>
+        <description>Update Account Relationship Active flag to Inactive</description>
+        <field>Active__c</field>
+        <literalValue>0</literalValue>
+        <name>AccountRelationship Active flag Inactive</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Search_Fields_on_Account_Relation</fullName>
+        <description>This will store the text content of the account relation record .
+to facilitate all field search.</description>
+        <field>Search_Helper__c</field>
+        <formula>&apos;Rel rel re Re &apos;&amp; 
+Name &amp;&apos; &apos;&amp; 
+Primary_Account_f__c &amp;&apos; &apos;&amp;
+TEXT(Relationship__c) &amp; &apos; &apos;&amp; 
+Related_Account_f__c</formula>
+        <name>Update Search Fields on Account Relation</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Update Account Relationship to Inactive</fullName>
+        <active>true</active>
+        <description>When End Date&gt; Today, update Account Relationship Active flag to Inactive</description>
+        <formula>AND ( 
+Active__c = TRUE, 
+NOT ( ISNULL ( End_Date__c))
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>AccountRelationship_Active_flag_Inactive</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Account_Relation__c.End_Date__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Update Account Relationship to Inactive Today</fullName>
+        <actions>
+            <name>AccountRelationship_Active_flag_Inactive</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>When End Date = Today, update Account Relationship Active flag to Inactive</description>
+        <formula>AND ( 
+Active__c = TRUE, 
+NOT ( ISNULL ( End_Date__c)),
+ End_Date__c &lt;= Today ()
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Search Helper Field</fullName>
+        <actions>
+            <name>Update_Search_Fields_on_Account_Relation</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>True</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

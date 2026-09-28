@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount_Charged_Original__c</fullName>
+    <label>Amount Charged.Original</label>
+    <summarizedField>CASS_Billing__c.Amount_Charged__c</summarizedField>
+    <summaryFilterItems>
+        <field>CASS_Billing__c.Charges__c</field>
+        <operation>equals</operation>
+        <value>Original</value>
+    </summaryFilterItems>
+    <summaryForeignKey>CASS_Billing__c.CASS_Request__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

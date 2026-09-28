@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheme_Number_f__c</fullName>
+    <externalId>false</externalId>
+    <formula>Scheme_Number_auto__c &amp;
+TEXT(mod(10-mod(
+			IF( VALUE(MID(Scheme_Number_auto__c ,1,1))*2 &gt; 9,
+				MOD(VALUE(MID(Scheme_Number_auto__c ,1,1))*2,10) + 1,
+				VALUE(MID(Scheme_Number_auto__c ,1,1))*2
+			) +
+			IF( VALUE(MID(Scheme_Number_auto__c ,3,1))*2 &gt; 9,
+				MOD(VALUE(MID(Scheme_Number_auto__c ,3,1))*2,10) + 1,
+				VALUE(MID(Scheme_Number_auto__c ,3,1))*2
+			) +
+			IF( VALUE(MID(Scheme_Number_auto__c ,5,1))*2 &gt; 9,
+				MOD(VALUE(MID(Scheme_Number_auto__c ,5,1))*2,10)+1,
+				VALUE(MID(Scheme_Number_auto__c ,5,1))*2
+			) +
+			IF( VALUE(MID(Scheme_Number_auto__c ,7,1))*2 &gt; 9,
+				MOD(VALUE(MID(Scheme_Number_auto__c ,7,1))*2,10)+1,
+				VALUE(MID(Scheme_Number_auto__c ,7,1))*2
+			) +
+			IF( VALUE(MID(Scheme_Number_auto__c ,9,1))*2 &gt; 9,
+				MOD(VALUE(MID(Scheme_Number_auto__c ,9,1))*2,10)+1,
+				VALUE(MID(Scheme_Number_auto__c ,9,1))*2
+			) +
+				VALUE(MID(Scheme_Number_auto__c ,2,1)) +
+				VALUE(MID(Scheme_Number_auto__c ,4,1)) +
+				VALUE(MID(Scheme_Number_auto__c ,6,1)) +
+				VALUE(MID(Scheme_Number_auto__c ,8,1))
+	,10)
+,10))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Scheme Number (System)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

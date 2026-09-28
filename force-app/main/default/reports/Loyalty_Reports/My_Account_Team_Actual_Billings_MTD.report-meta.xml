@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.Contracts__r.Excos__r$Program_Code__c</field>
+    </columns>
+    <columns>
+        <field>Account.Contracts__r.Excos__r$Partner_Code__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Contracts__r.Excos__r.Exco_Line_Items__r$Points_Value__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Contracts__r.Excos__r.Exco_Line_Items__r$Points__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <format>Summary</format>
+    <name>My Account Team Actual Billings MTD</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_Exco_Information__c</reportType>
+    <scope>accountteam</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account.Contracts__r.Excos__r.Exco_Line_Items__r$Points_Date__c</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

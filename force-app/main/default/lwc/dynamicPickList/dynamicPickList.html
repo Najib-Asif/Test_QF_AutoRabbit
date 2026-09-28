@@ -1,0 +1,34 @@
+<template>
+    <div class="slds-m-bottom_small" style="position: relative;">
+        <!-- Input field with custom arrow icon -->
+        <label class="slds-form-element__label" for="autocompleteInput">
+            <template if:true={required}>
+                <abbr class="slds-required" title="required">* </abbr>
+            </template>
+            {label}
+        </label>
+
+        <div class="slds-form-element__control">
+            <input
+                id="autocompleteInput"
+                name="input"
+                list="dynamicOptions"
+                placeholder={placeholder}
+                required={required}
+                class="slds-input"
+                type="text"
+                value={inputValue}
+                onchange={handleInputChange}
+                onkeypress={handleInputChange}
+                oninput={handleSelectCurrency}
+            />
+
+            <!-- Datalist for dynamic options -->
+            <datalist class="dynamic-options" id="dynamicOptions" >
+                <template for:each={filteredOptions} for:item="option">
+                    <option key={option} value={option}></option>
+                </template>
+            </datalist>
+        </div>
+    </div>
+</template>

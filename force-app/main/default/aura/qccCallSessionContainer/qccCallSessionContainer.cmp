@@ -1,0 +1,7 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes" access="global">
+    <aura:handler name="change" value="{!v.recordId}" action="{!c.onRecordIdChange}"/>
+    <c:qccCallSession recordId="{!v.recordId}"  />
+    <div>
+            <p>The current recordId is {!v.recordId}.</p>    
+    </div>
+</aura:component>

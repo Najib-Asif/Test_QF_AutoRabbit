@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SHR_QIS_Support_Services_Case</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>QCI_f__c</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>On_hold_Reason__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>QL_Previous_Case_Owner__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Enquiry</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>New,On Hold,Reopened,Open - Pending Investigation</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.SHR_QIS_Sales_Support</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>contains</operation>
+        <value>SHR QIS Support Services,Donna Hill,Stefanie Reynolds,Rachael Flood,Luca More,Emily Macpherson,Mook Simaraks</value>
+    </filters>
+    <filters>
+        <field>CASES.ORIGIN</field>
+        <operation>equals</operation>
+        <value>SHR QIS Sales Support</value>
+    </filters>
+    <label>SHR QIS Support Services</label>
+    <sharedTo>
+        <group>QAC_Deal_Support_Access</group>
+        <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support_Deal_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

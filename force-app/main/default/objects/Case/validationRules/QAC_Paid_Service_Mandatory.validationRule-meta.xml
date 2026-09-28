@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Paid_Service_Mandatory</fullName>
+    <active>false</active>
+    <description>CRM-4031 :  Service Fee Waiver &amp; Paid Service</description>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName ==&quot;QIC_Service_request&quot;,
+ISPICKVAL(Account.BillingCountryCode,&quot;AU&quot;),
+$Setup.EnableValidationRule__c.VR_QAC_Mandate_Paid_Service__c =False,
+ISPICKVAL(Status,&quot;Closed&quot;),
+ISPICKVAL (Service_Fee_Applies__c, &quot;Yes - Apply&quot;),
+Paid_Service__c = FALSE)</errorConditionFormula>
+    <errorDisplayField>Paid_Service__c</errorDisplayField>
+    <errorMessage>Please select the Paid Service if the Service Fee Applies is &quot;Yes - Apply&quot; for AU Consultants</errorMessage>
+</ValidationRule>

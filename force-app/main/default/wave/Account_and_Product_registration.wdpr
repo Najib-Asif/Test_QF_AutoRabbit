@@ -1,0 +1,91 @@
+{
+  "version" : "57.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Type", "RecordTypeId", "BillingState", "Industry", "ABN_Tax_Reference__c", "Aquire_Company_Name__c", "Aquire_Eligibility_f__c", "Aquire_Eligibility_l__c", "Aquire_Entity_Type__c", "Aquire_Override__c", "Aquire__c", "Contracted__c", "Country_f__c", "Airline_Level__c", "Membership_Number__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Account",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Account"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET2" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Product_Reg",
+        "rightKeys" : [ "Account__c" ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "RecordTypeId", "Account__c", "AMEX_Choice__c", "Acquire_Country__c", "Acquire_Number_of_employees__c", "Acquire_State_Province__c", "Acquire_Zip_Postal_Code__c", "Aquire_Entity_Name__c", "Aquire_Entity_Type__c", "Aquire_ID__c", "Aquire_Membership_Start_Date__c", "Enrolment_Date__c", "Membership_Number__c", "Program_Business_Name__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Product_Registration__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Product_Registration__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Account",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Product_Registration__c",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

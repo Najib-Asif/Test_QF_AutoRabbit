@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QIS_Leads</fullName>
+    <booleanFilter>1 OR 2 OR 3</booleanFilter>
+    <columns>FULL_NAME</columns>
+    <columns>LEAD.COMPANY</columns>
+    <columns>LEAD.STATE_CODE</columns>
+    <columns>LEAD.EMAIL</columns>
+    <columns>LEAD.STATUS</columns>
+    <columns>LEAD.CREATED_DATE</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>LEAD.UNREAD</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATEDBY_USER.ALIAS</field>
+        <operation>equals</operation>
+        <value>,BENJAMIN,Charlee,Donna,EMILY,BecD,Rory,SEAN</value>
+    </filters>
+    <filters>
+        <field>CREATEDBY_USER.ALIAS</field>
+        <operation>equals</operation>
+        <value>,Iris,JAMES,Kellie,kwils,Martyne,Matthew,Stephani</value>
+    </filters>
+    <filters>
+        <field>CREATEDBY_USER.ALIAS</field>
+        <operation>equals</operation>
+        <value>MAUREEN,ndean,panto,REBECCA,YAELLE</value>
+    </filters>
+    <label>QIS Leads</label>
+    <sharedTo>
+        <role>QF_DOM_Sales_SME_QIS</role>
+        <role>QF_DOM_Sales_SME_QIS_Sr_Manager</role>
+    </sharedTo>
+</ListView>

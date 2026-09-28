@@ -1,0 +1,67 @@
+<aura:component controller="QL_AquireAmexsection" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:handler name="init" action="{!c.Initfunction}" value="{!this}" />
+    <aura:attribute name="value" type="Account" />
+ 
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            
+            <br></br>
+            <div class="slds-grid slds-gutters">         
+                <div class="slds-col slds-border_right" style="width : 50%">
+                    <div class="slds-m-bottom_x-small">
+                        <p style="font-weight: bold">QBR</p>
+                    </div>
+                    <table style="width:100%">
+                        
+                        <tr>
+                            <td>QBR:</td>
+                            <td><ui:outputCheckbox aura:id="my-checkbox-output" value="{!v.value.Aquire_System__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Airline Level:</td>
+                            <td>{!v.value.Airline_Level__c}</td>
+                        </tr>                       
+                       <tr>
+                            <td>Airline Eligibility:</td>
+                            <td>{!v.value.Aquire_Eligibility_f__c}</td>
+                        </tr>
+                        <tr>
+                            <td>QBR Override:</td>
+                            <td>{!v.value.Aquire_Override__c}</td>
+                        </tr>                        
+                        <tr>
+                            <td>Enrolment Date:</td>
+                            <td > <ui:outputDate value="{!v.value.Aquire_Enrollment_Date_System__c}"/> </td>
+                        </tr>
+                        <tr>
+                            <td>Non-eligible reason:</td>
+                            <td>{!v.value.Primary_Reason_Not_Eligible__c}</td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div class="slds-col">
+                    <div class="slds-m-bottom_x-small">
+                        <p style="font-weight: bold">AMEX</p>
+                    </div>
+                    <table>                        
+                        <tr>
+                            <td>AMEX:</td>
+                            <td><ui:outputCheckbox aura:id="my-checkbox-output" value="{!v.value.AMEX__c}"/></td>
+                        </tr>     
+                      <tr>
+                            <td>Process Status:</td>
+                            <td>{!v.value.Product_Registrations__r[0].Process_Status__c}</td>
+                      </tr>   
+                      <tr>
+                            <td>Accept/Reject Code:</td>
+                            <td>{!v.value.Product_Registrations__r[0].AMEX_Accept_or_Reject_Code__c}</td>
+                      </tr>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    </article>      
+</aura:component>

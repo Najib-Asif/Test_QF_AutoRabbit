@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Chatter_Post</name>
+        <label>Chatter Post</label>
+        <locationX>160</locationX>
+        <locationY>974</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Check_Chatter_Notification_to_Case_owner_for_Approved_Cases</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ChatterMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Chatter_Post_for_Approved_Cases</name>
+        <label>Chatter Post for Approved Cases</label>
+        <locationX>50</locationX>
+        <locationY>1358</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ChatterPostforApprovedCasesMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Chatter_Post_for_Rejected_Cases</name>
+        <label>Chatter Post for Rejected Cases</label>
+        <locationX>314</locationX>
+        <locationY>1358</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ChatterPostforRejectedCasesMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Post_to_Case_Creator</name>
+        <label>Post to Case Creator</label>
+        <locationX>578</locationX>
+        <locationY>1358</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ChatterPostToCaseCreatorMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <constants>
+        <name>ValidCountryCode</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>AG,AR,BO,BR,BS,BZ,CA,CL,CO,CU,DM,DO,EC,GD,GT,GY,HN,HT,JM,KN,LC,MX,NI,PE,PY,SR,TT,US,UY,VC,VE</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <name>ADM_ACM_Greater_Than_1000</name>
+        <label>ADM ACM Greater Than 1000</label>
+        <locationX>292</locationX>
+        <locationY>866</locationY>
+        <defaultConnector>
+            <targetReference>Check_Chatter_Notification_to_Case_owner_for_Approved_Cases</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Greater_Than_1000</name>
+            <conditionLogic>1 AND ((2 AND 3) OR (NOT(2) AND 4))</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Process_Instance_Node_Name</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.ACM_Value__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>1000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Process_Instance_Node_Name.ProcessNodeName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Level 3 Approval</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Process_Instance_Node_Name.ProcessNodeName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Level 2 Approval</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Chatter_Post</targetReference>
+            </connector>
+            <label>Greater Than 1000</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>migrated from Case Close Status Notification to Case Owner via Chatter process builder</description>
+        <name>Check_Chatter_Notification_to_Case_owner_for_Approved_Cases</name>
+        <label>Check Chatter Notification to Case owner for Approved Cases</label>
+        <locationX>446</locationX>
+        <locationY>1250</locationY>
+        <defaultConnectorLabel>FALSE Chatter Notification to Case owner for Approved Cases</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Chatter_Notification_to_Case_owner_for_Approved_Cases</name>
+            <conditionLogic>1 AND  (2 OR 3) AND 4</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>QIC_Service_request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Group Waivers</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>SBT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Approval_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Chatter_Post_for_Approved_Cases</targetReference>
+            </connector>
+            <label>TRUE Chatter Notification to Case owner for Approved Cases</label>
+        </rules>
+        <rules>
+            <name>TRUE_Chatter_Notification_to_Case_owner_for_Rejected_Cases</name>
+            <conditionLogic>1 AND  (2 OR 3) AND 4</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>QIC_Service_request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Group Waivers</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>SBT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Approval_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reject</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Chatter_Post_for_Rejected_Cases</targetReference>
+            </connector>
+            <label>TRUE Chatter Notification to Case owner for Rejected Cases</label>
+        </rules>
+        <rules>
+            <name>TRUE_Notify_User_when_ADM_case_is_moved_to_Closed_Approved_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>QIC_Service_request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Commercial Waiver (non BART)</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Problem_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Internal - ADM/ACM</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue> Closed-Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Post_to_Case_Creator</targetReference>
+            </connector>
+            <label>TRUE Notify User when ADM case is moved to Closed Approved Status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Condition_To_Post_Approval_Chatter</name>
+        <label>Condition To Post Approval Chatter</label>
+        <locationX>446</locationX>
+        <locationY>650</locationY>
+        <defaultConnector>
+            <targetReference>Check_Chatter_Notification_to_Case_owner_for_Approved_Cases</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Post_Approval_Chatter</name>
+            <conditionLogic>1 AND 2 AND 3 AND 4 AND 5 AND (6 OR 7) AND 8</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.Problem_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Internal - ADM/ACM</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Process_Instance_Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.AccountId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>ValidCountryCode</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>objNewCase.Account.BillingCountry</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Approval_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objOldCase.Approval_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>objNewCase.Approval_Status__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Mandy_Morrissey_User_Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Process_Instance_Node_Name</targetReference>
+            </connector>
+            <label>Post Approval Chatter</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Entry criteria to send QAC Notification to SQS</description>
+        <name>Criteria_For_Sending_QAC_Notification</name>
+        <label>Criteria For Sending QAC Notification</label>
+        <locationX>446</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>Get_Mandy_Morrissey_User_Id</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Send_QAC_Notification</name>
+            <conditionLogic>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8 AND NOT(9)</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>QIC_Service_request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.AccountId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Account.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Agency Account</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Account.Qantas_Industry_Centre_ID__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>SBT</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Group Waivers</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Service Request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Commercial Waiver (non BART)</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Problem_Type__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Internal</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_QAC_Notification</targetReference>
+            </connector>
+            <label>Send QAC Notification</label>
+        </rules>
+    </decisions>
+    <description>migrated from QAC Request Country and Paid Service for AU process builder(Platform change)</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>QICServiceRequestCasePriorityHighCalculation</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(
+NOT(ISBLANK({!objNewCase.AccountId})),
+AND(
+{!objNewCase.RecordType.DeveloperName} = &quot;QIC_Service_request&quot;,
+NOT(CONTAINS(TEXT({!objNewCase.Status}), &apos;Closed&apos;)),
+{!objNewCase.Account.RecordType.DeveloperName} =&quot;Agency_Account&quot;,
+OR( 
+CONTAINS({!objNewCase.Account_Tier__c}, &quot;Platinum&quot;),
+ISPICKVAL({!objNewCase.Customer_Tier__c} , &quot;CL&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;PO&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;PL&quot;), 
+AND(
+{!objNewCase.Travel_expected_date__c} &lt;= 3, 
+{!objNewCase.Travel_expected_date__c} &gt;0
+),
+AND(
+{!objNewCase.No_of_Days_for_Ticketing__c} &lt;= 3 ,
+{!objNewCase.No_of_Days_for_Ticketing__c} &gt; 0 
+)
+)
+),
+FALSE
+)</expression>
+    </formulas>
+    <formulas>
+        <name>QICServiceRequestCasePriorityLowCalculation</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(
+NOT(ISBLANK({!objNewCase.AccountId})),
+AND( 
+{!objNewCase.RecordType.DeveloperName} = &quot;QIC_Service_request&quot;,
+NOT(CONTAINS( TEXT({!objNewCase.Status} ), &apos;Closed&apos;)),
+{!objNewCase.Account.RecordType.DeveloperName} =&quot;Agency_Account&quot;,
+OR( 
+CONTAINS(({!objNewCase.Account_Tier__c}), &quot;Bronze&quot;),
+CONTAINS(({!objNewCase.Account_Tier__c}), &quot;White&quot;)
+), 
+NOT(CONTAINS({!objNewCase.Account_Tier__c}, &quot;Platinum&quot;)),
+NOT(CONTAINS({!objNewCase.Account_Tier__c}, &quot;Gold&quot;)), 
+NOT(CONTAINS({!objNewCase.Account_Tier__c}, &quot;Silver&quot;)), 
+OR( 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;GD&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;SL&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;BR-NON&quot;) 
+), 
+OR( 
+ISNULL({!objNewCase.Travel_expected_date__c}), 
+{!objNewCase.Travel_expected_date__c} &gt;3,
+{!objNewCase.Travel_expected_date__c} &lt;0
+), 
+OR( 
+ISNULL({!objNewCase.No_of_Days_for_Ticketing__c}), 
+{!objNewCase.No_of_Days_for_Ticketing__c} &gt;3 ,
+{!objNewCase.No_of_Days_for_Ticketing__c} &lt;0 
+), 
+OR( 
+NOT(ISPICKVAL({!objNewCase.Customer_Tier__c},&quot;CL&quot;)), 
+NOT(ISPICKVAL({!objNewCase.Customer_Tier__c},&quot;PO&quot;)), 
+NOT(ISPICKVAL({!objNewCase.Customer_Tier__c},&quot;PL&quot;)) 
+) 
+),
+FALSE
+)</expression>
+    </formulas>
+    <formulas>
+        <name>QICServiceRequestCasePriorityMediumCalculation</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(
+NOT(ISBLANK({!objNewCase.AccountId})),
+AND(
+{!objNewCase.RecordType.DeveloperName} = &quot;QIC_Service_request&quot;, 
+NOT(CONTAINS( TEXT({!objNewCase.Status} ), &apos;Closed&apos;)),
+{!objNewCase.Account.RecordType.DeveloperName} =&quot;Agency_Account&quot;,
+OR( 
+CONTAINS({!objNewCase.Account_Tier__c}, &quot;Gold&quot;),
+CONTAINS({!objNewCase.Account_Tier__c}, &quot;Silver&quot;)
+), 
+NOT(CONTAINS({!objNewCase.Account_Tier__c}, &quot;Platinum&quot;)),
+NOT(CONTAINS({!objNewCase.Account_Tier__c}, &quot;Bronze&quot;)), 
+NOT(CONTAINS({!objNewCase.Account_Tier__c}, &quot;White&quot;)), 
+OR( 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;GD&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;SL&quot;), 
+ISPICKVAL({!objNewCase.Customer_Tier__c}, &quot;BR-NON&quot;) 
+), 
+OR( 
+ISNULL({!objNewCase.Travel_expected_date__c}), 
+{!objNewCase.Travel_expected_date__c} &gt;3,
+{!objNewCase.Travel_expected_date__c} &lt;0
+), 
+OR( 
+ISNULL({!objNewCase.No_of_Days_for_Ticketing__c}), 
+{!objNewCase.No_of_Days_for_Ticketing__c} &gt;3 ,
+{!objNewCase.No_of_Days_for_Ticketing__c} &lt;0 
+), 
+OR( 
+NOT(ISPICKVAL({!objNewCase.Customer_Tier__c},&quot;CL&quot;)), 
+NOT(ISPICKVAL({!objNewCase.Customer_Tier__c},&quot;PO&quot;)), 
+NOT(ISPICKVAL({!objNewCase.Customer_Tier__c},&quot;PL&quot;)) 
+) 
+),
+FALSE
+)</expression>
+    </formulas>
+    <interviewLabel>CaseAfterTriggerSubFlow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-OtherRecordTypeQACRequestCountryandPaidServiceforAU</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>To create QAC Notification record.</description>
+        <name>Create_QAC_Notification</name>
+        <label>Create QAC Notification</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <connector>
+            <targetReference>Get_Mandy_Morrissey_User_Id</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>CreatedDate__c</field>
+            <value>
+                <elementReference>objNewCase.CreatedDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>External_System_Reference_Id__c</field>
+            <value>
+                <elementReference>objNewCase.External_System_Reference_Id__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Id__c</field>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LastModifiedDate__c</field>
+            <value>
+                <elementReference>objNewCase.LastModifiedDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>QAC_Case_Notification__e</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Mandy_Morrissey_User_Id</name>
+        <label>Get Mandy Morrissey User Id</label>
+        <locationX>446</locationX>
+        <locationY>434</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Process_Instance_Id</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FirstName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Mandy</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>LastName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Morrissey</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Process_Instance_Id</name>
+        <label>Get Process Instance Id</label>
+        <locationX>446</locationX>
+        <locationY>542</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Condition_To_Post_Approval_Chatter</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>TargetObjectId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Approved</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ProcessInstance</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Status</queriedFields>
+        <sortField>CreatedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Process_Instance_Node_Name</name>
+        <label>Get Process Instance Node Name</label>
+        <locationX>292</locationX>
+        <locationY>758</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ADM_ACM_Greater_Than_1000</targetReference>
+        </connector>
+        <filterLogic>1 AND (2 OR 3) AND 4</filterLogic>
+        <filters>
+            <field>ProcessInstanceId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Process_Instance_Id.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>ProcessNodeName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Level 2 Approval</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ProcessNodeName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Level 3 Approval</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>NodeStatus</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Approved</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ProcessInstanceNode</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>ProcessNodeName</queriedFields>
+        <sortField>CreatedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>320</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Criteria_For_Sending_QAC_Notification</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>ChatterMessage</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>@[{!Get_Mandy_Morrissey_User_Id}], please note {!objNewCase.CaseNumber} created by {!objNewCase.CreatedBy.FirstName} {!objNewCase.CreatedBy.LastName} has been approved for ADM/ACM for {!objNewCase.Account.Qantas_Industry_Centre_ID__c}.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ChatterPostforApprovedCasesMsg</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Hi @&lt;span style=&quot;color: rgb(68, 68, 68);&quot;&gt;{!objNewCase.Owner:User.Id},&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Request has been Approved Successfully.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Thanks&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ChatterPostforRejectedCasesMsg</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Hi @{!objNewCase.Owner:User.Id},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Request was rejected by the Approver.&amp;nbsp;Please check&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Thanks&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ChatterPostToCaseCreatorMsg</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Hi @{!objNewCase.CreatedBy.Id},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Case:{![Case].CaseNumber} has been Closed. Thanks.&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

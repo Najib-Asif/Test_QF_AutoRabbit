@@ -1,0 +1,139 @@
+<aura:component controller="QCC_RecoveryController_CC" implements="flexipage:availableForRecordHome,force:lightningQuickActionWithoutHeader,force:hasRecordId">
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+   	
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="myval" type="Integer"/>	
+    <aura:attribute name="minval" type="Integer"/>	
+    <aura:attribute name="maxval" type="Integer"/>
+    <aura:attribute name="type" default="none" type="String"/>
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <force:recordData aura:id="recordLoader"
+      recordId="{!v.recordId}"
+      layoutType="FULL"
+      fields="Status__c,Suggested_Minimum__c,Suggested_Maximum__c,Amount__c"
+      targetRecord="{!v.record}"
+      targetFields="{!v.simpleRecord}"
+      targetError="{!v.recordError}"                   
+      recordUpdated="{!c.handleRecordUpdated}"
+      />
+	
+    <lightning:spinner aura:id="mySpinner" class="slds-hide" variant="brand" alternativeText="Fetching Data..." />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <!-- Display a header with details about the record -->
+    <div class="slds-card slds-section section-extra">
+        <h3 class="slds-section__title title-margin">
+            <span class="slds-truncate" title="Section Title">Suggested Recovery</span>
+        </h3>
+        <div aura:id="case1" class="slds-grid slds-hide">
+            <div class="slds-col">
+                
+                <p class="slds-text-body--label">Qantas Points</p>
+                
+            </div>
+            
+            <div aura:id="slider" class="slds-form-element slds-col slds-hide">
+                <lightning:slider step="100" min="{!v.simpleRecord.Suggested_Minimum__c}" max="{!v.simpleRecord.Suggested_Maximum__c}" value="{!v.myval}"/>
+            </div>
+            
+            <div class="slds-form-element slds-col">
+                
+                <!-- <button class="slds-button slds-section__title-action ff-button" label="Accept" onclick="{!c.getValueFromSlider}">Accept</button> -->
+                <ui:button aura:id="button1" disabled="" buttonTitle="Accept Suggested Recovery" class="slds-button_brand cls-submit-btn" label="Accept Suggested Recovery" press="{!c.getValueFromSlider}"/>
+            </div>
+            
+        </div>
+        <div aura:id="case2" class="slds-grid slds-hide" >
+            <div class="slds-col"><p>No Suggested Recovery available</p></div>
+        </div>
+        <div aura:id="case3" class="slds-grid slds-hide">
+            <div class="slds-col">
+                <p>Apology Letter (No Goodwill)</p>
+            </div>
+            <!--<aura:if isTrue="{!v.accept_button}"> -->
+            <div class="slds-form-element slds-col">
+                <!-- <button class="slds-button slds-section__title-action apology-button" label="Accept" onclick="{!c.getValueFromSlider}">Accept</button> -->
+                <ui:button aura:id="button2" disabled="" buttonTitle="Accept Suggested Recovery" class="slds-button_brand cls-submit-btn" label="Accept Suggested Recovery" press="{!c.getValueFromSlider}"/>
+            </div>
+            <!--</aura:if> -->
+        </div>
+        <div aura:id="case4" class="slds-grid slds-hide" >
+            <div class="slds-col"><p>Suggested Recovery has been provided</p></div>
+        </div>
+        <div class="slds-spinner_container slds-hide" aura:id="spinner">
+            <div class="slds-spinner--brand slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-section slds-is-open" style="display:none;">
+        <h3 class="slds-section__title">
+            <button aria-controls="expando-unique-id2" aria-expanded="true" class="slds-button slds-section__title-action">
+            	<span class="slds-truncate" title="Section Title">Other Recovery</span>
+            </button>
+        </h3>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id2">
+			<div class="slds-page-header" role="banner">
+                <p class="slds-text-body--label">Recovery Type</p>
+        		<h1 class="slds-page-header__title slds-m-right--small
+            		slds-truncate slds-align-center">{!v.simpleRecord.QCC_Other_Recovery_Type__c}</h1><p class="slds-text-body--label">Recovery Value</p><h1 class="slds-page-header__title slds-m-right--small
+            		slds-truncate slds-align-center">{!v.simpleRecord.QCC_Other_Recovery_Value__c}</h1>
+    		</div>            
+        </div>
+    </div>
+    <div class="slds-section slds-is-open" style="display:none;">
+        <h3 class="slds-section__title">
+            <button aria-controls="expando-unique-id3" aria-expanded="true" class="slds-button slds-section__title-action">
+            <span class="slds-truncate" title="Section Title">Financial Recovery</span>
+            </button>
+        </h3>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id3">
+			<div class="slds-page-header" role="banner">
+                <p class="slds-text-body--label">Payment Method</p>
+        		<h1 class="slds-page-header__title slds-m-right--small
+                           slds-truncate slds-align-center">{!v.simpleRecord.QCC_Payment_Method__c}</h1>
+                <p class="slds-text-body--label">Amount</p>
+                <h1 class="slds-page-header__title slds-m-right--small
+                           slds-truncate slds-align-center">{!v.simpleRecord.QCC_Amount__c}</h1>
+                <p class="slds-text-body--label">Payment Details</p>
+                <h1 class="slds-page-header__title slds-m-right--small
+                           slds-truncate slds-align-center">{!v.simpleRecord.QCC_Payment_Details__c}</h1>
+                <p class="slds-text-body--label">Approved by</p>
+                <h1 class="slds-page-header__title slds-m-right--small
+                           slds-truncate slds-align-center">{!v.simpleRecord.QCC_Approved_By__r.Name}</h1>
+    		</div>            
+        </div>
+    </div>
+    <!--<aura:if isTrue="{!v.isOpen}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.closeModal}">
+                        <lightning:icon class="slds-button__icon slds-button__icon_large" variant="inverse" iconName="utility:close" size="small" alternativeText="Close"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirm?</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <p class="slds-text-heading_small">You have chosen {!v.myval}, are you sure you want to proceed?</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick="{!c.closeModal}">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick="{!c.getValueFromSlider}">OK</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+	</aura:if>-->
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            <ui:message title="Error" severity="error" closable="true">
+                {!v.recordError}
+            </ui:message>
+        </div>
+    </aura:if>
+
+</aura:component>

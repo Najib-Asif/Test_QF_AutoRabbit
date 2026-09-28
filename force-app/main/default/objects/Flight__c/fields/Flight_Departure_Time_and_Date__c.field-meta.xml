@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flight_Departure_Time_and_Date__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(RecordType.DeveloperName == &quot;Service_Request&quot; &amp;&amp; NOT(ISBLANK(Flight_Date__c)) &amp;&amp; Departure_Time__c != &quot;&quot;,
+Value(
+IF(
+Month(Flight_Date__c)&lt;10,
+&quot;0&quot;&amp; TEXT(MONTH((Flight_Date__c))),
+TEXT(Month(Flight_Date__c))) &amp;
+IF(
+DAY(Flight_Date__c)&lt;10,
+&quot;0&quot;&amp;TEXT(DAY((Flight_Date__c))),
+TEXT(DAY(Flight_Date__c))) &amp;
+TEXT(Year(Flight_Date__c))
+
+)+ Value(LEFT(Departure_Time__c, 2)) +
+Value(RIGHT(Departure_Time__c, 2)),0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Flight Departure Time and Date</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

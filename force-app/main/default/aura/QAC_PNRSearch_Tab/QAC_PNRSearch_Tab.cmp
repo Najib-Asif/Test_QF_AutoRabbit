@@ -1,0 +1,76 @@
+<!--QAC Project-->
+<aura:component implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes"
+                controller="QAC_PNRSearch_Controller">
+    
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <aura:attribute name="pnrNumber" type="String"/>
+    <aura:attribute name="lastName" type="String"/>
+    <aura:attribute name="caseRec" type="Case" />
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:attribute name="wrapperData" type="object"/>
+    <aura:attribute name="pnrInformation" type="object"/>
+    <aura:attribute name="recordSaveError" type="String" 
+                    description="An error message bound to force:recordData"/>
+    <aura:attribute name="case" type="Object" 
+                    description="The record object to be displayed"/>
+    <aura:attribute name="activeSections" type="List"/>
+    <aura:attribute name="srActiveSections" type="List"/>
+    
+    <aura:attribute name="showFlights" type="boolean" default="false"/>
+    <aura:attribute name="showPassenger" type="boolean" default="false"/>
+    <aura:attribute name="showRecTypeModal" type="boolean" default="false"/>
+    <aura:attribute name="showButtons" type="boolean" default="true"/>
+    <!--CRM-8136 Live PNR Details-->
+    <force:recordData aura:id="recordLoader"
+    recordId="{!v.recordId}"
+    fields="PNR_number__c,Passenger_Last_Name__c"
+    targetFields="{!v.caseRec}"
+    targetError="{!v.recordSaveError}" recordUpdated="{!c.onRecordLoad}"/>
+    <!-- <aura:registerEvent name="dataSharing" type="c:QAC_DataSharingEvent" /> -->
+    <aura:handler name="bubblingEvent" event="c:QAC_NavigateEvent" action="{!c.handleBubbling}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!-- PAGE HEADER -->
+    <div class="slds-box slds-theme_default c-container" style="position: relative; height: 100px;">
+        <!-- <div class="slds-page-header"> -->
+        <lightning:layout class="slds-page-header slds-page-header--object-home">
+            <lightning:layoutItem >
+                <lightning:icon iconName="standard:scan_card" alternativeText="Search" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h2 class="slds-text-heading--medium">Search Bookings</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <aura:if isTrue="{!v.showSpinner}">
+            <div class="slds-spinner_container">
+                <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+            </div>
+        </aura:if>
+    </div>        
+    
+    <!-- Search Section Information (1st Page) - Start -->
+
+    <div aura:id="searchDiv" style="toggle">
+        <c:QAC_SearchForm aura:id="search" />   
+    </div>
+
+    <!-- Search Section Information (1st Page) - End -->
+    
+    <!-- Passengers / Flight Information (2 Page) - Start -->
+
+    <div aura:id="passengerDiv" style="toggle">
+        <c:QAC_PassengerData pnrInformation="{!v.pnrInformation}" aura:id="passenger"
+                                activeSections="{!v.activeSections}" onCase="{!v.caseRec}"/>   
+    </div>
+    <!-- Passengers / Flight Information (2 Page) - End -->
+    
+    <!-- Service Request Case (3 Page) - Start -->
+    <div aura:id="caseSRDiv" style="toggle">
+        <c:QAC_Case_ServiceRequest aura:id="caseSR" srActiveSections="{!v.srActiveSections}" resetForm="false"/>   
+    </div>
+    <!-- Service Request Case (3 Page) - End -->
+    
+</aura:component>

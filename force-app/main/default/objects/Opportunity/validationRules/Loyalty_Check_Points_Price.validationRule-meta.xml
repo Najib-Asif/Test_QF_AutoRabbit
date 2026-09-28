@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loyalty_Check_Points_Price</fullName>
+    <active>true</active>
+    <description>This rule is used for Loyalty Commercial record type and it validates the Price Per Point with the given &quot;Deal Value &amp;&amp; Points Price&quot; range</description>
+    <errorConditionFormula>IF(RecordType.DeveloperName = &apos;Loyalty_Commercial&apos; &amp;&amp; LEN(Low_Points_Price_Justification__c)=0,
+IF(NOT(ISBLANK(Amount)), IF(OR(ISCHANGED(Customer_Base__c), ISCHANGED(Assumed_Tag_Rate_at_Maturity__c), ISCHANGED(Price_Per_Point__c), ISCHANGED(Points_Per__c), ISCHANGED(Average_Spend_Per_Customer__c), ISCHANGED(Probability)) &amp;&amp; NOT(OR(ISBLANK(Customer_Base__c), ISBLANK(Assumed_Tag_Rate_at_Maturity__c), ISBLANK(Price_Per_Point__c), ISBLANK(Points_Per__c), ISBLANK(Average_Spend_Per_Customer__c), ISBLANK(Probability))),
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_4__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_above_4__c, true, 
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_3__c &amp;&amp; Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_4__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_3_4__c, true, 
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_2__c &amp;&amp; Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_3__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_2_3__c, true, 
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_1__c &amp;&amp; Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_2__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_1_2__c, true, 
+if(Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_1__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_below_1__c, true, false))))),
+if(Amount &gt; $Setup.Price_Per_Point_Checks__c.Amount_4__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_above_4__c, true, 
+if(Amount &gt; $Setup.Price_Per_Point_Checks__c.Amount_3__c &amp;&amp; Amount &lt;= $Setup.Price_Per_Point_Checks__c.Amount_4__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_3_4__c, true, 
+if(Amount &gt; $Setup.Price_Per_Point_Checks__c.Amount_2__c &amp;&amp; Amount &lt;= $Setup.Price_Per_Point_Checks__c.Amount_3__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_2_3__c, true, 
+if(Amount &gt; $Setup.Price_Per_Point_Checks__c.Amount_1__c &amp;&amp; Amount &lt;= $Setup.Price_Per_Point_Checks__c.Amount_2__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_1_2__c, true, 
+if(Amount &lt;= $Setup.Price_Per_Point_Checks__c.Amount_1__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_below_1__c, true, false)))))),
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_4__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_above_4__c, true, 
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_3__c &amp;&amp; Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_4__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_3_4__c, true, 
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_2__c &amp;&amp; Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_3__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_2_3__c, true, 
+if(Expected_Amount_Technical__c &gt; $Setup.Price_Per_Point_Checks__c.Amount_1__c &amp;&amp; Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_2__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_between_1_2__c, true, 
+if(Expected_Amount_Technical__c &lt;= $Setup.Price_Per_Point_Checks__c.Amount_1__c &amp;&amp; Price_Per_Point__c &lt; $Setup.Price_Per_Point_Checks__c.Price_Per_Point_below_1__c, true, false)
+))))),false)</errorConditionFormula>
+    <errorDisplayField>Price_Per_Point__c</errorDisplayField>
+    <errorMessage>Price Per Point is too low. Please update the Price Per Point value or provide the justification in &quot;Low Points Price Justification&quot;.</errorMessage>
+</ValidationRule>

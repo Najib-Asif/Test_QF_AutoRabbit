@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Post_Travel_Queue</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>NAME</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>CCC_And_B_Case_Type__c</columns>
+    <columns>PARENT.CASE_NUMBER</columns>
+    <columns>SLA_Age__c</columns>
+    <columns>Original_Closed_Date__c</columns>
+    <columns>Original_Due_Date__c</columns>
+    <columns>QCC_Status_Changed_Date__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>New,Reply Received</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Further_Action_Required,Case.CCC_On_The_Spot_Recovery,Case.CCC_Query,Case.CCC_Refund</value>
+    </filters>
+    <filters>
+        <field>CCC_And_B_Case_Type__c</field>
+        <operation>equals</operation>
+        <value>Stand-alone,Parent</value>
+    </filters>
+    <label>ZZZ Aged Post Travel Queue</label>
+    <queue>CCC_R1_Post_Travel_Q</queue>
+    <sharedTo>
+        <role>QF_QDC_OM</role>
+    </sharedTo>
+</ListView>

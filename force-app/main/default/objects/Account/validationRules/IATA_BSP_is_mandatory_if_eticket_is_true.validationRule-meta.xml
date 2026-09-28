@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IATA_BSP_is_mandatory_if_eticket_is_true</fullName>
+    <active>true</active>
+    <description>For Agency Accounts, if e-Ticket check box is true, IATA BSP is mandatory.</description>
+    <errorConditionFormula>AND(ISCHANGED(E_Ticket__c ), ISPICKVAL( Type , &apos;Agency Account&apos;) , E_Ticket__c  = true, ISPICKVAL( IATA_BSP_Level__c , &apos;&apos;) )</errorConditionFormula>
+    <errorMessage>Please select a value for IATA BSP Level.</errorMessage>
+</ValidationRule>

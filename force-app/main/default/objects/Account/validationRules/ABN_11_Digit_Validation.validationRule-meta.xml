@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ABN_11_Digit_Validation</fullName>
+    <active>true</active>
+    <description>ABN must have exactly 11 numbers with no spaces for AU Accounts. Users are not able to change the ABN if the AU Account has a product registration.</description>
+    <errorConditionFormula>AND( 
+BillingCountry = &quot;AU&quot;, 
+NOT( ISBLANK( ABN_Tax_Reference__c )),
+$Setup.EnableValidationRule__c.Flag_To_Prevent_ABN_VR_Fired__c, 
+OR( 
+AND( 
+OR(ISPICKVAL(Type, &quot;Customer Account&quot;),ISPICKVAL(Type, &quot;Agency Account&quot;),ISPICKVAL(Type, &quot;Prospect Account&quot;),AND($RecordType.DeveloperName = &quot;Freight_Account&quot;, NOT(ISBLANK(ABN_Tax_Reference__c)))), 
+OR( 
+NOT(ISNUMBER(ABN_Tax_Reference__c)), 
+LEN(ABN_Tax_Reference__c) &lt;&gt; 11, 
+CONTAINS(ABN_Tax_Reference__c, &quot;e&quot;	) 
+) 
+), 
+
+AND( 
+OR( 
+AMEX__c = TRUE, 
+Aquire_System__c = TRUE, 
+QBD__c = TRUE 
+), 
+ISCHANGED( ABN_Tax_Reference__c ) 
+) 
+) 
+)</errorConditionFormula>
+    <errorMessage>•     ABN must have exactly 11 numbers with no spaces 
+•     You cannot change the ABN if the Account has a product registration
+
+Please raise a System Admin Case to change the ABN.</errorMessage>
+</ValidationRule>

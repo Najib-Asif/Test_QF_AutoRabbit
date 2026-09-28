@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case.EmailMessages$TextBody</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.EmailMessages$HasAttachment</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case$Power_of_One_Case__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Case$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Query</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Accommodation/Reimbursement of Expenses</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>(for Meals),(for Accommodation),(for Accomodation),(for Transport)</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Type</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Query</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.EmailMessages$FromAddress</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>qantas_customer_care@qantas.com.au</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.EmailMessages$TextBody</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>If you need to provide further information relating to your case,you can respond directly to this email.</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.EmailMessages$TextBody</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>Reimbursement reason(s):</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.EmailMessages$TextBody</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>We&apos;re following up as we sent you an email 3 days</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.EmailMessages$TextBody</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>As we have been unsuccessful in our attempts to reach you,your case has been automatically closed.</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$CaseNumber</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Pre-WOLI GW Cases wo Auto Emails</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Emails__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <endDate>2025-03-19</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2025-03-03</startDate>
+    </timeFrameFilter>
+</Report>

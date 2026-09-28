@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Convert_to_Retail_Date__c</fullName>
+    <description>Date in Which Asset Scheme will be set to retail.</description>
+    <formula>IF(RecordType.DeveloperName == &apos;Public_Scheme&apos; &amp;&amp; NOT(ISNULL(Below_Threshold_Start_Date__c)), Below_Threshold_Start_Date__c +Value( $Label.Threshold_Time_Limit ), Null)</formula>
+    <label>Convert to Retail Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

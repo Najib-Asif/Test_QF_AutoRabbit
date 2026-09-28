@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_FOC_Waiver_Other</fullName>
+    <active>false</active>
+    <description>When Access Through = Other, Description is mandatory</description>
+    <errorConditionFormula>AND (
+ RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/
+ ISPICKVAL (  Sub_Type__c , &quot;FOC Qantas Club Waiver&quot; ),
+ ISPICKVAL (  Access_through__c , &quot;Other&quot;),
+ ISBLANK (   Description )
+
+)</errorConditionFormula>
+    <errorDisplayField>Description</errorDisplayField>
+    <errorMessage>For &quot;Other&quot; Access Through, please fill up the Description section.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>AU_DO_Opportunities_Edit_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Write/ Read Access to Business and Government, B&amp;G Campaigns,Global opportunity</description>
+        <label>AU DO - Opportunities Edit Access</label>
+        <sharedTo>
+            <role>QF_Support_B_G_Deal_Optimisation_Pricing</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Future Planet,Groups,Agency Partnerships,Global opportunity,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>AU_Deal_Support_Edit_Access_to_Opportunities</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Write/ Edit access to SME Product,Business and Government,Global opportunity</description>
+        <label>AU Deal Support - Edit Access to Opportunities</label>
+        <sharedTo>
+            <role>QF_Support_Deal_Support</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Global opportunity,Future Planet,B&amp;G Campaigns,Groups</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Access_to_B_G_and_Global_opportunities_for_the_role_subord_of_QF_Sales_Distrib</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share opportunity as Read Only for two Record Types Business and Government to the Roles and Sub ordinates of QF-Sales &amp; Distribution</description>
+        <label>Access to B&amp;G and Global opportunities for the role&amp;subord of QF-Sales &amp; Distrib</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Scheduled Charters,Future Planet,Groups,Agency Partnerships,Adhoc Charter,Global opportunity,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>B_G_All_Access_Opportunities</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>B&amp;G access to All Opportunities SME Product,Group Sales,Business and Government,Global opportunity,B&amp;G Campaigns,Future Planet</description>
+        <label>B&amp;G - All Access Opportunities</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_B_G</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Global opportunity,B&amp;G Campaigns,Future Planet,Groups</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>DPP_Onboarding_Opportunities_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>DPP Onboarding Opportunities Access</label>
+        <sharedTo>
+            <role>QF_Support_Sales_and_Distribution_DPP</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>DPP Onboarding Partners</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Opportunity_visiblity_to_Salescockpit_User</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Opportunity visiblity to Salescockpit User</label>
+        <sharedTo>
+            <group>Access_to_Salescockpit</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>SC_ID__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_Support_Loyalty_Contact_Centre</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>QF-Support-Loyalty Contact Centre  Role to Create Corporate Scheme</description>
+        <label>QF-Support-Loyalty Contact Centre</label>
+        <sharedTo>
+            <role>QF_Support_Loyalty_Contact_Centre</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>equals</operation>
+            <value>Qantas Corporate Scheme Opp for QLCC</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Regional_Roles_All_access_opp</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Regional Roles - All access opp</label>
+        <sharedTo>
+            <group>Regional_roles</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Global opportunity,B&amp;G Campaigns,Future Planet,Groups</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>S_D_Opps_BA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>S&amp;D Opps BA for read write access for Analytics and Process Improvements</description>
+        <label>S&amp;D Opps BA</label>
+        <sharedTo>
+            <group>S_D_Opps_BA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Scheduled Charters,GSA,Future Planet,DPP Onboarding Partners,Agency Partnerships,Groups,Adhoc Charter,Sales Development,Global opportunity,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>S_D_Opps_read_only</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>S&amp;D Opps read only</description>
+        <label>S&amp;D Opps read only</label>
+        <sharedTo>
+            <group>S_D_Opps_Reporting_access</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Scheduled Charters,GSA,Future Planet,DPP Onboarding Partners,Agency Partnerships,Groups,Adhoc Charter,Sales Development,Global opportunity,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Sales_Performance_All_Opportunity_Access</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>For Sales Performance Team, Read only access to all C&amp;CR Opportunity</description>
+        <label>Sales Performance All Opportunity Access</label>
+        <sharedTo>
+            <role>QF_Support_Sales_Performance</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>SME Product,Business and Government,Scheduled Charters,Future Planet,Groups,Agency Partnerships,Adhoc Charter,Global opportunity,B&amp;G Campaigns</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_all_USA_Opportunities</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>To share all the opportunities in USA with the Sales Support Team USA</description>
+        <label>Access to all USA Opportunities</label>
+        <sharedTo>
+            <group>Sales_Support_Team_US</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>All_USA_Sales_Users</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Agency_Partnership_Sharing_with_Account_Managers</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Agency Partnership Sharing with Account Managers</label>
+        <sharedTo>
+            <group>Agency_Account_Managers</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Agency_Sales_Performance_Team</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Freight_Opportunity_Sales_Group_Sharing</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Freight - Opportunities shared with Sales Group</description>
+        <label>Freight Opportunity Sales Group Sharing</label>
+        <sharedTo>
+            <group>Freight_Sales_Team</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Loyalty_Opportunity_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This rule shares all loyalty opportunities.</description>
+        <label>Loyalty Opportunity Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Loyalty_Sales</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Loyalty_Sales</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Owned_by_Sales_to_Deal_Sheet_Access_Group</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Owned by Sales to Deal Sheet Access Group</label>
+        <sharedTo>
+            <group>Deal_Sheet_External_Access</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>QIS_Opp_Audit</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QIS QA Team to access Opps for Audit purposes</description>
+        <label>QIS Opp Audit</label>
+        <sharedTo>
+            <group>QIS_QA_Group</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>QIS_SBD_Team</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Resources_and_Charters</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Resources and Charters</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_B_G_Resources_and_Charters</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <group>B_G_Resources_and_Charters</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Share_UK_opportunities_with_Sales_Support_Team_UK</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Sharing rule to share the UK opportunities with UK Sales Support Team</description>
+        <label>Share UK opportunities with Sales Support Team UK</label>
+        <sharedTo>
+            <group>Sales_Support_Team_UK</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_UK_and_Europe</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

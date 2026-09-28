@@ -1,0 +1,29 @@
+<!-- *******************************************************************************************************************
+Author:         gnanavelu
+Jira:           CRM-3532
+Description:    Mobile Friendly versions for Key Metrics
+************************************************************************************************************************
+History
+************************************************************************************************************************
+11-March-2019      gnanavelu               Initial Design
+************************************************************************************************************************ -->
+<apex:page standardController="Account" lightningStyleSheets="true">
+     <apex:includeLightning />
+   
+    <div id="LcDisplayId"></div> 
+    
+ <script>
+    var accountId = "{!$CurrentPage.parameters.id}";
+    $Lightning.use("c:QL_Account_Key_Metrics_App", function() {
+    $Lightning.createComponent("c:QL_Account_Key_Metrics",
+    { 
+        "accId" : accountId
+    },
+   "LcDisplayId",
+    function(component) {
+        console.log('acc id: ');
+        component.set("v.accId" , '{!account.Id}');
+    });
+ });
+ </script>
+</apex:page>

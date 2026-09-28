@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Status_as_Pending</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>CONTAINS(Owner:User.Level__c,&apos;GWTL&apos;)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Manager Approval</label>
+        <name>Manager_Approval</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Approval_Status_asApproved</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>kristinechippendale@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Kristine Chippendale&apos;s Approval</label>
+        <name>Kristine_Chippendale_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8) AND 9 AND 10</booleanFilter>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Space Available Upgrade - Economy to Premium Economy</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Space Available Upgrade - Economy to Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Space Available Upgrade - Economy to First</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Space Available Upgrade - Premium Economy to Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Space Available Upgrade - Premium Economy to First</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Space Available Upgrade - Business to First</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Excess Baggage</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>equals</operation>
+            <value>Lounge Access - Qantas First Lounge</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approval_Status__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Type</field>
+            <operation>equals</operation>
+            <value>Group Waivers</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>WaiverTypeApprovalProcess v1.0</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>true</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>29</processOrder>
+    <recallActions>
+        <action>
+            <name>Approval_Status_Change</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

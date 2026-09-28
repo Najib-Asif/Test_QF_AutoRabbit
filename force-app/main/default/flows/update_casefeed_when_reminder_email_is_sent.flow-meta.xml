@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <interviewLabel>update casefeed when reminder email is sent {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>update casefeed when reminder email is sent</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>post_to_case_feed</name>
+        <label>post to case feed</label>
+        <locationX>165</locationX>
+        <locationY>100</locationY>
+        <inputAssignments>
+            <field>Body</field>
+            <value>
+                <elementReference>CaseFeedTemplate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>varCaseId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type</field>
+            <value>
+                <stringValue>TextPost</stringValue>
+            </value>
+        </inputAssignments>
+        <object>FeedItem</object>
+    </recordCreates>
+    <startElementReference>post_to_case_feed</startElementReference>
+    <status>Active</status>
+    <textTemplates>
+        <name>CaseFeedTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Updated By: System
+Comments: Reminder email sent to other department {!varEmailId}</text>
+    </textTemplates>
+    <variables>
+        <name>varCaseId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>varEmailId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account_Relation__c$Related_Account__c.Type</field>
+    </columns>
+    <columns>
+        <field>Account_Relation__c$Related_Account__c.Owner.Name</field>
+    </columns>
+    <columns>
+        <field>Account_Relation__c$Name</field>
+    </columns>
+    <columns>
+        <field>Account_Relation__c$Id</field>
+    </columns>
+    <columns>
+        <field>Account_Relation__c$Owner</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account_Relation__c$Related_Account__c.Owner.Name</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Theresa Tong</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account_Relation__c$Owner</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Theresa Tong</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Account Relationships_Update to AO</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Account_Relationships_with_Account_and_TMC_Informa__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account_Relation__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shipments_help_in_HKT_by_Thai_Customs</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>Freight_AWB_Number__c</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Freight_Port__c</columns>
+    <columns>Freight_Shipment__c</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>Created_By_Name__c</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PARENT.CASE_NUMBER</field>
+        <operation>equals</operation>
+        <value>03140867</value>
+    </filters>
+    <label>Shipments held in HKT by Thai Customs</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

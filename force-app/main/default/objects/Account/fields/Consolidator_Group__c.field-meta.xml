@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consolidator_Group__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <inlineHelpText>Agency : Consolidator Email Sales Region</inlineHelpText>
+    <label>Consolidator Group</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Consolidator Group Sales region should be Active and Email should not be blank</errorMessage>
+        <filterItems>
+            <field>Sales_Region__c.Email__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </filterItems>
+        <filterItems>
+            <field>Sales_Region__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>Sales_Region__c.sales_h_eq_type__c</field>
+            <operation>equals</operation>
+            <value>Consolidator</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Sales_Region__c</referenceTo>
+    <relationshipLabel>Accounts (Consolidator Group)</relationshipLabel>
+    <relationshipName>Accounts2</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

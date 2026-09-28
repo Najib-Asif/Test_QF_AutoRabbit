@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Network_filed</fullName>
+    <active>true</active>
+    <description>Mandatory &quot;Network&quot; mandatory for Type::
+Route Deal
+Incentive Fare
+Fixed Fare
+Excess Baggage
+Advance Res/ Ticketing
+Penalties</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_Mandatory_Network_filed__c = false,   ISPICKVAL( QEC_Network__c , &apos;&apos;), OR( ISPICKVAL( QEC_Type__c , &apos;Route Deal&apos;),ISPICKVAL( QEC_Type__c , &apos;Route Deal&apos;),ISPICKVAL( QEC_Type__c , &apos;Incentive Fare&apos;),ISPICKVAL( QEC_Type__c , &apos;Fixed Fare&apos;),ISPICKVAL( QEC_Type__c , &apos;Excess Baggage&apos;),ISPICKVAL( QEC_Type__c , &apos;Advance Res/Ticketing&apos;), ISPICKVAL( QEC_Type__c , &apos;Penalties&apos;) ) )</errorConditionFormula>
+    <errorDisplayField>AutorabitExtId__c</errorDisplayField>
+    <errorMessage>Please choose Network. If the Type is Route Deal, Incentive Fare, Fixed Fare, Excess Baggage, Advance Res/Ticketing, Penalties.</errorMessage>
+</ValidationRule>

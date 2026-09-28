@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Editing_Placeholder_Contact</fullName>
+    <active>true</active>
+    <description>CCC: Restricts the user other than System Admin from editing the fields of Placeholder record type.</description>
+    <errorConditionFormula>$Profile.Name &lt;&gt; &quot;System Administrator&quot; &amp;&amp; $Profile.Name &lt;&gt; &quot;Qantas System Administrator&quot; &amp;&amp; $Profile.Name &lt;&gt; &quot;Qantas System Admin - Freight&quot; &amp;&amp; $Profile.Name &lt;&gt; &quot;Qantas System Admin - QCC&quot; &amp;&amp; $Profile.Name &lt;&gt; &quot;Qantas System Admin - SND&quot; &amp;&amp;  RecordType.Name = &quot;Placeholder&quot; &amp;&amp; (ISCHANGED(FirstName) || ISCHANGED(LastName) || ISCHANGED(Salutation) || ISCHANGED(AccountId) || ISCHANGED(Description))</errorConditionFormula>
+    <errorMessage>Null Contacts are not to be edited.</errorMessage>
+</ValidationRule>

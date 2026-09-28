@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Year_Month__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(Year__c)&amp;&quot;-&quot;&amp;Case(Month__c,1,&quot;01&quot;,2,&quot;02&quot;,3,&quot;03&quot;,4,&quot;04&quot;,5,&quot;05&quot;,6,&quot;06&quot;,7,&quot;07&quot;,8,&quot;08&quot;,9,&quot;09&quot;,10,&quot;10&quot;,11,&quot;11&quot;,12,&quot;12&quot;,&quot;NULL&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Year Month</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

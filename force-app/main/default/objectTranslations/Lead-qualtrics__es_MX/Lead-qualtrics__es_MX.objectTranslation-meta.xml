@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <recordTypes>
+        <description><!-- Record type for Freight Manual Lead Creation --></description>
+        <label><!-- Freight --></label>
+        <name>Freight</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Freight:Record type for Salescockpit Integration Only --></description>
+        <label><!-- Freight Salescockpit --></label>
+        <name>Freight_Salescockpit</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- ABN must have exactly 11 numbers with no spaces --></errorMessage>
+        <name>ABN_11_Digit_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Branch is selected as “Account Business Type”, please provide Parent Account Name (Country level Account) --></errorMessage>
+        <name>Freight_Account_Business_Type_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter an IATA# --></errorMessage>
+        <name>Freight_Agent_Type_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please note that a System Admin Case has been created for a manual conversion --></errorMessage>
+        <name>Restrict_Status_Change_For_Lead</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide State/Province --></errorMessage>
+        <name>State_Code_is_mandatory_for_AU_Agency</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- IATA#/TIDS# field should contain 7 digits Numeric characters --></errorMessage>
+        <name>Validate_IATA_TIDS_for_creating_Leads</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Conga_Composer_OAuth --></label>
+        <name>APXTConga4__Conga_Composer_OAuth</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Mail_Merge --></label>
+        <name>APXTConga4__Conga_Mail_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- AltavistaNews --></label>
+        <name>AltavistaNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- HooversProfile --></label>
+        <name>HooversProfile</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SendGmail --></label>
+        <name>SendGmail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Validate_ABN --></label>
+        <name>Validate_ABN</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Qualtrics_Survey --></label>
+        <name>qualtrics__Send_Qualtrics_Survey</name>
+    </webLinks>
+</CustomObjectTranslation>

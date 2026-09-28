@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offer_Bespoke_Incentive_Survey</fullName>
+    <active>true</active>
+    <description>For Sales Offer Bespoke Incentive, Campaign Start Date &gt;= 6 weeks from Created Date and Survey, Campaign Start Date &gt;= 2 weeks</description>
+    <errorConditionFormula>AND ( 
+RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/ 
+ NOT (   $UserRole.Id   = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/ 
+NOT ( CONTAINS ( $User.Level__c , &quot;SO(SME)&quot;)), 
+
+
+OR (
+AND(
+ISPICKVAL ( Type , &quot;Bespoke Incentive&quot;) ,
+OR(
+Campaign_Start_Date__c = TODAY() ,
+Campaign_Start_Date__c - TODAY() &lt; 42 ) 
+),
+
+AND(
+ISPICKVAL ( Type , &quot;Survey&quot;) ,
+OR(
+Campaign_Start_Date__c = TODAY() ,
+Campaign_Start_Date__c - TODAY() &lt; 14 )
+))
+
+)</errorConditionFormula>
+    <errorDisplayField>Campaign_Start_Date__c</errorDisplayField>
+    <errorMessage>For Bespoke Incentive Type, Campaign Start Date &gt; 6 weeks. For Survey Type, Campaign Start Date &gt; 2 weeks.</errorMessage>
+</ValidationRule>

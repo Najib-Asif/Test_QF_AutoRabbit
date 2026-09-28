@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheme_Data_Help__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL( Status ,&apos;Draft&apos;) ,IF(RecordType.DeveloperName =&apos;Corporate_Scheme&apos;,IMAGE(&quot;servlet/servlet.FileDownload?file=015N0000000f1Cf&quot;, &quot;&quot;, 160, 800),IMAGE(&quot;servlet/servlet.FileDownload?file=015N0000000f1H6&quot;, &quot;&quot;, 160, 800 )),IMAGE(&quot;servlet/servlet.FileDownload?file=015N0000000f1tK&quot;, &quot;&quot;, 20, 200 ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Information that are mandatory for Scheme to succesfully enrol in Ifly</inlineHelpText>
+    <label>Scheme Data Help</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

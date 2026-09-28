@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_72466521</developerName>
+        <masterLabel>Tier</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Case$Frequent_Flyer_Tier__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairmans Lounge</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Platinum One</sourceValue>
+            </sourceValues>
+            <value>1. Chair/Plat1</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Platinum</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Lifetime Gold</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Gold</sourceValue>
+            </sourceValues>
+            <value>2. Plat/Gold</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Lifetime Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Bronze</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Club Bronze</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Club Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Silver</sourceValue>
+            </sourceValues>
+            <value>3. Sil/Bnze</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>RowCount</column>
+        </chartSummaries>
+        <chartType>VerticalColumnStacked</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>Case$ClosedDate</groupingColumn>
+        <legendPosition>Right</legendPosition>
+        <location>CHART_BOTTOM</location>
+        <secondaryGroupingColumn>Case$Type</secondaryGroupingColumn>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <title>Proactive Cases Closed by Month</title>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>Case$ClosedByLocation__c</field>
+    </columns>
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$Group__c</field>
+    </columns>
+    <columns>
+        <field>Case$Record_Type__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>productivity view by agent
+CR 31/08/2022</description>
+    <filter>
+        <criteriaItems>
+            <column>Case$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.QCC_Assistance,Case.QCC_Disruption,Case.QCC_Elite_Process,Case.Chairmans_Lounge_Renewal,Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Compliment,Case.CCC_Query,Case.QCC_Insurance_Letter_Case,Case.CCC_Event</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Closed_By__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>QCC API Integration User,Data UpdatesUser</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Resolved,Closed,Waiting for Approval,Waiting for Customer,Waiting for Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$ClosedByLocation__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Hobart</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Type</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Add New Travel Arranger,Baggage,Baggage Claim,Bookings SSU Only,Complaint,Complaints,Compliment,Compliments,Customer Care,Customer Feedback,Customer Survey,Damaged Baggage,Enquiry,Flight Upgrades - Domestic,Flight Upgrades - International,Further Action Required,General Enquiries,Insurance,Insurance Letter,Medical Assistance,Medical-Assistance Provided,Medical-Patient,Name Change Request,New Traveller,On the Spot Recovery,On-the-spot-recovery,Other,Partner airlines &amp; HX,Platinum One Email Enquiries,Qantas Host Always Call,Query,Question,Queues,Refund,Request,Service Request,SSU Email Enquiries,Surprice and Delight,VIP,VIP Email Enquiries</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$FF_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Platinum One,Chairmans Lounge,Chairmans Lounge Platinum One,Chairman&apos;s Lounge,Chairman&apos;s Lounge Platinum One</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>Case$ClosedDate</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Type</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Reactive Cases Closed by Month</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_or_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$ClosedDate</dateColumn>
+        <interval>INTERVAL_LAST120</interval>
+    </timeFrameFilter>
+</Report>

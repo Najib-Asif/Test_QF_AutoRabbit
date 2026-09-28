@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_PCC_for_GDS_Recordtype</fullName>
+    <active>false</active>
+    <description>PCC field is mandatory for GDS record type.</description>
+    <errorConditionFormula>RecordType.Name = &apos;GDS&apos;  &amp;&amp;  PCC__c  = &apos;&apos;</errorConditionFormula>
+    <errorDisplayField>PCC__c</errorDisplayField>
+    <errorMessage>PCC or Pseudo City Code field should have a value when a TMC info transaction is related to GDS - this helps us to minimise downstream errors for iDeal.</errorMessage>
+</ValidationRule>

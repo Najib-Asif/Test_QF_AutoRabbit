@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_a_call</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Log a call</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/00T/e?title=call&amp;followup=1&amp;what_id={!CampaignMember.Related_AccountId__c}&amp;CF00N9000000FGBRF={!CampaignMember.Campaign}&amp;who_id={!IF(NOT(ISNULL(CampaignMember.ContactId)),CampaignMember.ContactId,CampaignMember.LeadId)}&amp;tsk5=call&amp;retURL=%2F{!CampaignMember.Id}</url>
+</WebLink>

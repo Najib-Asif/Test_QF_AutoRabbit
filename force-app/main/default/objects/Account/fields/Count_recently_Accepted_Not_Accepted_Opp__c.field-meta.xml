@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Count_recently_Accepted_Not_Accepted_Opp__c</fullName>
+    <label>Count-recently Accepted/Not Accepted Opp</label>
+    <summaryFilterItems>
+        <field>Opportunity.StageName</field>
+        <operation>equals</operation>
+        <value>Closed - Not Accepted, Closed - Accepted</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Opportunity.CloseDate</field>
+        <operation>greaterOrEqual</operation>
+        <value>6/1/2016</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

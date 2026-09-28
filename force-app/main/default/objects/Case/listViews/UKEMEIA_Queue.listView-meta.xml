@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UKEMEIA_Queue</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>PNR_number__c</columns>
+    <columns>Passenger_Name__c</columns>
+    <columns>Approval_Status__c</columns>
+    <filterScope>Queue</filterScope>
+    <label>UKEMEIA  Queue</label>
+    <queue>UKEMEIA_Support</queue>
+    <sharedTo>
+        <role>QF_Support_INT_UK</role>
+        <roleAndSubordinatesInternal>QF_INT_Sales_UK_and_Europe</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

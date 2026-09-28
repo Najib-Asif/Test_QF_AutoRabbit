@@ -1,0 +1,40 @@
+<template>
+  <lightning-card icon-name="custom:custom20" title="Suggested Booking Matches" variant="Narrow">
+    <template if:true={contact}>
+      <template if:true={bookings}>
+            <c-qcc-booking-table
+            key-field="id"
+            columns={columns}
+            data={bookings}
+            ondatatablecolumnclickhandler={handleClick}
+            hide-checkbox-column
+          >
+        </c-qcc-booking-table>
+      </template>
+      <template if:true={error}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture" role="alert">
+          <span class="slds-assistive-text">Error</span>
+          <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Error">
+              <lightning-icon icon-name={errorIconName} class="error-icon-color" size="x-small" alternative-text="Error"></lightning-icon>
+          </span>
+          <h2>{error}</h2>
+        </div>
+      </template>
+      <template if:true={noData}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture" role="alert">
+          <span class="slds-assistive-text">Error</span>
+          <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Error">
+            <lightning-icon icon-name="utility:announcement" class="error-icon-color" size="x-small" alternative-text="Error"></lightning-icon>
+          </span>
+          <h2>No bookings found</h2>
+        </div>
+      </template>
+    </template>
+      <div class="slds-clearfix slds-p-top_x-small">
+        <lightning-button variant="brand" label="Previous" icon-name="utility:left" icon-position="left" onclick={handlePrevious} disabled={hidePrev} class="slds-float_left"></lightning-button>
+        <lightning-button variant="brand" label="Next" icon-name="utility:right" icon-position="right" onclick={handleNext} disabled={hideNext} class="slds-float_right"></lightning-button>
+        <div class="slds-align_absolute-center slds-p-top_xxx-small">{pageNumber}</div>
+      </div>
+  </lightning-card>
+    
+</template>

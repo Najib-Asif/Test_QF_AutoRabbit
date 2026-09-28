@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Resolution_Method_Required</fullName>
+    <active>false</active>
+    <description>QCC: Resolution method must be specified to close a Case</description>
+    <errorConditionFormula>OR(
+AND($Setup.EnableValidationRule__c.VR_QCC_Resolution_Method_Required__c = TRUE,
+OR(RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+RecordType.DeveloperName = &apos;CCC_Query&apos;,
+RecordType.DeveloperName = &apos;Contact_Center&apos;,
+RecordType.DeveloperName = &apos;Service_Delivery&apos;,
+RecordType.DeveloperName = &apos;CCC_Refund&apos;,
+RecordType.DeveloperName = &apos;CCC_Event&apos;,
+RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;,
+RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;,
+RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;,
+RecordType.DeveloperName = &apos;QCC_Disruption&apos;,
+RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+RecordType.DeveloperName = &apos;QCC_Sensitive_Case&apos;
+),
+ISPICKVAL(Status , &apos;Closed&apos;),
+ISBLANK(Resolution_Method__c)
+),
+AND(NOT(Sensitive__c), NOT(INCLUDES(Resolution_Method__c , &apos;Case auto closed&apos;)), ISPICKVAL(Status , &apos;Closed&apos;), RecordType.DeveloperName = &apos;CCC_Baggage&apos;,ISPICKVAL( Baggage_Assessment_Outcome__c , &apos;&apos;), $Setup.EnableValidationRule__c.Bag_Assment_outcme_req_for_closing_case__c = true)
+)</errorConditionFormula>
+    <errorMessage>Please specify Resolution Method. For Baggage cases, ensure Resolution Method and Baggage Assessment Outcome are specified.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Prevent_WavStrDT_High_of_Sch_StrDT</fullName>
+    <active>true</active>
+    <description>Waiver Start Date should be less than Scheme Start Date</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Prevent_WavStrDT_High_of_Sch_StrDT__c  &amp;&amp; RecordType.DeveloperName == &apos;Corporate_Scheme&apos; &amp;&amp;  Scheme_Start_Date_f__c &gt; Waiver_Start_Date__c</errorConditionFormula>
+    <errorMessage>Override/Wavier Start Date Should be higher than Scheme Start Date</errorMessage>
+</ValidationRule>

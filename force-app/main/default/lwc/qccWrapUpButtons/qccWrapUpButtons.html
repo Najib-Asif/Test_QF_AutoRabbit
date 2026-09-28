@@ -1,0 +1,56 @@
+<template>
+    <div class="main-container">
+        
+            <lightning-textarea class="text-area" name="inputNotes" onchange={assignNotes} required value="" placeholder="Enter Interaction Notes" label="Call Outcome"  message-when-value-missing="An empty note cannot be posted." ></lightning-textarea>
+        
+        <div class="footer-container">
+           <!-- <template if:true={displaySurveyButton}>
+                <div class="margin-r">
+                    <lightning-button 
+                        record-id={recordId}
+                        object-api-name="Case"
+                        variant="brand" 
+                        label="Initiate Survey" 
+                        onclick={postCallSurvey}>
+                    </lightning-button>
+                </div>
+            </template> -->
+           <!-- <template if:false={displaySurveyButton}> -->
+                <!-- Initiate Survey button hidden -->
+            <!--  </template> -->
+
+            <template if:true={displaySaveButton}>
+                <div class="save-button">
+                    <lightning-button 
+                        record-id={recordId}
+                        object-api-name="Case"
+                        variant="brand" 
+                        label="Save" 
+                        onclick={handleGoNext}>
+                    </lightning-button>
+                </div>
+            </template>
+            <template if:false={displaySaveButton}>
+                <div class="save-button">
+                    <lightning-button 
+                        record-id={recordId}
+                        object-api-name="Case"
+                        variant="brand" 
+                        label="Save" 
+                        onclick={handleGoNext}
+                        disabled>
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+
+        <template if:true={internalCallWrapupReminder}>
+            <div class="wrapup-reminder">
+                <lightning-formatted-text 
+                    class="slds-text-color_error slds-var-m-left_xx-small"
+                    value={internalCallWrapupReminder}>
+                </lightning-formatted-text>
+            </div>
+        </template>
+    </div>
+</template>

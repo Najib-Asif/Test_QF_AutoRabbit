@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_user_to_decrease_the_CP_Amount</fullName>
+    <active>true</active>
+    <description>Allow user to decrease the Contract Payment Amount when the Proposal status is &quot;Acceptance Required - Customer&quot;</description>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName = &apos;Corporate_Contract_Payments&apos;,
+ISPICKVAL(Proposal__r.Status__c,&apos;Acceptance Required - Customer&apos;),
+Amount__c &gt; Payment_Amount__c)</errorConditionFormula>
+    <errorDisplayField>Amount__c</errorDisplayField>
+    <errorMessage>You can&apos;t increase the Amount when the Proposal status is &apos;Acceptance Required - Customer&apos;</errorMessage>
+</ValidationRule>

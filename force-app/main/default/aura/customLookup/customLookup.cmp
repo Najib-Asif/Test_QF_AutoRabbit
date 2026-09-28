@@ -1,0 +1,74 @@
+<aura:component controller="LookupController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:availableForFlowScreens" access="global">
+    <!--declare attributes--> 
+    <aura:attribute name="selectedRecord" type="sObject" default="{}" description="Use,for store SELECTED sObject Record"/>
+    <aura:attribute name="selectedRecords" type="sObject[]" description="Use,for store SELECTED sObject Records"/>
+    <aura:attribute name="listOfSearchRecords" type="List" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWord" type="string"/>
+    <aura:attribute name="objectAPIName" type="string" default=""/>
+    <aura:attribute name="IconName" type="string" default=""/>
+    <aura:attribute name="label" type="string" default=""/>
+    <aura:attribute name="Message" type="String" default=""/>
+    <aura:attribute name="Mode" type="String" default="" />
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:attribute name="originCountC" type="Integer"/>
+    <aura:attribute name="destinationCountC" type="Integer"/>
+    <aura:attribute name="originEnDiC" type="string"/>
+    <aura:attribute name="destinationEnDiC" type="string"/>
+    <aura:attribute name="setBoolO" type="boolean"/>
+    <aura:attribute name="setBoolD" type="boolean"/>
+    <aura:attribute name="Name" type="String" default="" />
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    
+    <!--register events for enabling/disabling Origin/Destination InputText--> 
+    <aura:registerevent name="enabledisable" type="c:QEC_EnaDisInputText"/>
+    
+    <!--declare events hendlers-->  
+    <aura:handler name="oSelectedRecordEvent" event="c:selectedsObjectRecordEvent" action="{!c.handleComponentEvent}"/>
+    <aura:handler name="change" value="{#v.setBoolO}" action="{!c.handleChange}"/>
+    <aura:handler name="change" value="{#v.setBoolD}" action="{!c.handleChange}"/>
+    
+    
+    <!-- https://www.lightningdesignsystem.com/components/lookups/ --> 
+    
+    <div onmouseleave="{!c.onblur}" aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close" >
+        <label class="slds-form-element__label" for="lookup-348">{!v.label}</label>
+        <!--This part is for display search bar for lookup-->  
+        <div class="slds-form-element__control">
+            
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+                <!-- This markup is for when an record is selected -->
+                
+                <div aura:id="lookupField" class="slds-show">
+                    <lightning:icon class="slds-input__icon slds-show" iconName="utility:search" size="x-small" alternativeText="search"/>
+                    <span class="slds-icon_container  slds-combobox__input-entity-icon" title="record">
+                        <lightning:icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" iconName="{!v.IconName}" size="x-small" alternativeText="icon"/>
+                        <span class="slds-assistive-text"></span>
+                    </span>
+                        <ui:inputText aura:id="inputField" click="{!c.onfocus}" updateOn="keyup" keyup="{!c.keyPressController}" class="slds-lookup__search-input slds-input leftPaddingClass" value="{!v.SearchKeyWord}" placeholder="search airport code.."/>
+                </div>   
+            </div>
+            
+        </div>
+        <!--This part is for Display typehead lookup result List-->  
+        <ul style="min-height:40px;margin-top:0px !important" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+            <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinner"/>
+            <center> {!v.Message}</center>
+            <aura:iteration items="{!v.listOfSearchRecords}" var="singleRec">
+                <c:customLookupResult oRecord="{!singleRec}" IconName="{!v.IconName}"/>
+            </aura:iteration>
+        </ul>
+    </div>
+    
+    <div class="slds-p-top--xx-small">
+        <aura:iteration items="{!v.selectedRecords}" var="rec" indexVar="index">
+            <!--<div onclick="{!c.clear}" data-value="{!rec.Id}">-->
+            <lightning:pill aura:id="selectedPill" label="{!rec.Name}" name="{!index}" onremove="{!c.clear}">
+                <aura:set attribute="media">
+                    <lightning:icon iconName="{!v.IconName}" size="x-small" alternativeText="{!v.IconName}"/>
+                </aura:set>
+            </lightning:pill>
+            <!--</div>-->
+        </aura:iteration>  
+    </div>
+</aura:component>
+<!-- Component--><!-- Component-->

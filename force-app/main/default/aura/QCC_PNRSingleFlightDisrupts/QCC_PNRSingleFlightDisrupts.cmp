@@ -1,0 +1,29 @@
+<aura:component >
+	<aura:attribute name="disruptsInfo" type="Object[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:method name="disruptMethod" action="{!c.getDisruptDetails}"> 
+        <aura:attribute name="disruptDetail" type="Object[]"/> 
+    </aura:method>
+    <!--<div class="c-container">-->
+        <lightning:card title="Flight Information" iconName="utility:info">
+            <aura:set attribute="title">
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                            <span class="slds-text-heading_small">Flight Information</span>
+                        </a>
+                    </h2>
+                </div>
+            </aura:set>
+            <aura:set attribute="footer">
+        	</aura:set>
+            <aura:renderIf isTrue="{!empty(v.disruptsInfo)}">
+                <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg}</div>
+                <aura:set attribute="else">
+                    <lightning:datatable hideCheckboxColumn="true" data="{!v.disruptsInfo}" columns="{!v.mycolumns}" 
+                                         keyField="key" />
+                </aura:set>
+            </aura:renderIf>
+        </lightning:card>
+    <!--</div>-->
+</aura:component>

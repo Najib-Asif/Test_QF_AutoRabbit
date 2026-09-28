@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Rank__c</fullName>
+    <description>Freight - Displays the customer rank visually with 5 being the highest</description>
+    <externalId>false</externalId>
+    <formula>IF(    ISPICKVAL(Customer_Ranking__c, &quot;1&quot;), IMAGE(&quot;/resource/1476351092000/onestar&quot;, &apos;One Star&apos;),
+IF( ISPICKVAL(Customer_Ranking__c, &quot;2&quot;), IMAGE(&quot;/resource/1470534573000/twostars&quot;, &apos;Two Stars&apos;), 
+IF( ISPICKVAL(Customer_Ranking__c, &quot;3&quot;), IMAGE(&quot;/resource/1476351092000/threestars&quot;, &apos;Three Stars&apos;),
+IF( ISPICKVAL(Customer_Ranking__c, &quot;4&quot;) , IMAGE(&quot;/resource/1470534573000/fourstars&quot;, &apos;Four Stars&apos;),
+IF( ISPICKVAL(Customer_Ranking__c, &quot;5&quot;) , IMAGE(&quot;/resource/1476433550000/fivestars&quot;, &apos;Five Stars&apos;),
+&apos; &apos; )))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Customer Rank</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Inactivation_of_PCC</fullName>
+    <active>false</active>
+    <description>PCC can be inactivated only when its GDS Status is NEW or BLANK.</description>
+    <errorConditionFormula>AND( 
+RecordType.DeveloperName = &quot;GDS&quot;, 
+$Setup.EnableValidationRule__c.Flag_To_Prevent_TMC_VR_Fired__c = FALSE, 
+ISCHANGED(Active__c),
+Active__c = FALSE, 
+
+OR( 
+
+NOT( 
+OR( 
+ISPICKVAL(GDS_Status__c , &quot;New&quot;),
+ISPICKVAL(GDS_Status__c , &quot;Inactive&quot;),
+ISBLANK(TEXT(GDS_Status__c)) 
+) 
+), 
+AND( 
+ISCHANGED(GDS_Status__c), 
+OR( 
+ISPICKVAL(GDS_Status__c , &quot;New&quot;), 
+ISPICKVAL(GDS_Status__c , &quot;Inactive&quot;),
+ISBLANK(TEXT(GDS_Status__c))
+), 
+ISPICKVAL(PRIORVALUE(GDS_Status__c),&quot;Accepted&quot;) 
+) 
+
+) 
+
+)</errorConditionFormula>
+    <errorDisplayField>Active__c</errorDisplayField>
+    <errorMessage>You can inactivate PCC only when GDS Status is New/Blank.</errorMessage>
+</ValidationRule>

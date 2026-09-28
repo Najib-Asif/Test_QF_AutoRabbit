@@ -1,0 +1,31 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="QCC_EmailPreviewController" >
+    <aura:attribute name="emailBody" type="String" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    <aura:handler name="refresh" event="force:refreshView" action="{!c.doInit}" />
+    <aura:handler name ="saveEvent" event="force:recordSaveSuccess" action="{!c.doInit}" />
+     <lightning:card  iconName="standard:email" title="Email Preview" class="slds-card_boundary" >
+        <aura:set attribute="actions">
+           <lightning:buttonIcon iconName="utility:refresh" onclick="{!c.doInit}" alternativeText="Refresh"/>
+         </aura:set> 
+        
+        <p class="slds-p-horizontal_small">
+            <div class="c-container">
+                <lightning:select aura:id="select" name="select" label="Preview Type : " required="true" onchange="{! c.onChange }">
+                    <option value="">choose one...</option>
+                    <option value="">No Recovery</option>
+                    <option value="FFRecovery">Recovery for Frequent Flyer</option>
+                    <option value="NFFRecovery">Recovery for NON-Frequent Flyer</option>
+                </lightning:select>
+                <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <ui:outputRichText class="slds-text-longform" value="{!v.emailBody}"/>
+                        
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </p>
+        
+    </lightning:card>
+    
+</aura:component>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Fare_Total_should_allow_only_Numbers</fullName>
+    <active>true</active>
+    <description>Fare Total field on Passengers should allow only Numbers and not Text</description>
+    <errorConditionFormula>AND(
+(RecordType.DeveloperName = &apos;QCC_InsuranceLetter&apos;), 
+NOT(ISBLANK((Fare_Total__c))),
+NOT(ISNUMBER(Fare_Total__c))
+)</errorConditionFormula>
+    <errorMessage>Please enter only Numbers for Fare Total</errorMessage>
+</ValidationRule>

@@ -1,0 +1,431 @@
+{
+  "version" : "66.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "flight_itinerary__c", "Flight_Number_With_Code__c", "Flight_Number__c", "QCC_Flight_No__c", "Airline__c", "Airlines__c", "Id", "CaseNumber", "RecordTypeId", "Status", "Description", "CreatedDate", "Carrier__c", "Arrival_Airport_Code__c", "Arrival_Airport__c", "Booking_PNR__c", "Category__c", "Departure_Airport_Code__c", "Departure_Airport__c", "Departure_Date_Time__c", "Sector__c", "Sub_Category__c", "Updated_Departure_Date_Time__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordType.Name",
+          "newProperties" : {
+            "label" : "Record Type",
+            "name" : "RecordType.Name"
+          }
+        } ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Middle_East_Hotwords",
+          "label" : "Middle East Hotwords",
+          "formulaExpression" : "IF(contains(Description, 'Montreal Convention'),'Montreal Convention',\r\nIF(contains(Description, 'MC99'),'MC99',\r\nIF(contains(Description, 'Australian Consumer Law'),'Australian Consumer Law',\r\nIF(contains(Description, 'ACL'),'ACL',\r\nIF(contains(Description, 'EC261'),'EC261',\r\nIF(contains(Description, 'UK261'),'UK261',\r\nIF(contains(Description, 'Reimbursement'),'Reimbursement',\r\nIF(contains(Description, 'Refund'),'Refund',\r\nIF(contains(Description, 'Expenses'),'Expenses',\r\n'No Hotwords'\r\n)))))))))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "SPLIT0" : {
+      "action" : "split",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "sourceField" : "Sector__c",
+        "delimiter" : " ",
+        "targetFields" : [ {
+          "name" : "Sector_Departure",
+          "label" : "Sector Departure"
+        }, {
+          "name" : "Sector_Arrival",
+          "label" : "Sector Arrival"
+        } ]
+      }
+    },
+    "DETECT_SENTIMENT0" : {
+      "action" : "detectSentiment",
+      "sources" : [ "SPLIT0" ],
+      "parameters" : {
+        "sourceField" : "Description",
+        "targetField" : {
+          "name" : "Description_sentiment",
+          "label" : "Description Sentiment"
+        },
+        "outputType" : "DIMENSION",
+        "sentimentScore" : "NONE",
+        "targetSentimentScoreFields" : { }
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "DETECT_SENTIMENT0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Sector_Departure_Port_Processed",
+          "label" : "Sector Departure Port Processed",
+          "formulaExpression" : "IF(contains(upper(Sector_Departure), 'DOH'),'DOH',\r\nIF(contains(upper(Sector_Departure), 'DOHA'),'DOH',\r\nIF(contains(upper(Sector_Departure), 'DXB'),'DXB',\r\nIF(contains(upper(Sector_Departure), 'DUBAI'),'DXB',\r\nIF(contains(upper(Sector_Departure), 'AUH'),'AUH',\r\nIF(contains(upper(Sector_Departure), 'ABU'),'AUH',\r\nIF(contains(upper(Sector_Departure), 'TLV'),'TLV',\r\nIF(contains(upper(Sector_Departure), 'TEL AVIV'),'TLV',\r\nIF(contains(upper(Sector_Departure), 'AMM'),'AMM',\r\nIF(contains(upper(Sector_Departure), 'AMMAN'),'AMM',\r\nIF(contains(upper(Sector_Departure), 'MCT'),'MCT',\r\nIF(contains(upper(Sector_Departure), 'MUSCAT'),'MCT',\r\nIF(contains(upper(Sector_Departure), 'BAH'),'BAH',\r\nIF(contains(upper(Sector_Departure), 'BAHRAIN'),'BAH',\r\n'Not Middle East'\r\n))))))))))))))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Sector_Arrival_Port_Processed",
+          "label" : "Sector Arrival Port Processed",
+          "formulaExpression" : "IF(contains(upper(Sector_Arrival), 'DOH'),'DOH',\r\nIF(contains(upper(Sector_Arrival), 'DOHA'),'DOH',\r\nIF(contains(upper(Sector_Arrival), 'DXB'),'DXB',\r\nIF(contains(upper(Sector_Arrival), 'DUBAI'),'DXB',\r\nIF(contains(upper(Sector_Arrival), 'AUH'),'AUH',\r\nIF(contains(upper(Sector_Arrival), 'ABU'),'AUH',\r\nIF(contains(upper(Sector_Arrival), 'TLV'),'TLV',\r\nIF(contains(upper(Sector_Arrival), 'TEL AVIV'),'TLV',\r\nIF(contains(upper(Sector_Arrival), 'AMM'),'AMM',\r\nIF(contains(upper(Sector_Arrival), 'AMMAN'),'AMM',\r\nIF(contains(upper(Sector_Arrival), 'MCT'),'MCT',\r\nIF(contains(upper(Sector_Arrival), 'MUSCAT'),'MCT',\r\nIF(contains(upper(Sector_Arrival), 'BAH'),'BAH',\r\nIF(contains(upper(Sector_Arrival), 'BAHRAIN'),'BAH',\r\n'Not Middle East'\r\n))))))))))))))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Departure_Airport_Processed",
+          "label" : "Departure Airport Processed",
+          "formulaExpression" : "IF(contains(upper(Departure_Airport__c), 'DOH'),'DOH',\r\nIF(contains(upper(Departure_Airport__c), 'DOHA'),'DOH',\r\nIF(contains(upper(Departure_Airport__c), 'DXB'),'DXB',\r\nIF(contains(upper(Departure_Airport__c), 'DUBAI'),'DXB',\r\nIF(contains(upper(Departure_Airport__c), 'AUH'),'AUH',\r\nIF(contains(upper(Departure_Airport__c), 'ABU'),'AUH',\r\nIF(contains(upper(Departure_Airport__c), 'TLV'),'TLV',\r\nIF(contains(upper(Departure_Airport__c), 'TEL AVIV'),'TLV',\r\nIF(contains(upper(Departure_Airport__c), 'AMM'),'AMM',\r\nIF(contains(upper(Departure_Airport__c), 'AMMAN'),'AMM',\r\nIF(contains(upper(Departure_Airport__c), 'MCT'),'MCT',\r\nIF(contains(upper(Departure_Airport__c), 'MUSCAT'),'MCT',\r\nIF(contains(upper(Departure_Airport__c), 'BAH'),'BAH',\r\nIF(contains(upper(Departure_Airport__c), 'BAHRAIN'),'BAH',\r\n'Not Middle East'\r\n))))))))))))))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Arrival_Airport_Processed",
+          "label" : "Arrival Airport Processed",
+          "formulaExpression" : "IF(contains(upper(Arrival_Airport__c), 'DOH'),'DOH',\r\nIF(contains(upper(Arrival_Airport__c), 'DOHA'),'DOH',\r\nIF(contains(upper(Arrival_Airport__c), 'DXB'),'DXB',\r\nIF(contains(upper(Arrival_Airport__c), 'DUBAI'),'DXB',\r\nIF(contains(upper(Arrival_Airport__c), 'AUH'),'AUH',\r\nIF(contains(upper(Arrival_Airport__c), 'ABU'),'AUH',\r\nIF(contains(upper(Arrival_Airport__c), 'TLV'),'TLV',\r\nIF(contains(upper(Arrival_Airport__c), 'TEL AVIV'),'TLV',\r\nIF(contains(upper(Arrival_Airport__c), 'AMM'),'AMM',\r\nIF(contains(upper(Arrival_Airport__c), 'AMMAN'),'AMM',\r\nIF(contains(upper(Arrival_Airport__c), 'MCT'),'MCT',\r\nIF(contains(upper(Arrival_Airport__c), 'MUSCAT'),'MCT',\r\nIF(contains(upper(Arrival_Airport__c), 'BAH'),'BAH',\r\nIF(contains(upper(Arrival_Airport__c), 'BAHRAIN'),'BAH',\r\n'Not Middle East'\r\n))))))))))))))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Departure_Airport_Code_Processed",
+          "label" : "Departure Airport Code Processed",
+          "formulaExpression" : "IF(contains(upper(Departure_Airport_Code__c), 'DOH'),'DOH',\r\nIF(contains(upper(Departure_Airport_Code__c), 'DOHA'),'DOH',\r\nIF(contains(upper(Departure_Airport_Code__c), 'DXB'),'DXB',\r\nIF(contains(upper(Departure_Airport_Code__c), 'DUBAI'),'DXB',\r\nIF(contains(upper(Departure_Airport_Code__c), 'AUH'),'AUH',\r\nIF(contains(upper(Departure_Airport_Code__c), 'ABU'),'AUH',\r\nIF(contains(upper(Departure_Airport_Code__c), 'TLV'),'TLV',\r\nIF(contains(upper(Departure_Airport_Code__c), 'TEL AVIV'),'TLV',\r\nIF(contains(upper(Departure_Airport_Code__c), 'AMM'),'AMM',\r\nIF(contains(upper(Departure_Airport_Code__c), 'AMMAN'),'AMM',\r\nIF(contains(upper(Departure_Airport_Code__c), 'MCT'),'MCT',\r\nIF(contains(upper(Departure_Airport_Code__c), 'MUSCAT'),'MCT',\r\nIF(contains(upper(Departure_Airport_Code__c), 'BAH'),'BAH',\r\nIF(contains(upper(Departure_Airport_Code__c), 'BAHRAIN'),'BAH',\r\n'Not Middle East'\r\n))))))))))))))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA6" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Arrival_Airport_Code_Processed",
+          "label" : "Arrival Airport Code Processed",
+          "formulaExpression" : "IF(contains(upper(Arrival_Airport_Code__c), 'DOH'),'DOH',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'DOHA'),'DOH',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'DXB'),'DXB',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'DUBAI'),'DXB',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'AUH'),'AUH',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'ABU'),'AUH',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'TLV'),'TLV',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'TEL AVIV'),'TLV',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'AMM'),'AMM',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'AMMAN'),'AMM',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'MCT'),'MCT',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'MUSCAT'),'MCT',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'BAH'),'BAH',\r\nIF(contains(upper(Arrival_Airport_Code__c), 'BAHRAIN'),'BAH',\r\n'Not Middle East'\r\n))))))))))))))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA7" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA6" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Sector_Departure_Code",
+          "label" : "Sector Departure Code",
+          "formulaExpression" : "IF(Sector_Departure_Port_Processed != 'Not Middle East', Sector_Departure_Port_Processed,\r\nIF(Departure_Airport_Code_Processed != 'Not Middle East',\r\nDeparture_Airport_Code_Processed,\r\nIF(Departure_Airport_Processed != 'Not Middle East', Departure_Airport_Processed,\r\n'Not Middle East'\r\n)))",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA8" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA7" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Sector_Arrival_Code",
+          "label" : "Sector Arrival Code",
+          "formulaExpression" : "IF(Sector_Arrival_Port_Processed != 'Not Middle East', Sector_Arrival_Port_Processed,\r\nIF(Arrival_Airport_Code_Processed != 'Not Middle East',\r\nArrival_Airport_Code_Processed,\r\nIF(Arrival_Airport_Processed != 'Not Middle East', Arrival_Airport_Processed,\r\n'Not Middle East'\r\n)))",
+          "precision" : 10,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FORMULA8" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "All Cases (For Middle East Processing)",
+          "name" : "All_Cases_For_Middle_East_Processing",
+          "folderName" : "NEO_MIDDLE_EAST_2026"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1767225600000" ]
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 532,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Edit Attributes"
+          },
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Middle East Hotwords"
+          },
+          "SPLIT0" : {
+            "label" : "Split"
+          },
+          "DETECT_SENTIMENT0" : {
+            "label" : "Detect Sentiment"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Sector Departure Port Processed"
+          },
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Sector Arrival Port Processed"
+          },
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Departure Airport Processed"
+          },
+          "FORMULA4" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Arrival Airport Processed"
+          },
+          "FORMULA5" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Departure Airport Code Processed"
+          },
+          "FORMULA6" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Arrival Airport Code Processed"
+          },
+          "FORMULA7" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Sector Departure Code"
+          },
+          "FORMULA8" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Sector Arrival Code"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "FORMULA0"
+        }, {
+          "source" : "FORMULA0",
+          "target" : "SPLIT0"
+        }, {
+          "source" : "SPLIT0",
+          "target" : "DETECT_SENTIMENT0"
+        }, {
+          "source" : "DETECT_SENTIMENT0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "FORMULA2"
+        }, {
+          "source" : "FORMULA2",
+          "target" : "FORMULA3"
+        }, {
+          "source" : "FORMULA3",
+          "target" : "FORMULA4"
+        }, {
+          "source" : "FORMULA4",
+          "target" : "FORMULA5"
+        }, {
+          "source" : "FORMULA5",
+          "target" : "FORMULA6"
+        }, {
+          "source" : "FORMULA6",
+          "target" : "FORMULA7"
+        }, {
+          "source" : "FORMULA7",
+          "target" : "FORMULA8"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "All Cases",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 812
+      },
+      "FILTER0" : {
+        "label" : "Recent Cases",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

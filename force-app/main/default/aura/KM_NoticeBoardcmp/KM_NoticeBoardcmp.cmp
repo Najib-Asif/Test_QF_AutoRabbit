@@ -1,0 +1,31 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" controller="KM_NoticeBoardController" access="global" >
+    <aura:handler name="init" action="{!c.loadCategories}" value="{!this}" />
+    <aura:attribute name="lstKey" type="list[]" default = ""/>
+    <!--  <aura:attribute name="lstvalue" type="Boolean" default = "false"/>-->
+    <lightning:card>
+    
+    <div class="slds-p-around_medium rich-text-container" >
+        
+        <!--  <aura:if isTrue = "{!v.lstvalue}">-->
+        <aura:iteration items="{!v.lstKey}"  var ="child">
+            <b> <lightning:formattedRichText value="{!child.Title}"/></b><br/><br/>
+            <lightning:formattedDateTime value="{!child.Startdate}" /> - <lightning:formattedDateTime value="{!child.Enddate}" /><br/><br/>
+            <lightning:formattedRichText value="{!child.ArticleOverview}" class="rich-text-content"/>  
+            <lightning:formattedRichText value="{!child.Announcement}" class="rich-text-content"/>
+        </aura:iteration>
+        <!--     <aura:set attribute ="else">
+                  <div class="slds-align_absolute-center" style="height:15rem" >
+                      <div class="slds-text-heading_medium">
+                    <p><center> 
+                      <img src="{!$Resource.Einstein_Image_for_Knowledge}"/>
+                        <lightning:formattedRichText value="OOps.. I could not locate the Latest National Memo Article for you"/> <br/>
+                                 <lightning:formattedRichText value="Can you Please use the side bar to navigate and pick the latest national memo while I get back to fixing the issue"/>                       
+                    </center>  </p> </div>  </div>
+                         
+            </aura:set>
+          
+             
+       </aura:if>--> 
+    </div>
+    </lightning:card>
+</aura:component>

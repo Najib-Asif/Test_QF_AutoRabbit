@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <outboundMessages>
+        <fullName>QAC_Flight_Notification</fullName>
+        <apiVersion>43.0</apiVersion>
+        <description>Notify QAC webstie on all the flight records related to agency service request created or updated in salesforce including the onces which is coming from the website itself</description>
+        <endpointUrl>https://qac.api.qantas.com/qac/notification/flightevent</endpointUrl>
+        <fields>Case__c</fields>
+        <fields>CreatedDate</fields>
+        <fields>External_System_Reference_Id__c</fields>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>system.updates@qantas.com.au</integrationUser>
+        <name>QAC Flight Notification</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>QAC Flight notification to website</fullName>
+        <actions>
+            <name>QAC_Flight_Notification</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Send outbound messages to QCP queue whenver a flight record relevant to agency related service request is created or updated</description>
+        <formula>AND( Case__r.RecordType.Name = &quot;Service Request&quot;, RecordType.Name = &quot;Service Request&quot;, ISPICKVAL(Case__r.Account.Type, &quot;Agency Account&quot;), NOT(ISBLANK(Case__r.Account.Qantas_Industry_Centre_ID__c)), NOT(  OR(  ISPICKVAL(Case__r.Type, &quot;Group Waivers&quot;),ISPICKVAL(Case__r.Type, &quot;SBT&quot;),ISPICKVAL(Case__r.Type, &quot;Service Request&quot;),  ISPICKVAL(Case__r.Type, &quot;Commerical Waiver (non BART)&quot;), CONTAINS( TEXT(Case__r.Problem_Type__c) , &quot;Internal&quot;)  )  )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

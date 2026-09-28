@@ -1,0 +1,350 @@
+<template>
+    <lightning-card  title="BCP Form" >
+        <lightning-spinner if:true={showSpinner} alternative-text="Loading" size="small"></lightning-spinner>
+        <div if:true={hasError}> Some error occured.</div>
+        <div if:true={isLoaded}>
+
+            <div if:false={bcpData}> {noFileMessage}</div>
+            <div if:true={bcpData}>
+            <lightning-accordion class="example-accordion"
+                         onsectiontoggle={handleToggleSection}
+                         allow-multiple-sections-open 
+                         active-section-name={activeSections}>
+
+                <lightning-accordion-section name="1" label="Service type" lwc:if={bcpData.serviceType}>
+                    <lightning-layout multiple-rows padding="around-small">
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.bookingType}>
+                            Booking Type: {bcpData.serviceType.bookingType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.departureType}>
+                            Departing within one business day?: {bcpData.serviceType.departureType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.critRequirement}>
+                            Critical requirements?: {bcpData.serviceType.critRequirement}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.holdingTicket}>
+                            Ticket credit?: {bcpData.serviceType.holdingTicket}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.ticketNumber}>
+                            Ticket number for the ticket in credit: {bcpData.serviceType.ticketNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.holdingCreditReason}>
+                            Reason for holding in credit: {bcpData.serviceType.holdingCreditReason}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.serviceRequest}>
+                            Service request reason: {bcpData.serviceType.serviceRequest}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.nameChangeAgree}>
+                            Name Change statement agreement: {bcpData.serviceType.nameChangeAgree}
+                        </lightning-layout-item>
+                       <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.affectedByScheduleChange}>
+                        Booked affected by schedule change?: {bcpData.serviceType.affectedByScheduleChange}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.classUpgrade}>
+                            Upgrade request?: {bcpData.serviceType.classUpgrade}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.serviceType.requestType}>
+                            Schedule change request: {bcpData.serviceType.requestType}
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-accordion-section>
+
+                <lightning-accordion-section name="2" label="Booking details" lwc:if={bcpData.bookingDetails}>
+                    <lightning-layout multiple-rows padding="around-small">
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.tripType}>
+                            Round trip: {bcpData.bookingDetails.tripType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" lwc:if={bcpData.bookingDetails.fareType}>
+                            Fare type: {bcpData.bookingDetails.fareType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.accountCode}>
+                            Account code: {bcpData.bookingDetails.accountCode}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" lwc:if={bcpData.bookingDetails.flexibleWithFare}>
+                            Best available fare in the cabin below: {bcpData.bookingDetails.flexibleWithFare}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.cabinClass}>
+                            Cabin: {bcpData.bookingDetails.cabinClass}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.bookingNumber}>
+                            PNR number: {bcpData.bookingDetails.bookingNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.firstName}>
+                            First name: {bcpData.bookingDetails.firstName}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.surName}>
+                            Last name: {bcpData.bookingDetails.surName}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.reissueType}>
+                            Tickets to be reissued: {bcpData.bookingDetails.reissueType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.ticketNumber}>
+                            Ticket number: {bcpData.bookingDetails.ticketNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.bookingDetails.cancelType}>
+                            Cancel booking for all passengers?: {bcpData.bookingDetails.cancelType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" padding="around-small" lwc:if={bcpData.bookingDetails.segmentDetails}>
+                            <lightning-datatable lwc:if={bcpData.bookingDetails.segmentDetails} key-field="id" 
+                                        data={bcpData.bookingDetails.segmentDetails} columns={bookingSegmentDetailsColumns}
+                                        column-widths-mode="auto" hide-checkbox-column>
+                            </lightning-datatable>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" padding="around-small" lwc:if={bcpData.bookingDetails.flightDetails}>
+            
+                            <lightning-datatable lwc:if={bcpData.bookingDetails.flightDetails} key-field="id" 
+                                        data={bcpData.bookingDetails.flightDetails} columns={bookingFlightDetailsColumns} 
+                                        column-widths-mode="auto" hide-checkbox-column>
+                            </lightning-datatable>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" padding="around-small" lwc:if={bcpData.bookingDetails.paxDetails}>
+                            <b>Passenger Details: </b> 
+                            <lightning-datatable lwc:if={bcpData.bookingDetails.paxDetails} key-field="id" 
+                                        data={bcpData.bookingDetails.paxDetails} columns={bookingPaxDetailsColumns}
+                                        column-widths-mode="auto" hide-checkbox-column>
+                            </lightning-datatable>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-accordion-section>
+                
+                <lightning-accordion-section name="3" label="Request details" lwc:if={bcpData.requestDetails}>
+                    <lightning-layout multiple-rows padding="around-small">
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.bookingQuoted}>
+                            Booking quoted/reassessed?: {bcpData.requestDetails.bookingQuoted}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.requestNumber}>
+                            Request Number (ticket request): {bcpData.requestDetails.requestNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.emd}>
+                            EMD Number: {bcpData.requestDetails.emd}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.holdTicket}>
+                            Does the passenger hold the ticket?: {bcpData.requestDetails.holdTicket}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.fareType}>
+                            Fare Type: {bcpData.requestDetails.fareType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.accountCode}>
+                            Account Code: {bcpData.requestDetails.accountCode}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.change}>
+                            What has changed?: {bcpData.requestDetails.change}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.ticketNumber}>
+                            Ticket number: {bcpData.requestDetails.ticketNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.changeDescription}>
+                            Detailed description of change: {bcpData.requestDetails.changeDescription}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.waiverType}>
+                            Type of rule waiver: {bcpData.requestDetails.waiverType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.waiverReason}>
+                            Reason for waiver request: {bcpData.requestDetails.waiverReason}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.detailDescription}>
+                            Detailed description: {bcpData.requestDetails.detailDescription}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.desiredTime}>
+                            Peferred time or time range (optional): {bcpData.requestDetails.desiredTime}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.preferredFlightNumber}>
+                            Flight number (if known): {bcpData.requestDetails.preferredFlightNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.requestDetails.departureDate}>
+                            Depature date: {bcpData.requestDetails.departureDate}
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="12" class="slds-p-around_xxx-small" lwc:if={requestDetails_FlightData}>
+                            <p><b>Flight Details: </b></p>
+                        </br>
+                            <lightning-tabset variant="vertical"> 
+                                 <div style="overflow-x: scroll;">   
+                                <template for:each={requestDetails_FlightData} for:item="eachFlight" for:index="tabIndex">
+                                    <lightning-tab label={eachFlight.fno} lwc:if={eachFlight} key={eachFlight}>
+                                        <lightning-layout multiple-rows padding="around-small">
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.currentFlightNumber}>
+                                               <b> Flight number: </b> {eachFlight.flightDetails.currentFlightNumber}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.newOrigin}>
+                                                New Origin: {eachFlight.flightDetails.newOrigin}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.newDestination}>
+                                                New Destination: {eachFlight.flightDetails.newDestination}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.preferredTimeOrFlight}>
+                                                Preferred Time or Flight: {eachFlight.flightDetails.preferredTimeOrFlight}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.preferredFlightNumber}>
+                                                <b> Preferred Flight Number: </b> {eachFlight.flightDetails.preferredFlightNumber}
+                                             </lightning-layout-item>
+                                             <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.departureDate}>
+                                                <b> Departure Date: </b> {eachFlight.flightDetails.departureDate}
+                                             </lightning-layout-item>
+                                             <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.cancelSegment}>
+                                                Cancel Segment: {eachFlight.flightDetails.cancelSegment}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.flexibleWithTime}>
+                                                Flexible With Time: {eachFlight.flightDetails.flexibleWithTime}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.newDepartureDate}>
+                                                New Departure Date: {eachFlight.flightDetails.newDepartureDate}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.newReturnDate}>
+                                                New Return Date: {eachFlight.flightDetails.newReturnDate}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.flexibleWithDate}>
+                                                Flexible With Dates: {eachFlight.flightDetails.flexibleWithDate}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.newFareType}>
+                                                New Fare Type: {eachFlight.flightDetails.newFareType}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.accountCode}>
+                                                Account Code: {eachFlight.flightDetails.accountCode}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.bestFare}>
+                                                Best available fare in the cabin below: {eachFlight.flightDetails.bestFare}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.cabinClass}>
+                                                Cabin Class: {eachFlight.flightDetails.cabinClass}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.desiredTime}>
+                                               <b> Desired Time: </b> {eachFlight.flightDetails.desiredTime}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachFlight.flightDetails.hasSpecialReq}>
+                                                Has Special Req: {eachFlight.flightDetails.hasSpecialReq}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" padding="around-small" lwc:if={eachFlight.flightDetails.specialRequirements}>
+                                                <b> Special Requirement: </b> 
+                                                <lightning-datatable  key-field="id" data={eachFlight.flightDetails.specialRequirements}
+                                                                    columns={specialRequirementsColumns} 
+                                                                    hide-checkbox-column
+                                                                    column-widths-mode="auto"
+                                                                    ></lightning-datatable>
+                                                
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-tab>
+                                </template>
+                            </div>
+                            </lightning-tabset>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-p-around_xxx-small" lwc:if={requestDetails_PaxData}>
+                            <p><b>Pax Details</b></p>
+                        </br>
+                            <lightning-tabset variant="vertical">
+                                <div style="overflow-x: scroll;">
+                                <template for:each={requestDetails_PaxData} for:item="eachPax" for:index="tabIndex">
+                                    <lightning-tab label={eachPax.pno} lwc:if={eachPax} key={eachPax} style="width: 12 rem;">
+                                        <lightning-layout multiple-rows padding="around-small">
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.isPrimary}>
+                                               <b> Primary passenger:</b> {eachPax.paxDetails.isPrimary}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.firstName}>
+                                               <b> First Name: </b>{eachPax.paxDetails.firstName}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.middleName}>
+                                                Middle name (if any): {eachPax.paxDetails.middleName}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.surName}>
+                                               <b> Last name:</b> {eachPax.paxDetails.surName}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.dateOfBirth}>
+                                                Date of Birth: {eachPax.paxDetails.dateOfBirth}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.countryCode}>
+                                               <b> Country Code:</b> {eachPax.paxDetails.countryCode}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.contact}>
+                                                Passenger contact number: {eachPax.paxDetails.contact}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.loyaltyProgram}>
+                                                Loyalty program (optional): {eachPax.paxDetails.loyaltyProgram}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.loyaltyProgramNumber}>
+                                                Loyalty program number (optional): {eachPax.paxDetails.loyaltyProgramNumber}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.mealRequirement}>
+                                                Meal Requirement: {eachPax.paxDetails.mealRequirement}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.hasSpecialReq}>
+                                                Optional: TCP, wheelchair, or deaf/blind assistance required: {eachPax.paxDetails.hasSpecialReq}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.assoAdultFirstName}>
+                                                Associated Adult's First Name: {eachPax.paxDetails.assoAdultFirstName}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.assoAdultSurName}>
+                                                Associated Adult's Surname: {eachPax.paxDetails.assoAdultSurName}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={eachPax.paxDetails.babyMealRequirement}>
+                                                Baby meal required?: {eachPax.paxDetails.babyMealRequirement}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" padding="around-small" lwc:if={eachPax.paxDetails.specialRequirements}>
+                                                <b> Special Requirement: </b> 
+                                                <lightning-datatable lwc:if={eachPax.paxDetails.specialRequirements}
+                                                key-field="id"
+                                                data={eachPax.paxDetails.specialRequirements}
+                                                columns={specialRequirementsColumns} 
+                                                column-widths-mode="auto"
+                                                 hide-checkbox-column
+                                                wrap-table-header>
+                                            </lightning-datatable>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-tab>
+                                </template>
+                            </div>
+                                 </lightning-tabset>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-accordion-section>
+                <lightning-accordion-section name="4" label="Agent details" lwc:if={bcpData.submitDetails}>
+                    <lightning-layout multiple-rows padding="around-small">
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.agencyName}>
+                            Agency Name: {bcpData.submitDetails.agencyName}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.yourName}>
+                            Your name: {bcpData.submitDetails.yourName}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.email}>
+                            Your email: {bcpData.submitDetails.email}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.mobile}>
+                            Mobile / Direct line: {bcpData.submitDetails.mobile}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.countryCode}>
+                            Country Code: {bcpData.submitDetails.countryCode}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.submitType}>
+                            Submit request: {bcpData.submitDetails.submitType}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.quotedReassessed}>
+                            Booking quoted/reassessed?: {bcpData.submitDetails.quotedReassessed}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.holdTicket}>
+                            Does the passenger hold the ticket?: {bcpData.submitDetails.holdTicket}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.change}>
+                            What has changed?: {bcpData.submitDetails.change}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.ticketNumber}>
+                            Ticket number: {bcpData.submitDetails.ticketNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.requestNumber}>
+                            Request Number (ticket request): {bcpData.submitDetails.requestNumber}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-p-around_xxx-small" lwc:if={bcpData.submitDetails.emd}>
+                            EMD Number (optional, if available): {bcpData.submitDetails.emd}
+                        </lightning-layout-item>
+                        
+                        
+                        
+                    </lightning-layout>
+                </lightning-accordion-section>
+            </lightning-accordion>
+            </div>
+
+        </div>
+
+    </lightning-card>
+</template>

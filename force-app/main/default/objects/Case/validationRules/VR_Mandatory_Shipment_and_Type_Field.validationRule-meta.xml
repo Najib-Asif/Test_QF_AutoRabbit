@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Mandatory_Shipment_and_Type_Field</fullName>
+    <active>false</active>
+    <description>CRM-8732 Issue Type = Duplicate Case to Skip the required Type and Shipment Field</description>
+    <errorConditionFormula>AND(
+NOT(ISCHANGED( OwnerId )),
+NOT (
+(CONTAINS(&apos;System Admin&apos;, $User.FirstName) &amp;&amp; CONTAINS(&apos;Updates&apos;, $User.LastName)) ||
+(CONTAINS(&apos;Automated&apos;, $User.FirstName) &amp;&amp; CONTAINS(&apos;Process&apos;, $User.LastName))
+),
+CONTAINS(RecordType.DeveloperName,&apos;Qantas_Freight&apos;),
+OR(
+AND(
+NOT( ISNEW()),
+NOT( ISPICKVAL( Freight_Resolve_Reason__c , &apos;Duplicate Case&apos;)),
+NOT( ISPICKVAL( Type , &apos;Invalid Case&apos;)),
+OR(
+ISBLANK(TEXT(Freight_Shipment__c)),
+ISBLANK(TEXT( Type ))
+)
+),
+AND(
+ISNEW(),
+ISPICKVAL(Origin,&apos;FRT Phone&apos;),
+OR(
+ISBLANK(TEXT(Freight_Shipment__c)),
+ISBLANK(TEXT( Type ))
+)
+)
+)
+)</errorConditionFormula>
+    <errorMessage>Please enter Type, Shipment to proceed</errorMessage>
+</ValidationRule>

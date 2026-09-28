@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Legal_required_submission_date</fullName>
+    <active>true</active>
+    <description>Make Approval Submission Date mandatory while Legal approval is required</description>
+    <errorConditionFormula>AND(ISPICKVAL( Legal_Approval__c , &apos;Required&apos;), OR(ISNULL( Approval_Submission_Date__c ), Approval_Submission_Date__c &gt; TODAY()) )</errorConditionFormula>
+    <errorDisplayField>Approval_Submission_Date__c</errorDisplayField>
+    <errorMessage>The Approval Submission Date cannot be a future date or null, please verify.</errorMessage>
+</ValidationRule>

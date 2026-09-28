@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Open_Time_Hours__c</fullName>
+    <description>FCRM-879
+This field has been created to calculate the number of hours a case has spend unresolved.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+	AND(RecordType.DeveloperName =&apos;QAC_Contact_Us_Support&apos;,ISPICKVAL(Type,&apos;NDC&apos;)), 
+ 	IF(IsClosed, 
+		FLOOR((ClosedDate - FreightLastCommDate__c)*24), 
+		FLOOR((NOW()-FreightLastCommDate__c)*24)
+	) , 
+	IF( 
+		ISBLANK( Reopened_Date__c ) , 
+		IF( 
+			ISBLANK( ClosedDate ) , 
+			((Today() - DATEVALUE(CreatedDate))*24),
+			((DATEVALUE(ClosedDate) - DATEVALUE(CreatedDate))*24)
+		) , 
+		IF(
+			ISBLANK( ClosedDate ) , 
+			((Today() - DATEVALUE(CreatedDate))*24), 
+			((DATEVALUE(ClosedDate) - DATEVALUE(CreatedDate))*24)
+		)
+	)	
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Hours since Last Comms</inlineHelpText>
+    <label>Case Open Time (Hours)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

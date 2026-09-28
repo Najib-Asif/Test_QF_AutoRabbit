@@ -1,0 +1,10 @@
+<aura:documentation>
+	<aura:description>Documentation</aura:description>
+	<aura:example name="QCC_DisruptionWarning" ref="QCC_DisruptionWarning" label="Label">
+		When flight cancellation or "significant delay" is logged in OGS, information pushed to Salesforce for customer's with a booking on this flight.
+        Note displayed in console to indicate Flight #, Origin, Destination and flight status (e.g. Cancelled)
+        On page load, the Contact Record will review any related Passenger Records (Related Event), and check the “Scheduled Departure Date/Time” field on the Passenger Record’s Event.
+        If the Scheduled Departure Date/Time is a future date/time from the current time (time now), then the Contact is considered “In Disruption” and a disruption warning sign will be displayed.
+        If the Scheduled Departure Date/Time is already past the time now, that Contact is no longer considered in disruption.
+	</aura:example>
+</aura:documentation>

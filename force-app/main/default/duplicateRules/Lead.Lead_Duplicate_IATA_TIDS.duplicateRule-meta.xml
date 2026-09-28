@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DuplicateRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOnInsert>Allow</actionOnInsert>
+    <actionOnUpdate>Allow</actionOnUpdate>
+    <alertText>You&apos;re creating a duplicate record. We recommend you use an existing Account with same IATA/TIDS/QIN Number instead.</alertText>
+    <description>This rule matches on IATA or TIDS number of Agency Account on Lead</description>
+    <duplicateRuleFilter>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <duplicateRuleFilterItems>
+            <field>Freight_Account_Business_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Loyalty</value>
+            <sortOrder>1</sortOrder>
+            <table>Lead</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Override_Duplicate_Rules_System__c</field>
+            <operation>notEqual</operation>
+            <value>true</value>
+            <sortOrder>2</sortOrder>
+            <table>Lead</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Alias</field>
+            <operation>notEqual</operation>
+            <value>sysup</value>
+            <sortOrder>3</sortOrder>
+            <table>User</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Data Administrator</value>
+            <sortOrder>4</sortOrder>
+            <table>User</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Agency, Charter, Customer, Prospect, Other</value>
+            <sortOrder>5</sortOrder>
+            <table>Lead</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Freight_Business_Sub_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Qantas Business Rewards, Qantas Frequent Flyer, QBR and QFF</value>
+            <sortOrder>6</sortOrder>
+            <table>Lead</table>
+        </duplicateRuleFilterItems>
+    </duplicateRuleFilter>
+    <duplicateRuleMatchRules>
+        <matchRuleSObjectType>Account</matchRuleSObjectType>
+        <matchingRule>Duplicate_IATA_TIDS_QIN</matchingRule>
+        <objectMapping>
+            <inputObject>Lead</inputObject>
+            <mappingFields>
+                <inputField>Agency_TIDS__c</inputField>
+                <outputField>Agency_TIDS_Number__c</outputField>
+            </mappingFields>
+            <mappingFields>
+                <inputField>IATA__c</inputField>
+                <outputField>IATA_Number__c</outputField>
+            </mappingFields>
+            <mappingFields>
+                <inputField>Qantas_Pseudo_Number__c</inputField>
+                <outputField>Qantas_Pseudo_Number__c</outputField>
+            </mappingFields>
+            <outputObject>Account</outputObject>
+        </objectMapping>
+    </duplicateRuleMatchRules>
+    <isActive>true</isActive>
+    <masterLabel>Lead - Duplicate IATA TIDS</masterLabel>
+    <operationsOnInsert>Alert</operationsOnInsert>
+    <operationsOnInsert>Report</operationsOnInsert>
+    <operationsOnUpdate>Alert</operationsOnUpdate>
+    <operationsOnUpdate>Report</operationsOnUpdate>
+    <securityOption>BypassSharingRules</securityOption>
+    <sortOrder>3</sortOrder>
+</DuplicateRule>

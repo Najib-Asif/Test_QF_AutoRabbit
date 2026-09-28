@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FMCA_Revenue_should_be_lesser_Total_MCA</fullName>
+    <active>true</active>
+    <description>Forecast MCA Revenue should not be greater than Forecast QF Revenue</description>
+    <errorConditionFormula>Forecast_MCA_Revenue__c &gt; Qantas_Annual_Expenditure__c</errorConditionFormula>
+    <errorDisplayField>Forecast_MCA_Revenue__c</errorDisplayField>
+    <errorMessage>Forecast MCA Revenue should be less than Forecast QF Revenue</errorMessage>
+</ValidationRule>

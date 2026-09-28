@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Team leads do not need Team lead approval, it goes directly to NAM/Manager SBD approval
+
+Entry Criteria Manager Role&apos;s for ID:-
+
+00E90000001P7ax - QF-DOM-Sales-B&amp;G-New Business &amp; Development
+
+00E90000001P6Kb ---&gt; QF-DOM-Sales-B&amp;G-Strategic Accounts
+
+00E90000001P7am ---&gt; QF-DOM-Sales-B&amp;G-Resources and Charters
+
+00E90000001P6Lo ---&gt; QF-DOM-Sales-SME-QIS-Sr Manager
+
+00E90000001P6Lj ---&gt; QF-DOM-Sales-SME-QIS</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>User.Manager_s_Role_ID__c</field>
+                <operation>notEqual</operation>
+                <value>00E90000001P7ax,00E90000001P6Kb,00E90000001P7am,00E90000001P6Lo,00E90000001P6Lj</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Approval by Team Lead</label>
+        <name>Approval_by_Team_Lead</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Approval needs to go to NAM or Manager SBD</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>User.UserRole</field>
+                <operation>notEqual</operation>
+                <value>QF-DOM-Sales-SME-QIS-Sr Manager,QF-DOM-Sales-B&amp;G-Regional VIC/TAS,QF-DOM-Sales-B&amp;G-Regional WA/SA,QF-DOM-Sales-B&amp;G-Regional QLD</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Created_by_Role__c</field>
+                <operation>notEqual</operation>
+                <value>QF-DOM-Sales-B&amp;G-Regional QLD,QF-DOM-Sales-B&amp;G-Regional VIC/TAS-Manager</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Approval by NAM/Manager SBD</label>
+        <name>Approval_by_NAM_Manager_SBD</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>This approval process is used for the deal support cases with type equal to deal extension or deal termination 
+RS - Removal of Step 3 as per CRM-4988
+
+Entry Criteria Manager Role&apos;s for ID
+00E90000001P6J4 ---&gt; QF-DOM-Sales-B&amp;G
+00E90000000b2Jz ---&gt; QF-INT-Sales-Asia-SG
+00E90000000b2KO ---&gt; QF-INT-Sales-North America-NZ</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7</booleanFilter>
+        <criteriaItems>
+            <field>Case.NAM_s_Approval__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Type</field>
+            <operation>equals</operation>
+            <value>Deal Termination</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.Manager_s_Role_ID__c</field>
+            <operation>notEqual</operation>
+            <value>00E90000001P6J4,00E90000000b2Jz,00E90000000b2KO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Deal Support Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.CountryCode</field>
+            <operation>equals</operation>
+            <value>AU</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Sub_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Channel Agency Payment Contract</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Created_by_Role__c</field>
+            <operation>notEqual</operation>
+            <value>QF-DOM-Sales-B&amp;G-Regional QLD,QF-DOM-Sales-B&amp;G-Regional VIC/TAS-Manager</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Assign_to_Deal_Support_Queue</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>NAM_Approved_is_Ticked</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_update</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status_as_Pending</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Deal Termination</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>47</processOrder>
+    <recallActions>
+        <action>
+            <name>Approval_Status_Change</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

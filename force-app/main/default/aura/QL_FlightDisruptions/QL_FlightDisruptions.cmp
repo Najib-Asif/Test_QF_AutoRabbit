@@ -1,0 +1,27 @@
+<!---
+        **********************************************************************************************
+        Author:        Gnanavelu Thirumalmarugan
+        Company:       TCS
+        Description:   Qantas BAU Flight disruption Component 
+            
+        ************************************************************************************************
+        History
+        ************************************************************************************************
+        03-Dec-2018      Gnanavelu Thirumalmarugan               Initial Design
+        **********************************************************************************************
+        -->
+
+<aura:component controller="QCC_FlightDisruptions" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:handler name="change" value="{!v.Frequentflyernumber}" action="{!c.fetchFlightDisruptionDetails}" />
+    <aura:attribute name="disruptCount" type="String" default="0"/>
+    <aura:attribute name="disruptRec" type="Object[]"/>
+    <aura:attribute name="Frequentflyernumber" type="String"/>
+    <aura:attribute name="RecId" type="String"/>
+    <aura:attribute name="contactDetails" type="Contact"/>
+
+    <ul class="slds-list--horizontal">   
+        <li class="slds-text-color_weak LISpacing">Disruptions in last 12 months: </li>
+        <li title="Description for second label"><span onclick="{!c.navigateToDisruptComp}"><a href="">{!v.disruptCount}</a></span></li>
+    </ul>
+</aura:component>

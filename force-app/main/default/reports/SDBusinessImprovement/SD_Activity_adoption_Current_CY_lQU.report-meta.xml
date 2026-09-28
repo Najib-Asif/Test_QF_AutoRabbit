@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>User$Name</field>
+    </columns>
+    <columns>
+        <field>User.Activity$CreatedById$Subject</field>
+    </columns>
+    <columns>
+        <field>User.Activity$CreatedById$Account</field>
+    </columns>
+    <columns>
+        <field>User.Activity$CreatedById$Task_type__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>User.Activity$CreatedById$IsTask</field>
+    </columns>
+    <columns>
+        <field>User.Activity$CreatedById$Subtype__c</field>
+    </columns>
+    <columns>
+        <field>User.Activity$CreatedById$Status</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>User*User$Profile_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Qantas Service Lightning,QL GSA,QL Qantas No Access,QL Qantas Service,QL_Qantas_Sales,QL_Qantas_US_Sales</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>S&amp;D Activity adoption - Current CY</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Users_with_without_Activities__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>User.Activity$CreatedById$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURY</interval>
+    </timeFrameFilter>
+</Report>

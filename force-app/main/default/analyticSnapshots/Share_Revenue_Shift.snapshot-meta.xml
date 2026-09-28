@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalyticSnapshot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Account Share/ Revenue Shift</description>
+    <mappings>
+        <sourceField>ACCOUNT_ID</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>Snapshot__c.Account__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>USERS.NAME</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>Snapshot__c.Account_Owner__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.Tier_Segmentation_Flag__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>Snapshot__c.Tier_Segmentation_Flag__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>ACCOUNT.NAME</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>Snapshot__c.Account_Name__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.QF_Revenue__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>Snapshot__c.QF_Revenue__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.QF_Market_Share__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>Snapshot__c.QF_Market_Share__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>ExecutionTime</sourceField>
+        <sourceType>snapshot</sourceType>
+        <targetField>Snapshot__c.Snapshot_Date__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.Qantas_Corporate_Identifier__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>Snapshot__c.QCI__c</targetField>
+    </mappings>
+    <name>Share/ Revenue Shift</name>
+    <runningUser>fidelia.teoh@qantas.com.au</runningUser>
+    <sourceReport>B_G_Sales_Coordinator_Team/Tier_Segmentation</sourceReport>
+    <targetObject>Snapshot__c</targetObject>
+</AnalyticSnapshot>

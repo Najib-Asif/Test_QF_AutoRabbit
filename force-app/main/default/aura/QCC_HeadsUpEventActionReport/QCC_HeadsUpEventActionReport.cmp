@@ -1,0 +1,32 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" 
+                controller="QCC_HeadsUpEventActionReportController">
+	<aura:attribute name="gridData" type="List" default="[]"/> 
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    
+    <div class="slds">
+        <table class="slds-table slds-table--bordered slds-table_fixed-layout">
+            <thead>
+                <th class="slds-cell-wrap"><lightning:buttonIcon iconName="utility:refresh" variant="bare" onclick="{! c.doInit }" alternativeText="Refresh" /></th>
+                <!--<th class="slds-cell-wrap">CLASS</th>  -->
+                <th class="slds-cell-wrap slds-text-align_center">PENDING</th>
+                <th class="slds-cell-wrap slds-text-align_center">UTR</th>
+                <th class="slds-cell-wrap slds-text-align_center">NO CHANGE</th>
+                <th class="slds-text-align_center">REBOOKED</th>
+
+            </thead>
+            <tbody>       
+                <aura:iteration items="{!v.gridData}" var="row">
+                    <tr class="slds-hint-parent ">
+                        <td class="firstCol slds-cell-wrap">{!row.cabinClass}</td>
+                        <td class="col slds-text-align_center">{!row.numOfPending}</td>
+                        <td class="col slds-text-align_center">{!row.numOfNoContactMade}</td>
+                        <td class="col slds-text-align_center">{!row.numOfStayingOnFlight}</td>
+                        <td class="col slds-text-align_center">{!row.numOfRebooked}</td>
+                    </tr>
+                </aura:iteration>
+                
+            </tbody> 
+		</table>
+    </div>
+</aura:component>

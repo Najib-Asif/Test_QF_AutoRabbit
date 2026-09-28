@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Other_Services_Formula__c</fullName>
+    <description>Results to the text value equivalent of the &quot;other services&quot; code. This is referenced by the Email Alert for first host is sent.</description>
+    <externalId>false</externalId>
+    <formula>IF(OR(INCLUDES( QCC_Other_Services__c , &quot;WCHR&quot;),INCLUDES( QCC_Other_Services__c , &quot;WCHS&quot;),INCLUDES( QCC_Other_Services__c , &quot;WCHC&quot;)),
+	IF(INCLUDES( QCC_Other_Services__c , &quot;BSCT&quot;),
+		IF(INCLUDES( QCC_Other_Services__c , &quot;MAAS&quot;),&apos;wheelchair assistance, a bassinet and assistance at the airport.&apos;,&apos;wheelchair assistance and a bassinet.&apos;),IF(INCLUDES( QCC_Other_Services__c , &quot;MAAS&quot;),&apos;wheelchair assistance and assistance at the airport.&apos;,&apos;wheelchair assistance.&apos;)
+	)
+,
+IF(INCLUDES( QCC_Other_Services__c , &quot;BSCT&quot;), 
+	IF(INCLUDES( QCC_Other_Services__c , &quot;MAAS&quot;),&apos;a bassinet and assistance at the airport.&apos;,&apos; a bassinet.&apos;) 
+	,IF(INCLUDES( QCC_Other_Services__c , &quot;MAAS&quot;),&apos;assistance at the airport.&apos;,NULL)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Other Services (formula)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

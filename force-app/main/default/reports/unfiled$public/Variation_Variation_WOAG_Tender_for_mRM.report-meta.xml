@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contract__c$Name</field>
+    </columns>
+    <columns>
+        <field>Contract__c.Contract_Discount_Lists__r$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Contract__c.Contract_Discount_Lists__r$Discount__c</field>
+    </columns>
+    <columns>
+        <field>Contract__c.Contract_Discount_Lists__r$Booking_Class_Name__c</field>
+    </columns>
+    <columns>
+        <field>Contract__c.Contract_Discount_Lists__r$Product_Code__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Contract__c$Name</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Variation - Variation - WOAG Tender for the Provision of Air Services 2016</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Variation - Variation - WOAG Tender for</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Contract_with_contract_fare_discounts__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contract__c$Agent_Override_End_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

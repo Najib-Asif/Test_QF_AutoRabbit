@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_QuoteAcceptanceCheck</fullName>
+    <active>true</active>
+    <description>Freight Implementation: There should not be any other Quote existing in &apos;Accepted&apos; state.</description>
+    <errorConditionFormula>AND(
+        Opportunity.RecordType.DeveloperName = &quot;Freight&quot;,
+	Opportunity.Freight_Quote_Count__c == 1,
+	ISNEW(),
+         RecordType.DeveloperName  = &quot;Freight_Quote&quot;
+
+
+)</errorConditionFormula>
+    <errorMessage>An Accepted Quote already exists for this Opportunity.</errorMessage>
+</ValidationRule>

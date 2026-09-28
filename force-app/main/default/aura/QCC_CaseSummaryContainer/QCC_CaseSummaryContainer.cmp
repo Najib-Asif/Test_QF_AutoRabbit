@@ -1,0 +1,22 @@
+<aura:component controller="QCC_CustomerDetailController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="objCon" type="Object"/>
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="isContactPresent" type="Boolean" default="true"/>
+
+    <aura:attribute name="record" type="Object"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div >
+        <aura:renderIf isTrue="{!v.isContactPresent}">
+         <lightning:card>
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem  flexibility="auto" padding="around-small">
+                    <!--CaseSummary Information-->
+                    <c:QCC_CaseSummary aura:id="CaseComponet" contactDetails="{!v.objCon}" recordId="{!v.recordId}"/>
+                </lightning:layoutItem>
+            </lightning:layout>
+         </lightning:card>   
+            
+        </aura:renderIf>
+    </div>
+</aura:component>

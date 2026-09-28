@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Entering_Qantas_Club_Discount</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( ISPICKVAL(  Qantas_Club_Discount__c , &apos;NO&apos;), OR(NOT(ISBLANK( TEXT(Qantas_Club_Discount_Offer__c))), 
+NOT(ISBLANK( TEXT(Qantas_Club_Join_Discount_Offer__c)))))</errorConditionFormula>
+    <errorMessage>Offer is not valid, please select none for Qantas Club Join Discount Offer,Qantas Club Member Discount Offer</errorMessage>
+</ValidationRule>

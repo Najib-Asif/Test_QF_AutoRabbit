@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AU_Agency_Accounts_Industry_Travel</fullName>
+    <active>true</active>
+    <description>Checks if all the Agency Australian Accounts has the Industry as Travel</description>
+    <errorConditionFormula>AND( BillingCountry = &quot;AU&quot;, RecordType.DeveloperName =&apos;Agency_Account&apos;, NOT(ISPICKVAL(Industry ,&apos;Travel&apos;)))</errorConditionFormula>
+    <errorDisplayField>Industry</errorDisplayField>
+    <errorMessage>Incorrect Industry.Please assign Industry as Travel for Agency Accounts</errorMessage>
+</ValidationRule>

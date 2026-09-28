@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_Red_e_deal_Q_Approvals_Required__c</fullName>
+    <description>If the Fare Combination is selected as &quot;Mainline Red-e-deal + Q&quot; approval should go to TeamLead-&gt;NAM_&gt;DO</description>
+    <label>No of Red-e-deal + Q Approvals Required</label>
+    <summaryFilterItems>
+        <field>Discount_List__c.Fare_Combination__c</field>
+        <operation>equals</operation>
+        <value>Mainline - Red e-Deal + Q</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Discount_List__c.Proposal__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

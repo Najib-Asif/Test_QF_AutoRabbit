@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Anniversary_Date__c</fullName>
+    <formula>IF(DATE(YEAR(TODAY()),MONTH( Start_Date__c ),DAY(Start_Date__c)) &lt;= TODAY(), DATE(YEAR(TODAY())+1,MONTH(Start_Date__c),DAY(Start_Date__c)), DATE(YEAR(TODAY()),MONTH(Start_Date__c),DAY(Start_Date__c)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Anniversary Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

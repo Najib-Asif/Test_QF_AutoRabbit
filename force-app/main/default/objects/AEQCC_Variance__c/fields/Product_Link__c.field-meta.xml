@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Link__c</fullName>
+    <label>Product Link</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>AEQCC Registration</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Product_Registration__c</referenceTo>
+    <relationshipLabel>AMEX Variance</relationshipLabel>
+    <relationshipName>AEQCC_Variance</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,30 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="DataCategoryTreeStructure" access="global">
+    
+    <aura:attribute name="categoryGroups" type="List"/>
+    <aura:attribute name="selectedGroup" type="String"/>
+    <aura:attribute name="categoryTree" type="Object"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Event to notify parent of selected node change -->
+    <aura:registerEvent name="categorySelected" type="c:SelectedCategoryEvent"/>
+
+    <lightning:card title="Data Category" class="slds-p-around_small">
+        <div class="slds-grid slds-wrap slds-p-around_x_small slds-m-bottom_x-small"> 
+            <div class="slds-col slds-size_1-of-1 slds-p-around_small">
+                <lightning:combobox 
+                    name="categoryGroup"
+                    label="Select Category Group"
+                    value="{!v.selectedGroup}"
+                    placeholder="Select a Category Group"
+                    options="{!v.categoryGroups}"
+                    onchange="{!c.handleCategoryGroupChange}"
+                    class="slds-m-bottom_x-small bold-label" 
+                />
+            </div>
+        </div>
+        <div class="slds-p-around_x_small slds-m-around_small">
+            <lightning:tree items="{!v.categoryTree}" onselect="{!c.handleSelect}" />
+        </div>
+    </lightning:card> 
+</aura:component>

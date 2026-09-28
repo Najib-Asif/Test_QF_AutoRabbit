@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_99571519</developerName>
+        <masterLabel>Case Type</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Recovery__c.Case_Type__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>On the Spot Recovery</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Medical-Assistance Provided</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Further Action Required</sourceValue>
+            </sourceValues>
+            <value>1. On The Spot</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Complaint</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Query</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Medical-Patient</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Insurance Letter</sourceValue>
+            </sourceValues>
+            <value>2. Reactive</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Baggage</sourceValue>
+            </sourceValues>
+            <value>3. Baggage</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Recovery__c.CaseNumber__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>Recovery__c.Goodwill_Monetory_Value__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Recovery__c.Status__c</field>
+    </columns>
+    <columns>
+        <field>Recovery__c.Type__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>FK_CASE_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Compliment,Case.CCC_Further_Action_Required,Case.CCC_Medical,Case.CCC_On_The_Spot_Recovery,Case.CCC_Query,Case.QCC_Insurance_Letter_Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Recovery__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Finalised,Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Recovery__c.Type__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>,No Goodwill</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Recovery__c.Refund_Account__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <field>FK_$Case.Updated_Departure_Date_Time__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_$Case.Departure_Airport_Code__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Recovery Cost for Finance</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Recovery__c@Recovery__c.Case_Number__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Recovery__c.Goodwill_Monetory_Value__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>FK_$Case.Updated_Departure_Date_Time__c</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

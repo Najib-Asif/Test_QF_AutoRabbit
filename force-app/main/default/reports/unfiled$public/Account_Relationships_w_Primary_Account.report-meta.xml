@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_$Account.IATA_Number__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Account.Agency_TIDS_Number__c</field>
+    </columns>
+    <columns>
+        <field>Account_Relation__c.Related_Account_f__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>List of Account Relationships with the Primary Account Detail</description>
+    <filter>
+        <booleanFilter>1 AND (2 OR 3) AND 4</booleanFilter>
+        <criteriaItems>
+            <column>Account_Relation__c.Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Account.IATA_Number__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0230078,0230181,0230207,0230244,0230278,0230291,0230457,0230462,0230479,0230583,0230589,0230610,0230649,0230773,0230784,0230806,0230906,0230914,0230920,0230948,0231604,0231851,0232238,0232285,0232742,0232757,0232816,0232822,0232824,0233056,0233109,0233135,0233210,0233231,0233515,0234014,0234029,0234038,0234058,0234088,0234111,0234132,0234171,0234250,0234333,0234340,0234342,0234356,0234372,0234379,0234430,0234453,0234458,0234569,0234631,0234642,0234644,0234673,0234722,0234816,0234843,0234976,0234988,0235036,0235062,0235075,0235077,0235121,0235168,0235170,0235190,0235210,0235224,0235227,0235241,0235273,0235296,0235324,0235332,0235393,0235473,0235479,0235511,0235567,0235578,0235601,0235614,0235693,0235695,0235699,0235702,0235742,0235766,0235790,0235863,0235871,0235878,0235885,0235921,0235928,0235958,0235962,0235976,0235993,0236015,0236064,0236100,0236103,0236129,0236133,0236143,0236145,0236187,0236190,0236200,0236213,0236224,0236288,0236304,0236339,0236349,0236357,0236364,0236365,0236477,0236482,0236494,0236543,0239863,4565555</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Account.Agency_TIDS_Number__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>9521111,9670687,9680902,9681273,9681381,9681497,9682335,9682830,9683023,9683044,9683045,9683080,9683778,9683793,9683967,9684123,9684125,9684550,9684656,9685028,9685049,9685179,9685206</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account_Relation__c.Relationship__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Travel Manager Of,Group Travel Manager Of</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Account Relationships w Primary Account</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Account_Relation__c@Account_Relation__c.Primary_Account__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account_Relation__c.End_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

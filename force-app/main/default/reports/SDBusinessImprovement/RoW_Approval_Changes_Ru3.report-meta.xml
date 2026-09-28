@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ProcessInstance$TargetName</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$ProcessDefinition</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance.Nodes$ProcessNode</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$CreatedBy.UserRole.Name</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$SubmittedBy</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance.Nodes$LastActor</field>
+    </columns>
+    <columns>
+        <field>ProcessInstance$LastActor</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>ProcessInstance$LastActor</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>John Simeone</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>RoW Approval Changes</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Approval_History__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>ProcessInstance$CompletedDate</dateColumn>
+        <endDate>2023-06-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2021-07-01</startDate>
+    </timeFrameFilter>
+</Report>

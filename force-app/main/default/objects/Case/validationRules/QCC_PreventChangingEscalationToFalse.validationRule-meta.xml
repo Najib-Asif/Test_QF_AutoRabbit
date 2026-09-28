@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_PreventChangingEscalationToFalse</fullName>
+    <active>true</active>
+    <description>QCC: Once the case is escalated can&apos;t be escalated checkbox can&apos;t be changed to false.</description>
+    <errorConditionFormula>AND( $Setup.EnableValidationRule__c.VR_QCC_PreventChangingEscalationToFalse__c, 
+                ISCHANGED(IsEscalated), OR(RecordType.DeveloperName = &apos;CCC_Baggage&apos;, RecordType.DeveloperName = &apos;CCC_Complaints&apos;, RecordType.DeveloperName = &apos;CCC_Compliment&apos;, RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;, RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;, RecordType.DeveloperName = &apos;CCC_Medical&apos;, RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;, RecordType.DeveloperName = &apos;CCC_Query&apos; ), 
+                IsEscalated = false)</errorConditionFormula>
+    <errorDisplayField>IsEscalated</errorDisplayField>
+    <errorMessage>Case Escalation Can&apos;t be Unchecked</errorMessage>
+</ValidationRule>

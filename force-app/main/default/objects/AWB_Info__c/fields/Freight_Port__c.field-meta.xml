@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Port__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Freight - captures where the freight issue is most likely to be located
+Created for CRM - 9349</description>
+    <inlineHelpText>Three letter IATA code - If with AWB#, value will be auto-refreshed from iCargo and will overwrite your manual entry.</inlineHelpText>
+    <label>Port</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Airport_Code__c.QF_Freight_Presence__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Airport_Code__c</referenceTo>
+    <relationshipLabel>AWB Infos</relationshipLabel>
+    <relationshipName>AWB_Infos</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

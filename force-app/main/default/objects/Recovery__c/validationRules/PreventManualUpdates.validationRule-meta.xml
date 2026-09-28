@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreventManualUpdates</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName &lt;&gt; &quot;Customer_Connect&quot;,
+AND($Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Administrator&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Admin - Freight&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Admin - QCC&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas System Admin - SND&quot;,
+$Permission.QCC_Submit_Recovery_Permission &lt;&gt; true,
+$Profile.Name &lt;&gt; &quot;CRM Administrator&quot;,
+NOT(CONTAINS($Profile.Name, &quot;CRM Administrator&quot;))),
+NOT(ISNEW()),
+OR(
+$Profile.Name = &quot;Qantas CC Consultant&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Hobart&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Manila&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Capetown&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Suva&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Auckland&quot;,
+$Profile.Name = &quot;QCC Contact Center Agent Mumbai&quot;,
+$Profile.Name = &quot;Qantas CC Customer Specific Needs&quot;,
+$Profile.Name = &quot;QCC Operational Manager&quot;,
+$Profile.Name = &quot;Qantas CC Journey Manager&quot;,
+$Profile.Name = &quot;QCC Customer Journey Manager&quot;,
+$Profile.Name = &quot;Qantas CC Operational Manager&quot;,
+$Profile.Name = &quot;QCC Specific Needs Agent&quot;,
+$Profile.Name = &quot;Qantas CC Team Lead&quot;,
+$Profile.Name = &quot;Qantas Pre Journey CC Consultant&quot;
+),
+OR(
+AND(NOT(ISCHANGED(Process_Status__c)),
+OR(
+ISPICKVAL(Process_Status__c, &quot;Finalised&quot;),
+ISPICKVAL(Process_Status__c, &quot;Cancelled&quot;),
+ISPICKVAL(Process_Status__c, &quot;Linked&quot;),
+ISPICKVAL(Status__c,&quot;Finalised&quot;)
+)),
+AND(
+OR(ISPICKVAL(Type__c, &quot;Payment (EFT)&quot;),
+ISPICKVAL(Type__c, &quot;Ticket Refund EFT&quot;)),
+OR(
+ISPICKVAL(Process_Status__c, &quot;Payment Details Received&quot;),
+ISPICKVAL(Process_Status__c, &quot;Queued for Payment Processing&quot;),
+ISPICKVAL(Process_Status__c, &quot;Submitted to Finance&quot;),
+ISPICKVAL(Process_Status__c, &quot;Findel Approved&quot;),
+ISPICKVAL(Process_Status__c, &quot;Payment Ready&quot;),
+ISPICKVAL(Process_Status__c, &quot;Payment Sent&quot;)
+),
+NOT(ISCHANGED(Process_Status__c)),
+NOT(OR(
+ISCHANGED(Currency_Conversion_Rate__c),
+ISCHANGED(Conversion_Date__c),
+ISCHANGED(Automated_Currency_Conversion_Complete__c),
+ISCHANGED(Monetary_Value__c),
+ISCHANGED(Recovery_System_log__c))
+)),
+AND(
+NOT(ISNEW()),
+ISPICKVAL(Type__c, &quot;Payment (Credit Card)&quot;),
+OR(
+ISPICKVAL(Process_Status__c, &quot;Payment Details Received&quot;),
+ISPICKVAL(Process_Status__c, &quot;Queued for Payment Processing&quot;),
+ISPICKVAL(Process_Status__c, &quot;Submitted to Finance&quot;),
+ISPICKVAL(Process_Status__c, &quot;Payment Sent&quot;)
+),
+NOT(ISCHANGED(Process_Status__c))
+),
+AND(
+ISPICKVAL(Type__c, &quot;Travel Vouchers&quot;),
+OR(
+ISPICKVAL(Process_Status__c, &quot;Submitted for Voucher Issuance&quot;),
+ISPICKVAL(Process_Status__c, &quot;Voucher Created&quot;),
+ISPICKVAL(Process_Status__c, &quot;Voucher Sent&quot;)
+),
+OR(
+ISCHANGED(Monetary_Value__c),
+ISCHANGED(Voucher_Number__c),
+ISCHANGED(Voucher_Expiry_Date__c))
+)
+)
+)</errorConditionFormula>
+    <errorMessage>Recovery details cannot be modified</errorMessage>
+</ValidationRule>

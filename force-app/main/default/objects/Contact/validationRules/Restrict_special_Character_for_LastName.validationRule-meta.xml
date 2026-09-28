@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_special_Character_for_LastName</fullName>
+    <active>true</active>
+    <description>the system should restrict users from creating Contact Last names with any special characters other than hyphens ( - ), apostrophes ( &apos; ) or spaces</description>
+    <errorConditionFormula>AND(
+   RecordType.Name=&apos;Individual Contact&apos;,
+   NOT(REGEX(  LastName , &quot;^[a-zA-Z0-9 \\-\&apos;]*$&quot;))
+)</errorConditionFormula>
+    <errorMessage>Special characters other than hyphens ( - ), apostrophes ( &apos; ) or spaces are not allowed in the Last Name field</errorMessage>
+</ValidationRule>

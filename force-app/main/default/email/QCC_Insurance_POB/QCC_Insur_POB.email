@@ -1,0 +1,449 @@
+<messaging:emailTemplate subject="Qantas Customer Care - {!relatedTo.CaseNumber}" recipientType="Contact" relatedToType="Case">
+
+<messaging:htmlEmailBody >  
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+ <head>
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW"/>
+    <META NAME="referrer" CONTENT="no-referrer"/>
+
+    <!-- Define Charset -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Prevent IOS from styling phone, address and date link colors -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Define Viewport -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Qantas</title>
+
+    <!-- Template Styles -->
+    <style type="text/css">
+        /*
+*****************************************************************
+* Fonts
+*****************************************************************
+*/
+
+        /* Find elements with the said font-family and force it to use that special font. */
+        [style*="Open Sans"] {
+            font-family: 'Open Sans', Arial, sans-serif !important;
+        }
+
+        /*
+*****************************************************************
+* Reset
+*****************************************************************
+*/
+        body,
+        #body-table,
+        #body-cell {
+            height: 100% !important;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+        }
+
+        table,
+        table td,
+        table th {
+            border-collapse: collapse;
+        }
+
+        img,
+        a img {
+            border: 0;
+            display: block;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h2 {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: bold;
+            color: #1F1C4F;
+        }
+
+        h3 {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: bold;
+            color: #1F1C4F;
+        }
+
+        p {
+            font-family: Arial, sans-serif;
+            color: #181B25;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: normal;
+        }
+
+        /*
+*****************************************************************
+* Client Specific
+*****************************************************************
+*/
+        body {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        /* prevent iOS/Windows platforms from resizing the text */
+
+        .ReadMsgBody {
+            width: 100%;
+        }
+
+        .ExternalClass {
+            width: 100%;
+        }
+
+        /* Force Hotmail/Outlook.com to display emails at full width. */
+
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
+        }
+
+        /* Force Hotmail/Outlook.com to display line heights normally. */
+
+        #GmailAppFontFix div {
+            white-space: nowrap;
+            font-size: 15px;
+            font-family: courier;
+            color: #ffffff;
+            line-height: 0;
+        }
+
+        /* Prevent Gmail App from resizing template font. */
+
+        table {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        /* Remove spacing between tables in Outlook 2007 and up. */
+
+        #outlook a {
+            padding: 0;
+        }
+
+        /* Force Outlook 2007 and up to provide a "view in browser" message. */
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /* Force IE to smoothly render resized images. */
+
+        li {
+            margin-bottom: 6px;
+            color: #da1710;
+        }
+
+        li span {
+            color: #181B25;
+        }
+
+        /*
+*****************************************************************
+* Base
+*****************************************************************
+*/
+
+        body {
+            color: #181b25;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: normal;
+            font-family: Arial, calibri;
+        }
+
+        .hidden-block {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .table_cell_p20 {
+            text-align: left;
+            padding-top: 20px;
+            vertical-align: top;
+        }
+
+        .table_cell_p5 {
+            text-align: left;
+            padding-top: 5px;
+            vertical-align: top;
+        }
+/*
+*****************************************************************
+* Layout
+*****************************************************************
+*/
+
+        /* Multicolumn */
+        .col-cell {
+            vertical-align: top;
+        }
+
+        /* Preheader */
+        .preheader {
+            display: none !important;
+            visibility: hidden;
+            opacity: 0;
+            color: transparent;
+            height: 0;
+            width: 0;
+        }
+
+        .m-border {
+            border-bottom: 2px solid #acadab;
+        }
+
+        /*
+*****************************************************************
+* Media Queries
+*****************************************************************
+*/
+
+        @media only screen and (max-width: 599px) {
+
+            /* THEME STYLES */
+            body {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+
+            /* Force iOS Mail to render the email at full width. */
+
+            #GmailAppFontFix div {
+                display: none !important;
+            }
+
+            /* Hide GmailAppFontFix on devices that supports media queries. */
+
+            /* FRAMEWORK STYLES */
+            #template-wrapper,
+            .flexible-container {
+                width: 100% !important;
+                float: none !important;
+            }
+
+            .flexible-image img {
+                width: 100% !important;
+                height: auto !important;
+                max-width: none !important;
+            }
+
+            .responsive-image img {
+                width: auto !important;
+                max-width: 100% !important;
+                height: auto !important;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body
+    style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;color: #181b25;font-size: 14px;line-height: 18px; font-weight: normal;font-family: Arial, sans-serif;height: 100% !important;width: 100% !important;">
+       
+<center>  
+<!-- START: LOGO -->
+    <table cellpadding="0" cellspacing="0"
+        style="border-collapse: collapse; text-align:center; " width="100%">
+
+        <tr>
+            <td align="left"
+                style=" padding-bottom: 5px; padding-top: 20px; text-align:center;"
+                valign="top" width="100">
+                <!-- start: Qantas Logo --><img
+                    alt="QantasLetterhead"
+                    src="https://qantas.file.force.com//servlet/servlet.ImageServer?id=0159000000FSVkd&oid=00D900000010OOK&lastMod=1521233610000"
+                    style="width: auto; height: auto; border: 0;display: inline-block;-ms-interpolation-mode: bicubic;"
+                    /> 
+                    <!-- end: site icon -->
+            </td>
+        </tr>
+    </table>
+<!-- END: LOGO -->
+
+
+<!-- START: LETTER REF AND ADDRESS -->
+    <table width="100%" style="border-collapse: collapse; margin: 0px 30px 0px 30px; min-width: 100% !important;">
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 20px;
+                        vertical-align: top;
+                        width: 100%;">
+            Ref: {!relatedTo.CaseNumber} 
+            </td>
+        </tr>
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 20px;
+                        vertical-align: top;">
+                <apex:outputText value="{0, Date, d MMMM yyyy}">
+                    <apex:param value="{!Today()}" />
+                </apex:outputText>
+            </td>
+        </tr>
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 20px;
+                        vertical-align: top;">
+            {!UPPER(LEFT(relatedTo.First_Name__c, 1)) + LOWER(RIGHT(relatedTo.First_Name__c, LEN(relatedTo.First_Name__c)-1))} {!UPPER(LEFT(relatedTo.Last_Name__c, 1)) + LOWER(RIGHT(relatedTo.Last_Name__c, LEN(relatedTo.Last_Name__c)-1))}
+            </td>
+        </tr>
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 0px;
+                        vertical-align: top;">
+            {!relatedTo.Street__c}
+            </td>
+        </tr>
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 0px;
+                        vertical-align: top;">
+            {!relatedTo.Suburb__c} {!relatedTo.State__c} {!relatedTo.Post_Code__c}
+            </td>
+        </tr>
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 0px;
+                        vertical-align: top;">
+            {!relatedTo.Country__c} 
+            </td>
+        </tr>
+    </table>
+<!-- END: LETTER REF AND ADDRESS -->
+
+<!-- START: LETTER BODY -->
+    <table style="border-collapse: collapse; margin: 0px 30px 0px 30px; width: 100%; ">
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 20px;
+                        vertical-align: top;">
+            Dear {!UPPER(LEFT(relatedTo.First_Name__c, 1)) + LOWER(RIGHT(relatedTo.First_Name__c, LEN(relatedTo.First_Name__c)-1))}, 
+            </td>
+        </tr>
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 20px;
+                        vertical-align: top;
+                        font-weight: bold;" >
+                RE: {!relatedTo.Booking_PNR__c}
+            </td>
+        </tr>
+        <tr>
+            <td style=" text-align: left;
+                        padding-top: 20px;
+                        vertical-align: top;
+                        padding-bottom: 10px;">
+            This is to confirm that Qantas Airways held a booking under the name of:
+            
+            </td>
+            </tr>
+    </table>
+    <table style="border-collapse: collapse; margin: 0px 30px 0px 30px; width: 100%;">
+        <apex:repeat var="apItem" value="{!relatedTo.Affected_Passengers__r}">
+            <tr style="padding-top: 30px;">
+                <td style=" text-align: left;
+                    padding-top: 20px;
+                    vertical-align: top;">
+                    {!UPPER(LEFT(apItem.FirstName__c, 1)) + LOWER(RIGHT(apItem.FirstName__c, LEN(apItem.FirstName__c)-1))} {!UPPER(LEFT(apItem.LastName__c, 1)) + LOWER(RIGHT(apItem.LastName__c, LEN(apItem.LastName__c)-1))}
+                    on Qantas flight {!relatedTo.Flight_Number_With_Code__c} from {!UPPER(LEFT(relatedTo.Departure_City__c, 1)) + LOWER(RIGHT(relatedTo.Departure_City__c, LEN(relatedTo.Departure_City__c)-1))} to 
+                    {!UPPER(LEFT(relatedTo.Arrival_City__c, 1)) + LOWER(RIGHT(relatedTo.Arrival_City__c, LEN(relatedTo.Arrival_City__c)-1))}, departing on
+                    <c:QCC_EmailTemplateDate dateTimeString="{!relatedTo.Departure_Date_Time__c}" dateTimeFormat="d MMMM yyyy"/>.
+                    Details of whether the flight was flown or not are noted below: 
+                    <apex:outputText value="{!apItem.Flight_Leg_Flown_Statuses__c}" escape="false" /> 
+                </td>
+            </tr>
+        </apex:repeat>
+    </table>
+    <table style="border-collapse: collapse; margin: 0px 30px 0px 30px; ">
+        <tr>
+            <td style="padding-top: 10px;">
+                This information is supplied in order to assist you to make a claim. 
+                It should not be considered as an admission of liability by Qantas Airways, to you or any person acting on your behalf. 
+                We hope this is sufficient for your requirements, and we look forward to seeing you again. 
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 20px;">
+                Kind regards
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 20px;">
+                {!$User.FirstName} 
+             </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 20px;">
+                Qantas Customer Care             
+            </td>
+        </tr> 
+    </table>
+   <table cellpadding="0" cellspacing="0"
+        style="border-collapse: collapse; margin: 0px 30px 0px 30px;" width="100% ">
+        <tr>
+            <td align="left"
+                style=" padding-bottom: 5px; padding-top: 20px; text-align:left;"
+                valign="top">
+                <!-- start: Qantas Logo --><img
+                    alt="QantasFooter"
+                    src="https://qantas.file.force.com/servlet/servlet.ImageServer?id=0159000000FSVkd&oid=00D900000010OOK&lastMod=1521233610000"
+                    style="width: auto; height: auto; border: 0;display: inline-block;-ms-interpolation-mode: bicubic;"
+                    /> 
+                <!-- end: Qantas Logo -->
+            </td>
+        </tr>
+    </table>
+    <table style="border-collapse: collapse; margin: 0px 30px 0px 30px; ">
+        <tr>
+            <td style="padding-top: 20px; text-align:center;">
+                Qantas Airways Limited, ABN 16 009 661 901 
+            </td>
+        </tr>
+        <tr>
+            <td  style="padding-top: 5px; text-align:center;">
+                10 Bourke Road Mascot NSW 2020 Australia
+            </td>
+        </tr>
+    </table>
+
+<!-- END: LETTER BODY -->
+
+
+</center>     
+<font color="white">
+        <apex:outputText value="{!relatedTo.Custom_Thread_ID__c}"/>
+</font>
+</body>
+</html>
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

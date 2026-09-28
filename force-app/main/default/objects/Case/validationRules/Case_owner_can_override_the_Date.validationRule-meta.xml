@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_owner_can_override_the_Date</fullName>
+    <active>true</active>
+    <description>Only the case owner has privilege to edit/modify the expected completion date</description>
+    <errorConditionFormula>AND(
+ISCHANGED( Expected_Completion_Date__c),
+OwnerId &lt;&gt; $User.Id,
+NOT($Profile.Name = &quot;System Administrator&quot;),
+NOT($Profile.Name = &quot;Qantas System Administrator&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - Freight&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - QCC&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - SND&quot;),
+ISPICKVAL(Status,&quot;Not yet assigned - with Account Manager&quot;),
+OR(RecordType.DeveloperName == &apos;Dealing_Model_Request&apos; , RecordType.DeveloperName == &apos;General_Dealing_Enquiry&apos; )
+)</errorConditionFormula>
+    <errorMessage>Only the Case Owner can modify the Expected Completion Date</errorMessage>
+</ValidationRule>

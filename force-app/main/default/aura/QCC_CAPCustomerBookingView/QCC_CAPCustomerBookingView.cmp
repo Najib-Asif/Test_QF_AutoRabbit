@@ -1,0 +1,77 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="QCC_DisplayBookingController" >
+    <!--<ltng:require scripts="{!$Resource.momentJS}"/>-->
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="hidePrev" type="Boolean" />
+    <aura:attribute name="hideNext" type="Boolean" />
+    <aura:attribute name="pageNumber" type="Integer" default="1" />
+    <aura:attribute name="lstCurrentBook" type="Object[]" />
+   	<aura:attribute name="maxRecord" type="Integer" />
+    <aura:attribute name="nextPageNumber" type="Integer"/>
+    <aura:attribute name="serverCalled" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <lightning:card iconName="standard:recent">
+        <aura:set attribute="title">
+           <!-- <lightning:spinner variant="brand" size="small" aura:id="mySpinner" />-->
+            <div class="slds-media__body">
+                <h2>
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Suggested Booking Matches">
+                        <span class="slds-text-heading_small">Suggested Booking Matches</span>
+                    </a>
+                </h2>
+            </div>
+        </aura:set>
+        
+        <aura:set attribute="footer">
+            <lightning:button variant="brand" label="Previous" iconName="utility:left" iconPosition="left" onclick="{!c.Previous}" disabled="{!v.hidePrev}" />
+            &nbsp;&nbsp;&nbsp;&nbsp; {!v.pageNumber} &nbsp;&nbsp;&nbsp;&nbsp;
+            <lightning:button variant="brand" label="Next" iconName="utility:right" iconPosition="right" onclick="{!c.Next}" disabled="{!v.hideNext}"/>
+        </aura:set>
+        
+        <aura:if isTrue="{! v.serverCalled}">
+            <aura:renderIf isTrue="{!empty(v.lstCurrentBook)}">
+                <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg2}</div>
+                <aura:set attribute="else">
+                    <table class="slds-table slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout">
+                        <!--Table must be responsive-->
+                        <thead>
+                            <tr class="slds-text-title_caps slds-line-height_reset">
+                                <th scope="col" style="width:25%">
+                                    <div  class="slds-truncate" title="PNR">PNR</div>
+                                </th>
+                                <th scope="col" style="width:15%">
+                                    <div  class="slds-truncate" title="Departure Port">DEP</div>
+                                </th>
+                                <th scope="col" style="width:15%">
+                                    <div  class="slds-truncate" title="Arrival Port">ARR</div>
+                                </th>
+                                <th scope="col" style="width:45%">
+                                    <div  class="slds-truncate" title="Departure Date">Departure Date</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--Jira: CRM-6052 -->
+                            <aura:iteration items="{!v.lstCurrentBook}" var="item" indexVar="i">
+                                <tr class="slds-hint-parent record onhover" data-record="{!i}" onclick="{!c.navigateToMyComponent}">
+                                    <td data-label="PNR">
+                                        <div  class="slds-truncate" title="{!item.reloc}">{!item.reloc}</div>
+                                    </td>
+                                    <td data-label="Depature Port">
+                                        <div  class="slds-truncate" title="{!item.departureAirportCode}">{!item.departureAirportCode}</div>
+                                    </td>
+                                    <td data-label="Arrival Port">
+                                        <div  class="slds-truncate" title="{!item.arrivalAirportCode}">{!item.arrivalAirportCode}</div>
+                                    </td>
+                                    <td data-label="Depature Date">
+                                        <div  class="slds-truncate" title="{!item.departureUTCTimestamp}">{!item.departureUTCTimestamp}</div>  
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </aura:set>
+            </aura:renderIf>
+        </aura:if>
+    </lightning:card>
+</aura:component>

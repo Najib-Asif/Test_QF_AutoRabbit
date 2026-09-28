@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_AWB_Number_Validation</fullName>
+    <active>true</active>
+    <description>Freight - AWB Number is mandatory when AWB Received is ticked</description>
+    <errorConditionFormula>AND($RecordType.DeveloperName = &quot;Freight&quot;,   Freight_AWB_Received__c = TRUE, OR(ISBLANK( Freight_AWB_Number__c ), Freight_AWB_Number__c = &quot;081-&quot;))</errorConditionFormula>
+    <errorDisplayField>Freight_AWB_Number__c</errorDisplayField>
+    <errorMessage>Please enter an AWB Number</errorMessage>
+</ValidationRule>

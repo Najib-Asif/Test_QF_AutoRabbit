@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes">
+    
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="CaseId" type="String" />
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Id,AccountId,RecordType.Name"
+                      targetFields="{!v.simpleRecord}"
+                      targetError="{!v.recordError}"
+                      />
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    <!--<aura:attribute name="Case" type="Object"/>  -->
+    <div onclick="{!c.gotoURL}">
+        <a class="Fontcolor" href=""><lightning:card iconName="utility:info" title="Add New Frequent Flyer" /></a>      	
+    </div> 
+    <!-- </div> -->	
+    
+    {!v.body} 
+</aura:component>

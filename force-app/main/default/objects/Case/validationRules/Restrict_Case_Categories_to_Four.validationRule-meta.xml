@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Case_Categories_to_Four</fullName>
+    <active>true</active>
+    <description>QCC: Restricts Case Categories to four</description>
+    <errorConditionFormula>Case_Category_Count__c &gt; 4 &amp;&amp; $Permission.QCC_Bypass_Account_Contact_Case_Triggers = False</errorConditionFormula>
+    <errorMessage>A Case can have a maximum of four Case Category Records</errorMessage>
+</ValidationRule>

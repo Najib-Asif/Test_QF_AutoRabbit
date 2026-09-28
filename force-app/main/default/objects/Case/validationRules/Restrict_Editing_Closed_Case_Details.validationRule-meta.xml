@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Editing_Closed_Case_Details</fullName>
+    <active>true</active>
+    <errorConditionFormula>(
+$Setup.EnableValidationRule__c.VR_extend_update_privilege_to_superusers__c=False &amp;&amp; NOT($UserRole.Name = &apos;QF-QDC&apos;) &amp;&amp;
+NOT( RecordType.Name = &apos;Master Operational Waiver&apos;) &amp;&amp;
+NOT( RecordType.DeveloperName = &apos;CCC_Voice&apos;) &amp;&amp;
+AND((CONTAINS(RecordType.DeveloperName,&apos;CCC&apos;)) || (CONTAINS(RecordType.DeveloperName,&apos;QCC&apos;))) &amp;&amp;
+
+/*Since there is no more Reopened status, therefore any status value is considered the case being reopened*/
+/*NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Closed - Rejected&apos;))&amp;&amp;*/
+/*(NOT(ISPICKVAL(Status,&apos;Reopened&apos;))) &amp;&amp; (NOT(ISPICKVAL(Status,&apos;In Progress&apos;))) &amp;&amp;*/
+
+CONTAINS(TEXT(Status),&apos;Closed&apos;) &amp;&amp;
+IsClosed &amp;&amp;
+$User.Id &lt;&gt; &apos;00590000004idiD&apos;&amp;&amp;
+$Profile.Name!=&apos;System Administrator&apos; &amp;&amp;
+$Profile.Name!=&apos;Qantas System Administrator&apos; &amp;&amp;
+$Profile.Name!=&apos;Qantas System Admin - Freight&apos; &amp;&amp;
+$Profile.Name!=&apos;Qantas System Admin - QCC&apos; &amp;&amp;
+$Profile.Name!=&apos;Qantas System Admin - SND&apos; &amp;&amp;
+$Profile.Name!=&apos;CRM Administrator&apos;&amp;&amp;
+$Profile.Name!=&apos;CRM Administrator - Freight&apos;&amp;&amp;
+$Profile.Name!=&apos;CRM Administrator - Global&apos;&amp;&amp;
+$Profile.Name!=&apos;CRM Administrator - QCC&apos;&amp;&amp;
+$Profile.Name!=&apos;CRM Administrator - SND&apos;&amp;&amp;
+(
+ISCHANGED(Closed_By__c) ||
+ISCHANGED(ClosedByManager__c) ||
+ISCHANGED(Created_By_Profile__c) ||
+ISCHANGED(Closed_By_Profile__c) ||
+ISCHANGED(Consultant_Name_Baggage__c) ||
+ISCHANGED(Assessor_Name__c) ||
+ISCHANGED(ClosedByLocation__c) ||
+ISCHANGED(Status) ||
+ISCHANGED(OwnerId) ||
+ISCHANGED(Example__c) ||
+ISCHANGED(Do_not_Send_Survey__c) ||
+ISCHANGED(Qualtrics_Survey_Notification_Date__c) ||
+ISCHANGED(FlightPax_DeleteTimestamp__c) ||
+ISCHANGED(Recovery_Status__c) ||
+ISCHANGED(Recovery_Type__c) ||
+ISCHANGED( InteractionId__c )
+
+) &amp;&amp;
+NOT(ISPICKVAL(Type, &apos;5,000 Status Credits&apos;)) &amp;&amp;
+NOT(ISPICKVAL(Type, &apos;7,000 Status Credits&apos;))
+
+)</errorConditionFormula>
+    <errorMessage>Closed cases are not able to be reopened. Please create a child case or stand-alone case.</errorMessage>
+</ValidationRule>

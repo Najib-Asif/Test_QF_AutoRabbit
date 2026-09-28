@@ -1,0 +1,59 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="QCC_LookupPhoneNumberController">
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:attribute name="PhNumber" type="String"/>
+    <aura:attribute name="ffNumber" type="String"/>
+    <aura:attribute name="results" type="Object"/>
+    <aura:attribute name="currentList" type="Object[]"/>
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="displaySearchResults" type="Boolean" default="false"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="recId" type="String" default=""/>
+    <aura:attribute name="errorMsg" type="String"/>
+    <aura:registerEvent name="QCC_Search_Contact_LE_Integration" type="c:QCC_Search_Contact_LE_Integration" />
+
+    
+    <aura:if isTrue="{! v.isLoading}">
+        <lightning:spinner variant="brand" alternativeText="Searching..."/>
+    </aura:if>
+    <lightning:card class="slds-clearfix">
+        <aura:set attribute="title">
+            <b>Lookup Phone Number</b>
+        </aura:set>
+        <div class="slds-p-around_small mypopover">
+            <lightning:input aura:id="PhNumber" value="{! v.PhNumber}" label="Phone Number"/>
+            <lightning:input aura:id="ffNumber" value="{! v.ffNumber}" label="Frequent Flyer Number"/></div>
+            
+        <div class="slds-p-around_small slds-float_right">
+            <lightning:button label="Lookup Customer" variant="brand" onclick="{! c.doLookup}"/>
+        </div>
+        <aura:if isTrue="{!v.displaySearchResults}">
+        <table class=" slds-table--bordered slds-max-medium-table--stacked-horizontal pad-bottom" style="max-width:700px">
+                            <!--Table must be responsive-->
+                            <thead>
+                                <tr class="slds-text-heading--label ">
+                                    <th class="slds-is-sortable lastname-col" scope="col">Surname</th>
+                                    <th class="slds-is-sortable firstname-col" scope="col">First Name</th>
+                                    <th class="slds-is-sortable" scope="col">FF#</th>
+                                    <th class="slds-is-sortable" scope="col">Tier</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cursor">
+               
+                                <aura:iteration items="{!v.currentList}" var="item" indexVar="i">
+                                    <tr class="slds-hint-parent record" data-record="{!i}" onclick="{!c.navigateToRecord}">
+                                        <td class="lastname-col" data-label="Surname"><a href="javascript:void(0);">{!item.lastName}&nbsp;</a></td>
+                                        <td class="firstname-col" data-label="First Name"><a href="javascript:void(0);">{!item.firstName}&nbsp;</a></td>
+                                        <td data-label="FF#">{!item.ffNumber}&nbsp;</td>
+                                        <td data-label="FF#">{!item.ffTier}&nbsp;</td>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+        </aura:if>
+    </lightning:card>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    
+    <c:QCC_ShowModal showModal="{! v.showModal}" header="Error" content="{! v.errorMsg}"/>
+        
+    <div style="height: 0px; " aura:id="overlayLibFF"/>
+</aura:component>

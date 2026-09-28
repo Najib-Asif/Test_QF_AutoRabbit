@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limit_Maximum_FF_Points_Recovery</fullName>
+    <active>true</active>
+    <description>Created to ensure maximum FF point recovery is not more than 15000000</description>
+    <errorConditionFormula>AND(
+Amount__c&gt;15000000,
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+(ISPICKVAL(Type__c, &apos;Qantas Points&apos;)
+)
+)</errorConditionFormula>
+    <errorMessage>Maximum FF points Recovery Limit is 15000000.</errorMessage>
+</ValidationRule>

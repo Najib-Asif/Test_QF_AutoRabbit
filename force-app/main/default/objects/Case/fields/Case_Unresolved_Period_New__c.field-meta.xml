@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Unresolved_Period_New__c</fullName>
+    <description>Calculate case unresolved period</description>
+    <externalId>false</externalId>
+    <formula>IF(AND(CONTAINS(RecordType.Name, &apos;Qantas Freight&apos;),OR(ISPICKVAL(Status, &apos;Closed&apos;),ISPICKVAL(Status, &apos;Resolved&apos;))),
+IMAGE(&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0152v00000IRHhh&amp;oid=00D8s00000IDoz7&amp;lastMod=1647355817000&quot;,
+Text(Status), 30, 30)+&apos; &apos;+Text(Status),
+
+IF(AND(CONTAINS(RecordType.Name, &apos;Qantas Freight&apos;), (Case_Unresolved_Hours__c &lt;= 24)),
+IMAGE(&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0152v00000IRHhi&amp;oid=00D8s00000IDoz7&amp;lastMod=1647355817000&quot;,
+Text(Case_Unresolved_Hours__c), 20, 20)+&apos; &apos;+ Text(Case_Unresolved_Hours__c)+&apos; Hours&apos;,
+
+
+IF(AND(CONTAINS(RecordType.Name, &apos;Qantas Freight&apos;), (Case_Unresolved_Hours__c &gt; 24)),
+IMAGE(&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0152v00000IRHhj&amp;oid=00D8s00000IDoz7&amp;lastMod=1647355817000&quot;,
+Text(Case_Unresolved_Hours__c), 20, 20)+&apos; &apos; + Text(Case_Unresolved_Hours__c) +&apos; Hours&apos;, Text(Status)) ) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Includes only Business Hours</inlineHelpText>
+    <label>Case Unresolved Period</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

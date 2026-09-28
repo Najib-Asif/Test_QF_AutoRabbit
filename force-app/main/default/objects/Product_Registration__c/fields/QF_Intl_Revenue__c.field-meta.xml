@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QF_Intl_Revenue__c</fullName>
+    <label>QF Intl Revenue (FYTD)</label>
+    <summarizedField>Travel_Tracker__c.Base_Amount__c</summarizedField>
+    <summaryFilterItems>
+        <field>Travel_Tracker__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Flights</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Travel_Tracker__c.Flight_Type__c</field>
+        <operation>equals</operation>
+        <value>International</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Travel_Tracker__c.TY__c</field>
+        <operation>equals</operation>
+        <value>Y</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Travel_Tracker__c.Customer__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

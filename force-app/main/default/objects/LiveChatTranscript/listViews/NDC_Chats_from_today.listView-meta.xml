@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NDC_Chats_from_today</fullName>
+    <columns>Name</columns>
+    <columns>Case</columns>
+    <columns>Account</columns>
+    <columns>Account_Tier__c</columns>
+    <columns>Contact</columns>
+    <columns>Contact_number__c</columns>
+    <columns>PNR__c</columns>
+    <columns>StartTime</columns>
+    <columns>EndTime</columns>
+    <columns>Status</columns>
+    <columns>Owner</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LiveChatButton</field>
+        <operation>notEqual</operation>
+        <value>Pet Experts</value>
+    </filters>
+    <filters>
+        <field>StartTime</field>
+        <operation>greaterThan</operation>
+        <value>3/26/2025 11:30 AM</value>
+    </filters>
+    <label>NDC Chats</label>
+</ListView>

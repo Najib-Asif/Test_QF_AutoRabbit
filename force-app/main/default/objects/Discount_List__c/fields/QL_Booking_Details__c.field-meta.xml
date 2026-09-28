@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QL_Booking_Details__c</fullName>
+    <description>This field stores coimbination of Booking Class, Category, Market Details</description>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK( Booking_Class_Name__c),&quot; - &quot;,Booking_Class_Name__c)  &amp; &quot; ; &quot; &amp; IF(ISBLANK(  Fare_Structure_Market_Category__c ),
+&quot; - &quot;,Fare_Structure_Market_Category__c) &amp; &quot; ; &quot; &amp; IF(ISBLANK( Fare_Structure_Market__c ),&quot; - &quot;,Fare_Structure_Market__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Booking Class;Category;Market</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

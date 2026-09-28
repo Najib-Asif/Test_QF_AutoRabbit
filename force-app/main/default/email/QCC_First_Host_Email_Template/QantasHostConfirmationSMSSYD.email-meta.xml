@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QantasHostConfirmationSMSSYD</name>
+    <style>none</style>
+    <subject>Confirmation of your Qantas Host details</subject>
+    <textOnly>Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},
+
+Thank you for choosing to fly with Qantas.
+
+{!IF(QCC_First_Host__c.QCC_Qantas_Porter_Service__c = TRUE, &quot;We’ve received your request for Qantas Porter Assistance for &quot; + QCC_First_Host__c.QCC_Carrier_Code__c + &quot;&quot; + QCC_First_Host__c.QCC_Flight_No__c + &quot; with your expected airport arrival time of &quot;+ QCC_First_Host__c.QCC_TECH_Expected_Arrival_Time_Formula__c + &quot;. As you approach Sydney International Terminal on the day of departure, please phone +61 409 711 556 and one of our porters will be expecting you. Please ask the driver to take the Marsh Street approach.&quot;, &quot;&quot;)}{!IF(QCC_First_Host__c.QCC_Qantas_First_Spa_Lounge__c = TRUE, &quot; A member of our team will be in contact prior to departure in regards to your Spa appointment enquiry.&quot;,&quot;&quot;)}{!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Other_Details__c)), &quot; Your special request was noted.&quot;,&quot;&quot;)}
+
+Warm regards,
+Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, &quot;Special&quot;,&quot;VIP&quot;)} Service Team
+{!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, &quot;World Wide +61 (2) 6250 8204&quot;, IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Chairmans Lounge&quot; || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Platinum One&quot; || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Chairmans Lounge Platinum One&quot; || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c =&quot;FFLP&quot; ,&quot;World Wide +61 1300 752 801&quot;,&quot;vipserviceteam@qantas.com.au&quot;))}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

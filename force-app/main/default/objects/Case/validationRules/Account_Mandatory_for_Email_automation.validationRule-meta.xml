@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Mandatory_for_Email_automation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( OR(ISPICKVAL(Status , &apos;Assigned - Deal Support - Deal Sheet&apos;),ISPICKVAL(Status , &apos;Complete - Pending PRISM Deal Load&apos;)), ISCHANGED(Status ),$RecordType.DeveloperName = &apos;Deal_Support_request&apos;, ISBLANK( AccountId ))</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Please select an Account.</errorMessage>
+</ValidationRule>

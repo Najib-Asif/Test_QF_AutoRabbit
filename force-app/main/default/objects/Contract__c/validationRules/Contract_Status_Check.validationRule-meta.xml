@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Status_Check</fullName>
+    <active>true</active>
+    <description>This is for loyalty and validates Contract end date</description>
+    <errorConditionFormula>RecordType.DeveloperName = &apos;Loyalty_Commercial&apos;   &amp;&amp;  Contract_End_Date__c &lt; TODAY()  &amp;&amp;  (ISPICKVAL( Status__c , &apos;Current&apos;) )</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Contract Status must be either  &apos;Expired&apos; or &apos;Terminated&apos; or &apos;Superceded&apos; as the Contract End Date is in past</errorMessage>
+</ValidationRule>

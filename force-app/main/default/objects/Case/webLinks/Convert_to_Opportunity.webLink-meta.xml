@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Convert_to_Opportunity</fullName>
+    <availability>online</availability>
+    <description>Creates a new Opportunity record from case object</description>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Convert to Opportunity</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/27.0/connection.js&apos;)}
+
+
+
+var selected = &apos;{!Case.Account}&apos;;
+ 
+if (selected[0] == null) { 
+
+    alert(&quot;Please select the Account Name&quot;)
+} 
+
+else {
+
+var caseObj = new sforce.SObject(&quot;Case&quot;);
+caseObj.Id = &apos;{!Case.Id}&apos;;
+caseObj.Status = &apos;Closed - Approved&apos;;
+var result = sforce.connection.update([caseObj]);
+
+var newOpp = new sforce.SObject(&apos;Opportunity&apos;);
+newOpp.AccountId = &apos;{!Case.AccountId}&apos;;
+newOpp.Name = &apos;{!Case.Subject}&apos;;
+newOpp.StageName = &apos;Prospecting&apos;;
+newOpp.CloseDate = new Date();
+newOpp.Description =&apos;{!JSENCODE(Case.Description)}&apos;; 
+
+
+
+var result = sforce.connection.query(&quot;Select Id, Name From RecordType Where SobjectType = &apos;Opportunity&apos; AND Name = &apos;Adhoc Charter&apos;&quot;);
+var records = result.getArray(&quot;records&quot;);
+newOpp.RecordtypeId = records[0].Id;
+
+
+
+var result = sforce.connection.create([newOpp]);
+ 
+if(result[0].success==&apos;true&apos;){
+    alert(&apos;Opportunity has been Created Successfully.&apos;);
+    window.location = &apos;/&apos; + result[0].id;
+}
+}</url>
+</WebLink>

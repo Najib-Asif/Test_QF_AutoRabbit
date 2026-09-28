@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>CRM-13421</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email to Customer on Case Closure</name>
+    <style>none</style>
+    <subject>Re :  {!Case.Sub_Type_2__c} {!Case.Description} AWB Number {!Case.Freight_AWB_Number__c}</subject>
+    <textOnly>Dear {!Case.SuppliedName},
+
+Re :  {!Case.Sub_Type_2__c} {!Case.Description} AWB Number {!Case.Freight_AWB_Number__c}
+
+Please be advised your spot rate has been applied to {!Case.Freight_AWB_Number__c}.
+
+Kind Regards
+
+Qantas Freight
+Qantas Airways Limited
+
+QCB6 - Qantas Centre | B Wing, Level 6 | 10 Bourke Road | Mascot | NSW 2020 | Australia
+
+We sometimes send emails outside of business hours and across time zones but are happy to respond during your business hours</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

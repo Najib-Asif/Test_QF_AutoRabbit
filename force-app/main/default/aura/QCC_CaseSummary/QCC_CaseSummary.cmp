@@ -1,0 +1,42 @@
+<!---
+**********************************************************************************************
+Author:        Praveen Sampath
+Company:       Capgemini
+Description:   QCC Case Summary Information Component on the Console layout 
+   
+************************************************************************************************
+History
+************************************************************************************************
+01-Nov-2017      Praveen Sampath               Initial Design
+22-Oct-2018		 Pushkar Purushothaman		   Updated for Case Disruption logic
+**********************************************************************************************
+-->
+<aura:component access="global" controller="QCC_FlightDisruptions">
+    
+    <aura:method name="caseMethod" action="{!c.getCaseSummary}"> 
+        <aura:attribute name="caseDetail" type="Object"/> 
+    </aura:method>
+    <aura:attribute name="objCon" type="Object"/>
+    <aura:attribute name="contactDetails" type="Object"/>
+    <aura:attribute name="disruptCount" type="String" default="0"/>
+    <aura:attribute name="disruptRec" type="Object[]"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="change" value="{!v.contactDetails}" action="{!c.handleContactDetlChange}"/>
+    <lightning:card >
+        <aura:set attribute="title">
+            Customer Case Summary
+        </aura:set>
+        <p class="slds-p-horizontal--small" style="padding-bottom: 21px;">
+            <br/>
+          <ul class="slds-list--horizontal LISpacingSummary">
+                <li class="slds-text-color_weak slds-truncate"> Number of Cases (past 12 months):  </li>
+                <li title="Description for second label">{!v.objCon.caseCount}</li>
+            </ul><br/>
+            <ul class="slds-list--horizontal LISpacingSummary">
+                    <li class="slds-text-color_weak slds-truncate slds-p-right--x-small">Disruptions in last 12 months: </li>
+                <li title="Description for second label"><span onclick="{!c.navigateToDisruptComp}"><a href="">{!v.disruptCount}</a></span></li>
+            </ul>
+            
+        </p>
+    </lightning:card>
+</aura:component>

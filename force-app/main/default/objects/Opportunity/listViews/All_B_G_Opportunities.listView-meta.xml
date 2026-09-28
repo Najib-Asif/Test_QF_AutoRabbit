@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_B_G_Opportunities</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Sub_Type_Level_1__c</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY_SCORE</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Revenue_Trend__c</columns>
+    <columns>DOM_Market_Share_Trend__c</columns>
+    <columns>INT_Market_Share_Trend__c</columns>
+    <columns>INT_MCA_Market_Share_Trend__c</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Business_and_Government</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>notEqual</operation>
+        <value>Closed - Accepted,Closed - Not Accepted</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.CLOSE_DATE</field>
+        <operation>greaterThan</operation>
+        <value>1/1/2016</value>
+    </filters>
+    <label>All B&amp;G Open Opportunities</label>
+    <sharedTo>
+        <group>S_D_Opps_BA</group>
+        <group>S_D_Opps_Reporting_access</group>
+        <role>QF</role>
+        <role>QF_DOM_Sales_B_G</role>
+        <role>QF_DOM_Sales_B_G_Business_and_Govt</role>
+        <role>QF_DOM_Sales_B_G_Regional_Development</role>
+        <role>QF_DOM_Sales_SME</role>
+        <role>QF_DOM_Sales_SME_QIS</role>
+        <role>QF_DOM_Sales_SME_QIS_Sr_Manager</role>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,227 @@
+{
+  "version" : "61.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "LastModifiedDate", "Account__c", "Account_Owner__c", "First_Name__c", "Frequent_Flyer_Number__c", "Last_Name__c", "Related_ABN__c", "Related_QCI__c", "Profile_Email__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Associated_Person__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Associated_Person__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "LastModifiedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ {
+            "argument" : -1,
+            "type" : "N_MONTHS"
+          }, {
+            "argument" : -1,
+            "type" : "N_MONTHS"
+          } ]
+        } ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Type_bucket",
+          "operator" : "EQUAL",
+          "operands" : [ "Non Proactive" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "RecordType.DeveloperName_bucket",
+          "operator" : "NOT",
+          "operands" : [ "Other" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Frequent_Flyer_Number__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "FILTER1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Frequent_Flyer_Number__c" ],
+        "rightQualifier" : "FFJoin",
+        "rightKeys" : [ "Frequent_Flyer_Number__c" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "QCC cases on Business Travel",
+          "name" : "QCC_B2B_Cases"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "LastModifiedDate", "Origin_bucket", "AccountId", "Description", "Frequent_Flyer_Tier__c", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "Case_Number__c", "Is_QCC_Case__c", "Frequent_Flyer_Number__c", "OwnerId", "OwnerName__c", "RecordType.DeveloperName", "Booking_PNR__c", "CCC_R1_CCAT_Type__c", "RecordTypeId", "CaseNumber", "Sub_Type_1__c", "Created_by_Role__c", "RecordType.Id", "MasterRecordId", "ParentId", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "RecordType.DeveloperName_bucket", "Record_Type__c", "Type", "IsEscalated", "Sub_Type_2__c", "Contact_Fullname__c", "Category__c", "CreatedDate", "ClosedDate", "Id", "Type_bucket", "Aircraft_Type_Code__c", "Recovery_Value__c", "Recovery_Quantity__c" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CaseRawDataSetFY25",
+          "name" : "CaseRawDataSetFY25"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Name", "OwnerId", "Id", "Active__c" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Accounts with Owner",
+          "name" : "Accounts_with_Owner"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "LOAD_DATASET2" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Account__c" ],
+        "rightQualifier" : "Accounts",
+        "rightKeys" : [ "Id" ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Associated_Person__c",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Filter 0",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "FILTER1" : {
+        "label" : "Filter 1",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 252
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "OUTPUT0" : {
+        "label" : "Customer Care Cases on Business Travel",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 672.2
+      },
+      "LOAD_DATASET1" : {
+        "label" : "CaseRawDataSetFY25",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Accounts with Owner",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Join 1",
+        "type" : "JOIN",
+        "top" : 111.9,
+        "left" : 532.2
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN1",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

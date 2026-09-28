@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact$Name</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$CaseNumber</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>For Melanie Newman to locate unmatched payments from the AirHelp payouts team</description>
+    <filter>
+        <criteriaItems>
+            <column>Contact.Cases.Recoveries_Case__r$Bank_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>UniCredit,Uni Credit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases.Recoveries_Case__r$Bank_Account_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>AirHelp,Air Help</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>EU comp AirHelp payments</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Contacts_with_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Cases.Recoveries_Case__r$Fulfilled_Date__c</dateColumn>
+        <endDate>2020-08-14</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2020-07-15</startDate>
+    </timeFrameFilter>
+</Report>

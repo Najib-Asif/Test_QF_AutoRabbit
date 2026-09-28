@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>iDeal_Check</fullName>
+    <availability>online</availability>
+    <description>This button searches if the Account is eligible to flow to iDeal or not</description>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>iDeal Check</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+try{ 
+
+var query =&quot;select id from Agency_Info__c where Account__c=\&apos;&quot;+&apos;{!Account.Id}&apos;+&quot;\&apos; and Recordtype.Name=\&apos;Distribution\&apos; limit 1&quot;; 
+
+var query2 =&quot;select id from Agency_Info__c where Account__c=\&apos;&quot;+&apos;{!Account.Id}&apos;+&quot;\&apos; and PCC__c!=&apos;&apos; and Recordtype.Name=\&apos;GDS\&apos; limit 1&quot;; 
+
+var query3 =&quot;select id from Agency_Info__c where Account__c in (select Primary_Account__c from Account_Relation__c where Related_Account__c=\&apos;&quot;+&apos;{!Account.Id}&apos;+&quot;\&apos; and Active__c=TRUE) and PCC__c!=&apos;&apos; limit 1&quot;; 
+
+var query4 =&quot;select id from Contract__c where Account__c=\&apos;&quot;+&apos;{!Account.Id}&apos;+&quot;\&apos; &quot;;
+
+
+var records = sforce.connection.query(query); 
+var records2= sforce.connection.query(query2); 
+var records3= sforce.connection.query(query3); 
+var records4= sforce.connection.query(query4); 
+
+var records1 = records.getArray(&apos;records&apos;); 
+var records21= records2.getArray(&apos;records&apos;); 
+var records31= records3.getArray(&apos;records&apos;); 
+var records41= records4.getArray(&apos;records&apos;); 
+
+
+window.location.href = &apos;/apex/iDealEligibilityAccSearch?id={!Account.Id}&amp;count=&apos;+records1.length+&apos;&amp;count2=&apos;+records21.length+&apos;&amp;count3=&apos;+records31.length+&apos;&amp;count4=&apos;+records41.length; 
+} 
+catch(err) { 
+alert(err); 
+} 
+/* 
+else if(records1.length&gt;0&amp;&amp;&apos;{!Account.Active__c}&apos; == &quot;1&quot;&amp;&amp;&apos;{!NOT(ISBLANK( Account.Qantas_Corporate_Identifier__c ))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!Account.Contracted__c}&apos;== &quot;1&quot;&amp;&amp; &apos;{!Account.Dealing_Flag__c}&apos;==&apos;Y&apos; &amp;&amp;&apos;{!Account.Aquire_Override__c}&apos;==&apos;N&apos;&amp;&amp;&apos;{!NOT(ISBLANK( Account.ShippingStreet ))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!NOT(ISBLANK( Account.ShippingCity ))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!NOT(ISBLANK( Account.ShippingCountry ))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!NOT(ISBLANK( Account.ShippingState ))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!NOT(ISBLANK( Account.ShippingPostalCode ))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!NOT(ISBLANK( Account.BillingStreet))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!NOT(ISBLANK( Account.BillingCity))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!NOT(ISBLANK( Account.BillingCountry))}&apos; == &apos;true&apos; &amp;&amp; &apos;{!NOT(ISBLANK( Account.BillingState))}&apos; == &apos;true&apos; &amp;&amp; &apos;{!NOT(ISBLANK( Account.BillingPostalCode))}&apos; == &apos;true&apos; &amp;&amp;&apos;{!Account.LastModifiedBy}&apos; != &apos;Data MigrationUser&apos;&amp;&amp;&apos;{!Account.LastModifiedBy}&apos; != &apos;Integration User&apos;) 
+{ 
+alert(&apos;Account is eligible for iDeal&apos;); 
+} 
+else{ 
+window.location.href = &apos;/apex/iDealEligibilityAccSearch?id={!Account.Id}&amp;count=&apos;+records1.length; 
+} */</url>
+</WebLink>

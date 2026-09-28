@@ -1,0 +1,104 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body data-new-gr-c-s-loaded="14.1045.0" style="height: auto; min-height: auto;"><br />
+Your intent to claim for <b>{!Case.Freight_AWB_Number__c}</b> has been submitted
+<br/>
+Reference number: <b>{!Case.CaseNumber}</b>
+<br/>
+<br/>
+Thank you for completing the first step of our claims process.  
+<br/>
+<br/>
+To proceed to the next step – lodge a formal claim – we will need further details from   
+you. Without these details your claim will not progress and cannot be assessed. Please   
+ensure you carefully follow all steps advised.
+<br/>
+<h3>Your Next step: <b>lodge a formal claim</b></h3>
+To lodge a formal claim, you’ll need to provide additional information. For more details on the required information, please refer to <a href="https://freight.qantas.com/au-en/help/claims.html">Claims Help</a> on our website.
+</br>
+</br>
+Formal claims must be lodged within the <a href="https://freight.qantas.com/au-en/help/claims.html">specified timeframe</a>. Further information is available on our <a href="https://freight.qantas.com/au-en/help/claims.html">website</a> and in our <a href="https://freight.qantas.com/au-en/conditions-of-carriage-domestic.html">Conditions of Carriage (within of Australia)</a> or <a href="https://freight.qantas.com/au-en/conditions-of-carriage-international.html">Conditions of Carriage (outside of Australia)</a>.
+<br/>
+<br/>
+<h3>Where to send this information?</h3>
+<b>Claims for domestic shipments (eligible for shippers or receivers)</b>
+</br>
+</br>
+Reply to this email with the additional information required to lodge a formal claim.
+</br>
+</br>
+Please note only one party–shipper or receiver–may lodge the formal claim.
+</br>
+</br>
+<b>Claims for international shipments (eligible for receivers only)</b>
+<ul>
+    <li>If the final destination is <b>within Australia or New Zealand</b>, reply to this email with the additional information required.</li>
+    <li>If the final destination is <b>outside Australia or New Zealand</b>, the receiver must contact their local <a href="https://freight.qantas.com/au-en/freight-terminals.html#international">Qantas Freight office</a> or ground handling agent and follow their claims process as local regulations vary.</li>
+</ul>
+</br>
+<b>Your shipment details </b>
+</br>
+</br>
+<table style="border: 1px solid black;  border-collapse: collapse; width:100%">
+    <tr style="height:40px">
+      <td style="border: 1px solid black; width:30%">Air waybill: </td>
+      <td style="border: 1px solid black;">{!Case.Freight_AWB_Number__c}</td>
+    </tr>
+    <tr style="height:40px">
+        <td style="border: 1px solid black;">House air waybill: </td>
+        <td style="border: 1px solid black;">{!Case.Freight_House_AWB_Num__c}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Lodgement reason:  </td>
+        <td style="border: 1px solid black;">{!Case.Request_Reason__c}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Supplementary lodgement reason: </td>
+        <td style="border: 1px solid black;">{!Case.Description}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Estimated damages: </td>
+        <td style="border: 1px solid black;">{!Case.Refund_Amount__c}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Number of affected pieces: </td>
+        <td style="border: 1px solid black;">{!Case.freight_num_of_Affected_Pieces__c}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Weight of affected pieces: </td>
+        <td style="border: 1px solid black;">{!Case.Freight_Weight__c}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Claimant name: </td>
+        <td style="border: 1px solid black;">{!Case.SuppliedName}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Contact number: </td>
+        <td style="border: 1px solid black;">{!Case.SuppliedPhone}</td>
+      </tr>
+      <tr style="height:40px">
+        <td style="border: 1px solid black;">Company name: </td>
+        <td style="border: 1px solid black;">{!Case.SuppliedCompany}</td>
+      </tr>
+  </table>
+</br>
+</br>
+<b>A reminder that strict <a href="https://freight.qantas.com/au-en/help/claims.html">time limitations</a> apply for lodging your formal claim. </b>
+</br>
+</br>
+<b>We’re here to help!</b>
+</br>
+</br>
+If you need assistance with lodging a formal claim or have any further questions, get in touch with our Customer Service Team at <b>13 12 13</b> or reply to this email.
+</br>
+</br>
+</br>
+Qantas Freight
+</br>
+</br>
+<font color="white">{!Case.Thread_Token}</font> <br/>
+<footer><img src="https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0159000000FHvlL&oid=00D900000010OOK&lastMod=1521233610000" alt="Freight Logo" 
+/></footer>
+</body>

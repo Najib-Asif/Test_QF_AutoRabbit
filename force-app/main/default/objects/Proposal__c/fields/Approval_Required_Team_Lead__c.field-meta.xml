@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Required_Team_Lead__c</fullName>
+    <description>Approval_Required_Team_Lead for QBS</description>
+    <formula>AND(No_of_TeamLead_Approvals_Required__c &gt; 0,
+NOT(TeamLead_Approved__c),NOT(TeamLead_Rejected__c),
+ISPICKVAL(Type__c, &apos;Qantas Business Savings&apos;),
+NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)))</formula>
+    <inlineHelpText>This approval is triggered for below condition:
+-Any change in the std. Domestic discount</inlineHelpText>
+    <label>Approval Required (Team Lead)</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,70 @@
+<apex:page contentType="text/html" standardController="Risk__c">
+<!--
+redirect page for the 'New' task button override .
+**update the record type Id manually**
+-- the Master record type is defaulted to all profiles.
+-- the 'Risk' record type id is appended as a parameter for the tasks that are created from the risk detail page.
+-->
+<apex:includeScript value="/soap/ajax/26.0/connection.js"/>
+<apex:includeScript value="/support/console/32.0/integration.js"/>
+<script>
+
+if( (typeof sforce != 'undefined') && sforce && (!!sforce.one)  ) { 
+    
+    var whatId = "{!$CurrentPage.parameters.Id}";
+    var redirUrl = "/00T/e?RecordType=01290000001Iabp&followup=1&tsk5=Call&title=call&retURL="+whatId+"&what_id="+whatId; // Manual Change: replace "012N00000004jUE" 'Risk' Recordtype id for task object.
+    alert(redirUrl);
+    sforce.one.navigateToURL(redirUrl);
+}
+else {  
+    var returl = "{!$CurrentPage.parameters.retURL}";
+    var whatId = "{!$CurrentPage.parameters.what_id}";
+    var redirUrl = "/00T/e?followup=1&tsk5=Call&title=call&retURL="+returl+"&what_id="+whatId;
+    if(whatId != null){
+        if(whatId.indexOf("a0m") == 0) {               // Manual Change: replace "a0m" with Risk Record id's first 3 characters
+            redirUrl += '&RecordType=01290000001Iabp'; // Manual Change: replace "012N00000004jUE" 'Risk' Recordtype id for task object.
+        }
+    }  
+
+if(!sforce.console.isInConsole()){
+    window.top.location =  redirUrl ;
+}
+else{  
+       sforce.console.getFocusedPrimaryTabObjectId(function(result){
+
+       if(result.id != 'null'){
+           sforce.console.getFocusedPrimaryTabId(function(result){
+
+                sforce.console.openSubtab(result.id, redirUrl, true, 'New Task', null, function(result1){                
+                    sforce.console.getFocusedSubtabId(function(result2){                
+                         sforce.console.closeTab(splitTabNumber(result2.id));    
+                    });
+                });
+            
+            });
+        }else{
+            sforce.console.openPrimaryTab(null, redirUrl, true, 'New Task', function(result){
+                sforce.console.closeTab(splitTabNumber(result.id));
+            });
+
+        }
+        
+        });
+    }
+    
+    function splitTabNumber(currentTabId){
+        var subTabId = currentTabId;
+        var splitted = subTabId.split("-");
+        var tabNumber = splitted[splitted.length - 1] - 1;                
+        var closeSubTabId = '';
+       
+        for(var i=0; i< splitted.length - 1; i++){                    
+           closeSubTabId = closeSubTabId+splitted[i]+'-';                    
+        }
+                            
+        closeSubTabId = closeSubTabId + tabNumber;        
+        return closeSubTabId;
+    }
+ }      
+</script>
+</apex:page>

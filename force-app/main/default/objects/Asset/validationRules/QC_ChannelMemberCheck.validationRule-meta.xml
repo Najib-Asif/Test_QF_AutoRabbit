@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QC_ChannelMemberCheck</fullName>
+    <active>false</active>
+    <description>To ensure that all the Channel Assets must have Channel member and Subscription Date available on the Account before they register to Channel</description>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName = &apos;Agency_Channel&apos;,
+NOT(ISBLANK(AccountId)),
+Account.RecordType.DeveloperName = &quot;Agency_Account&quot;,
+OR(
+Account.Channel_Member__c = FALSE,
+ISBLANK(Account.Channel_Subscription_Date__c)
+)
+)</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Account should be subscribed to Channel</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Extension_or_Termination_Active_chk</fullName>
+    <active>true</active>
+    <description>Validation to verify case updation over contract end date and active contract CRM-7863
+Updated validation to verify inactive contract with Future Start Date CRM-8052</description>
+    <errorConditionFormula>AND(RecordTypeId =$Label.QEC_Case_Recordtype_Deal_support_request, NAM_s_Approval__c = false,Related_Contract__r.Contract_Start_Date__c  &lt;=  TODAY(), Related_Contract__r.Active__c =false,ISNEW()||ISCHANGED(Related_Contract__c))</errorConditionFormula>
+    <errorDisplayField>Related_Contract__c</errorDisplayField>
+    <errorMessage>Please select active contract to proceed.</errorMessage>
+</ValidationRule>

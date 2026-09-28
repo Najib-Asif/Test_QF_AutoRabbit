@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_GW_Case_start_work_and_owner_rule</fullName>
+    <active>true</active>
+    <description>Only allow changes for an In progress case</description>
+    <errorConditionFormula>RecordType.DeveloperName = &apos;Expense&apos; &amp;&amp; $Profile.Name &lt;&gt; &apos;System Admin - Lite&apos; &amp;&amp; $Profile.Name &lt;&gt; &apos;CRM Administrator&apos; &amp;&amp;$Profile.Name &lt;&gt; &apos;CRM Administrator - Freight&apos; &amp;&amp;$Profile.Name &lt;&gt; &apos;CRM Administrator - Global&apos; &amp;&amp;$Profile.Name &lt;&gt; &apos;CRM Administrator - QCC&apos; &amp;&amp; $Profile.Name &lt;&gt; &apos;System Administrator&apos; &amp;&amp; $Profile.Name &lt;&gt; &apos;Qantas System Administrator&apos; &amp;&amp; $Profile.Name &lt;&gt; &apos;Qantas System Admin - Freight&apos; &amp;&amp; $Profile.Name &lt;&gt; &apos;Qantas System Admin - QCC&apos; &amp;&amp; $Profile.Name &lt;&gt; &apos;Qantas System Admin - SND&apos; &amp;&amp;  $Profile.Name &lt;&gt; &apos;API Profile QCC Connected/QCC GW Integration&apos; &amp;&amp;  WorkOrder.Case.OwnerId &lt;&gt;  $User.Id  &amp;&amp; NOT(ISPICKVAL(WorkOrder.Case.Status,&apos;In Progress&apos;))</errorConditionFormula>
+    <errorMessage>Changes can be made only for an In Progress Case by the Case Owner</errorMessage>
+</ValidationRule>

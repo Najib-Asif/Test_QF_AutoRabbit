@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Leads</fullName>
+    <columns>New_Account_Type__c</columns>
+    <columns>Freight_Account_Business_Type__c</columns>
+    <columns>FULL_NAME</columns>
+    <columns>LEAD.COMPANY</columns>
+    <columns>Parent_Account__c</columns>
+    <columns>Data_Quality_Score_for_All__c</columns>
+    <columns>Lead_Quality__c</columns>
+    <columns>Freight_Corporate_Identifier__c</columns>
+    <columns>Freight_Station_Code__c</columns>
+    <columns>LEAD.COUNTRY_CODE</columns>
+    <columns>Freight_City__c</columns>
+    <columns>LEAD.EMAIL</columns>
+    <columns>LEAD.STATUS</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <columns>LEAD.CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Business_Type__c</field>
+        <operation>equals</operation>
+        <value>Freight</value>
+    </filters>
+    <filters>
+        <field>LEAD.CONVERTED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Freight Leads</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

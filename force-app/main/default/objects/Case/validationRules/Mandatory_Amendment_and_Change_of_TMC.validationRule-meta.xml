@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Amendment_and_Change_of_TMC</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+(RecordType.DeveloperName = &apos;Deal_Support_request&apos;), 
+(ISPICKVAL(Type,&apos;Deal Amendment&apos;)), 
+(ISPICKVAL(Sub_Type__c,&apos;Change of TMC&apos;)), 
+OR( 
+ISBLANK(  New_TMC_Name__c  ), 
+ISBLANK(Date_Effective_DAT__c), 
+ISBLANK(IATA_DAT__c), 
+ISBLANK(PCC_Codes_DAT__c),
+ISBLANK(GDS_DAT__c)
+) 
+)</errorConditionFormula>
+    <errorMessage>Please provide all the details in the &apos;Deal Amendment (Change of TMC) section.</errorMessage>
+</ValidationRule>

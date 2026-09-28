@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FMCA_Revenue_should_be_lesser_Total_MCA</fullName>
+    <active>true</active>
+    <description>Forecast MCA Revenue should not be greater than Forecast QF Revenue</description>
+    <errorConditionFormula>Estimated_MCA_Revenue__c &gt; Estimated_Total_Annual_Revenue__c</errorConditionFormula>
+    <errorDisplayField>Estimated_MCA_Revenue__c</errorDisplayField>
+    <errorMessage>Estimated MCA Revenue should be less than Estimated QF Annual Revenue</errorMessage>
+</ValidationRule>

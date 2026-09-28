@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Upload_Code__c</fullName>
+    <description>C&amp;CR - Used by Sales Solution Team to return the Loyalty Code for Sales Offers</description>
+    <externalId>false</externalId>
+    <formula>CASE (  Sub_Type__c , &quot;Platinum Accelerate&quot; , &quot;SCCP&quot;,
+&quot;Gold Accelerate&quot; , &quot;SCCG&quot;,
+&quot;Corporate Trigger - 50% Bonus Status&quot; , &quot;CRPA15YP&quot;,
+&quot;50% Bonus Status Credits&quot; , &quot;OURCMPLN&quot; , &quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Upload Code</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

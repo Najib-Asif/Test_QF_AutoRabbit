@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Leads_POS_AU</fullName>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <columns>LEAD.COMPANY</columns>
+    <columns>LEAD.RATING</columns>
+    <columns>FULL_NAME</columns>
+    <columns>Data_Quality_Score_for_All__c</columns>
+    <columns>Parent_Account__c</columns>
+    <columns>Lead_Quality__c</columns>
+    <columns>Freight_City__c</columns>
+    <columns>LEAD.PHONE</columns>
+    <columns>LEAD.EMAIL</columns>
+    <columns>LEAD.CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LEAD.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Unqualified</value>
+    </filters>
+    <filters>
+        <field>New_Account_Type__c</field>
+        <operation>equals</operation>
+        <value>Freight-Branch</value>
+    </filters>
+    <filters>
+        <field>LEAD.COUNTRY_CODE</field>
+        <operation>equals</operation>
+        <value>AU</value>
+    </filters>
+    <label>Freight Leads POS AU</label>
+</ListView>

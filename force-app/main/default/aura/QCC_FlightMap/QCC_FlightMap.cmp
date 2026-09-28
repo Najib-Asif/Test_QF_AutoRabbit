@@ -1,0 +1,50 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="QCC_FlightMapController" >
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="test" type="Boolean" />
+    <aura:attribute name="lstFlights" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <lightning:card>
+        <aura:set attribute="title">
+            <lightning:icon iconName="custom:custom78" size="small"/>
+            Flight Map
+        </aura:set>
+        <aura:renderIf isTrue="{!!empty(v.lstFlights)}">
+            <lightning:accordion aura:id="accordion"  allowMultipleSectionsOpen="true">
+                <aura:iteration items="{!v.lstFlights}" var="item">
+                    <lightning:accordionSection name="FLIGHT" label="{!item.departurePort}">
+                        <dl class="{!(v.recordId == item.eventId)?'slds-box slds-box_xx-small slds-dl_horizontal slds-has-dividers_bottom slds-theme_shade':'slds-box slds-box_xx-small slds-dl_horizontal slds-has-dividers_bottom'}">
+                            <dt class="slds-dl_horizontal__label">From - To </dt>
+                            <dd class="slds-dl_horizontal__detail"><b>{!item.departurePort} - {!item.arrivalPort}</b></dd>
+                            <dt class="slds-dl_horizontal__label">Status</dt>
+                            <dd class="slds-dl_horizontal__detail">
+                                <aura:renderIf isTrue="{!(item.arrivalStatus  == 'Landed')}">
+                                    {!item.arrivalStatus}
+                                    <aura:set attribute="else">
+                                        {!item.depStatus}
+                                    </aura:set>
+                                </aura:renderIf>
+                                
+                            </dd>
+                            <dt class="slds-dl_horizontal__label">Schdule Date</dt>
+                            <dd class="slds-dl_horizontal__detail">{!item.depDate}</dd>
+                            <dt class="slds-dl_horizontal__label">Event</dt>
+                            <dd class="slds-dl_horizontal__detail">
+                                <lightning:formattedUrl value="{!item.eventLink}" tooltip="Go to " label="{!item.eventNumber}" target="_blank" />
+                            </dd>
+                            <dt class="slds-dl_horizontal__label">Event Failures</dt>
+                            <dd class="slds-dl_horizontal__detail">{!item.failures}</dd>
+                        </dl>
+                    </lightning:accordionSection>
+                </aura:iteration>
+            </lightning:accordion>
+            <aura:set attribute="else">
+                <ui:message severity="info" >
+                    No Data
+                </ui:message>
+            </aura:set>
+        </aura:renderIf>
+    </lightning:card>
+    
+</aura:component>

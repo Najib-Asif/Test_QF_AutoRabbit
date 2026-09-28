@@ -1,0 +1,256 @@
+<template>
+    <lightning-card title="Offer Allocation">
+        <lightning-spinner alternative-text="Loading" size="large" lwc:if={showSpinner}></lightning-spinner>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="2" padding="around-small">
+                <div class='slds-p-horizontal_small'>
+                    <lightning-record-picker label="Offer" placeholder="Search Offer..." value={selectedOfferId}
+                        object-api-name="Offer_Catalogue__c" lwc:ref="offerPicker" display-info={offerDisplayInfo}
+                        matching-info={offerMatchingInfo} onchange={handleOfferPickerChange} disabled={recordId}>
+                    </lightning-record-picker>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="10" padding="around-small">
+                <template lwc:if={offerDetailsList}>
+                    <div class='slds-align_absolute-center'>
+                        <lightning-datatable key-field="Id" data={offerDetailsList} columns={offerColumns}
+                            hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div class="slds-p-around_small slds-text-align_center slds-text-heading_medium" > Select an Offer to begin..</div>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" class="slds-border_top slds-m-vertical_medium"
+                lwc:if={offerDetailsList}>
+                <lightning-layout>
+                    <lightning-layout-item size="2" padding="around-small" class="slds-border_right">
+                        <div class="slds-p-horizontal_small">
+                            <div>
+                                <lightning-textarea name="input2" label="IATA Codes" placeholder="Paste values in new line or comma separated" lwc:ref="bulkLoad"></lightning-textarea>
+                            </div>
+                            <div>
+                                <lightning-input name="AgencyGroup" label="Agency Group" type="search"
+                                    onkeyup={handleKeyUp} pattern="[0-9A-Za-z]+" placeholder="Search Agency Group...">
+                                </lightning-input>
+                                <template if:true={searchTermsAgencyGroup} for:each={searchTermsAgencyGroup}
+                                    for:item="term">
+                                    <lightning-pill key={term} label={term} name={term}
+                                        onremove={handleRemoveAgencyGroup}></lightning-pill>
+                                </template>
+                            </div>
+                            <div class="slds-p-left_small">
+                                <lightning-record-picker label="Agency Brand" placeholder="Search Agency Brand..."
+                                    object-api-name="Sales_Region__c" lwc:ref="agencyBrandPicker"
+                                    filter={agencyBrandFilter} display-info={agencyBrandDisplayInfo}
+                                    onchange={handleAgencyBrandPickerChange}>
+                                </lightning-record-picker>
+                                <template if:true={searchTermsAgencyBrand} for:each={searchTermsAgencyBrand}
+                                    for:item="term">
+                                    <lightning-pill key={term.Id} label={term.Name} name={term.Id}
+                                        onremove={handleRemoveAgencyBrand} type="AgencyBrand"></lightning-pill>
+                                </template>
+                            </div>
+                            <div class="slds-p-left_x-large">
+                                <lightning-record-picker label="IATA/ARC/TIDS" placeholder="Search IATA/ARC/TIDS..."
+                                    object-api-name="Account" lwc:ref="agencyIATAPicker" filter={agencyIATAFilter}
+                                    display-info={agencyIATADisplayInfo} matching-info={agencyIATAmatchingInfo}
+                                    onchange={handleagencyIATAPickerChange}>
+                                </lightning-record-picker>
+                                <template if:true={searchTermsIATA} for:each={searchTermsIATA} for:item="term">
+                                    <lightning-pill key={term.Id} label={term.Name} name={term.Id}
+                                        onremove={handleRemoveAgencyIATA}></lightning-pill>
+                                </template>
+                            </div>
+
+                            <div class='slds-m-top_medium slds-align_absolute-center'>
+                                <lightning-button variant="destructive" label="Reset" title="Reset"
+                                    onclick={handleReset} class="slds-m-left_x-small"></lightning-button>
+                                <lightning-button variant="brand" label="Search" title="Search" onclick={handleSearch}
+                                    class="slds-m-left_x-small"></lightning-button>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="10" padding="around-small">
+                        <div if:false={hasRecords} class='slds-text-align_center'>
+                            {emptyMessage}<!-- or upload a csv file in the template
+                            format..
+                            <lightning-input variant="label-hidden" type="file" label="QIC file" accept=".csv" onchange={handleFilesSelected} class="slds-p-top_small">
+                            </lightning-input>-->
+
+                        </div>
+                        <div if:true={hasRecords}>
+                            <div class="slds-notify slds-notify_alert slds-alert_error" role="alert" lwc:if={notFoundIATACodes}>
+                                <span class="slds-assistive-text">error</span>
+                                <h2>Below Iata codes were not found in the system or is inactive, or does not have an active PNDC agency.<br/>{notFoundIATACodes}</h2>
+                            </div>
+                            <div class="slds-p-around_small slds-text-align_center slds-text-heading_medium" >Select Agencies</div>
+                            <table aria-multiselectable="true"
+                                class="slds-table slds-table_bordered slds-table_fixed-layout"
+                                role="grid">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode" colspan="2"
+                                            scope="col">
+                                            Filters:
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <lightning-combobox value={qicIdFilterVal} label="QIC ID"
+                                                placeholder="QIC ID" options={qicIdFilterOptions}
+                                                onchange={handleQicIdFilterChange} variant="label-hidden">
+                                            </lightning-combobox>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <lightning-combobox value={billingCountryCodeFilterVal} label="Billing Country Code"
+                                                placeholder="Billing Country Code" options={billingCountryCodeFilterOptions}
+                                                onchange={handleBillingCountryCodeFilterChange} variant="label-hidden">
+                                            </lightning-combobox>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <lightning-combobox value={statusFilterVal} label="Status"
+                                                placeholder="Status" options={statusFilterOptions}
+                                                onchange={handleStatusFilterChange} variant="label-hidden">
+                                            </lightning-combobox>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <lightning-combobox value={allocationFilterVal} label="Allocation"
+                                                placeholder="Allocation" options={allocationFilterOptions}
+                                                onchange={handleAllocationFilterChange} variant="label-hidden">
+                                            </lightning-combobox>
+                                        </th>
+                                        <th class="slds-text-align_right slds-cell_action-mode" scope="col">
+                                            <lightning-button variant="base" label="Clear Filters" onclick={handleClearFilter}
+                                                class="slds-m-right_small"></lightning-button>
+                                        </th>
+                                    </tr>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <div
+                                                class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-truncate" title="Name">Agency Brand</span>
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <div
+                                                class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-truncate" title="Name">Agency Name</span>
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <div
+                                                class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-truncate" title="Name">QIC Id</span>
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <div
+                                                class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-truncate" title="Name">Billing Country Code</span>
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <div
+                                                class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-truncate" title="Name">P-NDC Status</span>
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                                            scope="col">
+                                            <div
+                                                class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-truncate" title="Name">Allocation</span>
+                                            </div>
+                                        </th>
+                                        <th class="slds-text-align_right slds-cell_action-mode" scope="col">
+                                            <div class="slds-th__action_form">
+                                                <lightning-input type="checkbox" label="Select All option"
+                                                    name="selectAll" lwc:ref="selectAll" variant="label-hidden"
+                                                    onchange={selectAllHandler}></lightning-input>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={records} for:item="asset">
+                                        <tr aria-selected="false" class="slds-hint-parent" key={asset.keyIndex}>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div class="slds-truncate" title={asset.agencyBrand}>{asset.agencyBrand}
+                                                </div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div class="slds-truncate" title={asset.agencyName}>{asset.agencyName}
+                                                </div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div class="slds-truncate" title={asset.qicId}>{asset.qicId}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div class="slds-truncate" title={asset.billingCountryCode}>{asset.billingCountryCode}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div class="slds-truncate" title={asset.pndcStatus}>{asset.pndcStatus}
+                                                </div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div class="slds-truncate" title={asset.offerAllocated}>{asset.offerAllocated}
+                                                </div>
+                                            </td>
+                                            <td class="slds-text-align_right slds-cell_action-mode" scope="gridcell">
+                                                <div class="slds-checkbox">
+                                                    <template lwc:if={asset.errorStatus}>
+                                                        <lightning-icon icon-name="utility:check" size="x-small"
+                                                            alternative-text={asset.errorStatus}
+                                                            title={asset.errorStatus}
+                                                            class="slds-m-right_x-small"></lightning-icon>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-input type="checkbox" label="Select"
+                                                            name={asset.keyIndex} lwc:if={asset.allowAllocation}
+                                                            checked={asset.selected} variant="label-hidden"
+                                                            onchange={selectHandler}></lightning-input>
+                                                    </template>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="slds-m-top_medium slds-grid slds-gutters">
+                                <div class="slds-col slds-text-align_left"> Record Count: {filteredRecordCount}</div>
+                                <div class='slds-align_absolute-center slds-col'>
+                                    <lightning-button variant="brand" label="Allocate" title="Allocate" class="slds-m-right_small"
+                                    onclick={handleAllocate}></lightning-button>
+                                    <lightning-button variant="brand" label="De-Allocate" title="De-Allocate"
+                                    onclick={handleDeAllocate}></lightning-button>
+                                </div>
+                                <div class="slds-col slds-text-align_right"> Selected Count: {selectedRecordCount}</div>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+
+    <template if:true={showProgress}>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-label="Meaningful description of the modal content" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <div class="slds-modal__content slds-p-around_medium slds-modal__content_headless" id="modal-content-id-1">
+                {progressMessage}
+                <lightning-progress-bar value={percentComplete} variant="circular"></lightning-progress-bar>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

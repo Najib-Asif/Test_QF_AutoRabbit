@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Received_Date_Cannot_Change</fullName>
+    <active>true</active>
+    <description>Once received date has been set, it cannot be changed</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_Description_field_is_locked_QCC__c = TRUE, ISCHANGED( Received_Date__c ), OR(RecordType.DeveloperName = &apos;CCC_Baggage&apos;, RecordType.DeveloperName = &apos;CCC_Complaints&apos;, RecordType.DeveloperName = &apos;CCC_Compliment&apos;, RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;, RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;, RecordType.DeveloperName = &apos;CCC_Medical&apos;, RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;, RecordType.DeveloperName = &apos;CCC_Query&apos; ))</errorConditionFormula>
+    <errorDisplayField>Received_Date__c</errorDisplayField>
+    <errorMessage>Received date cannot be changed</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<apex:component controller="QCC_TimeUtility" access="global">
+  <apex:attribute name="dateTimeString" type="String" description="Date/Time in string format" 
+                  assignTo="{!dateString}" />
+  <apex:attribute name="dateTimeFormat" type="String" description="Format of data/time output" default="HH:mm 'on' d MMMM yyyy"/>
+  <apex:attribute name="dataType" type="String" description="Date ot Time" default="Date"/>
+  <!-- Begin Default Content REMOVE THIS -->
+<apex:outputText rendered="{!IF(LEN(dateTimeString)>0,true, false)}" 
+                    value="{0, {!dataType} , {!dateTimeFormat}}"> <apex:param value="{!DateTimeValue}" /> </apex:outputText>
+<!-- End Default Content REMOVE THIS -->
+</apex:component>

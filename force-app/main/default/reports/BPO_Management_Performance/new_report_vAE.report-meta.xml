@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>(Case_value_changes__c.Total_Case_Status_Duration_in_minutes__c:AVG)</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA2</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Average Duration</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <columns>
+        <field>Case_value_changes__c.Field_Value_Changed_For__c</field>
+    </columns>
+    <columns>
+        <field>Case_value_changes__c.Old_Value__c</field>
+    </columns>
+    <columns>
+        <field>Case_value_changes__c.New_Value__c</field>
+    </columns>
+    <columns>
+        <field>Case_value_changes__c.Modified_Date_Time__c</field>
+    </columns>
+    <columns>
+        <field>FK_CASE_OWNER_NAME</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <booleanFilter>1 AND (2 OR 6 OR 7) AND (3 OR 4 OR 5) AND 8 AND 9</booleanFilter>
+        <criteriaItems>
+            <column>FK_CASE_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Complaints,Case.CCC_Further_Action_Required,Case.CCC_Query</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.Old_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>In Progress</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.New_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Waiting for Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.New_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Waiting for Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.New_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Pending Recovery</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.Old_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Reply Received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.Old_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Case.Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Accommodation/Reimbursement of Expenses</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Case.Is_CCAT_User__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_CASE_TYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case_value_changes__c.Case_Status_Changed_Duration__c</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <name>Downgrades &amp; Reimbursements Handled Yest</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Case_value_changes__c@Case_value_changes__c.Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Case_value_changes__c.Modified_Date_Time__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Case_value_changes__c.Modified_Date_Time__c</dateColumn>
+        <interval>INTERVAL_YESTERDAY</interval>
+    </timeFrameFilter>
+</Report>

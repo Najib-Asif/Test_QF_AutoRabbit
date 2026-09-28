@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Name_Match__c</fullName>
+    <formula>AND( Active_QBD_Record__c, Active_Profile_Record__c, UPPER(QBD_Last_Name__c ) == UPPER(Last_Name__c) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>This is driven by the comparision between &apos;QBD Last Name&apos; (that comes in as part of QBD request) and &apos;Last Name&apos; - this flag is checked if the two Last Name match (case insensitive).</inlineHelpText>
+    <label>Last Name Match</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

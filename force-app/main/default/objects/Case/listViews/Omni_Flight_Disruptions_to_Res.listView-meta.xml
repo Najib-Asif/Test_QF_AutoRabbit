@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Omni_Flight_Disruptions_to_Res</fullName>
+    <booleanFilter>1 AND 2 AND (3 or 5 or 6 or 7) AND 4</booleanFilter>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>Due_Date__c</columns>
+    <columns>Group__c</columns>
+    <columns>Category__c</columns>
+    <columns>Case_Age__c</columns>
+    <columns>Frequent_Flyer_Tier__c</columns>
+    <columns>OWNER_NAME</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Resolved,Closed</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>New,Reply Received</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Access,Account Queries,Aircraft Condition,Airport Security,Airports,Announcements,Award Bookings,Beverage Quality/Selection,Boarding,Booking Cancelled by Customer,Catering Quality/Selection,Check-In,Customs/Immigration,Delay Handling</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Qantas Pass (UATP),Medical - Patient</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Delayed Baggage to Carousel,Delayed Flight,Delayed or Lost Baggage,Delayed Priority Baggage to Carousel,epiQure,Facilities,Facilities/Signage,Fees/Cost/Price,Flight Cancelled by Qantas,Food and Beverage,Frequent Flyer Service Centre</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>In-Flight Entertainment,In-Flight Products,Meal Preferences,Overbooked Flight,Personal Property Lost In-Flight,No Chillers/Second Service/Ambient Product,Purchased Lounge Pass,Qantas Assure,Qantas Cash,Qantas Policies,Qantas Store,Seating</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Seating Change,Seating Profile Preference,Seating Requests,Status Credits/Qantas Points,Ticket Changes,Travel Agents,Accommodation/Reimbursement of Expenses,Downgrade,Refunds</value>
+    </filters>
+    <label>Omni - Flight Disruptions to Resolutions</label>
+    <queue>CCC_R1_Flight_Disruption_Q</queue>
+</ListView>

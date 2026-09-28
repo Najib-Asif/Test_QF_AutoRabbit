@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>AM_s_Manager__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Asian Countries</description>
+        <entryCriteria>
+            <formula>(Account.BillingCountry = &apos;IN&apos; || 
+Account.BillingCountry = &apos;HK&apos;  ||
+Account.BillingCountry = &apos;CN&apos;  ||
+Account.BillingCountry = &apos;ID&apos;  ||
+Account.BillingCountry = &apos;PH&apos;  ||
+Account.BillingCountry = &apos;TH&apos;  ||
+Account.BillingCountry = &apos;SG&apos;  ||
+Account.BillingCountry = &apos;MY&apos;  ||
+Account.BillingCountry = &apos;VN&apos;  ||
+Account.BillingCountry = &apos;TW&apos;  ||
+Account.BillingCountry = &apos;KR&apos;  ||
+Account.BillingCountry = &apos;PG&apos;  ||
+Account.BillingCountry = &apos;SB&apos;  ||
+Account.BillingCountry = &apos;IL&apos;  ||
+Account.BillingCountry = &apos;LK&apos;  ||
+Account.BillingCountry = &apos;CN&apos;  || 
+Account.BillingCountry = &apos;MO&apos;  ||
+Account.BillingCountry = &apos;PK&apos; || 
+Account.BillingCountry = &apos;SA&apos; ||
+Account.BillingCountry = &apos;EG&apos; ||
+Account.BillingCountry = &apos;QA&apos; || 
+Account.BillingCountry = &apos;OM&apos; ||
+Account.BillingCountry = &apos;KE&apos; ||
+Account.BillingCountry = &apos;KW&apos; ||
+Account.BillingCountry = &apos;LB&apos; || 
+Account.BillingCountry = &apos;KH&apos; ||
+Account.BillingCountry = &apos;BH&apos; ||
+Account.BillingCountry = &apos;KZ&apos; || 
+Account.BillingCountry = &apos;JO&apos; ||
+Account.BillingCountry = &apos;BD&apos; ||
+Account.BillingCountry = &apos;CY&apos; ||
+Account.BillingCountry = &apos;ET&apos; ||
+Account.BillingCountry = &apos;TN&apos; ||
+Account.BillingCountry = &apos;BN&apos; ||
+Account.BillingCountry = &apos;FJ&apos; || 
+Account.BillingCountry = &apos;NC&apos; ||
+Account.BillingCountry = &apos;PF&apos; ||
+Account.BillingCountry = &apos;WS&apos; || 
+Account.BillingCountry = &apos;VU&apos; ||
+Account.BillingCountry = &apos;GU&apos; ||
+Account.BillingCountry = &apos;CK&apos; ||
+Account.BillingCountry = &apos;TO&apos; || 
+Account.BillingCountry = &apos;WF&apos; ||
+Account.BillingCountry = &apos;LA&apos;
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approvals1</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Reports_To__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>(Account.BillingCountry = &apos;IN&apos; || 
+Account.BillingCountry = &apos;HK&apos;  ||
+Account.BillingCountry = &apos;CN&apos;  ||
+Account.BillingCountry = &apos;ID&apos;  ||
+Account.BillingCountry = &apos;PH&apos;  ||
+Account.BillingCountry = &apos;TH&apos;  ||
+Account.BillingCountry = &apos;SG&apos;  ||
+Account.BillingCountry = &apos;MY&apos;  ||
+Account.BillingCountry = &apos;VN&apos;  ||
+Account.BillingCountry = &apos;TW&apos;  ||
+Account.BillingCountry = &apos;KR&apos;  ||
+Account.BillingCountry = &apos;PG&apos;  ||
+Account.BillingCountry = &apos;SB&apos;  ||
+Account.BillingCountry = &apos;IL&apos;  ||
+Account.BillingCountry = &apos;LK&apos;  ||
+Account.BillingCountry = &apos;CN&apos;  || 
+Account.BillingCountry = &apos;MO&apos;  ||
+Account.BillingCountry = &apos;PK&apos; || 
+Account.BillingCountry = &apos;SA&apos; ||
+Account.BillingCountry = &apos;EG&apos; ||
+Account.BillingCountry = &apos;QA&apos; || 
+Account.BillingCountry = &apos;OM&apos; ||
+Account.BillingCountry = &apos;KE&apos; ||
+Account.BillingCountry = &apos;KW&apos; ||
+Account.BillingCountry = &apos;LB&apos; || 
+Account.BillingCountry = &apos;KH&apos; ||
+Account.BillingCountry = &apos;BH&apos; ||
+Account.BillingCountry = &apos;KZ&apos; || 
+Account.BillingCountry = &apos;JO&apos; ||
+Account.BillingCountry = &apos;BD&apos; ||
+Account.BillingCountry = &apos;CY&apos; ||
+Account.BillingCountry = &apos;ET&apos; ||
+Account.BillingCountry = &apos;TN&apos; ||
+Account.BillingCountry = &apos;BN&apos; ||
+Account.BillingCountry = &apos;FJ&apos; || 
+Account.BillingCountry = &apos;NC&apos; ||
+Account.BillingCountry = &apos;PF&apos; ||
+Account.BillingCountry = &apos;WS&apos; || 
+Account.BillingCountry = &apos;VU&apos; ||
+Account.BillingCountry = &apos;GU&apos; ||
+Account.BillingCountry = &apos;CK&apos; ||
+Account.BillingCountry = &apos;TO&apos; || 
+Account.BillingCountry = &apos;WF&apos; ||
+Account.BillingCountry = &apos;LA&apos;)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approval_AU</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Requested_By__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>(Account.BillingCountry = &apos;IN&apos; || 
+Account.BillingCountry = &apos;HK&apos;  ||
+Account.BillingCountry = &apos;CN&apos;  ||
+Account.BillingCountry = &apos;ID&apos;  ||
+Account.BillingCountry = &apos;PH&apos;  ||
+Account.BillingCountry = &apos;TH&apos;  ||
+Account.BillingCountry = &apos;SG&apos;  ||
+Account.BillingCountry = &apos;MY&apos;  ||
+Account.BillingCountry = &apos;VN&apos;  ||
+Account.BillingCountry = &apos;TW&apos;  ||
+Account.BillingCountry = &apos;KR&apos;  ||
+Account.BillingCountry = &apos;PG&apos;  ||
+Account.BillingCountry = &apos;SB&apos;  ||
+Account.BillingCountry = &apos;IL&apos;  ||
+Account.BillingCountry = &apos;LK&apos;  ||
+Account.BillingCountry = &apos;CN&apos;  || 
+Account.BillingCountry = &apos;MO&apos;  ||
+Account.BillingCountry = &apos;PK&apos; || 
+Account.BillingCountry = &apos;SA&apos; ||
+Account.BillingCountry = &apos;EG&apos; ||
+Account.BillingCountry = &apos;QA&apos; || 
+Account.BillingCountry = &apos;OM&apos; ||
+Account.BillingCountry = &apos;KE&apos; ||
+Account.BillingCountry = &apos;KW&apos; ||
+Account.BillingCountry = &apos;LB&apos; || 
+Account.BillingCountry = &apos;KH&apos; ||
+Account.BillingCountry = &apos;BH&apos; ||
+Account.BillingCountry = &apos;KZ&apos; || 
+Account.BillingCountry = &apos;JO&apos; ||
+Account.BillingCountry = &apos;BD&apos; ||
+Account.BillingCountry = &apos;CY&apos; ||
+Account.BillingCountry = &apos;ET&apos; ||
+Account.BillingCountry = &apos;TN&apos; ||
+Account.BillingCountry = &apos;BN&apos; ||
+Account.BillingCountry = &apos;FJ&apos; || 
+Account.BillingCountry = &apos;NC&apos; ||
+Account.BillingCountry = &apos;PF&apos; ||
+Account.BillingCountry = &apos;WS&apos; || 
+Account.BillingCountry = &apos;VU&apos; ||
+Account.BillingCountry = &apos;GU&apos; ||
+Account.BillingCountry = &apos;CK&apos; ||
+Account.BillingCountry = &apos;TO&apos; || 
+Account.BillingCountry = &apos;WF&apos; ||
+Account.BillingCountry = &apos;LA&apos;) &amp;&amp; ACM_Value__c &gt; 1000</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 3 Approval</label>
+        <name>Level_3_Approval_GT_1k</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <description>New Zealand,UK,US,South Africa,Canada,Mexico</description>
+        <entryCriteria>
+            <formula>(Account.BillingCountry = &apos;NZ&apos; ||Account.BillingCountry = &apos;GB&apos; ||Account.BillingCountry = &apos;ZA&apos; ||Account.BillingCountry = &apos;CA&apos; ||Account.BillingCountry = &apos;US&apos; ||Account.BillingCountry = &apos;MX&apos; ||Account.BillingCountry = &apos;FR&apos; ||Account.BillingCountry = &apos;BR&apos; ||Account.BillingCountry = &apos;DE&apos; ||Account.BillingCountry = &apos;JP&apos; ||Account.BillingCountry = &apos;ES&apos; ||Account.BillingCountry = &apos;IT&apos; ||Account.BillingCountry = &apos;SE&apos; ||Account.BillingCountry = &apos;AE&apos; ||Account.BillingCountry = &apos;CO&apos; ||Account.BillingCountry = &apos;NL&apos; ||Account.BillingCountry = &apos;PL&apos; ||Account.BillingCountry = &apos;AR&apos; ||Account.BillingCountry = &apos;CH&apos; ||Account.BillingCountry = &apos;RU&apos; ||Account.BillingCountry = &apos;AT&apos; ||Account.BillingCountry = &apos;MN&apos; ||Account.BillingCountry = &apos;NP&apos; ||Account.BillingCountry = &apos;GH&apos; ||Account.BillingCountry = &apos;UG&apos; ||Account.BillingCountry = &apos;MA&apos; ||Account.BillingCountry = &apos;TZ&apos; ||Account.BillingCountry = &apos;NA&apos; ||Account.BillingCountry = &apos;BW&apos; ||Account.BillingCountry = &apos;NG&apos; ||Account.BillingCountry = &apos;CM&apos; ||Account.BillingCountry = &apos;MW&apos; ||Account.BillingCountry = &apos;ZM&apos; ||Account.BillingCountry = &apos;AO&apos; ||Account.BillingCountry = &apos;CD&apos; ||Account.BillingCountry = &apos;CG&apos; ||Account.BillingCountry = &apos;NA&apos; ||Account.BillingCountry = &apos;SZ&apos; ||Account.BillingCountry = &apos;ZW&apos; ||Account.BillingCountry = &apos;BJ&apos; ||Account.BillingCountry = &apos;BI&apos; ||Account.BillingCountry = &apos;TD&apos; ||Account.BillingCountry = &apos;CI&apos; ||Account.BillingCountry = &apos;GA&apos; ||Account.BillingCountry = &apos;GN&apos; ||Account.BillingCountry = &apos;GW&apos; ||Account.BillingCountry = &apos;MG&apos; ||Account.BillingCountry = &apos;MV&apos; ||Account.BillingCountry = &apos;ML&apos; ||Account.BillingCountry = &apos;MR&apos; ||Account.BillingCountry = &apos;MU&apos; ||Account.BillingCountry = &apos;MZ&apos; ||Account.BillingCountry = &apos;RW&apos; ||Account.BillingCountry = &apos;SN&apos; ||Account.BillingCountry = &apos;SL&apos; ||Account.BillingCountry = &apos;SD&apos; ||Account.BillingCountry = &apos;TG&apos; ||Account.BillingCountry = &apos;NO&apos; ||Account.BillingCountry = &apos;BE&apos; ||Account.BillingCountry =&apos;TR&apos; ||Account.BillingCountry = &apos;HU&apos; ||Account.BillingCountry = &apos;DK&apos; ||Account.BillingCountry = &apos;IE&apos; ||Account.BillingCountry = &apos;CL&apos; ||Account.BillingCountry = &apos;CZ&apos; ||Account.BillingCountry = &apos;GR&apos; ||Account.BillingCountry = &apos;PE&apos; ||Account.BillingCountry = &apos;FI&apos; ||Account.BillingCountry = &apos;PT&apos; ||Account.BillingCountry = &apos;VE&apos; ||Account.BillingCountry = &apos;RO&apos; ||Account.BillingCountry = &apos;SK&apos; ||Account.BillingCountry = &apos;MT&apos; ||Account.BillingCountry = &apos;HR&apos; ||Account.BillingCountry = &apos;LU&apos; ||Account.BillingCountry = &apos;UA&apos; ||Account.BillingCountry = &apos;PA&apos; ||Account.BillingCountry = &apos;RS&apos; ||Account.BillingCountry = &apos;CR&apos; ||Account.BillingCountry = &apos;SV&apos; ||Account.BillingCountry = &apos;LT&apos; ||Account.BillingCountry = &apos;SI&apos; ||Account.BillingCountry = &apos;BO&apos; ||Account.BillingCountry = &apos;EE&apos; ||Account.BillingCountry = &apos;UY&apos; ||Account.BillingCountry = &apos;BG&apos; ||Account.BillingCountry = &apos;GT&apos; ||Account.BillingCountry = &apos;AZ&apos; ||Account.BillingCountry = &apos;HN&apos; ||Account.BillingCountry = &apos;IS&apos; ||Account.BillingCountry = &apos;LV&apos; ||Account.BillingCountry = &apos;MK&apos; ||Account.BillingCountry = &apos;ME&apos; ||Account.BillingCountry = &apos;MC&apos; ||Account.BillingCountry = &apos;MQ&apos; ||Account.BillingCountry = &apos;BS&apos; ||Account.BillingCountry = &apos;DO&apos; ||Account.BillingCountry = &apos;NI&apos; ||Account.BillingCountry = &apos;PY&apos; ||Account.BillingCountry = &apos;BL&apos; ||Account.BillingCountry = &apos;SM&apos; ||Account.BillingCountry = &apos;SX&apos;)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approvals</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Reports_To__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>(Account.BillingCountry = &apos;NZ&apos; ||Account.BillingCountry = &apos;GB&apos; ||Account.BillingCountry = &apos;ZA&apos; ||Account.BillingCountry = &apos;CA&apos; ||Account.BillingCountry = &apos;US&apos; ||Account.BillingCountry = &apos;MX&apos; ||Account.BillingCountry = &apos;FR&apos; ||Account.BillingCountry = &apos;BR&apos; ||Account.BillingCountry = &apos;DE&apos; ||Account.BillingCountry = &apos;JP&apos; ||Account.BillingCountry = &apos;ES&apos; ||Account.BillingCountry = &apos;IT&apos; ||Account.BillingCountry = &apos;SE&apos; ||Account.BillingCountry = &apos;AE&apos; ||Account.BillingCountry = &apos;CO&apos; ||Account.BillingCountry = &apos;NL&apos; ||Account.BillingCountry = &apos;PL&apos; ||Account.BillingCountry = &apos;AR&apos; ||Account.BillingCountry = &apos;CH&apos; ||Account.BillingCountry = &apos;RU&apos; ||Account.BillingCountry = &apos;AT&apos; ||Account.BillingCountry = &apos;MN&apos; ||Account.BillingCountry = &apos;NP&apos; ||Account.BillingCountry = &apos;GH&apos; ||Account.BillingCountry = &apos;UG&apos; ||Account.BillingCountry = &apos;MA&apos; ||Account.BillingCountry = &apos;TZ&apos; ||Account.BillingCountry = &apos;NA&apos; ||Account.BillingCountry = &apos;BW&apos; ||Account.BillingCountry = &apos;NG&apos; ||Account.BillingCountry = &apos;CM&apos; ||Account.BillingCountry = &apos;MW&apos; ||Account.BillingCountry = &apos;ZM&apos; ||Account.BillingCountry = &apos;AO&apos; ||Account.BillingCountry = &apos;CD&apos; ||Account.BillingCountry = &apos;CG&apos; ||Account.BillingCountry = &apos;NA&apos; ||Account.BillingCountry = &apos;SZ&apos; ||Account.BillingCountry = &apos;ZW&apos; ||Account.BillingCountry = &apos;BJ&apos; ||Account.BillingCountry = &apos;BI&apos; ||Account.BillingCountry = &apos;TD&apos; ||Account.BillingCountry = &apos;CI&apos; ||Account.BillingCountry = &apos;GA&apos; ||Account.BillingCountry = &apos;GN&apos; ||Account.BillingCountry = &apos;GW&apos; ||Account.BillingCountry = &apos;MG&apos; ||Account.BillingCountry = &apos;MV&apos; ||Account.BillingCountry = &apos;ML&apos; ||Account.BillingCountry = &apos;MR&apos; ||Account.BillingCountry = &apos;MU&apos; ||Account.BillingCountry = &apos;MZ&apos; ||Account.BillingCountry = &apos;RW&apos; ||Account.BillingCountry = &apos;SN&apos; ||Account.BillingCountry = &apos;SL&apos; ||Account.BillingCountry = &apos;SD&apos; ||Account.BillingCountry = &apos;TG&apos; ||Account.BillingCountry = &apos;NO&apos; ||Account.BillingCountry = &apos;BE&apos; ||Account.BillingCountry =&apos;TR&apos; ||Account.BillingCountry = &apos;HU&apos; ||Account.BillingCountry = &apos;DK&apos; ||Account.BillingCountry = &apos;IE&apos; ||Account.BillingCountry = &apos;CL&apos; ||Account.BillingCountry = &apos;CZ&apos; ||Account.BillingCountry = &apos;GR&apos; ||Account.BillingCountry = &apos;PE&apos; ||Account.BillingCountry = &apos;FI&apos; ||Account.BillingCountry = &apos;PT&apos; ||Account.BillingCountry = &apos;VE&apos; ||Account.BillingCountry = &apos;RO&apos; ||Account.BillingCountry = &apos;SK&apos; ||Account.BillingCountry = &apos;MT&apos; ||Account.BillingCountry = &apos;HR&apos; ||Account.BillingCountry = &apos;LU&apos; ||Account.BillingCountry = &apos;UA&apos; ||Account.BillingCountry = &apos;PA&apos; ||Account.BillingCountry = &apos;RS&apos; ||Account.BillingCountry = &apos;CR&apos; ||Account.BillingCountry = &apos;SV&apos; ||Account.BillingCountry = &apos;LT&apos; ||Account.BillingCountry = &apos;SI&apos; ||Account.BillingCountry = &apos;BO&apos; ||Account.BillingCountry = &apos;EE&apos; ||Account.BillingCountry = &apos;UY&apos; ||Account.BillingCountry = &apos;BG&apos; ||Account.BillingCountry = &apos;GT&apos; ||Account.BillingCountry = &apos;AZ&apos; ||Account.BillingCountry = &apos;HN&apos; ||Account.BillingCountry = &apos;IS&apos; ||Account.BillingCountry = &apos;LV&apos; ||Account.BillingCountry = &apos;MK&apos; ||Account.BillingCountry = &apos;ME&apos; ||Account.BillingCountry = &apos;MC&apos; ||Account.BillingCountry = &apos;MQ&apos; ||Account.BillingCountry = &apos;BS&apos; ||Account.BillingCountry = &apos;DO&apos; ||Account.BillingCountry = &apos;NI&apos; ||Account.BillingCountry = &apos;PY&apos; ||Account.BillingCountry = &apos;BL&apos; ||Account.BillingCountry = &apos;SM&apos; ||Account.BillingCountry = &apos;SX&apos;)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approvals</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Requested_By__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>(Account.BillingCountry = &apos;NZ&apos; ||Account.BillingCountry = &apos;GB&apos; ||Account.BillingCountry = &apos;ZA&apos; ||Account.BillingCountry = &apos;CA&apos; ||Account.BillingCountry = &apos;US&apos; ||Account.BillingCountry = &apos;MX&apos; ||Account.BillingCountry = &apos;FR&apos; ||Account.BillingCountry = &apos;BR&apos; ||Account.BillingCountry = &apos;DE&apos; ||Account.BillingCountry = &apos;JP&apos; ||Account.BillingCountry = &apos;ES&apos; ||Account.BillingCountry = &apos;IT&apos; ||Account.BillingCountry = &apos;SE&apos; ||Account.BillingCountry = &apos;AE&apos; ||Account.BillingCountry = &apos;CO&apos; ||Account.BillingCountry = &apos;NL&apos; ||Account.BillingCountry = &apos;PL&apos; ||Account.BillingCountry = &apos;AR&apos; ||Account.BillingCountry = &apos;CH&apos; ||Account.BillingCountry = &apos;RU&apos; ||Account.BillingCountry = &apos;AT&apos; ||Account.BillingCountry = &apos;MN&apos; ||Account.BillingCountry = &apos;NP&apos; ||Account.BillingCountry = &apos;GH&apos; ||Account.BillingCountry = &apos;UG&apos; ||Account.BillingCountry = &apos;MA&apos; ||Account.BillingCountry = &apos;TZ&apos; ||Account.BillingCountry = &apos;NA&apos; ||Account.BillingCountry = &apos;BW&apos; ||Account.BillingCountry = &apos;NG&apos; ||Account.BillingCountry = &apos;CM&apos; ||Account.BillingCountry = &apos;MW&apos; ||Account.BillingCountry = &apos;ZM&apos; ||Account.BillingCountry = &apos;AO&apos; ||Account.BillingCountry = &apos;CD&apos; ||Account.BillingCountry = &apos;CG&apos; ||Account.BillingCountry = &apos;NA&apos; ||Account.BillingCountry = &apos;SZ&apos; ||Account.BillingCountry = &apos;ZW&apos; ||Account.BillingCountry = &apos;BJ&apos; ||Account.BillingCountry = &apos;BI&apos; ||Account.BillingCountry = &apos;TD&apos; ||Account.BillingCountry = &apos;CI&apos; ||Account.BillingCountry = &apos;GA&apos; ||Account.BillingCountry = &apos;GN&apos; ||Account.BillingCountry = &apos;GW&apos; ||Account.BillingCountry = &apos;MG&apos; ||Account.BillingCountry = &apos;MV&apos; ||Account.BillingCountry = &apos;ML&apos; ||Account.BillingCountry = &apos;MR&apos; ||Account.BillingCountry = &apos;MU&apos; ||Account.BillingCountry = &apos;MZ&apos; ||Account.BillingCountry = &apos;RW&apos; ||Account.BillingCountry = &apos;SN&apos; ||Account.BillingCountry = &apos;SL&apos; ||Account.BillingCountry = &apos;SD&apos; ||Account.BillingCountry = &apos;TG&apos; ||Account.BillingCountry = &apos;NO&apos; ||Account.BillingCountry = &apos;BE&apos; ||Account.BillingCountry =&apos;TR&apos; ||Account.BillingCountry = &apos;HU&apos; ||Account.BillingCountry = &apos;DK&apos; ||Account.BillingCountry = &apos;IE&apos; ||Account.BillingCountry = &apos;CL&apos; ||Account.BillingCountry = &apos;CZ&apos; ||Account.BillingCountry = &apos;GR&apos; ||Account.BillingCountry = &apos;PE&apos; ||Account.BillingCountry = &apos;FI&apos; ||Account.BillingCountry = &apos;PT&apos; ||Account.BillingCountry = &apos;VE&apos; ||Account.BillingCountry = &apos;RO&apos; ||Account.BillingCountry = &apos;SK&apos; ||Account.BillingCountry = &apos;MT&apos; ||Account.BillingCountry = &apos;HR&apos; ||Account.BillingCountry = &apos;LU&apos; ||Account.BillingCountry = &apos;UA&apos; ||Account.BillingCountry = &apos;PA&apos; ||Account.BillingCountry = &apos;RS&apos; ||Account.BillingCountry = &apos;CR&apos; ||Account.BillingCountry = &apos;SV&apos; ||Account.BillingCountry = &apos;LT&apos; ||Account.BillingCountry = &apos;SI&apos; ||Account.BillingCountry = &apos;BO&apos; ||Account.BillingCountry = &apos;EE&apos; ||Account.BillingCountry = &apos;UY&apos; ||Account.BillingCountry = &apos;BG&apos; ||Account.BillingCountry = &apos;GT&apos; ||Account.BillingCountry = &apos;AZ&apos; ||Account.BillingCountry = &apos;HN&apos; ||Account.BillingCountry = &apos;IS&apos; ||Account.BillingCountry = &apos;LV&apos; ||Account.BillingCountry = &apos;MK&apos; ||Account.BillingCountry = &apos;ME&apos; ||Account.BillingCountry = &apos;MC&apos; ||Account.BillingCountry = &apos;MQ&apos; ||Account.BillingCountry = &apos;BS&apos; ||Account.BillingCountry = &apos;DO&apos; ||Account.BillingCountry = &apos;NI&apos; ||Account.BillingCountry = &apos;PY&apos; ||Account.BillingCountry = &apos;BL&apos; ||Account.BillingCountry = &apos;SM&apos; ||Account.BillingCountry = &apos;SX&apos;) &amp;&amp; ACM_Value__c &gt; 1000</formula>
+        </entryCriteria>
+        <label>Level 3 Approval</label>
+        <name>Level_3_Approvals1</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>All regions ADM approvals have been handled here Except AU</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>RecordType.DeveloperName = &apos;QIC_Service_request&apos;  &amp;&amp;
+ISPICKVAL(Problem_Type__c, &apos;Internal - ADM/ACM&apos;)  &amp;&amp;  
+(ACM_Value__c  &lt; 1000  || ACM_Value__c  &gt; 1000) &amp;&amp; NOT(ISPICKVAL(Approval_Status__c,&apos;Approved&apos;) || ISPICKVAL(Approval_Status__c,&apos;Reject&apos;))</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Last_Approved_By_update</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>ADM ACM Approval Matrix</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>3</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Quotes_under_approval1</fullName>
+    <columns>QUOTE.NAME</columns>
+    <columns>CreatedBy</columns>
+    <columns>QUOTE.EXPIRATIONDATE</columns>
+    <columns>Shipping__c</columns>
+    <columns>QUOTE.TOTALPRICE</columns>
+    <columns>Freight_Category__c</columns>
+    <columns>Approval_Required__c</columns>
+    <columns>Freight_Comments__c</columns>
+    <columns>Approval_Submission__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Freight_Category__c</field>
+        <operation>contains</operation>
+        <value>Tier</value>
+    </filters>
+    <label>Freight Quotes - Tier Assignment</label>
+</ListView>

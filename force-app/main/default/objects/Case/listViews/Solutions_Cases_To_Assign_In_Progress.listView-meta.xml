@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solutions_Cases_To_Assign_In_Progress</fullName>
+    <booleanFilter>(1 AND 2 AND 3 AND 4 AND 5 AND 6 AND (8 OR 9 OR 10)) OR (3 AND 7)</booleanFilter>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <columns>Case_Age__c</columns>
+    <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
+    <columns>OWNER_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.CCC_Complaints,Case.CCC_Query</value>
+    </filters>
+    <filters>
+        <field>Group__c</field>
+        <operation>equals</operation>
+        <value>Flight Disruptions,Contact Centre,Departure Airport,Lounges,Arrival Airport,In-Flight,Frequent Flyer,Other,Request Copy of Tax Invoice</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>In Progress</value>
+    </filters>
+    <filters>
+        <field>Is_CCAT_User__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>notContain</operation>
+        <value>CCC UATP Refunds,CCC Critical Queue,CCC Advocacy Queue,CCC Auckland Queue,CCC ExCo Queue,CCC EU Compensation Queue,GMC Triage Queue,QANTAS VIP Post Travel Queue,CCC Hobart Queue,VIP</value>
+    </filters>
+    <filters>
+        <field>CASES.ORIGIN</field>
+        <operation>notEqual</operation>
+        <value>GMC,Qantas Loyalty</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.QCC_Insurance_Letter_Case</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>equals</operation>
+        <value>Account Queries,Aircraft Condition,Aircraft Schedule Change/Notification,Airport Security,Announcements,Award Bookings,Beverage Quality/Selection,Boarding,Catering Quality/Selection,Check-In,Customs/Immigration,Fees/Cost/Price</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>equals</operation>
+        <value>Delayed Baggage to Carousel,Delayed Priority Baggage,Delayed Priority Baggage to Carousel,Delay Handling,epiQure,Facilities,Facilities/Signage,Food and Beverage,Frequent Flyer Service Centre,In-Flight Entertainment,In-Flight Products</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>equals</operation>
+        <value>Meal Preferences,Overbooked Flight,Purchased Lounge Pass,Qantas Assure,Qantas Cash,Qantas Policies,Qantas Store,Seating,Seating Change,Seating Profile Preference,Seating Requests,Status Credits/Qantas Points,Ticket Changes,Travel Agents</value>
+    </filters>
+    <label>Solutions Cases - In Progress</label>
+</ListView>

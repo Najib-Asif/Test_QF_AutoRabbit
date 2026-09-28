@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>CreatedDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Freight_Claims_Coordinator_approvals</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Refund_Request_Amount__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>AUD 1</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Auto Approval from submitter</label>
+        <name>Auto_Approval_from_submitter</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Refund_Request_Amount__c</field>
+                <operation>greaterThan</operation>
+                <value>&quot;AUD 1,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>CSU Manager Approval</label>
+        <name>CSU_Manager_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Regional_Manager_Queue_AU_NZ</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Refund_Request_Amount__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>&quot;AUD 10,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Australia Region Manager Approval</label>
+        <name>Australia_Region_Manager_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>CCA freight claim approval CRM-9062, CRM-12686</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND( 
+RecordType.Name =&apos;Qantas Freight&apos;, 
+Approved__c != true,
+Refund_Request_Amount__c  &gt; 0, 
+OR(Owner:User.UserRole.Name =&apos;QF-Freight-Customer-Service-Unit&apos;,Owner:User.UserRole.Name =&apos;QF-Freight-Customer-Service-Unit-Team&apos;,Owner:User.UserRole.Name =&apos;QF-Freight-Support&apos;, Owner:User.UserRole.Name =&apos;QF-Freight&apos;)
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Check_the_Approved_checkbox</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Freight_Claim_Payment</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Case_Owner_To_Freight_Claim_Queue</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Freight_Claim_Rejection_action</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Case_Owner_Queue</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Claim_Stage_to_Investigating</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>CCA/Freight Claim approvals</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>true</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>31</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

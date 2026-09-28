@@ -1,0 +1,247 @@
+<!-- Last Modified By   : Vinoth Balasubramanian (Added the comments in the line where the changes are done)
+                 JIRA   : CRM - 2017 -->  
+
+<apex:page controller="RiskReportExport" readOnly="true">
+
+<Style>
+table {
+border-collapse:collapse;
+}
+table.table1 th{
+    text-align: Center;
+    border:1px solid #000000;
+    white-space: normal;
+     padding:0;
+}
+
+table.table1 tr{
+border:1px solid #000000;
+}
+
+table.table1 td{
+border:1px solid #000000;
+padding:0;
+}
+
+table.table2, table.table2 tr, table.table2 td, table.tableHeader tr, table.tableHeader th{
+    border:none;
+}
+table.table2 tr{
+    border-top:1px solid #000000;
+}
+table.table2 tr:first-child{
+    border-top:none;
+}
+table.table2 td, table.tableHeader th{
+     border-right:1px solid #000000;
+}
+table.table2 td:last-child, table.tableHeader th:last-child{
+    border-right:none;
+}
+
+
+<!--
+.commentsCls {
+    border-right: 1px solid transparent !important;
+    border-top: 1px solid transparent !important;
+    border-bottom: 1px solid transparent !important;
+
+}
+.actiontaken,.ddate,commentsCls {  
+    border-top: 1px solid transparent !important;
+    border-bottom: 1px solid transparent !important;
+}
+-->
+</style>
+<apex:form >
+<Center><p><font size="6" face="Arial" color="Black" ><u>Risk Report</u></font></p></center>
+
+   <center> <apex:commandButton value="Export Details" action="{!exportExcel}"/></center><br/><br/>
+   
+     
+    <table border="0" class="table1" width="100%">
+    
+        <!-- CRM - 2017 - Changed the Width because of adding Description column and commented the old lines below
+        <tr>
+            <th width="8%">Account Manager</th>
+            <th width="8%">Account Name</th>
+            <th width="6%">Value</th>
+            <th width="6%">QF Total Revenue</th>
+            <th width="3%">Status</th>
+            <th width="4%">At risk since</th>
+            <th width="10%">Reason AtRisk</th>
+            <th width="55%">
+                <table border="0" width="100%" cellpadding="0" cellspacing="0" height="50px" class="tableHeader">
+                    <tr>
+                        <th width="20%" class="actiontaken">Action Taken/Next Step</th>
+                     <!--  <th width="100">Owner</th> -->
+                        <!--<th width="10%" class="ddate">Due Date</th>
+                        <th width="70%" class="commentsCls">Comments</th>
+                    </tr>
+                </table>
+            </th>
+        </tr> -->
+        
+        <tr>
+            <th width="3%">Account Manager</th>
+            
+                <!-- CRM-2017 -  Changed the column heading from Account Nameto Account Name / TMC -->
+            <th width="4%">Account Name / TMC</th>
+            
+            <th width="2%">Value</th>
+            <th width="3%">QF Total Revenue</th>
+            
+            <!-- CRM-2017 -  Added the column heading "Current International Market Share" and "Current Domestic Market Share"  -->
+             <th width="3%">Current International Market Share</th>
+            <th width="3%">Current Domestic Market Share</th>
+            
+             <!-- CRM-2017 -  Changed the column heading from 'Status' to Likelihood of Loss-->
+            <th width="3%">Likelihood of Loss</th>
+            
+            <th width="2%">At risk since</th>
+            <th width="2%">Reason At Risk</th>
+            
+              <!-- CRM-2017 - Added the 'Description' Column -->   
+            <th width="40%">Description</th>
+            
+            <th width="35%">
+                <table border="0" width="100%" cellpadding="0" cellspacing="1" height="50px" class="tableHeader">
+                    <tr>
+                       
+                      
+                        <th width="20%" class="actiontaken">Action Taken / Next Steps</th>
+                     <!--  <th width="100">Owner</th> -->
+                     
+                        <!-- CRM-2017 -  Changed the column heading from Due Date to Date -->
+                        <th width="10%" class="ddate">Date</th>
+                        
+                        <th width="70%" class="commentsCls">Comments</th>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+        
+       
+        
+        <!-- Display risk data -------------------------------->
+        <apex:repeat value="{!RiskWrapperList}" var="risk">
+            <tr>
+                <td>{!risk.risk.Account_Manager__c}</td>
+                
+                 <!-- CRM-2017 - In the Account Name column, where the Customer and TMC info is pulled into the column create a break in the text so that there is a blank line between the 2 names. -->
+                <td><a href="/{!risk.risk.Account__c}">{!risk.risk.Account__r.Name}</a>
+                <br></br>
+                <br></br>
+                {!risk.acc.Primary_Account__r.Name}</td>
+                
+                <!-- CRM-2017 - Commented the below line as the value amount decimal should not be included-->
+                
+                <!-- <td>$<apex:outputText value="{!risk.risk.Amount_Risk__c}"/></td> -->
+                
+                  <td>
+                    $<apex:outputText value="{0, number, ###,###}">
+                       <apex:param value="{!risk.risk.Amount_Risk__c}" />
+                   </apex:outputText>
+                   </td>
+                   
+                   
+                   <!-- CRM-2017 - Commented the below line as the QF Total Revenue amount decimal should not be included-->
+                <!-- <td>$<apex:outputText value="{!risk.risk.Amount_At_Risk__c}"/></td> -->
+                
+                  <td>
+                    $<apex:outputText value="{0, number, ###,###}">
+                       <apex:param value="{!risk.risk.Amount_At_Risk__c}" />
+                   </apex:outputText>
+                   </td>
+                   
+                     <!--<td>{!risk.risk.Account__r.QF_Domestic_Market_Share__c}</td>
+                     <td>{!risk.risk.Account__r.QF_International_Market_Share__c}</td>-->
+                     
+                         <!-- CRM-2017 -  Added the data for "QF International Market Share" and "QF Domestic Market Share"  -->
+                     
+                     <td>
+                    <apex:outputText value="{0, number, ###,###.0}">
+                       <apex:param value="{!risk.risk.Account__r.QF_International_Market_Share__c}"/>
+                   </apex:outputText>%
+                   </td>
+                   
+                    <td>
+                    <apex:outputText value="{0, number, ###,###.0}">
+                       <apex:param value="{!risk.risk.Account__r.QF_Domestic_Market_Share__c}"/>
+                   </apex:outputText>%
+                   </td>
+                   
+                    
+                   
+                   
+                   
+                   
+                <td>                
+                    <apex:outputText escape="false" value="{!SUBSTITUTE(risk.risk.Risk_Indicator__c, 'resource/', '/resource/')}"></apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, date, dd/MM/yyyy}">
+                       <apex:param value="{!risk.risk.At_Risk_Since__c}" />
+                   </apex:outputText>
+                </td>                
+                <td>{!risk.risk.Reason_At_Risk__c}</td>
+                
+               <!-- CRM-2017 -  Added the Risk Description Data -->
+                <td>{!risk.risk.Risk_Description__c}</td>
+                
+                <td>
+                    <table border="0" class="table2" width="100%" height="100%">
+    
+                <!-- To render Action taken----------------->        
+                        <apex:repeat value="{!risk.risk.ActivityHistories}" var="activity">
+                            <tr>
+                            
+                              
+                             
+                               
+                            
+                            <!-- CRM-2017 -Added the Subject into the report. Into the Action Taken/Next Steps column. Text to follow the current cell text eg: Action Taken Contract Variation Meeting -->
+                                <td width="20%">{!activity.Subtype__c} - {!activity.Subject} </td>
+                                
+                              <!--  <td width="100"><apex:outputField value="{!activity.Owner.Name}"/></td>-->
+                                <td width="10%">
+                                    <apex:outputText value="{0, date, dd/MM/yy}">
+                                       <apex:param value="{!activity.ActivityDate}" />
+                                   </apex:outputText>
+                                </td>
+                                <td width="70%"><apex:outputField value="{!activity.Description}"/></td>
+                            </tr>
+                            
+                        </apex:repeat>
+                        
+                <!-- To render Next step ----------------------------------------------->        
+                        <apex:repeat value="{!risk.risk.Tasks}" var="activity">
+                            <tr>
+                            
+                             
+                            
+                            <!-- CRM-2017 -Added the Subject into the report. Into the Action Taken/Next Steps column. Text to follow the current cell text eg: Action Taken Contract Variation Meeting -->
+                                <td width="20%">{!activity.Subtype__c} - {!activity.Subject} </td>
+                                
+                              <!-- <td width="100"><apex:outputField value="{!activity.Owner.Name}"/></td> -->
+                                <td width="10%">
+                                    <apex:outputText value="{0, date, dd/MM/yy}">
+                                       <apex:param value="{!activity.ActivityDate}" />
+                                   </apex:outputText>
+                                </td>
+                                <td width="70%"><apex:outputField value="{!activity.Description}"/></td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </td>
+            </tr>
+        </apex:repeat>
+        
+    </table>
+    
+   
+    <br/><br/>
+   <center> <apex:commandButton value="Export Details" action="{!exportExcel}"/></center>
+     
+    </apex:form>
+</apex:page>

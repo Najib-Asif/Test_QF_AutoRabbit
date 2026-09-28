@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Modifying_for_International</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(AND( ISPICKVAL( Fare_Combination__c, &apos;International&apos; ), ISPICKVAL( Proposal_Type__c, &apos;Qantas Business Savings&apos;),
+NOT(Network__c = &apos;MCA &amp; Non-MCA&apos;),
+NOT(FareStructure__c = &apos;W&apos;) ,
+ISCHANGED( Discount__c ), $Setup.EnableValidationRule__c.EnableVR_to_prevent_DO_Users_from_Editin__c),
+
+
+AND(ISPICKVAL( Fare_Combination__c, &apos;International&apos; ), ISPICKVAL( Proposal_Type__c, &apos;Qantas Business Savings&apos;),
+Network__c = &apos;MCA &amp; Non-MCA&apos;,
+PRIORVALUE(Discount__c ) != 0,
+ISCHANGED( Discount__c ),$Setup.EnableValidationRule__c.EnableVR_to_prevent_DO_Users_from_Editin__c))</errorConditionFormula>
+    <errorDisplayField>Discount__c</errorDisplayField>
+    <errorMessage>You can&apos;t change the discount for International products in QBS</errorMessage>
+</ValidationRule>

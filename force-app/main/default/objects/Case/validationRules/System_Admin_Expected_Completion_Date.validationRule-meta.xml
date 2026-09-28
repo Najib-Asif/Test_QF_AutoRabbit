@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>System_Admin_Expected_Completion_Date</fullName>
+    <active>true</active>
+    <description>For System Admin Cases with Status = Open, Expected Completion Date cannot be less than 10 Days from Creation Date</description>
+    <errorConditionFormula>AND ( 
+ RecordType.Id = &apos;01290000001IINP&apos;, /*System Admin Cases*/
+ NOT ( $Profile.Id  = &apos;00e90000001wK8z&apos;), /*System Admin Profile*/
+ Expected_Completion_Date__c -  DATEVALUE(CreatedDate) &lt; 10,
+ ISPICKVAL( Status , &apos;Open&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>Expected_Completion_Date__c</errorDisplayField>
+    <errorMessage>Expected Completion Date cannot be less than 10 Days from Today.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case$Origin</field>
+    </columns>
+    <columns>
+        <field>Case$Group__c</field>
+    </columns>
+    <columns>
+        <field>Case$Category__c</field>
+    </columns>
+    <columns>
+        <field>Case$Sub_Category__c</field>
+    </columns>
+    <columns>
+        <field>Case$Description</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Requested by Gloria to identify top pain points in past 3 months for customers attempting to self-service on qantas.com</description>
+    <filter>
+        <criteriaItems>
+            <column>Case$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Complaints,Case.CCC_Query</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>qantas.com,online,website,on line,on-line,internet,site,page</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>unable,could not,couldn&apos;t,couldn t,wouldn&apos;t,wouldn t,would not,error,restrict,let me,tried,try</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Self-servicing online pain points</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_or_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <endDate>2022-10-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2022-08-01</startDate>
+    </timeFrameFilter>
+</Report>

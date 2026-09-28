@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Prevent_Editing_AMEX_Product_In_UI</fullName>
+    <active>true</active>
+    <description>Rule to enforce to prevention of edit any AMEX Product Registration other than Data Administartor User</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Prevent_Editing_AMEX_Product_In_UI__c &amp;&amp; 
+RecordType.DeveloperName == &apos;AMEX_Registration&apos; &amp;&amp; NOT(ISNEW())</errorConditionFormula>
+    <errorMessage>You are not entitled to Modify this record.Please contact the System Administrator for further assistance</errorMessage>
+</ValidationRule>

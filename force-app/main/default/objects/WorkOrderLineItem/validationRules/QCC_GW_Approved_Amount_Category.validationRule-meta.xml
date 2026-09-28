@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_GW_Approved_Amount_Category</fullName>
+    <active>true</active>
+    <description>Allow only relevant approved approved amount categories based on Expense Category</description>
+    <errorConditionFormula>RecordType.DeveloperName = &apos;Expense&apos; &amp;&amp; (ISPICKVAL( Status ,&apos;Approved&apos;) || ISPICKVAL( Status ,&apos;Rejected&apos;)) &amp;&amp; (Total_Approved_Amount__c &gt; ( IF( INCLUDES( Expense_Category__c, &apos;Accommodation&apos;), NULLVALUE(Approved_Accommodation_Amount__c, 0)  , 0) +  IF(INCLUDES( Expense_Category__c, &apos;Meals&apos;),  NULLVALUE(Approved_Meal_Amount__c, 0), 0) +  IF(INCLUDES( Expense_Category__c, &apos;Transport&apos;),  NULLVALUE(Approved_Transport_Amount__c, 0), 0) ))</errorConditionFormula>
+    <errorMessage>The Approved Amount must align with the Expense Category provided</errorMessage>
+</ValidationRule>

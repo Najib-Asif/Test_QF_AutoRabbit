@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NIS_Validation</fullName>
+    <active>true</active>
+    <description>NIS validation rule</description>
+    <errorConditionFormula>Contact_Details_Confirmed_n_Updated__c &gt;= 7  ||  
+Communication_Active_Listening_Skills__c &gt;= 7  ||  
+Open_ended_Q_to_Identify_Cust_Travel__c &gt;= 7</errorConditionFormula>
+    <errorMessage>One or more of the Need Identification Scoring is wrong hence needs to be reviewed and corrected.</errorMessage>
+</ValidationRule>

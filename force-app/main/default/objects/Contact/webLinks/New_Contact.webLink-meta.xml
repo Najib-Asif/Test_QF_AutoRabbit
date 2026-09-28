@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Contact</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Contact</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>/003/e?retURL={!Account.Id}&amp;con4={!Account.Name}&amp;00N9000000DhELE={! CASE(Account.Type, &apos;Agency Account&apos;, &apos;Agency&apos;, &apos;Customer Account&apos;, &apos;B&amp;G&apos;, &apos;Prospect Account&apos;, &apos;B&amp;G&apos;, &apos;Charter Account&apos;,&apos;Charter&apos;,&apos;Other Account&apos;,&apos;Supplier/Commercial Partner&apos;,&apos;&apos;) }</url>
+</WebLink>

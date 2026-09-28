@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_details_TAX_Id</fullName>
+    <active>true</active>
+    <errorConditionFormula>$Profile.Name  &lt;&gt; &apos;System Administrator&apos;  &amp;&amp;
+$Profile.Name  &lt;&gt; &apos;Qantas System Administrator&apos;  &amp;&amp;
+$Profile.Name  &lt;&gt; &apos;Qantas System Admin - Freight&apos;  &amp;&amp;
+$Profile.Name  &lt;&gt; &apos;Qantas System Admin - QCC&apos;  &amp;&amp;
+$Profile.Name  &lt;&gt; &apos;Qantas System Admin - SND&apos;  &amp;&amp;
+TEXT(Process_Status__c) = &apos;Payment Details Received&apos; &amp;&amp;
+CONTAINS(TEXT(Type__c), &apos;EFT&apos;) &amp;&amp;
+( 
+		Original_Currency_Acronym__c = &apos;CLP&apos; ||
+	 Original_Currency_Acronym__c = &apos;ARS&apos; ||
+  Original_Currency_Acronym__c = &apos;CNY&apos;
+) &amp;&amp;
+ISBLANK(TAX_Id_VAT_Reg_No__c) &amp;&amp;
+ISCHANGED(Process_Status__c)</errorConditionFormula>
+    <errorMessage>TAX ID is mandatory for  currency CLP, ARS or CNY</errorMessage>
+</ValidationRule>

@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Freight_Email_Alert_to_Downstream_Account_Name_Change</fullName>
+        <description>Freight Email Alert to Downstream Account Name Change</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>dataupdatesuser@qantas.com.au</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Freight_Account_Name_Change_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Freight_Email_Alert_to_Downstream_Account_Ownership_Change</fullName>
+        <ccEmails>Shrfreightcst@qantas.com.au</ccEmails>
+        <description>Freight Email Alert to Downstream Account Ownership Change</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>madelaine.zamora@qantas.com.au</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Freight_Account_Ownership_Change_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Freight_Email_Alert_to_Downstream_Parent_Account_Hierarchy_Change_Request</fullName>
+        <description>Freight Email Alert to Downstream Parent Account/Hierarchy Change Request</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>dataupdatesuser@qantas.com.au</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Freight_Parent_Account_Hierarchy_Change_Request</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Account_Record_type_Agency</fullName>
+        <description>Record type will change automatically based on the Type field value.</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Agency_Account</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Account Record type_Agency</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Record_type_Customer</fullName>
+        <description>Record type will change automatically based on the Type field value.</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Customer_Account</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Account Record type_Customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Record_type_Other</fullName>
+        <description>Record type will change automatically based on the Type field value.</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Other_Account</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Account Record type_Other</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Record_type_Prospect</fullName>
+        <description>Record type will change automatically based on the Type field value.</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Prospect_Account</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Account Record type_Prospect</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Travel_Agent_to_Y</fullName>
+        <field>Agency__c</field>
+        <literalValue>Y</literalValue>
+        <name>Account Travel Agent to &apos;Y&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Update_ProcessQBD_field</fullName>
+        <field>Process_QBD_Update__c</field>
+        <literalValue>1</literalValue>
+        <name>Account Update ProcessQBD field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_travel_Agent_to_N</fullName>
+        <field>Agency__c</field>
+        <literalValue>N</literalValue>
+        <name>Account travel Agent to &apos;N&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Activate_Account</fullName>
+        <description>Activate Account</description>
+        <field>Active__c</field>
+        <literalValue>1</literalValue>
+        <name>Activate Account</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Account_Owner_Agency</fullName>
+        <field>OwnerId</field>
+        <lookupValue>kristinechippendale@qantas.com.au</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Assign Account Owner -Agency</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Account_Owner_Jonathon_or_Kylie</fullName>
+        <description>Assign Account Owner Kate Younger</description>
+        <field>OwnerId</field>
+        <lookupValue>vinny.brome@qantas.com.au.inactive</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Assign Account Owner Kathy Rey</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Type_to_Agency</fullName>
+        <description>Change the Type to Agency</description>
+        <field>Type</field>
+        <literalValue>Agency Account</literalValue>
+        <name>Assign Type to Agency</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Type_to_Customer</fullName>
+        <description>Change the Type to Customer</description>
+        <field>Type</field>
+        <literalValue>Customer Account</literalValue>
+        <name>Assign Type to Customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Type_to_Other</fullName>
+        <description>Change the Type to Other</description>
+        <field>Type</field>
+        <literalValue>Other Account</literalValue>
+        <name>Assign Type to Other</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Type_to_Prospect</fullName>
+        <description>Change the Type to Prospect</description>
+        <field>Type</field>
+        <literalValue>Prospect Account</literalValue>
+        <name>Assign Type to Prospect</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Auto_Verify_to_TRUE</fullName>
+        <description>Auto Verify to TRUE when Airline Level chnages from 1 to 2,2 to 3, 3 to 4</description>
+        <field>Verified_Customer__c</field>
+        <literalValue>1</literalValue>
+        <name>Auto Verify to TRUE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DealingFlag_Update_Y</fullName>
+        <field>Dealing_Flag__c</field>
+        <literalValue>Y</literalValue>
+        <name>DealingFlag Update Y</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QAC_Assign_Account_Owner_FU_Agency_NZ</fullName>
+        <field>OwnerId</field>
+        <lookupValue>rebeccaslee@qantas.com.au</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>QAC Assign Account Owner FU -Agency NZ</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QAC_UK_Assign_Account_Owner_FU_Agency</fullName>
+        <field>OwnerId</field>
+        <lookupValue>reneechadwick@qantas.com.au</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>QAC UK Assign Account Owner FU -Agency</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QIC</fullName>
+        <field>Qantas_Industry_Centre_ID__c</field>
+        <formula>IF(NOT(OR( BillingCountry =&apos;Au&apos;, BillingCountry =&apos;NZ&apos;, BillingCountry =&apos;CA&apos;, BillingCountry =&apos;US&apos;, BillingCountry =&apos;UK&apos;,BillingCountry =&apos;IE&apos; )), IF( Active__c, Replicate_IATA_TIDS_to_QIC__c , &apos;&apos;),Replicate_IATA_TIDS_to_QIC__c)</formula>
+        <name>QIC</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Account_Previously_Contracted_True</fullName>
+        <field>Contracted_Previously__c</field>
+        <literalValue>1</literalValue>
+        <name>Set Account Previously Contracted True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateAquireOverrideToBlank</fullName>
+        <description>Update Aquire Override End Date to Blank.</description>
+        <field>Aquire_Override_End_Date__c</field>
+        <name>Update Aquire Override To Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Acc_Listner_Type_to_Direct_Stream</fullName>
+        <description>To Update  Listner Type to Direct Stream</description>
+        <field>Listner_Type__c</field>
+        <literalValue>Direct Stream</literalValue>
+        <name>Update Acc Listner Type to Direct Stream</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Account_Aquire_Override_to_N</fullName>
+        <description>Update Aquire Override field to N after the Aquire Override End Date Expires</description>
+        <field>Aquire_Override__c</field>
+        <literalValue>N</literalValue>
+        <name>Update Account Aquire Override to N</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Dealing_Flag_N</fullName>
+        <field>Dealing_Flag__c</field>
+        <literalValue>N</literalValue>
+        <name>Update Dealing Flag N</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Direct_Discount_Code_to_Blank</fullName>
+        <description>Discount COde will be blanked when Airline Eligible to N and No Acquire is Attached</description>
+        <field>key_Contact_Office_ID__c</field>
+        <name>Update Direct Discount Code to Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_GA_Accounts_to_true</fullName>
+        <description>Update GA Accounts to true for Account owner.role = QF-Government Affairs</description>
+        <field>GMC_Accounts__c</field>
+        <literalValue>1</literalValue>
+        <name>Update GA Accounts to true</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Indirect_Discount_Code_to_Blank</fullName>
+        <description>InDirect Discount Code will be blanked when Airline Eligible to N and No Acquire is Attached</description>
+        <field>Indirect_Discount_Code__c</field>
+        <name>Update Indirect Discount Code to Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_SMEAcc_Notification_Date</fullName>
+        <description>Updates the SME Account Outbound Notification Sent Date/Time</description>
+        <field>SME_Account_Outbound_Notification__c</field>
+        <formula>NOW()</formula>
+        <name>Update SMEAcc Notification Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Total_Market_Share_Declined_false</fullName>
+        <description>Update Total Market Share Declined flag to false</description>
+        <field>Total_Market_Share_Declined__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Total Market Share Declined false</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Total_Market_Share_Declined_true</fullName>
+        <description>Update Total Market Share Declined flag to true</description>
+        <field>Total_Market_Share_Declined__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Total Market Share Declined True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_aquire_override_reason_to_blank</fullName>
+        <field>Aquire_Override_Reason__c</field>
+        <name>Update aquire override reason to blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_ABN_number</fullName>
+        <field>ABN__ABN__c</field>
+        <formula>ABN_Tax_Reference__c</formula>
+        <name>Update the ABN number</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>Airline_Level_Change_Notification</fullName>
+        <apiVersion>38.0</apiVersion>
+        <description>Notify a cache refresh for QBR travellers</description>
+        <endpointUrl>https://qbr.api.qantas.com/sme/notification/smeaccountupdate?access_token=51f159ea-ace8-48d9-9864-0c905414748d</endpointUrl>
+        <fields>ABN_Tax_Reference__c</fields>
+        <fields>Airline_Level__c</fields>
+        <fields>Aquire_Eligibility_f__c</fields>
+        <fields>Aquire_Membership_Number__c</fields>
+        <fields>Id</fields>
+        <fields>Indirect_Discount_Code__c</fields>
+        <fields>LastModifiedDate</fields>
+        <fields>Name</fields>
+        <fields>Primary_Reason_Not_Eligible__c</fields>
+        <fields>Registry_ID__c</fields>
+        <fields>Verified_Customer__c</fields>
+        <fields>key_Contact_Office_ID__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>api_integration_user@qantas.com.au</integrationUser>
+        <name>Airline Level Change Notification</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>true</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Account Aquire Override Update to N</fullName>
+        <active>true</active>
+        <description>Next day after the Aquire Override End Date, the Aquire Override field gets Updated to N If it is not already N.</description>
+        <formula>ISPICKVAL(Aquire_Override__c ,&apos;Y&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Account_Aquire_Override_to_N</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Account.Aquire_Override_End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Account Process QBD Update Field On</fullName>
+        <actions>
+            <name>Account_Update_ProcessQBD_field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR(ISCHANGED(QBD__c), ISCHANGED(Aquire_Blocking_Classification__c), AND( ISCHANGED(Aquire_System__c), No_of_Aquires__c &lt; 2), ISCHANGED(Aquire_Eligibility_f__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account Record Type Change_Agency</fullName>
+        <actions>
+            <name>Account_Record_type_Agency</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Account_Travel_Agent_to_Y</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Assign_Type_to_Agency</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Agency</value>
+        </criteriaItems>
+        <description>Account Record type will change once Type field value will be changed to Agency Account.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account Record Type Change_Customer</fullName>
+        <actions>
+            <name>Account_Record_type_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Assign_Type_to_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Customer Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Customer</value>
+        </criteriaItems>
+        <description>Account Record type will change once Type field value will be changed to Customer Account.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account Record Type Change_Other</fullName>
+        <actions>
+            <name>Account_Record_type_Other</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Assign_Type_to_Other</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Other Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Other</value>
+        </criteriaItems>
+        <description>Account Record type will change once Type field value will be changed to Other Account.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account Record Type Change_Prospect</fullName>
+        <actions>
+            <name>Account_Record_type_Prospect</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Assign_Type_to_Prospect</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Prospect Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Prospect</value>
+        </criteriaItems>
+        <description>Account Record type will change once Type field value will be changed to Prospect Account.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aquire Eligibility Flag Update N</fullName>
+        <active>true</active>
+        <description>If Dealing Flag, Agency c n Aquire_Override field is Y then Aquire Eligibility field is Updated with N</description>
+        <formula>NOT(AND(ISPICKVAL(Agency__c , &apos;N&apos;), ISPICKVAL( Dealing_Flag__c  , &apos;N&apos;), ISPICKVAL( Aquire_Override__c  , &apos;N&apos;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aquire Eligibility Flag Update Y</fullName>
+        <active>true</active>
+        <description>If Dealing Flag, Agency c n Aquire_Override field is Y then Aquire Eligibility field is Updated with N</description>
+        <formula>AND(ISPICKVAL(Agency__c , &apos;N&apos;), ISPICKVAL( Dealing_Flag__c  , &apos;N&apos;), ISPICKVAL( Aquire_Override__c  , &apos;N&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aquire Override End Date To Blank</fullName>
+        <actions>
+            <name>UpdateAquireOverrideToBlank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Aquire_Override__c</field>
+            <operation>equals</operation>
+            <value>N,None</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Aquire_Override_End_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Update Aquire Override End Date to Blank when Aquire Override changed from Y to N</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aquire override reason to be blank</fullName>
+        <actions>
+            <name>Update_aquire_override_reason_to_blank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Aquire_Override__c</field>
+            <operation>equals</operation>
+            <value>N,None</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Aquire_Override_Reason__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This is to set aquire override reason to blank when aquire override is off.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Assign Account Owner Jonathon or Kylie - Agency</fullName>
+        <actions>
+            <name>Assign_Account_Owner_Agency</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.OwnerId</field>
+            <operation>equals</operation>
+            <value>Integration User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>Converted  Assign Account Owner Jonathon or Kylie process builder to WF</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Assign Account Owner Jonathon or Kylie - Non Agency</fullName>
+        <actions>
+            <name>Assign_Account_Owner_Jonathon_or_Kylie</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <criteriaItems>
+            <field>Account.OwnerId</field>
+            <operation>equals</operation>
+            <value>Integration User,API Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Customer Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Prospect Account</value>
+        </criteriaItems>
+        <description>Converted  Assign Account Owner Jonathon or Kylie process builder to WF</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Freight Account Name%2FFCI Change Request</fullName>
+        <actions>
+            <name>Freight_Email_Alert_to_Downstream_Account_Name_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>Freight - Account Name Change to notify downstream systems</description>
+        <formula>AND(  RecordType.DeveloperName == &apos;Freight_Account&apos;,   ISPICKVAL(Type, &apos;Freight-Branch&apos;),   NOT(ISNEW()),   ISCHANGED(Name),   CONTAINS(PRIORVALUE(Name), &apos;[FREIGHT-&apos;)  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Freight Account Ownership Change Request</fullName>
+        <actions>
+            <name>Freight_Email_Alert_to_Downstream_Account_Ownership_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>Freight - Account Ownership Change to notify downstream systems</description>
+        <formula>AND(RecordType.DeveloperName == &apos;Freight_Account&apos;, ISPICKVAL(Type, &apos;Freight-Branch&apos;), NOT(ISNEW()), (OR(ISCHANGED(OwnerId))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Freight Parent Account%2FHierarchy Change Request</fullName>
+        <actions>
+            <name>Freight_Email_Alert_to_Downstream_Parent_Account_Hierarchy_Change_Request</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>Freight - Parent Account/Hierarchy Change to notify downstream systems</description>
+        <formula>AND(RecordType.DeveloperName == &apos;Freight_Account&apos;,   ISPICKVAL(Type, &apos;Freight-Branch&apos;),     NOT(ISNEW()),   AND (  NOT(ISBLANK((PRIORVALUE(ParentId)))),  (OR(ISCHANGED(ParentId)))  )   )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Notify Airline Level Eligibility and Name Change</fullName>
+        <actions>
+            <name>Update_Acc_Listner_Type_to_Direct_Stream</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_SMEAcc_Notification_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Airline_Level_Change_Notification</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Notify Airline Level Change to do a cache refresh for QBR(Aquire) stored traveller data STME -1608
+Salesforce notification triggered on SME create STME-1613
+Salesforce notification triggered on QBR Inactivate STME-1726</description>
+        <formula>$User.Alias != &apos;apiuser&apos; &amp;&amp; Active__c = True &amp;&amp; ((No_of_Aquires__c != 0 &amp;&amp; (NOT(ISNEW()) &amp;&amp; ( ISCHANGED(Airline_Level__c) || ISCHANGED(Name) || ISCHANGED( Aquire_Eligibility_f__c ) || ISCHANGED(ABN_Tax_Reference__c) || ISCHANGED(No_of_Aquires__c) || ISCHANGED(Verified_Customer__c) || ISCHANGED(Primary_Reason_Not_Eligible__c)))) || (No_of_Aquires__c = 0 &amp;&amp; (ISCHANGED(No_of_Aquires__c))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QAC Assign Account Owner - Agency</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.OwnerId</field>
+            <operation>equals</operation>
+            <value>QAC API Integration User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.BillingCountryCode</field>
+            <operation>equals</operation>
+            <value>AU</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>This workflow rule will change the owner name from &apos;QAC API Integration&apos; User to &apos;Amanda Young&apos;   for all QAC Agency Registration Accounts.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>QAC Assign Account Owner - Agency NZ</fullName>
+        <actions>
+            <name>QAC_Assign_Account_Owner_FU_Agency_NZ</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.OwnerId</field>
+            <operation>equals</operation>
+            <value>QAC API Integration User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.BillingCountryCode</field>
+            <operation>equals</operation>
+            <value>NZ</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>This workflow rule will change the owner name from &apos;QAC API Integration&apos; User to &apos;Eli Logan&apos;   for all QAC Agency Registration NZ Accounts.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>QAC UK Assign Account Owner - Agency</fullName>
+        <actions>
+            <name>QAC_UK_Assign_Account_Owner_FU_Agency</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.OwnerId</field>
+            <operation>equals</operation>
+            <value>QAC API Integration User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.BillingCountryCode</field>
+            <operation>equals</operation>
+            <value>GB</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Agency Account</value>
+        </criteriaItems>
+        <description>This workflow rule will change the owner name from &apos;QAC API Integration&apos; User to &apos;Renee Chadwick&apos;   for all QAC Agency Registration GB Accounts.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>QIC Update with IATA or TIDS</fullName>
+        <actions>
+            <name>QIC</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>CRM-2362 : Replicate IATA-TIDS to QIC and if both are present then IATA needs to be replicated</description>
+        <formula>OR(ISNEW(),ISCHANGED(Replicate_IATA_TIDS_to_QIC__c),ISBLANK(Qantas_Industry_Centre_ID__c),AND(NOT(Active__c),NOT( OR( BillingCountry =&apos;Au&apos;, BillingCountry =&apos;NZ&apos;, BillingCountry =&apos;CA&apos;, BillingCountry =&apos;US&apos;, BillingCountry =&apos;UK&apos;,BillingCountry =&apos;IE&apos; ))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Re-activate Account with Aquire and AEQCC registration</fullName>
+        <actions>
+            <name>Activate_Account</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <criteriaItems>
+            <field>Account.Active__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.AMEX__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Aquire_System__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Re-activate Account with Aquire and AEQCC registration</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Restrict GA Account Visibility</fullName>
+        <actions>
+            <name>Update_GA_Accounts_to_true</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Account_Owner_Role__c</field>
+            <operation>equals</operation>
+            <value>QF-Government Affairs</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Prospect Account,Customer Account,Agency Account,Other Account,Charter Account,Regional Account</value>
+        </criteriaItems>
+        <description>Restrict GA&apos;s Account Visibility to all Roles except &apos;QF-Government Affairs&apos; role users. Set GMC Accounts field = true</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Account Travel Agent to %27N%27</fullName>
+        <actions>
+            <name>Account_travel_Agent_to_N</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Aquire_Travel_Agent_Count__c</field>
+            <operation>lessOrEqual</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Industry</field>
+            <operation>notEqual</operation>
+            <value>Travel</value>
+        </criteriaItems>
+        <description>CRM 699</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Account Travel Agent to %27Y%27</fullName>
+        <actions>
+            <name>Account_Travel_Agent_to_Y</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Account.Industry</field>
+            <operation>equals</operation>
+            <value>Travel</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Aquire_Travel_Agent_Count__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <description>CRM 699</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Previously Contracted Flag to True</fullName>
+        <actions>
+            <name>Set_Account_Previously_Contracted_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Checked if previously contracted and contract now expired</description>
+        <formula>AND(ISCHANGED(Contracted__c), PRIORVALUE(Contracted__c ) == TRUE)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Trigger Outbound For Existing Accounts</fullName>
+        <actions>
+            <name>Update_Acc_Listner_Type_to_Direct_Stream</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_SMEAcc_Notification_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Airline_Level_Change_Notification</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Trigger Outbound For Existing Accounts</description>
+        <formula>$User.Alias != &apos;apiuser&apos; &amp;&amp; Trigger_Outbound__c == true</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the ABN number</fullName>
+        <actions>
+            <name>Update_the_ABN_number</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.BillingCountryCode</field>
+            <operation>equals</operation>
+            <value>AU</value>
+        </criteriaItems>
+        <description>To update the ABN field of the App</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF Auto Verify Customers</fullName>
+        <actions>
+            <name>Auto_Verify_to_TRUE</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Sets Automatically the Verified Customer to True when Airline Level is Chnaged from 1 to 2,2 to 3,3 to 4</description>
+        <formula>VALUE((Airline_Level__c)) &gt; 1 &amp;&amp; No_of_Aquires__c&gt;0</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF_Account_On_Eligiblity_To_N</fullName>
+        <actions>
+            <name>Update_Direct_Discount_Code_to_Blank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Indirect_Discount_Code_to_Blank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Account.Aquire_Eligibility_f__c</field>
+            <operation>equals</operation>
+            <value>N</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.No_of_Aquires__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.key_Contact_Office_ID__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Indirect_Discount_Code__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Prospect Account,Customer Account,Agency Account,Other Account,AEQCC/Aquire Prospect Account,New Account,Charter Account,Regional Account</value>
+        </criteriaItems>
+        <description>WF to Update fields when Eligiblity is changed to N</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

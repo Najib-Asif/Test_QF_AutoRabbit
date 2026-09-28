@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>CUST_OWNER_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Adi Rua Naulivou,Atasa Bolatolu,Dikove Babakobau,Kelera Tuva,Sera Ravueta,Susana Tagilala,Savenaca Tubamasi,MerI Leqe,Laura Tora,Seini Gonekalou,Nina Tafunai,Vasemaca Saumadu,Frances Naigia,Savenca Tubamasi,Mere Domo,Sera Matavesi,Meredani Banuve,Vasiti Tinainamatalevu,Esther Madigi,Suliana Radikedike,Meresimani Finau,Elenoa Tuirara,Isireli Lagicere,Lavenia Dakulala,Mario Stephens,Racheal Levu,Samuela Tuinaceva,Yvette September,Shoneez Adams,Ayakha Fulumeni,Keysha Lee Richardson,Fawwaaz Jansen,Robyn Peterson,Yullah Dhliwayo,Charne Abrahams,Keanu Samuels,Marlyn Van Graan,Bongiwe Nkam,Imelda Ambrosio,Manilyn Amit,Ramie Michael Bambilla,Chaipen Bersabe,John Ashi Cristobal,Maria Rita Cruz,Arrah Mae Espiritu,Jona Mae Gavarra,Pamela Jerusalem,Kimberly Llarenas,Arnel Nolasco,Darwin Sumalinog</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Resolutions: Avg Handle Time 30 Days</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Case_value_changes__c@Case_value_changes__c.Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_LAST30</interval>
+    </timeFrameFilter>
+</Report>

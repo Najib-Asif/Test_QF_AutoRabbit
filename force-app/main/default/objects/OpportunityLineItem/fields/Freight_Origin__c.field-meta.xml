@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Origin__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Freight Implementation: It will be a start destination of underlying product</description>
+    <inlineHelpText>Search by IATA aiport code (e.g. LAX, SYD, DXB)</inlineHelpText>
+    <label>Origin</label>
+    <referenceTo>Airport_Code__c</referenceTo>
+    <relationshipLabel>Opportunity Product Origin</relationshipLabel>
+    <relationshipName>Opportunity_Product</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

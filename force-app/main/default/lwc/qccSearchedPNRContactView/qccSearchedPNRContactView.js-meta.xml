@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+           
+            <property 
+                name="recordId" 
+                type="String" 
+                label="recordId"/>
+            <property 
+                name="firstName" 
+                type="String" 
+                label="First Name"/> 
+            <property 
+                name="lastName" 
+                type="String" 
+                label="Last Name"/>
+            <property 
+                name="Email" 
+                type="String" 
+                label="Email"/>
+            <property 
+                name="phone" 
+                type="String" 
+                label="Phone"/>
+            <property 
+                name="ffNumber"
+                type="String" 
+                label="Frequent Flyer Number"/>    
+            <property 
+                name="contactId" 
+                type="String" 
+                label="contactId"/>      
+            <property 
+                name="create" 
+                type="Boolean" 
+                label="create"/>   
+                
+            <property 
+                name="associate" 
+                type="Boolean" 
+                label="Associate"/>   
+             
+          
+            
+        </targetConfig>    
+    </targetConfigs>
+</LightningComponentBundle>

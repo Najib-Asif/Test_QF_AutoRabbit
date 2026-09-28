@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_75295784</developerName>
+        <masterLabel>Account Team Owner</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account$Owner.Reporting_Team__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>B&amp;G - Business - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Business Development - Yosu</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Government - Ash</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - New Business NSW - Simon</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - New Business QLD - Elsa</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - New Business VIC - Tim</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - New Business WA - Julian</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Darren) - Dean</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Paul) - Dean</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>B&amp;G - Resources (Tim) - Dean</sourceValue>
+            </sourceValues>
+            <value>B &amp; G</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QIS</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS - Acquisition and Growth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS - Retention and Growth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS - Senior Manager</sourceValue>
+            </sourceValues>
+            <value>QIS/SME</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Other</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>US - East Region</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>US - North America</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>US - West Region</sourceValue>
+            </sourceValues>
+            <value>Overseas/Other</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_60262031</developerName>
+        <masterLabel>B &amp; G</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account$Owner.Reporting_Team__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <value>B &amp; G</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account$Multi_national_Type__c</field>
+    </columns>
+    <columns>
+        <field>Account$Type__c</field>
+    </columns>
+    <columns>
+        <field>Account.Cases$Status</field>
+    </columns>
+    <columns>
+        <field>Account$Owner.Reporting_Team__c</field>
+    </columns>
+    <columns>
+        <field>Account$Owner</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account.Cases$Type</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>New Deal Load,Deal Amendment,Deal Extension,Deal Renewal,Deal Termination,Account Review,DRA Amendment,DRA Cancellation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Cases$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Closed - Rejected,Closed - Duplicate</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Cases$Type</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_75295784</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Support team Dealing reports</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_w_Case_w_Account_info__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account.Cases$Due_Date__c</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

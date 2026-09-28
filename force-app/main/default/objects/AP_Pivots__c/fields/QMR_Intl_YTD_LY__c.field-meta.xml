@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QMR_Intl_YTD_LY__c</fullName>
+    <label>QMR Intl (YTD) (LY)</label>
+    <summarizedField>Agency_Performance__c.Reported_Value_LY__c</summarizedField>
+    <summaryFilterItems>
+        <field>Agency_Performance__c.Measure_Type__c</field>
+        <operation>equals</operation>
+        <value>QMR</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Agency_Performance__c.LY_Vs_TY__c</field>
+        <operation>equals</operation>
+        <value>TY</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Agency_Performance__c.Network__c</field>
+        <operation>equals</operation>
+        <value>International</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Agency_Performance__c.LY_exclude__c</field>
+        <operation>equals</operation>
+        <value>False</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Agency_Performance__c.AP_Insights_Link__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

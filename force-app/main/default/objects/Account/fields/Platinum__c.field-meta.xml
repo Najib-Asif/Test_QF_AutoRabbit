@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Platinum__c</fullName>
+    <label>Platinum #</label>
+    <summaryFilterItems>
+        <field>Associated_Person__c.Profile_Membership_Current_Tier__c</field>
+        <operation>contains</operation>
+        <value>Platinum</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Associated_Person__c.Profile_Membership_Current_Tier__c</field>
+        <operation>notContain</operation>
+        <value>Platinum One</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Associated_Person__c.Account__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

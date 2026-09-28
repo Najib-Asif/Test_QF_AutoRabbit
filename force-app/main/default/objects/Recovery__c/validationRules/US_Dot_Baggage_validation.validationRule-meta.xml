@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>US_Dot_Baggage_validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>INCLUDES(Recovery_Reason__c, &apos;US Dot Baggage Refund&apos;) &amp;&amp;
+ PICKLISTCOUNT(Recovery_Reason__c) &gt; 1</errorConditionFormula>
+    <errorDisplayField>Recovery_Reason__c</errorDisplayField>
+    <errorMessage>You can not add any other reason with US Dot Baggage Refund</errorMessage>
+</ValidationRule>

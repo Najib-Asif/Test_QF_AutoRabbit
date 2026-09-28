@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_user_from_editing_the_FF_record</fullName>
+    <active>true</active>
+    <description>Frequent Flyer Information - Restrict user from editing the frequent flyer record when the status is &quot;Pending with Sales Solutions&quot;</description>
+    <errorConditionFormula>AND(($Profile.Name &lt;&gt; &apos;System Administrator&apos;),
+($Profile.Name &lt;&gt; &apos;Qantas System Administrator&apos;),
+($Profile.Name &lt;&gt; &apos;Qantas System Admin - Freight&apos;),
+($Profile.Name &lt;&gt; &apos;Qantas System Admin - QCC&apos;),
+($Profile.Name &lt;&gt; &apos;Qantas System Admin - SND&apos;),
+ISPICKVAL( Case__r.Status , &quot;Pending with Sales Solutions&quot;),
+OR( ISNEW(),
+OR(
+CreatedDate  &lt;&gt;  LastModifiedDate ,
+ISCHANGED(Name),
+ISCHANGED(Current_Tier__c),
+ISCHANGED(Freq_Flyer_Expiry_Date__c),
+ISCHANGED(Frequent_Flyer_Number__c),
+ISCHANGED(Request_Type__c),
+ISCHANGED(Upgrade_Tier_Requested__c),
+ISCHANGED(Case__c))))</errorConditionFormula>
+    <errorMessage>Frequent Flyer Information record should not be edited if the Status is ‘Pending with Sales Solutions&apos;</errorMessage>
+</ValidationRule>

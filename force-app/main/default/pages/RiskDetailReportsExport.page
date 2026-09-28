@@ -1,0 +1,139 @@
+<!-- Last Modified By   : Vinoth Balasubramanian (Added the comments in the line where the changes are done)
+                 JIRA   : CRM - 2017 -->          
+
+
+
+<apex:page controller="RiskReportExport" contentType="application/vnd.ms-excel#RiskReport.xls">
+    <table border="1">
+        <tr>
+            <th>Account Manager</th>
+            
+            <!-- CRM-2017 -  Changed the column heading from ‘Account Name’ to ‘Account Name / TMC’ -->
+            <th>Account Name / TMC</th>
+            
+            <th>Value</th>
+            
+            <!-- CRM-2017 -  Changed the column heading from 'Status' to ‘Likelihood of Loss’ -->
+            <!--<th>Status</th>-->
+            <th>Likelihood of Loss</th>
+            
+              <!-- CRM-2017 -  Added the column heading "Current International Market Share" and "Current Domestic Market Share"  -->
+            <th>Current International Market Share</th>
+            <th>Current Domestic Market Share</th>
+            
+            <th>At risk since</th>
+            <th>Reason at Risk</th>
+            
+            <!-- CRM-2017 - Added the 'Description' Column -->
+            <th>Description</th>
+            
+            <th>
+                <table border="1">
+                    <tr>
+                    
+                    <!-- CRM-2017 -  Changed the column heading ‘Next Steps / Action Taken’ to ‘Action Taken / Next Steps’ -->
+                        <th width="150">Action Taken / Next Steps</th>
+                        <!-- CRM-2017 -  Removed the 'Owner' Column -->
+                       <!-- <th width="100">Owner</th> -->
+                       
+                       <!-- CRM-2017 -  Changed the column heading from ‘Due Date’ to ‘Date’ -->
+                        <th width="100">Date</th>
+                        
+                        <th>Comments</th>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+        <apex:repeat value="{!RiskWrapperList}" var="risk">
+            <tr>
+                <td valign="top">{!risk.risk.Account_Manager__c}</td>
+                
+                 <!-- CRM-2017 - In the Account Name column, where the Customer and TMC info is pulled into the column create a break in the text so that there is a blank line between the 2 names. -->
+                <td valign="top">{!risk.risk.Account__r.Name} 
+                <br></br>
+                <br></br>
+                {!risk.acc.Primary_Account__r.Name}</td>
+                
+                   <!-- CRM-2017 - Commented the below line as the value amount decimal should not be included-->
+                  <!--<td valign="top">$<apex:outputText value="{!risk.risk.Amount_Risk__c}"/></td>-->
+                 <td valign="top">
+                    $<apex:outputText value="{0, number, ###,###}">
+                       <apex:param value="{!risk.risk.Amount_Risk__c}" />
+                   </apex:outputText>
+                   </td>
+                
+              
+                <td valign="top">                
+                    {!risk.risk.Risk_Level__c}
+                </td>
+                
+                 <!-- CRM-2017 -  Added the data for "QF International Market Share" and "QF Domestic Market Share"  -->
+                
+                  <td valign="top">
+                    <apex:outputText value="{0, number, ###,###.0}">
+                       <apex:param value="{!risk.risk.Account__r.QF_International_Market_Share__c}"/>
+                   </apex:outputText>%
+                   </td>
+                   
+                      <td>
+                    <apex:outputText value="{0, number, ###,###.0}">
+                       <apex:param value="{!risk.risk.Account__r.QF_Domestic_Market_Share__c}"/>
+                   </apex:outputText>%
+                   </td>
+                
+                     <!--<td valign="top"><apex:outputText value="{!risk.risk.Account__r.QF_International_Market_Share__c}"/>%</td>
+                     <td valign="top"><apex:outputText value="{!risk.risk.Account__r.QF_Domestic_Market_Share__c}"/>%</td>-->
+                     
+                <td valign="top">
+                    <apex:outputText value="{0, date, dd/MM/yyyy}">
+                       <apex:param value="{!risk.risk.At_Risk_Since__c}" />
+                   </apex:outputText>
+                </td>                
+                <td valign="top">{!risk.risk.Reason_At_Risk__c}</td>
+                
+                   <!-- CRM-2017 -  Added the Risk Description Data -->
+                <td valign="top">{!risk.risk.Risk_Description__c}</td>
+                
+                <td valign="top">
+                    <table border="1">
+                         <apex:repeat value="{!risk.risk.Tasks}" var="activity">
+                            <tr>
+                            
+                            <!-- CRM-2017 -Added the ‘Subject’ into the report. Into the Action Taken/Next Steps column. Text to follow the current cell text eg: Action Taken – Contract Variation Meeting -->
+                                <td width="150" valign="top">{!activity.Subtype__c} - {!activity.Subject}</td>
+                                
+                                 <!-- CRM-2017 -  Removed the Activity Owner Data -->
+                                <!--<td width="100" valign="top"><apex:outputField value="{!activity.Owner.Name}"/></td>-->
+                                
+                                <td width="100" valign="top">
+                                    <apex:outputText value="{0, date, dd/MM/yyyy}">
+                                       <apex:param value="{!activity.ActivityDate}" />
+                                   </apex:outputText>
+                                </td>
+                                <td valign="top"><apex:outputField value="{!activity.Description}"/></td>
+                            </tr>
+                        </apex:repeat>
+                        
+                        <apex:repeat value="{!risk.risk.ActivityHistories}" var="activity">
+                            <tr>
+                            
+                            <!-- CRM-2017 -Added the ‘Subject’ into the report. Into the Action Taken/Next Steps column. Text to follow the current cell text eg: Action Taken – Contract Variation Meeting -->
+                                <td width="150" valign="top">{!activity.Subtype__c} - {!activity.Subject}</td>
+                                
+                                <!-- CRM-2017 -  Removed the Activity Owner Data -->
+                                <!--<td width="100" valign="top"><apex:outputField value="{!activity.Owner.Name}"/></td>-->
+                                
+                                <td width="100" valign="top">
+                                    <apex:outputText value="{0, date, dd/MM/yyyy}">
+                                       <apex:param value="{!activity.ActivityDate}" />
+                                   </apex:outputText>
+                                </td>
+                                <td valign="top"><apex:outputField value="{!activity.Description}"/></td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </td>
+            </tr>
+        </apex:repeat>
+    </table>
+</apex:page>

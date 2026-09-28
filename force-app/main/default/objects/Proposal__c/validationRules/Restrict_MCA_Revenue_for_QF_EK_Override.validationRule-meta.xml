@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_MCA_Revenue_for_QF_EK_Override</fullName>
+    <active>true</active>
+    <description>Restricting Forecast MCA Revenue for QF-EK Network Override - CRM 8083</description>
+    <errorConditionFormula>AND( Forecast_MCA_Revenue__c  &lt; 100000,  QL_QF_EK_Network_Override__c = True)</errorConditionFormula>
+    <errorMessage>No Applicable Process Found - Please disable QF-EK Network Override Checkbox.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Editing_Response_Requested_Flag</fullName>
+    <active>false</active>
+    <description>QCC: Restricting the modification of Response Requested field.</description>
+    <errorConditionFormula>ISCHANGED(Is_Response_Requested__c) &amp;&amp; NOT(ISCHANGED(FCR__c))</errorConditionFormula>
+    <errorMessage>You are not allowed to modify the &quot;Email Reference to Customer&quot;</errorMessage>
+</ValidationRule>

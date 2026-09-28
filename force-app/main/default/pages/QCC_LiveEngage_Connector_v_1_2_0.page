@@ -1,0 +1,80 @@
+<!-- code provided by Live Person -->
+
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           docType="html-5.0" title="LiveEngage Connector">
+    <apex:includeLightning />
+    <apex:includeScript value="/support/console/41.0/integration.js"/>
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Case" jsShorthand="case" fields="Id">
+            <apex:remoteObjectField name="ContactId" jsShorthand="contactId"></apex:remoteObjectField>
+            <apex:remoteObjectField name="CaseNumber" jsShorthand="caseNumber"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Type" jsShorthand="type"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Group__c" jsShorthand="group"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Category__c" jsShorthand="category"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Priority" jsShorthand="priority"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Status" jsShorthand="status"></apex:remoteObjectField>
+            <apex:remoteObjectField name="CreatedDate" jsShorthand="createdDate"></apex:remoteObjectField>
+            <apex:remoteObjectField name="RecordTypeId" jsShorthand="recordTypeId"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Description" jsShorthand="description"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Origin" jsShorthand="origin"></apex:remoteObjectField>
+            <apex:remoteObjectField name="Contact_Email__c" jsShorthand="contactEmail"></apex:remoteObjectField>
+        </apex:remoteObjectModel>
+        <apex:remoteObjectModel name="LiveEngage__Chat_Transcript__c" jsShorthand="tran" fields="Id">
+            <apex:remoteObjectField name="LiveEngage__Case__c" jsShorthand="case"></apex:remoteObjectField>
+            <apex:remoteObjectField name="LiveEngage__Chat_Start_Time__c" jsShorthand="startTime"></apex:remoteObjectField>
+            <apex:remoteObjectField name="LiveEngage__Chat_End_Time__c" jsShorthand="endTime"></apex:remoteObjectField>
+            <apex:remoteObjectField name="LiveEngage__Chat_Number__c" jsShorthand="number"></apex:remoteObjectField>
+            <apex:remoteObjectField name="LiveEngage__LivePerson_SDK_API_Type__c" jsShorthand="sdkApiType"></apex:remoteObjectField>
+            <apex:remoteObjectField name="LiveEngage__Status__c" jsShorthand="status"></apex:remoteObjectField>
+            <apex:remoteObjectField name="LiveEngage__Transcript__c" jsShorthand="transcript"></apex:remoteObjectField>
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+    <html>
+        <head>
+            <script>
+                "use strict";
+                angular.module('server-data', [])
+                .constant('basePath', '{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, "/")}'.split('?')[0]);
+            </script>
+            <apex:stylesheet value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'css/bootstrap.min.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'css/connector.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'css/font-awesome.min.css')}"/>
+
+            <apex:includeScript value="https://lpcdn-a.lpsnmedia.net/webagent/client-SDK.min.js"/>
+        </head>
+        <body ng-app="liveEngageConnector">
+            <div id="parentContainer" class="container-fluid" ng-controller="MainController as vm">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-danger" role="alert" id="no-env-found" style="display:none;">
+                            No environment file found. Please speak to your administrator to troubleshoot the issue.
+                        </div>
+                    </div>
+                    <ng-view></ng-view>
+                </div>
+            </div>
+            <apex:includeScript value="{!$Resource.QCC_LiveEngage_Connector_Config_v_1_2_0}"/>
+
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'js/jquery-3.2.1.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'js/bootstrap.min.js')}"/>
+            
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'js/angular.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'js/angular-route.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'js/angular-animate.min.js')}"/>
+            
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/app.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/main/mainController.js')}"/>
+            
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/loading/widgetLoadingController.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/search/widgetSearchController.js')}"/>
+
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/factory/transcriptFactory.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/factory/caseFactory.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/factory/chatFactory.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/factory/chatLineFactory.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.QCC_LiveEngage_Connector_Static_v_1_2_0, 'angular-app/factory/timeFactory.js')}"/>
+
+        </body>
+    </html>
+    
+</apex:page>

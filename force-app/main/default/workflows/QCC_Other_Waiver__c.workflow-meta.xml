@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Other_Waiver_Approval_UpdateSubmDate</fullName>
+        <description>Update submission date to current date once the record has been sent to approval.</description>
+        <field>QCC_Submission_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Other Waiver Approval - UpdateSubmDate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Other_Waiver_Approval_Update_Status</fullName>
+        <description>Update status to Awaiting Approval</description>
+        <field>QCC_Status__c</field>
+        <literalValue>Awaiting Approval</literalValue>
+        <name>Other Waiver Approval - UpdateStatus</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Update_Approval_Status_Rejected</fullName>
+        <field>QCC_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>QCC: Update Approval Status Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Update_Approved_Status_on_Recovery</fullName>
+        <field>QCC_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>QCC: Update Approved Status on Recovery</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

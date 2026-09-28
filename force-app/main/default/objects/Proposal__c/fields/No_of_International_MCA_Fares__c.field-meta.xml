@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_International_MCA_Fares__c</fullName>
+    <label>No of International MCA Fares</label>
+    <summaryFilterItems>
+        <field>Discount_List__c.Fare_Combination__c</field>
+        <operation>equals</operation>
+        <value>International</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Discount_List__c.Network__c</field>
+        <operation>equals</operation>
+        <value>MCA</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Discount_List__c.Proposal__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

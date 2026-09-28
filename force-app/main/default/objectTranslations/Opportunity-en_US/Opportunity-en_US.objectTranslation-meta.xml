@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <recordTypes>
+        <description><!-- To be used for Adhoc Charter opportunity --></description>
+        <label><!-- Adhoc Charter --></label>
+        <name>Adhoc_Charter</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture all types of opportunities for Agency Partnerships --></description>
+        <label><!-- Agency Partnerships --></label>
+        <name>Agency_Partnerships</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- B&amp;G Campaigns --></label>
+        <name>B_G_Campaigns</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture all opportunities for Business and Government --></description>
+        <label><!-- Business and Government --></label>
+        <name>Business_and_Government</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Used for Distribution Partner Platform (DPP) Onboarding - Partner --></description>
+        <label><!-- DPP Onboarding Partners --></label>
+        <name>DPP_Onboarding_Partners</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture all opportunities for Qantas Freight --></description>
+        <label><!-- Freight --></label>
+        <name>Freight</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture all opportunities for Future Planet --></description>
+        <label><!-- Future Planet --></label>
+        <name>Future_Planet</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture all opportunities related to GSAs --></description>
+        <label><!-- GSA --></label>
+        <name>GSA</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- A holistic view of all the opportunities under multiple Local POS tagged to a Multinational Deal --></description>
+        <label><!-- Global opportunity --></label>
+        <name>Global_opportunity</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture Group Sales &amp; Business Events related opportunities --></description>
+        <label><!-- Groups --></label>
+        <name>Group_Sales</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type process used by Qantas Loyalty Commercial team to capture the loyalty sales --></description>
+        <label><!-- Loyalty Commercial --></label>
+        <name>Loyalty_Commercial</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Sustainable aviation Fuel related Opportunities towards for Customers to purchase SAF fuel against Carbon Credits --></description>
+        <label><!-- SAF Opportunity --></label>
+        <name>SAF_Opportunity</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture opportunities for SME products (Aquire, AEQCC and QBD) --></description>
+        <label><!-- SME Product --></label>
+        <name>SME_Product</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture all opportunities related to Sales Development --></description>
+        <label><!-- Sales Development --></label>
+        <name>Sales_Development</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used to capture all opportunities for Charters --></description>
+        <label><!-- Scheduled Charters --></label>
+        <name>Scheduled_Charters</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Please enter closure comments. --></errorMessage>
+        <name>Closure_comments_when_opp_closed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter an AWB Number --></errorMessage>
+        <name>Freight_AWB_Number_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select a managed Freight-Country Account or an unmanaged account as Opportunities on a Freight Branch account are not allowed. --></errorMessage>
+        <name>Freight_Account_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter First Shipment Propose Date --></errorMessage>
+        <name>Freight_First_Shipment_Date_Mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter a date which is equal or greater to the Expected Closure Date --></errorMessage>
+        <name>Freight_First_Shipment_Date_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- After an Opportunity is Closed, you may only edit the Closure Information section --></errorMessage>
+        <name>Freight_Opportunity_Closure_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Customer Quote must be accepted to mark this Opportunity as Closed-Accepted --></errorMessage>
+        <name>Freight_QuoteRequiredToClosedWonOppor</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You do not have the permission to change the Stage --></errorMessage>
+        <name>Freight_Stage_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Price Per Point is too low. Please update the Price Per Point value or provide the justification in &quot;Low Points Price Justification&quot;. --></errorMessage>
+        <name>Loyalty_Check_Points_Price</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter an amount --></errorMessage>
+        <name>Loyalty_check_for_amount</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select a Closure Reason and add in Closure Comments. --></errorMessage>
+        <name>Mandate_Closure_Comments_and_Reason</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please add closure comments --></errorMessage>
+        <name>Mandate_Closure_Comments_for_Other</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select a closed reason, when an opportunity is closed. --></errorMessage>
+        <name>Mandatory_reasons_for_closed_opportunity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You are not authorized to edit a closed opportunity. Please contact your system administrator for assistance. --></errorMessage>
+        <name>No_edit_of_closed_opportunitie</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please convert the Proposal to a Contract before closing this Opportunity. --></errorMessage>
+        <name>Opportunity_not_closed_for_no_contract</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t create Renewal or Variation Opportunity for Prospect Account --></errorMessage>
+        <name>Restrict_Creating_Opp_Prospect_Account</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The opportunity record is being added to an inactive account. Please check if the correct account is added or raise a System Admin case requesting to reactivate the account --></errorMessage>
+        <name>Valiadate_Only_Active_Accounts_Selected</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Conga_Composer_OAuth --></label>
+        <name>APXTConga4__Conga_Composer_OAuth</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Mail_Merge --></label>
+        <name>APXTConga4__Conga_Mail_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Contract_Execution_Certificate --></label>
+        <name>Contract_Execution_Certificate</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Convert_to_Proposal_and_Contract --></label>
+        <name>Convert_to_Proposal_and_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- NDA_Document --></label>
+        <name>NDA_Document</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Opportunity --></label>
+        <name>New_Opportunity</name>
+    </webLinks>
+</CustomObjectTranslation>

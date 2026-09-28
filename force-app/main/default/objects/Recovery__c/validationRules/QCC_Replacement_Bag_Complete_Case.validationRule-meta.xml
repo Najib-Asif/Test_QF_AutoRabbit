@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Replacement_Bag_Complete_Case</fullName>
+    <active>true</active>
+    <description>Ensuring that all required fields are populated: 
+Contact Name (Contact) 
+Contact Phone (Case) 
+Street Address (Case) 
+Suburb (Case) 
+Postcode (Case) 
+State (Case) 
+Country (Case)</description>
+    <errorConditionFormula>IF(ISPICKVAL(Type__c, &apos;Bag Replacement&apos;), 
+OR( 
+ISBLANK( Case_Number__r.ContactId ), 
+ISBLANK( Case_Number__r.Contact_Phone__c ), 
+ISBLANK( Case_Number__r.Street__c ), 
+ISBLANK( Case_Number__r.Suburb__c ), 
+ISBLANK( Case_Number__r.Post_Code__c ), 
+ISBLANK( Case_Number__r.State__c ), 
+ISPICKVAL( Case_Number__r.Country__c, &apos;&apos; ) 
+),false 
+)</errorConditionFormula>
+    <errorMessage>Please ensure all of the following fields are populated on the case: Contact Name, Contact Phone, Street Address, Suburb, Postcode, State and Country.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TodaysLeads</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>LEAD.COMPANY</columns>
+    <columns>LEAD.TITLE</columns>
+    <columns>LEAD.EMAIL</columns>
+    <columns>LEAD.PHONE</columns>
+    <columns>LEAD.COUNTRY_CODE</columns>
+    <columns>LEAD.LEAD_SOURCE</columns>
+    <columns>LEAD.STATUS</columns>
+    <columns>LEAD.CREATED_DATE</columns>
+    <columns>Data_Quality_Score_for_All__c</columns>
+    <columns>Lead_Quality__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LEAD.CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>Today&apos;s Leads</label>
+    <sharedTo>
+        <group>QF</group>
+        <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

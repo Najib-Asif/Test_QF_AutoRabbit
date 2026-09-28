@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Guided_Likelihood_to_Pay__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND( Proposal__r.Qantas_Annual_Expenditure__c &gt;= Proposal__r.Account__r.QF_Revenue__c, Proposal__r.Domestic_Annual_Share__c &gt;= Proposal__r.Account__r.QF_Domestic_Market_Share__c, Proposal__r.International_Annual_Share__c &gt;= Proposal__r.Account__r.QF_International_Market_Share__c ), &apos;Likely&apos;, IF(Proposal__r.Domestic_Annual_Share__c &gt;= Proposal__r.Account__r.QF_Domestic_Market_Share__c , &apos;Moderate&apos;,&apos;Not Likely&apos;))</formula>
+    <inlineHelpText>Likely - meets all Revenue &amp; Share Targets
+Moderate - meets DOM Share Target
+Not Likely - not meeting any Target</inlineHelpText>
+    <label>Guided Likelihood to Pay</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

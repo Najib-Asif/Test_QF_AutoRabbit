@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TechArrivalDelayDuration__c</fullName>
+    <description>QCC: Technical Field to Calculate the Arrival Delay. Backend Not used in layout or report.</description>
+    <externalId>false</externalId>
+    <formula>IF(ISNULL(Actual_Arrival_UTC__c),Estimated_Arrival_UTC__c-Scheduled_Arrival_UTC__c, Actual_Arrival_UTC__c-Scheduled_Arrival_UTC__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tech Arrival Delay Duration</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

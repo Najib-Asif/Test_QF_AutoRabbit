@@ -1,0 +1,8 @@
+<apex:page sidebar="false" showHeader="false" standardController="Account" extensions="iDealPageRedirectExtn">
+    <script> 
+    var previousOnload = window.onload; 
+    window.onload = function() {                         
+        window.location.href = '/apex/iDealEligibilityAccSearchforLightening?id={!Account.Id}&count='+{!count}+'&count2='+{!count2}+'&count3='+{!count3}+'&count4='+{!count4};
+    } 
+    </script>
+</apex:page>

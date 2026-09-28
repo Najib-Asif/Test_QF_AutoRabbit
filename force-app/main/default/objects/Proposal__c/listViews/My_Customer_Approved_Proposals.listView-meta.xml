@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Customer_Approved_Proposals</fullName>
+    <columns>NAME</columns>
+    <columns>Proposal_Number__c</columns>
+    <columns>Account__c</columns>
+    <columns>Opportunity__c</columns>
+    <columns>Qantas_Annual_Expenditure__c</columns>
+    <columns>Domestic_Annual_Share__c</columns>
+    <columns>International_Annual_Share__c</columns>
+    <columns>MCA_Routes_Annual_Share__c</columns>
+    <columns>Valid_From_Date__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>contains</operation>
+        <value>Accepted by Customer</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>My Customer Approved Proposals</label>
+</ListView>

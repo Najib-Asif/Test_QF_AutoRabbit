@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>UserServicePresence.StatusDuration:SUM/60</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Total in mins</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>(UserServicePresence.StatusDuration:SUM/60)/60</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA2</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>total in hrs</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <columns>
+        <field>UserServicePresence$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>UserServicePresence$StatusDuration</field>
+    </columns>
+    <columns>
+        <field>UserServicePresence$StatusEndDate</field>
+    </columns>
+    <columns>
+        <field>UserServicePresence$StatusStartDate</field>
+    </columns>
+    <columns>
+        <field>UserServicePresence$Id</field>
+    </columns>
+    <columns>
+        <field>UserServicePresence$CreatedBy</field>
+    </columns>
+    <columns>
+        <field>UserServicePresence$CreatedDate</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>This report provides rep details, grouped by rep. Details include key metrics such as average capacity, idle duration, and status duration.</description>
+    <filter>
+        <criteriaItems>
+            <column>UserServicePresence$User</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Alison Welch,Angie Sheedy,Charlotte Hawkes,Gabriella Stops,Georgie Knapek,Hayley Barton,Holly Tennant,Jamie Van Beest,Karen Devine,Kat Buchanan,Kate Burke,Matthew Tanner,Melissa Lacey,Mike Wilcox,Samuel Mitchell,Shannon Jubb,Winnie WANG</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>UserServicePresence$User</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>UserServicePresence$ServicePresenceStatus</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Rep Presence Status</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>SfdcUserPresenceReportType__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>UserServicePresence$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2026-01-28</startDate>
+    </timeFrameFilter>
+</Report>

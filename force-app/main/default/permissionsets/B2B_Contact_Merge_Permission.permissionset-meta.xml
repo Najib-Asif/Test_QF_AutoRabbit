@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>For SME Mid Market Managers to self cleanup contacts by merging them and reduce duplicates from system.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>B2B Contact Merge Permission</label>
+    <license>Salesforce</license>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Contact</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <recordTypeVisibilities>
+        <recordType>Contact.Non_Agency_Contact</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+</PermissionSet>

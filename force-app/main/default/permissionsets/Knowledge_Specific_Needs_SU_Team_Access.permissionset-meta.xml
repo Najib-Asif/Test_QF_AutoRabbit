@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>KMNavigationalMenuController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>KM_Banner_Controller</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>KM_NoticeBoardController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Gives access for the Specific Needs SU team to enter details on their conditional section of the article and data category access</description>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.QCC_Specific_Needs__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Knowledge__kav.Additional_Information__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Knowledge__kav.Specific_Needs_SU__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Knowledge__kav.Specific_Needs__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Knowledge Specific Needs SU Team Access</label>
+    <recordTypeVisibilities>
+        <recordType>Knowledge__kav.Internal_Knowledge_QCC_Article</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Knowledge__kav.Internal_Noticeboard</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+</PermissionSet>

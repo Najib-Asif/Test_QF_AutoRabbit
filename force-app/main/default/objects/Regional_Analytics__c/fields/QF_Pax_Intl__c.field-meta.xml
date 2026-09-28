@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QF_Pax_Intl__c</fullName>
+    <label>QF Pax Intl</label>
+    <summarizedField>Regional_Routes__c.QF_Flights__c</summarizedField>
+    <summaryFilterItems>
+        <field>Regional_Routes__c.Network__c</field>
+        <operation>equals</operation>
+        <value>International</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Regional_Routes__c.Region_Month__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

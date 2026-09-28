@@ -1,0 +1,11 @@
+<apex:page standardController="Contract__c" extensions="ChangeContractStatusExt">
+  <apex:sectionHeader title="Customer Response" subtitle="{!Contract__c.Name}"/>
+  <apex:form >
+      <apex:pageMessages ></apex:pageMessages>
+        <apex:selectRadio value="{!response}">
+        <apex:selectOptions value="{!customerResponse}"/>
+        </apex:selectRadio>
+        &nbsp;&nbsp;&nbsp;&nbsp;<apex:commandButton action="{!saveCustomerResponse}" value="Save"/>&nbsp;&nbsp;
+        <apex:commandButton action="{!cancelStatus}" value="Cancel"/>
+  </apex:form>    
+</apex:page>

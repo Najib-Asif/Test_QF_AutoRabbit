@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Frequent Flyer Information</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Frequent Flyer Informations</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- If you would like to change the Account Name, Please do so in the Case related to this Frequent Flyer. --></errorMessage>
+        <name>Account_Name_validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Request Type is &apos;Tier Retain – Mbr can only be retained in Exp Month&apos; OR If you are requesting a Sales Offer, , please fill in the Expiry Date. --></errorMessage>
+        <name>Freq_Flyer_Expiry_Date_mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please fill in the Freq Flyer Expiry Date --></errorMessage>
+        <name>Mandatory_field_for_Request_Type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Frequent Flyer Information record should not be edited if the Status is ‘Pending with Sales Solutions&apos; --></errorMessage>
+        <name>Restrict_user_from_editing_the_FF_record</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- For Campaign Type Sales Offers OR FOC Qantas Club Waiver Request, you are not allow to add a Frequent Flyer to the Case. --></errorMessage>
+        <name>Sales_Offers_Campaign_Type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You are not allowed to pick the values in the Upgrade Tier Requested or Request Type picklist for Sales Offers Type request. --></errorMessage>
+        <name>Sales_Offers_Do_Not_fill_Request_Type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- For Sales Offer Request, email address is mandatory --></errorMessage>
+        <name>Sales_Offers_Email_is_mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- For more than 10 Frequent Flyer Request, you will have to request a Sales Offer Campaign --></errorMessage>
+        <name>Sales_Offers_FF_more_than_10</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- New_Frequent_Flyer_Information --></label>
+        <name>New_Frequent_Flyer_Information</name>
+    </webLinks>
+</CustomObjectTranslation>

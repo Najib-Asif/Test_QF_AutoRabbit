@@ -1,0 +1,109 @@
+<aura:component >
+    <aura:attribute name="firstName" type="String"/>
+    <aura:attribute name="lastName" type="String"/>
+    <aura:attribute name="ffNumber" type="String"/>
+    <aura:attribute name="ffTier" type="String"/>
+    <aura:attribute name="phoneList" type="Object"/>
+    <aura:attribute name="email" type="String"/>
+    <aura:attribute name="capId" type="String"/>
+    <aura:attribute name="value" type="String"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="phone" type="String"/>
+    <aura:attribute name="ffTierSF" type="String"/>
+    <aura:attribute name="pnr" type="String"/>  <!-- Added by RDC to pass pnr to case creation flow -->
+    
+    <aura:attribute name="phone_Country_Code__c" type="String" default="61"/>
+    <aura:attribute name="phone_Area_Code__c" type="String"/>
+    <aura:attribute name="phone_Line_Number__c" type="String"/>
+    <aura:attribute name="checked" type="boolean" default="false"/>
+    
+    <aura:attribute name="address" type="Object"/>
+    
+    <aura:registerEvent name="contactInfoEvent" type="c:QCC_ContactInfoEvent"/>
+    <aura:handler name="init" value="{! this}" action="{! c.doInit}"/>
+    
+   <div class="demo-only" style="height: 640px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-modal__close" title="Close" 
+                            onclick="{!c.closeMe}">
+                        <lightning:icon class="slds-button__icon slds-button__icon_large" variant="inverse" iconName="utility:close" size="small" alternativeText="Close"/> 
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select Contact Method</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    
+                    <div class="slds-clearfix mypopover">
+                        <dl class="slds-list_horizontal slds-wrap">
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate">First Name:</dt>
+                            <dd class="slds-item_detail slds-truncate">{! v.firstName}</dd>
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Last Name:</dt>
+                            <dd class="slds-item_detail slds-truncate">{! v.lastName}</dd>
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Frequent Flyer Number:</dt>
+                            <dd class="slds-item_detail slds-truncate">{! v.ffNumber}</dd>
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Frequent Flyer Tier:</dt>
+                            <dd class="slds-item_detail slds-truncate">{! v.ffTierSF}</dd>
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate"><!-- <abbr class="slds-required" title="required">*</abbr> -->Email:</dt>
+                            <dd class="slds-item_detail slds-truncate">
+                                <lightning:input aura:id="email" label="" variant="label-hidden"  type="email" value="{! v.email}"/>
+                            </dd>
+                        </dl>
+                        
+                        <br/>
+                        <fieldset class="slds-form-element">
+                            <lightning:radioGroup aura:id="mygroup"
+                                                  name="radioButtonGroup"
+                                                  label="Select Phone Number"
+                                                  options="{! v.phoneList }"
+                                                  value="{! v.value }"/>
+                            <aura:if isTrue="{! v.value == 'additional'}">
+                                <fieldset  aura:id="phoneArea" class="slds-box slds-theme--default flag">
+                                    <legend id="newsearchform" class="slds-text-heading--small slds-p-vertical--small" style="padding: 5px;">
+                                        Phone Details
+                                    </legend>
+                                    <div class="slds-form-element__control slds-is-required phone">
+                                        <div class="slds-grid slds-grid_pull-padded-medium" style="padding-top: 0px;">
+                                            <div class="slds-cols slds-p-horizontal_medium">
+                                                <ui:inputRadio aura:id="r0" name="others" label="Mobile" labelClass="slds-radio__label" class="slds-radio" change="{!c.onSelect}"/>
+                                            </div>
+                                            <div class="slds-cols slds-p-horizontal_medium">
+                                                <ui:inputRadio aura:id="r1" name="others" label="Phone Number" labelClass="slds-radio__label" class="slds-radio" change="{!c.onSelect}" disabled="{!v.reset}" value="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element__control ">
+                                            <div class="slds-grid slds-grid_pull-padded-medium">
+                                                <div class="slds-cols slds-p-horizontal_medium">
+                                                    <lightning:input type="tel" label="Country Code" aura:id="phone1" value="{!v.phone_Country_Code__c}" onchange="{!c.onPhoneChange}" pattern="[0-9]+" messageWhenPatternMismatch="Numerical Field Only." />
+                                                </div>
+                                                <div class="slds-cols slds-p-horizontal_medium">
+                                                    <lightning:input type="tel" label="Area Code" aura:id="phone2" value="{!v.phone_Area_Code__c}" disabled="{!v.checked}" onchange="{!c.onPhoneChange}" pattern="[0-9]+" messageWhenPatternMismatch="Numerical Field Only." />
+                                                </div>
+                                                <div class="slds-cols slds-p-horizontal_medium">
+                                                    <lightning:input type="tel" label="Phone Number" aura:id="phone3" value="{!v.phone_Line_Number__c}" onchange="{!c.onPhoneChange}" pattern="[0-9]+" messageWhenPatternMismatch="Numerical Field Only." />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <!-- <lightning:input style="padding-left:23px" aura:id="phone" label="" variant="label-hidden" required="true" type="tel" value="{! v.phone}"/> -->
+                            </aura:if>
+                        </fieldset>
+                        <!--<lightning:datatable aura:id="phoneTable" data="{! v.phoneList}" 
+                                     columns="{! v.mycolumns}" 
+                                     keyField="phoneId"
+                                     resizeColumnDisabled="true"
+                                     maxRowSelection="1"
+                                     selectedRows="{! v.selectedRows}"
+                                     class="mypopover1"/>-->
+                        <div class="slds-p-around_small slds-float_right">
+                            <lightning:button label="Confirm" variant="brand" onclick="{! c.selected}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>                 
+</aura:component>

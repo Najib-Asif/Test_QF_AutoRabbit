@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>vinothkumar.balasubramanian@qantas.com.au</contactEmail>
+    <description>Connected app to authenticate QDP using JWT with Selfsigned certificate</description>
+    <label>Channel QDP</label>
+    <oauthConfig>
+        <callbackUrl>https://login.salesforce.com/services/oauth2/success</callbackUrl>
+        <certificate>MIIEdTCCA12gAwIBAgIOAWtzQ6/7AAAAAA2yCiAwDQYJKoZIhvcNAQELBQAwfzEXMBUGA1UEAwwOQ2hhbm5lbFFEUDIwMTkxGDAWBgNVBAsMDzAwRDkwMDAwMDAxME9PSzEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0EwHhcNMTkwNjIwMDUwMjI0WhcNMjAwNjIwMDAwMDAwWjB/MRcwFQYDVQQDDA5DaGFubmVsUURQMjAxOTEYMBYGA1UECwwPMDBEOTAwMDAwMDEwT09LMRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzELMAkGA1UECAwCQ0ExDDAKBgNVBAYTA1VTQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKgORGPrBn1baIIULjwg0DTG2goOW1CZxSaAka7UkzDTfUPrIFT1zgfhzallYJRu28OXCcKCZz1+lPG0JOs+87Yf5FhcTFT1j6UMjAWPeJei3QURR77p0n1iU0v0BdEDamTageCE9H8FZ1YYiKtjMpYpSxkUuPjc/8+czf0rpITamUSyUwJc+Cxqatl+isyzUHm+LCGZNXifQBETO1aw8wcChlcrZTqK7d9aoIRHAE4MeByrFrPvS8iYlT5UjDyWl7Rgc5xb8tvhsGux2/b/+MRnCxeH30+42G/pxtZWmK+9l1MCDPS5P1bJm+DgaRgoRd5x4IhXmEn1OM5tmUqECgcCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUswwzOUQZZV6+D3UvD9K6FPHRp6wwDwYDVR0TAQH/BAUwAwEB/zCBuAYDVR0jBIGwMIGtgBSzDDM5RBllXr4PdS8P0roU8dGnrKGBhKSBgTB/MRcwFQYDVQQDDA5DaGFubmVsUURQMjAxOTEYMBYGA1UECwwPMDBEOTAwMDAwMDEwT09LMRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzELMAkGA1UECAwCQ0ExDDAKBgNVBAYTA1VTQYIOAWtzQ6/7AAAAAA2yCiAwDQYJKoZIhvcNAQELBQADggEBACxJiTI1ZHwxist+Fa/CZQ24X4wMFeUzmzXCnNSyUlkz0eXpMrGi0nNRdEwIcTjRu6Inu9oVrwYUljquhuSbKDSNS7igt9sQcYYjw2II0EuGwrFu0/iASYRof3PwxkXwwEN2Qh9ai6N3ldFLH0BD6odBsODrcdQPH+HdNnbfQEViOAgY5YOlz5KftGf2ZXUKORAe+PCivRALYTgNY8LU9WXan8Ja0bCFSSUPRm0WydjYi5rs07CGb3/9Ifz/tfwV6ioq5d6kaY25alVFpYWQcArQTsOXcMwvpum+llMU1Vgw4WAh9dunp362ho0O4l5u1z/2CCcCoHk9JZcVI4MlziI=</certificate>
+        <consumerKey>3MVG94HL4YxRKo9uU30DsaLcpKauJDJqDovXx4z7yg_lQuusFeHSomHacolaCTmFQX7dw71xmiiXsqm3RQM4S</consumerKey>
+        <isAdminApproved>true</isAdminApproved>
+        <isClientCredentialEnabled>false</isClientCredentialEnabled>
+        <isCodeCredentialEnabled>false</isCodeCredentialEnabled>
+        <isCodeCredentialPostOnly>false</isCodeCredentialPostOnly>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isNamedUserJwtEnabled>false</isNamedUserJwtEnabled>
+        <isPkceRequired>false</isPkceRequired>
+        <isRefreshTokenRotationEnabled>false</isRefreshTokenRotationEnabled>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <isSecretRequiredForTokenExchange>false</isSecretRequiredForTokenExchange>
+        <isTokenExchangeEnabled>false</isTokenExchangeEnabled>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+        <scopes>RefreshToken</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <isTokenExchangeFlowEnabled>false</isTokenExchangeFlowEnabled>
+        <refreshTokenPolicy>specific_lifetime:1:HOURS</refreshTokenPolicy>
+        <singleLogoutUrl>https://login.microsoftonline.com/74ea519d-9792-4aa9-86d9-b7cab8204ddd/saml2</singleLogoutUrl>
+    </oauthPolicy>
+    <sessionPolicy>
+        <sessionTimeout>30</sessionTimeout>
+    </sessionPolicy>
+</ConnectedApp>

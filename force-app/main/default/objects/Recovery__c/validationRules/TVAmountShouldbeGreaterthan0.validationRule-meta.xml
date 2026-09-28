@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TVAmountShouldbeGreaterthan0</fullName>
+    <active>true</active>
+    <description>Travel Voucher Monetary Value should be greater than 0</description>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Type__c, &quot;Travel Vouchers&quot;),
+    NOT(ISBLANK(Monetary_Value__c)), 
+    OR( Monetary_Value__c &lt; 10,
+    MOD(Monetary_Value__c, 1) &lt;&gt; 0),
+    OR(ISPICKVAL(Status__c, &quot;New&quot;),
+       ISPICKVAL(Process_Status__c, &quot;New&quot;))
+)</errorConditionFormula>
+    <errorMessage>Monetary Value should be at least $10 and rounded up to the nearest number</errorMessage>
+</ValidationRule>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_23130275</developerName>
+        <masterLabel>BusinessUnit_c</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>User$Profile</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas CC Consultant</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Customer Specific Needs</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Journey Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Operational Manager</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas CC Team Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Pre Journey CC Consultant</sourceValue>
+            </sourceValues>
+            <value>Contact Centre</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas Freight Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Freight Service</sourceValue>
+            </sourceValues>
+            <value>Freight 185</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QL_Qantas_Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL_Qantas_US_Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL GSA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL Qantas Service</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QL Qantas Vendor</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QAC API Integration Profile</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Sales</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Service Lightning</sourceValue>
+            </sourceValues>
+            <value>Sales 575</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas Loyalty</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Loyalty -Commercial Sales</sourceValue>
+            </sourceValues>
+            <value>Loyalty 63</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_58163051</developerName>
+        <masterLabel>cCountry</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>User$CountryCode</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <value>AU</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>NZ</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>US</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>AR</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>BR</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CL</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>JP</sourceValue>
+            </sourceValues>
+            <value>Americas</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>FR</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DE</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IT</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>NL</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>ZA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>SE</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CH</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>AE</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>GB</sourceValue>
+            </sourceValues>
+            <value>UK and Europe</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>CN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>HK</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>KR</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>NC</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PG</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>SG</sourceValue>
+            </sourceValues>
+            <value>Asia</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>User$Name</field>
+    </columns>
+    <columns>
+        <field>User$FederationIdentifier</field>
+    </columns>
+    <columns>
+        <field>User$UserRole</field>
+    </columns>
+    <columns>
+        <field>User*User$Profile_Name__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+        <criteriaItems>
+            <column>User$IsActive</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User$UserRole</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>startsWith</operator>
+            <value>QF-QDC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User$Name</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>QCC Reporting</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User*User$Location__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Suva</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>User*User$Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>QCC User License - Salesforce - Suva</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>User_custom__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>User$UserRole</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>User$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

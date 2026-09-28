@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignmentRule>
+        <fullName>Auto Assign to Escalation Queue</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <assignedTo>QCC_QANTAS_VIP_Pre_Flight_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>( 				( 								( 												OR( 																ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Platinum One&quot;), 																ISPICKVAL(Contact.Frequent_Flyer_Tier__c,&quot;Chairman&apos;s Lounge Platinum One&quot;), 																ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge&quot;), 																ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge Platinum One&quot;), 																ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge&quot;) 												)  												|| Contact.SSU__c = TRUE 												|| 												OR( 																TEXT(Contact.QCC_Effective_Tier__c)= &quot;FFLP&quot;, 																TEXT(Contact.QCC_Effective_Tier__c)= &quot;CLPP&quot; )  								)   								&amp;&amp; 								OR( 												ISPICKVAL(Type, &quot;Review Complimentary Upgrade - Meal&quot;), 												ISPICKVAL(Type, &quot;Review Complimentary Upgrade - Special Assistance&quot;), 												ISPICKVAL(Type, &quot;Review Complimentary Upgrade - Watchlist&quot;), 												ISPICKVAL(Type, &quot;Pre-Flight Watchlist Check&quot;), 												ISPICKVAL(Type, &quot;Watch list is Expiring&quot;) 								) 				)  				|| 				OR( 								ISPICKVAL(Type,&quot;Qantas Host Always Call&quot; ), 								ISPICKVAL(Type, &quot;Qantas Host Call&quot;), 								ISPICKVAL(Type, &quot;Qantas First Spa Lounge&quot;), 								ISPICKVAL(Type, &quot;PNR Health Check&quot;), 								ISPICKVAL(Type, &quot;PNR Health Check - Watchlist&quot;) 				) ) &amp;&amp; RecordType.DeveloperName = &quot;QCC_Elite_Process&quot;</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( ISNEW(),     OR(RecordType.DeveloperName = &apos;Freight_Claims&apos;, RecordType.DeveloperName = &apos;Freight_Email_to_Case&apos;, RecordType.DeveloperName = &apos;Freight_Feedback&apos;,  RecordType.DeveloperName = &apos;Freight_Invoicing&apos;, RecordType.DeveloperName = &apos;Freight_Query&apos;, RecordType.DeveloperName = &apos;Freight_Shipment&apos;,   RecordType.DeveloperName = &apos;Freight_Track_Trace_Exceptions&apos;, RecordType.DeveloperName = &apos;Qantas_Freight&apos;),    ISPICKVAL(Origin, &apos;FRT Phone&apos;),  AND(Created_By_Name__c != &apos;System Admin Updates&apos;, Created_By_Name__c != &apos;Freight Integration User&apos;, Created_By_Name__c != &apos;Freight Customer Feedback User&apos;)     )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QCC_QANTAS_VIP_Milestone_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>( 				OR( 							ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Platinum One&quot;), 							ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge Platinum One&quot;), 							ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge&quot;), 							ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge Platinum One&quot;), 							ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge&quot;) 						) 						|| Contact.SSU__c = TRUE 						|| OR( 								TEXT(Contact.QCC_Effective_Tier__c)= &quot;FFLP&quot;, 								TEXT(Contact.QCC_Effective_Tier__c)= &quot;CLPP&quot; ) 					) 					&amp;&amp;  						OR( 							ISPICKVAL(Type,&quot;Welcome to Platinum One&quot; ), 							ISPICKVAL(Type,&quot;Retain Platinum One&quot;), 							ISPICKVAL(Type,&quot;Welcome to SSU&quot;), 							ISPICKVAL(Type,&quot;Welcome to Life Time Platinum&quot;) 						) 					&amp;&amp;  					RecordType.DeveloperName = &quot;QCC_Elite_Process&quot;</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QCC_QANTAS_VIP_General_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND( 				OR( 					OR( 						ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Platinum One&quot;), 						ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge Platinum One&quot;), 						ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge&quot;), 						ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge Platinum One&quot;), 						ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge&quot;) 						), 					Contact.SSU__c  = TRUE 					|| OR( 							TEXT(Contact.QCC_Effective_Tier__c)= &quot;FFLP&quot;, 							TEXT(Contact.QCC_Effective_Tier__c)= &quot;CLPP&quot;)			 	 					), 				OR( 					ISPICKVAL(Type,&quot;Potential Downgrade&quot; ), 					ISPICKVAL(Type,&quot;Quarterly Health Check Call&quot; ), 					ISPICKVAL(Type,&quot;No Flight Health Check&quot; ) 					), 					 				RecordType.DeveloperName = &quot;QCC_Elite_Process&quot; 				)</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QCC_VIP_Email_Enquiries</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Assistance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>VIP Email Enquiries</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QCC_SSU_Email_Enquiries</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Assistanceiui</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>SSU Email Enquiries</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QCC_QANTAS_VIP_General_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Assistance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>General Enquiries</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QANTAS_VIP_Post_Travel_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>UPPER($Label.QCC_EnableQANTASVIPPostTravelQueue) = &apos;TRUE&apos; &amp;&amp;(                 OR(                                 ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Platinum One&quot;),                                 ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge Platinum One&quot;),                                 ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairman&apos;s Lounge&quot;),                                 ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge Platinum One&quot;),                                 ISPICKVAL(Contact.Frequent_Flyer_Tier__c, &quot;Chairmans Lounge&quot;)                 )                 || Contact.SSU__c  = TRUE                   || OR(                                 TEXT(Contact.QCC_Effective_Tier__c)= &quot;FFLP&quot;,                                 TEXT(Contact.QCC_Effective_Tier__c)= &quot;CLPP&quot;                 ) ) &amp;&amp;  OR(                 RecordType.DeveloperName = &quot;CCC_Baggage&quot;,                 RecordType.DeveloperName = &quot;CCC_Complaints&quot;,                 RecordType.DeveloperName = &quot;CCC_Further_Action_Required&quot;,                 RecordType.DeveloperName = &quot;CCC_Event&quot;,                 RecordType.DeveloperName = &quot;CCC_Query&quot;,                 RecordType.DeveloperName = &quot;QCC_Insurance_Letter_Case&quot;   ) &amp;&amp;     AND(                     NOT(ISPICKVAL(Category__c, &quot;Medical - Assistance Provided&quot;)),                     NOT(ISPICKVAL(Category__c, &quot;Medical - Patient&quot;)),                     NOT(ISPICKVAL(Category__c, &quot;Injury/Illness/Safety&quot;))     ) &amp;&amp; AND(     NOT(BEGINS(OwnerName__c, &quot;Advocacy_Queue&quot;)),     NOT(BEGINS(OwnerName__c, &quot;Critical_Queue&quot;)),     NOT(BEGINS(OwnerName__c, &quot;Emirates_Queue&quot;)),     NOT(BEGINS(OwnerName__c, &quot;EU_Compensation_Queue&quot;)),     NOT(BEGINS(OwnerName__c, &quot;ExCo_Queue&quot;)) ) &amp;&amp; Board_Of_Member__c = FALSE &amp;&amp;  TEXT(Status) = &apos;NEW&apos;</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QCC_VIP_Disruption_Case_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR( 								 		ISPICKVAL(Type,&quot;Air Turn Back&quot;), 								 		ISPICKVAL(Type,&quot;Add Stop&quot;), 								 		ISPICKVAL(Type,&quot;Diversion&quot;), 								 		ISPICKVAL(Type,&quot;Domestic Delay&quot;), 								 		ISPICKVAL(Type,&quot;International Cancellation&quot;), 								 		ISPICKVAL(Type,&quot;International Delay&quot;) 				 	)</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QCC_Specific_Needs_Email_Enquiries</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QDP_Portal_Support</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>QAC Contact Us Support</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>QDP</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>NDC_Support</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>QAC Contact Us Support</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>NDC</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_AU_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Service Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>QAC Website</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>AU</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_AU_Account_Management_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>AU</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_NZ_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Service Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>QAC Website</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>NZ</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_NZ_Account_Management</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>NZ</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_UK_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Service Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>QAC Website</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>GB</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>IE</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_UK_Account_Management</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+            <criteriaItems>
+                <field>Account.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>GB</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>IE</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_NA_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Service Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>QAC Website</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>CA,US</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QIC_Sales_Support_Escalation_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Ticketing Authority</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Ticketing Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Status</field>
+                <operation>equals</operation>
+                <value>New</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Sub_Type_1__c</field>
+                <operation>equals</operation>
+                <value>New,Reactivated</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_NA_Account_Management</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Account.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>CA,US,MX</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_ASIA_Account_Management_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>CN,SG,JP,MY,TH,KH,VN,ID,KR,PH,HK</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_EU_Account_Management_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>NL,ZA,AT,BH,BD,BE,BA,BW,HR,CZ,DK,EG,FR,GR,HU,IN,IR,IQ,IL,IT,JO,KW,LB,MK,MT,NA,NP,NO,OM,PK,PL,PT,QA,RO,RU,SA,RS,SK,SI,ES,LK,SE,CH,TR,AE,DE,TZ</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_Pacific_Account_Management_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>SB,PG,FJ,NC</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QAC_SA_Account_Management_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Agency Account</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Account Maintenance</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountryCode</field>
+                <operation>equals</operation>
+                <value>AR,BR,CL,VE</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_CSS_Americas_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Qantas Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Freight_Origin__c</field>
+                <operation>equals</operation>
+                <value>Web-US</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_Sales_Support_AU_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Qantas Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Booking</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Sub_Type_1__c</field>
+                <operation>equals</operation>
+                <value>New</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Sub_Type_2__c</field>
+                <operation>equals</operation>
+                <value>Spot Rate</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Country__c</field>
+                <operation>equals</operation>
+                <value>Australia</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_CSU_AU_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR( 
+	AND ( 
+		OR(RecordType.Name =&apos;Freight Shipment&apos;,RecordType.Name =&apos;Freight Query&apos;,RecordType.Name =&apos;Freight Feedback&apos;,RecordType.Name =&apos;Freight Claims&apos;), 
+			Freight_WebToCaseType__c!=&apos;&apos;, ISPICKVAL(Origin,&apos;Web&apos;)), 
+				AND(RecordType.Name =&apos;Qantas Freight&apos;, 
+					OR(ISPICKVAL(Type,&apos;Booking&apos;), ISPICKVAL(Type,&apos;Disruption&apos;),ISPICKVAL(Type,&apos;NCR&apos;), 
+						AND(ISPICKVAL(Type,&apos;Customer Query&apos;), OR(ISPICKVAL(Sub_Type_1__c,&apos;Special Requests&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Documentation&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Tracking&apos;), ISPICKVAL(Sub_Type_1__c,&apos;Pets&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Freight Portal&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Customs&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Terminal&apos;), ISPICKVAL(Sub_Type_1__c,&apos;Feedback&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Charity&apos;), ISPICKVAL(Sub_Type_1__c,&apos;Damaged&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Product/Services&apos;) ) ),
+							ISPICKVAL(Type,&apos;Special Moves&apos;), ISPICKVAL(Type,&apos;Export Moves&apos;)  ) ) )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_Invoices_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR( AND( RecordType.Name=&apos;Freight Invoicing&apos;, ISPICKVAL(Freight_Shipment__c, &apos;Domestic&apos;) , ISPICKVAL(Status ,&apos;Open&apos;)), AND(RecordType.Name=&apos;Qantas Freight&apos;, OR(AND(ISPICKVAL(Type, &apos;Customer Query&apos;),AND(ISPICKVAL(Sub_Type_1__c, &apos;Accounts&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Invoice&apos;))), AND(ISPICKVAL(Type, &apos;Customer Query&apos;),ISPICKVAL(Sub_Type_1__c, &apos;Terminal service fee&apos;))) ) )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Deal_Support_Request_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Status</field>
+                <operation>contains</operation>
+                <value>Deal Support</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QDM_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Status</field>
+                <operation>equals</operation>
+                <value>With QDM - Pending PRISM Load</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Pricing_Team_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Status</field>
+                <operation>equals</operation>
+                <value>With Pricing - Pending ATPCO Load</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>System_Admin_Request_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>System Admin Request</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_Sales_Support_AU_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.Name=&apos;Qantas Freight&apos;, OR(ISPICKVAL(Sub_Type_1__c ,&apos;QBR&apos;), AND(ISPICKVAL(Type ,&apos;Customer Query&apos;),ISPICKVAL(Sub_Type_1__c ,&apos;Accounts&apos;), ISPICKVAL(Sub_Type_2__c ,&apos;Rates&apos;)), AND(ISPICKVAL(Type ,&apos;Customer Query&apos;), OR(ISPICKVAL(Sub_Type_1__c ,&apos;General network&apos;),ISPICKVAL(Sub_Type_1__c ,&apos;Charter Rate&apos;)))) )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_CSS_AU_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Freight Track &amp; Trace Exceptions</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Elenium</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Sub_Type_1__c</field>
+                <operation>notEqual</operation>
+                <value>Missing AWB (from Missing ULD),AWB wrong location (from ULD in wrong location),Unable to locate AWB in warehouse (due to Unable to locate ULD in warehouse),Found AWB (from Unmanifested ULD)</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_Claims_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL(Type, &apos;Claims&apos;), OR(AND(ISPICKVAL(Sub_Type_1__c, &apos;MBG&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Pax&apos;)),AND(ISPICKVAL(Sub_Type_1__c, &apos;Animal&apos;),ISPICKVAL(Sub_Type_2__c, &apos;&apos;)), AND(ISPICKVAL(Sub_Type_1__c, &apos;Service Failure&apos;),ISPICKVAL(Sub_Type_2__c, &apos;&apos;)), AND(ISPICKVAL(Sub_Type_1__c, &apos;Lost Documents&apos;),ISPICKVAL(Sub_Type_2__c, &apos;&apos;)))), AND(RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL(Type, &apos;Claims&apos;),OR(ISPICKVAL(Freight_Shipment__c,&apos;International&apos;),ISPICKVAL(Freight_Shipment__c,&apos;Domestic&apos;)), OR(AND(ISPICKVAL(Sub_Type_1__c, &apos;Missing&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;)), AND(ISPICKVAL(Sub_Type_1__c, &apos;Damaged&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;)), AND(ISPICKVAL(Sub_Type_1__c, &apos;Delay&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;))) ))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.IsEscalated</field>
+                <operation>equals</operation>
+                <value>False</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Status</field>
+                <operation>notEqual</operation>
+                <value>With Deal Support - Pending iDeal Load,With QDM - Pending PRISM Load,With Pricing - Pending ATPCO Load,With Deal Support - Pending Distribution,Closed - Deal Implemented</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>notEqual</operation>
+                <value>Freight Track &amp; Trace Exceptions</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_CSU_AU_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(ISPICKVAL(Origin,&apos;Web&apos;),RecordType.Name =&apos;Qantas Freight&apos;,ISPICKVAL(Freight_Shipment__c,&apos;Domestic&apos;),ISPICKVAL(Type,&apos;Customer Query&apos;),ISPICKVAL(Sub_Type_1__c,&apos;Pets&apos;), OR(ISPICKVAL( Product__c,&apos;Q-GO Animals&apos;),ISPICKVAL(Product__c,&apos;Q-GO Pets&apos;)))</formula>
+        </ruleEntry>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>NameChange Requests To QIC Team</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <assignedTo>QIC_Team</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Name Change</value>
+            </criteriaItems>
+        </ruleEntry>
+    </assignmentRule>
+</AssignmentRules>

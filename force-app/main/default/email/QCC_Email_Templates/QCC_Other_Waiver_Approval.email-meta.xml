@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Waiver Approval Template</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Other Waiver Approval</name>
+    <style>none</style>
+    <subject>Approval message for Other Waiver</subject>
+    <textOnly>Dear Approver,
+
+{!ApprovalRequest.Process_Assignee} has requested your approval for the following item:
+
+Owner: {!QCC_Other_Waiver__c.OwnerFullName}&lt;br/&gt;&lt;br/&gt;
+Date: {!QCC_Other_Waiver__c.QCC_Date__c}&lt;br/&gt;&lt;br/&gt;
+Reason: {!QCC_Other_Waiver__c.QCC_Reason__c}&lt;br/&gt;&lt;br/&gt;
+Value: {!QCC_Other_Waiver__c.QCC_Value__c}&lt;br/&gt;&lt;br/&gt;
+Status: {!QCC_Other_Waiver__c.QCC_Status__c}&lt;br/&gt;&lt;br/&gt;
+
+Please click here to approve or reject this record.
+
+Thank you,</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

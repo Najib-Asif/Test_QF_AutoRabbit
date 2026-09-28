@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used for Qantas Host Service Confirmation</description>
+    <fieldOverrides>
+        <field>ToAddress</field>
+        <formula>QCC_First_Host__c.QCC_First_Host_Contact__r.Email</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>ValidatedFromAddress</field>
+        <formula>IF( QCC_First_Host__c.QCC_SSU_Formula__c  = TRUE,$Label.QCC_EmailCustomer_ValidatedFrom_SSU,$Label.QCC_EmailCustomer_ValidatedFrom_VIP)</formula>
+    </fieldOverrides>
+    <optionsCreateFeedItem>true</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns/>
+        <quickActionLayoutColumns/>
+    </quickActionLayout>
+    <standardLabel>SendEmail</standardLabel>
+    <targetObject>OutgoingEmail</targetObject>
+    <targetParentField>RelatedTo</targetParentField>
+    <type>SendEmail</type>
+</QuickAction>

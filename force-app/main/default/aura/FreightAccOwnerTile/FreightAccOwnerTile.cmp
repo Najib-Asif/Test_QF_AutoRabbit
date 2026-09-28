@@ -1,0 +1,73 @@
+<aura:component controller="FreightAccOwnerController" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="AccOwner" type="User" />
+    
+    <article class="slds-card">
+        
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-contact" title="User">
+                        <lightning:icon iconName="standard:user" size="small"/>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="{!'/' + v.AccOwner.Id}" class="slds-card__header-link slds-truncate" title="Account Owner">
+                            <span class="slds-text-heading_small">Account Owner Details</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        
+        <div class="slds-card__body">
+            <div class="slds-card__body--inner">
+                <div class="slds-tile">
+                    <div class="slds-tile__detail slds-text-body--small">
+                        <dl class="slds-list--horizontal slds-wrap">
+                            <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Account Owner:">
+                                Name:
+                            </dt>
+                            
+                            <dd class="slds-item--detail slds-truncate" title="{!v.AccOwner.Name}" style="width:auto;">
+                                <h3 class="slds-truncate" title="{!v.AccOwner.Name}" >
+                                    <a href="{!'/' + v.AccOwner.Id}">
+                                        {!v.AccOwner.Name}
+                                    </a>
+                                </h3>
+                            </dd>
+                        </dl>
+                    </div>
+                    <br />
+                    
+                    <div class="slds-tile__detail slds-text-body--small">
+                        <dl class="slds-list--horizontal slds-wrap">
+                            <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Email:">
+                                Email:
+                            </dt>
+                            
+                            <dd class="slds-item--detail slds-truncate" title="{!v.AccOwner.Email}" style="width:auto;">
+                                <a href="{!'mailto:'+v.AccOwner.Email}">{!v.AccOwner.Email}</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <br />
+                    
+                    <div class="slds-tile__detail slds-text-body--small">
+                        <dl class="slds-list--horizontal slds-wrap">
+                            <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Phone:">
+                                Phone:
+                            </dt>
+                            
+                            <dd class="slds-item--detail slds-truncate" title="{!v.AccOwner.Phone}">
+                                {!v.AccOwner.Phone}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </article>
+</aura:component>

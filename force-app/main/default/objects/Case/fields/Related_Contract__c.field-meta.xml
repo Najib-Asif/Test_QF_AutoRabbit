@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Related_Contract__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <inlineHelpText>For Dealing Model Request, please select Customer&apos;s current Contract</inlineHelpText>
+    <label>Related Contract</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Please select the Signed/Rejected Contracts</errorMessage>
+        <filterItems>
+            <field>Contract__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Signature Required by Customer, Signed by Customer, Rejected - Customer, Rejected – Legal, Rejected - Internal</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Deal Support Request, Frequent Flyer Request, Corporate Scheme Service Request, Account Review Request, Sales Offers Request, Dealing Model Request, Chairmans Lounge Renewal</value>
+        </filterItems>
+        <infoMessage>Please select the Signed/Rejected Contracts</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Contract__c</referenceTo>
+    <relationshipLabel>Cases</relationshipLabel>
+    <relationshipName>Cases</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

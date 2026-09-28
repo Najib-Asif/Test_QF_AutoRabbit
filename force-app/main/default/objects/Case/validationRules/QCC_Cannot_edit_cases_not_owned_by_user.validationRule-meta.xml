@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Cannot_edit_cases_not_owned_by_user</fullName>
+    <active>true</active>
+    <description>QCC - Unable to edit cases that are not owned by the current user</description>
+    <errorConditionFormula>AND(
+    $Permission.Bypass_VR_for_QCC_Omnichannel_Supervisors = false,
+    $Setup.EnableValidationRule__c.VR_QCC_Cannot_edit_cases_not_owned_by_us__c = TRUE,
+	OwnerId &lt;&gt; $User.Id,
+	BEGINS(OwnerId, &apos;00G&apos;),
+(NOW() - LastModifiedDate) &gt; 0.0001133,
+	NOT(ISCHANGED( OwnerId )),
+	OR(
+		RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+		RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+		RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+		RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+		RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+		RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+		RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+		RecordType.DeveloperName = &apos;CCC_Query&apos;,
+		RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;,
+		RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+		RecordType.DeveloperName = &apos;QCC_Disruption&apos;,
+		RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;
+	),
+	OR(
+		NOT(ISCHANGED(Status)),
+		AND(ISPICKVAL(Status, &apos;In Progress&apos;),
+			BEGINS(OwnerId, &apos;00G&apos;)
+			)
+	)
+)</errorConditionFormula>
+    <errorMessage>Please take ownership of the case before making any changes.</errorMessage>
+</ValidationRule>

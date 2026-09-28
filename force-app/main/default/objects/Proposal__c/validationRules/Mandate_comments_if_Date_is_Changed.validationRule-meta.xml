@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_comments_if_Date_is_Changed</fullName>
+    <active>false</active>
+    <description>Make the Urgent Approval Reasons field mandatory if the Expected Approval date is override</description>
+    <errorConditionFormula>AND(OR((RecordType.Name = &apos;CA - Approval Required - Internal&apos;),(RecordType.Name = &apos;QBS - Approval Required - Internal&apos;),(RecordType.Name = &apos;CA - Draft&apos;),(RecordType.Name = &apos;QBS - Draft&apos;)),
+OR(Opportunity__r.OwnerId = $User.Id,
+$UserRole.Id = &apos;00E90000001P6KH&apos;, /*Deal Optimization */
+$User.Id = &apos;00590000004hkhl&apos;, /*Nikki Suters */
+$UserRole.Id = &apos;00E90000001P7am&apos;, /* B&amp;G - National Manager - Resources */
+$UserRole.Id = &apos;00E90000001P6Kb&apos;, /* National Manager - Business &amp; Government */
+$UserRole.Id = &apos;00E90000001P6Lj&apos;, /*Head of QIS */
+$UserRole.Id = &apos;00E90000001P6Iz&apos;, /*Head of Agency Partnerships */
+$UserRole.Id = &apos;00E90000001P6J4&apos; /*Head of Bus&amp;Gov */
+),
+AND(((Today()+ 10)&gt;(Expected_Approval_Date__c)),NOT(Expected_Approval_Date__c &lt; Today()),ISBLANK(Comments__c),DateIsChecked__c = False),
+NOT($Profile.Name = &quot;System Administrator&quot;),
+NOT($Profile.Name = &quot;Qantas System Administrator&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - Freight&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - QCC&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - SND&quot;))</errorConditionFormula>
+    <errorDisplayField>Comments__c</errorDisplayField>
+    <errorMessage>Please enter the reason for Urgent Approval</errorMessage>
+</ValidationRule>

@@ -1,0 +1,159 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="main-div">
+        <div class="authentication-div">
+            <!-- Authenticate Button -->
+            <div class="button-set">
+                <lightning-button 
+                    variant="brand" 
+                    label="Authenticate" 
+                    onclick={authenticate}
+                    onmouseout={handleMouseout}
+                    onmouseover={handleMouseover}></lightning-button>
+            </div>
+            
+            <template if:true={isHovered}>
+                <div class="child-div">
+                    <section aria-describedby="dialog-body-id-113" aria-labelledby="dialog-heading-id-1" 
+                        class="slds-popover slds-popover_warning slds-nubbin_bottom-right popover-section" 
+                        role="dialog">
+                        <header class="slds-popover__header">
+                            <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-utility-warning"></span>
+                                </div>
+                                <div class="slds-media__body popover-body">
+                                    <lightning-icon 
+                                        icon-name="utility:warning" 
+                                        size="x-small" 
+                                        alternative-text="Warning!" 
+                                        title="Warning" 
+                                        class="notification-icon"
+                                        ></lightning-icon>
+                                    <h5 
+                                        class="slds-truncate slds-text-heading_small notification-header" 
+                                        id="dialog-heading-id-2" 
+                                        title="Review warning"
+                                        >Review warning</h5>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-popover__body">
+                            <p>Please authenticate for any points related transactions.</p>
+                        </div>
+                    </section>
+                </div>
+            </template>
+        </div>
+        
+        <div class="ivr-selection-div">
+            <!--Caller IVR Details-->
+            <p class="call-details"><b>Time in Queue: </b> 
+                <template if:true={callerQueuedWaitTimeMins}>
+                    <lightning-formatted-number 
+                    class="slds-var-m-left_xx-small"
+                    value={callerQueuedWaitTimeMins}>
+                    </lightning-formatted-number> Mins
+                </template>
+            </p>
+            <p class="call-details"><strong>
+                <lightning-formatted-text 
+                value="Caller IVR Details"></lightning-formatted-text>
+            </strong></p>
+
+            <p class="call-details"><b>IVR Selection: </b>
+                <lightning-formatted-text
+                    class="slds-var-m-left_medium" 
+                    value={ivrSelection}>
+                </lightning-formatted-text>  {travelType}  {paymentType}
+            </p>
+            <template lwc:if={queryDescription}>
+                <p class="call-details"><b>Query Description: </b>
+                    <lightning-formatted-text
+                        class="slds-var-m-left_medium" 
+                        value={queryDescription}>
+                    </lightning-formatted-text>
+                </p>
+            </template>
+            <p class="call-details"><b>Caller Location: </b>
+                <lightning-formatted-text 
+                    class="slds-var-m-left_xx-small"
+                    value={callerLocation}>
+                </lightning-formatted-text>
+            </p>
+
+            <p class="call-details"><b>PNR: </b> 
+                <lightning-formatted-text 
+                    class="slds-var-m-left_xx-small"
+                    value={pnr}>
+                </lightning-formatted-text>
+            </p>
+            
+            <!-- CRM-8775 -->
+            <template lwc:if={pnrContains}>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_2-of-8">
+                        <p class="call-details"><b>PNR Contains:</b></p>
+                    </div>
+                    <div class="slds-col slds-size_6-of-8">
+                        <p class="call-details">
+                            <lightning-formatted-text 
+                                class="slds-var-m-left_xx-small"
+                                value={pnrContains}>
+                            </lightning-formatted-text>
+                        </p>
+                    </div>
+                </div>
+            </template>
+
+            <template if:false={isAuthenticated}>
+                <!-- Unauthenticated -->
+                <p class="call-details"><b>Auth Status:</b> 
+                    <strong><lightning-formatted-text 
+                        class="slds-text-color_error slds-var-m-left_xx-small"
+                        value={authenticationStatus}>
+                    </lightning-formatted-text></strong>
+                </p>
+            </template>
+
+            <template if:true={isAuthenticated}>
+                <!-- Authenticated -->
+                <p class="call-details"><b>Auth Status:</b>  
+                    <strong><lightning-formatted-text 
+                        class="slds-text-color_success slds-var-m-left_xx-small"
+                        value={authenticationStatus}>
+                    </lightning-formatted-text></strong>
+                </p>
+            </template>
+
+            <p class="call-details"><b>Queue Name: </b> 
+                <lightning-formatted-text 
+                    class="slds-var-m-left_xx-small"
+                    value={queueName}>
+                </lightning-formatted-text>
+            </p>
+
+            <p class="call-details"><b>QFF Name: </b>
+                <lightning-formatted-text 
+                    class="slds-var-m-left_xx-small"
+                    value={callerName}>
+                </lightning-formatted-text>
+            </p>
+
+            <p class="call-details"><b>QFF Number: </b>
+                <lightning-formatted-text 
+                    class="slds-var-m-left_xx-small"
+                    value={qffNumber}>
+                </lightning-formatted-text>
+            </p>
+
+            <p class="call-details"><b>QFF Tier: </b>
+                <lightning-formatted-text 
+                    class="slds-var-m-left_xx-small"
+                    value={qffTier}>
+                </lightning-formatted-text>
+            </p>
+        </div>
+
+    </div>
+</template>

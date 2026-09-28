@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CloseAction__c</fullName>
+    <description>QCC: the action taken to close this Event</description>
+    <label>Close Action</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Comms not required</fullName>
+                <default>false</default>
+                <label>Comms not required</label>
+            </value>
+            <value>
+                <fullName>Comms sent</fullName>
+                <default>false</default>
+                <label>Comms sent</label>
+            </value>
+            <value>
+                <fullName>Recoveries created and comms sent</fullName>
+                <default>false</default>
+                <label>Recoveries created and comms sent</label>
+            </value>
+            <value>
+                <fullName>Event Auto-Closed</fullName>
+                <default>false</default>
+                <label>Event Auto-Closed</label>
+            </value>
+            <value>
+                <fullName>Close-Offload</fullName>
+                <default>false</default>
+                <label>Close-Offload</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

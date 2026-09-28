@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_FlightNumberCheck</fullName>
+    <active>true</active>
+    <description>QCC: Regex check on the flight number to ensure it will map the format stored in CAP</description>
+    <errorConditionFormula>AND(
+				$Setup.EnableValidationRule__c.VR_QCC_FlightNumberCheck__c=TRUE, 
+				NOT(REGEX( FlightNumber__c, &quot;[A-Z]{2}\\d{4}&quot;)),
+		(RecordType.DeveloperName ==  &apos;Active_Event&apos; || 
+	  RecordType.DeveloperName ==  &apos;Closed_Event&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>FlightNumber__c</errorDisplayField>
+    <errorMessage>Flight number is not in a valid format, please enter it in the following format: AA1234</errorMessage>
+</ValidationRule>

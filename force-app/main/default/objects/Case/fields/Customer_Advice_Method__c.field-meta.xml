@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Advice_Method__c</fullName>
+    <description>Freight - Drop down showing which resolution method the caller would prefer to get the feedback ie, phone, email, sms/text, other</description>
+    <inlineHelpText>Mandatory field. Select as per customer request</inlineHelpText>
+    <label>Preferred customer advice method</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>Phone</fullName>
+                <default>false</default>
+                <label>Phone</label>
+            </value>
+            <value>
+                <fullName>SMS_Text</fullName>
+                <default>false</default>
+                <label>SMS/Text</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other (add in Comments)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

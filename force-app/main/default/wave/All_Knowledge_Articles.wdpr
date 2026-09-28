@@ -1,0 +1,122 @@
+{
+  "version" : "67.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "KnowledgeArticleId", "OwnerId", "ValidationStatus", "PublishStatus", "VersionNumber", "IsLatestVersion", "IsVisibleInApp", "IsVisibleInPkb", "IsVisibleInCsp", "IsVisibleInPrm", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "Language", "Title", "UrlName", "Summary", "ArticleNumber", "FirstPublishedDate", "LastPublishedDate", "ArticleCaseAttachCount", "ArticleCreatedById", "ArticleCreatedDate", "ArticleTotalViewCount", "RecordTypeId", "Content__c", "Team_Coach_Team_Leader_Information__c", "Additional_Information__c", "Answer__c", "CJO_All__c", "CJO_SU__c", "Chot_Bot_Answers__c", "Contact_Center_Information__c", "POSST_SSU__c", "Question__c", "Ticketing_Team__c", "QuestionWithClass__c", "Announcement__c", "Article_Overview__c", "Flow_Update__c", "Promotion__c", "Public_Facing_Information__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__kav",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__kav",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ParentId", "Language", "VersionNumber", "CreatedById", "CreatedDate", "EventType", "FieldName", "DataType", "OldValue", "NewValue", "VersionId", "Id" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__VersionHistory",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__VersionHistory"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "OUTER",
+        "leftKeys" : [ "KnowledgeArticleId" ],
+        "rightQualifier" : "Knowledge_",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "All KAV History2",
+          "name" : "All_KAV_History2",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Knowledge__kav",
+        "type" : "LOAD_DATASET",
+        "top" : 252.39999999999998,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Knowledge__VersionHistory",
+        "type" : "LOAD_DATASET",
+        "top" : 112.4,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Get Version History",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "OUTPUT1" : {
+        "label" : "All KAV History",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112.19999999999999,
+        "left" : 392.1
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldOverrides>
+        <field>Monetary_Value__c</field>
+        <formula>Recovery__c.Value__c</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Original_Currency__c</field>
+        <literalValue>AUD Australian Dollar</literalValue>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Process_Status__c</field>
+        <literalValue>Payment Details Received</literalValue>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Refund_POS_Country__c</field>
+        <literalValue>AU	(Australia)</literalValue>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Type__c</field>
+        <literalValue>Payment (Credit Card)</literalValue>
+    </fieldOverrides>
+    <label>Convert to Credit Card</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Credit_Card_Token__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Card_Expiry_Month__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Card_Type__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Card_Expiry_Year__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+    </quickActionLayout>
+    <type>Update</type>
+</QuickAction>

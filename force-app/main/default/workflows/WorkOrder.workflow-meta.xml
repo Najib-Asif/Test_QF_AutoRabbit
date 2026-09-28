@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <outboundMessages>
+        <fullName>QAC_Workorder_Notification</fullName>
+        <apiVersion>43.0</apiVersion>
+        <description>Notify QAC website on all the Workorder related to agency service request created or updated in Salesforce including the once which is coming from the website itself.</description>
+        <endpointUrl>https://qac.api.qantas.com/qac/notification/workorderevent</endpointUrl>
+        <fields>CaseId</fields>
+        <fields>CreatedDate</fields>
+        <fields>External_System_Reference_Id__c</fields>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>system.updates@qantas.com.au</integrationUser>
+        <name>QAC Workorder Notification</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>QAC Workorder notification to website</fullName>
+        <actions>
+            <name>QAC_Workorder_Notification</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Send outbound messages to QCP queue whenver a Work order record relevant to agency related service request is created or updated</description>
+        <formula>AND( Case.RecordType.Name = &quot;Service Request&quot;, RecordType.Name = &quot;Service Request&quot;,  ISPICKVAL(Case.Account.Type, &quot;Agency Account&quot;), NOT(ISBLANK(Case.Account.Qantas_Industry_Centre_ID__c)), NOT(  OR(  ISPICKVAL(Case.Type, &quot;Group Waivers&quot;),ISPICKVAL(Case.Type, &quot;SBT&quot;),ISPICKVAL(Case.Type, &quot;Service Request&quot;),  ISPICKVAL(Case.Type, &quot;Commerical Waiver (non BART)&quot;), CONTAINS( TEXT(Case.Problem_Type__c) , &quot;Internal&quot;)  )  )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

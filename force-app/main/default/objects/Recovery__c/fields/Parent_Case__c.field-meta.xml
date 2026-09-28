@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parent_Case__c</fullName>
+    <description>Used on all Recovery Email templates
+Value can be either Top Parent Case or immediate Case</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK( Top_Parent_Case__c ),   Case_Number__r.CaseNumber  , Top_Parent_Case__r.CaseNumber  )</formula>
+    <label>Parent Case</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

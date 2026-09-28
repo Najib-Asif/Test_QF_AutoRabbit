@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Pacific_Acc_Maintenance_Closed_Cases</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>Country__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Account_Maintenance</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Closed</value>
+    </filters>
+    <filters>
+        <field>Account_Country__c</field>
+        <operation>equals</operation>
+        <value>SB,PG,FJ,NC</value>
+    </filters>
+    <label>QAC Pacific Acc Maintenance Closed Cases</label>
+    <queue>QAC_Pacific_Account_Management_Queue</queue>
+    <sharedTo>
+        <group>QAC_UK_for_AU_Users</group>
+        <roleAndSubordinatesInternal>QF_INT_Sales_North_America_NZ</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

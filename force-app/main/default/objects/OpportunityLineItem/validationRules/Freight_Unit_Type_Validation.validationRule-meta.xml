@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Unit_Type_Validation</fullName>
+    <active>true</active>
+    <description>Freight - Unit Type is mandatory when per unit is selected</description>
+    <errorConditionFormula>AND(   ISPICKVAL( Freight_Rate_Type__c , &quot;unit&quot;), ISPICKVAL(  Freight_Unit_Type__c  , &quot;&quot;))</errorConditionFormula>
+    <errorMessage>Please select a Unit Type</errorMessage>
+</ValidationRule>

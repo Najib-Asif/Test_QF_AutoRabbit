@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>QF_Freight_Recovery_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This is created as a part of RBAC project. CRM-11026</description>
+        <label>QF Freight Recovery Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Other Recovery,Freight</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_QDC_Recovery_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This is created as a part of RBAC project. CRM-11026</description>
+        <label>QF QDC Recovery Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Exgratia Flight Pass,Travel Voucher Recovery,Other Recovery,EFT Recovery,Customer Connect,Credit Card Recovery,QBR Recovery</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_Sales_Distribution_Recovery_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This is created as a part of RBAC project. CRM-11026</description>
+        <label>QF Sales &amp; Distribution Recovery Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Exgratia Flight Pass,Travel Voucher Recovery,Other Recovery,EFT Recovery,Customer Connect,Credit Card Recovery,QBR Recovery</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

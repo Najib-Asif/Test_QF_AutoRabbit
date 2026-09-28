@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account$Owner</field>
+    </columns>
+    <columns>
+        <field>Account.SurveySubjectEntities.SurveyResponses.SurveyQuestionResponses$Question</field>
+    </columns>
+    <columns>
+        <field>Account$Account_Owner_Role__c</field>
+    </columns>
+    <columns>
+        <field>Account$Qantas_Corporate_Identifier__c</field>
+    </columns>
+    <columns>
+        <field>Account$Account_ID_18_Digit__c</field>
+    </columns>
+    <columns>
+        <field>Account.SurveySubjectEntities.SurveyResponses$CompletionDateTime</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Applies to: Corporate
+Response options: Surcharge, Previous Fare Increases, Their agent&apos;s readiness to connect to NDC, Ability to change Agent/OBT to access NDC, Agent Feed, Functionality of QDP/NDC, Ability to meet Share/Rev Targets</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.SurveySubjectEntities$Survey</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Corporate - Dist 3.0 Sentiment Survey</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.SurveySubjectEntities.SurveyResponses.SurveyQuestionResponses$Question</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>startsWith</operator>
+            <value>Were any of the following topics</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.SurveySubjectEntities$Survey</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Corporate - Dist 3.0 Sentiment Survey</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.SurveySubjectEntities.SurveyResponses.SurveyQuestionResponses$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Topics raised relating to NDC</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_Survey_Questions_Answers__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

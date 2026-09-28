@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OH_Validation_Rule</fullName>
+    <active>true</active>
+    <errorConditionFormula>Call_Control_Deviation_Skills__c &gt;= 6 || 
+Proactive_Attempt_at_Objection_Handling__c &gt;= 5  || First_Contact_Resolution__c &gt;= 6</errorConditionFormula>
+    <errorMessage>One or more of the Objection handling related score is wrong and needs review and amendment.</errorMessage>
+</ValidationRule>

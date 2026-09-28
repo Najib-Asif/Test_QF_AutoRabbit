@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_FirmSpaceUpgradeRecoveryTypeCheck</fullName>
+    <active>true</active>
+    <errorConditionFormula>$Profile.Name  &lt;&gt; &apos;System Admin&apos;
+&amp;&amp;
+TEXT(Type__c) = &apos;Firm Space Upgrade (CCAT Only)&apos;
+&amp;&amp;
+Case_Number__r.RecordType.DeveloperName &lt;&gt; &apos;CCC_Medical&apos;</errorConditionFormula>
+    <errorMessage>Firm Space Upgrade Recovery can be created only to Cases where Case Type is Medical</errorMessage>
+</ValidationRule>

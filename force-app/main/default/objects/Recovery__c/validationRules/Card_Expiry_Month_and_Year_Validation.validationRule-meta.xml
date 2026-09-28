@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Card_Expiry_Month_and_Year_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(
+    OR(
+        VALUE(TEXT(Card_Expiry_Year__c)) &lt; YEAR(TODAY()), 
+        AND(
+            VALUE(TEXT(Card_Expiry_Year__c)) = YEAR(TODAY()), 
+            CASE(
+                TEXT(Card_Expiry_Month__c),
+                &quot;01 (Jan)&quot;, 1,
+                &quot;02 (Feb)&quot;, 2,
+                &quot;03 (Mar)&quot;, 3,
+                &quot;04 (Apr)&quot;, 4,
+                &quot;05 (May)&quot;, 5,
+                &quot;06 (Jun)&quot;, 6,
+                &quot;07 (Jul)&quot;, 7,
+                &quot;08 (Aug)&quot;, 8,
+                &quot;09 (Sep)&quot;, 9,
+                &quot;10 (Oct)&quot;, 10,
+                &quot;11 (Nov)&quot;, 11,
+                &quot;12 (Dec)&quot;, 12,
+                NULL
+            ) &lt; MONTH(TODAY())
+        )
+    ), 
+    TRUE, 
+    FALSE
+)</errorConditionFormula>
+    <errorMessage>Credit Card Expiry Month/Year should be greater than current date</errorMessage>
+</ValidationRule>

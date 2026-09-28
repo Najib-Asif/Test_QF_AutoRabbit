@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assignment_1</name>
+        <label>Assign Open Recoveries</label>
+        <locationX>572</locationX>
+        <locationY>600</locationY>
+        <assignmentItems>
+            <assignToReference>OpenRecoveryCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Iterate_Recoveries</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Check_if_Recovery_is_Cancelled_or_Finalised</name>
+        <label>Check if Recovery is Cancelled or Finalised</label>
+        <locationX>704</locationX>
+        <locationY>492</locationY>
+        <defaultConnector>
+            <targetReference>Iterate_Recoveries</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Recovery_is_not_Cancelled_or_Finalised</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Iterate_Recoveries.Process_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Finalised</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Iterate_Recoveries.Process_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Cancelled</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assignment_1</targetReference>
+            </connector>
+            <label>Recovery is not Cancelled or Finalised</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>If_no_open_recoveries_exist</name>
+        <label>If no open recoveries exist</label>
+        <locationX>484</locationX>
+        <locationY>876</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>No_Open_Recoveries</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>OpenRecoveryCount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Case_to_Closed</targetReference>
+            </connector>
+            <label>No Open Recoveries</label>
+        </rules>
+    </decisions>
+    <description>1. CDP2-1048 to update Cases in Pending Recovery Status to Closed if it has Qantas Points and Lounge Pass Recoveries linked and all the recoveries are Cancelled or Finalised</description>
+    <environments>Default</environments>
+    <interviewLabel>QCC Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QCC Update Pending Recovery Case to Closed</label>
+    <loops>
+        <name>Iterate_Recoveries</name>
+        <label>Iterate Recoveries</label>
+        <locationX>484</locationX>
+        <locationY>384</locationY>
+        <collectionReference>Get_Related_Recoveries</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_if_Recovery_is_Cancelled_or_Finalised</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>If_no_open_recoveries_exist</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Related_Recoveries</name>
+        <label>Get Related Recoveries</label>
+        <locationX>484</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Iterate_Recoveries</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case_Number__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Case_Number__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Recovery__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Case_to_Closed</name>
+        <label>Update Case to Closed</label>
+        <locationX>352</locationX>
+        <locationY>984</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Case_Number__r.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterFormula>ISPICKVAL({!$Record.Case_Number__r.Status}, &apos;Pending Recovery&apos;) 
+&amp;&amp; (ISPICKVAL({!$Record.Type__c}, &apos;Qantas Points&apos;) || ISPICKVAL({!$Record.Type__c}, &apos;Lounge Passes&apos;)) 
+&amp;&amp; (ISPICKVAL({!$Record.Process_Status__c}, &apos;Finalised&apos;) || ISPICKVAL({!$Record.Process_Status__c}, &apos;Cancelled&apos;))</filterFormula>
+        <object>Recovery__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <scheduledPaths>
+            <name>After_1_hour</name>
+            <connector>
+                <targetReference>Get_Related_Recoveries</targetReference>
+            </connector>
+            <label>After 1 hour</label>
+            <maxBatchSize>1</maxBatchSize>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Hours</offsetUnit>
+            <timeSource>RecordTriggerEvent</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>OpenRecoveryCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+</Flow>

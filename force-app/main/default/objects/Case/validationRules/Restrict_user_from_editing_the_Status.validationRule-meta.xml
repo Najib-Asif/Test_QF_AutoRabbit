@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_user_from_editing_the_Status</fullName>
+    <active>true</active>
+    <description>Frequent Flyer Request -  User will be able to edit the record only after receieving all the approvals</description>
+    <errorConditionFormula>OR(
+AND(ISNEW(),NOT(ISPICKVAL(Status,&quot;Not yet assigned - with Account Manager&quot;)),
+RecordType.Name=&quot;Frequent Flyer Request&quot;),
+
+AND(
+NOT(ISPICKVAL(Status,&quot;Not yet assigned - with Account Manager&quot;)),NOT(ISPICKVAL(Status,&quot;Closed - Rejected&quot;)),
+
+ISCHANGED(Status),
+Approved__c = False,
+RecordType.Name=&quot;Frequent Flyer Request&quot;,
+NOT ( $User.Id = &quot;00590000004hkf5&quot;), 
+NOT(Owner:Queue.QueueName = &quot;Sales Solution Queue&quot;)))</errorConditionFormula>
+    <errorMessage>The Status can be changed only after receiving all the approvals.</errorMessage>
+</ValidationRule>

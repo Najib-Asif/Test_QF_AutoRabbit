@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Close_Score__c</fullName>
+    <externalId>false</externalId>
+    <formula>(Case( Correct_Exit_Used__c ,
+1,0.5,
+2,1.75,
+3,2,
+4,2.25,
+5,2.35,
+6,2.5,
+0,2.5,0)  +
+(IF((ISPICKVAL(Privacy_Advised__c,&quot;U&quot;)), 0.5,(IF((ISPICKVAL(Privacy_Advised__c,&quot;F&quot;)), 2.5,2.5))   
+)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Call Close Score</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

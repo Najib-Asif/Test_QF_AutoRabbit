@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_MandatoryEQNumber</fullName>
+    <active>true</active>
+    <description>Freight Implementation: eQ Customer # is Mandatory if RevenueStream is Domestic.</description>
+    <errorConditionFormula>AND( 
+
+		OR( 
+		$RecordType.DeveloperName = &quot;Freight_Account&quot; 
+		), 
+
+		ISPICKVAL( Freight_Revenue_Stream__c , &quot;DOM&quot;),
+		
+		ISPICKVAL( Type , &quot;Freight-Branch&quot;),
+		
+	    (ISBLANK(Freight_eQ_Reference__c)) 
+
+	)</errorConditionFormula>
+    <errorMessage>Please provide eQ Customer #, If Revenue stream is DOM.</errorMessage>
+</ValidationRule>

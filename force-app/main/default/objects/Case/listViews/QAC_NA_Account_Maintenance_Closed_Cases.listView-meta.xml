@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_NA_Account_Maintenance_Closed_Cases</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>Country__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Closed</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Account_Maintenance</value>
+    </filters>
+    <filters>
+        <field>Account_Country__c</field>
+        <operation>equals</operation>
+        <value>CA,US</value>
+    </filters>
+    <label>QAC NA Account Maintenance Closed Cases</label>
+    <sharedTo>
+        <group>QAC_NA_Support_Team_for_US_and_Canada</group>
+        <roleAndSubordinatesInternal>QF_Support_INT_USA</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

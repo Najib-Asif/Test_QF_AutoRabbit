@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limit_Maximum_Amount_of_Recovery</fullName>
+    <active>true</active>
+    <description>Created to ensure maximum recovery amount is not more than 150K AUD</description>
+    <errorConditionFormula>AND(
+Value__c &gt;150000,
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+OR(ISPICKVAL(Type__c, &apos;Credit Card Refund&apos;),
+ISPICKVAL(Type__c, &apos;EFT Refund&apos;)
+)
+)</errorConditionFormula>
+    <errorMessage>Maximum Recovery Limit is 150K AUD</errorMessage>
+</ValidationRule>

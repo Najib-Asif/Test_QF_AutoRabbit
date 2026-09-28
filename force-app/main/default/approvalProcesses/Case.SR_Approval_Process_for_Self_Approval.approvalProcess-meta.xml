@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>LastModifiedBy</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>SR Self Approval</description>
+        <entryCriteria>
+            <formula>0=1</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Self Approval</label>
+        <name>Self_Approval</name>
+    </approvalStep>
+    <description>This approval process is a 1-step approval Service Request cases that are Group Waivers and SBT with Case Currency as either NZD/CFP.
+CRM-9029 Group Waivers For AU requires auto approval</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2 AND ((3 AND 4 AND 5) OR (6 AND 7 AND 8))</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approval_Status__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Type</field>
+            <operation>equals</operation>
+            <value>Group Waivers,SBT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Condition_Met__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>notContain</operation>
+            <value>Space Available Upgrade,Lounge Access</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.CurrencyIsoCode</field>
+            <operation>equals</operation>
+            <value>NZD,CFP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approval_Levels__c</field>
+            <operation>equals</operation>
+            <value>L1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Condition_Met__c</field>
+            <operation>notEqual</operation>
+            <value>No</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Authority_Status_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Authority_Status_to_Denied</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status_as_Pending</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Self-Approval for Group Waivers and SBT</label>
+    <processOrder>3</processOrder>
+    <recallActions>
+        <action>
+            <name>Approval_Status_Change</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

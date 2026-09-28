@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>FlightFailiureCCReadWriteAccess</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: Read write Access for flight failures for CC</description>
+        <label>Flight Failiure CC - Read/Write Access</label>
+        <sharedTo>
+            <group>QCC_CCEventsGroup</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>FlightFailureCJMReadWriteAccess</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: Read Write Access for CJM</description>
+        <label>Flight Failure CJM - Read/Write Access</label>
+        <sharedTo>
+            <group>QCC_CJMPublicGroup</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

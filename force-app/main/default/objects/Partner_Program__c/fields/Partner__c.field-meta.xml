@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partner__c</fullName>
+    <description>Indicates the membership of customer with the associated partner within QBR program</description>
+    <label>Link to QBR record</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Product_Registration__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Aquire</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Product_Registration__c</referenceTo>
+    <relationshipLabel>Partner Program</relationshipLabel>
+    <relationshipName>Partner_Program</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>true</writeRequiresMasterRead>
+</CustomField>

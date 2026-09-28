@@ -1,0 +1,1043 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "LastModifiedDate", "AccountId", "Description", "Frequent_Flyer_Tier__c", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "Case_Number__c", "Is_QCC_Case__c", "Frequent_Flyer_Number__c", "OwnerId", "OwnerName__c", "RecordType.DeveloperName", "Booking_PNR__c", "CCC_R1_CCAT_Type__c", "RecordTypeId", "CaseNumber", "Sub_Type_1__c", "Created_by_Role__c", "RecordType.Id", "MasterRecordId", "ParentId", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "RecordType.DeveloperName_bucket", "Record_Type__c", "Type", "IsEscalated", "Sub_Type_2__c", "Contact_Fullname__c", "Category__c", "CreatedDate", "ClosedDate", "Id", "Aircraft_Type_Code__c", "Recovery_Value__c", "Recovery_Quantity__c", "Type_bucket" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CaseRawDataSet",
+          "name" : "CaseRawDataSet"
+        },
+        "sampleDetails" : {
+          "type" : "Custom",
+          "filters" : {
+            "filterExpressions" : [ {
+              "type" : "TEXT",
+              "field" : "RecordType.DeveloperName",
+              "operator" : "IS_NOT_NULL",
+              "operands" : [ ]
+            }, {
+              "type" : "TEXT",
+              "field" : "Group__c",
+              "operator" : "IS_NOT_NULL",
+              "operands" : [ ]
+            }, {
+              "type" : "TEXT",
+              "field" : "Category__c",
+              "operator" : "IS_NOT_NULL",
+              "operands" : [ ]
+            }, {
+              "type" : "TEXT",
+              "field" : "Sub_Category__c",
+              "operator" : "IS_NOT_NULL",
+              "operands" : [ ]
+            } ]
+          },
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA12" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CategorisationLookup",
+          "label" : "CategorisationLookup",
+          "formulaExpression" : "concat(coalesce(CaseRecordType2,'-'),coalesce(Group,'-'),coalesce(Category,'-'), coalesce(Sub_Category,'-'))",
+          "precision" : 255,
+          "defaultValue" : "-"
+        } ]
+      }
+    },
+    "FORMULA10" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CategorisationLookupCleaned",
+          "label" : "Categorisation Lookup Cleaned",
+          "formulaExpression" : "replace(trim(CategorisationLookup),'-','')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FILTER0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CategorisatioToLookup",
+          "label" : "CategorisatioToLookup",
+          "formulaExpression" : "concat(coalesce(\"RecordType.DeveloperName\",'-'),coalesce(Group__c,'-'), coalesce(Category__c,'-'),coalesce(Sub_Category__c,'-'))",
+          "precision" : 255,
+          "defaultValue" : "-"
+        } ]
+      }
+    },
+    "FORMULA11" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CategorisationToLookupCleaned",
+          "label" : "CategorisationToLookupCleaned",
+          "formulaExpression" : "replace(trim(CategorisatioToLookup),'-','')",
+          "precision" : 255,
+          "defaultValue" : "-"
+        } ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FORMULA11", "FORMULA10" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "ComplaintRefinedCategory.Sub_Category", "ComplaintRefinedCategory.Group", "ComplaintRefinedCategory.Category", "ComplaintRefinedCategory.Case_Record_Type" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "CategorisationToLookupCleaned" ],
+        "rightQualifier" : "ComplaintRefinedCategory",
+        "rightKeys" : [ "CategorisationLookupCleaned" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordType.DeveloperName",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC_Baggage", "CCC_Complaints", "CCC_Compliment", "CCC_Further_Action_Required", "CCC_On_The_Spot_Recovery", "CCC_Query", "QCC_Insurance_Letter_Case" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ {
+            "argument" : 0,
+            "type" : "N_YEARS"
+          }, {
+            "argument" : 0,
+            "type" : "N_YEARS"
+          } ]
+        } ],
+        "filterBooleanLogic" : "1 AND 2"
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "FILTER1" ],
+      "parameters" : {
+        "grainExtractions" : [ {
+          "source" : "CreatedDate",
+          "targets" : [ {
+            "name" : "CreatedDate_MONTH",
+            "label" : "Created Date Month",
+            "grainType" : "MONTH"
+          }, {
+            "name" : "CreatedDate_YEAR",
+            "label" : "Created Date Year",
+            "grainType" : "YEAR"
+          } ]
+        } ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "COUNT",
+          "name" : "COUNT_Rows",
+          "label" : "Rows"
+        } ],
+        "groupings" : [ "ComplaintRefinedCategory.NewCategory", "Category__c", "CreatedDate_MONTH", "CreatedDate_YEAR" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "EXTRACT1" : {
+      "action" : "extractGrains",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "grainExtractions" : [ {
+          "source" : "CreatedDate",
+          "targets" : [ {
+            "name" : "CreatedDate_MONTH",
+            "label" : "Created Date Month",
+            "grainType" : "MONTH"
+          }, {
+            "name" : "CreatedDate_YEAR",
+            "label" : "Created Date Year",
+            "grainType" : "YEAR"
+          } ]
+        } ]
+      }
+    },
+    "AGGREGATE3" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT1" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "COUNT",
+          "name" : "COUNT_Rows",
+          "label" : "Rows"
+        } ],
+        "groupings" : [ "ComplaintRefinedCategory.NewCategory", "Group__c", "CreatedDate_MONTH", "CreatedDate_YEAR" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "ComplaintRefinedCategory.NewCategory",
+          "operator" : "EQUAL",
+          "operands" : [ "Flight Disruptions", "Policy", "Product and Physical Environment" ]
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "ComplaintRefinedCategory.NewCategory",
+          "operator" : "CONTAINS",
+          "operands" : [ "Service" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "ParentId",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "ComplaintRefinedCategory.NewCategory",
+          "operator" : "EQUAL",
+          "operands" : [ "Baggage" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "ParentId",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "FILTER3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedBaggage",
+          "label" : "CalculatedBaggage",
+          "formulaExpression" : "case when contains(Group__c, 'Damaged') then Group__c\nwhen contains(Group__c, 'Delayed') then Group__c\nwhen contains(Category__c, 'Cabin') then Category__c\nelse 'Other Baggage'\nend",
+          "precision" : 255,
+          "defaultValue" : "Other Baggage"
+        } ]
+      }
+    },
+    "EXTRACT2" : {
+      "action" : "extractGrains",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "grainExtractions" : [ {
+          "source" : "CreatedDate",
+          "targets" : [ {
+            "name" : "CreatedDate_MONTH",
+            "label" : "Created Date Month",
+            "grainType" : "MONTH"
+          }, {
+            "name" : "CreatedDate_YEAR",
+            "label" : "Created Date Year",
+            "grainType" : "YEAR"
+          } ]
+        } ]
+      }
+    },
+    "AGGREGATE5" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT2" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "COUNT",
+          "name" : "COUNT_Rows",
+          "label" : "Rows"
+        } ],
+        "groupings" : [ "ComplaintRefinedCategory.NewCategory", "CalculatedBaggage", "CreatedDate_MONTH", "CreatedDate_YEAR" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "AGGREGATE1", "AGGREGATE3" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "ComplaintRefinedCategory.NewCategory",
+          "bottom" : "ComplaintRefinedCategory.NewCategory"
+        }, {
+          "top" : "CreatedDate_MONTH",
+          "bottom" : "CreatedDate_MONTH"
+        }, {
+          "top" : "CreatedDate_YEAR",
+          "bottom" : "CreatedDate_YEAR"
+        }, {
+          "top" : "COUNT_Rows",
+          "bottom" : "COUNT_Rows"
+        }, {
+          "bottom" : "Group__c"
+        } ]
+      }
+    },
+    "APPEND1" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND0", "AGGREGATE5" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "ComplaintRefinedCategory.NewCategory",
+          "bottom" : "ComplaintRefinedCategory.NewCategory"
+        }, {
+          "top" : "CreatedDate_MONTH",
+          "bottom" : "CreatedDate_MONTH"
+        }, {
+          "top" : "CreatedDate_YEAR",
+          "bottom" : "CreatedDate_YEAR"
+        }, {
+          "top" : "COUNT_Rows",
+          "bottom" : "COUNT_Rows"
+        }, {
+          "bottom" : "CalculatedBaggage"
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "APPEND1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedCategory",
+          "label" : "Calculated Category",
+          "formulaExpression" : "case when Group__c is not null then Group__c\nwhen Category__c is not null then Category__c\nwhen CalculatedBaggage is not null then CalculatedBaggage\nelse 'No Category Found'\nend",
+          "precision" : 100,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "DROP_FIELDS1" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Group__c", "Category__c", "CalculatedBaggage" ]
+        }
+      }
+    },
+    "FORMULA6" : {
+      "action" : "formula",
+      "sources" : [ "DROP_FIELDS1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "SnapshotDate",
+          "label" : "Snapshot Date",
+          "formulaExpression" : "now()",
+          "format" : "dd-MM-yyyy",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA7" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA6" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "RunDate",
+          "label" : "Run Date",
+          "formulaExpression" : "now()",
+          "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA8" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA7" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CreatedDateText",
+          "label" : "CreatedDateText",
+          "formulaExpression" : "concat('01','-',CreatedDate_MONTH, '-',CreatedDate_YEAR)",
+          "precision" : 20,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "TO_DATE0" : {
+      "action" : "typeCast",
+      "sources" : [ "FORMULA8" ],
+      "schema" : {
+        "fields" : [ {
+          "name" : "CreatedDateText_to_date",
+          "newProperties" : {
+            "name" : "CreatedDateText"
+          }
+        } ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "CreatedDateText" ]
+        }
+      },
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CreatedDateText",
+          "newProperties" : {
+            "label" : "CreatedDateText",
+            "name" : "CreatedDateText_to_date",
+            "typeProperties" : {
+              "type" : "DATETIME",
+              "format" : "dd-MM-yyyy"
+            }
+          }
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "formula",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedCaseReason",
+          "label" : "CalculatedCaseReason",
+          "formulaExpression" : "case when Group__c is not null then Group__c\nwhen Category__c is not null then Category__c\nwhen contains(Group__c, 'Damaged') then Group__c\nwhen contains(Group__c, 'Delayed') then Group__c\nwhen contains(Category__c, 'Checked') then Category__c\nwhen Category__c is not null then 'Other Baggage'\nelse 'No Category Found'\nend",
+          "precision" : 100,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA9" ],
+      "parameters" : {
+        "partitionBy" : [ "Booking_PNR__c" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "LatestCreatedDateTime",
+          "label" : "LatestCreatedDateTime",
+          "formulaExpression" : "CreatedDate",
+          "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA9" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedCategorisationReasoning",
+          "label" : "CalculatedCategorisationReasoning",
+          "formulaExpression" : "case when (\"ComplaintRefinedCategory.NewCategory\"='Policy' \n            OR \"ComplaintRefinedCategory.NewCategory\"='Product and Physical Environment' \n            OR \"ComplaintRefinedCategory.NewCategory\"='Flight Disruptions' OR \"ComplaintRefinedCategory.NewCategory\"='Loyalty Program') then Category__c\nwhen \"ComplaintRefinedCategory.NewCategory\"='Service Interaction' then Group__c\nwhen \"ComplaintRefinedCategory.NewCategory\"='Critical' then 'Critical Category'\nwhen (\"ComplaintRefinedCategory.NewCategory\"='Baggage' and Group__c='Damaged Baggage') then Group__c\nwhen \"ComplaintRefinedCategory.NewCategory\"='Baggage' and contains(Group__c, 'Delayed') then Group__c\nwhen Category__c is not null then Category__c\nwhen  Group__c is not null then Group__c\nelse 'Non Voice Default Category'\nend",
+          "precision" : 100,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Non Voice Case Categorisation",
+          "name" : "NonVoiceCaseCategorisation",
+          "folderName" : "Repeat_Call_Analytics"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "TO_DATE0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Current Complaints Resolution DS",
+          "name" : "CurrentComplaintsResolutionDS"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA12" : {
+      "action" : "formula",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CaseRecordType2",
+          "label" : "Case Record Type 2",
+          "formulaExpression" : "replace(Case_Record_Type,' ','_')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Sub_Category", "Group", "Category", "Case_Record_Type", "NewCategory" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Complaints Refined Categories",
+          "name" : "category"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "CaseRawDataSet",
+        "type" : "LOAD_DATASET",
+        "top" : 252.8,
+        "left" : 112.1,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "TRANSFORM0" : {
+        "label" : "CategorisationLookup",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 392,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "CategorisationLookup"
+          },
+          "FORMULA10" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA10"
+        } ]
+      },
+      "TRANSFORM1" : {
+        "label" : "CategorisatioToLookup Plus Transformations",
+        "description" : "- Driver",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 532,
+        "graph" : {
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA11" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA1",
+          "target" : "FORMULA11"
+        } ]
+      },
+      "JOIN0" : {
+        "label" : "CaseWithComplaintsCategories",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 672
+      },
+      "FILTER0" : {
+        "label" : "THIS YEAR",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 252
+      },
+      "AGGREGATE0" : {
+        "label" : "Aggregate 0",
+        "type" : "AGGREGATE",
+        "top" : 252,
+        "left" : 952,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "AGGREGATE2" : {
+        "label" : "Aggregate 2",
+        "type" : "AGGREGATE",
+        "top" : 392.1,
+        "left" : 1091.9,
+        "graph" : {
+          "EXTRACT1" : null,
+          "AGGREGATE3" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT1",
+          "target" : "AGGREGATE3"
+        } ]
+      },
+      "FILTER1" : {
+        "label" : "Filter 1",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 812
+      },
+      "FILTER2" : {
+        "label" : "Filter 2",
+        "type" : "FILTER",
+        "top" : 392,
+        "left" : 951.9
+      },
+      "FILTER3" : {
+        "label" : "Filter 3",
+        "type" : "FILTER",
+        "top" : 532,
+        "left" : 812.1
+      },
+      "TRANSFORM2" : {
+        "label" : "Transform 2",
+        "type" : "TRANSFORM",
+        "top" : 532,
+        "left" : 952,
+        "graph" : {
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "AGGREGATE4" : {
+        "label" : "Aggregate 4",
+        "type" : "AGGREGATE",
+        "top" : 532,
+        "left" : 1092,
+        "graph" : {
+          "EXTRACT2" : null,
+          "AGGREGATE5" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT2",
+          "target" : "AGGREGATE5"
+        } ]
+      },
+      "APPEND0" : {
+        "label" : "Append 0",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 1092
+      },
+      "APPEND1" : {
+        "label" : "Append 1",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 1232
+      },
+      "TRANSFORM3" : {
+        "label" : "Transform 3",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 1372,
+        "graph" : {
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "DROP_FIELDS1" : {
+            "label" : "Drop Columns"
+          },
+          "FORMULA6" : {
+            "parameters" : {
+              "type" : "DATE_NOW_UI"
+            },
+            "label" : "Formula Now"
+          },
+          "FORMULA7" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA8" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "TO_DATE0" : {
+            "label" : "To Date"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA3",
+          "target" : "DROP_FIELDS1"
+        }, {
+          "source" : "DROP_FIELDS1",
+          "target" : "FORMULA6"
+        }, {
+          "source" : "FORMULA6",
+          "target" : "FORMULA7"
+        }, {
+          "source" : "FORMULA7",
+          "target" : "FORMULA8"
+        }, {
+          "source" : "FORMULA8",
+          "target" : "TO_DATE0"
+        } ]
+      },
+      "TRANSFORM4" : {
+        "label" : "Transform 4",
+        "type" : "TRANSFORM",
+        "top" : 672,
+        "left" : 671.8,
+        "graph" : {
+          "FORMULA4" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA5" : {
+            "label" : "Formula"
+          },
+          "FORMULA9" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA4",
+          "target" : "FORMULA9"
+        }, {
+          "source" : "FORMULA9",
+          "target" : "FORMULA5"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Non Voice Case Categorisation",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 671.9,
+        "left" : 1372.1
+      },
+      "OUTPUT2" : {
+        "label" : "Current Complaints Resolution DS",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1512
+      },
+      "TRANSFORM5" : {
+        "label" : "Transform 5",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 252,
+        "graph" : {
+          "FORMULA12" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Complaints Refined Categories",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      }
+    },
+    "connectors" : [ {
+      "source" : "APPEND0",
+      "target" : "APPEND1"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "APPEND0"
+    }, {
+      "source" : "TRANSFORM5",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "AGGREGATE0"
+    }, {
+      "source" : "FILTER2",
+      "target" : "AGGREGATE2"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER2"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER3"
+    }, {
+      "source" : "FILTER3",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "AGGREGATE4"
+    }, {
+      "source" : "AGGREGATE2",
+      "target" : "APPEND0"
+    }, {
+      "source" : "AGGREGATE4",
+      "target" : "APPEND1"
+    }, {
+      "source" : "APPEND1",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "TRANSFORM5"
+    } ],
+    "hiddenColumns" : [ {
+      "fieldName" : "Recovery_Quantity__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Recovery_Value__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Aircraft_Type_Code__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Id",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "ClosedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Contact_Fullname__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Sub_Type_2__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "IsEscalated",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Type",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Record_Type__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordType.DeveloperName_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Is_CCAT_User__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Priority",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Status",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "MasterRecordId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordType.Id",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Created_by_Role__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Sub_Type_1__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "CaseNumber",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordTypeId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "CCC_R1_CCAT_Type__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "OwnerName__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "OwnerId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Frequent_Flyer_Number__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Is_QCC_Case__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Reason",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordType.Name",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "IsClosed",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "ContactId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Frequent_Flyer_Tier__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Description",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "AccountId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "LastModifiedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Origin",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    } ]
+  },
+  "runMode" : "full"
+}

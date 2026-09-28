@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Update_Active_to_True</fullName>
+        <description>To Update Active check to True</description>
+        <field>Active__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Active to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Asset_Status_to_Active</fullName>
+        <field>Status</field>
+        <literalValue>Active</literalValue>
+        <name>Update Asset Status to Active</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Batch_Run_to_True</fullName>
+        <description>This will update the abcth run to True on Wavier start date.</description>
+        <field>Batch_Run__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Batch Run to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Below_Threshold_Start_Date</fullName>
+        <field>Below_Threshold_Start_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Update Below Threshold  Start Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Ifly_Outbound_Notification_DateTi</fullName>
+        <description>Updates the Ifly NotificationDate Time</description>
+        <field>Ifly_Notification_Date_Time__c</field>
+        <formula>NOW()</formula>
+        <name>Update Ifly Outbound Notification DateTi</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Mailing_Name_1</fullName>
+        <field>Mailing_Name_1__c</field>
+        <formula>IF(LEN(TEXT(Contact.Salutation) &amp;&quot; &quot;&amp; Contact.FirstName &amp;&quot; &quot;&amp; Contact.LastName) &gt; 22 ,
+ TEXT(Contact.Salutation) &amp;&quot; &quot;&amp; Contact.FirstName,
+ TEXT(Contact.Salutation) &amp;&quot; &quot;&amp; Contact.FirstName &amp;&quot; &quot;&amp; Contact.LastName
+)</formula>
+        <name>Update Mailing Name 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Mailing_Name_2</fullName>
+        <field>Mailing_Name_2__c</field>
+        <formula>IF(LEN(TEXT(Contact.Salutation) &amp;&quot; &quot;&amp; Contact.FirstName &amp;&quot; &quot;&amp; Contact.LastName) &gt; 22 , 
+ Contact.LastName, 
+&quot;&quot;
+)</formula>
+        <name>Update Mailing Name 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Public_Scheme_End_date</fullName>
+        <description>Update Public Scheme End Date to Today when Made Inactive</description>
+        <field>Public_Scheme_End_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Update Public Scheme End date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Qantas_Club_Join_Discount_to_Null</fullName>
+        <field>Qantas_Club_Join_Discount__c</field>
+        <name>Update Qantas Club Join Discount to Null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Qantas_Club_Mem_Discount_to_Null</fullName>
+        <field>Member_Fee_Discount__c</field>
+        <name>Update Qantas Club Mem Discount to Null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Scheme_Discount_Type_from_Scheme</fullName>
+        <description>Updates the Scheme discount Type from scheme Type</description>
+        <field>Scheme_Discount_Type__c</field>
+        <formula>RecordType.Name</formula>
+        <name>Update Scheme Discount Type from Scheme</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Scheme_Discount_Type_to_Retail</fullName>
+        <description>To Update Scheme Discount Type to Retail</description>
+        <field>Scheme_Discount_Type__c</field>
+        <formula>&apos;Retail&apos;</formula>
+        <name>Update Scheme Discount Type to Retail</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Scheme_Number</fullName>
+        <description>hold the external id  of the generated number  and check digit</description>
+        <field>Scheme_Number__c</field>
+        <formula>Scheme_Number_f__c</formula>
+        <name>Update Scheme Number</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Scheme_StartDate_in_Corp_Scheme</fullName>
+        <description>Update Scheme Start Date  from Contract  Start Date</description>
+        <field>Scheme_Start_Date_f__c</field>
+        <formula>IF(NOT(ISNULL( Contract__c )) &amp;&amp; Contract__r.Contract_Start_Date__c &gt; TODAY(),Contract__r.Contract_Start_Date__c, TODAY())</formula>
+        <name>Update Scheme StartDate in Corp Scheme</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Scheme_StartDate_in_Public_Scheme</fullName>
+        <description>Update Scheme Start Date  from Public Scheme Start Date</description>
+        <field>Scheme_Start_Date_f__c</field>
+        <formula>Public_Scheme_Start_Date__c</formula>
+        <name>Update Scheme StartDate in Public Scheme</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Scheme_Start_Date_to_Blank</fullName>
+        <description>Update Scheme Start Date to Null</description>
+        <field>Scheme_Start_Date_f__c</field>
+        <name>Update Scheme Start Date to Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Scheme_Type_to_Retail</fullName>
+        <field>Scheme_Type__c</field>
+        <literalValue>Retail</literalValue>
+        <name>Update Scheme Type to Retail</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Serial_Number_same_as_Scheme_Numb</fullName>
+        <description>Update Serial Number same as Scheme Number for Corporate and Public Scheme</description>
+        <field>SerialNumber</field>
+        <formula>IF(OR(RecordType.DeveloperName == &apos;Corporate_Scheme&apos;,RecordType.DeveloperName == &apos;Public_Scheme&apos;),Scheme_Number_f__c,SerialNumber)</formula>
+        <name>Update Serial Number same as Scheme Numb</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Threshold_Date_to_Null</fullName>
+        <field>Below_Threshold_Start_Date__c</field>
+        <name>Update Threshold Date to Null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Wavier_End_Date_to_Null</fullName>
+        <field>Waiver_End_Date__c</field>
+        <name>Update Wavier End Date to Null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Wavier_Start_Date_to_Null</fullName>
+        <field>Waiver_Start_Date__c</field>
+        <name>Update Wavier Start Date to Null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_active_to_False</fullName>
+        <field>Active__c</field>
+        <literalValue>0</literalValue>
+        <name>Update active to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>Asset_Corporate_Scheme_Sync_to_iFly</fullName>
+        <apiVersion>39.0</apiVersion>
+        <endpointUrl>https://api.services.qantasloyalty.com/event/corporate-scheme</endpointUrl>
+        <fields>AccountId</fields>
+        <fields>Account_Number__c</fields>
+        <fields>Active__c</fields>
+        <fields>Additional_Contact_Remarks__c</fields>
+        <fields>Area_Code_f__c</fields>
+        <fields>ContactId</fields>
+        <fields>Country_Code_f__c</fields>
+        <fields>CreatedDate</fields>
+        <fields>CurrencyIsoCode</fields>
+        <fields>Email_f__c</fields>
+        <fields>First_Name_f__c</fields>
+        <fields>Fulfilment__c</fields>
+        <fields>Id</fields>
+        <fields>Job_Role_f__c</fields>
+        <fields>Join_Fee_GST__c</fields>
+        <fields>Join_Fee_Gross__c</fields>
+        <fields>Join_Fee_Points__c</fields>
+        <fields>Join_Fee_Published__c</fields>
+        <fields>LastModifiedDate</fields>
+        <fields>Last_Name_f__c</fields>
+        <fields>Mailing_City_f__c</fields>
+        <fields>Mailing_Country_f__c</fields>
+        <fields>Mailing_Name_1__c</fields>
+        <fields>Mailing_Name_2__c</fields>
+        <fields>Mailing_PostalCode_f__c</fields>
+        <fields>Mailing_State_f__c</fields>
+        <fields>Mailing_Street_f__c</fields>
+        <fields>Mobile_Country_Code_f__c</fields>
+        <fields>Mobile_Number_f__c</fields>
+        <fields>Name</fields>
+        <fields>Phone_Number_f__c</fields>
+        <fields>Renewals__c</fields>
+        <fields>Salutation_f__c</fields>
+        <fields>Scheme_Cost_Center__c</fields>
+        <fields>Scheme_End_Date_f__c</fields>
+        <fields>Scheme_Number__c</fields>
+        <fields>Scheme_Start_Date_f__c</fields>
+        <fields>Scheme_Type__c</fields>
+        <fields>Title_f__c</fields>
+        <fields>X1_Year_Membership_Fee_GST__c</fields>
+        <fields>X1_Year_Membership_Fee_Gross__c</fields>
+        <fields>X1_Year_Membership_Fee_Points__c</fields>
+        <fields>X1_Year_Membership_Fee_Published__c</fields>
+        <fields>X1_Year_Membership_Renewal_Fee_GST__c</fields>
+        <fields>X1_Year_Membership_Renewal_Fee_Points__c</fields>
+        <fields>X1_Year_Membership_Renewal_Fee_Published__c</fields>
+        <fields>X1_Year_Membership_Renewal_Fee__c</fields>
+        <fields>X2_Year_Membership_Fee_GST__c</fields>
+        <fields>X2_Year_Membership_Fee_Gross__c</fields>
+        <fields>X2_Year_Membership_Fee_Published__c</fields>
+        <fields>X2_Year_Membership_Fee_points__c</fields>
+        <fields>X2_Year_Membership_Renewal_Fee_GST__c</fields>
+        <fields>X2_Year_Membership_Renewal_Fee_Points__c</fields>
+        <fields>X2_Year_Membership_Renewal_Fee_Published__c</fields>
+        <fields>X2_Year_Membership_Renewal_Fee__c</fields>
+        <fields>X4_Year_Membership_Fee_GST__c</fields>
+        <fields>X4_Year_Membership_Fee_Gross__c</fields>
+        <fields>X4_Year_Membership_Fee_Points__c</fields>
+        <fields>X4_Year_Membership_Fee_Published__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>api_integration_user@qantas.com.au</integrationUser>
+        <name>Asset Corporate Scheme Sync to iFly</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>true</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>WF To Blank Threshold Start Date</fullName>
+        <actions>
+            <name>Update_Threshold_Date_to_Null</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Below_Threshold__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>Workflow Rule to Set the Start Date of Threshold to Null when Below Threshold is FALSE</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF To Populate Corp Scheme Start Date From Contract</fullName>
+        <actions>
+            <name>Update_Scheme_StartDate_in_Corp_Scheme</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Rule to Populate the Scheme Start Date to Contract Start Date</description>
+        <formula>RecordType.DeveloperName == &apos;Corporate_Scheme&apos; &amp;&amp;  ISPICKVAL(Status , &apos;Complete – Pending Activation&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF To Populate Public Scheme Start Date</fullName>
+        <actions>
+            <name>Update_Scheme_StartDate_in_Public_Scheme</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Scheme</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.Status</field>
+            <operation>equals</operation>
+            <value>Complete – Pending Activation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.Public_Scheme_Start_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Rule to Populate the Scheme Start Date from Public scheme Start Date</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF To Populate Scheme Discount Type</fullName>
+        <actions>
+            <name>Update_Scheme_Discount_Type_from_Scheme</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>WF Rule to update the Scheme Discount Type when Scheme type Changes</description>
+        <formula>AND( OR( RecordType.DeveloperName =&apos;Corporate_Scheme&apos;,  RecordType.DeveloperName =&apos;Public_Scheme&apos; ), OR( ISNEW(), AND(ISCHANGED(Override_Threshold__c),Override_Threshold__c), AND(ISCHANGED(Below_Threshold__c),NOT(Below_Threshold__c)), ISCHANGED(RecordTypeId) ) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF To Populate Threshold Start Date</fullName>
+        <actions>
+            <name>Update_Below_Threshold_Start_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Workflow Rule to Set the Start Date of Threshold to Today, when Below Threshold is TRUE</description>
+        <formula>Below_Threshold__c</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF To ReCalculate fee on Wavier End Date</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Waiver_End_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>To Invoke a time trigger action to recaluclate joining and memership fee based on Wavier End date.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Batch_Run_to_True</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Update_Qantas_Club_Join_Discount_to_Null</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Update_Qantas_Club_Mem_Discount_to_Null</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Update_Wavier_End_Date_to_Null</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Update_Wavier_Start_Date_to_Null</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Asset.Waiver_End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>WF To ReCalculate fee on Wavier Start Date</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Waiver_Start_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>To Invoke a time trigger action to recaluclate joining and memership fee based on Wavier start date.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Batch_Run_to_True</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Asset.Waiver_Start_Date__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>WF to Activate Asset Immediately</fullName>
+        <actions>
+            <name>Update_Asset_Status_to_Active</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Asset.Scheme_Start_Date_f__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.Status</field>
+            <operation>equals</operation>
+            <value>Complete – Pending Activation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>This will update the status to active Asset Immediately if the start date is today and status is Complete pending Activation</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF to Activate the Asset on Start Date</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Asset.Scheme_Start_Date_f__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.Status</field>
+            <operation>equals</operation>
+            <value>Complete – Pending Activation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>To Update the status to Active on Asset Start Date</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Asset_Status_to_Active</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Asset.Scheme_Start_Date_f__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>WF to Blank Scheme StartDate_PublicScheme</fullName>
+        <actions>
+            <name>Update_Scheme_Start_Date_to_Blank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Scheme</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.Status</field>
+            <operation>equals</operation>
+            <value>Draft</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.Scheme_Start_Date_f__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Blank off Scheme StartDate when Status is Draft and Scheme StartDate is not Empty</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF to Convert Public Scheme to Retail</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Scheme</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.Below_Threshold__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Workflow Rule to Trigger when Public Scheme chnagesto Retail</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Scheme_Discount_Type_to_Retail</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Asset.Convert_to_Retail_Date__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>WF_ To Activate Assets</fullName>
+        <actions>
+            <name>Update_Active_to_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Status</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>To Activate the Asset Check box when Status is Active</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF_ To End Public Scheme when Inactivated</fullName>
+        <actions>
+            <name>Update_Public_Scheme_End_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Status</field>
+            <operation>equals</operation>
+            <value>Inactive</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>WF to End the Public Scheme when Inactivated</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF_Corporate Scheme Notification to iFly</fullName>
+        <actions>
+            <name>Update_Ifly_Outbound_Notification_DateTi</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Asset_Corporate_Scheme_Sync_to_iFly</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>notification is sent to a LSL system which further handles the request.
+Excluded the change of &apos;Active Scheme Member Count&apos; field as part of CRM-5513</description>
+        <formula>AND(   OR(ISPICKVAL(Status, &apos;Active&apos;), ISPICKVAL(Status, &apos;Inactive&apos;)),   NOT(ISBLANK(Scheme_Start_Date_f__c)),   OR(RecordType.DeveloperName =&apos;Public_Scheme&apos;, RecordType.DeveloperName =&apos;Corporate_Scheme&apos;),   NOT(ISCHANGED(Scheme_Active_Member_Count__c)) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF_To_Deactive Asset</fullName>
+        <actions>
+            <name>Update_active_to_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Status</field>
+            <operation>notEqual</operation>
+            <value>Active</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Asset.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Corporate Scheme,Public Scheme</value>
+        </criteriaItems>
+        <description>Deactivate the Asset Checkbox when Status is not ACtive</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF_Update Mailing Names</fullName>
+        <actions>
+            <name>Update_Mailing_Name_1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Mailing_Name_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Fulfillment system facilitates customizing the names. User can update the desired names on the packages. Currently a default split is used</description>
+        <formula>AND( OR( RecordType.DeveloperName =&apos;Corporate_Scheme&apos;,  RecordType.DeveloperName =&apos;Public_Scheme&apos; ), OR( ISCHANGED( ContactId ), LEN(Mailing_Name_1__c) == 0 ) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF_Update Scheme Number</fullName>
+        <actions>
+            <name>Update_Scheme_Number</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Serial_Number_same_as_Scheme_Numb</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>copy the generated scheme number check digit to an external Id</description>
+        <formula>AND( ISBLANK(Scheme_Number__c), OR( RecordType.DeveloperName =&apos;Corporate_Scheme&apos;, RecordType.DeveloperName =&apos;Public_Scheme&apos; ) )</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

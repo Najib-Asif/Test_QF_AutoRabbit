@@ -1,0 +1,736 @@
+{
+  "version" : "64.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "EVENT_TYPE", "SESSION_KEY", "QUIDDITY", "USER_ID", "REQUEST_ID", "URI", "ENTRY_POINT", "ORGANIZATION_ID", "URI_ID_DERIVED", "TIMESTAMP_DERIVED", "LOGIN_KEY", "USER_ID_DERIVED", "EXEC_TIME", "CALLOUT_TIME", "IS_LONG_RUNNING_REQUEST", "CPU_TIME", "NUMBER_SOQL_QUERIES", "RUN_TIME", "DB_TOTAL_TIME", "TIMESTAMP" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025-05-20_12_ApexExecution",
+          "name" : "X2025_05_20_12_ApexExecution"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "EVENT_TYPE", "SESSION_KEY", "QUIDDITY", "USER_ID", "REQUEST_ID", "URI", "ENTRY_POINT", "ORGANIZATION_ID", "URI_ID_DERIVED", "TIMESTAMP_DERIVED", "LOGIN_KEY", "USER_ID_DERIVED", "EXEC_TIME", "CALLOUT_TIME", "IS_LONG_RUNNING_REQUEST", "CPU_TIME", "NUMBER_SOQL_QUERIES", "RUN_TIME", "DB_TOTAL_TIME", "TIMESTAMP" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025-05-21_12_ApexExecution",
+          "name" : "X2025_05_21_12_ApexExecution"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "EVENT_TYPE", "SESSION_KEY", "QUIDDITY", "USER_ID", "REQUEST_ID", "URI", "ENTRY_POINT", "ORGANIZATION_ID", "URI_ID_DERIVED", "TIMESTAMP_DERIVED", "LOGIN_KEY", "USER_ID_DERIVED", "EXEC_TIME", "CALLOUT_TIME", "IS_LONG_RUNNING_REQUEST", "CPU_TIME", "NUMBER_SOQL_QUERIES", "RUN_TIME", "DB_TOTAL_TIME", "TIMESTAMP" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025-05-22_12_ApexExecution",
+          "name" : "X2025_05_22_12_ApexExecution"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "EVENT_TYPE", "SESSION_KEY", "QUIDDITY", "USER_ID", "REQUEST_ID", "URI", "ENTRY_POINT", "ORGANIZATION_ID", "URI_ID_DERIVED", "TIMESTAMP_DERIVED", "LOGIN_KEY", "USER_ID_DERIVED", "EXEC_TIME", "CALLOUT_TIME", "IS_LONG_RUNNING_REQUEST", "CPU_TIME", "NUMBER_SOQL_QUERIES", "RUN_TIME", "DB_TOTAL_TIME", "TIMESTAMP" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025-05-23_12_ApexExecution",
+          "name" : "X2025_05_23_12_ApexExecution"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "EVENT_TYPE", "SESSION_KEY", "IS_LONG_RUNNING_REQUEST", "QUIDDITY", "USER_ID", "REQUEST_ID", "URI", "ENTRY_POINT", "ORGANIZATION_ID", "URI_ID_DERIVED", "TIMESTAMP_DERIVED", "TIMESTAMP", "LOGIN_KEY", "USER_ID_DERIVED", "EXEC_TIME", "CALLOUT_TIME", "CPU_TIME", "NUMBER_SOQL_QUERIES", "RUN_TIME", "DB_TOTAL_TIME" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "ApexExecution",
+          "name" : "ApexExecution1"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CLIENT_IP", "EVENT_TYPE", "SESSION_KEY", "QUIDDITY", "USER_ID", "REQUEST_ID", "URI", "ENTRY_POINT", "ORGANIZATION_ID", "URI_ID_DERIVED", "TIMESTAMP_DERIVED", "LOGIN_KEY", "USER_ID_DERIVED", "EXEC_TIME", "CALLOUT_TIME", "IS_LONG_RUNNING_REQUEST", "CPU_TIME", "NUMBER_SOQL_QUERIES", "RUN_TIME", "DB_TOTAL_TIME", "TIMESTAMP" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2025-05-19_12_ApexExecution",
+          "name" : "X2025_05_19_12_ApexExecution"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET5" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "CLIENT_IP",
+          "bottom" : "CLIENT_IP"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "SESSION_KEY",
+          "bottom" : "SESSION_KEY"
+        }, {
+          "top" : "QUIDDITY",
+          "bottom" : "QUIDDITY"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "URI",
+          "bottom" : "URI"
+        }, {
+          "top" : "ENTRY_POINT",
+          "bottom" : "ENTRY_POINT"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "URI_ID_DERIVED",
+          "bottom" : "URI_ID_DERIVED"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "LOGIN_KEY",
+          "bottom" : "LOGIN_KEY"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        }, {
+          "top" : "EXEC_TIME",
+          "bottom" : "EXEC_TIME"
+        }, {
+          "top" : "CALLOUT_TIME",
+          "bottom" : "CALLOUT_TIME"
+        }, {
+          "top" : "IS_LONG_RUNNING_REQUEST",
+          "bottom" : "IS_LONG_RUNNING_REQUEST"
+        }, {
+          "top" : "CPU_TIME",
+          "bottom" : "CPU_TIME"
+        }, {
+          "top" : "NUMBER_SOQL_QUERIES",
+          "bottom" : "NUMBER_SOQL_QUERIES"
+        }, {
+          "top" : "RUN_TIME",
+          "bottom" : "RUN_TIME"
+        }, {
+          "top" : "DB_TOTAL_TIME",
+          "bottom" : "DB_TOTAL_TIME"
+        }, {
+          "top" : "TIMESTAMP",
+          "bottom" : "TIMESTAMP"
+        } ]
+      }
+    },
+    "APPEND1" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET1", "APPEND0" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "CLIENT_IP",
+          "bottom" : "CLIENT_IP"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "SESSION_KEY",
+          "bottom" : "SESSION_KEY"
+        }, {
+          "top" : "QUIDDITY",
+          "bottom" : "QUIDDITY"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "URI",
+          "bottom" : "URI"
+        }, {
+          "top" : "ENTRY_POINT",
+          "bottom" : "ENTRY_POINT"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "URI_ID_DERIVED",
+          "bottom" : "URI_ID_DERIVED"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "LOGIN_KEY",
+          "bottom" : "LOGIN_KEY"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        }, {
+          "top" : "EXEC_TIME",
+          "bottom" : "EXEC_TIME"
+        }, {
+          "top" : "CALLOUT_TIME",
+          "bottom" : "CALLOUT_TIME"
+        }, {
+          "top" : "IS_LONG_RUNNING_REQUEST",
+          "bottom" : "IS_LONG_RUNNING_REQUEST"
+        }, {
+          "top" : "CPU_TIME",
+          "bottom" : "CPU_TIME"
+        }, {
+          "top" : "NUMBER_SOQL_QUERIES",
+          "bottom" : "NUMBER_SOQL_QUERIES"
+        }, {
+          "top" : "RUN_TIME",
+          "bottom" : "RUN_TIME"
+        }, {
+          "top" : "DB_TOTAL_TIME",
+          "bottom" : "DB_TOTAL_TIME"
+        }, {
+          "top" : "TIMESTAMP",
+          "bottom" : "TIMESTAMP"
+        } ]
+      }
+    },
+    "APPEND2" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET2", "APPEND1" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "CLIENT_IP",
+          "bottom" : "CLIENT_IP"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "SESSION_KEY",
+          "bottom" : "SESSION_KEY"
+        }, {
+          "top" : "QUIDDITY",
+          "bottom" : "QUIDDITY"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "URI",
+          "bottom" : "URI"
+        }, {
+          "top" : "ENTRY_POINT",
+          "bottom" : "ENTRY_POINT"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "URI_ID_DERIVED",
+          "bottom" : "URI_ID_DERIVED"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "LOGIN_KEY",
+          "bottom" : "LOGIN_KEY"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        }, {
+          "top" : "EXEC_TIME",
+          "bottom" : "EXEC_TIME"
+        }, {
+          "top" : "CALLOUT_TIME",
+          "bottom" : "CALLOUT_TIME"
+        }, {
+          "top" : "IS_LONG_RUNNING_REQUEST",
+          "bottom" : "IS_LONG_RUNNING_REQUEST"
+        }, {
+          "top" : "CPU_TIME",
+          "bottom" : "CPU_TIME"
+        }, {
+          "top" : "NUMBER_SOQL_QUERIES",
+          "bottom" : "NUMBER_SOQL_QUERIES"
+        }, {
+          "top" : "RUN_TIME",
+          "bottom" : "RUN_TIME"
+        }, {
+          "top" : "DB_TOTAL_TIME",
+          "bottom" : "DB_TOTAL_TIME"
+        }, {
+          "top" : "TIMESTAMP",
+          "bottom" : "TIMESTAMP"
+        } ]
+      }
+    },
+    "APPEND3" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET3", "APPEND2" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "CLIENT_IP",
+          "bottom" : "CLIENT_IP"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "SESSION_KEY",
+          "bottom" : "SESSION_KEY"
+        }, {
+          "top" : "QUIDDITY",
+          "bottom" : "QUIDDITY"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "URI",
+          "bottom" : "URI"
+        }, {
+          "top" : "ENTRY_POINT",
+          "bottom" : "ENTRY_POINT"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "URI_ID_DERIVED",
+          "bottom" : "URI_ID_DERIVED"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "LOGIN_KEY",
+          "bottom" : "LOGIN_KEY"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        }, {
+          "top" : "EXEC_TIME",
+          "bottom" : "EXEC_TIME"
+        }, {
+          "top" : "CALLOUT_TIME",
+          "bottom" : "CALLOUT_TIME"
+        }, {
+          "top" : "IS_LONG_RUNNING_REQUEST",
+          "bottom" : "IS_LONG_RUNNING_REQUEST"
+        }, {
+          "top" : "CPU_TIME",
+          "bottom" : "CPU_TIME"
+        }, {
+          "top" : "NUMBER_SOQL_QUERIES",
+          "bottom" : "NUMBER_SOQL_QUERIES"
+        }, {
+          "top" : "RUN_TIME",
+          "bottom" : "RUN_TIME"
+        }, {
+          "top" : "DB_TOTAL_TIME",
+          "bottom" : "DB_TOTAL_TIME"
+        }, {
+          "top" : "TIMESTAMP",
+          "bottom" : "TIMESTAMP"
+        } ]
+      }
+    },
+    "APPEND4" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET4", "DROP_FIELDS0" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "CLIENT_IP",
+          "bottom" : "CLIENT_IP"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "SESSION_KEY",
+          "bottom" : "SESSION_KEY"
+        }, {
+          "top" : "QUIDDITY",
+          "bottom" : "QUIDDITY"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "URI",
+          "bottom" : "URI"
+        }, {
+          "top" : "ENTRY_POINT",
+          "bottom" : "ENTRY_POINT"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "URI_ID_DERIVED",
+          "bottom" : "URI_ID_DERIVED"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "LOGIN_KEY",
+          "bottom" : "LOGIN_KEY"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        }, {
+          "top" : "EXEC_TIME",
+          "bottom" : "EXEC_TIME"
+        }, {
+          "top" : "CALLOUT_TIME",
+          "bottom" : "CALLOUT_TIME"
+        }, {
+          "top" : "IS_LONG_RUNNING_REQUEST",
+          "bottom" : "IS_LONG_RUNNING_REQUEST"
+        }, {
+          "top" : "CPU_TIME",
+          "bottom" : "CPU_TIME"
+        }, {
+          "top" : "NUMBER_SOQL_QUERIES",
+          "bottom" : "NUMBER_SOQL_QUERIES"
+        }, {
+          "top" : "RUN_TIME",
+          "bottom" : "RUN_TIME"
+        }, {
+          "top" : "DB_TOTAL_TIME",
+          "bottom" : "DB_TOTAL_TIME"
+        }, {
+          "top" : "TIMESTAMP",
+          "bottom" : "TIMESTAMP"
+        } ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Username", "LastName", "FirstName", "Name", "UserRoleId", "Location__c", "Email" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET6", "LOAD_DATASET7" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "UserRole",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "APPEND4", "JOIN0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "USER_ID_DERIVED" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Apex Execution Appended",
+          "name" : "Apex_Execution_Appended",
+          "folderName" : "NEO_APEX_EXECUTION"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "APPEND3" ],
+      "parameters" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "TIMESTAMP", "IS_LONG_RUNNING_REQUEST" ]
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "2025-05-20_12_ApexExecution",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 252.3,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "2025-05-21_12_ApexExecution",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 532,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "2025-05-22_12_ApexExecution",
+        "type" : "LOAD_DATASET",
+        "top" : 112.1,
+        "left" : 672.2,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET3" : {
+        "label" : "2025-05-23_12_ApexExecution",
+        "type" : "LOAD_DATASET",
+        "top" : 112.4,
+        "left" : 812.1,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "ApexExecution",
+        "type" : "LOAD_DATASET",
+        "top" : 112.1,
+        "left" : 952,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET5" : {
+        "label" : "2025-05-19_12_ApexExecution",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112.4,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND0" : {
+        "label" : "Append 0",
+        "type" : "APPEND",
+        "top" : 252.2,
+        "left" : 253.2
+      },
+      "APPEND1" : {
+        "label" : "Append 1",
+        "type" : "APPEND",
+        "top" : 252.10000000000002,
+        "left" : 531.5
+      },
+      "APPEND2" : {
+        "label" : "Append 2",
+        "type" : "APPEND",
+        "top" : 252.10000000000002,
+        "left" : 672.2
+      },
+      "APPEND3" : {
+        "label" : "Append 3",
+        "type" : "APPEND",
+        "top" : 252.10000000000002,
+        "left" : 812.1
+      },
+      "APPEND4" : {
+        "label" : "Append 4",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 1092
+      },
+      "LOAD_DATASET6" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 671.9,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "LOAD_DATASET7" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 671.9,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Role",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.2,
+        "left" : 811.9
+      },
+      "JOIN1" : {
+        "label" : "Get User",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 1232
+      },
+      "OUTPUT0" : {
+        "label" : "Apex Execution Appended",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1372
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 952,
+        "graph" : {
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "APPEND0"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "APPEND0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "APPEND1"
+    }, {
+      "source" : "APPEND0",
+      "target" : "APPEND1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "APPEND2"
+    }, {
+      "source" : "APPEND1",
+      "target" : "APPEND2"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "APPEND3"
+    }, {
+      "source" : "APPEND2",
+      "target" : "APPEND3"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "APPEND4"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "APPEND4"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "JOIN0"
+    }, {
+      "source" : "APPEND4",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "APPEND3",
+      "target" : "TRANSFORM0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="QCC_FeeWaiverRelatedListController" access="global" >
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    <div style="border-width:3px 1px 1px 1px; border-style:solid; border-radius:5px; border-color:#B0ADAB;">
+        <lightning:card iconName="custom:custom40">
+            <aura:set attribute="title">
+                <b>AQIRE Fee Waivers</b>
+            </aura:set>
+            <aura:set attribute="body">
+                <div id="divTable" style="max-height: 300px">
+                    <lightning:datatable aura:id="tblFeeWaiver" keyField="id" data="{! v.data }" columns="{! v.columns }" hideCheckboxColumn="true"/>
+                </div>
+            </aura:set>
+            <aura:set attribute="footer">
+            </aura:set>
+        </lightning:card>
+    </div>
+</aura:component>

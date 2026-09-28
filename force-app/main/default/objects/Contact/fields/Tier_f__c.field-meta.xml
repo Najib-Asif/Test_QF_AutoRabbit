@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tier_f__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;GOLD&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;GOLD&quot;)), IMAGE(&quot;/resource/ContactImages/Gold.PNG&quot;, &quot;g&quot;, 30, 70),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;CHAIRMANS LOUNGE&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;CHAIRMANS LOUNGE&quot;)), IMAGE(&quot;/resource/ContactImages/ChairmansLounge.PNG&quot;, &quot;g&quot;, 30, 150),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;CHAIRMANS LOUNGE PLATINUM ONE&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;CLPO&quot;)), IMAGE(&quot;/resource/ContactImages/CLPO.PNG&quot;, &quot;g&quot;, 30, 200),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;QCB&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;QCB&quot;)), IMAGE(&quot;/resource/ContactImages/QCB.PNG&quot;, &quot;g&quot;, 30, 160),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;QCS&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;QCS&quot;)), IMAGE(&quot;/resource/ContactImages/QCS.PNG&quot;, &quot;g&quot;, 30, 160),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;SILVER&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;SILVER&quot;)), IMAGE(&quot;/resource/ContactImages/Silver.PNG&quot;, &quot;g&quot;, 30, 80),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;PLATINUM ONE&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;PLATINUM ONE&quot;)), IMAGE(&quot;/resource/ContactImages/Platinum1.PNG&quot;, &quot;g&quot;, 30, 130),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;BRONZE&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;BRONZE&quot;)), IMAGE(&quot;/resource/ContactImages/Bronze.PNG&quot;, &quot;g&quot;, 30, 80),
+IF(OR(CONTAINS( UPPER( TEXT(Profile_Membership_Current_Tier__c)) , &quot;PLATINUM&quot;),CONTAINS( UPPER( TEXT(Frequent_Flyer_Tier__c)) , &quot;PLATINUM&quot;)), IMAGE(&quot;/resource/ContactImages/Platinum.PNG&quot;, &quot;g&quot;, 30, 100), &quot;&quot;)
+)
+)
+)
+)))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Corporate: Profile Membership Current  Tier</inlineHelpText>
+    <label>Tier</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

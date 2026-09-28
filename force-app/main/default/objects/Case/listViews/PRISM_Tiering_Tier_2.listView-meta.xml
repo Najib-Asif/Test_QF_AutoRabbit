@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PRISM_Tiering_Tier_2</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>QCI_f__c</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>On_hold_Reason__c</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>OWNER_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>contains</operation>
+        <value>Deal Support Team Queue,Donna Hill,Lisa Momiroski,Stefanie Reynolds,Genessa Formento,Rachael Flood,Luca More,Mook Simaraks</value>
+    </filters>
+    <filters>
+        <field>CASES.SUBJECT</field>
+        <operation>equals</operation>
+        <value>FC FLX PCC - 01JAN24</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>On Hold,Assigned-Deal Support-iDeal loading</value>
+    </filters>
+    <label>Farelogix</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_Support_Deal_Support</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support_QIC_Member</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

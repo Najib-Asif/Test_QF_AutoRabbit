@@ -1,0 +1,209 @@
+<aura:component implements="forceCommunity:searchInterface,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="QL_searchController" >
+    <aura:attribute Name="selItem2" type="object"  access="public" />
+    <div class="slds">
+        <div class="slds-size_2-of-2 ">
+            <c:QL_SeachComponent objectName="Account"
+                                 field_API_text="Name"
+                                 field_API_val="Id"
+                                 field_API_val1="Total_Air_Spend__c"
+                                 field_API_val2="QF_Market_Share__c"
+                                 field_API_val3="QF_Contracted_QF_Actual__c"
+                                 field_API_val4="QF_International_Market_Share__c"
+                                 field_API_val5="Latest_Period_Date__c"
+                                 field_API_val6="Qantas_Corporate_Identifier__c"
+                                 field_API_val7="Sentiment__c"
+                                 field_API_val8="Type"
+                                 field_API_val9="Customer Account"
+                                 field_API_val10="Domestic_Annual_Share__c"
+                                 field_API_val11="Contract_Start_Date__c"
+                                 field_API_val12="Contract_End_Date__c"
+                                 field_API_val13="Total_QF_Revenue_TY__c"
+                                 field_API_val14="QF_DOMESTIC_MARKET_SHARE__c"
+                                 field_API_val15="Qantas_Annual_Expenditure__c"
+                                 field_API_val16="International_Annual_Share__c"
+                                 limit="20"
+                                 field_API_search="Name"
+                                 lookupIcon="standard:account" 
+                                 selectedItem="{!v.selItem2}" 
+                                 placeholder="Search Account Name"
+                                 />  
+        </div>
+        <!--    <aura:if isTrue="{! not(empty(v.selItem2)) }"> 
+                    <br />
+                    <b>Executive  Summary Details: </b><br />
+                   <b>Account Name</b> - {#v.selItem2.text}<br /> 
+                      
+                     <b> QCI </b> - {#v.selItem2.objDet.field_API_val6}<br/>
+                   <b> Sentiment Indicator </b> - {#v.selItem2.objDet.Sentiment2}<br/>
+                   <b> Total Air Spend </b> - {#v.selItem2.objDet.TotalAirSpend}<br/>
+                   <b> QF Market Share </b>- {#v.selItem2.objDet.QFMarketShare}<br/>
+                   <b> QF Contracted Revenue </b> - {#v.selItem2.objDet.QFContractedQFActual}<br/>
+                   <b> Market Share Dom % </b> - {#v.selItem2.objDet.QFContractedQFActual}<br/>
+                   <b> Market Share Int % </b> - {#v.selItem2.objDet.QFInternationalMarketShare}<br/>
+                  <b>  As of Date </b>- {#v.selItem2.objDet.LatestPeriodDate}<br/>
+                    
+                </aura:if> -->
+        <div class="slds-size_1-of-2 ">
+            
+            <aura:if isTrue="{! not(empty(v.selItem2)) }">
+                
+                <br/><br/>
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer tableSty slds-scrollable "  width="600" cellspacing="0" cellpadding="0" border="1">
+                    
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" class="cellBgColor">
+                            <div class="slds-cell-wrap fontColor" title="Account Name">Account Name</div>
+                        </th>
+                        
+                        
+                        <td scope="row" data-label="Account Name">
+                            <div class="slds-cell-wrap" title="{!v.selItem2.text}">{!v.selItem2.text}</div>
+                        </td> 
+                    </tr>	
+                    <tr class="slds-text-title--caps">					
+                        <th scope="col" class="cellBgColor">
+                            <div class="slds-cell-wrap fontColor" title="Account Owner">Account Owner</div>
+                        </th>
+                        <td scope="row" data-label="Account Owner" class="">
+                            <div class="slds-cell-wrap" title="{!v.selItem2.objDet.AccOwner}">{!v.selItem2.objDet.AccOwner}</div>
+                        </td> 
+                    </tr>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" class="cellBgColor">
+                            <div class="slds-cell-wrap fontColor" title="QCI">QCI</div>
+                        </th>
+                        <td scope="row" data-label="QCI" class="">
+                            <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val6}">{!v.selItem2.objDet.val6}</div>
+                        </td> 
+                        
+                    </tr>
+                    
+                    
+                    
+                    
+                </table>			
+                
+                <br/>
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer tableSty slds-scrollable"  width="600"  cellspacing="0" cellpadding="0" border="1">
+                    <thead>
+                        <tr class="slds-text-title--caps">
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Contract Start Date">Contract Start Date</div>
+                            </th>
+                            <td scope="row" data-label="Contract Start Date" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val11}"><ui:outputdate value="{!v.selItem2.objDet.val11}"></ui:outputdate></div> 
+                            </td>
+                        </tr>
+                        
+                        <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Contract End Date">Contract End Date</div>
+                            </th>
+                            <td scope="row" data-label="Contract End Date" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val12}"><ui:outputdate value="{!v.selItem2.objDet.val12}"></ui:outputdate></div> 
+                            </td>
+                        </tr>
+						
+						<tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Forecast QF Spend">Forecast QF Spend</div>
+                            </th>
+                            <td scope="row" data-label="Forecast QF Spend" class="">
+                              <!--  <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val15}">{!v.selItem2.objDet.val15}</div> -->
+							  <ui:outputCurrency value="{!v.selItem2.objDet.val15}"/>
+                            </td>
+                        </tr>
+						 <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Forecast QF Share (Dom)">Forecast QF Share (Dom) %</div>
+                            </th>
+                            <td scope="row" data-label="Forecast QF Share (Dom)" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val10}">{!v.selItem2.objDet.val10} %</div> 
+                            </td>
+                        </tr>
+						<tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Forecast QF Share (INT)">Forecast QF Share (INT) %</div>
+                            </th>
+                            <td scope="row" data-label="Forecast QF Share (INT)" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val16}">{!v.selItem2.objDet.val16} %</div> 
+                            </td>
+                        </tr>
+                        <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Sentiment Indicator">Sentiment Indicator</div>
+                            </th>
+                            <td scope="row" data-label="Sentiment Indicator" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val7}">{!v.selItem2.objDet.val7}</div> 
+                            </td> 
+                        </tr>
+                    </thead>
+                    
+                </table>
+                <br/>
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer tableSty slds-scrollable"  width="600"  cellspacing="0" cellpadding="0" border="1">
+                    <thead>
+                        <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Total Air Travel Spend">Total Air Travel Spend</div>
+                            </th>
+                            <td scope="row" data-label="Total Air Travel Spend" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val1}"><ui:outputCurrency value="{!v.selItem2.objDet.val1}"></ui:outputCurrency></div> 
+                            </td> 
+                        </tr>
+                        <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor">
+                                <div class="slds-cell-wrap fontColor" title="Total QF Revenue">Total QF Revenue (TY)</div>
+                            </th>
+                            <td scope="row" data-label="Total QF Revenue (TY)" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val13}"><ui:outputCurrency value="{!v.selItem2.objDet.val13}"></ui:outputCurrency></div> 
+                            </td> 
+                            
+                        </tr>
+                        <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor" >
+                                <div class="slds-cell-wrap fontColor" title="Market Share Dom %">Market Share Dom % </div>
+                            </th>
+                            <td scope="row" data-label="Market Share Dom %" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val14}">{!v.selItem2.objDet.val14}%</div> 
+                            </td> 
+                        </tr>
+                        <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor" >
+                                <div class="slds-cell-wrap fontColor" title="Market Share Int %">Market Share Int %</div>
+                            </th>
+                            <td scope="row" data-label="Market Share Int %" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val4}">{!v.selItem2.objDet.val4}%</div> 
+                            </td> 
+                            
+                        </tr>
+                        <tr class="slds-text-title--caps">
+                            
+                            <th scope="col" class="cellBgColor" >
+                                <div class="slds-cell-wrap fontColor" title="As of Date">As of Date</div>
+                            </th>
+                            <td scope="row" data-label="As of Date" class="">
+                                <div class="slds-cell-wrap" title="{!v.selItem2.objDet.val5}">{!v.selItem2.objDet.val5}</div> 
+                            </td> 
+                            
+                        </tr>
+                    </thead>
+                    
+                </table>
+                <br/>
+                
+                
+            </aura:if>		 
+        </div>
+    </div>
+    
+</aura:component>

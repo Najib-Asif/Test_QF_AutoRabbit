@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>Account</field>
+        <field>AM_s_Manager__c</field>
+        <field>QCI_f__c</field>
+        <field>Subject</field>
+        <field>Description</field>
+        <field>CreatedBy</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Update_Status_Step_1_Approved</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>AM_s_Manager__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Existing Account Owner&apos;s Manager field</description>
+        <label>Step 1: Account Owner&apos;s Manager</label>
+        <name>Step_1_Account_Owner_s_Manager</name>
+        <rejectionActions>
+            <action>
+                <name>Update_Approval_Status_as_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>rdrakoulis@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>yuriguen@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>For Head of QIS &amp; Portfolio Manager of new Account Owner</description>
+        <label>Step 2: Head of QIS &amp; New Portfolio Manager</label>
+        <name>Step_2_Head_of_QIS_New_Portfolio_Manager</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>For Account Handovers, from QIS to B&amp;G - New Business &amp; Business Development (Yosu)</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Account Handover</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.NAM_s_Approval__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.New_Team__c</field>
+            <operation>equals</operation>
+            <value>New Business &amp; Business Development - Yosu</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.AM_s_Manager__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Not yet assigned - with Account Manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Type</field>
+            <operation>equals</operation>
+            <value>QIS to B&amp;G</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Assign_to_QDM_Queue</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Status_with_QDM_Team</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>In_Approval_Process</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Account Handover - QIS to B&amp;G (NB)</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>user__c</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>3</processOrder>
+    <recallActions>
+        <action>
+            <name>Upd_Status_to_Not_yet_assigned_with_AM</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

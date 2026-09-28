@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Modifying_Discount</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( RecordType.DeveloperName = &apos;Approved_Customer&apos;, ISCHANGED( Discount__c ), $Setup.EnableValidationRule__c.EnableVR_to_prevent_DO_Users_from_Editin__c)</errorConditionFormula>
+    <errorDisplayField>Discount__c</errorDisplayField>
+    <errorMessage>Value change is not allowed</errorMessage>
+</ValidationRule>

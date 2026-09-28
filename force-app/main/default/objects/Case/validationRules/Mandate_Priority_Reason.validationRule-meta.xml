@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Priority_Reason</fullName>
+    <active>true</active>
+    <description>Mandate Priority Reason when Priority is High</description>
+    <errorConditionFormula>AND( 
+ISBLANK(Priority_Reason__c), 
+
+OR( 
+AND(ISPICKVAL(Priority, &quot;High&quot;), $RecordType.DeveloperName = &quot;Frequent_Flyer_Request&quot;), /*Frequent Flyer*/ 
+AND ( ISPICKVAL (Priority, &quot;Yes&quot;), $RecordType.DeveloperName = &quot;Sales_Offers_Request&quot;)) /*Sales Offers*/ 
+)</errorConditionFormula>
+    <errorDisplayField>Priority_Reason__c</errorDisplayField>
+    <errorMessage>Please enter Priority Reason</errorMessage>
+</ValidationRule>

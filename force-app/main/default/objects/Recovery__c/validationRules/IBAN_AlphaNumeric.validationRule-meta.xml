@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IBAN_AlphaNumeric</fullName>
+    <active>true</active>
+    <description>IBAN should be alpha numeric</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Type__c, &apos;Payment (EFT)&apos;) || ISPICKVAL(Type__c, &apos;Ticket Refund EFT&apos;),
+NOT(ISBLANK(IBAN__c)),
+NOT(REGEX(IBAN__c, &quot;^[a-zA-Z0-9]+$&quot;)),
+ISCHANGED(IBAN__c)
+)</errorConditionFormula>
+    <errorDisplayField>IBAN__c</errorDisplayField>
+    <errorMessage>IBAN should be alpha numeric</errorMessage>
+</ValidationRule>

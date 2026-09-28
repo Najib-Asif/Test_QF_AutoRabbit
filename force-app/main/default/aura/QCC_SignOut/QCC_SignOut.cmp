@@ -1,0 +1,41 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" controller="QCC_SignOutController">
+    
+    <lightning:workspaceAPI aura:id="workspace" />
+    <lightning:utilityBarAPI aura:id="utilitybar" /> <!-- GRAPHITE-1152: Case Status -Enhancement -->
+
+    <aura:attribute name="baseUrl" type="String" default=""/> 
+    <aura:attribute name="user" type="Object" default="{}"/>     
+    <!-- GRAPHITE-1152: Case Status -Enhancement -->
+    <aura:attribute name="withOpenCases" type="boolean" default ="false"/>
+    <aura:attribute name="openCases" 	type="Case[]" default="{}"/> 
+    <aura:attribute name="mycolumns" type="List"/>     
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.withOpenCases}" >
+        There are still 'In Progress' Cases assigned to you.  
+        
+        <lightning:datatable data="{!v.openCases}"
+                             columns="{!v.mycolumns}"
+                             keyField="id"
+                             hideCheckboxColumn="true"/>
+        
+        <aura:set attribute="else">
+            <article class="slds-card"> 
+                <div class="slds-card__header slds-grid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">                
+                        <div class="slds-media__body">
+                            <h2>
+                                Are you sure you want to sign-out?
+                            </h2>
+                        </div>
+                    </header>
+                </div>
+                <footer class="slds-card__footer">
+                    <lightning:button label="Sign out" onclick="{!c.logOut}"/>
+                </footer>
+            </article>  
+        </aura:set>                
+    </aura:if>	  
+</aura:component>

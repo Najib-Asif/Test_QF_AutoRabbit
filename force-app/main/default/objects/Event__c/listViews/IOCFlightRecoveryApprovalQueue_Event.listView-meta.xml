@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOCFlightRecoveryApprovalQueue_Event</fullName>
+    <columns>NAME</columns>
+    <columns>Flight_Status__c</columns>
+    <columns>ApprovalStatus__c</columns>
+    <columns>DelayFailureCode__c</columns>
+    <columns>Non_Delay_Failure_Code__c</columns>
+    <columns>Departure_Arrival__c</columns>
+    <columns>IntDom__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CloseAction__c</field>
+        <operation>equals</operation>
+        <value>Recoveries created and comms sent</value>
+    </filters>
+    <filters>
+        <field>Closed_Date_Time__c</field>
+        <operation>equals</operation>
+        <value>9/12/2025 12:00 AM</value>
+    </filters>
+    <label>IOCFlightRecoveryApprovalQueue</label>
+    <sharedTo>
+        <role>QF_QDC_OM</role>
+    </sharedTo>
+</ListView>

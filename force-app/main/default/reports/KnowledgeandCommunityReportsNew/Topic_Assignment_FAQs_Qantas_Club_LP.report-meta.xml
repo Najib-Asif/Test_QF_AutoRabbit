@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>TopicAssignment$Entity</field>
+    </columns>
+    <columns>
+        <field>TopicAssignment$DerivedRecord</field>
+    </columns>
+    <columns>
+        <field>TopicAssignment$CreatedDate</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>TopicAssignment$DerivedRecord</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>startsWith</operator>
+            <value>ka</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>TopicAssignment$Topic</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Topic Assignment FAQs Qantas Club LP</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Topic_Assignments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>TopicAssignment$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2020-11-24</startDate>
+    </timeFrameFilter>
+</Report>

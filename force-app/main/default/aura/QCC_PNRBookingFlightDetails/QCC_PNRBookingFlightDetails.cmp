@@ -1,0 +1,92 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,lightning:isUrlAddressable" controller="QCC_BookingDetailController" access="global" >
+    <aura:attribute name="completebooking" type="Object" />
+    <aura:attribute name="segmentID" type="String" />
+    <aura:attribute name="passengerID" type="String" />
+    <aura:attribute name="segmentTattoo" type="String" />
+    <aura:attribute name="passengerTattoo" type="String" />
+    <aura:attribute name="segment" type="Object" />
+    <aura:attribute name="passenger" type="Object" />
+    <aura:attribute name="selectedLeg" type="Object" />
+    <aura:attribute name="selectedSSR" type="Object[]" />
+    <aura:attribute name="pnr" type="String" />
+    <aura:attribute name="creationDate" type="String" />
+    <!--Jira: CRM-6052 -->
+    <aura:attribute name="isNeedToFormatDate" type="Boolean" default="true"/>
+    <aura:attribute name="onContact" type="Boolean" default="false" />
+    <aura:attribute name="showSSRButton" type="Boolean" />
+    <aura:attribute name="showLegButton" type="Boolean" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="contact" type="Object" />
+	<aura:attribute name="contactF" type="Object" />
+    <aura:attribute name="firstPassenger" type="Object"/>
+    <aura:attribute name="isHistory" type="Boolean" default="false"/>
+    <aura:attribute name="archivalData" type="Boolean" default="false"/>
+    <aura:attribute name="con" type="Contact"/>
+    <aura:attribute name="showToProfiles" type="Boolean" default="true"/>
+    <aura:handler name="flightEvent" event="c:QCC_PNRFlightEvent" action="{!c.flightBasedSection}"/>
+    <aura:handler name="passengerEvent" event="c:QCC_PNRPassengerEvent" action="{!c.passengerBasedSection}"/>
+    <aura:handler name="createCaseEvent" event="c:QCC_PNRCaseCreationEvent" action="{!c.createCase}"/> 
+    <aura:handler name="addToCaseEvent" event="c:QCC_PNRAddtoCaseEvent" action="{!c.addToCase}"/>   
+    <aura:handler name="onLegSelection" event="c:QCC_PNRLegSelectionEvent" action="{!c.updateSelectedLeg}"/>
+    <aura:handler name="onSSRSelection" event="c:QCC_PNRSSRSelectionEvent" action="{!c.updateSelectedSSR}"/>
+    <aura:handler name="flightHistoryEvent" event="c:QCC_PNRFlightHistoryEvent" action="{!c.flightHistorySection}"/>
+    
+    <aura:handler event="force:navigateToSObject" action="{!c.refreshPage}"/>
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <!--<aura:handler event="lightning:tabCreated" action="{! c.onTabCreated }"/>-->
+    <force:recordData aura:id="contactRecord"
+			            recordId="{!if(!v.pageReference.state.recordId,v.recordId,v.pageReference.state.recordId)}"
+        				layoutType="FULL"
+        				fields="Preferred_Email__c, Preferred_Phone_Number__c, MailingStreet, MailingCity, MailingState, MailingPostalCode, CountryName__c, CAP_ID__c"
+        				targetRecord="{!v.contact}"
+        				targetFields="{!v.contactF}"
+        				targetError="{!v.message}" 
+        				mode="VIEW" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:spinner aura:id="mySpinner" variant="brand" alternativeText="Fetching Data..." />
+    <div class="c-container">
+        <aura:if isTrue="{!v.showToProfiles}"> 
+            <lightning:layout horizontalAlign="space">
+                <lightning:layoutItem flexibility="auto" size="12" padding="around-small">
+                    <lightning:overlayLibrary aura:id="overlayLib"/>
+                    <aura:if isTrue="{!v.pnr}"> 
+                    	<c:QCC_PNRHighlightPanel aura:id="highlightComponent" pnr="{!v.pnr}"/>
+                    </aura:if>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+        
+        <lightning:layout horizontalAlign="space">            
+            <lightning:layoutItem flexibility="auto" size="3" padding="around-small">
+                <!-- Passenger Section -->
+                <c:QCC_PNRPassengerDetails aura:id="passengerComponet"/>
+                <!-- <c:QCC_PNRContactDetails aura:id="contactComponent"/> -->
+                <c:QCC_PNRAncillaryDetails aura:id="ancillaryComponent"/>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem flexibility="auto" size="6" padding="around-small">
+                <!--Booking-->
+                <c:QCC_PNRSingleFlightDetails aura:id="singleComponent"/>
+                <c:QCC_PNRSingleFlightDisrupts aura:id="singleDisrupt"/>
+                <c:QCC_PNRSingleFlightPassenger aura:id="flgPassengerComponent"/>
+                <c:QCC_PNRPassengerSSR aura:id="ssrComponent"/>
+                <div>&nbsp;
+                &nbsp;
+                &nbsp;&nbsp;&nbsp;</div>
+                <div>&nbsp;
+                &nbsp;
+                &nbsp;&nbsp;&nbsp;</div>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem flexibility="auto" size="3" padding="around-small">
+                <!-- Flight Section -->
+                <c:QCC_PNRFlightDetails aura:id="flightComponet"/>
+				<!-- Disruption Communication Section -->
+                <c:QCC_CustomerDisruptionCommunication aura:id="disruptComm" pnr="{!v.pnr}" segment="{!v.segment}" passenger="{!v.passenger}" creationDate="{!v.creationDate}"/>
+                <!-- Added by Purushotham -->
+                <c:QCC_PNRFlightHistoryDetails aura:id="flightHistComponent"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

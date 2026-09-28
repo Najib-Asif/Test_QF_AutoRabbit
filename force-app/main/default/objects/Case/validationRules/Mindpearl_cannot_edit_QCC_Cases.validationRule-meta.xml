@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mindpearl_cannot_edit_QCC_Cases</fullName>
+    <active>true</active>
+    <description>Mindpearl Users should not edit QCC Cases and they should have Read Only</description>
+    <errorConditionFormula>AND($Permission.Mindpearl_Permission,
+OR(
+AND(
+OR(
+(NOW() - LastModifiedDate) &gt; 0.0001133,
+(ISCHANGED(OwnerId))),
+OR(RecordType.DeveloperName = &apos;CCC_Baggage&apos;, RecordType.DeveloperName = &apos;CCC_Complaints&apos;, RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;, RecordType.DeveloperName = &apos;CCC_Event&apos;, RecordType.DeveloperName = &apos;CCCOffload&apos;,
+RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;, RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;, 
+RecordType.DeveloperName = &apos;CCC_Medical&apos;, RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;, RecordType.DeveloperName = &apos;CCC_Query&apos;)),
+AND(
+ISCHANGED(RecordTypeId),
+OR(PRIORVALUE(RecordTypeId) = &apos;01290000000ukaj&apos;, PRIORVALUE(RecordTypeId) = &apos;01290000000ukak&apos;, PRIORVALUE(RecordTypeId) = &apos;01290000000ukal&apos;,
+PRIORVALUE(RecordTypeId) = &apos;01290000001BXvo&apos;, PRIORVALUE(RecordTypeId) = &apos;01290000001BYLK&apos;, PRIORVALUE(RecordTypeId) = &apos;01290000000ukam&apos;,
+PRIORVALUE(RecordTypeId) = &apos;01290000000ukaq&apos;, PRIORVALUE(RecordTypeId) = &apos;01290000000ukan&apos;, PRIORVALUE(RecordTypeId) = &apos;0122v000001ImEP&apos;,
+PRIORVALUE(RecordTypeId) = &apos;01290000000ukao&apos;, PRIORVALUE(RecordTypeId) = &apos;01290000000ukap&apos;))
+)
+)</errorConditionFormula>
+    <errorMessage>Insufficient access to update the Customer Connect Cases</errorMessage>
+</ValidationRule>

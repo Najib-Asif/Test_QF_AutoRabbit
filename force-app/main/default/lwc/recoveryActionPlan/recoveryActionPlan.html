@@ -1,0 +1,255 @@
+<template>   
+    <template if:true={hasAnyData}>
+        <lightning-accordion allow-multiple-sections-open active-section-name={activeSections} >
+
+            <!-- Important Notice Box with Light Yellow Background -->
+            <div class="slds-p-around_medium" style="background-color: #FBF3E0; border: 1px solid; border-color: #DDDBDA; border-radius: 4px; box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.10); padding-bottom: 16px">
+                {disclaimerMessage}
+            </div>
+
+            <!-- Hotel Accommodation Section - Only show if hotelItems has data -->
+            <div style="margin-top:16px"> 
+                <template if:true={hasHotelData}>
+                    <lightning-accordion-section 
+                        label="Hotel Accommodation" 
+                        name="1"
+                        style="font-size: 16px;"> 
+                        <template if:true={hotelItems.Eligibility_Indicator__c}>
+                            <template if:true={isHotelEligible}>
+                                <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                    <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                        <img src={eligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                    
+                                    </div> 
+                                    <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                        <strong>Eligible </strong>
+                                        <template if:true={hotelItems.Eligibility_Comments__c}>
+                                            - {hotelItems.Eligibility_Comments__c}
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+
+                        
+                            <template if:false={isHotelEligible}>
+                                <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                    <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                        <img src={notEligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                    
+                                    </div> 
+                                    <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                        <strong>Not eligible </strong>
+                                        <template if:true={hotelItems.Eligibility_Comments__c}>
+                                            - {hotelItems.Eligibility_Comments__c}
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+
+
+                        <template if:true={hotelItems.Arrangements_Indicator__c}>
+                            <template if:true={isHotelEligible}>
+                                <template if:true={isArrangementsEligible}>
+                                    <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                        <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                            <img src={eligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                        </div> 
+                                        <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                            <strong>Accommodation provided </strong>
+                                            <template if:true={hotelItems.Arrangement_Comments__c}>
+                                                - {hotelItems.Arrangement_Comments__c}
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:false={isArrangementsEligible}>
+                                    <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                        <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                            <img src={notEligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                        </div> 
+                                        <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                            <strong>Accommodation not provided </strong>
+                                            <template if:true={hotelItems.Arrangement_Comments__c}>
+                                                - {hotelItems.Arrangement_Comments__c}
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                            
+                        </template>
+                        <template if:true={isHotelEligible}>
+                            <template if:true={expenseGuide}>
+                                <div class=" slds-grid  slds-p-around_xx-small " style="font-size: 14px; display: flex; align-items: center; flex-wrap: wrap;margin-left: 8px;">
+                                    <div class="slds-col" style="margin-left:22px;">
+                                        <strong>Expense Claim Guidelines: {expenseGuide} </strong>
+                                        <template if:true={hotelItems.Expense_Claim_Guide_Comments__c}>
+                                            - {hotelItems.Expense_Claim_Guide_Comments__c}
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        </template>
+                    </lightning-accordion-section>
+                </template>
+            </div>
+
+            <!-- Transport Section - Only show if transportItems has data -->
+            <template if:true={hasTransportData}>
+                <lightning-accordion-section 
+                    label="Transport" 
+                    name="2"
+                    style="font-size: 16px;"> 
+
+                    <template if:true={transportItems.Eligibility_Indicator__c}>
+                    
+                        <template if:true={isTransportEligible}>
+                        
+                                <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                    <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                        <img src={eligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                    </div> 
+                                    <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                        <strong>Eligible </strong>
+                                        <template if:true={transportItems.Eligibility_Comments__c}>
+                                            - {transportItems.Eligibility_Comments__c}
+                                        </template>
+                                    </div>
+                                </div>
+                            
+                        </template>
+
+                        <template if:false={isTransportEligible}>
+                            <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                    <img src={notEligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                </div> 
+                                <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                    <strong>Not eligible </strong>
+                                    <template if:true={transportItems.Eligibility_Comments__c}>
+                                        - {transportItems.Eligibility_Comments__c}
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+
+                    <template if:true={transportItems.Arrangements_Indicator__c}>
+                        <template if:true={isTransportEligible}>
+                            <template if:true={isTransportArrangementsEligible}>
+                                <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                    <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                        <img src={eligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                    </div> 
+                                    <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                        <strong>Transport provided </strong>
+                                        <template if:true={transportItems.Arrangement_Comments__c}>
+                                            - {transportItems.Arrangement_Comments__c}
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:false={isTransportArrangementsEligible}>
+                                <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                    <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                        <img src={notEligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                    </div> 
+                                    <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                        <strong>Transport not provided </strong>
+                                        <template if:true={transportItems.Arrangement_Comments__c}>
+                                            - {transportItems.Arrangement_Comments__c}
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </template>
+                </lightning-accordion-section>
+            </template>
+
+            <!-- Meals Section - Only show if mealsItems has data -->
+            <template if:true={hasMealsData}>
+                <lightning-accordion-section 
+                    label="Meals" 
+                    name="3"
+                    style="font-size: 16px;"> 
+                <template if:true={mealsItems.Eligibility_Indicator__c}>
+                    <template if:true={isMealsEligible}>
+                        <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                            <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                <img src={eligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                            </div> 
+                            <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                <strong>Eligible </strong>
+                                <template if:true={mealsItems.Eligibility_Comments__c}>
+                                     - {mealsItems.Eligibility_Comments__c}
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                
+                    <template if:false={isMealsEligible}>
+                        <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                            <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                <img src={notEligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                            </div> 
+                            <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                <strong>Not eligible </strong>
+                                <template if:true={mealsItems.Eligibility_Comments__c}>
+                                     - {mealsItems.Eligibility_Comments__c}
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+
+                <template if:true={mealsItems.Arrangements_Indicator__c}>
+                    <template if:true={isMealsEligible}>
+                        <template if:true={isMealArrangementsEligible}>
+                            <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                    <img src={eligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                </div> 
+                                <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                    <strong>Meals provided </strong>
+                                    <template if:true={mealsItems.Arrangement_Comments__c}>
+                                         - {mealsItems.Arrangement_Comments__c}
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    
+                        <template if:false={isMealArrangementsEligible}>
+                            <div class="slds-grid  slds-p-around_xx-small" style="font-size: 14px; display: flex; align-items: flex-start; flex-wrap: nowrap;">
+                                <div style="display: flex; align-items: flex-start; flex-shrink: 0;">
+                                    <img src={notEligibleUrl} style="width: 21.99px; height: 21.99px; margin-right: 2px;" />
+                                </div> 
+                                <div style="flex-grow: 1; word-break: break-word; align-items: flex-start;overflow-wrap: break-word; margin-left: 8px;">
+                                    <strong>Meals not provided </strong>
+                                    <template if:true={mealsItems.Arrangement_Comments__c}>
+                                         - {mealsItems.Arrangement_Comments__c}
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    </template>
+
+                </lightning-accordion-section>
+            </template>
+
+        </lightning-accordion>
+    </template>
+
+    <template if:false={hasAnyData}>
+        <div class="slds-p-around_medium" style="background-color: #F4F6F9; border: 1px solid; border-radius: 4px; border-color: #DDDBDA; box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.10);">
+            {disclaimerMessageNoData}
+        </div>
+    </template>
+    
+    
+    
+
+</template>

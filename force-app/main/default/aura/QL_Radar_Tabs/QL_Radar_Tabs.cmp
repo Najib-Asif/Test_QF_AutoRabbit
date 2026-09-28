@@ -1,0 +1,19 @@
+<aura:component controller="QL_currentUserInfoCtrl" implements="flexipage:availableForAllPageTypes" access="global" >
+ <span class="crayon-i "> </span><span class="crayon-c"><!-- init handler event call "doInit" function on component load and fetch current user information --></span> 
+ <aura:handler name="init" value="this" action="{!c.doInit}"/>
+  
+    <aura:attribute name="userInfo" type="user"/>   
+    <aura:attribute name="headerTitle" type="Aura.Component[]">
+        <h2>
+            <b>Radar Dashboards</b>
+        </h2>
+    </aura:attribute>
+    <lightning:card class="slds-text-body_regular" title="{!v.headerTitle}" >
+    <ul class="slds-list_horizontal slds-has-dividers_right slds-has-block-links_space">
+        <li class="slds-item"><p><lightning:formattedUrl value="{!format($Label.c.Radar_AU_Agency,v.userInfo.FirstName,v.userInfo.LastName,v.userInfo.Qantas_Staff_ID__c)}" tooltip="AU Agency" label="AU Agency" target="_blank"/></p></li>
+        <li class="slds-item"><p><lightning:formattedUrl value="{!format($Label.c.Radar_AU_BandG,v.userInfo.FirstName,v.userInfo.LastName,v.userInfo.Qantas_Staff_ID__c)}" tooltip="AU B&amp;G" label="AU B&amp;G" target="_blank"/></p></li>
+        <li class="slds-item"><p><lightning:formattedUrl value="{!format($Label.c.Radar_RoW_Agency,v.userInfo.FirstName,v.userInfo.LastName,v.userInfo.Qantas_Staff_ID__c)}" tooltip="RoW Agency" label="RoW Agency" target="_blank"/></p></li>
+        <li class="slds-item"><p><lightning:formattedUrl value="{!format($Label.c.Radar_RoW_Corporate,v.userInfo.FirstName,v.userInfo.LastName,v.userInfo.Qantas_Staff_ID__c)}" tooltip="RoW Corporate" label="RoW Corporate" target="_blank"/></p></li>
+    </ul>
+    </lightning:card>
+</aura:component>

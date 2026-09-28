@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>FF_Closure_Chatter_Notification</name>
+        <label>FF Closure Chatter Notification</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>FrequentFlyerClosedStatusChatterMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_Frequent_Flyer_Closed_Status</name>
+        <label>Check Frequent Flyer Closed Status</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>FALSE Frequent Flyer Closed Status</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_Frequent_Flyer_Closed_Status</name>
+            <conditionLogic>1 AND ( 2 OR 3 )</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Frequent_Flyer_Request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed - Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed - Rejected</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FF_Closure_Chatter_Notification</targetReference>
+            </connector>
+            <label>TRUE Frequent Flyer Closed Status</label>
+        </rules>
+    </decisions>
+    <description>migrated from Sales Solution - Closed Notification process builder(Platform change)</description>
+    <environments>Default</environments>
+    <interviewLabel>CaseAfterTriggerSubFlow-OtherFrequentFlyer {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-OtherFrequentFlyer</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Frequent_Flyer_Closed_Status</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>FrequentFlyerClosedStatusChatterMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi @[{!objNewCase.CreatedBy.Id}], the Status of the Frequent Flyer Case for {!objNewCase.Account.Name} has been changed to {!objNewCase.Status}. Thanks.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SalesOfferCompletedStatusChatterMsg</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Hi {!objNewCase.CreatedBy.Id} the Status of the Sales Offer Case Type: {!objNewCase.Type} - {!objNewCase.Sub_Type__c} for {!objNewCase.Account.Name} has been changed to {!objNewCase.Status}. Thanks.&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <description>trigger.new</description>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>trigger.old</description>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

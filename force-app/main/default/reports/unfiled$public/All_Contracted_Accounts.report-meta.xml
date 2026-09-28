@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_67373655</developerName>
+        <masterLabel>New World Portfolio</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>OWNERSHIP</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <value>R&amp;G Under 500K</value>
+        </values>
+        <values>
+            <value>R&amp;G above 500K</value>
+        </values>
+        <values>
+            <value>ISAM</value>
+        </values>
+        <values>
+            <value>BDR</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>R&amp;G-Lead</sourceValue>
+            </sourceValues>
+            <value>R&amp;G Lead Gen</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Account.Qantas_Corporate_Identifier__c</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.ABN_Tax_Reference__c</field>
+    </columns>
+    <columns>
+        <field>Account.Aquire_Enrollment_Date_System__c</field>
+    </columns>
+    <columns>
+        <field>Account.Account_ID_18_Digit__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account.Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>TYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Customer Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Contracted__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ROLLUP_DESCRIPTION</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>QIS</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>USERS.NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>SME Contracted Accounts</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account.Contract_Start_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_to_Prevent_Setting_Status_to_Active</fullName>
+    <active>true</active>
+    <description>Validation will prevent user manually setting the status to Active. Scheme can be activated only through system</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_to_Prevent_Setting_Status_to_Active__c &amp;&amp;
+(RecordType.DeveloperName =&apos;Public_Scheme&apos; || RecordType.DeveloperName =&apos;Corporate_Scheme&apos; ) &amp;&amp; 
+(ISNEW() || ISCHANGED(Status )) &amp;&amp;  ISPICKVAL(Status , &apos;Active&apos;)</errorConditionFormula>
+    <errorMessage>Asset Can&apos;t be Activated Manually. Please set the status to Complete – Pending Activation and Scheme will be auto Activated based on the Scheme Start Date</errorMessage>
+</ValidationRule>

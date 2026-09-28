@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Opportunity</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>New Opportunity</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+var rtype; 
+if(&apos;{!Account.RecordType}&apos; == &apos;Charter Account&apos;){ 
+rtype = &apos;Charters&apos;; 
+}
+var query = &quot;SELECT Id, Name FROM RecordType where Name like &apos;%&quot;+rtype+&quot;%&apos; AND sObjectType=&apos;Opportunity&apos; limit 1&quot;; 
+var records = sforce.connection.query(query); 
+var records1 = records.getArray(&apos;records&apos;); 
+
+var URL; 
+
+if(&apos;{!Account.RecordType}&apos; == &apos;Customer Account&apos;){ 
+var URL = &apos;https://qantas.my.salesforce.com/setup/ui/recordtypeselect.jsp?ent=Opportunity&amp;retURL=%2F{!Account.Id}&amp;save_new_url=%2F006%2Fe%3FretURL%3D%252F{!Account.Id}%26accid={!Account.Id}&amp;00N9000000Dg8jH={!IF(Account.Estimated_Total_Annual_Revenue__c !=0,TEXT(Account.Estimated_Total_Annual_Revenue__c),TEXT(Account.QF_Revenue__c))}&amp;00N9000000EPJxX={!IF(Account.Estimated_MCA_Revenue__c !=0,TEXT(Account.Estimated_MCA_Revenue__c),TEXT(Account.Estimated_MCA_Revenue__c))}&amp;00N9000000Dg8jC={!IF(Account.Estimated_QF_Dom_Market_Share__c !=0,Account.Estimated_QF_Dom_Market_Share__c*100,Account.QF_Domestic_Market_Share__c*100)}&amp;00N9000000Dg8jF={!IF(Account.Estimated_Int_Market_Share__c !=0,Account.Estimated_Int_Market_Share__c*100,Account.QF_International_Market_Share__c*100)}&amp;00N9000000Dg8jE={!IF(Account.Estimated_Int_MCA_Market_Share__c !=0,Account.Estimated_Int_MCA_Market_Share__c*100,Account.QF_International_MCA_Market_Share__c*100)}&apos;; 
+
+}else if(&apos;{!Account.RecordType}&apos; == &apos;Charter Account&apos;){ 
+URL = &apos;/006/e?retURL={!Account.Id}&amp;accid={!Account.Id}&amp;RecordType=&apos;+records1[0].Id+&apos;&amp;ent=Opportunity&apos;; 
+} 
+window.top.location.href = URL;</url>
+</WebLink>

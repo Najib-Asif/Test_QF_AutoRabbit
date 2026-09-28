@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Subject</field>
+        <field>Description</field>
+        <field>Sub_Type_1__c</field>
+        <field>Sub_Type_2__c</field>
+        <field>Priority</field>
+        <field>First_Name__c</field>
+        <field>Last_Name__c</field>
+        <field>User_s_Email__c</field>
+        <field>Business_Unit__c</field>
+        <field>Department__c</field>
+        <field>Owner</field>
+        <field>CreatedDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <label>Step 1</label>
+        <name>Step_1</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>brenton.watson@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Approval for New/Replace user accounts -CRM Manager</label>
+        <name>Approval_for_New_Replace_user_accounts_CRMManager</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND (2 OR 3 OR 4) AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.Sub_Type_1__c</field>
+            <operation>equals</operation>
+            <value>Freight,Sales and Distribution,Agency Connect,Customer Contact,Customer Journey Operations,Loyalty</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Sub_Type_2__c</field>
+            <operation>equals</operation>
+            <value>,Other,User Maintenance (New User),User Maintenance (Other),Accounts,Opportunity,Quote,Case,Price Book,Capacity Outlook,CCA,Revenue Insights,Contacts,Deactivate User,Change in Permission,Account Maintenance,Dashboard,Data Load Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Sub_Type_2__c</field>
+            <operation>equals</operation>
+            <value>Radar,How Do I?,Reports,Case Information,Booking Information,Customer Information,Recovery/Refund,Survey Response,Baggage,Case Owner,Omni Channel,Chatter,Event Action Plan,Flight Map,Customer/PNR Search,Approvals</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Sub_Type_2__c</field>
+            <operation>equals</operation>
+            <value>,Recovery Portfolio,Details Tab,Related Tab,Emails/Attachments,Knowledge,Flight Events,Flight Failure,Passenger List,Files,Costs,Assign to CCC,Global Events,Flight,Events,Offload Events,User Maintenance (Chatter User)</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>System Admin Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Type</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Check_the_Approved_checkbox</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Last_Approved_By_update</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>New_User_Rep_Acc_Status_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>New_User_Rep_Acc_Status_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Approval for New/Replace user accounts</label>
+    <processOrder>49</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

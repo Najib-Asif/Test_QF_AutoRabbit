@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Revenue_Var_Monthly__c</fullName>
+    <formula>IF(QF_Revenue__c &gt; 0, QF_Revenue__c -  QF_Rev_Target__c, null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Actual monthly QF revenue - QF monthly revenue target</inlineHelpText>
+    <label>Revenue Var (Monthly)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

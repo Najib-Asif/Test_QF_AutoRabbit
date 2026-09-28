@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Closure_Comments_for_Other</fullName>
+    <active>false</active>
+    <description>Closure Comments should be mandatory if ‘Other’ is selected as a Closure Reason.</description>
+    <errorConditionFormula>AND
+(
+NOT( CreatedBy.FirstName = &apos;Data&apos;),
+NOT( RecordType.DeveloperName = &apos;Loyalty_Commercial&apos;), 
+NOT( $User.ProfileId = &apos;00e90000001wK8z&apos;), /*SystemAdmins*/
+NOT ( ISPICKVAL( Type , &quot;Global Opportunity&quot;)), /*Global Opportunity*/
+INCLUDES(Closed_Reasons__c, &apos;Other&apos;),
+ISBLANK( Other_reasons__c))</errorConditionFormula>
+    <errorDisplayField>Other_reasons__c</errorDisplayField>
+    <errorMessage>Please add closure comments</errorMessage>
+</ValidationRule>

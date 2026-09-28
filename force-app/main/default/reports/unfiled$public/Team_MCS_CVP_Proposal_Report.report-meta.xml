@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Proposal__c$Name</field>
+    </columns>
+    <columns>
+        <field>Proposal__c$Approval_Status__c</field>
+    </columns>
+    <columns>
+        <field>Proposal__c$CreatedDate</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Team MCS CVP Proposal Report 
+Manual QCIs added - not dynamic</description>
+    <filter>
+        <criteriaItems>
+            <column>Proposal__c$Account__c.Qantas_Corporate_Identifier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>FMR,BUS,AMC,FMN,ZTB,ZJP,ABF,ZTL,CGG,BFV,BIY,DGK,DLZ,FEY,FOF,FNS,ZYV,DGN,FMA,GCO,AUS,CKN,FRM,FMZ,BOO,DTP,ZEN,ZQN,AJD,DQR,AUH,YXI,CBJ,ASZ,CFA,EDD,ZVQ,YUG,BAQ,ZJN,FLZ,ECU,CZE,DNB,FHK,FFD,FLE,ZRN,YFO,CIR,FHA,EEX,DQW,DVX,DQG,GAS,ZYO,YRI,ZOB,EXE,ZWS,ZJK,ZCQ,FOZ,ZER,CJA,FMT,ZRZ,DFK,DKH,FFI,ZVP,CQJ,ZTI,YYM,YYO,YYT,DKY,CKY,DXO,GBC,FEW,DRQ,DSQ,FOB,DRG,GAX,CMQ,ZCV,YFH,ZGW,BZL,ZGV,APM,ZOS,AGF,AOD,CMC,DNF,DMH,FOP,FMU,FHH,YYH,ABL,EBK,FMF,CHI,DGF,ZGP,BHB,CMY,CBN,AVD,CIQ,FME,CUO,FEO,EOA,EUK,CBO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Proposal__c$Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Proposal__c$CreatedDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>9/24/2025 12:00 AM</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Proposal__c$Opportunity__c.Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Proposal__c$Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Team MCS CVP Proposal Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Proposal__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Proposal__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

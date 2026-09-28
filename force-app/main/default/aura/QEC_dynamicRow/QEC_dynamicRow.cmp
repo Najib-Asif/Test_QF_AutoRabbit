@@ -1,0 +1,93 @@
+<aura:component > 
+    <aura:attribute name="specialCondition" type="QEC_Special_Condition__c" />
+    <aura:attribute name="fields" type="String[]" />
+    <aura:attribute name="pickListMap" type="Map" />
+    <aura:attribute name="rowIndex" type="String" />
+    <aura:attribute name="type" type="String" />
+    <aura:registerEvent name="rowDeleteEvent" type="c:QEC_RowOperation" />
+    <aura:registerEvent name="rowCloneEvent" type="c:QEC_RowOperation" />
+    <aura:handler name="selectEvent" event="c:QEC_selectChangeEvent" action="{!c.handleEvent}"/>
+    <div class="slds-card">
+        <div class="slds-card__body slds-card__body_inner slds-grid">
+            <div class="slds-m-around_xx-small slds-form-element__label">
+                Origin
+                <lightning:helptext content="Enter Airport Code, Country, Domestic or International." />
+                <lightning:input class="select-auto-width" value="{!v.specialCondition.QEC_Origin__c}" variant="label-hidden" label="Origin" disabled="true"/>
+            </div>
+            <div class="slds-m-around_xx-small slds-form-element__label">
+                Destination
+                <lightning:helptext content="Enter Airport Code, Country, Domestic or International." />
+                <lightning:input class="select-auto-width" value="{!v.specialCondition.QEC_Destination__c}" variant="label-hidden" label="Destination" disabled="true"/>
+            </div>
+            <aura:iteration items="{!v.fields}" var="field">
+                <aura:if isTrue="{!field.fieldType == 'PICKLIST'}">
+                    <c:QEC_customSelect pickListMap="{!v.pickListMap}" pickListName="{!field.fieldName}" pickListLabel="{!field.fieldLabel}"/>
+                </aura:if>
+                <aura:if isTrue="{!field.fieldType == 'BOOLEAN'}" >
+                    <div class="slds-m-around_xx-small slds-form-element__label ">
+                        {!field.fieldLabel}
+                        <br/>
+                        <lightning:input name="{!field.fieldName}" type="Checkbox" label="{!field.fieldLabel}" variant="label-hidden" onchange="{!c.handleCheck}" class="slds-m-top_x-small"/>
+                    </div> 
+                </aura:if>
+                <aura:if isTrue="{!field.fieldType == 'DOUBLE'}">
+                    <div class="slds-m-around_xx-small slds-form-element__label ">
+                        {!field.fieldLabel}
+                        <aura:if isTrue="{!field.helpText != null}">
+                            <lightning:helptext content="{!field.helpText}" />
+                        </aura:if>
+                        <lightning:input name="{!field.fieldName}" type="Number" label="{!field.fieldLabel}" variant="label-hidden" onchange="{!c.handleChange}" /> 
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!field.fieldType == 'CURRENCY'}">
+                    <div class="slds-m-around_xx-small slds-form-element__label ">
+                        {!field.fieldLabel}
+                        <aura:if isTrue="{!field.helpText != null}">
+                            <lightning:helptext content="{!field.helpText}" />
+                        </aura:if>
+                        <lightning:input name="{!field.fieldName}" type="Number" label="{!field.fieldLabel}" variant="label-hidden" onchange="{!c.handleChange}" formatter="currency" step=".01"/> 
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!field.fieldType == 'PERCENT'}">
+                    <div class="slds-m-around_xx-small slds-form-element__label ">
+                        {!field.fieldLabel}
+                        <aura:if isTrue="{!field.helpText != null}">
+                            <lightning:helptext content="{!field.helpText}" />
+                        </aura:if>
+                        <lightning:input name="{!field.fieldName}" type="Number" label="{!field.fieldLabel}" variant="label-hidden" onchange="{!c.handleChange}" formatter="percent-fixed" step="0.01"/> 
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!field.fieldType == 'DATE'}">
+                    <div class="slds-m-around_xx-small slds-form-element__label ">
+                        {!field.fieldLabel}
+                        <aura:if isTrue="{!field.helpText != null}">
+                            <lightning:helptext content="{!field.helpText}" />
+                        </aura:if>
+                        <lightning:input name="{!field.fieldName}" type="Date" label="{!field.fieldLabel}" variant="label-hidden" onchange="{!c.handleChange}" /> 
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!field.fieldType == 'STRING'}">
+                    <div class="slds-m-around_xx-small slds-form-element__label ">
+                        {!field.fieldLabel}
+                        <aura:if isTrue="{!field.helpText != null}">
+                            <lightning:helptext content="{!field.helpText}" />
+                        </aura:if>
+                        <lightning:input name="{!field.fieldName}" type="Text" label="{!field.fieldLabel}" variant="label-hidden" onchange="{!c.handleChange}" disabled="{!field.disabled}"/> 
+                    </div>
+                </aura:if>
+            </aura:iteration>
+            <div class="slds-p-left_x-small slds-p-top_x-large">
+                <a onclick="{!c.addNewRow}">
+                    <lightning:icon iconName="action:new"  size="xx-small" alternativeText="add"/>
+                    <span class="slds-assistive-text">Add Icon</span>
+                </a> 
+            </div>
+            <div class="slds-p-left_x-small slds-p-top_x-large">
+                <a onclick="{!c.removeRow}">
+                    <lightning:icon variant="error" iconName="action:delete" size="xx-small" alternativeText="icon"/>
+                    <span class="slds-assistive-text">Delete Icon</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</aura:component>

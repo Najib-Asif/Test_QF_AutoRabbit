@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Levels__c</fullName>
+    <description>INTL Service Request Approval Levels</description>
+    <externalId>false</externalId>
+    <formula>IF ( OR ( 
+ISPICKVAL (  Problem_Type__c , &quot;Lounge Access - Qantas Domestic Business Lounge&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Space Available Upgrade - Economy to Premium Economy&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Space Available Upgrade - Economy to Business&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Space Available Upgrade - Premium Economy to Business&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Excess Baggage&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Prizewinner&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Lounge Access - Qantas International Business Lounge&quot; )), &quot;L2&quot; , 
+IF ( OR (
+ISPICKVAL (  Problem_Type__c , &quot;Lounge Access - Qantas First Lounge&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Space Available Upgrade - Economy to First&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Space Available Upgrade - Premium Economy to First&quot; ),
+ISPICKVAL (  Problem_Type__c , &quot;Space Available Upgrade - Business to First&quot; )
+), &quot;L2+L3&quot; , 
+IF ( AND ( ISPICKVAL (  Problem_Type__c , &quot;Advance Seat Selection&quot; ) , CONTAINS ( Account_Tier__c , &quot;Industry - Platinum&quot;)), &quot;L4&quot;,
+IF ( ISPICKVAL (  Type , &quot;Commercial Waiver (non BART)&quot; ), &quot;L4&quot; , &quot;L1&quot; ))))</formula>
+    <label>Approval Levels</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

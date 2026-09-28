@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>Account</field>
+        <field>Problem_Type__c</field>
+        <field>CreatedDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Last_Approved_By_update</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Recent_Approval_Date_Time</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>kevinburns@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>((1 OR 2 OR 3) AND 4) OR (5 OR (4 AND 6))</booleanFilter>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Space Available Upgrade - Economy to Premium Economy,Space Available Upgrade - Economy to Business,Space Available Upgrade - Economy to First</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Space Available Upgrade - Premium Economy to Business,Space Available Upgrade - Premium Economy to First,Space Available Upgrade - Business to First</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Qantas First Lounge Access,Group/Family Qantas First Lounge Access,Group/Family Qantas Club Access,Excess Baggage,Qantas Club Access</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Service Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Commercial Waiver (BART),Commercial Waiver (non BART),Operational Waiver</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Advance Seat Selection,Agent Discount Travel,Change of TMC,Prizewinner,Qantas International Business Lounge Access</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>VP North America Sales</label>
+        <name>VP_North_America_Sales</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Last_Approved_By_update</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Recent_Approval_Date_Time</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>sthompson@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>((1 OR 2 OR 3) AND 4) OR (5 OR (4 AND 6))</booleanFilter>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Space Available Upgrade - Economy to Premium Economy,Space Available Upgrade - Economy to Business,Space Available Upgrade - Economy to First</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Space Available Upgrade - Premium Economy to Business,Space Available Upgrade - Premium Economy to First,Space Available Upgrade - Business to First</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Qantas First Lounge Access,Group/Family Qantas First Lounge Access,Group/Family Qantas Club Access,Excess Baggage,Qantas Club Access</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Service Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Commercial Waiver (BART),Commercial Waiver (non BART),Operational Waiver</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Advance Seat Selection,Agent Discount Travel,Change of TMC,Prizewinner,Qantas International Business Lounge Access</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>RGM North America Approval</label>
+        <name>RGM_North_America_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approval_Status__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.BillingCountry</field>
+            <operation>equals</operation>
+            <value>US</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Assign_to_US_Sales_Support_Queue</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Assigned_to_US_Sales_Support</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status_as_Pending</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_status_to_Waiting_for_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Service Requests - US</label>
+    <processOrder>5</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

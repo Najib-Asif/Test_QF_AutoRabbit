@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Level_Calculated__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( 
+NOT(ISBLANK( sales_h_parent_region__r.sales_h_parent_region__r.Name)),2, 
+IF( 
+NOT(ISBLANK(sales_h_parent_region__r.Name)),1, 
+3))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Level Calculated</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

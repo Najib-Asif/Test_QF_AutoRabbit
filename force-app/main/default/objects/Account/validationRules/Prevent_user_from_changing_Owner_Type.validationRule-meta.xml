@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_user_from_changing_Owner_Type</fullName>
+    <active>false</active>
+    <description>This is to Prevent user from Changing Account owner and Type for the Prospect Account</description>
+    <errorConditionFormula>AND(RecordType.DeveloperName =&apos;Prospect_Account&apos;,$Setup.EnableValidationRule__c.VR_Prevent_user_from_changing_Owner_Type__c = false ,$Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+        $Profile.Name &lt;&gt; &apos;Qantas System Administrator&apos;,
+        $Profile.Name &lt;&gt; &apos;Qantas System Admin - Freight&apos;,
+        $Profile.Name &lt;&gt; &apos;Qantas System Admin - QCC&apos;,
+        $Profile.Name &lt;&gt; &apos;Qantas System Admin - SND&apos;,
+        OR(ISCHANGED(Type),ISCHANGED(OwnerId)))</errorConditionFormula>
+    <errorMessage>You are not entitled to change the Account owner and Type for the Prospect Account</errorMessage>
+</ValidationRule>

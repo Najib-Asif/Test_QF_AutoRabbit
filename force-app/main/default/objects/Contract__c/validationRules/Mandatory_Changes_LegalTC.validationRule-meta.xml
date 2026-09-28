@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Changes_LegalTC</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(  OR( ISPICKVAL( Legal_Approval__c , &apos;Required&apos;), ISPICKVAL( Legal_Approval__c , &apos;Approved&apos;), ISPICKVAL( Legal_Approval__c , &apos;Rejected&apos;)),  ISBLANK( Changes_in_Legal_T_Cs__c )   )</errorConditionFormula>
+    <errorDisplayField>Changes_in_Legal_T_Cs__c</errorDisplayField>
+    <errorMessage>You should enter the value if Legal Approval is Required</errorMessage>
+</ValidationRule>

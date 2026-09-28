@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheme_Threshold__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Override_Threshold__c  == False, IF((Scheme_Active_Member_Count__c &gt;=  Value($Label.Threshold_Limit_First_Year) &amp;&amp; TODAY()- Public_Scheme_Start_Date__c &lt;365) || 
+(Scheme_Active_Member_Count__c &gt;=  Value($Label.Threshold_Limit_Second_Year) &amp;&amp; TODAY()- Public_Scheme_Start_Date__c &gt;365 &amp;&amp; TODAY()- Public_Scheme_Start_Date__c &lt;720)|| 
+(Scheme_Active_Member_Count__c &gt;=  Value($Label.Threshold_Limit_ThreePlus_Year)  &amp;&amp; TODAY()- Public_Scheme_Start_Date__c &lt;1095 &amp;&amp; TODAY()- Public_Scheme_Start_Date__c &gt;720), 
+
+IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 17, 17),
+
+IMAGE(&quot;/img/samples/color_red.gif&quot;, &quot;red&quot;, 17, 17)
+), IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 17, 17))</formula>
+    <label>Scheme Threshold</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

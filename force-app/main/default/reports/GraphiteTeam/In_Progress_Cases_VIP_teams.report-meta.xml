@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_70031052</developerName>
+        <masterLabel>SLA Met/Missed</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Case$SLA_Met_Or_Missed_By__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>-1</to>
+            </sourceValues>
+            <value>Within SLA</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>-1</from>
+            </sourceValues>
+            <value>Over SLA</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_87418854</developerName>
+        <masterLabel>Service Type</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Case$Type</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Welcome to Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to SSU</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to Life Time Platinum</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PNR Health Check</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PNR Health Check - Watchlist</sourceValue>
+            </sourceValues>
+            <value>Proactive</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_13645481</developerName>
+        <masterLabel>Tier</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Case$Frequent_Flyer_Tier__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge</sourceValue>
+            </sourceValues>
+            <value>1. Chair/Plat1</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Platinum</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Gold</sourceValue>
+            </sourceValues>
+            <value>2. Plat/Gold</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Qantas Club Bronze</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Club Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Bronze</sourceValue>
+            </sourceValues>
+            <value>3. Sil/Bnze</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Case$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case$Due_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$Owner_City__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case$No_of_Days_Case_is_Due_In__c</field>
+    </columns>
+    <columns>
+        <field>Case$RecordType</field>
+    </columns>
+    <columns>
+        <field>Case$Type</field>
+    </columns>
+    <columns>
+        <field>Case$Origin</field>
+    </columns>
+    <columns>
+        <field>BucketField_87418854</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <booleanFilter>2 AND 3 AND 1 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <column>Case$IsClosed</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>In Progress,Waiting for Customer,Waiting for Internal,Reply Received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_87418854</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Proactive</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Frequent_Flyer_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Chairman,One</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$FF_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Platinum One,Chairmans Lounge,Chairmans Lounge Platinum One,Chairman&apos;s Lounge,Chairman&apos;s Lounge Platinum One</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$FF_Tier__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Status</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>In Progress Cases - VIP teams</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_or_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Amount_Calculated__c</fullName>
+    <description>This field indicates whether Amount field is calculated using dependent fields(workflow) or manually user inputs. Its used by Loyalty Commercial managers</description>
+    <formula>IF(Amount = Customer_Base__c * Assumed_Tag_Rate_at_Maturity__c  * Price_Per_Point__c * Points_Per__c * Average_Spend_Per_Customer__c*  Probability , TRUE, FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>If checked, the amount field is calculated by Salesforce</inlineHelpText>
+    <label>Is Amount Calculated</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

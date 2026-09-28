@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Status__c</field>
+        <field>Type__c</field>
+        <field>Value__c</field>
+        <field>Amount__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Update_previous_approvers_ID</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_TL_Approved</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Level 1 Approval</description>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approval</name>
+        <rejectionActions>
+            <action>
+                <name>Update_TL_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Update_OM_Approved</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Level 2 Approval</description>
+        <entryCriteria>
+            <formula>OR( AND(CreatedBy.Profile.Name = &apos;Qantas CC Consultant&apos; 
+,OR(Text(Type__c)=&apos;Space available upgrade&apos; 
+,Text(Type__c)=&apos;Firm space upgrade&apos; 
+, AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c&gt;2500) 
+, AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;25000) 
+,AND(Text(Type__c)=&apos;Credit Card Refund&apos;,Value__c&gt;2000) 
+,AND(Text(Type__c)=&apos;EFT Refund&apos;,Value__c&gt;2000)) 
+) 
+,AND(CreatedBy.Profile.Name= &apos;Qantas CC Team Lead&apos; 
+,OR(AND(Text(Type__c)=&apos;Credit Card Refund&apos;,Value__c&gt;5000) 
+,AND(Text(Type__c)=&apos;EFT Refund&apos;,Value__c&gt;5000) 
+,AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;100000) 
+) 
+) 
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+        <rejectionActions>
+            <action>
+                <name>Update_OM_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Top Level Management Approval</description>
+        <entryCriteria>
+            <formula>AND(CreatedBy.Profile.Name = &apos;Qantas CC Consultant&apos;
+,OR(AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;100000)
+,AND(Text(Type__c)=&apos;Credit Card Refund&apos;,Value__c&gt;5000) 
+,AND(Text(Type__c)=&apos;EFT Refund&apos;,Value__c&gt;5000))
+)</formula>
+        </entryCriteria>
+        <label>Level 3 Approval</label>
+        <name>Level_3_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>QCC: Recovery Approval Process</description>
+    <emailTemplate>QCC_Email_Templates/QCC_Approval_Template</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+OR(AND(LastModifiedBy.Profile.Name = &apos;Qantas CC Consultant&apos;, 
+OR(Text(Type__c)=&apos;Space available upgrade&apos;, 
+Text(Type__c)=&apos;Firm space upgrade&apos;,
+Text(Type__c)=&apos;Other&apos;
+) 
+
+,OR(AND(Text(Type__c)=&apos;Valet Parking or Carwash&apos;,Amount__c&gt;2) 
+
+,AND(OR(Text(Type__c) = 
+&apos;Dinner vouchers&apos;,Text(Type__c)=&apos;Flowers&apos;),Value__c&gt;80) 
+
+,AND(Text(Type__c) =&apos;Wine&apos;,Value__c&gt;100) ) 
+) 
+
+,AND( 
+OR(Text(LastModifiedBy.Location__c)= &apos;Manila&apos;, Text(LastModifiedBy.Location__c)= &apos;Hobart&apos;,Text(LastModifiedBy.Location__c)= &apos;Auckland&apos;) 
+
+,OR(AND(Text(Type__c)= 
+&apos;Qantas Points&apos;,Amount__c&gt;Suggested_Maximum__c) 
+,AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;0,ISBLANK(Suggested_Maximum__c) 
+
+,AND(Amount__c&gt;2, 
+OR( 
+Text(Type__c)=&apos;Qantas club lounge passes&apos; 
+,Text(Type__c) =&apos;Business Lounge Passes&apos; 
+
+) 
+) 
+,AND(Text(Type__c)=&apos;Credit Card Refund&apos;,Value__c&gt;500) 
+,AND(Text(Type__c)=&apos;EFT Refund&apos;,Value__c&gt;500) 
+,AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c&gt;200) 
+) 
+) 
+
+,AND(Text(LastModifiedBy.Location__c)= &apos;Sydney&apos;, 
+
+OR(AND(Text(Type__c)=&apos;Credit Card Refund&apos;,Value__c&gt;1000) 
+,AND(Text(Type__c)=&apos;EFT Refund&apos;,Value__c&gt;1000) 
+,AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c&gt;500), 
+AND(Amount__c&gt;4, 
+OR( 
+Text(Type__c)=&apos;Qantas club lounge passes&apos; 
+,Text(Type__c) =&apos;Business Lounge Passes&apos; 
+) 
+) 
+,AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;20000) 
+)) 
+) 
+,AND(CreatedBy.Profile.Name= &apos;Qantas CC Team Lead&apos; 
+,OR(Text(Type__c)=&apos;Space available upgrade&apos;, 
+Text(Type__c)=&apos;Firm space upgrade&apos;,
+Text(Type__c)=&apos;Other&apos; 
+) 
+,OR(AND(Text(Type__c)=&apos;Credit Card Refund&apos;,Value__c&gt;2000) 
+,AND(Text(Type__c)=&apos;EFT Refund&apos;,Value__c&gt;2000) 
+,AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c&gt;2500) 
+,AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;25000) 
+)), 
+AND(CreatedBy.Profile.Name= &apos;Qantas CC Operational Manager&apos; 
+,OR(Text(Type__c)=&apos;Other&apos;
+,AND(Text(Type__c)=&apos;Credit Card Refund&apos;,Value__c&gt;5000) 
+,AND(Text(Type__c)=&apos;EFT Refund&apos;,Value__c&gt;5000) 
+,AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;100000) 
+)) 
+)
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>QCC_Update_Approved_By_on_Recovery</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Approved_By_on_Recovery</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>QCC_Update_Approval_Status_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Update_Status_to_Awaiting_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>QCC Recovery Approval Process</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>1</processOrder>
+    <recallActions>
+        <action>
+            <name>Update_Recovery_Status_to_Open</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

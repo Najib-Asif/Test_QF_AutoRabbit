@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>NetworkPublicUsageDailyMetrics.UniqueVisitorDailyCount:SUM/7</calculatedFormula>
+        <datatype>number</datatype>
+        <description>Average number of visitors per day</description>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Average Daily Visitors</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>NetworkPublicUsageDailyMetrics.UniqueVisitorDailyCount:MAX</calculatedFormula>
+        <datatype>number</datatype>
+        <description>Max visitors on a single day</description>
+        <developerName>FORMULA2</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Max Visitors</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <aggregate>Sum</aggregate>
+            <axisBinding>y</axisBinding>
+            <column>Network.NetworkPublicUsageDailyMetrics$UniqueVisitorDailyCount</column>
+        </chartSummaries>
+        <chartType>HorizontalBar</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>Network$Name</groupingColumn>
+        <location>CHART_BOTTOM</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>Network.NetworkPublicUsageDailyMetrics$FieldValue</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Network.NetworkPublicUsageDailyMetrics$UniqueVisitorDailyCount</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Network.NetworkPublicUsageDailyMetrics$PageViewDailyCount</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Report for dashboard - community visitor stats for last week</description>
+    <filter>
+        <criteriaItems>
+            <column>Network$Name</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Qantas Help and Support</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Network$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <field>Network.NetworkPublicUsageDailyMetrics$PeriodEndDate</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Customer Visitor Stats - last week</name>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>ca_only_2_0__Network_Public_Usage_Daily_Metrics_20__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Network.NetworkPublicUsageDailyMetrics$PeriodEndDate</dateColumn>
+        <interval>INTERVAL_LASTWEEK</interval>
+    </timeFrameFilter>
+</Report>

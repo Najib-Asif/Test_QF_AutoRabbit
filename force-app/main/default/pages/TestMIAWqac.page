@@ -1,0 +1,29 @@
+<apex:page >
+ <script type='text/javascript'>
+    function initEmbeddedMessaging() {
+        try {
+            embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+            
+            window.addEventListener("onEmbeddedMessagingReady", () => {
+                console.log("Received the onEmbeddedMessagingReady event…");
+            
+                // Send data to Salesforce
+                embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"QIC_Number" : "0239205"});
+            });
+
+            embeddedservice_bootstrap.init(
+                '00D8s00000IDoz7',
+                'QAC_Messaging_Web_Chat',
+                'https://qantas.my.site.com/ESWQACMessagingWebChat1763451308145',
+                {
+                    scrt2URL: 'https://qantas.my.salesforce-scrt.com'
+                }
+            );
+        } catch (err) {
+            console.error('Error loading Embedded Messaging: ', err);
+        }
+    };
+</script>
+<script type='text/javascript' src='https://qantas.my.site.com/ESWQACMessagingWebChat1763451308145/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+</apex:page>

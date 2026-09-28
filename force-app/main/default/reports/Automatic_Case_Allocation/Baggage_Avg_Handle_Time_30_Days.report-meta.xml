@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>CUST_OWNER_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Abigael Bea Bernardino,Alliah Faith Noelle Tarlit,Azile Mthunzini,Bradny Gumede,Caroline Maenetja,Cherelloi Adolfo,Christina Joyzen Pasia,Damian De Vos,Daniel Arendse,Elton Isaacs,Erica Tikili,Escaraman Ma. Danilly Jane Mendoza,Eugene Agpoon,Hani Leila Mallari,Iris Banua,Isobelle Jane Soreno,James Patrick Abdula,Jean Kate Favila,Jemar Rey Alvarez,Joannelyn Silang,Jocelyn Belonio,Joevic Macapagal,Julian Ludick,Kristine Joy Bondoc,Larriane Grace Almazar,Maria Cabajes,Maria Cecilia Collantes,Maria Pinili,Masithembe Nono,Nasria Dacillo Hadjiaziz,Neo Pan,Noah Buys,Raffy Dida-agun,Raul Taga-an,Rebecca Oliquino,Rizaline Saavedra,Samantha Chakanetsa,Shamiel Jonathan,Sibongile Phama,Sigman Rhee Elarcosa,Steven Clint Velasco,Waldrex Jr Bautista</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Baggage: Avg Handle Time 30 Days</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Case_value_changes__c@Case_value_changes__c.Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_LAST30</interval>
+    </timeFrameFilter>
+</Report>

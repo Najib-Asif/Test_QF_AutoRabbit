@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Reporting_Team__c</fullName>
+    <description>Formula to return Team of the Roles for Freight</description>
+    <externalId>false</externalId>
+    <formula>/* Freight */
+IF (( UserRole.Name == &quot;QF-Freight&quot;), &quot;Freight Executives&quot;,
+
+/* Freight Asia */
+IF (( UserRole.Name == &quot;QF-Freight-Asia&quot;), &quot;Asia&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-Asia-Account Manager&quot;), &quot;Asia&quot;, 
+IF (( UserRole.Name == &quot;QF-Freight-Support-Asia&quot;), &quot;Asia&quot;,
+
+/* Freight AU */
+IF (( UserRole.Name == &quot;QF-Freight-AU&quot;), &quot;AU/NZ&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-AU-Account Manager&quot;), &quot;AU/NZ&quot;,
+
+/* Freight CSS */
+IF (( UserRole.Name == &quot;QF-Freight-Customer-Service-Support&quot;), &quot;CSS&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-Customer-Service-Support-Team&quot;), &quot;CSS&quot;,
+
+/* Freight CSU */
+IF (( UserRole.Name == &quot;QF-Freight-Customer-Service-Unit&quot;), &quot;CSU&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-Customer-Service-Unit-Team&quot;), &quot;CSU&quot;,
+
+/* Freight UK */
+IF (( UserRole.Name == &quot;QF-Freight-UK&quot;), &quot;UKEA&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-UK-Account Manager&quot;), &quot;UKEA&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-Support-UK&quot;), &quot;UKEA&quot;,
+
+/* Freight US */
+IF (( UserRole.Name == &quot;QF-Freight-US&quot;), &quot;US&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-US-Account Manager&quot;), &quot;US&quot;,
+IF (( UserRole.Name == &quot;QF-Freight-Support-US&quot;), &quot;US&quot;,
+
+&quot;Other&quot;
+
+))))))))))))))))</formula>
+    <label>Freight Reporting Team</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

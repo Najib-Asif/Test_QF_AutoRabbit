@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_50686603</developerName>
+        <masterLabel>Cape Town</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>CREATED</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Maya Kyenge</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chelsea Jane Abrahams</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Cherise van Wyk</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Michelle Roberts</sourceValue>
+            </sourceValues>
+            <value>Cape Town</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Cases created last 3 months by agent</description>
+    <filter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCCOffload,Case.QCC_Elite_Process,Case.QCC_Specific_Needs,Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Compliment,Case.CCC_Further_Action_Required,Case.CCC_Medical,Case.CCC_On_The_Spot_Recovery,Case.CCC_Query,Case.QCC_Insurance_Letter_Case,Case.CCC_Email_Bounced_Back,Case.CCC_Event</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CREATED</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>sandra Buys,Chelsea Jane Abrahams,Michelle Roberts,Cherise van Wyk,Maya Kyenge,Chantal Nsona Munganza</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>RECORDTYPE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CREATED</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>CPT Case created for last 3 months</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>team</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <endDate>2020-09-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2020-07-15</startDate>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Restrict_Resolution_Method_Auto_Close</fullName>
+    <active>true</active>
+    <description>Prevent Consultant updating Resolution method to &apos;Auto Close - Recovery&apos; manually
+CDP2-965 AC01</description>
+    <errorConditionFormula>AND( $Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - Freight&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - QCC&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - SND&apos;,
+$Setup.EnableValidationRule__c.BypassVRCaseResolutionAutoClose__c = false,
+OR( RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+RecordType.DeveloperName = &apos;CCC_Refund&apos;,
+RecordType.DeveloperName = &apos;CCC_Event&apos;,
+RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+RecordType.DeveloperName = &apos;CCCOffload&apos;,
+RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+RecordType.DeveloperName = &apos;CCC_Query&apos;,
+RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+RecordType.DeveloperName = &apos;QCC_Sensitive_Case&apos;,
+RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;),
+ISCHANGED(Resolution_Method__c),
+INCLUDES(Resolution_Method__c, &apos;Auto Closed - Recovery&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>Resolution_Method__c</errorDisplayField>
+    <errorMessage>Invalid selection, please choose another option</errorMessage>
+</ValidationRule>

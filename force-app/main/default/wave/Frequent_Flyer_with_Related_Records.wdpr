@@ -1,0 +1,740 @@
+{
+  "version" : "62.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "LastName", "FirstName", "Name", "RecordTypeId", "Phone", "Email", "Frequent_Flyer_Number__c", "Tier_f__c", "Frequent_Flyer_Tier__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordTypeId",
+          "operator" : "EQUAL",
+          "operands" : [ "0122v000001NlG6AAK" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Frequent_Flyer_Number__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CaseNumber", "ParentId", "RecordTypeId", "Id", "ContactId", "CreatedDate" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "ContactId" ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "partitionBy" : [ "Frequent_Flyer_Number__c" ],
+        "orderBy" : [ {
+          "fieldName" : "Case.CaseNumber",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Case_Count",
+          "label" : "Case Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Label",
+          "label" : "Label",
+          "formulaExpression" : "if(Frequent_Flyer_Number__c is not Null, 'Case', '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Frequent Flyer with Case Count",
+          "name" : "Frequent_Flyer_with_Case_Count",
+          "folderName" : "Frequent_Flyers_and_Related_Records"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Case_Number__c", "Name", "Id", "CreatedDate", "Status__c", "Type__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Recovery__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Recovery__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET2", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Case_Number__c" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "JOIN1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Recovery",
+        "rightKeys" : [ "Case.ContactId" ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "partitionBy" : [ "Frequent_Flyer_Number__c" ],
+        "orderBy" : [ {
+          "fieldName" : "Recovery.Name",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Recovery_Count",
+          "label" : "Recovery Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Label",
+          "label" : "Label",
+          "formulaExpression" : "if(Frequent_Flyer_Number__c is not Null, 'Recovery', '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Frequent Flyer with Recovery Count",
+          "name" : "Frequent_Flyer_with_Recovery_Count",
+          "folderName" : "Frequent_Flyers_and_Related_Records"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "CaseId", "CreatedById", "CreatedDate", "Field", "DataType", "OldValue", "NewValue" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseHistory",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseHistory"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET3", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CaseId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "JOIN3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "CaseHistory",
+        "rightKeys" : [ "Case.ContactId" ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "partitionBy" : [ "Frequent_Flyer_Number__c" ],
+        "orderBy" : [ {
+          "fieldName" : "CaseHistory.CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Case_History_Count",
+          "label" : "Case History Count",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Label",
+          "label" : "Label",
+          "formulaExpression" : "if(Frequent_Flyer_Number__c is not Null, 'Case History', '')",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Frequent Flyer with Case History Count",
+          "name" : "Frequent_Flyer_with_Case_History_Count",
+          "folderName" : "Frequent_Flyers_and_Related_Records"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "FORMULA4", "FORMULA5" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "Id",
+          "bottom" : "Id"
+        }, {
+          "top" : "LastName",
+          "bottom" : "LastName"
+        }, {
+          "top" : "FirstName",
+          "bottom" : "FirstName"
+        }, {
+          "top" : "Name",
+          "bottom" : "Name"
+        }, {
+          "top" : "RecordTypeId",
+          "bottom" : "RecordTypeId"
+        }, {
+          "top" : "Phone",
+          "bottom" : "Phone"
+        }, {
+          "top" : "Email",
+          "bottom" : "Email"
+        }, {
+          "top" : "Frequent_Flyer_Number__c",
+          "bottom" : "Frequent_Flyer_Number__c"
+        }, {
+          "top" : "Tier_f__c",
+          "bottom" : "Tier_f__c"
+        }, {
+          "top" : "Frequent_Flyer_Tier__c",
+          "bottom" : "Frequent_Flyer_Tier__c"
+        }, {
+          "top" : "Recovery.Case_Number__c",
+          "bottom" : "CaseHistory.Case.CaseNumber"
+        }, {
+          "top" : "Recovery.Case.CreatedDate",
+          "bottom" : "CaseHistory.Case.CreatedDate"
+        }, {
+          "top" : "Label",
+          "bottom" : "Label"
+        }, {
+          "top" : "CaseHistory.Id",
+          "bottom" : "CaseHistory.Id"
+        }, {
+          "top" : "CaseHistory.IsDeleted",
+          "bottom" : "CaseHistory.IsDeleted"
+        }, {
+          "top" : "CaseHistory.CaseId",
+          "bottom" : "CaseHistory.CaseId"
+        }, {
+          "top" : "CaseHistory.CreatedById",
+          "bottom" : "CaseHistory.CreatedById"
+        }, {
+          "top" : "CaseHistory.CreatedDate",
+          "bottom" : "CaseHistory.CreatedDate"
+        }, {
+          "top" : "CaseHistory.Field",
+          "bottom" : "CaseHistory.Field"
+        }, {
+          "top" : "CaseHistory.DataType",
+          "bottom" : "CaseHistory.DataType"
+        }, {
+          "top" : "CaseHistory.OldValue",
+          "bottom" : "CaseHistory.OldValue"
+        }, {
+          "top" : "CaseHistory.NewValue",
+          "bottom" : "CaseHistory.NewValue"
+        }, {
+          "top" : "CaseHistory.Case.CreatedDate",
+          "bottom" : "CaseHistory.Case.CreatedDate"
+        }, {
+          "top" : "CaseHistory.Case.Id",
+          "bottom" : "CaseHistory.Case.Id"
+        }, {
+          "top" : "CaseHistory.Case.ContactId",
+          "bottom" : "CaseHistory.Case.ContactId"
+        }, {
+          "top" : "CaseHistory.Case.CaseNumber",
+          "bottom" : "CaseHistory.Case.CaseNumber"
+        } ]
+      }
+    },
+    "APPEND1" : {
+      "action" : "appendV2",
+      "sources" : [ "FORMULA3", "APPEND0" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "Id",
+          "bottom" : "Id"
+        }, {
+          "top" : "LastName",
+          "bottom" : "LastName"
+        }, {
+          "top" : "FirstName",
+          "bottom" : "FirstName"
+        }, {
+          "top" : "Name",
+          "bottom" : "Name"
+        }, {
+          "top" : "RecordTypeId",
+          "bottom" : "RecordTypeId"
+        }, {
+          "top" : "Phone",
+          "bottom" : "Phone"
+        }, {
+          "top" : "Email",
+          "bottom" : "Email"
+        }, {
+          "top" : "Frequent_Flyer_Number__c",
+          "bottom" : "Frequent_Flyer_Number__c"
+        }, {
+          "top" : "Tier_f__c",
+          "bottom" : "Tier_f__c"
+        }, {
+          "top" : "Frequent_Flyer_Tier__c",
+          "bottom" : "Frequent_Flyer_Tier__c"
+        }, {
+          "top" : "Case.CreatedDate",
+          "bottom" : "Recovery.Case.CreatedDate"
+        }, {
+          "top" : "Case.Id",
+          "bottom" : "Recovery.Case.Id"
+        }, {
+          "top" : "Case.ContactId",
+          "bottom" : "Recovery.Case.ContactId"
+        }, {
+          "top" : "Case.CaseNumber",
+          "bottom" : "Recovery.Case_Number__c"
+        }, {
+          "top" : "Case.ParentId",
+          "bottom" : "Recovery.Case.ParentId"
+        }, {
+          "top" : "Label",
+          "bottom" : "Label"
+        } ]
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "APPEND1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case & History & Recovery Appended",
+          "name" : "Case_History_Recovery_Appended",
+          "folderName" : "Frequent_Flyers_and_Related_Records"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112.30000000000001,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "QCC Frequent Flyer Only",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 111.5,
+        "left" : 392
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Case to Contact",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 672
+      },
+      "TRANSFORM0" : {
+        "label" : "Case Count Tranform",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 812,
+        "graph" : {
+          "FORMULA0" : {
+            "label" : "Count Cases on FF"
+          },
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Label Case"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA3"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "Frequent Flyer with Case Count",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 1092
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Recovery__c",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Case to Recovery",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 253.3
+      },
+      "JOIN2" : {
+        "label" : "Recovery to Contact",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252.3,
+        "left" : 392.1
+      },
+      "TRANSFORM1" : {
+        "label" : "Recovery Count Transform",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 532,
+        "graph" : {
+          "FORMULA1" : {
+            "label" : "Count Recoveries on FF"
+          },
+          "FORMULA4" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Label"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA1",
+          "target" : "FORMULA4"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Frequent Flyer with Recovery Count",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 391.7,
+        "left" : 952.1
+      },
+      "LOAD_DATASET3" : {
+        "label" : "CaseHistory",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN3" : {
+        "label" : "Case to Case History",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 252.2
+      },
+      "JOIN4" : {
+        "label" : "Case History to Contact",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 392.3
+      },
+      "TRANSFORM2" : {
+        "label" : "Case History Count Transform",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 533.3,
+        "left" : 532,
+        "graph" : {
+          "FORMULA2" : {
+            "label" : "Count Case History on FF"
+          },
+          "FORMULA5" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Label"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA2",
+          "target" : "FORMULA5"
+        } ]
+      },
+      "OUTPUT2" : {
+        "label" : "Frequent Flyer with Case History Count",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532.1,
+        "left" : 952.3
+      },
+      "APPEND0" : {
+        "label" : "Append 0",
+        "type" : "APPEND",
+        "top" : 392,
+        "left" : 811.6
+      },
+      "APPEND1" : {
+        "label" : "Append 1",
+        "type" : "APPEND",
+        "top" : 251.60000000000002,
+        "left" : 812
+      },
+      "OUTPUT3" : {
+        "label" : "Case & History & Recovery Appended",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 952
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER0",
+      "target" : "JOIN2"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN3",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN4",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "APPEND0"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "APPEND0"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "APPEND1"
+    }, {
+      "source" : "APPEND0",
+      "target" : "APPEND1"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "APPEND1",
+      "target" : "OUTPUT3"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

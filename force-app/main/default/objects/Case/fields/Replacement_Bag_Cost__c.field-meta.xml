@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Replacement_Bag_Cost__c</fullName>
+    <description>Replacement Bag Cost</description>
+    <formula>CASE(Customer_Location__c , &apos;Metro&apos; , IF(ISPICKVAL(Size_of_Bag__c, &apos;Small (55cm)&apos;) , 70.20 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;S-Small (55cm)&apos;) , 70.20 , 
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Medium (68cm)&apos;) , 87.30 ,                                                                                                                                                                   
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Medium (70cm)&apos;) , 85.50 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Large (76cm)&apos;) , 88.50 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Large (79cm)&apos;) , 97.50 ,            
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Extra Large (82cm)&apos;) , 96.70 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;S-Extra Large (82 cm)&apos;) , 96.70 , null)))))))) , &apos;Regional&apos; , 
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Small (55cm)&apos;) , 92.20 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;S-Small (55cm)&apos;) , 92.20 , 
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Medium (68cm)&apos;) , 115.90 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Medium (70cm)&apos;) , 113.00 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Large (76cm)&apos;) , 116.00 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Large (79cm)&apos;) , 123.10 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;Extra Large (82cm)&apos;) , 127.50 ,
+IF(ISPICKVAL(Size_of_Bag__c, &apos;S-Extra Large (82 cm)&apos;) , 127.50 ,  null)))))))), null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Replacement Bag Cost</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

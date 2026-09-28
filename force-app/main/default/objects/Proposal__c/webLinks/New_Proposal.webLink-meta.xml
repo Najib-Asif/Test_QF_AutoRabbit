@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Proposal</fullName>
+    <availability>online</availability>
+    <description>Added in Related List of Opportunity, bcz of Account is not populating</description>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>New Proposal</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+
+// Validation Rule 
+var query1 = &quot;SELECT Id,(SELECT Id, Status__c FROM Proposals__r where Active__c=true AND (Status__c=&apos;Accepted by Customer&apos; OR Status__c=&apos;Approval Required - Internal&apos; OR Status__c=&apos;Acceptance Required - Customer&apos;)) FROM Opportunity where Id=\&apos;{!Opportunity.Id}\&apos; limit 1&quot;; 
+
+var oppRecords = sforce.connection.query(query1); 
+var oppRecords1 = oppRecords.getArray(&apos;records&apos;); 
+
+if(&quot;{!Opportunity.StageName}&quot; == &apos;Closed - Accepted&apos; || &quot;{!Opportunity.StageName}&quot; == &apos;Closed - Not Accepted&apos; ){ 
+
+alert(&apos;Please note that you cannot create a proposal for a closed opportunity.&apos;); 
+
+}else if(oppRecords1[0].Proposals__r != null){ 
+
+alert(&apos;Please note that you cannot create a new proposal for this opportunity since there is an existing active proposal.&apos;); 
+
+}else{ 
+
+var rtype; 
+if(&apos;{!Opportunity.Category__c}&apos; == &apos;Qantas Business Savings&apos;){ 
+rtype = &apos;QBS - Draft&apos;; 
+}else if(&apos;{!Opportunity.Category__c}&apos; == &apos;Corporate Airfares&apos;){ 
+rtype = &apos;CA - Draft&apos;; 
+}else if(&apos;{!Opportunity.Category__c}&apos; == &apos;Adhoc&apos;){ 
+rtype = &apos;Adhoc Charter - Approval Required - Customer&apos;; 
+}else if(&apos;{!Opportunity.Category__c}&apos; == &apos;Scheduled&apos;){ 
+rtype = &apos;Adhoc Charter - Approval Required - Customer&apos;; 
+}else if(&apos;{!Opportunity.Category__c}&apos; == &apos;FIFO Scheduled&apos;){ 
+rtype = &apos;Adhoc Charter - Approval Required - Customer&apos;; 
+} 
+var query = &quot;SELECT Id, Name FROM RecordType where Name like &apos;%&quot;+rtype+&quot;%&apos; AND sObjectType=&apos;Proposal__c&apos; limit 1&quot;;
+var records = sforce.connection.query(query); 
+var records1 = records.getArray(&apos;records&apos;); 
+var amnt = &apos;{!Opportunity.Amount}&apos;;
+amnt = amnt.substring(3,amnt.length);
+
+window.top.location.href =&apos;/a0H/e?CF00N9000000Dg8UI=&apos;+encodeURIComponent(&quot;{!Opportunity.Name}&quot;)+&apos;&amp;CF00N9000000Dg8UI_lkid={!Opportunity.Id}&amp;CF00N9000000Dg8lB_lkid={!Opportunity.AccountId}&amp;CF00N9000000Dg8lB=&apos;+encodeURIComponent(&quot;{!Opportunity.Account}&quot;)+&apos;&amp;00N9000000Dg8lx=&apos;+amnt+&apos;&amp;00N9000000Dg8lY={!Opportunity.Proposed_Market_Share__c}&amp;00N9000000Dg8lg={!Opportunity.Proposed_International_Market_Share__c}&amp;00N9000000Ezy91={!Text(Opportunity.Forecast_Charter_Spend__c)}&amp;00N9000000EPJxr={!Text(Opportunity.Forecast_MCA_Revenue__c)}&amp;00N9000000Dg8lX={!Opportunity.Deal_Type__c}&amp;00N9000000Dg8lk={!Opportunity.Proposed_MCA_Routes_Market_Share__c}&amp;RecordType=&apos;+records1[0].Id+&apos;&amp;00N9000000Dg8mJ={!Opportunity.Category__c}&amp;retURL={!Opportunity.Id}&amp;nooverride=1&amp;CF00N9000000Dg8lU=&apos;+encodeURIComponent(&quot;{!Opportunity.Contact__c}&quot;)+&apos;&amp;CF00N9000000Dg8lU_lkid={!Opportunity.ContactId__c}&apos;;
+
+}</url>
+</WebLink>

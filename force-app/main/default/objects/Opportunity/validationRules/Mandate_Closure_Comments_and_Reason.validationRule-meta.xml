@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Closure_Comments_and_Reason</fullName>
+    <active>true</active>
+    <description>Rule to make the closure comments and Closure Reason field mandatory, when the opportunity is Closed - Accepted and Closed - Not Accepted.</description>
+    <errorConditionFormula>AND($RecordType.DeveloperName =&apos;Business_and_Government&apos; ,
+ISCHANGED( StageName ),
+OR(ISPICKVAL( StageName , &quot;Closed - Accepted&quot;),
+ISPICKVAL( StageName , &quot;Closed - Not Accepted&quot;)),
+OR(ISBLANK( Closed_Reasons__c ) ,
+  ISBLANK( Other_reasons__c )))</errorConditionFormula>
+    <errorMessage>Please select a Closure Reason and add in Closure Comments.</errorMessage>
+</ValidationRule>

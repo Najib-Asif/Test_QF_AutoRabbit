@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GEN_DOM_INT_Is_NotBlank_OTHER</fullName>
+    <active>false</active>
+    <description>This is for Corporate Airfares and QBS contracts where General, Domestic Amendment and  International Amendment fields can&apos;t be blank before generating Deal Sheet. Applicable for All countries except &apos;AU&apos;</description>
+    <errorConditionFormula>AND(OR($RecordType.Name = &apos;CA - Signed by Customer&apos;,$RecordType.Name = &apos;QBS - Signed by Customer&apos;,$RecordType.Name = &apos;CA - Legal/Customer Pending&apos;,$RecordType.Name = &apos;QBS - Legal/Customer Pending&apos;), ISPICKVAL(Status__c  , &apos;Signed by Customer&apos;), NOT(ISPICKVAL( PRIORVALUE(Status__c) , &apos;Signed by Customer&apos;)),OR(ISBLANK(General__c), ISBLANK(Amendments__c)), NOT(Opportunity__r.Owner.Country = &apos;AU&apos;), NOT(Opportunity__r.Owner.Country = &quot;US&quot;))</errorConditionFormula>
+    <errorMessage>General, Amendments fields can&apos;t be Blank when the Contract Status is &apos;Signed by Customer&apos;</errorMessage>
+</ValidationRule>

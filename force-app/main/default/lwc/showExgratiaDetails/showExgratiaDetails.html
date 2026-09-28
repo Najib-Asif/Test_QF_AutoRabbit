@@ -1,0 +1,78 @@
+<template>
+	<lightning-layout  horizontal-align="spread">
+		<lightning-layout-item size="6" class="slds-p-right_small">
+			<div class="slds-text-heading_x-small slds-box_xx-small slds-box    slds-theme_shade"> 
+				<b>Pax and PNR Eligibility</b>
+			</div>
+			<lightning-layout multiple-rows="true" class="slds-col slds-p-top_small">
+				
+				<template if:true={paxDetailsWrapper} for:each={paxDetailsWrapper} for:item="pax" for:index="index">
+					<lightning-layout-item size="6" key={pax.key} class="slds-wrap slds-p-bottom_x-small slds-col">
+						{pax.key} 
+					</lightning-layout-item>
+					<lightning-layout-item size="6"  key={pax.key} class="slds-wrap slds-p-bottom_x-small slds-col">
+						{pax.value}
+					</lightning-layout-item>
+				</template>
+			</lightning-layout>
+
+		</lightning-layout-item>
+		<lightning-layout-item size="6">
+			<div class="slds-text-heading_x-small slds-box_xx-small slds-box  slds-theme_shade"> 
+				<b>Flight Pass Details </b>
+			</div>
+			<lightning-layout multiple-rows="true" class="slds-col slds-p-top_small">
+				
+				<template if:true={flightPassDetailsWrapper} for:each={flightPassDetailsWrapper} for:item="fPass" for:index="index">
+					<lightning-layout-item size="6" flexibility="auto, no-grow" key={fPass.key} class="slds-wrap slds-p-bottom_x-small">
+						{fPass.key} 
+					</lightning-layout-item>
+					<lightning-layout-item size="6" flexibility="auto, no-grow" key={fPass.key} class="slds-wrap slds-p-bottom_x-small">
+						{fPass.value}
+					</lightning-layout-item>
+				</template>
+			   
+			</lightning-layout>
+		</lightning-layout-item>
+	   
+	</lightning-layout>
+	<lightning-layout>
+		<lightning-layout-item size="6" class="slds-p-right_small">
+			<!-- <div class="slds-text-heading_x-small  slds-box_xx-small slds-box  slds-theme_shade">
+				<b>Flight Eligibility</b>
+			</div>
+
+			<lightning-layout multiple-rows="true" class="slds-col slds-p-top_small">
+				
+				<template if:true={flightDetailsWrapper} for:each={flightDetailsWrapper} for:item="fEligibility" for:index="index">
+					<lightning-layout-item size="4" flexibility="auto, no-grow" key={fEligibility.key} class="slds-wrap slds-p-bottom_x-small">
+						{fEligibility.key} 
+					</lightning-layout-item>
+					<lightning-layout-item size="8" flexibility="auto, no-grow" key={fEligibility.key} class="slds-wrap slds-p-bottom_x-small">
+						{fEligibility.value}
+					</lightning-layout-item>
+				</template>
+			   
+			</lightning-layout> -->
+		</lightning-layout-item>
+
+		<lightning-layout-item size="6">
+			<div class="slds-text-heading_x-small  slds-box_xx-small slds-box  slds-theme_shade">
+				<b>Data Last Updated</b>
+			</div>
+
+			<lightning-layout multiple-rows="true" class="slds-col slds-p-top_small">
+				
+				<template if:true={dataLastUpdatesWrapper} for:each={dataLastUpdatesWrapper} for:item="dUpdate" for:index="index">
+					<lightning-layout-item size="4" flexibility="auto, no-grow" key={dUpdate.key} class="slds-wrap slds-p-bottom_x-small">
+						{dUpdate.key} 
+					</lightning-layout-item>
+					<lightning-layout-item size="8" flexibility="auto, no-grow" key={dUpdate.key} class="slds-wrap slds-p-bottom_x-small">
+						{dUpdate.value}
+					</lightning-layout-item>
+				</template>
+			   
+			</lightning-layout>
+		</lightning-layout-item>
+	</lightning-layout>
+</template>

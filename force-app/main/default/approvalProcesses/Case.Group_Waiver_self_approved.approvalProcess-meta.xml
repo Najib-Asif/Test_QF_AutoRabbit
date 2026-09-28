@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>LastModifiedBy</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>SR Self Approval</description>
+        <entryCriteria>
+            <formula>0=1</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Self Approval</label>
+        <name>Self_Approval</name>
+    </approvalStep>
+    <description>CRM-4979:
+Certain users are able to self-approve any Service Request&gt;Group Waivers (excluding waiver types which include Lounge access or Space Available Upgrade.</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>RecordType.DeveloperName = &apos;QIC_Service_request&apos;  &amp;&amp; 
+ TEXT(Type) = &apos;Group Waivers&apos; &amp;&amp; 
+ NOT(BEGINS( TEXT(Problem_Type__c) , &apos;Space Available Upgrade&apos;)) &amp;&amp; 
+NOT(BEGINS( TEXT(Problem_Type__c) , &apos;Lounge Access&apos;))
+&amp;&amp;
+CONTAINS( $Label.QCC_Group_Waivers_Self_Approval , CreatedBy.Username)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Authority_Status_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Group Waiver self-approved</label>
+    <processOrder>4</processOrder>
+    <recallActions>
+        <action>
+            <name>Approval_Status_Change</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

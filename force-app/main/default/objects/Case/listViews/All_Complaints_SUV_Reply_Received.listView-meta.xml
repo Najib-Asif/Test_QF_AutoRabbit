@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Complaints_SUV_Reply_Received</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <columns>Case_Age__c</columns>
+    <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
+    <columns>OWNER_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Accommodation/Reimbursement of Expenses,Downgrade,Refunds</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Reply Received</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.CCC_Complaints,Case.CCC_Further_Action_Required,Case.CCC_On_The_Spot_Recovery,Case.CCC_Query</value>
+    </filters>
+    <filters>
+        <field>Owner_City__c</field>
+        <operation>notEqual</operation>
+        <value>Sydney,Hobart</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>notEqual</operation>
+        <value>CCC Emirates Queue,Qantas VIP general Queue,CCC ExCo Queue,CCC Critical queue,VIP Email Enquiries,GMC Triage Queue,CCC Advocacy Queue,CCC EU Compensation Queue,Specific Needs,Specific Needs Waiting for Internal</value>
+    </filters>
+    <filters>
+        <field>CASES.SUBJECT</field>
+        <operation>notEqual</operation>
+        <value>DRW SIN Passenger</value>
+    </filters>
+    <filters>
+        <field>Freight_Origin__c</field>
+        <operation>notEqual</operation>
+        <value>GMC</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>notEqual</operation>
+        <value>QANTAS VIP POST Travel Queue,Dianne Palmer</value>
+    </filters>
+    <label>All Complaints (SUV) - Reply Received</label>
+</ListView>

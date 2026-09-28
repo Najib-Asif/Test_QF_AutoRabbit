@@ -1,0 +1,29 @@
+<apex:page Controller="QL_ScheduleQuipBatchesController">
+   <script>
+
+    Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.QL_ScheduleQuipBatchesController.checkPermissions}',
+                function(result, event){
+                  if(result){
+   					   // Click Ok to Schedule the Jobs else click Cancel
+                      // By selecting OK you confirm to Schedule Quip Jobs and cancel to exit this pop up
+    if (confirm("Selecting OK to Schedule Quip Jobs otherwise select Cancel to exit this pop up!")) {
+        Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.QL_ScheduleQuipBatchesController.invokeScheduleJobs}',
+                function(result, event){
+                    console.log('event' , result);
+                    window.history.back();
+                }
+            );
+  } else {
+    window.history.back();
+  }
+            }
+            else {
+              alert("You don't have permission to perform this action");
+              window.history.back();
+           }
+                }
+            );
+</script>
+</apex:page>

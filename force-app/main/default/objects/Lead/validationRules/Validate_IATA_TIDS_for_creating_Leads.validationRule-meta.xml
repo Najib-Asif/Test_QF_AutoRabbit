@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_IATA_TIDS_for_creating_Leads</fullName>
+    <active>true</active>
+    <description>When entered IATA should contain only 7 digits of numeric characters for Agency Lead.</description>
+    <errorConditionFormula>AND( ISPICKVAL(New_Account_Type__c, &apos;Agency&apos;) , OR(AND(IF(NOT(ISNUMBER(IATA__c)),true,IF(LEN(IATA__c) &lt;&gt; 7,true,false)),NOT(ISBLANK(IATA__c))),AND(IF(NOT(ISNUMBER(Agency_TIDS__c)),true,IF(LEN(Agency_TIDS__c) &lt;&gt; 7,true,false)),NOT(ISBLANK(Agency_TIDS__c)))))</errorConditionFormula>
+    <errorMessage>IATA#/TIDS# field should contain 7 digits Numeric characters</errorMessage>
+</ValidationRule>

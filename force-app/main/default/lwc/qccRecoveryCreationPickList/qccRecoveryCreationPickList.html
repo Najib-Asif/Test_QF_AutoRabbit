@@ -1,0 +1,40 @@
+<template>
+    <lightning-card>
+        <div class="recovery-container">
+            <lightning-combobox
+                name="controllingPicklist"
+                label="Recovery Type"
+                value={controllingValue}
+                placeholder="Select Type"
+                required="true"
+                options={controllingOptions}
+                onchange={handleControllingChange}>
+            </lightning-combobox>
+        </div>
+
+        <!-- Conditional rendering of the dual-listbox based on controllingValue -->
+        <template if:true={showDependentPicklist}>
+            <div class="recovery-container">
+                <lightning-dual-listbox
+                    name="dependentPicklist"
+                    label="Recovery Reason"
+                    source-label="Available"
+                    selected-label="Chosen"
+                    field-level-help="Select reasons for recovery"
+                    options={dependentOptions}
+                    value={selectedDependentValues}
+                    onchange={handleDependentChange}>
+                </lightning-dual-listbox>
+            </div>
+        </template>
+        <template if:true={showCheckbox}>
+            <div class="recovery-container">
+                <lightning-input type="checkbox"
+                    label="Create recovery with Payment Details"
+                     checked={paymentDetailsFlag} 
+                    onchange={handleCheckboxChange}>
+                </lightning-input>
+            </div>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,166 @@
+<!---
+    **********************************************************************************************
+    Author:        Pushkar Purushothaman
+    Company:       TCS
+    Description:   To display customer flight disruptions data in a table fetched from the CAP Disruptions API
+         
+    ************************************************************************************************
+    History
+    ************************************************************************************************
+    01-Oct-2018     Pushkar Purushothaman              Initial Design
+    
+    **********************************************************************************************
+    -->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="disruptionList" type="Object[]"/>
+    <aura:attribute name="conDetails" type="Object"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="dispListColumns" type="List"/>
+    <aura:attribute name="arrowDirection" type="string" default="arrowup" description="Use for change arrow sign direction on header based on click"/>
+    <aura:attribute name="selectedTabsoft" type="string" default="deptDate" description="Use for show/hide arrow sign on header based on conditions"/>
+    
+    <aura:attribute name="PaginationList" type="Object[]"/>
+    <aura:attribute name="filterList" type="Object[]"/>
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    <lightning:navigation aura:id="navService"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <div class="slds-p-around_medium">
+        <div>
+            <!--<lightning:layout horizontalAlign="spread">
+                <div>
+                    <span>Filter By Departure Delay :</span>
+                    <span class="slds-p-left_large" data-value="lt60" onclick="{!c.onSelectFilter}"><a href="">&lt; 60 minutes</a></span>
+                    <span class="slds-p-left_xx-large" data-value="gteq60" onclick="{!c.onSelectFilter}"><a href="">&gt;= 60 minutes</a></span>
+                    <span class="slds-p-left_xx-large" data-value="All" onclick="{!c.onSelectFilter}"><a href="">All</a></span>
+                </div>
+                <div class="slds-p-right_xx-large">No. of records : 30</div>
+            </lightning:layout>-->
+            
+            <lightning:select aura:id="filterDispTime" name="select" class="selectFilter" label="Filter By Departure Delay :" onchange="{!c.onSelectFilter}">
+                <option value="All">All</option>
+                <option value="gteq60">Greater than or equal to 60 minutes</option>
+                <option value="lt60">Less than 60 minutes</option> 
+            </lightning:select>
+            
+        </div><br/>
+        
+        <div>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered tblBorder">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-is-sortable slds-text-title_caps slds-cell-wrap" scope="col" onclick="{!c.sortPNR}">
+                            <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                                <span class="slds-assistive-text">Sort</span>
+                                <span class="slds-truncate" title="PNR">PNR</span>  
+                                <aura:if isTrue="{! and(v.arrowDirection == 'arrowdown', v.selectedTabsoft == 'reloc') }">&nbsp;  &#9660; </aura:if>  
+                                <aura:if isTrue="{! and(v.arrowDirection != 'arrowdown', v.selectedTabsoft == 'reloc') }"> &nbsp;  &#9650; </aura:if>                        
+                            </a>
+                        </th>
+                        <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+                            <div title="Carrier">Carrier</div>
+                        </th>
+                        <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+                            <div title="Flight No">Flight No</div>
+                        </th>
+                        <th class="slds-is-sortable slds-text-title_caps slds-cell-wrap" scope="col" onclick="{!c.sortDeptDate}">
+                            <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                                <span class="slds-assistive-text">Sort</span>
+                                <span class="slds-truncate" title="Scheduled Departure Date">Scheduled Departure Date</span>  
+                                <aura:if isTrue="{! and(v.arrowDirection == 'arrowdown', v.selectedTabsoft == 'scheduledDepartureLocalDate') }">&nbsp;  &#9660; </aura:if>  
+                                <aura:if isTrue="{! and(v.arrowDirection != 'arrowdown', v.selectedTabsoft == 'scheduledDepartureLocalDate') }"> &nbsp;  &#9650; </aura:if>                        
+                            </a>
+                        </th>
+                        <th class="slds-is-sortable slds-text-title_caps slds-cell-wrap" scope="col" onclick="{!c.sortDeptPort}">
+                            <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                                <span class="slds-assistive-text">Sort</span>
+                                <span class="slds-truncate" title="Departure Port">Departure Port</span>  
+                                <aura:if isTrue="{! and(v.arrowDirection == 'arrowdown', v.selectedTabsoft == 'departureAirportCode') }">&nbsp;  &#9660; </aura:if>  
+                                <aura:if isTrue="{! and(v.arrowDirection != 'arrowdown', v.selectedTabsoft == 'departureAirportCode') }"> &nbsp;  &#9650; </aura:if>                        
+                            </a>
+                        </th>
+                        <th class="slds-is-sortable slds-text-title_caps slds-cell-wrap" scope="col" onclick="{!c.sortArrPort}">
+                            <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                                <span class="slds-assistive-text">Sort</span>
+                                <span class="slds-truncate" title="Arrival Port">Arrival Port</span>  
+                                <aura:if isTrue="{! and(v.arrowDirection == 'arrowdown', v.selectedTabsoft == 'arrivalAirportCode') }">&nbsp;  &#9660; </aura:if>  
+                                <aura:if isTrue="{! and(v.arrowDirection != 'arrowdown', v.selectedTabsoft == 'arrivalAirportCode') }"> &nbsp;  &#9650; </aura:if>                        
+                            </a>
+                        </th>
+                        <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+                            <div title="Status (Delay/Cancel)">Status (Delay/Cancel)</div>
+                        </th>
+                        <th class="slds-is-sortable slds-text-title_caps slds-cell-wrap" scope="col" onclick="{!c.sortDeptDlyDurtn}">
+                            <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                                <span class="slds-assistive-text">Sort</span>
+                                <span class="slds-truncate" title="Departure Delay Duration">Departure Delay(min)</span>  
+                                <aura:if isTrue="{! and(v.arrowDirection == 'arrowdown', v.selectedTabsoft == 'departureDelayInMinute') }">&nbsp;  &#9660; </aura:if>  
+                                <aura:if isTrue="{! and(v.arrowDirection != 'arrowdown', v.selectedTabsoft == 'departureDelayInMinute') }"> &nbsp;  &#9650; </aura:if>                        
+                            </a>
+                        </th>
+                        <th class="slds-is-sortable slds-text-title_caps slds-cell-wrap" scope="col" onclick="{!c.sortArrvlDlyDurtn}">
+                            <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                                <span class="slds-assistive-text">Sort</span>
+                                <span class="slds-truncate" title="Arrival Delay Duration">Arrival Delay(min)</span>  
+                                <aura:if isTrue="{! and(v.arrowDirection == 'arrowdown', v.selectedTabsoft == 'arrivalDelayInMinute') }">&nbsp;  &#9660; </aura:if>  
+                                <aura:if isTrue="{! and(v.arrowDirection != 'arrowdown', v.selectedTabsoft == 'arrivalDelayInMinute') }"> &nbsp;  &#9650; </aura:if>                        
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.PaginationList}" var="item">
+                        <tr class="slds-hint-parent">
+                            <td data-label="PNR" scope="row">
+                                <div class="slds-truncate" title="{!item.reloc}" onclick="{!c.navigateToMyComponent}" data-value="{!(item.reloc)+','+(item.creationDate)}"><a href="javascript:void(0);" tabindex="-1">{!item.reloc}</a></div>
+                            </td>
+                            <td data-label="Carrier">
+                                <div class="slds-truncate" title="{!item.bookedFlight.operatingCarrierAlphaCode}">{!item.bookedFlight.operatingCarrierAlphaCode}</div>
+                            </td>
+                            <td data-label="Flight No">
+                                <div class="slds-truncate" title="{!item.bookedFlight.operatingFlightNumber}">{!item.bookedFlight.operatingFlightNumber}</div>
+                            </td>
+                            <td data-label="Scheduled Departure Date">
+                                <div class="slds-truncate" title="{!item.bookedFlight.scheduledDepartureLocalDate}">{!item.bookedFlight.scheduledDepartureLocalDate}</div>
+                            </td>
+                            <td data-label="Departure Port">
+                                <div class="slds-truncate" title="{!item.bookedFlight.departureAirportCode}">{!item.bookedFlight.departureAirportCode}</div>
+                            </td>
+                            <td data-label="Arrival Port">
+                                <div class="slds-truncate" title="{!item.bookedFlight.arrivalAirportCode}">{!item.bookedFlight.arrivalAirportCode}</div>
+                            </td>
+                            <td data-label="Status (Delay/Cancel)">
+                                <div class="slds-truncate" title="{!item.disruptionEventType}">{!item.disruptionEventType}</div>
+                            </td>
+                            <td data-label="Departure Delay Duration">
+                                <div class="slds-truncate" title="{!item.bookedFlight.departureDelayInMinute}">{!item.bookedFlight.departureDelayInMinute}</div>
+                            </td>
+                            <td data-label="Arrival Delay Duration">
+                                <div class="slds-truncate" title="{!item.bookedFlight.arrivalDelayInMinute}">{!item.bookedFlight.arrivalDelayInMinute}</div>
+                            </td>
+                        </tr>
+                    </aura:iteration>    
+                </tbody>
+            </table>
+            
+            <div class="slds-align_absolute-center slds-m-top_large">
+                <lightning:button label="Previous" 
+                                  disabled="{!v.startPage == 0}"  
+                                  onclick="{!c.previous}" 
+                                  variant="brand"
+                                  iconName='utility:back'
+                                  class="slds-p-right_large"/>
+                <lightning:button label="Next" 
+                                  disabled="{!v.endPage + 1 >= v.totalRecords}" 
+                                  variant="brand"
+                                  onclick="{!c.next}" 
+                                  iconName='utility:forward'/>
+            </div>  
+            
+        </div>
+    </div>
+</aura:component>

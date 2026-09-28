@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Resolve_Comments_Required</fullName>
+    <active>true</active>
+    <description>Freight - Resolve Comments is mandatory when Resolve Reason is &quot;Other&quot;</description>
+    <errorConditionFormula>AND(CONTAINS(RecordType.DeveloperName,&apos;Freight&apos;),   ISPICKVAL(Freight_Resolve_Reason__c, &quot;Other&quot;),
+ISBLANK(Freight_Resolve_Comments__c),FCR__c= false)</errorConditionFormula>
+    <errorDisplayField>Freight_Resolve_Comments__c</errorDisplayField>
+    <errorMessage>Please enter Resolve Comments</errorMessage>
+</ValidationRule>

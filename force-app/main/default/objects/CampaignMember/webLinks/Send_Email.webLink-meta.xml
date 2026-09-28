@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_Email</fullName>
+    <availability>online</availability>
+    <description>This is to send SME Product related information pack to the customer from the campaign member record.</description>
+    <displayType>button</displayType>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Send Email</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>{!IF(CampaignMember.Is_Contact_or_Lead_Associated__c==&quot;Contact&quot;, URLFOR(&quot;/_ui/core/email/author/EmailAuthor?retURL=/&quot;&amp;CampaignMember.Id&amp;&quot;&amp;p2_lkid=&quot;&amp;CampaignMember.ContactId&amp;&quot;&amp;p3_lkid=&quot;&amp;CampaignMember.CampaignId&amp;&quot;&amp;p26=corpsalesaus@qantas.com.au&quot;),URLFOR(&quot;/_ui/core/email/author/EmailAuthor?retURL=/&quot;&amp;CampaignMember.Id&amp;&quot;&amp;p2_lkid=&quot;&amp;CampaignMember.LeadId&amp;&quot;&amp;p26=corpsalesaus@qantas.com.au&quot;)
+)}</url>
+</WebLink>

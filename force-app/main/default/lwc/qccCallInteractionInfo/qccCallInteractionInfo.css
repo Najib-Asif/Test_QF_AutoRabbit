@@ -1,0 +1,81 @@
+.main-div{
+  background-color: white;
+  position: relative;
+}
+
+.interaction-event-button {
+  width: 90px;
+}
+
+.event-button-large {
+  width: 184px;
+}
+
+.button-set {
+  margin: 10px 0 10px;
+  padding-right: 10px;
+  text-align: end;
+}
+
+.output-console textarea {
+  height: 95px;
+}
+
+.ivr-selection-div{
+  margin: 1em;
+}
+
+.authentication-div{
+  margin: .5em;
+}
+
+.call-details{
+  padding: .3em;
+}
+
+@keyframes pulse-orange {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 #de7d0d;
+  }
+
+  70% {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 10px rgba(255, 121, 63, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 121, 63, 0);
+  }
+}
+
+.child-div{
+  position: absolute;
+  bottom: 100%; 
+  left: 36%;
+  transform: translateX(-50%);
+}
+
+/* .gray-bg{
+  background-color: #e5ebeb;
+} */
+
+.popover-section{
+  width: 140%;
+}
+
+.popover-body{
+  display: flex;
+  padding: .2em;
+}
+
+.notification-header{
+  margin-left: .5em;
+  align-self: center; 
+}
+
+.notification-icon{
+  align-self: center; 
+  animation: pulse-orange 2s infinite;
+}

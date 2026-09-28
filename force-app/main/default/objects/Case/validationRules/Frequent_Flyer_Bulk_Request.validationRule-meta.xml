@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Frequent_Flyer_Bulk_Request</fullName>
+    <active>false</active>
+    <description>For Frequent Flyer Request and Sales Offer Request, if Bulk Frequent Flyer Request? = TRUE, Number of Frequent Flyer Request is mandatory</description>
+    <errorConditionFormula>AND ( 
+OR (
+ RecordType.DeveloperName  = &quot;Frequent_Flyer_Request&quot;, /*Frequent Flyer Request*/
+ RecordType.DeveloperName = &quot;Sales_Offers_Request&quot;), /*Sales Offers Service Request*/
+NOT ( $User.UserRoleId =  $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/ 
+Approved__c = FALSE, 
+
+OR(
+AND(
+ Bulk_Frequent_Flyer_Request__c = TRUE,
+ ISBLANK ( Number_of_Frequent_Flyer_Request__c )),
+AND(
+Number_of_Frequent_Flyer_Request__c &gt;= 1 ,
+ Bulk_Frequent_Flyer_Request__c = FALSE )
+)
+
+
+)</errorConditionFormula>
+    <errorDisplayField>Bulk_Frequent_Flyer_Request__c</errorDisplayField>
+    <errorMessage>Both Bulk Frequent Flyer Request? and Number of Frequent Flyer Request has to be populated.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Freight - Template to be sent to downstream systems for any Freight Account Ownership Change Requests</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Freight Account Ownership Change Request</name>
+    <style>none</style>
+    <subject>Account Ownership Change Request</subject>
+    <textOnly>Hi,
+
+Please note the following Account Owner change, raise a RITM request and assign it to Taurus team:
+
+Account Type: {!Account.Type}
+
+Global Customer Code (FCI): {!Account.Freight_Corporate_Identifier__c}
+
+Billing Country: {!Account.BillingCountry}
+
+Account Name*: {!Account.Name}
+
+Customer Type: {!Account.Freight_Revenue_Stream__c}
+
+Customer#: {!Account.Freight_eQ_Reference__c}
+
+Customer Code: {!Account.Freight_Customer_Code__c}
+
+New Account Owner: {!Account.OwnerFullName}
+
+*Please ignore the [ ] in the Account Name
+
+Thanks,
+
+{!Account.OwnerFullName}
+
+{!Account.OwnerEmail}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

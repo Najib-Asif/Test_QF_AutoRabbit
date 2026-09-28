@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>OTA_Booking_Flow__c</entityName>
+    <fieldName>Status__c</fieldName>
+    <masterLabel>Booking Flow</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Amount_Charged__c</fieldNames>
+        <fieldNames>Booking_Reference__c</fieldNames>
+        <fieldNames>Ticket_Number__c</fieldNames>
+        <fieldNames>Departure_Date__c</fieldNames>
+        <fieldNames>Departure_Time__c</fieldNames>
+        <info>&lt;p&gt;Booking details like departure time, date, ticket number etc&lt;/p&gt;</info>
+        <picklistValueName>Booked</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Amendment_Fee__c</fieldNames>
+        <fieldNames>Cancellation_Fee__c</fieldNames>
+        <picklistValueName>Cancelled</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Additional_lnformation__c</fieldNames>
+        <fieldNames>Score__c</fieldNames>
+        <info>&lt;p&gt;Finalise your summary on this record.&lt;/p&gt;</info>
+        <picklistValueName>Complete</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Destination__c</fieldNames>
+        <fieldNames>Origin__c</fieldNames>
+        <fieldNames>Qtr__c</fieldNames>
+        <fieldNames>OTA_Business_Name__c</fieldNames>
+        <fieldNames>OTA_Web_address__c</fieldNames>
+        <info>&lt;p&gt;Plan for the Origin and Destination business wants to focus for checks.&lt;/p&gt;</info>
+        <picklistValueName>Planned</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Amount_Refunded__c</fieldNames>
+        <fieldNames>Net_Loss__c</fieldNames>
+        <picklistValueName>Refunded</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Ticketing_PCC__c</fieldNames>
+        <fieldNames>Ticketing_Agent__c</fieldNames>
+        <fieldNames>Booking_PCC__c</fieldNames>
+        <fieldNames>Booking_Agent__c</fieldNames>
+        <fieldNames>GDS__c</fieldNames>
+        <info>&lt;p&gt;Extract info from in house systems&lt;/p&gt;</info>
+        <picklistValueName>with Support</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

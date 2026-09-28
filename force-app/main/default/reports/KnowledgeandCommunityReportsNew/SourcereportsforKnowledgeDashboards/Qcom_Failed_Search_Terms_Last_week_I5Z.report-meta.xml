@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>NetworkSearchQueryFrequency$CountQueries</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Search terms without results</description>
+    <filter>
+        <criteriaItems>
+            <column>NetworkSearchQueryFrequency$Network</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Help and Support | Qantas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>NetworkSearchQueryFrequency$HasResults</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <field>NetworkSearchQueryFrequency$QueryDate</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <aggregateType>Sum</aggregateType>
+        <dateGranularity>Day</dateGranularity>
+        <field>NetworkSearchQueryFrequency$SearchTerm</field>
+        <sortByName>NetworkSearchQueryFrequency$CountQueries</sortByName>
+        <sortOrder>Desc</sortOrder>
+        <sortType>Aggregate</sortType>
+    </groupingsDown>
+    <name>Q.com Failed Search Terms Last week</name>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>ca_only_2_0__Community_Searches_2_0__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>NetworkSearchQueryFrequency$QueryDate</dateColumn>
+        <interval>INTERVAL_LASTWEEK</interval>
+    </timeFrameFilter>
+</Report>

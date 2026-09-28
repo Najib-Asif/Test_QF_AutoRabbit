@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contract Payments</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Contract Payments</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- This determines the records that belong to Channel Incentive Contract Payments --></description>
+        <label><!-- Channel Incentive --></label>
+        <name>Channel_Incentive</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Channel Tech Fund --></label>
+        <name>Channel_Tech_Fund</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This determines the records that belong to Corporate Contract Payments --></description>
+        <label><!-- Corporate Contract Payments --></label>
+        <name>Corporate_Contract_Payments</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t increase the Amount when the Proposal status is &apos;Acceptance Required - Customer&apos; --></errorMessage>
+        <name>Allow_user_to_decrease_the_CP_Amount</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t edit the record when the status is &quot;Accepted by Customer&quot; --></errorMessage>
+        <name>Lock_the_record_when_status_is_Accepted</name>
+    </validationRules>
+</CustomObjectTranslation>

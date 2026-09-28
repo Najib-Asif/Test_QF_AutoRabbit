@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TicketNumber_Mandatory_QIC_Requests</fullName>
+    <active>true</active>
+    <description>Ticket number mandatory for QIC requests when Type is Commercial Waivers (BART) and Reason is &quot;Refund&quot;.</description>
+    <errorConditionFormula>AND 
+( 
+RecordType.Name==&quot;Service Request&quot;, 
+(ISPICKVAL(Type,&apos;Commercial Waiver (BART)&apos;)), 
+(ISPICKVAL(Problem_Type__c,&apos;Refund&apos;)), 
+(ISBLANK(Ticket_Number__c)) 
+)</errorConditionFormula>
+    <errorDisplayField>Ticket_Number__c</errorDisplayField>
+    <errorMessage>Please enter Ticket Number</errorMessage>
+</ValidationRule>

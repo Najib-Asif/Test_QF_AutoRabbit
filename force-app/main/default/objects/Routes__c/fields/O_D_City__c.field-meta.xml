@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>O_D_City__c</fullName>
+    <description>Used for Reporting</description>
+    <externalId>false</externalId>
+    <formula>IF ( CONTAINS ( O_D_Pair__c , &quot;PER&quot;),&quot;Perth&quot;,
+IF ( CONTAINS ( O_D_Pair__c , &quot;ADL&quot;),&quot;Adelaide&quot;,
+IF ( CONTAINS ( O_D_Pair__c , &quot;SYD&quot;),&quot;Sydney&quot;,
+IF ( CONTAINS ( O_D_Pair__c , &quot;MEL&quot;),&quot;Melbourne&quot;,
+IF ( CONTAINS ( O_D_Pair__c , &quot;BNE&quot;),&quot;Brisbane&quot;,
+IF ( CONTAINS ( O_D_Pair__c , &quot;HOB&quot;),&quot;Hobart&quot;,
+IF ( CONTAINS ( O_D_Pair__c , &quot;DRW&quot;),&quot;Darwin&quot;,
+IF ( CONTAINS ( O_D_Pair__c , &quot;CBR&quot;),&quot;Canberra&quot;,
+&quot;OTHER&quot;))))))))</formula>
+    <label>O&amp;D City</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

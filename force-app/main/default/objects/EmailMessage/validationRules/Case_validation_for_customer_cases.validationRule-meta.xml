@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_validation_for_customer_cases</fullName>
+    <active>true</active>
+    <description>Restricting the email access for customer connect cases to service lightning profile users</description>
+    <errorConditionFormula>AND(
+OR($Profile.Name == &apos;Qantas Service Lightning&apos;, $Profile.Name == &apos;Qantas Agency Connect and Agency Sales&apos;),
+CONTAINS(Parent.RecordType.DeveloperName,&quot;CCC&quot;)
+)</errorConditionFormula>
+    <errorMessage>You don&apos;t have necessary access to send an email for this case</errorMessage>
+</ValidationRule>

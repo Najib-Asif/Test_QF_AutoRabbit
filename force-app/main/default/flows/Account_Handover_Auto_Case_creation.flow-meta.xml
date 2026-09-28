@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>We determine the owner of the contract&apos;s opportunity and contract&apos;s account. If they are not equal then we are suppose to create a case.</description>
+        <name>Check_Opportunity_and_Account_Owners</name>
+        <label>Check Opportunity and Account Owners</label>
+        <locationX>454</locationX>
+        <locationY>129</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Opportunity_owner_and_account_owner_check</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Accountownercheckwithopportunityowner</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_a_Case</targetReference>
+            </connector>
+            <label>Opportunity owner and account owner check</label>
+        </rules>
+    </decisions>
+    <description>A case will be created and submitted for approval when a Contract is changed to signed by customer having different account and opportunity owners.</description>
+    <formulas>
+        <description>Check opportunity owner with account owner</description>
+        <name>Accountownercheckwithopportunityowner</name>
+        <dataType>Boolean</dataType>
+        <expression>IF({!$Record.Account__r.Owner.Id}={!$Record.Opportunity__r.Owner.Id}, true,false)</expression>
+    </formulas>
+    <formulas>
+        <description>Points to contract owner id</description>
+        <name>CaseOwnerId</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Contract_Owner__c}</expression>
+    </formulas>
+    <formulas>
+        <description>Case type to be calculated based on Account owner role and Contract Owner role</description>
+        <name>CaseTypeValue</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(CONTAINS({!$Record.Account__r.Owner.UserRole.Name},&quot;B&amp;G&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G&quot;)),&quot;B&amp;G to B&amp;G&quot;,IF(AND(CONTAINS({!$Record.Account__r.Owner.UserRole.Name},&quot;B&amp;G&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;QIS&quot;)),&quot;B&amp;G to QIS&quot;,IF(AND(CONTAINS({!$Record.Account__r.Owner.UserRole.Name},&quot;QIS&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;QIS&quot;)),&quot;QIS to QIS&quot;,IF(AND(CONTAINS({!$Record.Account__r.Owner.UserRole.Name},&quot;QIS&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G&quot;)),&quot;QIS to B&amp;G&quot;,&quot;Other&quot;))))</expression>
+    </formulas>
+    <formulas>
+        <description>Contract&apos;s opportunity ownername</description>
+        <name>ContractOpportunityOwnerName</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Opportunity__r.Owner.FirstName} +&quot; &quot;+{!$Record.Opportunity__r.Owner.LastName}</expression>
+    </formulas>
+    <formulas>
+        <description>Today + 2 weeks</description>
+        <name>Duedate</name>
+        <dataType>Date</dataType>
+        <expression>{!$System.OriginDateTime} +14</expression>
+    </formulas>
+    <formulas>
+        <description>Today + 14 days</description>
+        <name>dueDatePlusTwoWeeks</name>
+        <dataType>Date</dataType>
+        <expression>{!$Flow.CurrentDate} + 14</expression>
+    </formulas>
+    <formulas>
+        <description>New Portfolio value based on the Owner role</description>
+        <name>NewPortfolio</name>
+        <dataType>String</dataType>
+        <expression>IF(CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;Development&quot;),&quot;Business Development&quot;,IF(CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;Strategic Accounts&quot;),&quot;Strategic Accounts&quot;,IF(CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G-Resources&quot;),&quot;Resources&quot;,IF(CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G-New Business&quot;),&quot;New Business&quot;,IF(CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;SME-QIS&quot;),&quot;QIS&quot;,&quot;Others&quot;)))))</expression>
+    </formulas>
+    <formulas>
+        <description>New Team value based on New portfolio and Contract owner role</description>
+        <name>NewTeam</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(CONTAINS({!NewPortfolio},&quot;Resources&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G-Resources NSW/VIC&quot;)),&quot;Resources NSW/VIC&quot;,IF(AND(CONTAINS({!NewPortfolio},&quot;Resources&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G-Resources QLD&quot;)),&quot;Resources QLD&quot;,IF(AND(CONTAINS({!NewPortfolio},&quot;Resources&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G-Resources WA&quot;)),&quot;Resources WA&quot;,IF(CONTAINS({!NewPortfolio},&quot;Strategic Accounts&quot;),&quot;Businss&quot;,IF(AND(CONTAINS({!NewPortfolio},&quot;Business Development&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;VIC&quot;)),&quot;Business Development - VIC&quot;,IF(AND(CONTAINS({!NewPortfolio},&quot;Business Development&quot;),CONTAINS({!$Record.CreatedBy.UserRole.Name},&quot;B&amp;G&quot;)),&quot;Business Development - Other States&quot;,NULL))))))</expression>
+    </formulas>
+    <interviewLabel>Account Handover - Auto Case creation {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account Handover - Auto Case creation</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create a case when opportunity owner is not equal to Account owner</description>
+        <name>Create_a_Case</name>
+        <label>Create a Case</label>
+        <locationX>734</locationX>
+        <locationY>128</locationY>
+        <inputAssignments>
+            <field>AccountId</field>
+            <value>
+                <elementReference>$Record.Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Auto-Created Account Handover case.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Due_Date__c</field>
+            <value>
+                <elementReference>dueDatePlusTwoWeeks</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>New_Owner__c</field>
+            <value>
+                <elementReference>ContractOpportunityOwnerName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>New_Portfolio__c</field>
+            <value>
+                <elementReference>NewPortfolio</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>New_Team__c</field>
+            <value>
+                <elementReference>NewTeam</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.Opportunity__r.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Medium</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <stringValue>01290000000A8QnAAK</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not yet assigned - with Account Manager</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Auto-Created Account Handover case.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type</field>
+            <value>
+                <elementReference>CaseTypeValue</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Check_Opportunity_and_Account_Owners</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Signed by Customer</stringValue>
+            </value>
+        </filters>
+        <object>Contract__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

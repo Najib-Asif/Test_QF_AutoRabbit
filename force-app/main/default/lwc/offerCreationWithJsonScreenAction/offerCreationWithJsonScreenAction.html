@@ -1,0 +1,17 @@
+<template>
+
+    <lightning-quick-action-panel header={headerTitle}>
+        <lightning-textarea lwc:ref="jsonBody" name="jsonImput" required placeholder="Paste your JSON here.." 
+            label="Offer JSON" message-when-value-missing="Please provide an offer JSON" ></lightning-textarea>
+    <div slot="footer">
+      <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+      <template if:true={disableSaveButton}>
+        <lightning-button variant="brand" label="Save" class="slds-m-left_x-small" onclick={handleCreate}></lightning-button>
+      </template>
+      <template if:true={disableUpdateButton}>
+        <lightning-Button variant="brand" label="Update" class="slds-m-left_x-small" onclick={updateHandler}></label></lightning-Button>
+      </template>
+    </div>
+  </lightning-quick-action-panel>
+    
+</template>

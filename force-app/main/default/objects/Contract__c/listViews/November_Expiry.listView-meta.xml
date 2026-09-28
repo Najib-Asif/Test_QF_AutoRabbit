@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>November_Expiry</fullName>
+    <booleanFilter>1 AND 4 AND 3 AND (2 OR 5 OR 6) AND 7</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Billing_To_Address__c</columns>
+    <columns>Qantas_Annual_Expenditure__c</columns>
+    <columns>Type__c</columns>
+    <columns>Contract_Start_Date__c</columns>
+    <columns>Contract_End_Date__c</columns>
+    <columns>Agent_Override__c</columns>
+    <columns>Agent_Override_End_Date__c</columns>
+    <columns>Agent_Override_Start_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Contract_Start_Date__c</field>
+        <operation>lessOrEqual</operation>
+        <value>5/1/2016</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Signed by Customer</value>
+    </filters>
+    <filters>
+        <field>LAST_UPDATE</field>
+        <operation>greaterThan</operation>
+        <value>4/1/2016 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>Contract_End_Date__c</field>
+        <operation>lessOrEqual</operation>
+        <value>11/30/2016</value>
+    </filters>
+    <filters>
+        <field>Original_Contract_End_Date__c</field>
+        <operation>equals</operation>
+        <value>4/30/2016</value>
+    </filters>
+    <filters>
+        <field>Billing_To_Address__c</field>
+        <operation>contains</operation>
+        <value>AU</value>
+    </filters>
+    <label>May 2016 Contracts and Extensions</label>
+    <sharedTo>
+        <role>QF_Support_Deal_Support</role>
+    </sharedTo>
+</ListView>

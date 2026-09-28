@@ -1,0 +1,329 @@
+{
+  "version" : "64.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ContactEmail", "Email__c", "Contact_Email__c", "SuppliedEmail", "Id", "CaseNumber", "ContactId", "AccountId", "RecordTypeId", "Status", "Origin", "Subject", "CreatedDate", "Contact_Fullname__c", "Freight_Origin__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "RecordType",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "ParentId", "Name", "ContentType", "BodyLength", "OwnerId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "Description" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Attachment",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Attachment"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "WebToCaseCaseEmail",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1754352000000" ]
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Cases and Attachments Post 2025-08-05",
+          "name" : "Cases_and_Attachments_Post_2025_08_05"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "CreatedById", "CreatedDate", "TextBody", "Subject", "Name", "FromName", "FromAddress", "ValidatedFromAddress", "ToAddress", "Incoming", "Status", "RelatedToId", "IsBounced" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "EmailMessage",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "EmailMessage"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET4" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1754352000000" ]
+        } ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "FILTER2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Attachment",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1754352000000" ]
+        } ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "EmailToCaseAttachment",
+        "rightKeys" : [ "ParentId" ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 532.6,
+        "left" : 111.5,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Case Record Type",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 392
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Attachment",
+        "type" : "LOAD_DATASET",
+        "top" : 672.1,
+        "left" : 112.1,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Case Attachments from Email Service",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 532
+      },
+      "FILTER0" : {
+        "label" : "Since Aug 5",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532,
+        "left" : 252
+      },
+      "OUTPUT0" : {
+        "label" : "Cases and Attachments",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 812
+      },
+      "LOAD_DATASET4" : {
+        "label" : "EmailMessage",
+        "type" : "LOAD_DATASET",
+        "top" : 811.9,
+        "left" : 112.4,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER1" : {
+        "label" : "Since Aug 5",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 811.7,
+        "left" : 252.39999999999998
+      },
+      "JOIN2" : {
+        "label" : "Email Attachments",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 812,
+        "left" : 392.4
+      },
+      "FILTER2" : {
+        "label" : "Since Aug 5",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 672,
+        "left" : 252
+      },
+      "JOIN3" : {
+        "label" : "Case Attachments from Email to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 531.9,
+        "left" : 672
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "JOIN3",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "FILTER2",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "FILTER2"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN3"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

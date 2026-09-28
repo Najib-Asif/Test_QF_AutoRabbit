@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Fields_MarketingChild_Statuses</fullName>
+    <active>true</active>
+    <description>Mandatory fields for all  Marketing Child Statuses except Completed Status based on CurrencyIsoCode
+Fields: 
+Region
+Target Audience
+Expected Revenue in Campaign
+Expected Incremental Revenue</description>
+    <errorConditionFormula>AND( 
+$RecordType.DeveloperName = &quot;Marketing_Child&quot;, 
+OR(ISPICKVAL( CurrencyIsoCode, &quot;KHR&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;IDR&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;USD&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;KRW&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;MYR&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;PGK&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;PHP&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;SGD&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;BHD&quot;), 
+ISPICKVAL( CurrencyIsoCode, &quot;VND&quot;)), 
+OR( 
+ISBLANK (TEXT ( Region__c )), 
+ISBLANK ( Target_Audience__c ), 
+ISBLANK( ExpectedRevenue ), 
+ISBLANK( Expected_Incremental_Revenue__c ) 
+) 
+)</errorConditionFormula>
+    <errorMessage>Please fill up all fields:
+Region,
+Target Audience,
+Expected Revenue in Campaign,
+Expected Incremental Revenue</errorMessage>
+</ValidationRule>

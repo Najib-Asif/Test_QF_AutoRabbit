@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PPD_OH__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(  Objection_Handling_Score__c &lt;= 6.60, 1,(IF( Objection_Handling_Score__c &gt; 6.60 &amp;&amp; Objection_Handling_Score__c &lt;= 7.75, 2,(IF( Objection_Handling_Score__c &gt; 7.75 &amp;&amp; Objection_Handling_Score__c &lt;= 9.00, 3,(IF( Objection_Handling_Score__c &gt; 9.00 &amp;&amp; Objection_Handling_Score__c &lt;= 9.75, 4,(IF( Objection_Handling_Score__c &gt; 9.75 &amp;&amp; Objection_Handling_Score__c &lt;= 10.00,5,0))) ))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>PPD OH</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

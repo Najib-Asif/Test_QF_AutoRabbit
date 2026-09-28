@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Signature__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Opportunity__r.Owner.Country = &apos;AU&apos;,&apos;https://qantas.my.salesforce.com/servlet/servlet.ImageServer?id=015Mo000004nLVd&amp;oid=00D8s00000IDoz7&amp;lastMod=1732704954000&apos;,&apos;https://qantas.my.salesforce.com/servlet/servlet.ImageServer?id=0152v00000IR4yv&amp;oid=00D8s00000IDoz7&amp;lastMod=1632447510000&apos;)
+
+/* // Comment the above stmts and Uncomment the below after COVID-19
+IF(Qantas_Annual_Expenditure__c &lt;= 5000000, IF(NOT(CONTAINS(CreatedBy.UserRole.Name, &apos;B&amp;G&apos;)) ,&apos;https://qantas.lightning.force.com/servlet/servlet.FileDownload?file=0159000000FYaEz&apos;,IF(AND(CONTAINS(CreatedBy.UserRole.Name, &apos;B&amp;G&apos;),ISPICKVAL(Approval_Status__c,&apos;Approved&apos;)),&apos;https://qantas.lightning.force.com/servlet/servlet.FileDownload?file=0159000000AdOCV&apos;,&apos;&apos;)),&apos;&apos;) */</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Conga Signature</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

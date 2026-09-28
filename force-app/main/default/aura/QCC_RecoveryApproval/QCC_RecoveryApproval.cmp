@@ -1,0 +1,96 @@
+<aura:component controller="QCC_EFTRefundController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:attribute name="recoveries"   type="Recovery__c[]" />
+    <aura:attribute name="displayEFT"   type="Boolean"  default="false"/> 
+    <aura:attribute name="displayCC"    type="Boolean"  default="false"/>
+    <aura:attribute name="searchInput"  type="String"/>
+    <aura:attribute name="settings"     type="String"/>
+    <!-- pagination variables - start -->
+    <aura:attribute name="currentList" type="Recovery__c[]" />
+    <aura:attribute name="pageNumber" type="Integer" default="1" />
+    <aura:attribute name="maxPage" type="Integer" default="1" />
+    <aura:handler name="change" value="{!v.pageNumber}" action="{!c.renderPage}" />
+    <aura:attribute name="value" type="String" default="EFT Refund"/>
+    <aura:attribute name="options" type="List" default="[{'label': 'EFT Refund', 'value': 'EFT Refund'},{'label': 'Credit Card Refund', 'value': 'Credit Card Refund'}
+        ]"/>
+    <!-- pagination variables - end -->
+    <div>
+        <h2 class="slds-text-heading--small slds-m-bottom--small slds-align_absolute-center">RECOVERIES AWAITING APPROVAL</h2>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col" >
+                <lightning:button variant="brand" label="Approve" onclick="{!c.approveSelectedRecoveries }" class="slds-m-right_medium"/>
+                <!--<lightning:button variant="brand" label="Reject" onclick="{!c.declineSelectedRecoveries }" />-->
+                <lightning:button aura:id="eftReport" variant="brand" label="EFT Refund Report" onclick="{!c.goToReport }"/>
+                <lightning:button aura:id="ccReport" variant="brand" label="Credit Card Refund Report" onclick="{!c.goToReport }"/>
+            </div>
+            <div class="slds-col">
+                <lightning:radioGroup aura:id="recType"
+                    name="recoveryType"
+                    label="Recovery Type"
+                    options="{! v.options }"
+                    value="{! v.value }"
+                    onchange="{! c.handleChange }" />
+
+            </div>
+            
+            <div class ="slds-col">
+           <lightning:button variant="brand" label="Reject" onclick="{!c.declineSelectedRecoveries }"/>
+            </div>
+            
+            <div onkeyup="{!c.searchOnEnter}" class="slds-col" >
+                <ui:inputText aura:id="searchRecovery" class="slds-input" labelClass="slds-form-element__label" value="{!v.searchInput}" maxlength="20" placeholder="Search Recovery"/>
+            </div>
+            <div class="slds-col" >
+                <lightning:button variant="brand" label="Search Recovery" onclick="{!c.searchRecovery }"/></div>
+        </div>
+        
+        <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout slds-scrollable">
+            <thead>
+                <tr class="slds-text-heading--label">
+                    <th scope="col"><div class="slds-truncate">Selection</div></th>
+                    <th scope="col"><div class="slds-truncate">RECOVERY</div></th>
+                    <th scope="col"><div class="slds-truncate">CASE NUMBER</div></th>
+                    <th scope="col"><div class="slds-truncate">CUSTOMER NAME</div></th>
+                    <th scope="col"><div class="slds-truncate">REFUND AMOUNT</div></th>
+                    <th scope="col"><div class="slds-truncate">TYPE</div></th>
+                    <th scope="col"><div class="slds-truncate">COMMENT</div></th>
+                    <aura:if isTrue="{!v.displayEFT}">
+                            <th scope="col"><div class="slds-truncate">BANK NAME</div></th>
+                            <th scope="col"><div class="slds-truncate">BANK ACCOUNT NUMBER</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.displayCC}">
+                            <th scope="col"><div class="slds-truncate">CARD TYPE</div></th>
+                            <th scope="col"><div class="slds-truncate">CARD TOKEN</div></th>
+                    </aura:if>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Use the Apex model and controller to fetch server side data -->
+                <aura:iteration items="{!v.currentList}" var="recovery"  indexVar="i">
+                    <tr >
+                        <td><input type="checkbox" aura:id="{!recovery.Id}" id="{!recovery.Id}" checked="false"/></td>
+                        <td><div class="slds-truncate"><a href="#" id="{!recovery.Id}" onclick="{!c.navigateToRecord}">{!recovery.Name}</a></div></td>
+                        <td><div class="slds-truncate"><a href="#" id="{!recovery.Case_Number__c}" onclick="{!c.navigateToRecord}">{!recovery.Case_Number__r.CaseNumber }</a></div></td>
+                        <td><div class="slds-truncate">{!recovery.Contact__r.Name }</div></td>
+                        <td><div class="slds-truncate">{!recovery.Value__c }</div></td>
+                        <td><div class="slds-truncate">{!recovery.Type__c}</div></td>
+                        <td><ui:inputTextArea aura:id="comment" rows="1" value="{!recovery.Approver_Comment__c}"/></td>
+                        <aura:if isTrue="{!v.displayEFT}">
+                                <th scope="col"><div class="slds-truncate">{!recovery.Bank_Name__c}</div></th>
+                                <th scope="col"><div class="slds-truncate">{!recovery.Bank_Account_Name__c}</div></th>
+                        </aura:if>
+                        <aura:if isTrue="{!v.displayCC}">
+                                <th scope="col"><div class="slds-truncate">{!recovery.Card_Type__c}</div></th>
+                                <th scope="col"><div class="slds-truncate">{!recovery.Credit_Card_Token__c}</div></th>
+                        </aura:if>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <c:QCC_Pagination currentPageNumber="{!v.pageNumber}" maxPageNumber="{!v.maxPage}" />
+    </div>
+</div>
+
+</aura:component>

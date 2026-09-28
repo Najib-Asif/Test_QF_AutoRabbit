@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_Domestic_Fares__c</fullName>
+    <label>No of Domestic Fares</label>
+    <summaryFilterItems>
+        <field>Discount_List__c.Fare_Combination__c</field>
+        <operation>equals</operation>
+        <value>Mainline - Flex Only Deal, Mainline - Red e-Deal, Intra WA - H in B, Intra-WA Flex, Volume - Flex, Token - H in B, Token - Flex, Mainline - JCYB Deal, Mainline - Red e-Deal + Q</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Discount_List__c.Proposal__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

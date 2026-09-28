@@ -1,0 +1,35 @@
+<aura:component controller="QL_AccountClassification" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:handler name="init" action="{!c.Initfunction}" value="{!this}" />
+    <aura:attribute name="value" type="Account_Classifications__c" />
+    
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <aura:iteration items="{!v.value}" var="records" >
+                <aura:if isTrue="{!(records.Classification__c == 'Procurement Tier' || records.Classification__c == 'OBT' ||records.Classification__c == 'QBR Segmentation' || records.Classification__c == 'Top QBR Customer>$200K' || records.Classification__c == 'QBR QF Share')}">
+                    <div class="slds-grid slds-m-bottom_x-small">                
+                        <table >   
+                            <th>{!records.Classification__c}</th>
+                            <tr>
+                                <td>Sub Classification:</td>
+                                <td>{!records.Sub_Classification__c}</td>
+                            </tr>                       
+                            <tr>
+                                <td>Reviewed Date:</td>
+                                <td>
+                                    <ui:outputDate value="{!records.Reviewed_Date__c}"/>
+                                </td>
+                            </tr>
+                            <aura:if isTrue="{!(records.Classification__c == 'Procurement Tier')}">
+                                <tr>
+                                    <td>Change-on-Procurement-Spend:</td>
+                                    <td>{!records.Change_on_Procurement_Spend__c}%</td>
+                                </tr> 
+                            </aura:if>             
+                        </table>                                         
+                    </div>
+                </aura:if>
+            </aura:iteration>
+        </div>
+    </article> 
+</aura:component>

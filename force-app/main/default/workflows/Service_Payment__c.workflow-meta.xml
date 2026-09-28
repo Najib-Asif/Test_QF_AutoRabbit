@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>QAC_Initiated_Fulfilment_Field_Update</fullName>
+        <description>QAC</description>
+        <field>Initiated_fulfilment__c</field>
+        <literalValue>1</literalValue>
+        <name>QAC Initiated Fulfilment Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QAC_Payment_Timestamp_Field_Update</fullName>
+        <description>QAC - It will update &apos;Payment Timestamp&apos; field when the &apos;Payment Status&apos; is changed to &apos;Paid&apos;</description>
+        <field>Payment_Timestamp__c</field>
+        <formula>NOW()</formula>
+        <name>QAC Payment Timestamp Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>QAC_Payment_Fulfillment_Notification</fullName>
+        <apiVersion>43.0</apiVersion>
+        <description>Notify QAC website on all the Service Payment related to agency service request created or updated in salesforce including the once which is coming from the website itself.
+This notification is for Droid for completing the fulfillment.</description>
+        <endpointUrl>https://qac.api.qantas.com/qac/notification/fulfillmentevent</endpointUrl>
+        <fields>Case__c</fields>
+        <fields>CreatedDate</fields>
+        <fields>External_System_Reference_Id__c</fields>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>system.updates@qantas.com.au</integrationUser>
+        <name>QAC Payment Fulfillment Notification</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>QAC_Service_Payment_Notification</fullName>
+        <apiVersion>43.0</apiVersion>
+        <description>Notify QAC website on all the Service Payment related to agency service request created or updated in Salesforce including the once which is coming from the website itself.</description>
+        <endpointUrl>https://qac.api.qantas.com/qac/notification/paymentevent</endpointUrl>
+        <fields>Case__c</fields>
+        <fields>CreatedDate</fields>
+        <fields>External_System_Reference_Id__c</fields>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>system.updates@qantas.com.au</integrationUser>
+        <name>QAC Service Payment Notification</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>QAC Payment Fulfillment Notification to website</fullName>
+        <actions>
+            <name>QAC_Initiated_Fulfilment_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>QAC_Payment_Fulfillment_Notification</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Send outbound messages to QCP queue whenver a Service Payment record relevant to agency related service request is created or updated</description>
+        <formula>AND( Case__r.RecordType.Name = &quot;Service Request&quot;, ISPICKVAL(Case__r.Origin, &quot;QAC Website&quot;), RecordType.Name = &quot;Service Request&quot;, AND(ISPICKVAL(Payment_Status__c, &quot;Paid&quot;), Initiated_fulfilment__c = False), ISPICKVAL(Case__r.Account.Type, &quot;Agency Account&quot;), NOT(ISBLANK(Case__r.Account.Qantas_Industry_Centre_ID__c)), NOT(  OR(  ISPICKVAL(Case__r.Type, &quot;Group Waivers&quot;),ISPICKVAL(Case__r.Type, &quot;SBT&quot;),ISPICKVAL(Case__r.Type, &quot;Service Request&quot;),  ISPICKVAL(Case__r.Type, &quot;Commerical Waiver (non BART)&quot;), CONTAINS( TEXT(Case__r.Problem_Type__c) , &quot;Internal&quot;)  )  )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QAC Service Payment Payment Timestamp Update</fullName>
+        <actions>
+            <name>QAC_Payment_Timestamp_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Service_Payment__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Service_Payment__c.Payment_Timestamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Service_Payment__c.Payment_Status__c</field>
+            <operation>equals</operation>
+            <value>Paid</value>
+        </criteriaItems>
+        <description>QAC - This workflow rule will update the &quot;Payment Timestamp&quot; field for Offline cases</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QAC Service Payment notification to website</fullName>
+        <actions>
+            <name>QAC_Service_Payment_Notification</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Send outbound messages to QCP queue whenever a Service Payment record relevant to agency related service request is created or updated</description>
+        <formula>AND( Case__r.RecordType.Name = &quot;Service Request&quot;,  RecordType.Name = &quot;Service Request&quot;, ISPICKVAL(Case__r.Account.Type, &quot;Agency Account&quot;), NOT(ISBLANK(Case__r.Account.Qantas_Industry_Centre_ID__c)), NOT(  OR(  ISPICKVAL(Case__r.Type, &quot;Group Waivers&quot;),ISPICKVAL(Case__r.Type, &quot;SBT&quot;),ISPICKVAL(Case__r.Type, &quot;Service Request&quot;),  ISPICKVAL(Case__r.Type, &quot;Commerical Waiver (non BART)&quot;), CONTAINS( TEXT(Case__r.Problem_Type__c) , &quot;Internal&quot;)  )  )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

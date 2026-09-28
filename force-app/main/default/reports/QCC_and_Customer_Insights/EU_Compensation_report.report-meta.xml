@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case$Status</field>
+    </columns>
+    <columns>
+        <field>Case$ClosedDate</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Type__c</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Fulfilled_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Status__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Recoveries_Case__r$Value__c</field>
+    </columns>
+    <columns>
+        <field>Case$Departure_Date_Time__c</field>
+    </columns>
+    <columns>
+        <field>Case$Departure_Airport__c</field>
+    </columns>
+    <columns>
+        <field>Case$Arrival_Airport__c</field>
+    </columns>
+    <columns>
+        <field>Case$Flight_Number__c</field>
+    </columns>
+    <columns>
+        <field>Case$Description</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Cost_Centre_Account_Number__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>For Narmatha Sivapalan to estimate monthly EU disrupt costs</description>
+    <filter>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <criteriaItems>
+            <column>Case$Sub_Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>EU Compensation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Subject</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>EU Compensation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>EUR600,600 Euro,600Euro,EU261,EC261,EU compensation</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>EU Compensation report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_or_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

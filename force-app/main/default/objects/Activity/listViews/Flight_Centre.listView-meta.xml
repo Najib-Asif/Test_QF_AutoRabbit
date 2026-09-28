@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flight_Centre</fullName>
+    <columns>TASK.SUBJECT</columns>
+    <columns>TASK.WHO_NAME</columns>
+    <columns>TASK.WHAT_NAME</columns>
+    <columns>TASK.DUE_DATE</columns>
+    <columns>TASK.STATUS</columns>
+    <columns>TASK.PRIORITY</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>TASK.LAST_UPDATE</columns>
+    <columns>UPDATEDBY_USER.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATEDBY_USER.ALIAS</field>
+        <operation>equals</operation>
+        <value>RShar</value>
+    </filters>
+    <filters>
+        <field>TASK.CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>4/8/2016 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>TASK.SUBJECT</field>
+        <operation>equals</operation>
+        <value>Agency Data - FC Retail</value>
+    </filters>
+    <filters>
+        <field>TASK.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Completed</value>
+    </filters>
+    <label>Flight Centre</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_DOM_Sales_SME_QIS</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

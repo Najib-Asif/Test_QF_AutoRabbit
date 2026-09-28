@@ -1,0 +1,57 @@
+<aura:component controller="QAC_CaseOwnerHistoryController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="casehistory" type="QAC_CaseOwnerHistoryController.OwnerHistoryData[]" />
+    <aura:attribute name="numberOfRecordsVisible" type="Integer" default="3"/>
+    <aura:attribute name="buttonstate" type="Boolean" default="false"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="toggleCount" type="Integer" default="3"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" /> 
+    
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-contact" title="fulfillment">
+                        <lightning:icon iconName="custom:custom55" size="small"/>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <span class="slds-text-heading_small">Case Owner History</span>
+                    </h2>
+                </div>
+            </header>
+        </div>                
+            <aura:iteration items="{!v.casehistory}" var="wrap" indexVar="idx" end="{!v.toggleCount}">
+                <div class="timeline">
+                <div class="container right">
+                    <div class="content">
+                        <h2> <b>{!wrap.ownerName }</b></h2>
+                        <p> on <ui:outputDateTime  value="{!wrap.historyTime}" ></ui:outputDateTime></p>
+                    </div>
+                </div>
+                </div>                    
+            </aura:iteration>
+        
+        <aura:if isTrue="{!(v.casehistory.length > v.numberOfRecordsVisible)}">
+        <lightning:buttonStateful labelWhenOff="Show More"
+                                  labelWhenOn="Show Less"
+                                  labelWhenHover=""
+                                  iconNameWhenOff="utility:chevrondown"
+                                  iconNameWhenOn="utility:chevronup"
+                                  iconNameWhenHover=""
+                                  state="{!v.buttonstate}"
+                                  onclick="{!c.toggleTable}"
+                                  class="stateClass slds-align_absolute-center slds-button__icon_right"
+                                  />                    
+    	</aura:if>
+        
+        <br/>
+        
+    </article>
+    
+    
+    
+    
+</aura:component>

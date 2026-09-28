@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RRP_of_Bag__c</fullName>
+    <formula>IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Delsey Belmont&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;55&apos;)) , 229,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Delsey Belmont&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;70&apos;)) , 279,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Delsey Belmont&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;76&apos;)) , 299,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Delsey Belmont&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;82&apos;)) , 329,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Delsey U-Lite Classic 2&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;68&apos;)) , 329,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Delsey U-Lite Classic 2&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;79&apos;)) , 359,0))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>RRP of Bag</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

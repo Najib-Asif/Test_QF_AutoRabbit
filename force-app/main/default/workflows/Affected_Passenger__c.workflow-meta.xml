@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>QCC_GlobalEventsEmailAlert</fullName>
+        <description>QCC_GlobalEventsEmailAlert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QCC_GlobalTemplate</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_SendCommsToPassengerFFRecovery</fullName>
+        <description>QCC_SendCommsToPassengerFFRecovery</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QCC_PassengerCommsWithRecoveryFF</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_SendCommsToPassengerNFFRecovery</fullName>
+        <description>QCC_SendCommsToPassengerNFFRecovery</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QCC_PassengerCommsWithRecoveryNFF</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_SendCommsToPassengerNoRecovery</fullName>
+        <description>QCC_SendCommsToPassengerNoRecovery</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QCC_PassengerCommsWithOutRecovery</template>
+    </alerts>
+    <outboundMessages>
+        <fullName>QAC_Passenger_Notification</fullName>
+        <apiVersion>43.0</apiVersion>
+        <description>Notify QAC webstie on all the passenger records related to agency service request created or updated in salesforce including the onces which is coming from the website itself</description>
+        <endpointUrl>https://qac.api.qantas.com/qac/notification/passengerevent</endpointUrl>
+        <fields>Case__c</fields>
+        <fields>CreatedDate</fields>
+        <fields>External_System_Reference_Id__c</fields>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>system.updates@qantas.com.au</integrationUser>
+        <name>QAC Passenger Notification</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>QAC Passenger notification to website</fullName>
+        <actions>
+            <name>QAC_Passenger_Notification</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Send outbound messages to QCP queue whenver a passenger record relevant to agency related service request is created or updated</description>
+        <formula>AND( Case__r.RecordType.Name = &quot;Service Request&quot;, RecordType.Name = &quot;Service Request&quot;, ISPICKVAL(Case__r.Account.Type, &quot;Agency Account&quot;), NOT(ISBLANK(Case__r.Account.Qantas_Industry_Centre_ID__c)), NOT(  OR(  ISPICKVAL(Case__r.Type, &quot;Group Waivers&quot;),ISPICKVAL(Case__r.Type, &quot;SBT&quot;),ISPICKVAL(Case__r.Type, &quot;Service Request&quot;),  ISPICKVAL(Case__r.Type, &quot;Commerical Waiver (non BART)&quot;), CONTAINS( TEXT(Case__r.Problem_Type__c) , &quot;Internal&quot;)   )  )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

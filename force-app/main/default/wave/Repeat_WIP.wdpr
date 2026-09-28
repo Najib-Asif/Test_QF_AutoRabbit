@@ -1,0 +1,322 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "LastModifiedDate", "Origin_bucket", "AccountId", "Description", "Frequent_Flyer_Tier__c", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "Case_Number__c", "Is_QCC_Case__c", "Frequent_Flyer_Number__c", "OwnerId", "OwnerName__c", "RecordType.DeveloperName", "Booking_PNR__c", "CCC_R1_CCAT_Type__c", "RecordTypeId", "CaseNumber", "Sub_Type_1__c", "Created_by_Role__c", "RecordType.Id", "MasterRecordId", "ParentId", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "RecordType.DeveloperName_bucket", "Record_Type__c", "Type", "IsEscalated", "Sub_Type_2__c", "Contact_Fullname__c", "Category__c", "CreatedDate", "ClosedDate", "Id", "Type_bucket", "Aircraft_Type_Code__c", "Recovery_Value__c", "Recovery_Quantity__c" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CaseRawDataSet",
+          "name" : "CaseRawDataSet"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1682899200000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "RecordType.DeveloperName",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC_Complaints", "CCC_Voice" ]
+        } ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "FILTER0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Month",
+          "label" : "Month",
+          "formulaExpression" : "month(CreatedDate)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordType.DeveloperName_bucket1",
+          "label" : "Interaction or Complaint",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "RecordType.DeveloperName",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Complaint",
+              "sourceValues" : [ "CCC_Complaints" ]
+            }, {
+              "value" : "Voice",
+              "sourceValues" : [ "CCC_Voice" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "Month",
+          "operator" : "EQUAL",
+          "operands" : [ "5" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "RecordType.DeveloperName_bucket1",
+          "operator" : "EQUAL",
+          "operands" : [ "Complaint" ]
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FILTER1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "May Complaints",
+          "name" : "May_Complaints"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "Month",
+          "operator" : "EQUAL",
+          "operands" : [ "5" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "RecordType.DeveloperName_bucket1",
+          "operator" : "NOT",
+          "operands" : [ "Complaint" ]
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "May Complaints and Calls",
+          "name" : "May_Complaints_and_Calls"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER2", "FILTER1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "ContactId" ],
+        "rightQualifier" : "MayComplai",
+        "rightKeys" : [ "ContactId" ]
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "Id",
+          "name" : "UNIQUE_Id",
+          "label" : "Unique Case ID"
+        } ],
+        "groupings" : [ "ContactId", "Record_Type__c", "Booking_PNR__c" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Complaints aggregate",
+          "name" : "Complaints_aggregate"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "CaseRawDataSet",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "All Voice and Complaint Cases",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "TRANSFORM0" : {
+        "label" : "Month",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 392,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "BUCKET0"
+        } ]
+      },
+      "FILTER1" : {
+        "label" : "May Complaints",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 532
+      },
+      "OUTPUT0" : {
+        "label" : "May Complaints",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 672
+      },
+      "FILTER2" : {
+        "label" : "Filter 2",
+        "type" : "FILTER",
+        "top" : 252.39999999999998,
+        "left" : 532
+      },
+      "OUTPUT1" : {
+        "label" : "MAY Voice Calls",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 672
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 393.1,
+        "left" : 672
+      },
+      "AGGREGATE0" : {
+        "label" : "Aggregate 0",
+        "type" : "AGGREGATE",
+        "top" : 391.9,
+        "left" : 812,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "OUTPUT2" : {
+        "label" : "Complaints Aggregate",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 952
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER1",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "FILTER2"
+    }, {
+      "source" : "FILTER2",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER2",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "AGGREGATE0"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "OUTPUT2"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

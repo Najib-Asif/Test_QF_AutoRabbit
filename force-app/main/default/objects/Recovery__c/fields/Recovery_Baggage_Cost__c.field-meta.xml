@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recovery_Baggage_Cost__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Case_Number__r.Customer_Location__c , &apos;Metro&apos;,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;55&apos;)) , 70.20,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;70&apos;)) , 85.50,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;76&apos;)) , 88.50,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;82&apos;)) , 96.70,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Chartreuse&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;68&apos;)) , 87.30,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Chartreuse&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;78&apos;)) , 97.50,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;U_Lite_Classic2&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;68&apos;)) , 87.30,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;U_Lite_Classic2&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;79&apos;)) , 97.50,0)))))))),
+
+CASE(Case_Number__r.Customer_Location__c , &apos;Regional&apos;,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;55&apos;)) , 92.20,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;70&apos;)) , 113.00,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;76&apos;)) , 116.00,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Belmont_Plus&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;82&apos;)) , 127.50,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Chartreuse&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;68&apos;)) , 115.90,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;Chartreuse&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;78&apos;)) , 123.10,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;U_Lite_Classic2&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;68&apos;)) , 115.90,
+IF( AND(ISPICKVAL( Replacement_Bag_Type__c , &apos;U_Lite_Classic2&apos;),ISPICKVAL( Size_of_Bag_cm__c , &apos;79&apos;)) , 123.10,0)))))))),
+0
+
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Recovery Baggage Cost</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

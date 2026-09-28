@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_UnableToUpdateOwnerWhenClosed</fullName>
+    <active>true</active>
+    <description>QCC: Stopping users from updating the owner field when an event is closed</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_QCC_UnableToUpdateOwnerWhenClosed__c=TRUE, 
+    TEXT(Status__c) == &apos;Closed&apos; , 
+    ISPICKVAL(PRIORVALUE(Status__c), &apos;Closed&apos;), 
+    NOT(ISCHANGED(RecoveryIsCreated__c)), 
+    NOT(ISCHANGED(TotalCostSpentOnFlight_Event__c)), 
+    NOT(ISCHANGED(Primary_Root_Cause__c)), 
+    NOT(ISCHANGED(OwnerId) &amp;&amp; BEGINS(OwnerId, &apos;00G&apos;)), 
+    NOT(ISCHANGED( IsEventReopened__c )), 
+    NOT(ISCHANGED(DelayCostsCompleted__c)),
+				NOT(ISCHANGED(GlobalEvent__c)), 
+    (RecordType.DeveloperName == &apos;Active_Event&apos; || 
+     RecordType.DeveloperName == &apos;Closed_Event&apos; || 
+     RecordType.DeveloperName == &apos;FlightEventOffload&apos; || 
+     RecordType.DeveloperName == &apos;GlobalEvent&apos;) 
+)</errorConditionFormula>
+    <errorMessage>Event cannot be edited while closed, please reopen to edit the event</errorMessage>
+</ValidationRule>

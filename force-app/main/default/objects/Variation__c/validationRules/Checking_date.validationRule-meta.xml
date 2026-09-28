@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Checking_date</fullName>
+    <active>true</active>
+    <description>Ensuring end date is entered if the variation reason is an extension</description>
+    <errorConditionFormula>AND(OR(  
+ISPICKVAL( Contract_Variation_Reason__c , &apos;Extension&apos;)  ,ISPICKVAL( Contract_Variation_Reason__c , &apos;Amendment + Extension&apos;))
+,ISBLANK( Contract_End_Date__c ))</errorConditionFormula>
+    <errorDisplayField>Contract_End_Date__c</errorDisplayField>
+    <errorMessage>Please enter an end date</errorMessage>
+</ValidationRule>

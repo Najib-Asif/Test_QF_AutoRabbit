@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_MandatoryCheck_BefActivation_CorpSch</fullName>
+    <active>true</active>
+    <description>To check if all the mandatory fields are entered for Corporate Scheme</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_MandatoryCheck_BefActivation_CorpSch__c &amp;&amp;
+RecordType.DeveloperName =&apos;Corporate_Scheme&apos; &amp;&amp;
+ (ISPICKVAL(Status ,&apos;Complete – Pending Activation&apos;) || ISPICKVAL(Status ,&apos;Active&apos;) ) &amp;&amp;
+( ISNULL(AccountId) || ISNULL(ContactId) || ISNULL(Contract__c) ||  ISBLANK(Scheme_Cost_Center__c) || ISBLANK(Mailing_Name_1__c))</errorConditionFormula>
+    <errorMessage>Insufficient detail to move the Corporate Scheme to Complete – Pending Activation. Please check if you have entered Account,Contact,Contract,Scheme Cost Center,Mailing Name 1 Details.</errorMessage>
+</ValidationRule>

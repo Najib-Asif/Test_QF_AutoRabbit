@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Parent</field>
+        <field>Owner</field>
+        <field>StartDate</field>
+        <field>EndDate</field>
+        <field>BudgetedCost</field>
+        <field>Description</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>ssmith@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>Thailand,Indonesia,Cambodia,Vietnam,Malaysia,India,Sri Lanka,Japan</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approval_Other_Regions</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>anthony.penney@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>PNG &amp; Solomon Island</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>Papua New Guinea,Solomon Island</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approval_PNG_SI</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>alanchang@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Level 1 approval step for China and Hong Kong</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>China,Hong Kong,Taiwan,Philippines</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 for China and Hong Kong</label>
+        <name>Level_1_for_China_and_Hong_Kong</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>lteo@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>Singapore</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Approval for Singapore Campaign</label>
+        <name>Approval_for_Singapore_Campaign</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>ryuta.nakayama@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Campaign.Region__c</field>
+                <operation>equals</operation>
+                <value>Korea</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Level 1 for Approval for Korea</label>
+        <name>Level_1_for_Approval_for_Korea</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Asia Campaigns Approval based on the Regions.  New value Singapore has been added to region, CRM- 5611 to add approval steps for China
+CRM-6697 *Campaign Approval Flows - Changes
+CRM-11086 Removed Japan steps in  V7 version.</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Campaign.RecordType</field>
+            <operation>equals</operation>
+            <value>Marketing - Child</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.Region__c</field>
+            <operation>equals</operation>
+            <value>Asia,Cambodia,China,Hong Kong,India,Indonesia,Korea,Malaysia,North East Asia,Philippines,Singapore,Taiwan,Thailand,Vietnam,Papua New Guinea,Solomon Island,Sri Lanka,Japan</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Campaign_Status_to_In_Progress</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Approval_Status_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Update_Approval_Status_to_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Update_Approval_Status_to_Submitted</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Asia Campaign Approval v8</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>3</processOrder>
+    <recallActions>
+        <action>
+            <name>Update_Approval_Status_to_Recalled</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

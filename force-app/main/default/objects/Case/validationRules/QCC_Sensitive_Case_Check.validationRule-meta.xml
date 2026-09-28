@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Sensitive_Case_Check</fullName>
+    <active>true</active>
+    <description>Restrict the User, for making the new case as Sensitive.Jira-CRM-5051</description>
+    <errorConditionFormula>AND(Sensitive__c, ISPICKVAL(Status, &apos;New&apos;)) &amp;&amp;
+$Profile.Name != &apos;System Administrator&apos; &amp;&amp;
+$Profile.Name != &apos;Qantas System Administrator&apos; &amp;&amp;
+$Profile.Name != &apos;Qantas System Admin - Freight&apos; &amp;&amp;
+$Profile.Name != &apos;Qantas System Admin - QCC&apos; &amp;&amp;
+$Profile.Name != &apos;Qantas System Admin - SND&apos;</errorConditionFormula>
+    <errorMessage>Can&apos;t make a new case as sensitive case</errorMessage>
+</ValidationRule>

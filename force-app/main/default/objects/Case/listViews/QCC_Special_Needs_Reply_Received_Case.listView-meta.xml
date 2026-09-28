@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Special_Needs_Reply_Received_Case</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>Specific_Needs__c</columns>
+    <columns>Updated_Departure_Date_Time__c</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>PARENT.CASE_NUMBER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Reply Received</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.QCC_Specific_Needs</value>
+    </filters>
+    <label>Specific Needs Reply Received</label>
+    <sharedTo>
+        <role>QF_QDC_OM</role>
+        <roleAndSubordinatesInternal>QF_QDC_OM_SN_TL</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

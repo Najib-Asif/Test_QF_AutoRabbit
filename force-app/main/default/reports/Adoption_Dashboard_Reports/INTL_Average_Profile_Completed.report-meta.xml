@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>(User.Profile_Status__c:AVG/100)</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>User Profile Status</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_67800279</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>FULL_NAME</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>YOSU URIGUEN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PATRICK HYDE</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>ANTHONY MATAHLIJA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>BRONTE HOLMES</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CAMERON FRANKLIN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CHRIS BOOTH</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DANIEL HOVAN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DAVID CANT</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>ANDREW JORGENSEN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CHRISTOPHER MARDOQUIO</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DAMIEN TOWN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>RICHARD FOX</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>STEPHAN VAN ARNHEM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>TONY BURNS</sourceValue>
+            </sourceValues>
+            <value>Yosu Uriguen</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>DEAN HOWARTH</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PAUL FARRELL</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DIANE ANSTEY</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DARREN BATTY</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Andres Fernandez</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>TIMOTHY DAVERN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CRAIG MCCRACKEN</sourceValue>
+            </sourceValues>
+            <value>Dean Howarth</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>GARY COWLISHAW</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>ASHLEY HOWELL</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>HENRY BARRINGTON</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Nick Duggan</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>ANTONIETTA ESPOSITO</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CLAIRE PAISLEY</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DAVID DICKSON</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DREW BEAMES</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>JOHN ISSAAKIDIS</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>JOSHUA BIRD</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Mark Wong</sourceValue>
+            </sourceValues>
+            <value>Ash Howell</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>FORMULA1</column>
+        </chartSummaries>
+        <chartType>VerticalColumn</chartType>
+        <enableHoverLabels>true</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>ADDRESS_COUNTRY_CODE</groupingColumn>
+        <location>CHART_BOTTOM</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>true</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>USER_ID</field>
+    </columns>
+    <columns>
+        <field>USERNAME</field>
+    </columns>
+    <columns>
+        <field>DIVISION</field>
+    </columns>
+    <columns>
+        <field>User.Profile_Check__c</field>
+    </columns>
+    <columns>
+        <field>User.Profile_Status__c</field>
+    </columns>
+    <columns>
+        <field>User.Profile_Name__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>LICENSE_TYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>S</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>PROFILE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Administrator</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>User.Business_Unit__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ADDRESS_COUNTRY_CODE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FULL_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>INTL Average Profile Completed</name>
+    <params>
+        <name>active</name>
+        <value>active</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>User</reportType>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>LOGIN_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

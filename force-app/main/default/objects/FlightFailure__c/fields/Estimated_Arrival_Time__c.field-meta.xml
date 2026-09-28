@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estimated_Arrival_Time__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(ISBLANK(EstimatedArrivalTimeUtc__c),&quot;&quot;,TEXT(DAY(DATEVALUE(EstimatedArrivalTimeUtc__c))) &amp; &quot;/&quot; &amp; 
+TEXT(MONTH(DATEVALUE(EstimatedArrivalTimeUtc__c))) &amp; &quot;/&quot; &amp; 
+TEXT(YEAR(DATEVALUE( EstimatedArrivalTimeUtc__c ))) &amp; &quot; &quot; &amp; 
+
+
+TEXT(HOUR(TIMEVALUE(EstimatedArrivalTimeUtc__c))) &amp; &quot;:&quot; &amp; 
+TEXT(MINUTE(TIMEVALUE(EstimatedArrivalTimeUtc__c))) &amp; &quot;:&quot; &amp; 
+TEXT(SECOND(TIMEVALUE(EstimatedArrivalTimeUtc__c))))</formula>
+    <label>Estimated Arrival Time</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_62396589</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account.Opportunities$Owner.UserRole</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager1</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager5</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager1</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager5</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-Acquisition and Growth</sourceValue>
+            </sourceValues>
+            <value>A&amp;G</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager1</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-Retention and Growth</sourceValue>
+            </sourceValues>
+            <value>R&amp;G</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Account.Opportunities$Owner</field>
+    </columns>
+    <columns>
+        <field>Account$Qantas_Corporate_Identifier__c</field>
+    </columns>
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Amount</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Incremental_Revenue__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Competitor_Contract__c</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$CloseDate</field>
+    </columns>
+    <columns>
+        <field>Account$LastActivityDate</field>
+    </columns>
+    <columns>
+        <field>Account$BillingStateCode</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Campaign</field>
+    </columns>
+    <columns>
+        <field>Account$Owner</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>JM Pipeline</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.Opportunities$StageName</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Closed - Accepted,Closed - Not Accepted,Declined</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Owner</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>$USER</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Opportunities$StageName</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Opportunities$Probability</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>JM Pipeline</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunities_with_without_Contracts__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Account$BillingStateCode</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Account.Opportunities$CloseDate</dateColumn>
+        <endDate>2027-10-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2019-07-01</startDate>
+    </timeFrameFilter>
+</Report>

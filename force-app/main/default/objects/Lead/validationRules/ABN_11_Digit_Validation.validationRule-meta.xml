@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ABN_11_Digit_Validation</fullName>
+    <active>true</active>
+    <description>ABN must have exactly 11 numbers with no spaces for AU Accounts.</description>
+    <errorConditionFormula>AND( Country = &apos;AU&apos;, NOT(CONTAINS($Profile.Name, &apos;Administrator&apos;)) ,OR((NOT(ISNUMBER(ABN_Tax_Reference__c))), LEN(ABN_Tax_Reference__c) &lt;&gt; 11)
+	,AND(CONTAINS($Profile.Name,&apos;Qantas Loyalty -Commercial Sales&apos;),NOT(LEFT(PRIORVALUE(OwnerId), 3) = &quot;00G&quot;)),
+NOT ( $Profile.Id = &apos;00e90000001wK8z&apos; ) /*system Administrator*/)</errorConditionFormula>
+    <errorDisplayField>ABN_Tax_Reference__c</errorDisplayField>
+    <errorMessage>ABN must have exactly 11 numbers with no spaces</errorMessage>
+</ValidationRule>

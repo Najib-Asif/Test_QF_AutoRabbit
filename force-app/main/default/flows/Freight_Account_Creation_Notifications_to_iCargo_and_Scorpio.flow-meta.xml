@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>DOM_Email_alert</name>
+        <label>DOM Email alert</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <actionName>AccountContactRelation.Freight_Email_Alert_to_iCargo</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>DOM_Mail_sent_update_in_chatter</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>AccountContactRelation.Freight_Email_Alert_to_iCargo</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>DOM_Mail_sent_update_in_chatter</name>
+        <label>DOM Mail sent update in chatter</label>
+        <locationX>314</locationX>
+        <locationY>647</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>Details of the new Freight Customer has been emailed to iCargo team</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>$Record.Account.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>INT_DOM_Email_alert</name>
+        <label>INT/DOM Email alert</label>
+        <locationX>578</locationX>
+        <locationY>539</locationY>
+        <actionName>AccountContactRelation.Freight_Email_Alert_to_iCargo</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>INT_DOM_Mail_sent_update_in_chatter</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>AccountContactRelation.Freight_Email_Alert_to_iCargo</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>INT_DOM_Mail_sent_update_in_chatter</name>
+        <label>INT/DOM Mail sent update in chatter</label>
+        <locationX>578</locationX>
+        <locationY>647</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>Details of the new Freight Customer has been emailed to iCargo team.</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>$Record.Account.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>INT_email_alert</name>
+        <label>INT email alert</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <actionName>AccountContactRelation.Freight_Email_Alert_to_iCargo_and_Scorpio</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>INT_Mail_sent_update_in_chatter</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>AccountContactRelation.Freight_Email_Alert_to_iCargo_and_Scorpio</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>INT_Mail_sent_update_in_chatter</name>
+        <label>INT Mail sent update in chatter</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>Details of the new Freight Customer has been emailed to iCargo team</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>$Record.Account.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>60.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Decision will check whether Freight  is INT or DOM or INT/DOM</description>
+        <name>Freight_INT_DOM_Account_Check</name>
+        <label>Freight INT/DOM Account Check</label>
+        <locationX>446</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Freight_INT_Account_Check</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>FreightINTAccount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Email_sent_check_INT</targetReference>
+            </connector>
+            <label>Freight INT Account Check</label>
+        </rules>
+        <rules>
+            <name>Freight_DOM_Account_Check</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>FreightDOMCheck</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Email_sent_check_DOM</targetReference>
+            </connector>
+            <label>Freight DOM Account Check</label>
+        </rules>
+        <rules>
+            <name>Freight_INT_AND_DOM_Account_Check</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>FreightINTAndDOMcheck</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Email_sent_check_INT_DOM</targetReference>
+            </connector>
+            <label>Freight INT/DOM Account Check</label>
+        </rules>
+    </decisions>
+    <description>Created this flow as per the story : CRM-7303</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>FreightDOMCheck</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+ISPICKVAL({!$Record.Account.New_Account_Type__c}, &apos;Freight-Branch&apos;),
+NOT(ISNEW()),
+{!$Record.Account.Freight_Email_Sent__c} == False,
+ISPICKVAL({!$Record.Account.Freight_Revenue_Stream__c}, &apos;DOM&apos;)
+)</expression>
+    </formulas>
+    <formulas>
+        <name>FreightINTAccount</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+ISPICKVAL({!$Record.Account.New_Account_Type__c}, &apos;Freight-Branch&apos;),
+NOT(ISNEW()),
+{!$Record.Account.Freight_Email_Sent__c} == False,
+ISPICKVAL({!$Record.Account.Freight_Revenue_Stream__c}, &apos;INT&apos;)
+)</expression>
+    </formulas>
+    <formulas>
+        <name>FreightINTAndDOMcheck</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+ISPICKVAL({!$Record.Account.New_Account_Type__c}, &apos;Freight-Branch&apos;),
+NOT(ISNEW()),
+{!$Record.Account.Freight_Email_Sent__c}== False  
+)</expression>
+    </formulas>
+    <interviewLabel>Freight Account Creation Notifications to iCargo and Scorpio {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Freight Account Creation Notifications to iCargo and Scorpio</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Email_sent_check_DOM</name>
+        <label>Email sent check DOM</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>DOM_Email_alert</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>New_Account_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight-Branch</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Freight_Email_Sent__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Account</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Email_sent_check_INT</name>
+        <label>Email sent check INT</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>INT_email_alert</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>New_Account_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight-Branch</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Freight_Email_Sent__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Account</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Email_sent_check_INT_DOM</name>
+        <label>Email sent check INT DOM</label>
+        <locationX>578</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>INT_DOM_Email_alert</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>New_Account_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight-Branch</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Freight_Email_Sent__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Account</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>320</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Freight_INT_DOM_Account_Check</targetReference>
+        </connector>
+        <object>AccountContactRelation</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

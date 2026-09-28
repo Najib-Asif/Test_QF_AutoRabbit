@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Activate_Member</fullName>
+        <field>Profile_Membership_Active_Flag__c</field>
+        <formula>&quot;Active&quot;</formula>
+        <name>Activate Member</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Deactivate_Member</fullName>
+        <field>Profile_Membership_Active_Flag__c</field>
+        <formula>&quot;Inactive&quot;</formula>
+        <name>Deactivate Member</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Memeber_update_relationship_to_Org_Con</fullName>
+        <field>Relationship__c</field>
+        <literalValue>Organization Contact</literalValue>
+        <name>Memeber: update relationship to Org Con.</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Active_QBD_Checkbox</fullName>
+        <field>Active_QBD_Record__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Active QBD Checkbox</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_QBD_Title_System_Field</fullName>
+        <field>Title__c</field>
+        <formula>IF( ISPICKVAL( Salutation__c , &quot;&quot;) ,  TEXT( QBD_Salutation__c ) ,  TEXT( Salutation__c ) )</formula>
+        <name>Update QBD Title System Field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Activate the Member Status</fullName>
+        <actions>
+            <name>Activate_Member</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>NOT(TODAY() - 365 &gt; Last_Flown_Date__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Copy Salutation to QBD Title System Field</fullName>
+        <actions>
+            <name>Update_QBD_Title_System_Field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow field update is used to copy salutation value to QBD Title System field which flows to other system.</description>
+        <formula>Active_QBD_Record__c =TRUE</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Deactivate the Member Status</fullName>
+        <actions>
+            <name>Deactivate_Member</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>TODAY() - 365 &gt; Last_Flown_Date__c</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Default Active QBD relationship to Org contact</fullName>
+        <actions>
+            <name>Memeber_update_relationship_to_Org_Con</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Associated_Person__c.Active_QBD_Record__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>for QBD integration.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Uncheck Active QBD if the End Date Expires</fullName>
+        <actions>
+            <name>Uncheck_Active_QBD_Checkbox</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>TODAY() &gt; End_Date__c</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Uncheck Active QBD if the End Date is Expired</fullName>
+        <active>true</active>
+        <description>When the QBD End date is expired uncheck the Active QBD Checkbox</description>
+        <formula>TODAY() &lt;= End_Date__c</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Uncheck_Active_QBD_Checkbox</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Associated_Person__c.End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

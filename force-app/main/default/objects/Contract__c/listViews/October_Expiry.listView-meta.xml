@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>October_Expiry</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Qantas_Annual_Expenditure__c</columns>
+    <columns>Type__c</columns>
+    <columns>Contract_Start_Date__c</columns>
+    <columns>Contract_End_Date__c</columns>
+    <columns>Agent_Override__c</columns>
+    <columns>Agent_Override_End_Date__c</columns>
+    <columns>Agent_Override_Start_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Contract_End_Date__c</field>
+        <operation>lessThan</operation>
+        <value>1/1/2019</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Signed by Customer</value>
+    </filters>
+    <label>October 2015 Expiry</label>
+    <language>en_US</language>
+    <sharedTo>
+        <role>QF_Support_Deal_Support</role>
+    </sharedTo>
+</ListView>

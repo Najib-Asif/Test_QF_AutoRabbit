@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Mandatory_Fields_for_Active_Cont</fullName>
+    <active>true</active>
+    <description>Mandate Mandatory Fields for Active Contacts</description>
+    <errorConditionFormula>AND( Account.RecordType.DeveloperName != &apos;Person_Account&apos;, IsActive = TRUE, ( NOT( ISNEW()&amp;&amp; IsDirect )),(NOT($Profile.Name=&apos;System Administrator&apos;)),NOT($Profile.Name=&apos;CRM Administrator&apos;), NOT($Profile.Name=&apos;CRM Administrator - Freight&apos;), NOT($Profile.Name=&apos;CRM Administrator - Global&apos;), NOT($Profile.Name=&apos;CRM Administrator - QCC&apos;), NOT($Profile.Name=&apos;CRM Administrator - SND&apos;),(NOT( $Profile.Name=&apos;Qantas System Administrator&apos;)), (NOT( $Profile.Name=&apos;Qantas System Admin - Freight&apos;)), (NOT( $Profile.Name=&apos;Qantas System Admin - QCC&apos;)), (NOT( $Profile.Name=&apos;Qantas System Admin - SND&apos;)), (NOT( $Profile.Name=&apos;Data Administrator&apos;)), (OR( ISPICKVAL(Business_Type__c, &quot;&quot;), ISPICKVAL( Job_Role__c , &quot;&quot;) , ISPICKVAL( Function__c , &quot;&quot;))))</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Please enter a value for Business Type (Related), Job Role (Related), and Function (Related)</errorMessage>
+</ValidationRule>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QL_Effective_Tier_is_Mandatory</fullName>
+    <active>true</active>
+    <description>Created for Proposal 2-Tier</description>
+    <errorConditionFormula>AND(ISPICKVAL(Status__c , &apos;Signed by Customer&apos;),  ISPICKVAL(QL_Discount_Model__c,&apos;Tiered&apos;),ISBLANK( TEXT(QL_Effective_Tier__c )) )</errorConditionFormula>
+    <errorDisplayField>QL_Effective_Tier__c</errorDisplayField>
+    <errorMessage>Please select Effective Tier</errorMessage>
+</ValidationRule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>CRM-8536 New Email to case set up required for marketing campaign new booking</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>KC_campaign</name>
+    <style>none</style>
+    <subject>Tracking Reference Number - {!Case.CaseNumber}</subject>
+    <textOnly>Hi {!Contact.Name},
+
+Thank you for providing the booking details for the Kelly Clarkson competition winners. For tracking your case number is: {!Case.CaseNumber}
+
+If you need to provide further information relating to your case, you can respond directly to this email.
+
+
+Kind regards, Qantas Contact Centers</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

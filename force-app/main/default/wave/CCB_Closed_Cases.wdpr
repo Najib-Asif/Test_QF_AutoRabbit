@@ -1,0 +1,396 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "ActivityId", "CreatedById", "CreatedDate", "Headers", "Subject", "FromName", "ValidatedFromAddress", "ToAddress", "Incoming", "Status", "MessageIdentifier", "ThreadIdentifier", "ClientThreadIdentifier", "RelatedToId", "IsBounced", "TextBody" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "EmailMessage",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "EmailMessage"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Location__c", "Id", "Name" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "BasicUserM",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET6" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "RIGHT_OUTER",
+        "leftKeys" : [ "ParentId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "LastModifiedDate", "Origin_bucket", "AccountId", "Description", "Frequent_Flyer_Tier__c", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "Case_Number__c", "Is_QCC_Case__c", "Frequent_Flyer_Number__c", "OwnerId", "OwnerName__c", "RecordType.DeveloperName", "Booking_PNR__c", "CCC_R1_CCAT_Type__c", "RecordTypeId", "CaseNumber", "Sub_Type_1__c", "Created_by_Role__c", "RecordType.Id", "MasterRecordId", "ParentId", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "RecordType.DeveloperName_bucket", "Record_Type__c", "Type", "IsEscalated", "Sub_Type_2__c", "Contact_Fullname__c", "Category__c", "CreatedDate", "ClosedDate", "Id", "Type_bucket", "Aircraft_Type_Code__c", "Recovery_Value__c", "Recovery_Quantity__c" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CaseRawDataSetFY23",
+          "name" : "CaseRawDataSetFY23"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CCB closure rates and Interactions",
+          "name" : "CCB_closure_rates_and_Interactions",
+          "folderName" : "Repeat_Call_Analytics"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "BasicUserM.Name_bucket",
+          "label" : "Full Name Bucket",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Agent",
+            "nullBucketValue" : "No Email on Case",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "BasicUserM.Name",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Incoming from Customer",
+              "sourceValues" : [ "System Admin Updates" ]
+            }, {
+              "value" : "Auto Response",
+              "sourceValues" : [ "Data UpdatesUser", "QCC API Integration User" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "1640995200000" ]
+        } ]
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "grainExtractions" : [ {
+          "source" : "Case.ClosedDate",
+          "targets" : [ {
+            "name" : "Case.ClosedDate_FISCAL_MONTH",
+            "label" : "Case.Closed Date Fiscal Month",
+            "grainType" : "FISCAL_MONTH"
+          } ]
+        } ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "CreatedById",
+          "name" : "UNIQUE_CreatedById",
+          "label" : "Unique Created By ID"
+        }, {
+          "action" : "COUNT",
+          "source" : "Id",
+          "name" : "COUNT_Id",
+          "label" : "Count of Email Message ID"
+        }, {
+          "action" : "SUM",
+          "source" : "Case.Recovery_Quantity__c",
+          "name" : "SUM_Case.Recovery_Quantity__c",
+          "label" : "Sum of Recovery Quantity"
+        }, {
+          "action" : "SUM",
+          "source" : "Case.Recovery_Value__c",
+          "name" : "SUM_Case.Recovery_Value__c",
+          "label" : "Sum of Recovery Value"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Case.Id",
+          "name" : "UNIQUE_Case.Id",
+          "label" : "Unique Case ID"
+        } ],
+        "groupings" : [ "Case.CaseNumber", "Case.RecordType.Name", "Case.ClosedDate_FISCAL_MONTH" ],
+        "pivots" : [ ],
+        "pivot_v2" : {
+          "sourceFields" : [ "BasicUserM.Name_bucket" ],
+          "valueCombinations" : [ [ "No Email on Case" ], [ "Agent" ], [ "Auto Response" ], [ "Incoming from Customer" ] ],
+          "pivotFieldsInfo" : {
+            "UNIQUE_CreatedById" : [ {
+              "name" : "UNIQUE_CreatedById_NoEmailonCase",
+              "label" : "Unique Created By ID by No Email on Case"
+            }, {
+              "name" : "UNIQUE_CreatedById_Agent",
+              "label" : "Unique Created By ID by Agent"
+            }, {
+              "name" : "UNIQUE_CreatedById_AutoResponse",
+              "label" : "Unique Created By ID by Auto Response"
+            }, {
+              "name" : "UNIQUE_CreatedById_IncomingfromCustomer",
+              "label" : "Unique Created By ID by Incoming from Customer"
+            } ],
+            "COUNT_Id" : [ {
+              "name" : "COUNT_Id_NoEmailonCase",
+              "label" : "Count of Email Message ID by No Email on Case"
+            }, {
+              "name" : "COUNT_Id_Agent",
+              "label" : "Count of Email Message ID by Agent"
+            }, {
+              "name" : "COUNT_Id_AutoResponse",
+              "label" : "Count of Email Message ID by Auto Response"
+            }, {
+              "name" : "COUNT_Id_IncomingfromCustomer",
+              "label" : "Count of Email Message ID by Incoming from Customer"
+            } ],
+            "SUM_Case.Recovery_Quantity__c" : [ {
+              "name" : "SUM_Case.Recovery_Quantity__c_NoEmailonCase",
+              "label" : "Sum of Recovery Quantity by No Email on Case"
+            }, {
+              "name" : "SUM_Case.Recovery_Quantity__c_Agent",
+              "label" : "Sum of Recovery Quantity by Agent"
+            }, {
+              "name" : "SUM_Case.Recovery_Quantity__c_AutoResponse",
+              "label" : "Sum of Recovery Quantity by Auto Response"
+            }, {
+              "name" : "SUM_Case.Recovery_Quantity__c_IncomingfromCustomer",
+              "label" : "Sum of Recovery Quantity by Incoming from Customer"
+            } ],
+            "SUM_Case.Recovery_Value__c" : [ {
+              "name" : "SUM_Case.Recovery_Value__c_NoEmailonCase",
+              "label" : "Sum of Recovery Value by No Email on Case"
+            }, {
+              "name" : "SUM_Case.Recovery_Value__c_Agent",
+              "label" : "Sum of Recovery Value by Agent"
+            }, {
+              "name" : "SUM_Case.Recovery_Value__c_AutoResponse",
+              "label" : "Sum of Recovery Value by Auto Response"
+            }, {
+              "name" : "SUM_Case.Recovery_Value__c_IncomingfromCustomer",
+              "label" : "Sum of Recovery Value by Incoming from Customer"
+            } ],
+            "UNIQUE_Case.Id" : [ {
+              "name" : "UNIQUE_Case.Id_NoEmailonCase",
+              "label" : "Unique Case ID by No Email on Case"
+            }, {
+              "name" : "UNIQUE_Case.Id_Agent",
+              "label" : "Unique Case ID by Agent"
+            }, {
+              "name" : "UNIQUE_Case.Id_AutoResponse",
+              "label" : "Unique Case ID by Auto Response"
+            }, {
+              "name" : "UNIQUE_Case.Id_IncomingfromCustomer",
+              "label" : "Unique Case ID by Incoming from Customer"
+            } ]
+          }
+        },
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CCB Aggregates FY23",
+          "name" : "CCB_Aggregates_FY23",
+          "folderName" : "Repeat_Call_Analytics"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET3" : {
+        "label" : "EmailMessage",
+        "type" : "LOAD_DATASET",
+        "top" : 251.5,
+        "left" : 111.9,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Basic User Master",
+        "type" : "LOAD_DATASET",
+        "top" : 391.5,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Join 1",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 532
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 672
+      },
+      "LOAD_DATASET6" : {
+        "label" : "CaseRawDataSetFY23",
+        "type" : "LOAD_DATASET",
+        "top" : 531.5,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "CCB Close Insights",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1092
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 251.89999999999998,
+        "left" : 951.1,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER0" : {
+        "label" : ">2022",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 252
+      },
+      "AGGREGATE0" : {
+        "label" : "Aggregate 0",
+        "type" : "AGGREGATE",
+        "top" : 392.7,
+        "left" : 1092,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Output 1",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 1372
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "FILTER0"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "AGGREGATE0"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "OUTPUT1"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

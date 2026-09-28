@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Prevent_WEndDT_Lessthan_WStartDT</fullName>
+    <active>true</active>
+    <description>TO Check Waver End date is not lessthan Wavier Start date</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Prevent_WEndDT_Lessthan_WStartDT__c &amp;&amp;
+RecordType.DeveloperName =&apos;Corporate_Scheme&apos; &amp;&amp; NOT(ISNULL(Waiver_Start_Date__c)) &amp;&amp;  NOT(ISNULL(Waiver_End_Date__c)) &amp;&amp; Waiver_Start_Date__c &gt; Waiver_End_Date__c</errorConditionFormula>
+    <errorMessage>Override / Waiver End Date should be greater than Override / Waiver Start Date</errorMessage>
+</ValidationRule>

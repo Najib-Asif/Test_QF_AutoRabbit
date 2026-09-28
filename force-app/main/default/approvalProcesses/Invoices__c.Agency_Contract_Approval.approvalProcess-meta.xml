@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <submitter>Agency_Sales_Performance_Team</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>QF_DOM_Sales_B_G_Business_and_Govt</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>QF_DOM_Sales_B_G_Business_and_Govt_Business</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>QF_DOM_Sales_B_G_Development_Other_States_Lead</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>ABN__c</field>
+        <field>Amount__c</field>
+        <field>Calculated_Amount__c</field>
+        <field>Contract__c</field>
+        <field>Address__c</field>
+        <field>Contract_Expiry__c</field>
+        <field>Contract_Payments__c</field>
+        <field>Cost_Centre__c</field>
+        <field>Account_Number__c</field>
+        <field>CurrencyIsoCode</field>
+        <field>EQ_Address_Number__c</field>
+        <field>EQ_Invoice_reference__c</field>
+        <field>EQ_Supplier_Number__c</field>
+        <field>Fact_No__c</field>
+        <field>Company_Name__c</field>
+        <field>File_Attachment__c</field>
+        <field>GST_Amount__c</field>
+        <field>GST_Rate__c</field>
+        <field>Comment__c</field>
+        <field>Likelihood_to_Pay_Manual__c</field>
+        <field>Paid__c</field>
+        <field>Payable_Amount_incl_GST__c</field>
+        <field>Payment_Criteria__c</field>
+        <field>Payment_Date__c</field>
+        <field>Payment_Due_Date_System__c</field>
+        <field>End_Date__c</field>
+        <field>Start_Date__c</field>
+        <field>Payment_Qualified__c</field>
+        <field>Invoice_Reason__c</field>
+        <field>Payment_required__c</field>
+        <field>Type__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <label>First Level Approval</label>
+        <name>First_Level_Approval</name>
+    </approvalStep>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+RecordType.DeveloperName = &apos;Agency Payments&apos;,
+ISPICKVAL(Payment_Qualified__c,&apos;Yes&apos;),
+OR(
+ISPICKVAL(Status__c,&apos;Draft&apos;),
+ISPICKVAL(Status__c,&apos;NAM Rejected&apos;)
+),
+
+NOT(AND(Owner:User.UserRole.DeveloperName = &apos;QF_DOM_Sales_B_G_Business_and_Govt&apos;,
+
+OR($UserRole.DeveloperName = &apos;QF_DOM_Sales_B_G_Business_and_Govt_Business&apos;,
+$UserRole.DeveloperName = &apos;QF_DOM_Sales_B_G_Development_Other_States_Lead&apos;) ) )
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Change_record_type_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Change_status_to_NAM_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>QP_Invoice_Approval_Notification</name>
+            <type>Alert</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>QP_Invoice_Rejection_Notification</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Status_change_to_NAM_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Change_Status_to_Submitted_for_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Agency Contract Approval</label>
+    <processOrder>3</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

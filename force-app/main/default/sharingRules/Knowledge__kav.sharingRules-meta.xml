@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Duty_Travel_Bookings_Readonly</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Duty Travel Bookings Readonly</label>
+        <sharedTo>
+            <group>QCC_Knowledge_Duty_Travel_Bookings</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Process and Procedure,Internal Knowledge: QCC Article</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Channel__c</field>
+            <operation>equals</operation>
+            <value>Duty Travel Bookings</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Freight_Articles</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Sharing rule for Freight articles</description>
+        <label>Freight Articles</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Freight_Executive</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Qantas Freight</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Freight_Content_Authors_Read_Write</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>FCRM - 951
+Opening read and write access onto Freight Knowledge Articles for the content authors</description>
+        <label>Freight Content Authors Read/Write</label>
+        <sharedTo>
+            <group>Freight_Knowledge_Content_Authors</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Qantas Freight</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Knowledge_sharing_to_QF_SND</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Knowledge sharing to QF SND</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_SND</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Qantas S&amp;D,Process and Procedure,Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Knowledge_edits</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QCC Knowledge edits</label>
+        <sharedTo>
+            <group>Digital_Knowledge_Champions</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Reports_and_Queue_knowledge_view</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>All articles with chanel (Queues and Reports Specialist Team)</description>
+        <label>QCC Reports and Queue knowledge view</label>
+        <sharedTo>
+            <group>Queues_and_Reports_Specialist_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Informational Article,Process and Procedure</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Channel__c</field>
+            <operation>equals</operation>
+            <value>Queues &amp; Reports Specialist Team</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_QDC_Knowledge_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>QF-QDC Knowledge Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Policy,Internal Noticeboard,Marketing and Promotional,Internal Knowledge: QCC Article,Informational Article,Triage Article,Process and Procedure,Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_QDC_Service_Delivery_Knowledge_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QF-QDC-Service Delivery Knowledge Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_Service_Delivery</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Policy,Internal Noticeboard,Marketing and Promotional,Internal Knowledge: QCC Article,Informational Article,Triage Article,Process and Procedure,Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>S_D_Article_edit</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Opening up access for S&amp;D chamipons to allow edit on articles created for entire business unit.</description>
+        <label>S&amp;D Article edit</label>
+        <sharedTo>
+            <group>S_D_Knowledge_champs</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Qantas S&amp;D,Process and Procedure,Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>Agency_Connect_Guest_USer</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Agency Connect Guest USer</label>
+        <sharedTo>
+            <guestUser>Qantas_Agency_Connect_Help_and_Support</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>UrlName</field>
+            <operation>notEqual</operation>
+            <value>What-is-the-Qantas-com-Price-Promise</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>UrlName</field>
+            <operation>notEqual</operation>
+            <value>What-qualifies-for-the-Price-Promise</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+    <sharingGuestRules>
+        <fullName>Guest_User_Access_for_Knowledge_Articles</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>To share the articles with the KnowledgeIQ community guest users.</description>
+        <label>Guest User Access for Knowledge Articles</label>
+        <sharedTo>
+            <guestUser>Knowledge_iQ</guestUser>
+        </sharedTo>
+        <booleanFilter>(1 AND 4 AND 5) OR (2 AND 3)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Policy,Internal Noticeboard,Marketing and Promotional,Internal Knowledge: QCC Article,Informational Article,Triage Article,Process and Procedure</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Channel__c</field>
+            <operation>equals</operation>
+            <value>Q.com+KIQ+SFDC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Channel__c</field>
+            <operation>notEqual</operation>
+            <value>Service Delivery,Interaction guides,Duty Travel Bookings,Change of FOP Helpdesk Process</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Channel__c</field>
+            <operation>notEqual</operation>
+            <value>Call Guides Phase 2 HBA/AKL,Queues &amp; Reports Specialist Team,Call guide phase 2</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+    <sharingGuestRules>
+        <fullName>Read_Only_Help_and_Support</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Read Only Help and Support</label>
+        <sharedTo>
+            <guestUser>Qantas_Help_and_Support</guestUser>
+        </sharedTo>
+        <booleanFilter>1 AND 2 AND (3 OR 4 OR 5 OR 6) AND 7 AND 8 AND 9</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Knowledge: FAQ&apos;s</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>IsVisibleInPkb</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>LastModifiedById</field>
+            <operation>notEqual</operation>
+            <value>00590000004hkivAAA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>LastModifiedById</field>
+            <operation>notEqual</operation>
+            <value>0052v00000iddBNAAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CreatedById</field>
+            <operation>notEqual</operation>
+            <value>0052v00000iddBNAAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CreatedById</field>
+            <operation>notEqual</operation>
+            <value>00590000004hkivAAA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>UrlName</field>
+            <operation>notEqual</operation>
+            <value>Select-a-Seat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>UrlName</field>
+            <operation>notEqual</operation>
+            <value>Advance-Seat-Selection-Purchase-Online</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Channel__c</field>
+            <operation>notEqual</operation>
+            <value>QAC FAQs</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+    <sharingOwnerRules>
+        <fullName>Knowledge_Loyalty_Edits</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Knowledge Loyalty Edits</label>
+        <sharedTo>
+            <group>Knowledge_Loyalty_Champions</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Knowledge_Loyalty_Champions</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Knowledge_Service_Delivery_Edits</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Knowledge Service Delivery Edits</label>
+        <sharedTo>
+            <group>Service_Delivery_Content_Authors</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Service_Delivery_Content_Authors</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

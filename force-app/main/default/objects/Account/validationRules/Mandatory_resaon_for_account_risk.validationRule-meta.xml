@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_resaon_for_account_risk</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(LEN (  Reason_At_Risk__c  ) = 0, NOT(ISPICKVAL(  Risk_Level__c  , &quot;&quot;)) )</errorConditionFormula>
+    <errorDisplayField>Reason_At_Risk__c</errorDisplayField>
+    <errorMessage>Please enter reasons for risk.</errorMessage>
+</ValidationRule>

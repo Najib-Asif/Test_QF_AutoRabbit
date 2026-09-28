@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_field_for_Contract</fullName>
+    <active>true</active>
+    <description>Frequent Flyer Request - Used for the &apos;Frequent Flyer Request&apos; record type</description>
+    <errorConditionFormula>OR( AND(RecordType.DeveloperName = &apos;Dealing_Model_Request&apos;,  NOT(ISPICKVAL(Related_Opportunity__r.Sub_Type_Level_2__c,&apos;New Contract&apos;)), ISBLANK(Related_Contract__c)),AND( 
+
+OR ( 
+RecordType.DeveloperName = &apos;Frequent_Flyer_Request&apos;,
+RecordType.DeveloperName = &apos;Sales_Offers_Request&apos;
+), 
+Part_of_a_Deal__c = TRUE,
+OR( 
+ISBLANK(Related_Contract__c)
+) 
+)
+)</errorConditionFormula>
+    <errorDisplayField>Related_Contract__c</errorDisplayField>
+    <errorMessage>Please provide the value for Related Contract</errorMessage>
+</ValidationRule>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ROLLUP_DESCRIPTION</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT_NAME</field>
+    </columns>
+    <columns>
+        <field>OPPORTUNITY_NAME</field>
+    </columns>
+    <columns>
+        <field>Proposal__c.Proposal_Start_Date__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Sub_Type_Level_2__c</field>
+    </columns>
+    <columns>
+        <field>FISCAL_QUARTER</field>
+    </columns>
+    <columns>
+        <field>AMOUNT</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Account.Qantas_Corporate_Identifier__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <customDetailFormulas>
+        <calculatedFormula>IF(
+  ISPICKVAL(Opportunity.Sub_Type_Level_2__c, &apos;New Contract&apos;),
+  IF(
+    (
+      (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+      (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+    ) &lt; 11,
+    ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 11),
+    IF(
+      (
+        (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+        (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+      ) &lt; 17,
+      ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 17),
+      IF(
+        (
+          (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+          (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+        ) &lt; 23,
+        ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 23),
+        IF(
+          (
+            (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+            (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+          ) &lt; 29,
+          ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 29),
+          ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 11)  
+        )
+      )
+    )
+  ),
+  IF(
+    (
+      (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+      (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+    ) &lt; 5,
+    ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 5),
+    IF(
+      (
+        (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+        (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+      ) &lt; 11,
+      ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 11),
+      IF(
+        (
+          (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+          (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+        ) &lt; 17,
+        ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 17),
+        IF(
+          (
+            (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+            (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+          ) &lt; 23,
+          ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 23),
+          IF(
+            (
+              (YEAR(TODAY()) - YEAR(Proposal__c.Proposal_Start_Date__c)) * 12 +
+              (MONTH(TODAY()) - MONTH(Proposal__c.Proposal_Start_Date__c))
+            ) &lt; 29,
+            ADDMONTHS(Proposal__c.Proposal_Start_Date__c, 29),
+            NULL
+          )
+        )
+      )
+    )
+  )
+)</calculatedFormula>
+        <dataType>DateOnly</dataType>
+        <developerName>CDF1</developerName>
+        <label>Next Tiering Conversation</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <filter>
+        <criteriaItems>
+            <column>Proposal__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Accepted by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Account_Owner_Role__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>R&amp;G</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Proposal__c.QL_Discount_Model__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Tiered</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Contracted__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ACCOUNT_OWNER</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <field>CDF1</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Tiering Contract Start Date Mid Public</name>
+    <params>
+        <name>terr</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>open</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>probability</name>
+        <value>&gt;0</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>OpportunityCustomEntity$Proposal__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>ACCOUNT_NAME</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Proposal__c.Proposal_Start_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

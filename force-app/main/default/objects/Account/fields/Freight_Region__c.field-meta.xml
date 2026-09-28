@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Region__c</fullName>
+    <description>Formula to return Regions for Freight</description>
+    <externalId>false</externalId>
+    <formula>/* Freight AU/NZ*/
+IF (( Account_Owner_Role__c == &quot;QF-Freight&quot;), &quot;AU/NZ&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-AU&quot;), &quot;AU/NZ&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-AU-Account Manager&quot;), &quot;AU/NZ&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Customer-Service-Support&quot;), &quot;AU/NZ&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Customer-Service-Support-Team&quot;), &quot;AU/NZ&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Customer-Service-Unit&quot;), &quot;AU/NZ&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Customer-Service-Unit-Team&quot;), &quot;AU/NZ&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Support-AU&quot;), &quot;AU/NZ&quot;,
+
+
+/* Freight Asia */
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Asia&quot;), &quot;Asia&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Asia-Account Manager&quot;), &quot;Asia&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Support-Asia&quot;), &quot;Asia&quot;,
+
+/* Freight UK */
+IF (( Account_Owner_Role__c == &quot;QF-Freight-UK&quot;), &quot;UKEA&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-UK-Account Manager&quot;), &quot;UKEA&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Support-UK&quot;), &quot;UKEA&quot;,
+
+/* Freight US */
+IF (( Account_Owner_Role__c == &quot;QF-Freight-US&quot;), &quot;US&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-US-Account Manager&quot;), &quot;US&quot;,
+IF (( Account_Owner_Role__c == &quot;QF-Freight-Support-US&quot;), &quot;US&quot;,
+
+&quot;&quot;
+
+)))))))))))))))))</formula>
+    <inlineHelpText>Returns Regions based on User Roles.</inlineHelpText>
+    <label>Freight Region</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

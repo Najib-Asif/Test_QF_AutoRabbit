@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_CMPGN_CP_Start_GTR_2_Months</fullName>
+    <active>true</active>
+    <description>When Case = Sales Offers Request &amp; Type = Campaign &amp; Sub Type = FOC Qantas Club Waiver &amp; Created Date &gt;=25, Campaign Start Date &gt; 2 Months</description>
+    <errorConditionFormula>AND (
+ RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/
+ NOT (   $UserRole.Id   = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/
+ ISPICKVAL ( Type , &quot;Campaign&quot; ),
+ ISPICKVAL ( Sub_Type__c , &quot;FOC Qantas Club Waiver&quot;),
+
+ DAY( DATEVALUE( CreatedDate ) ) &gt;= 25,
+ NOT ( MONTH ( Campaign_Start_Date__c ) &gt; MONTH ( DATEVALUE( CreatedDate ))+ 1)
+)</errorConditionFormula>
+    <errorDisplayField>Campaign_Start_Date__c</errorDisplayField>
+    <errorMessage>For any Case created &gt; 25th, the Campaign Start Date has to be greater than the next 2 months - FOC Qantas Club Waiver</errorMessage>
+</ValidationRule>

@@ -1,0 +1,61 @@
+<!--
+Author:        Praveen Sampath
+Company:       Capgemini
+Description:   FF Display on Case page
+Inputs:
+Test Class:     
+************************************************************************************************
+History
+************************************************************************************************
+03-AUG-2018      Praveen Sampath               Initial Design
+--><aura:component implements="flexipage:availableForAllPageTypes" access="global"  controller="QCC_PNRSearchController" >
+    <aura:attribute name="firstName" type="String"/>
+    <aura:attribute name="lastName" type="String"/>
+    <aura:attribute name="ffNumber" type="String"/>
+    <aura:attribute name="ffTier" type="String"/>
+    <aura:attribute name="caseId" type="String"/>
+    <aura:attribute name="capId" type="String"/>
+    <aura:attribute name="errMSG" type="String" default=""/>
+	<aura:attribute name="ffTierSF" type="String"/>
+	<!-- CRM-7179 -->
+    <aura:attribute name="phone" type="String"/>
+    <aura:attribute name="email" type="String"/>
+    <!--CRM-8903 duplicate contact resolution-->
+    <aura:attribute name="disableAssignment" type="boolean" default="false"/>
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:renderIf isTrue="{!not(empty(v.errMSG))}">
+        <ui:message title="Error" severity="error" closable="true">
+            {!v.errMSG} 
+        </ui:message>
+    </aura:renderIf> 
+    
+    <lightning:layout verticalAlign="center" pullToBoundary="small" multipleRows="true" >
+        
+        <lightning:layoutItem size="12" >
+            <label class="slds-form-element__label"> First Name </label>
+            <ui:outputText value="{!v.firstName}"/>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem size="12">
+            <label class="slds-form-element__label"> Last Name </label>
+            <ui:outputText value="{!v.lastName}"/>
+        </lightning:layoutItem>
+        
+        
+        <lightning:layoutItem size="12" >
+            <label class="slds-form-element__label"> FrequentFlyer Number  </label>
+            <ui:outputText value="{!v.ffNumber}"/>
+        </lightning:layoutItem>
+        
+        
+        <lightning:layoutItem size="12">
+            <label class="slds-form-element__label"> FrequentFlyer Tier </label>
+            <ui:outputText value="{!v.ffTierSF}"/>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem size="6" padding="around-small">
+            <lightning:button label="Assign to Case" variant="brand" onclick="{!c.onConfirm}" disabled="{!v.disableAssignment}"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

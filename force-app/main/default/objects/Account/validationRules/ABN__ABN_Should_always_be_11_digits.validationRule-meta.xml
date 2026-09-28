@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ABN__ABN_Should_always_be_11_digits</fullName>
+    <active>false</active>
+    <description>ABN_Should_always_be_11_digits</description>
+    <errorConditionFormula>NOT(ISBLANK(ABN__ABN__c)) &amp;&amp; (NOT(ISNUMBER(ABN__ABN__c)) || LEN(ABN__ABN__c) != 11)</errorConditionFormula>
+    <errorDisplayField>ABN__ABN__c</errorDisplayField>
+    <errorMessage>Incorrect ABN. Can only contain numbers and should be exactly 11 digits.</errorMessage>
+</ValidationRule>

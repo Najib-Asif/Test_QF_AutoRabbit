@@ -1,0 +1,15 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="selectEvent" type="c:QEC_selectChangeEvent"/>
+    <aura:attribute name="pickListMap" type="Map" />
+    <aura:attribute name="pickListName" type="String" />
+    <aura:attribute name="pickListLabel" type="String" />
+    <aura:attribute name="pickListValues" type="List" />
+    <aura:attribute name="selectedOption" type="String" />
+    <lightning:select name="{!v.pickListName}" label="{!v.pickListLabel}" class="slds-m-around_xx-small" value="{!v.selectedOption}" onchange="{!c.handleChange}">
+        <option value="">--Select a Value--</option>
+        <aura:iteration items="{!v.pickListValues}" var="option">
+            <option value="{!option}">{!option}</option>
+        </aura:iteration>
+    </lightning:select>
+</aura:component>

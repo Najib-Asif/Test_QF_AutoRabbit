@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ApprovalRequired_Team_Lead_CA__c</fullName>
+    <formula>AND(OR( 
+AND( NOT(Approved_by_TL__c),Discount__c &gt; Discount_Threshold_AM__c,Segment__c==&apos;Domestic&apos;, 
+OR(Category__c==&apos;Mainline&apos;, Category__c==&apos;Intra-WA&apos;, Category__c==&apos;Regional&apos;, Category__c==&apos;Route&apos;), 
+ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;)), 
+
+AND(NOT(Approved_by_TL__c), Discount__c &gt; Discount_Threshold_AM__c, Segment__c==&apos;International&apos;, ISPICKVAL(Proposal_Type__c, &apos;Corporate Airfares&apos;))), 
+NOT(TL_Rejected__c),OR(NOT(IsApproved__c),QL_IsReapproved__c),
+NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>TL Approval Required</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

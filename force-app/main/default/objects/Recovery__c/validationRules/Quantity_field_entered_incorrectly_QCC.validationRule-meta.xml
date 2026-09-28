@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantity_field_entered_incorrectly_QCC</fullName>
+    <active>true</active>
+    <description>If the field should be populated in value except Space available upgrade and Firm space upgrade instead due to recovery type</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_Quantity_field_entered_incorrectlyQCC__c=TRUE,
+RecordType.DeveloperName = &apos;Customer_Connect&apos;, 
+OR( AND(ISPICKVAL(Type__c, &apos;Credit Card Refund&apos;), NOT( ISBLANK( Amount__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;EFT Refund&apos;), NOT( ISBLANK( Amount__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;Flowers&apos;), NOT( ISBLANK( Amount__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;Dinner vouchers&apos;), NOT( ISBLANK( Amount__c ) ) ), 
+
+AND(ISPICKVAL(Type__c, &apos;Travel vouchers&apos;), NOT( ISBLANK( Amount__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;Wine&apos;) , NOT( ISBLANK( Amount__c ) ) )))</errorConditionFormula>
+    <errorDisplayField>Amount__c</errorDisplayField>
+    <errorMessage>This field should be blank</errorMessage>
+</ValidationRule>

@@ -1,0 +1,80 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:appHostable,lightning:isUrlAddressable" controller="QCC_CaseRelationshipsController" access="global" >
+	<lightning:workspaceAPI aura:id="workspace"/>
+	<aura:attribute name="caseRelationships" type="List" />
+	<aura:attribute name="showTable" type="boolean" default="false"/>
+	<aura:attribute name="isTab" type="boolean" default="true"/>
+	<aura:attribute name="totalCaseRelationships" type="String" default="0"/>
+  	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+        <aura:handler name="change" value="{!v.recordId}" action="{!c.onRecordIdChange}"/>
+	<article class="slds-card slds-card_boundary forceRelatedListCardDesktop">
+		<div class="slds-card__header slds-grid">
+			<header class="slds-media slds-media_center slds-has-flexi-truncate">
+				<div class="slds-media__figure">
+					<span class="slds-icon_container slds-icon-standard-contact" title="description of icon when needed">
+						<lightning:icon iconName="standard:custom" size="small" alternativeText="Case Relationships"/>
+					</span>
+				</div>
+				<div class="slds-media__body">
+					<h2>
+						<aura:if isTrue="{!v.isTab}">							
+							<span class="slds-card__header-link slds-text-heading_small">Case Relationships ({!v.totalCaseRelationships})</span>
+							<aura:set attribute="else">
+								<a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Case Relationships" onclick="{!c.openCaseRelationshipSubtab}">
+									<span class="slds-text-heading_small">Case Relationships ({!v.totalCaseRelationships})</span>
+								</a>
+							</aura:set>
+						</aura:if>
+					</h2>
+				</div>
+			</header>
+			<aura:if isTrue="{!not(v.isTab)}">
+				<div class="slds-no-flex">
+				    <button class="slds-button slds-button_neutral" onclick="{!c.createCaseRelationship}">New</button>
+				</div>
+			</aura:if>
+		</div>
+		<div class="slds-card__body">
+			<aura:if isTrue="{!v.showTable}">
+				<table class="slds-table slds-table_fixed-layout slds-table_bordered slds-no-row-hover slds-table_cell-buffer">
+					<thead>
+						<tr class="slds-text-title_caps">
+							<th scope="col"><div class="slds-truncate" title="Case Number">Case Number</div></th>
+		       	 			<th scope="col"><div class="slds-truncate" title="Contact Name">Contact Name</div></th>
+		        			<th scope="col"><div class="slds-truncate" title="Creation Date">Creation Date</div></th>
+                            <th scope="col"><div class="slds-truncate" title="Description">Description</div></th>
+                         </tr>
+					</thead>
+					<tbody>
+						<aura:if isTrue="{!v.isTab}">
+							<aura:iteration items="{!v.caseRelationships}" var="caseRelationship">			
+					    		<tr>
+						          <th scope="row"><div class="slds-truncate" title="{!caseRelationship.caseNumber}">
+						          	<a id="{!caseRelationship.caseId}" onclick="{!c.openCaseTab}">{!caseRelationship.caseNumber}</a></div></th>
+						          <td><div class="slds-truncate" title="{!caseRelationship.contactName}">{!caseRelationship.contactName}</div></td>
+						          <td><div class="slds-truncate"><ui:outputDateTime value="{!caseRelationship.createdDate}" format="DD/MM/YYYY hh:mm a"/></div></td>
+                                  <td><div class="slds-truncate" title="{!caseRelationship.description}">{!caseRelationship.description}</div></td>
+							   </tr>
+						    </aura:iteration>
+						    <aura:set attribute="else">
+							    <aura:iteration items="{!v.caseRelationships}" var="caseRelationship" end="3">					
+							    	<tr>
+							          <th scope="row"><div class="slds-truncate" title="{!caseRelationship.caseNumber}">
+							          	<a id="{!caseRelationship.caseId}" onclick="{!c.openCaseTab}">{!caseRelationship.caseNumber}</a></div></th>
+							          <td><div class="slds-truncate" title="{!caseRelationship.contactName}">{!caseRelationship.contactName}</div></td>
+							          <td><div class="slds-truncate"><ui:outputDateTime value="{!caseRelationship.createdDate}" format="DD/MM/YYYY hh:mm a"/></div></td>
+							          <td><div class="slds-truncate" title="{!caseRelationship.description}">{!caseRelationship.description}</div></td>
+							          </tr>
+							    </aura:iteration>
+						    </aura:set>
+					    </aura:if>
+					</tbody>      
+				</table>
+			</aura:if>
+           <!-- <lightning:input aura:id="recordIdHidden" name="recordIdHidden" label="recordIdHidden"  class="slds-hidden" />-->
+		</div>
+		<aura:if isTrue="{!and(not(v.isTab), v.showTable)}">
+			<footer class="slds-card__footer"><a href="javascript:void(0);" onclick="{!c.openCaseRelationshipSubtab}">View All <span class="slds-assistive-text">entity type</span></a></footer>
+		</aura:if>
+	</article>
+  
+</aura:component>

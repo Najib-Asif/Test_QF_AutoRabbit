@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tomorrow_s_Spa_Bookings_Sydney</fullName>
+    <columns>NAME</columns>
+    <columns>QCC_Flight_No__c</columns>
+    <columns>QCC_Departure_Local_Date__c</columns>
+    <columns>QCC_Flight_Departure_Time__c</columns>
+    <columns>QCC_PNR__c</columns>
+    <columns>QCC_First_Host_Contact__c</columns>
+    <columns>QCC_Frequent_Flyer_Tier_Formula__c</columns>
+    <columns>QCC_Cabin__c</columns>
+    <columns>QCC_Class_of_Service__c</columns>
+    <columns>OWNER.ALIAS</columns>
+    <columns>QCC_Expected_Arrival_Time__c</columns>
+    <columns>QCC_Spa_Booking_Time__c</columns>
+    <columns>QCC_Spa_Booking_Status__c</columns>
+    <columns>QCC_Additional_Comments__c</columns>
+    <columns>QCC_Spa_Request_Outcome__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>QCC_Qantas_First_Spa_Lounge__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>QCC_Departure_Airport__c</field>
+        <operation>equals</operation>
+        <value>SYD</value>
+    </filters>
+    <filters>
+        <field>QCC_Departure_Local_Date__c</field>
+        <operation>equals</operation>
+        <value>TOMORROW</value>
+    </filters>
+    <label>Tomorrow&apos;s Spa Bookings - Sydney</label>
+</ListView>

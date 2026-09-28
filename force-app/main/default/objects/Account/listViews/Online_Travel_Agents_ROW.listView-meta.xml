@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Online_Travel_Agents_ROW</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Qantas_Industry_Centre_ID__c</columns>
+    <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
+    <columns>ACCOUNT.PHONE1</columns>
+    <columns>ACCOUNT.TYPE</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACCOUNT.ADDRESS1_COUNTRY_CODE</field>
+        <operation>notEqual</operation>
+        <value>AU</value>
+    </filters>
+    <filters>
+        <field>Business_Type__c</field>
+        <operation>equals</operation>
+        <value>Online Travel Agent (OTA)</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Online Travel Agents (ROW)</label>
+    <sharedTo>
+        <group>QF</group>
+        <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

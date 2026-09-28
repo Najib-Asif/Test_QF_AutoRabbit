@@ -1,0 +1,236 @@
+<aura:component implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes" 
+                controller="QAC_SiteAdministrator_Controller"
+                access="global">
+
+    <lightning:workspaceAPI aura:id="workspace"/>    
+    
+    <aura:attribute name="strIATA" type="String"/>
+    <aura:attribute name="sfAccount" type="Account"/>
+    <aura:attribute name="LSite" type="QAC_SiteAdministrator_Controller.QAC_LDAPDetailsWrapper"/>
+    
+    <aura:attribute name="messageError" type="Boolean" default="false"/>
+    <aura:attribute name="isDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="message" type="String"/>
+    
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="buttonName" type="String"/>
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:attribute name="activeSections" type="List"/>    
+    
+    <!-- PAGE HEADER -->
+    <div class="slds-box slds-theme_default c-container" style="position: relative; height: 100px;">
+        <lightning:layout class="slds-page-header slds-page-header--object-home">
+            <lightning:layoutItem >
+                <lightning:icon iconName="standard:scan_card" alternativeText="Site Admin" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Agency Account</h1>
+                    <h2 class="slds-text-heading--small">SITE ADMINISTRATION</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+    <div class="slds-box slds-theme_default c-container">
+        
+        <lightning:accordion aura:id="accordion"
+                             allowMultipleSectionsOpen="true"
+                             activeSectionName="{! v.activeSections }">
+            
+            <!-- Search Section -->
+            <aura:if isTrue="{!(v.recordId == null)}">
+                <lightning:layout class="slds-align_absolute-center slds-p-around_small">
+                    <lightning:layoutItem>
+                        <dl class="slds-list--horizontal slds-wrap">
+                            <dt class="slds-item--label slds-text-color--weak qiclabel" >
+                                Enter QIC ID:
+                            </dt>
+                            
+                            <dd class="slds-item--detail" style="width:auto;padding-right: .75rem;">
+                                <lightning:input variant="label-hidden"
+                                                 required="true"                        
+                                                 name="IATA"
+                                                 value="{!v.strIATA}"
+                                                 pattern="[0-9]+"
+                                                 minlength="7"
+                                                 maxlength="7"
+                                                 messageWhenPatternMismatch="Enter the 7 digit IATA"
+                                                 placeholder=""
+                                                 type="text"
+                                                 />  
+                            </dd>
+                            
+                            <dd class="slds-item--detail" style="width:auto;">
+                                <lightning:buttonIcon iconName="utility:send" onclick="{!c.fetchAccount}" size="large" variant="border-filled" alternativeText="Go" iconClass="dark"/>
+                            </dd>
+                        </dl>
+                        
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </aura:if>
+            
+            <!-- Account Information Section -->
+            <div aura:id="accInfoDiv" class="toggle">
+                <lightning:accordionSection name="A" label="Account Information">
+                    <lightning:layout class="slds-align_absolute-center slds-p-around_small">
+                        <lightning:layoutItem padding="around-small" size="4" smallDeviceSize="4">
+                            
+                            <fieldset class="slds-box slds-theme--default slds-container--small">
+                                <!-- slds-form double hyphen stacked // use this for Label-Detail one below the other -->
+                                <form class="slds-form-element">
+                                    <dl class="slds-list--horizontal">
+                                        <dt class="slds-item--label">Account:</dt>
+                                        <dd class="slds-item--detail">
+                                            <a data-custom="{!v.sfAccount.Id}" onclick="{!c.openTab}">
+                                                {!v.sfAccount.Qantas_Industry_Centre_ID__c}</a>
+                                        </dd>
+                                    </dl>                        
+                                    
+                                    <dl class="slds-list--horizontal">
+                                        <dt class="slds-item--label">Name:</dt>
+                                        <dd class="slds-item--detail">
+                                            {!v.sfAccount.Name}
+                                        </dd>
+                                    </dl>                        
+                                    
+                                    <dl class="slds-list--horizontal">
+                                        <dt class="slds-item--label">Billing Country:</dt>
+                                        <dd class="slds-item--detail">
+                                            {!v.sfAccount.Country_f__c}
+                                        </dd>
+                                    </dl>                        
+                                    
+                                    <dl class="slds-list--horizontal">
+                                        <dt class="slds-item--label">Email:</dt>
+                                        <dd class="slds-item--detail">
+                                            {!v.sfAccount.Email__c}
+                                        </dd>
+                                    </dl>                        
+                                    
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element slds-size_1-of-3 slds-checkbox">
+                                            <span class="slds-form-element__label">RCTI</span>
+                                            <div class="slds-form-element__control">
+                                                <ui:outputCheckbox aura:id="output" value="{!v.sfAccount.RCTI__c}"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-3 slds-checkbox">
+                                            <span class="slds-form-element__label">Tradesite</span>
+                                            <div class="slds-form-element__control">
+                                                <ui:outputCheckbox aura:id="output" value="{!v.sfAccount.Tradesite__c}"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element slds-size_1-of-3 slds-checkbox">
+                                            <span class="slds-form-element__label">Active</span>
+                                            <div class="slds-form-element__control">
+                                                <ui:outputCheckbox aura:id="output" value="{!v.sfAccount.Active__c}"/>
+                                            </div>
+                                        </div>
+                                    </div>                            
+                                </form>
+                            </fieldset>
+                        </lightning:layoutItem>
+                    </lightning:layout>  
+                </lightning:accordionSection>
+            </div>
+            
+            <!-- LDAP Information Section -->
+            <div aura:id="LDAPInfoDiv" class="toggle">
+                <lightning:accordionSection name="B" label="LDAP Information">
+                    
+                    <!-- VALIDATE -->
+                    <aura:if isTrue="{!v.buttonName == 'validate'}">
+                        
+                        <!-- LDAP FORM SECTION-->
+                        <lightning:layout class="slds-align_absolute-center slds-p-around_small">
+                            <lightning:layoutItem padding="around-small" size="4">
+                                
+                                <fieldset class="slds-box slds-theme--default slds-form-element">
+                                    <form class="slds-form-element">
+                                        
+                                        <dl class="slds-list--horizontal">
+                                            <dt class="slds-item--label">LDAP Status</dt>
+                                            <dd class="slds-item--detail">
+                                                <b>{!v.LSite.agencyStatus}</b>
+                                            </dd>
+                                        </dl>                        
+                                        <dl class="slds-list--horizontal">
+                                            <dt class="slds-item--label">Agency Last Updated Time</dt>
+                                            <dd class="slds-item--detail">
+                                                <b><ui:outputDateTime value="{!v.LSite.agencyLastUpdated}" format="DD-MM-YYYY HH:mm"/></b>
+                                            </dd>
+                                        </dl>                        
+                                        <dl class="slds-list--horizontal">
+                                            <dt class="slds-item--label">Manager Last Updated Time</dt>
+                                            <dd class="slds-item--detail">
+                                                <b><ui:outputDateTime value="{!v.LSite.managerLastUpdated}" format="DD-MM-YYYY HH:mm"/></b>
+                                            </dd>
+                                        </dl>                        
+                                        
+                                    </form>
+                                </fieldset>
+                                
+                            </lightning:layoutItem>
+                        </lightning:layout>   
+                        
+                        <!-- LDAP MESSAGE SECTION-->
+                        <aura:set attribute="else">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home">
+                                <lightning:layoutItem padding="horizontal-small">
+                                    
+                                    <aura:if isTrue="{!v.buttonName == 'create'}">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Create LDAP Status</h1>
+                                            <h2 class="slds-text-heading--small">{!v.LSite.sfMessage}</h2>
+                                        </div>
+                                    </aura:if>    
+                                    
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </aura:set>
+                        
+                    </aura:if>    
+                    
+                </lightning:accordionSection>
+            </div>
+            
+            <aura:if isTrue="{!v.messageError}">
+                <!-- Load error -->
+                <div aura:id="errorDiv" class="userCreateError">
+                    <ui:message title="Error" severity="error" closable="true">
+                        <ui:outputText value="{!v.message}"/>
+                    </ui:message>
+                </div>
+            </aura:if>	
+            
+            <div aura:id="buttonDiv" class="toggle">
+                <aura:if isTrue="{!v.isDisabled}">
+                    <!--<div class="slds-text-color_error slds-align_absolute-center">
+                        Note: Create/Reset button will be enabled only if 
+                        Agency Account belongs to Active Tradesite Account and Account email is set.
+                    </div>-->
+					<div class="slds-text-color_error slds-align_absolute-center">
+                        Note: Create button will be enabled only if 
+                        Agency Account email is set.
+                    </div>
+                </aura:if>
+                <lightning:layout class="slds-align_absolute-center slds-p-around_medium slds-text-heading_small" >
+                    <lightning:button variant="brand" label="Validate" onclick="{!c.validateData}"/>
+                    <lightning:button variant="brand" label="Create" onclick="{!c.createData}" disabled="{!v.isDisabled}"/>
+                    <!--<lightning:button variant="brand" label="Reset" onclick="{!c.resetData}" disabled="{!v.isDisabled}"/>-->
+                </lightning:layout>
+            </div>
+            
+        </lightning:accordion>
+        
+    </div>
+    
+    <!-- Loading Spinner -->    
+    <aura:if isTrue="{!v.showSpinner}">
+        <div class="slds-spinner_container">
+            <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+        </div>
+    </aura:if>    
+    
+</aura:component>

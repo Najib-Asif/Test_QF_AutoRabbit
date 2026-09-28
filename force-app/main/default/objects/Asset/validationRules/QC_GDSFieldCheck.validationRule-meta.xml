@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QC_GDSFieldCheck</fullName>
+    <active>true</active>
+    <description>To ensure that all Channel Assets should not change GDS after it is created.</description>
+    <errorConditionFormula>AND( 
+RecordType.DeveloperName = &apos;Agency_Channel&apos;, 
+NOT(ISNEW()),
+ISCHANGED(GDS__c)  
+)</errorConditionFormula>
+    <errorDisplayField>GDS__c</errorDisplayField>
+    <errorMessage>GDS cannot be modified on Asset</errorMessage>
+</ValidationRule>

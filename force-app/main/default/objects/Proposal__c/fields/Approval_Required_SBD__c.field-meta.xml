@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Required_SBD__c</fullName>
+    <description>Approval Required (SBD) for CA</description>
+    <formula>AND(OR(No_of_SBD_Approvals_Required__c &gt; 0, AND(NOT(Approved_by_SBD__c),
+OR(
+AND(ISPICKVAL(Qantas_Club_Discount__c, &apos;Yes&apos;),ISPICKVAL( Qantas_Club_Discount_Offer__c , &apos;35%&apos;)),
+ISPICKVAL( Frequent_Flyer_Status_Upgrade__c , &apos;Yes&apos;),ISPICKVAL( Standard__c , &apos;Yes&apos;),Domestic_Annual_Share__c &lt; 0.70,Qantas_Annual_Expenditure__c &lt; 250000)),
+SBD_Approval_Required__c),NOT(Approved_by_SBD__c), NOT(Rejected_by_SBD__c),
+ISPICKVAL(Type__c, &apos;Qantas Business Savings&apos;),
+OR(CONTAINS(CreatedBy.Level__c,&apos;P5&apos;),CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Approval Required (SBD)</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

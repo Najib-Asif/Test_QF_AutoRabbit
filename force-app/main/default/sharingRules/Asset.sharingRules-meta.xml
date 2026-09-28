@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Asset_Sharing_to_QDP_Support</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Asset Sharing to QDP Support</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_Sales_and_Distribution_QDP_Support</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Channel</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Asset_Sharing_to_QF_Agency_Support</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>To share Agency Channel records to QF Agency support</description>
+        <label>Asset Sharing to QF Agency Support</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Channel</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Agency_Credit_Asset_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QAC</description>
+        <label>QAC Agency Credit Asset Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_Agency_Credit_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Credit</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QC_Asset_Sharing_to_DDP_Support</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QC Asset Sharing to DDP Support</label>
+        <sharedTo>
+            <group>QDP_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Agency Channel</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_Support_Loyalty_Contact_Centre</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QF-Support-Loyalty Contact Centre -Read/Write Public Scheme</description>
+        <label>QF-Support-Loyalty Contact Centre</label>
+        <sharedTo>
+            <role>QF_Support_Loyalty_Contact_Centre</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Scheme</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_the_Corporate_Public_Schemes_to_QF_Support_QIC_Member</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share the Corporate,Public Schemes to QF-Support-QIC-Member</description>
+        <label>Share the Corporate,Public Schemes to QF-Support-QIC-Member</label>
+        <sharedTo>
+            <role>QF_Support_QIC_Member</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Scheme,Corporate Scheme</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_the_Corporate_Public_Schemes_to_QF_Support_users</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share the Corporate,Public Schemes to all Support roles</description>
+        <label>Share the Corporate,Public Schemes to QF-Support users</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Public Scheme,Corporate Scheme</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Asset_Edit_access_to_Role_QF_Support_Deal_Support</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This sharing rule is created for CRM-10171 to provide the edit access for all fields in Qantas Club Override/Waiver section for the role QF-Support-Deal Support.</description>
+        <label>Asset: Edit access to Role - QF-Support-Deal Support</label>
+        <sharedTo>
+            <role>QF_Support_Deal_Support</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>QF_DOM_Sales_B_G_Business_and_Govt_Business_Manager</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>S_D_Asset_Sharing_DOM_BG</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing Public and Corporate Schemes amongst the team members of S&amp;D Corp Group.</description>
+        <label>S&amp;D Asset Sharing DOM B&amp;G</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_B_G</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_B_G</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>S_D_Asset_Sharing_DOM_SME</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Asset Sharing amongst SME roles for S&amp;D</description>
+        <label>S&amp;D Asset Sharing DOM SME</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>SnD_Colin_Henry</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SnD-Colin-Henry</label>
+        <sharedTo>
+            <role>QF_DOM_Sales_B_G_Business_and_Govt_State_Govt_Manager</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>QF_DOM_Sales_B_G_Business_and_Govt_State_Govt</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CL_recommendation_required</fullName>
+    <active>true</active>
+    <description>CL recommendation and Justification required for when Closed-Renew/Downgrade</description>
+    <errorConditionFormula>AND
+(
+ RecordType.DeveloperName == &apos;Chairmans_Lounge_Renewal&apos;,
+ISBLANK(CL_Justification__c),
+(OR (ISPICKVAL(Status,&apos;Closed-Renew&apos;), ISPICKVAL(Status,&apos;Closed-Downgrade&apos;)))
+)</errorConditionFormula>
+    <errorMessage>Please provide CL Renewal Recommendation and CL Justification.</errorMessage>
+</ValidationRule>

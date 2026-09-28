@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Account_Validation</fullName>
+    <active>true</active>
+    <description>Freight - Users cannot select a Branch Account for a Freight Opportunity</description>
+    <errorConditionFormula>AND(
+
+$RecordType.DeveloperName = &quot;Freight&quot;, 
+ISPICKVAL(Account.Type, &quot;Freight-Branch&quot;)
+
+)</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Please select a managed Freight-Country Account or an unmanaged account as Opportunities on a Freight Branch account are not allowed.</errorMessage>
+</ValidationRule>

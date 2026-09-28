@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Quotes_under_approval</fullName>
+    <columns>QUOTE.NAME</columns>
+    <columns>CreatedBy</columns>
+    <columns>QUOTE.EXPIRATIONDATE</columns>
+    <columns>Shipping__c</columns>
+    <columns>QUOTE.TOTALPRICE</columns>
+    <columns>Freight_Category__c</columns>
+    <columns>Approval_Required__c</columns>
+    <columns>Freight_Comments__c</columns>
+    <columns>Approval_Submission__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Approval_Required__c</field>
+        <operation>equals</operation>
+        <value>Approval Level - 1,Approval Level - 2,Approval Level - 3,Approval Level - 4,Approval Level - 5</value>
+    </filters>
+    <filters>
+        <field>QUOTE.STATUS</field>
+        <operation>equals</operation>
+        <value>Needs Review</value>
+    </filters>
+    <label>Freight Quotes under approval</label>
+</ListView>

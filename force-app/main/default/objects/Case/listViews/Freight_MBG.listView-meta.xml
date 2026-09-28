@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_MBG</fullName>
+    <columns>CASES.PRIORITY</columns>
+    <columns>Product__c</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Freight_AWB_Number__c</columns>
+    <columns>Freight_Unresolved_Time__c</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.ORIGIN</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>Freight_AWB_Shipment_Description__c</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Freight_Invoicing,Case.Qantas_Freight</value>
+    </filters>
+    <filters>
+        <field>CASES.CLOSED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Claims</value>
+    </filters>
+    <label>Freight MBG</label>
+</ListView>

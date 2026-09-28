@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Corporate_Scheme_Blank</fullName>
+    <active>false</active>
+    <description>For Sales Offers, Corporate Scheme field has to be blank unless Sub Type = FOC Qantas Club Waiver.</description>
+    <errorConditionFormula>AND (
+ RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/
+ NOT( ISPICKVAL (  Sub_Type__c , &quot;FOC Qantas Club Waiver&quot; )),
+ NOT ( ISBLANK (     AssetId  ))
+)</errorConditionFormula>
+    <errorMessage>You can only use the Corporate Scheme section for FOC Qantas Club Waiver</errorMessage>
+</ValidationRule>

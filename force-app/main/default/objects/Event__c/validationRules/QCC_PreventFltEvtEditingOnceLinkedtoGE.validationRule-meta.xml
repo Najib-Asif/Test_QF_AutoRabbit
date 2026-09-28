@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_PreventFltEvtEditingOnceLinkedtoGE</fullName>
+    <active>true</active>
+    <description>QCC: Event linked to Global Event should not be Edited</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_FltEvtEditingOnceLinkedtoGE__c &amp;&amp; (GlobalEvent__c != Null &amp;&amp;  
+    PRIORVALUE(GlobalEvent__c) != Null) &amp;&amp; 
+         ((RecoveryPlanCompleted__c ||
+           DelayCostsCompleted__c  ) &amp;&amp; TEXT(Status__c) != &apos;Closed&apos;) 
+        &amp;&amp; NOT(ISCHANGED(Status__c) &amp;&amp; TEXT(Status__c) == &apos;Closed&apos;)
+        &amp;&amp; NOT(ISCHANGED(Primary_Root_Cause__c))
+        &amp;&amp; NOT(ISCHANGED(OwnerId) &amp;&amp; TEXT(Status__c) == &apos;Closed&apos;)
+        &amp;&amp; NOT(ISCHANGED(Comments__c ))
+        &amp;&amp; NOT(ISCHANGED( NoOfBronzePassenger__c ))
+        &amp;&amp; NOT(ISCHANGED( NoOfChairmansLoungePassenger__c  ))
+        &amp;&amp; NOT(ISCHANGED( NoOfCLPlatinumOnePassenger__c  ))
+        &amp;&amp; NOT(ISCHANGED( NoOfGoldPassenger__c  ))
+        &amp;&amp; NOT(ISCHANGED( NoOfNonTieredPassenger__c))
+        &amp;&amp; NOT(ISCHANGED( NoOfPlatinumOnePassenger__c ))
+        &amp;&amp; NOT(ISCHANGED( NoOfPlatinumPassenger__c ))
+        &amp;&amp; NOT(ISCHANGED( NoOfSilverPassenger__c )) &amp;&amp; 
+    (RecordType.DeveloperName ==  &apos;Active_Event&apos; || 
+    RecordType.DeveloperName ==  &apos;Closed_Event&apos;)</errorConditionFormula>
+    <errorMessage>Flight Event is Linked to a Global Event, Please Remove the association to edit the Flight Event.</errorMessage>
+</ValidationRule>

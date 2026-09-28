@@ -1,0 +1,648 @@
+<!-- *******************************************************************************************************************
+Author:      	gnanavelu
+Jira:      	 	CRM-3532
+Description:  	Mobile Friendly versions for Key Metrics
+************************************************************************************************************************
+History
+************************************************************************************************************************
+11-March-2019      gnanavelu               Initial Design
+23-Feb-2022		   raj sharma			   Addition of CP19 fields and extra table (CRM-5163)
+************************************************************************************************************************ -->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="record" type="Object" />
+    <aura:attribute name="AccountObj" type="Object" />
+    <aura:attribute name="error" type="String"/>
+    <aura:attribute name="accId" type="String"/>
+    <aura:attribute name="showSaveResetBtn" type="boolean"/>
+    <aura:attribute name="Buttonlable" type="String" default="Reset Estimations"/>
+    <aura:attribute name="EditModeTATS" type="boolean" default="false" />
+    <aura:attribute name="EditModeTQR" type="boolean" default="false" />
+    <aura:attribute name="EditModeDQR" type="boolean" default="false" />
+    <aura:attribute name="EditModeIQR" type="boolean" default="false" />
+    <aura:attribute name="EditModeDQMS" type="boolean" default="false" />
+    <aura:attribute name="EditModeIQMS" type="boolean" default="false" />
+    <aura:attribute name="spinner" type="boolean" default="false" />
+    <aura:attribute name="Editmode" type="boolean" default="true" />
+    
+    <aura:if isTrue="{!v.Editmode}">
+        <force:recordData aura:id="recordEditor" recordId="{!v.accId}"
+                          targetFields ="{!v.AccountObj}" 
+                          targetError="{!v.error}"
+                          fields="Id, Name, BillingCountry, Total_Air_Travel_Spend__c, Total_Air_Travel_Spend_LY__c, Total_QF_Revenue_TY__c, Total_QF_Revenue_LY__c, Domestic_Air_Travel_Spend__c, Domestic_Air_Travel_Spend_LY__c,
+                                  QF_Domestic_Revenue__c, QF_Domestic_Revenue_LY__c, International_Air_Travel_Spend__c, International_Air_Travel_Spend_LY__c, Intl_QF_EK_Revenue_TY__c, Intl_QF_EK_Revenue_LY__c,
+                                  Intl_Non_MCA_Air_Travel_Spend_TY__c, Intl_Non_MCA_Air_Travel_Spend_LY__c, Intl_Non_MCA_QF_Revenue_TY__c, Intl_Non_MCA_QF_Revenue_LY__c, International_MCA_Air_Travel_Spend__c,
+                                  International_MCA_Air_Travel_Spend_LY__c, QF_EK_MCA_Revenue__c, QF_EK_MCA_Revenue_LY__c, QF_Domestic_Market_Share__c, Estimated_QF_Dom_Market_Share__c, QF_International_Market_Share__c,
+                                  QF_International_Market_Share_LY__c, Intl_Non_MCA_QF_Market_Share_TY__c, Intl_Non_MCA_QF_Market_Share_LY__c, International_QF_EK_MCA_Market_Share__c, International_QF_EK_MCA_Market_Share_LY__c,
+                                  Tonnes_Carbon__c, Latest_Period_Date__c, Estimated_Total_Air_Travel_Spend__c, Estimated_Total_Annual_Revenue__c, Estimated_Total_QF_Dom_Annual_Revenue__c, Estimated_Total_QF_Int_Annual_Revenue__c,
+                                  Estimated_Int_Market_Share__c, QF_Domestic_Market_Share_LY__c,CP19_Total_Air_Travel_Spend__c,CP19_Total_QF_Revenue_TY__c,CP19_Domestic_Air_Travel_Spend__c,CP19_QF_Domestic_Revenue__c,CP19_International_Air_Travel_Spend__c,
+                                  CP19_QF_EK_MCA_Revenue__c,CP19_Intl_Non_MCA_Air_Travel_Spend_TY__c,CP19_Intl_Non_MCA_QF_Revenue_TY__c,CP19_International_MCA_Air_Travel_Spend__c,CP19_Intl_QF_EK_Revenue_TY__c,CP19_QF_Domestic_Market_Share__c,CP19_QF_International_Market_Share__c,
+                                  CP19_Intl_Non_MCA_QF_Market_Share_TY__c,CP19_International_MCA_QF_EK_Market_Shar__c"
+                          mode="EDIT" recordUpdated="{!c.recordUpdated}"
+                          />
+    </aura:if>
+    
+    <aura:if isTrue="{!v.Editmode == false}">
+        <force:recordData aura:id="recordEditor" recordId="{!v.accId}"
+                          targetFields ="{!v.AccountObj}" 
+                          targetError="{!v.error}"
+                          fields="Id, Name, BillingCountry, Total_Air_Travel_Spend__c, Total_Air_Travel_Spend_LY__c, Total_QF_Revenue_TY__c, Total_QF_Revenue_LY__c, Domestic_Air_Travel_Spend__c, Domestic_Air_Travel_Spend_LY__c,
+                                  QF_Domestic_Revenue__c, QF_Domestic_Revenue_LY__c, International_Air_Travel_Spend__c, International_Air_Travel_Spend_LY__c, Intl_QF_EK_Revenue_TY__c, Intl_QF_EK_Revenue_LY__c,
+                                  Intl_Non_MCA_Air_Travel_Spend_TY__c, Intl_Non_MCA_Air_Travel_Spend_LY__c, Intl_Non_MCA_QF_Revenue_TY__c, Intl_Non_MCA_QF_Revenue_LY__c, International_MCA_Air_Travel_Spend__c,
+                                  International_MCA_Air_Travel_Spend_LY__c, QF_EK_MCA_Revenue__c, QF_EK_MCA_Revenue_LY__c, QF_Domestic_Market_Share__c, Estimated_QF_Dom_Market_Share__c, QF_International_Market_Share__c,
+                                  QF_International_Market_Share_LY__c, Intl_Non_MCA_QF_Market_Share_TY__c, Intl_Non_MCA_QF_Market_Share_LY__c, International_QF_EK_MCA_Market_Share__c, International_QF_EK_MCA_Market_Share_LY__c,
+                                  Tonnes_Carbon__c, Latest_Period_Date__c, Estimated_Total_Air_Travel_Spend__c, Estimated_Total_Annual_Revenue__c, Estimated_Total_QF_Dom_Annual_Revenue__c, Estimated_Total_QF_Int_Annual_Revenue__c,
+                                  Estimated_Int_Market_Share__c, QF_Domestic_Market_Share_LY__c,CP19_Total_Air_Travel_Spend__c,CP19_Total_QF_Revenue_TY__c,CP19_Domestic_Air_Travel_Spend__c,CP19_QF_Domestic_Revenue__c,CP19_International_Air_Travel_Spend__c,
+                                  CP19_QF_EK_MCA_Revenue__c,CP19_Intl_Non_MCA_Air_Travel_Spend_TY__c,CP19_Intl_Non_MCA_QF_Revenue_TY__c,CP19_International_MCA_Air_Travel_Spend__c,CP19_Intl_QF_EK_Revenue_TY__c,CP19_QF_Domestic_Market_Share__c,CP19_QF_International_Market_Share__c,
+                                  CP19_Intl_Non_MCA_QF_Market_Share_TY__c,CP19_International_MCA_QF_EK_Market_Shar__c"
+                          mode="VIEW" 
+                          />
+    </aura:if>
+    
+    <div class="slds">
+        <table class="slds-table slds-table--bordered  slds-is-relative">
+            <aura:if isTrue="{!v.spinner}">
+                <lightning:spinner  aura:id="mySpinner" variant="brand" size="medium"/>
+            </aura:if>
+            <thead>
+                <tr class="slds-text-heading--label" >
+                    <th scope="col" class="nobordertop">
+                        <div></div>
+                    </th>
+                    <th scope="col" class="nobordertop slds-cell-edit" title="Year till Date">
+                        <div>TY QDM MAT</div>
+                    </th>
+                    <th scope="col" class="nobordertop" title="Last Year">
+                        <div>LY QDM MAT</div>
+                    </th>
+                    <th scope="col" class="nobordertop" title="Last Year">
+                        <div>Pre-Covid QDM</div>
+                    </th>
+                    <th scope="col" class="nobordertop" title="To be captured by the Account Manager/Team if there are no actuals or if estimated is different from actuals">
+                        <div>Estimated</div>
+                    </th>              
+                </tr>
+            </thead>
+            <tbody>   
+                <tr>
+                    <td data-label="Total Air Travel Spend" title="Total Air Travel Spend">
+                        <div>Total Air Travel Spend</div>
+                    </td>
+                    <td data-label="TY Total Air Travel Spend" title="TY Total Air Travel Spend">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Total_Air_Travel_Spend__c}" /></div>
+                    </td> 
+                    <td data-label="LY Total Air Travel Spend" title="LY Total Air Travel Spend">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Total_Air_Travel_Spend_LY__c}" /></div>
+                    </td>  
+                    <td data-label="CP19-Total Air Travel Spend" title="CP19-Total Air Travel Spend">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_Total_Air_Travel_Spend__c}" /></div>
+                    </td>
+                    <td  ondblclick="{!c.inlineEditTATS}" class="slds-cell-edit" data-label="Estimated Total Air Travel Spend" title="Estimated Total Air Travel Spend">
+                        <span class="slds-grid slds-grid_align-spread">
+                            <aura:if isTrue="{!v.EditModeTATS == false}">
+                                <span class="slds-truncate" ><ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Estimated_Total_Air_Travel_Spend__c}" /></span>
+                                <button onclick="{!c.inlineEditTATS}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                                    <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                </button>
+                                
+                                <aura:set attribute="else">
+                                    <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                                        <div class="slds-popover__body">
+                                            <div class="slds-form-element slds-grid slds-wrap">
+                                                <div class="slds-form-element__control slds-grow">
+                                                    <ui:inputCurrency  class="slds-input inputFieldWidth"
+                                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                                      aura:id="EditModeTATSId"
+                                                                      blur="{!c.closeBox}"
+                                                                      change="{!c.onChange}"
+                                                                      label="Estimated Total Air Travel Spend"
+                                                                      value="{!v.AccountObj.Estimated_Total_Air_Travel_Spend__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span id="form-end" tabindex="0"></span>
+                                    </section>
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td data-label="Total QF Revenue *" title="Total QF Revenue *">
+                        <div>Total QF Revenue *</div>
+                    </td>
+                    <td data-label="TY Total QF Revenue" title="TY Total QF Revenue">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Total_QF_Revenue_TY__c}" /></div>
+                    </td> 
+                    <td data-label="LY Total QF Revenue" title="LY Total QF Revenue">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Total_QF_Revenue_LY__c}" /></div>
+                    </td>
+                    <td data-label="CP19-Total QF Revenue (TY)" title="CP19-Total QF Revenue (TY)">
+					<div>
+					<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_Total_QF_Revenue_TY__c}" /></div>
+					</td>
+                    <td  ondblclick="{!c.inlineEditTQR}" class="slds-cell-edit" data-label="Estimated Total QF Revenue" title="Estimated Total QF Revenue">
+                        <span class="slds-grid slds-grid_align-spread">
+                            <aura:if isTrue="{!v.EditModeTQR == false}">
+                                <span class="slds-truncate"><ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Estimated_Total_Annual_Revenue__c}" /></span>
+                                <button onclick="{!c.inlineEditTQR}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                                    <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                </button>
+                                
+                                <aura:set attribute="else">
+                                    <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                                        <div class="slds-popover__body">
+                                            <div class="slds-form-element slds-grid slds-wrap">
+                                                <div class="slds-form-element__control slds-grow">
+                                                    <ui:inputCurrency  class="slds-input inputFieldWidth"
+                                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                                      aura:id="EditModeTQRId"
+                                                                      blur="{!c.closeBox}"
+                                                                      change="{!c.onChange}"
+                                                                      label="Estimated Total QF Revenue"
+                                                                      value="{!v.AccountObj.Estimated_Total_Annual_Revenue__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span id="form-end" tabindex="0"></span>
+                                    </section>
+                                </aura:set>
+                            </aura:if>
+                        </span>  
+                    </td>
+                </tr>
+                
+                <tr >
+                    <td data-label="Domestic Air Travel Spend" title="Domestic Air Travel Spend">
+                        <div>Domestic Air Travel Spend</div>
+                    </td>
+                    <td data-label="TY Domestic Air Travel Spend" title="TY Domestic Air Travel Spend">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Domestic_Air_Travel_Spend__c}" />
+                        </div>
+                    </td> 
+                    <td data-label="LY Domestic Air Travel Spend" title="LY Domestic Air Travel Spend">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Domestic_Air_Travel_Spend_LY__c}" />
+                        </div>
+                    </td>
+                    <td data-label="CP19-Domestic Air Travel Spend" title="CP19-Domestic Air Travel Spend">
+					<div>
+					<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_Domestic_Air_Travel_Spend__c}" /></div>
+					</td>
+                    <td data-label="Estimated" title="Estimated">
+                        <div>N/A</div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td data-label="Domestic QF Revenue" title="Domestic QF Revenue">
+                        <div>Domestic QF Revenue</div>
+                    </td>
+                    <td data-label="TY Domestic QF Revenue" title="TY Domestic QF Revenue">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.QF_Domestic_Revenue__c}" />
+                        </div>
+                    </td> 
+                    <td data-label="LY Domestic QF Revenue" title="LY Domestic QF Revenue">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.QF_Domestic_Revenue_LY__c}" />
+                        </div>
+                    </td> 
+                    <td data-label="CP19-QF Domestic Revenue" title="CP19-QF Domestic Revenue">
+						<div>
+					<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_QF_Domestic_Revenue__c}" /></div>
+					</td>
+                    <td  ondblclick="{!c.inlineEditDQR}" class="slds-cell-edit" data-label="Estimated Domestic QF Revenue" title="Estimated Domestic QF Revenue">
+                        <span class="slds-grid slds-grid_align-spread">
+                            <aura:if isTrue="{!v.EditModeDQR == false}">
+                                <span class="slds-truncate"><ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Estimated_Total_QF_Dom_Annual_Revenue__c}" /></span>
+                                <button onclick="{!c.inlineEditDQR}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                                    <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                </button>
+                                
+                                <aura:set attribute="else">
+                                    <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                                        <div class="slds-popover__body">
+                                            <div class="slds-form-element slds-grid slds-wrap">
+                                                <div class="slds-form-element__control slds-grow">
+                                                    <ui:inputCurrency  class="slds-input inputFieldWidth"
+                                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                                      aura:id="EditModeDQRId"
+                                                                      blur="{!c.closeBox}"
+                                                                      change="{!c.onChange}"
+                                                                      label="Estimated Domestic QF Revenue"
+                                                                      value="{!v.AccountObj.Estimated_Total_QF_Dom_Annual_Revenue__c	}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span id="form-end" tabindex="0"></span>
+                                    </section>
+                                </aura:set>
+                            </aura:if>
+                        </span>  
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    <td  data-label="International Air Travel Spend" title="International Air Travel Spend">
+                        <div>International Air Travel Spend</div>
+                    </td>
+                    <td data-label="TY International Air Travel Spend" title="TY International Air Travel Spend">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.International_Air_Travel_Spend__c}" />
+                        </div>
+                    </td> 
+                    <td data-label="LY International Air Travel Spend" title="LY International Air Travel Spend">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.International_Air_Travel_Spend_LY__c}" />
+                        </div>
+                    </td>
+                    <td data-label="CP19-International Air Travel Spend" title="CP19-International Air Travel Spend">
+						<div>
+					<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_International_Air_Travel_Spend__c}" /></div>
+					</td>
+                    <td data-label="Estiamted N/A" title="Estiamted N/A">
+                        <div>N/A</div>
+                    </td> 
+                </tr>
+                
+                <tr>
+                    <td data-label="International QF Revenue" title="International QF Revenue">
+                        <div>International QF Revenue *</div>
+                    </td>
+                    <td data-label="TY International QF Revenue" title="TY International QF Revenue">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Intl_QF_EK_Revenue_TY__c}" />
+                        </div>
+                    </td> 
+                    <td data-label="LY International QF Revenue" title="LY International QF Revenue">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Intl_QF_EK_Revenue_LY__c}" />
+                        </div>
+                    </td> 
+                   <td data-label="CP19-Intl QF/EK Revenue(TY)" title="CP19-Intl QF/EK Revenue(TY)">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_Intl_QF_EK_Revenue_TY__c}" />
+                        </div>
+                    </td> 
+                    <td  ondblclick="{!c.inlineEditIQR}" class="slds-cell-edit" data-label="Estimated International QF Revenue" title="Estimated International QF Revenue">
+                        <span class="slds-grid slds-grid_align-spread">
+                            <aura:if isTrue="{!v.EditModeIQR == false}">
+                                <span class="slds-truncate"><ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Estimated_Total_QF_Int_Annual_Revenue__c}" /></span>
+                                <button onclick="{!c.inlineEditIQR}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                                    <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                </button>
+                                
+                                <aura:set attribute="else">
+                                    <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                                        <div class="slds-popover__body">
+                                            <div class="slds-form-element slds-grid slds-wrap">
+                                                <div class="slds-form-element__control slds-grow">
+                                                    <ui:inputCurrency  class="slds-input inputFieldWidth"
+                                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                                      aura:id="EditModeIQRId"
+                                                                      blur="{!c.closeBox}"
+                                                                      change="{!c.onChange}"
+                                                                      label="Estimated International QF Revenue"
+                                                                      value="{!v.AccountObj.Estimated_Total_QF_Int_Annual_Revenue__c	}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span id="form-end" tabindex="0"></span>
+                                    </section>
+                                </aura:set>
+                            </aura:if>
+                        </span>  
+                    </td>
+                    
+                </tr>
+                
+                <aura:if  isTrue="{!or(v.AccountObj.Intl_Non_MCA_Air_Travel_Spend_TY__c!=null, v.AccountObj.Intl_Non_MCA_Air_Travel_Spend_LY__c!=null)}" >
+                    <tr>
+                        <td data-label="Non-MCA Air Travel Spend" title="Non-MCA Air Travel Spend">
+                            <div>Non-MCA Air Travel Spend</div>
+                        </td>
+                        <td data-label="TY Non-MCA Air Travel Spend" title="TY Non-MCA Air Travel Spend">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Intl_Non_MCA_Air_Travel_Spend_TY__c}" />
+                            </div>
+                        </td> 
+                        <td data-label="LY Non-MCA Air Travel Spend" title="LY Non-MCA Air Travel Spend">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Intl_Non_MCA_Air_Travel_Spend_LY__c}" />
+                            </div>
+                        </td>    
+                         <td data-label="CP19-Intl Non-MCA Air Travel Spend (TY)" title="CP19-Intl Non-MCA Air Travel Spend (TY)">
+							<div>
+							<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_Intl_Non_MCA_Air_Travel_Spend_TY__c}" /></div>
+						</td>
+                        <td data-label="Estiamted N/A" title="Estiamted N/A">
+                        <div>N/A</div>
+                    </td> 
+                    </tr>
+                </aura:if>
+                
+                <aura:if  isTrue="{!or(v.AccountObj.Intl_Non_MCA_QF_Revenue_TY__c!=null, v.AccountObj.Intl_Non_MCA_QF_Revenue_LY__c!=null)}" >
+                    <tr>
+                        <td data-label="Non-MCA QF Revenue" title="Non-MCA QF Revenue">
+                            <div>Non-MCA QF Revenue</div>
+                        </td>
+                        <td data-label="TY Non-MCA QF Revenue" title="TY Non-MCA QF Revenue">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Intl_Non_MCA_QF_Revenue_TY__c}" />
+                            </div>
+                        </td> 
+                        <td data-label="LY Non-MCA QF Revenue" title="LY Non-MCA QF Revenue">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Intl_Non_MCA_QF_Revenue_LY__c}" />
+                            </div>
+                        </td> 
+                        
+                        <td data-label="CP19-Intl Non-MCA QF Revenue (TY)" title="CP19-Intl Non-MCA QF Revenue (TY)">
+							<div>
+							<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_Intl_Non_MCA_QF_Revenue_TY__c}" /></div>
+						</td>
+                        <td data-label="Estiamted N/A" title="Estiamted N/A">
+                        <div>N/A</div>
+                    </td> 
+                    </tr>
+                </aura:if>
+                
+                <aura:if  isTrue="{!or(v.AccountObj.International_MCA_Air_Travel_Spend__c!=null, v.AccountObj.International_MCA_Air_Travel_Spend_LY__c!=null)}" >
+                    <tr>
+                        <td data-label="MCA Air Travel Spend" title="MCA Air Travel Spend">
+                            <div>MCA Air Travel Spend</div>
+                        </td>
+                        <td data-label="TY MCA Air Travel Spend" title="TY MCA Air Travel Spend">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.International_MCA_Air_Travel_Spend__c}" />
+                            </div>
+                        </td> 
+                        <td data-label="LY MCA Air Travel Spend" title="LY MCA Air Travel Spend">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.International_MCA_Air_Travel_Spend_LY__c}" />
+                            </div>
+                        </td>
+                        <td data-label="CP19-International MCA Air Travel Spend" title="CP19-International MCA Air Travel Spend">
+							<div>
+						<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_International_MCA_Air_Travel_Spend__c}" /></div>
+						</td>
+                        <td data-label="Estimated MCA Air Travel Spend" title="Estimated MCA Air Travel Spend">
+                            <div></div>
+                        </td> 
+                    </tr>
+                </aura:if>
+                
+                <aura:if  isTrue="{!or(v.AccountObj.QF_EK_MCA_Revenue__c!=null, v.AccountObj.QF_EK_MCA_Revenue_LY__c!=null)}" >
+                    <tr>
+                        <td data-label="MCA QF/EK Revenue" title="MCA QF/EK Revenue">
+                            <div>MCA QF/EK Revenue</div>
+                        </td>
+                        <td data-label="TY MCA QF/EK Revenue" title="TY MCA QF/EK Revenue">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.QF_EK_MCA_Revenue__c}" />
+                            </div>
+                        </td> 
+                        <td data-label="LY MCA QF/EK Revenue" title="LY MCA QF/EK Revenue">
+                            <div>
+                                <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.QF_EK_MCA_Revenue_LY__c}" />
+                            </div>
+                        </td>   
+                        
+                        <td data-label="CP19-QF/EK MCA Revenue" title="CP19-QF/EK MCA Revenue">
+						<div>
+							<ui:outputCurrency aura:id="curr" value="{!v.AccountObj.CP19_QF_EK_MCA_Revenue__c}" /></div>
+						</td>
+                        <td data-label="Estiamted N/A" title="Estiamted N/A">
+                        <div>N/A</div>
+                    </td> 
+                    </tr>
+                </aura:if>
+                
+                <tr>
+                    <td data-label="Domestic QF Market Share" title="Domestic QF Market Share">
+                        <div>Domestic QF Market Share</div>
+                    </td>
+                    <td data-label="TY Domestic QF Market Share" title="TY Domestic QF Market Share">
+                        <div><aura:if  isTrue="{!v.AccountObj.QF_Domestic_Market_Share__c != null}" >
+                            {!v.AccountObj.QF_Domestic_Market_Share__c}%     
+                            </aura:if>
+                        </div>
+                    </td> 
+                    <td data-label="LY Domestic QF Market Share" title="LY Domestic QF Market Share">
+                        <div><aura:if  isTrue="{!v.AccountObj.QF_Domestic_Market_Share_LY__c != null}" >
+                            {!v.AccountObj.QF_Domestic_Market_Share_LY__c}%
+                            </aura:if></div>
+                    </td>    
+                    <td data-label="CP19-QF Domestic Market Share" title="CP19-QF Domestic Market Share">
+                        <div><aura:if  isTrue="{!v.AccountObj.CP19_QF_Domestic_Market_Share__c != null}" >
+                            {!v.AccountObj.CP19_QF_Domestic_Market_Share__c}%     
+                            </aura:if>
+                        </div>
+                    </td>
+                    <td  ondblclick="{!c.inlineEditDQMS}" class="slds-cell-edit" data-label="Estimated Domestic QF Market Share" title="Estimated Domestic QF Market Share">
+                        <span class="slds-grid slds-grid_align-spread">
+                            <aura:if isTrue="{!v.EditModeDQMS == false}">
+                                <span class="slds-truncate"><aura:if  isTrue="{!v.AccountObj.Estimated_QF_Dom_Market_Share__c != null}" >{!v.AccountObj.Estimated_QF_Dom_Market_Share__c}%</aura:if></span>
+                                <button onclick="{!c.inlineEditDQMS}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                                    <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                </button>
+                                
+                                <aura:set attribute="else">
+                                    <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                                        <div class="slds-popover__body">
+                                            <div class="slds-form-element slds-grid slds-wrap">
+                                                <div class="slds-form-element__control slds-grow">
+                                                    <ui:inputCurrency  class="slds-input inputFieldWidth"
+                                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                                      aura:id="EditModeDQMSId"
+                                                                      blur="{!c.closeBox}"
+                                                                      change="{!c.onChange}"
+                                                                      label="Estimated Domestic QF Market Share"
+                                                                      value="{!v.AccountObj.Estimated_QF_Dom_Market_Share__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span id="form-end" tabindex="0"></span>
+                                    </section>
+                                </aura:set>
+                            </aura:if>
+                        </span>  
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    <td data-label="International QF Market Share" title="International QF Market Share">
+                        <div>International QF Market Share *</div>
+                    </td>
+                    <td data-label="TY International QF Market Share" title="TY International QF Market Share">
+                        <div>
+                            <aura:if  isTrue="{!v.AccountObj.QF_International_Market_Share__c != null}" >{!v.AccountObj.QF_International_Market_Share__c}%</aura:if>
+                        </div>
+                    </td> 
+                    <td data-label="LY International QF Market Share" title="LY International QF Market Share">
+                        <div><aura:if  isTrue="{!v.AccountObj.QF_International_Market_Share_LY__c != null}" >{!v.AccountObj.QF_International_Market_Share_LY__c}%</aura:if>
+                        </div>
+                    </td> 
+                     <td data-label="CP19-QF International Market Share" title="CP19-QF International Market Share">
+                        <div><aura:if  isTrue="{!v.AccountObj.CP19_QF_International_Market_Share__c != null}" >
+                            {!v.AccountObj.CP19_QF_International_Market_Share__c}%     
+                            </aura:if></div>
+					</td>
+                    <td  ondblclick="{!c.inlineEditIQMS}" class="slds-cell-edit" data-label="Estimated International QF Market Share" title="Estimated International QF Market Share">
+                        <span class="slds-grid slds-grid_align-spread">
+                            <aura:if isTrue="{!v.EditModeIQMS == false}">
+                                <span class="slds-truncate"><aura:if  isTrue="{!v.AccountObj.Estimated_Int_Market_Share__c != null}" >{!v.AccountObj.Estimated_Int_Market_Share__c}%</aura:if></span>
+                                <button onclick="{!c.inlineEditIQMS}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                                    <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                </button>
+                                
+                                <aura:set attribute="else">
+                                    <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                                        <div class="slds-popover__body">
+                                            <div class="slds-form-element slds-grid slds-wrap">
+                                                <div class="slds-form-element__control slds-grow">
+                                                    <ui:inputCurrency  class="slds-input inputFieldWidth"
+                                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                                      aura:id="EditModeIQMSId"
+                                                                      blur="{!c.closeBox}"
+                                                                      change="{!c.onChange}"
+                                                                      label="Estimated International QF Market Share"
+                                                                      value="{!v.AccountObj.Estimated_Int_Market_Share__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span id="form-end" tabindex="0"></span>
+                                    </section>
+                                </aura:set>
+                            </aura:if>
+                        </span>  
+                    </td>
+                    
+                </tr>
+                
+                 <aura:if  isTrue="{!or(v.AccountObj.Intl_Non_MCA_QF_Market_Share_TY__c!=null, v.AccountObj.Intl_Non_MCA_QF_Market_Share_LY__c!=null)}" >
+                    <tr>
+                        <td data-label="Non-MCA QF Market Share" title="Non-MCA QF Market Share">
+                            <div>Non-MCA QF Market Share</div>
+                        </td>
+                        <td data-label="TY Non-MCA QF Market Share" title="TY Non-MCA QF Market Share">
+                            <div>{!v.AccountObj.Intl_Non_MCA_QF_Market_Share_TY__c}%</div>
+                        </td> 
+                        <td data-label="LY Non-MCA QF Market Share" title="LY Non-MCA QF Market Share">
+                            <div>{!v.AccountObj.Intl_Non_MCA_QF_Market_Share_LY__c}%</div>
+                        </td>    
+                         <td data-label="TY Non-MCA QF Market Share" title="TY Non-MCA QF Market Share">
+                            <div>{!v.AccountObj.CP19_Intl_Non_MCA_QF_Market_Share_TY__c}%</div>
+                        </td> 
+                        <td data-label="LY Non-MCA QF Market Share" title="LY Non-MCA QF Market Share">
+                            <div></div>
+                        </td>   
+                     
+                    </tr>
+                </aura:if>
+                
+                <tr>
+                    <td data-label="MCA QF/EK Market Share" title="MCA QF/EK Market Share">
+                        <div>MCA QF/EK Market Share</div>
+                    </td>
+                    <td data-label="TY MCA QF/EK Market Share" title="TY MCA QF/EK Market Share">
+                        <div><aura:if  isTrue="{! v.AccountObj.International_QF_EK_MCA_Market_Share__c != null}" >
+                            {!v.AccountObj.International_QF_EK_MCA_Market_Share__c}%</aura:if></div>
+                    </td> 
+                    <td data-label="LY MCA QF/EK Market Share" title="LY MCA QF/EK Market Share">
+                        <div><aura:if  isTrue="{! v.AccountObj.International_QF_EK_MCA_Market_Share_LY__c != null}" >
+                            {!v.AccountObj.International_QF_EK_MCA_Market_Share_LY__c}% </aura:if></div>
+                    </td> 
+                    <td data-label="CP19-International MCA QF/EK Market Shar" title="CP19-International MCA QF/EK Market Shar">
+                        <div><aura:if  isTrue="{! v.AccountObj.CP19_International_MCA_QF_EK_Market_Shar__c!= null}" >
+                            {!v.AccountObj.CP19_International_MCA_QF_EK_Market_Shar__c}%</aura:if></div>
+                    </td> 
+                    <td data-label="LY MCA QF/EK Market Share" title="LY MCA QF/EK Market Share">
+                        <div></div>
+                    </td> 
+                </tr>
+                <tr>
+                    <td data-label="Tonnes Carbon" title="Tonnes Carbon">
+                        <div>Tonnes Carbon</div>
+                    </td>
+                    <td data-label="TY Tonnes Carbon" title="TY Tonnes Carbon">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Tonnes_Carbon__c}" />
+                        </div>
+                    </td> 
+                    <td data-label="LY Tonnes Carbon" title="LY Tonnes Carbon">
+                        <div>--</div>
+                    </td>  
+                    <td data-label="PRE-COVID Tonnes Carbon" title="PRE-COVID Tonnes Carbon">
+                        <div>
+                            <ui:outputCurrency aura:id="curr" value="{!v.AccountObj.Tonnes_Carbon__c}" />
+                        </div>
+                    </td> 
+                    <td data-label="Estimated Tonnes Carbon" title="Estimated Tonnes Carbon">
+                        <div>--</div>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td data-label="As At" title="Date when the revenue and share figures were last updated">
+                        <div>**As At</div>
+                    </td>
+                    <td data-label="TY As At" title="TY As At">
+                        <div>{!v.AccountObj.Latest_Period_Date__c}</div>
+                    </td> 
+                    <td data-label="LY As At" title="LY As At">
+                        <div> </div>
+                    </td>    
+                    <td data-label="PRE-COVID As At" title="PRE-COVID As At">
+                        <div> </div>
+                    </td>  
+                    <td data-label="LY As At" title="LY As At">
+                        <div> </div>
+                    </td>  
+                </tr>
+                
+            </tbody>
+        </table> 
+        <aura:if isTrue="{!v.showSaveResetBtn}">
+            <lightning:buttonGroup class="slds-m-around_medium slds-align_absolute-center slds-p-around_medium">
+                <lightning:button variant="brand" label="Save" title="Save Estimations" onclick="{!c.SaveRecord}" />
+                <lightning:button label="{!v.Buttonlable}" title="Reset Estimations" onclick="{!c.ResetEstimations}" />
+                <lightning:button label="Cancel" title="Reset Estimations" onclick="{!c.OnCancel}" />
+            </lightning:buttonGroup>
+            
+            <aura:set attribute="else">
+                <div class="slds-m-around_medium slds-align_absolute-center slds-p-around_medium">
+                    <lightning:button variant="brand" label="{!v.Buttonlable}" title="Reset Estimations" onclick="{!c.ResetEstimations}" />
+                </div>
+            </aura:set>
+        </aura:if>
+        
+        <aura:if  isTrue="{!(v.AccountObj.BillingCountry != 'AU')}" >
+            <div class="slds-p-bottom_medium" aura:id="NoteonQDM">
+                <b>Note on QDM Data:</b> The Data in the Key Metrics section is an aggregated representation of numbers applicable for this Point of Sale only. If you suspect the numbers are inaccurate it could be due to: 1)TMC not submitting the complete set of data (including all subsidiaries) before the PRISM cut-off 2)Data getting filtered out due to no DRA in the PRISM system. Please consult TMC to ensure accuracy of data.
+            </div>
+        </aura:if>
+        
+        <aura:if  isTrue="{!(v.AccountObj.BillingCountry == 'AU')}" >
+            <div class="slds-p-bottom_medium" aura:id="NoteonQDM">
+                <b>Note on QDM Data:</b> * Included both QF and EK marketed revenue on MCA routes .
+            </div>
+        </aura:if>
+    </div>
+    
+    <div>
+        <b>Note:</b> To update the 'Estimated' Revenue figures: (1) Double click on the cell. (2) Change the Revenue. (3) Click on 'Save' to Save the Estimations.
+    </div>
+</aura:component>

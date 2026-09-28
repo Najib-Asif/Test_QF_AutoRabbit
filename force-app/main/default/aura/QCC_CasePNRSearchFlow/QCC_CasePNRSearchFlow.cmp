@@ -1,0 +1,175 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global" controller="QCC_CasePNRSearchFlowController" >
+
+    <!-- Input Paramters-->
+    <aura:attribute name="pnr" type="String" />
+    <aura:attribute name="lastName" type="String" />
+
+    <aura:attribute name="contact" type="Contact" />
+    <aura:attribute name="caseDetails" type="Case" />
+    <aura:attribute name="inputCaseDetails" type="Case" />
+
+    <!-- Internal variables-->
+
+    <aura:attribute name="segmentID" type="String" />
+    <aura:attribute name="passengerID" type="String" />
+    <aura:attribute name="segmentTattoo" type="String" />
+    <aura:attribute name="passengerTattoo" type="String" />
+    <aura:attribute name="creationDate" type="String" />
+
+
+    <aura:attribute name="conDetails" type="String"/>
+    <aura:attribute name="onContact" type="Boolean" default="false" />
+
+    <aura:attribute name="history" type="Boolean" default="false"/>
+    <aura:attribute name="isHistory" type="Boolean" default="false"/>
+    <aura:attribute name="archivalData" type="Boolean" default="false"/>
+
+    <aura:attribute name="con" type="Contact"/>
+	<aura:attribute name="contactF" type="Object" />
+
+    <aura:attribute name="segment" type="Object" />
+    <aura:attribute name="flightInfo" type="Object[]"/>
+    <aura:attribute name="passenger" type="Object" />
+    <aura:attribute name="passengerInfo" type="Object[]" />
+    <aura:attribute name="selectedLeg" type="Object" />
+    <aura:attribute name="selectedSSR" type="Object[]" />
+    <aura:attribute name="completebooking" type="Object" />
+    <aura:attribute name="objPassenger" type="Object" />
+    <aura:attribute name="firstPassenger" type="Object"/>
+    <aura:attribute name="lstCurrentBook" type="Object[]" />
+
+    <aura:attribute name="showSearchButton" type="Boolean"  default="false"/>
+    <aura:attribute name="showFlightDetails" type="Boolean"  default="false"/>
+    <aura:attribute name="showPassengerDetails" type="Boolean"  default="false"/>
+    <aura:attribute name="showMsg" type="Boolean"  />
+    
+    <aura:handler name="init" value="{! this}" action="{! c.doInit}"/>        
+
+    <aura:handler name="flightEvent" event="c:QCC_PNRFlightEvent" action="{!c.flightBasedSelection}"/>
+    <aura:handler name="passengerEvent" event="c:QCC_PNRPassengerEvent" action="{!c.passengerBasedSelection}"/>
+
+    <aura:html tag="style">
+        .slds-modal__container{ 
+          max-height : 90%;  
+        } 
+    </aura:html>
+     
+
+    <div>
+        <div class="slds-border_top slds-border_left slds-border_bottom slds-border_right slds-p-left_x-small slds-p-right_x-small">
+            <div>
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem flexibility="auto" size="12" >
+                        <div class="slds-p-top_large slds-p-bottom_medium">      
+                            <span class="slds-text-heading_medium slds-p-bottom_medium">1. Find PNR Booking</span>
+                        </div>    
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="auto" size="5" >
+                        <div class="slds-p-top_small slds-p-bottom_small">      
+                            <lightning:input name="pnrInput" label="PNR" maxlength="10" value="{!v.pnr}" onchange="{!c.turnOffMsg}"/>
+                        </div>    
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="auto" size="5" >
+                        <div class="slds-p-top_small slds-p-bottom_small">
+                            <lightning:input name="lastName" label="Last Name" value="{!v.lastName}" onchange="{!c.turnOffMsg}"/>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="auto" size="2" >
+                        <div class="slds-p-top_small slds-m-top_x-large slds-m-left_x-large slds-p-bottom_small">
+                            <lightning:input type="checkbox" label="Search History" variant="standard" title="{! $Label.c.QCC_SearchHistoryHelpText}" checked="{!v.history}" onchange="{!c.turnOffMsg}"/>
+                        </div>
+                    </lightning:layoutItem> 
+                </lightning:layout>
+            </div> 
+            <div class="slds-p-bottom_small">
+                <aura:renderIf isTrue="{!and(v.showMsg, or(empty(v.lstCurrentBook),empty(v.pnr)  )  )}">
+                    <aura:renderIf isTrue="{!and(v.showMsg, empty(v.pnr))}">
+                            <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_CasePNREmptyPNRmsg}</div>
+                        <aura:set attribute="else">
+                            <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_CasePNRmsg}</div>
+                        </aura:set>
+                    </aura:renderIf>
+                    <aura:set attribute="else">
+                        <aura:renderIf isTrue="{!not(empty(v.lstCurrentBook))}">
+                            PNR Booking Records Found
+                            <table class="slds-table slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout">
+                                <!--Table must be responsive-->
+                                <thead>
+                                    <tr class="slds-text-title_caps slds-line-height_reset" style="height: 18px;">
+                                        <th scope="col" style="width:25%">
+                                            <div  class="slds-truncate" title="PNR">PNR</div>
+                                        </th>
+                                        <th scope="col" style="width:15%">
+                                            <div  class="slds-truncate" title="Departure Port">DEP</div>
+                                        </th>
+                                        <th scope="col" style="width:15%">
+                                            <div  class="slds-truncate" title="Arrival Port">ARR</div>
+                                        </th>
+                                        <th scope="col" style="width:45%">
+                                            <div  class="slds-truncate" title="Departure Date">Departure Date</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.lstCurrentBook}" var="item" indexVar="i">
+                                        <tr class="slds-hint-parent record onhover" data-record="{!i}">
+                                            <td data-label="PNR">
+                                                <div  class="slds-truncate" title="{!item.reloc}">{!item.reloc}</div>
+                                            </td>
+                                            <td data-label="Depature Port">
+                                                <div  class="slds-truncate" title="{!item.departurePort}">{!item.departurePort}</div>
+                                            </td>
+                                            <td data-label="Arrival Port">
+                                                <div  class="slds-truncate" title="{!item.arrivalPort}">{!item.arrivalPort}</div>
+                                            </td>
+                                            <td data-label="Depature Date">
+                                                <div  class="slds-truncate" title="{!item.departureTimeStamp}">{!item.departureTimeStamp}</div>
+                                            </td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </aura:renderIf>
+                    </aura:set>
+                </aura:renderIf>
+            </div>
+        </div>
+     
+        <div>
+            <aura:if isTrue="{! v.showFlightDetails}">
+                <div class="slds-p-top_large slds-p-bottom_medium">      
+                    <span class="slds-text-heading_medium slds-p-bottom_medium">2. Select Flight</span>
+                </div>    
+                <c:QCC_PNRFlightDetailsFlow aura:id="flightDetailComponent" pnr="{!v.pnr}" creationDate="{!v.creationDate}" archivalData="{!v.archivalData}" />
+           </aura:if >
+            <aura:if isTrue="{! v.showPassengerDetails}">
+                <div class="slds-p-top_large slds-p-bottom_medium">      
+                    <span class="slds-text-heading_medium slds-p-bottom_medium">3. Select Passenger</span>
+                </div>    
+                <c:QCC_PNRPassengerDetailsFlow aura:id="passengerDetailComponent" passengerInfo="{!v.passengerInfo}" />
+            </aura:if >
+        </div>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem flexibility="auto" size="12">
+                <div class="slds-p-top_large slds-p-bottom_small slds-float_right">  
+                    <aura:if isTrue="{! v.showPassengerDetails || v.showFlightDetails }">    
+                        <lightning:button variant="brand" label="Reset" title="PNR Reset" onclick="{!c.resetClick}" />
+                    </aura:if>
+                    <aura:if isTrue="{! v.showSearchButton }">    
+                        <lightning:button variant="brand" label="Search" title="PNR Search" onclick="{!c.searchButtonClick}" />
+                    </aura:if>                
+                    <aura:if isTrue="{! v.showPassengerDetails}">
+                        <lightning:button variant="brand" label="Add Details To Case" title="Update Case" onclick="{!c.updateCase}" />
+                    </aura:if >
+                </div>                
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" size="12">
+             </lightning:layoutItem>
+        </lightning:layout>
+
+        <div aura:id="LoadingSpinner" class="spinner slds-hide">
+            <lightning:spinner alternativeText="Loading" size="medium" />
+        </div>  
+    </div>
+  
+</aura:component>

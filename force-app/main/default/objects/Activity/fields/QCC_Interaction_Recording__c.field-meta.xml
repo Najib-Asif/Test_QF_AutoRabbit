@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Interaction_Recording__c</fullName>
+    <description>Agent Desktop - Field used for ADT-25</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK(CallObject) ,  $Label.QCC_Interaction_Recording_Error_Message , HYPERLINK( $Label.QCC_Interaction_Recording_Link  +  CallObject ,  $Label.QCC_Interaction_Recording_Success_Message ))</formula>
+    <label>Interaction Recording</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

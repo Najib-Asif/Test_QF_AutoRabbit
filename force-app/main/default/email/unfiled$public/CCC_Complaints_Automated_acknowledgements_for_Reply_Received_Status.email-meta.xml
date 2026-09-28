@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>CCC Complaints Automated acknowledgements for Reply Received Status</name>
+    <style>none</style>
+    <subject>Update from Qantas Customer Care - Reference {!Case.CaseNumber}</subject>
+    <textOnly>Hi {!Contact.FirstName},
+
+We’re here to help
+
+Thank you for your response. We’re currently reviewing the information you provided.
+
+Based on your circumstances, our team will work to find a resolution as quickly as possible and one of our consultants will get in touch.
+
+We appreciate your patience and understanding.
+
+Kind regards,
+
+Qantas Customer Care
+
+
+
+
+{!Case.Thread_Token} Qantas Airways Limited, ABN 16 009 661 901
+10 Bourke Road Mascot NSW 2020 Australia</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Count_of_Extension_Variation_Type__c</fullName>
+    <description>Counts the number of variation of type extension and extension + amendment</description>
+    <inlineHelpText>Number of variations that have extended this contract</inlineHelpText>
+    <label>Count of Extension Variation [System]</label>
+    <summaryFilterItems>
+        <field>Variation__c.Contract_Variation_Reason__c</field>
+        <operation>equals</operation>
+        <value>Extension, Amendment + Extension</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Variation__c.Contract_Agreement__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

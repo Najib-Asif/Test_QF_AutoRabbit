@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Freight Email to Case to send Acknowledgement</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Freight Email to Case Acknowledgement</name>
+    <style>none</style>
+    <subject>Re: {!Case.CaseNumber} - {!Case.Subject}         {!Case.Thread_Id}</subject>
+    <textOnly>Hi,
+
+We’ve received your enquiry and will respond to you as soon as we can.
+
+Your reference number is {!Case.CaseNumber}.
+
+We will be in touch if there are any updates.
+
+Thank you
+
+Freight Customer Service Team
+Qantas Airways Limited
+
+P. 13 12 13
+E. freightcustomerservice@qantas.com.au
+
+H. Monday - Friday: 7am to 8pm AEST
+Saturday - Sunday: 8am to 4pm AEST
+
+qantas.com | facebook.com/qantas | twitter @qantas | youtube.com/qantas</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

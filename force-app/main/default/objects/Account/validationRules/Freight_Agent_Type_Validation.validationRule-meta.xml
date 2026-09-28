@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Agent_Type_Validation</fullName>
+    <active>true</active>
+    <description>Freight - If “IATA Agent” is selected as the Agent Type then mandatory to enter IATA#</description>
+    <errorConditionFormula>AND( (  $RecordType.DeveloperName = &quot;Freight_Account&quot; ),  ISPICKVAL(Type, &quot;Freight-Branch&quot;), 
+ISPICKVAL(  Freight_Agent_Type__c  , &quot;IATA Agent&quot;), (ISBLANK(  IATA_Number__c  )))</errorConditionFormula>
+    <errorDisplayField>IATA_Number__c</errorDisplayField>
+    <errorMessage>Please enter an IATA#</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Cases_in_queue_without_a_port</fullName>
+    <active>true</active>
+    <description>Freight business unit does not want cases to be pushed to the queue without the port information. as each team looks after there port when picking up cases from the queue and often these ones are often missed.</description>
+    <errorConditionFormula>AND (BEGINS(OwnerName__c , &apos;Freight CSU&apos;), 
+ISBLANK(Freight_Port__c ), 
+ISBLANK(Freight_Port_State_Code__c ),
+FCR__c=FALSE, 
+CreatedBy.Profile.Name &lt;&gt; &quot;Data Administrator&quot;)</errorConditionFormula>
+    <errorMessage>When assigning Cases to a Freight CSS Queue please make sure the applicable Port is filled in.</errorMessage>
+</ValidationRule>

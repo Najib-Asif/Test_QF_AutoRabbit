@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>INT_MCA_Market_Share_Trend__c</fullName>
+    <externalId>false</externalId>
+    <formula>if 
+( 
+Incremental_INT_MCA_Market_Share__c&gt; 0.05, IMAGE(&quot;/resource/Increment_up&quot;, &quot;Up&quot;) , 
+if 
+( 
+Incremental_INT_MCA_Market_Share__c&lt; -0.05, IMAGE(&quot;/resource/Increment_Down&quot;, &quot;Down&quot;) , 
+if 
+( 
+true,IMAGE(&quot;/resource/Increment_Nochange&quot;, &quot;No Change&quot;)  ,&quot;UNK&quot; 
+) 
+) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Projected Intl MCA Market Share Outcome</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

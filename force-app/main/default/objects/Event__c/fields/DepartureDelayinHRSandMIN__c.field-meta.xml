@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DepartureDelayinHRSandMIN__c</fullName>
+    <description>QCC: Departure Delay in Hrs and MIN</description>
+    <externalId>false</externalId>
+    <formula>IF (TechDepartureDelayDuration__c &gt; 0, 
+TEXT( FLOOR( 24 * TechDepartureDelayDuration__c)) &amp; &quot; Hrs &quot; &amp; 
+TEXT( ROUND(60 * (ROUND( 24 * (TechDepartureDelayDuration__c - FLOOR(TechDepartureDelayDuration__c) ),8) - FLOOR( 
+ROUND( 24 * (TechDepartureDelayDuration__c - FLOOR(TechDepartureDelayDuration__c) ),8)) ),0)) &amp; &quot; Mins &quot; 
+, &quot;No Departure Delay&quot;)</formula>
+    <label>Departure Delay Length</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Case</entityName>
+    <fieldName>Article_Journey__c</fieldName>
+    <masterLabel>Knowledge Requests</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Article__c</fieldNames>
+        <fieldNames>Status</fieldNames>
+        <fieldNames>Type</fieldNames>
+        <info>&lt;p&gt;&lt;strong&gt;&lt;u&gt;Checklist: &lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Ownership of the case: With Content Author&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Based on the type value: Go to knowledge and either clone the article or amend an existing article to draft state before linking the article to this case. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Perform the rest of the updates on Knowledge article using the Article Steps below. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>Article Curation</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Due_Date__c</fieldNames>
+        <fieldNames>Priority</fieldNames>
+        <fieldNames>Type</fieldNames>
+        <fieldNames>Status</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Please use the Change owner button to assign the case to your team member &amp;amp; follow the following matrix to firm up the priority/deadline of the case. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;﻿&lt;/span&gt;&lt;img src=&quot;https://qantas--pist.sandbox.file.force.com/servlet/rtaImage?eid=1CF2v000000AIAl&amp;amp;feoid=Info&amp;amp;refid=0EM2v000003y6W6&quot;&gt;&lt;/img&gt;&lt;/p&gt;&lt;p&gt;mark this step complete when you have set the priority/due date and assigned the case to content author.&lt;/p&gt;</info>
+        <picklistValueName>Prioritise &amp; Assign</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Status</fieldNames>
+        <fieldNames>Number_of_Articles_Delivered__c</fieldNames>
+        <fieldNames>Comments__c</fieldNames>
+        <info>&lt;p&gt;Use the Email to communicate to the stakeholder and update the fields on your left to mark this case closed. Once done mark this step complete.&lt;/p&gt;</info>
+        <picklistValueName>Publish &amp; Communicate</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Status</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Click on the Article link to update the Date Category / Any Attachments / Promoted Search terms etc to the Article as your first step towards QA of the article. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt; Start the QA process by populating the details as per Step 3 below and continue the offline review and approval until validation status reached the last status of validated, which marks the completion of this journey step. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt; You also need to mark the milestone as complete which will stop the SLA clock. &lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>QA &amp; Approval</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Subject</fieldNames>
+        <fieldNames>Description</fieldNames>
+        <fieldNames>ContactId</fieldNames>
+        <fieldNames>SuppliedName</fieldNames>
+        <fieldNames>SuppliedEmail</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13.3333px;&quot;&gt;Evaluate the request based on the subject and Description.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Request</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Knowledge_Request</recordTypeName>
+</PathAssistant>

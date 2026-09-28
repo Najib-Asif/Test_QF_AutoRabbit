@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Duplicate_Check__c</fullName>
+    <description>Calculates formula for evaluate duplicate check</description>
+    <externalId>false</externalId>
+    <formula>TEXT(Deal_Type__c) +&apos;_&apos;+ TEXT(Location__c) +&apos;_&apos;+ TEXT(Sequence_Number__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Duplicate Check</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

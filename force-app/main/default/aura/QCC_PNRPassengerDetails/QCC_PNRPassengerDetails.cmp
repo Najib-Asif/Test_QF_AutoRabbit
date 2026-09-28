@@ -1,0 +1,62 @@
+<aura:component >
+    <aura:attribute name="passengerInfo" type="Object[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:method name="passengerMethod" action="{!c.getPassengerDetails}"> 
+        <aura:attribute name="passengerDetail" type="Object[]"/> 
+    </aura:method>
+    <aura:registerEvent name="passengerEvent" type="c:QCC_PNRPassengerEvent"/>
+    
+    <lightning:card title="Passengers" iconName="standard:customers">
+        <aura:set attribute="title">
+            <div class="slds-media__body">
+                <h2>
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                        <span class="slds-text-heading_small">Passengers</span>
+                    </a>
+                </h2>
+            </div>
+        </aura:set>
+        
+        <aura:set attribute="footer">
+        </aura:set>
+        
+        <aura:renderIf isTrue="{!empty(v.passengerInfo)}">
+            <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg}</div>
+            <aura:set attribute="else">
+                <!--<lightning:datatable hideCheckboxColumn="true" data="{!v.passengerInfo}" columns="{!v.mycolumns}" 
+                                     keyField="passengerId" />-->
+                <table class="slds-table slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout slds-has-focus">
+                    <!--Table must be responsive-->
+                    <thead>
+                        <tr class="slds-text-title_caps slds-line-height_reset">
+                            <th scope="col">
+                                <div  class="slds-truncate" title="First Name">First Name</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="Last Name">Last Name</div>
+                            </th>
+                            <th scope="col">
+                                <div  class="slds-truncate" title="FF Number">FF Number</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.passengerInfo}" var="item" indexVar="i">
+                            <tr class="{! i == 0 ? 'slds-hint-parent record onhover onSelection' : 'slds-hint-parent record onhover'}" id ="{!item.passengerId}" data-record="{!item.passengerId}" onclick="{!c.getSelectedName}">
+                                <td data-label="First Name">
+                                    <div  class="slds-truncate">{!item.firstName}</div>
+                                </td>
+                                <td data-label="Last Name">
+                                    <div  class="slds-truncate">{!item.lastName}</div>
+                                </td>
+                                <td data-label="FF Number">
+                                    <div  class="slds-truncate">{!item.qantasFFNo}</div>
+                                </td>
+                             </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </aura:set>
+        </aura:renderIf>
+    </lightning:card>
+</aura:component>

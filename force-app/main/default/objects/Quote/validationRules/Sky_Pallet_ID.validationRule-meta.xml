@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sky_Pallet_ID</fullName>
+    <active>true</active>
+    <description>to ensure users are using both systems</description>
+    <errorConditionFormula>ISBLANK( Sky_Pallet_ID__c )  &amp;&amp; ( ISPICKVAL( Status , &quot;Accepted&quot;) || ISPICKVAL( Status , &quot;Presented&quot;) )  &amp;&amp; Freight_Category__c  = &quot;Freighter - Spot Rates&quot; &amp;&amp; (ISPICKVAL( Approval_Required__c, &quot;Approval Level - 4&quot;) || ISPICKVAL( Approval_Required__c, &quot;Approval Level - 1&quot;))</errorConditionFormula>
+    <errorMessage>Please enter the sky pallet id.</errorMessage>
+</ValidationRule>

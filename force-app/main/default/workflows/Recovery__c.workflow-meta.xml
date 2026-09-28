@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>QCC_Update_Approval_Status_Rejected</fullName>
+        <description>QCC: Update Approval Status to &apos;Rejected&apos;  on Recovery</description>
+        <field>Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>QCC Update Approval Status Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Update_Approved_By_on_Recovery</fullName>
+        <description>QCC: Update &apos;Approved Status&apos; on Recovery</description>
+        <field>Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>QCC: Update Approved Status on Recovery</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reset_Retrigger_Approval_Flag</fullName>
+        <field>Retrigger_Approval__c</field>
+        <literalValue>0</literalValue>
+        <name>Reset Retrigger Approval Flag</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Retrigger_Approval_Flag</fullName>
+        <field>Retrigger_Approval__c</field>
+        <literalValue>1</literalValue>
+        <name>Set Retrigger Approval Flag</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approved_By_on_Recovery</fullName>
+        <description>Qcc: Update Approved By on Recovery</description>
+        <field>ApprovedBy__c</field>
+        <formula>$User.FirstName &amp; &quot; &quot; &amp; $User.LastName</formula>
+        <name>Update Approved By on Recovery</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_OM_Approved</fullName>
+        <description>QCC: Update OM Approved</description>
+        <field>OM_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Update OM Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_OM_Approved_Recall</fullName>
+        <description>QCC: Update OM Approved</description>
+        <field>OM_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Update OM Approved Recall</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_OM_Rejected</fullName>
+        <description>QCC: Update OM Rejected</description>
+        <field>OM_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Update OM Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Process_Status_ActionReq</fullName>
+        <field>Process_Status__c</field>
+        <literalValue>Action Required</literalValue>
+        <name>Update Process Status ActionReq</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Process_Status_Approved</fullName>
+        <field>Process_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Update Process Status Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Process_Status_to_Finalised</fullName>
+        <field>Process_Status__c</field>
+        <literalValue>Finalised</literalValue>
+        <name>Update Process Status to Finalised</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Process_Status_to_New</fullName>
+        <field>Process_Status__c</field>
+        <literalValue>New</literalValue>
+        <name>Update Process Status to New</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Recovery_Status_to_Open</fullName>
+        <description>QCC: Update Recovery Status to Open on Approval Recall</description>
+        <field>Status__c</field>
+        <literalValue>Open</literalValue>
+        <name>Update Recovery Status to Open</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_RecvyStatus_to_Finalised</fullName>
+        <field>Status__c</field>
+        <literalValue>Finalised</literalValue>
+        <name>Update RecvyStatus to Finalised</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_RecvyStatus_to_FurtherActReq</fullName>
+        <field>Status__c</field>
+        <literalValue>Further Action Required</literalValue>
+        <name>Update RecvyStatus to FurtherActReq</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_RecvyStatus_to_New</fullName>
+        <field>Status__c</field>
+        <literalValue>New</literalValue>
+        <name>Update RecvyStatus to New</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Recvy_Status_to_Approved_CvrRef</fullName>
+        <field>Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Update Recvy Status to Approved_CvrRef</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_Awaiting_Approval</fullName>
+        <description>Update Status to Awaiting Approval</description>
+        <field>Status__c</field>
+        <literalValue>Awaiting Approval</literalValue>
+        <name>Update Status to Awaiting Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_New</fullName>
+        <field>Status__c</field>
+        <literalValue>New</literalValue>
+        <name>Update Status to New</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_TL_Approved</fullName>
+        <description>QCC:Update TL Approved</description>
+        <field>TL_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Update TL Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_TL_Approved_Recall</fullName>
+        <description>QCC: Update TL Approved</description>
+        <field>TL_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Update TL Approved Recall</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_TL_Rejected</fullName>
+        <description>QCC: Update TL Rejected</description>
+        <field>TL_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Update TL Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_previous_approvers_ID</fullName>
+        <description>QCC: Update prev approvers ID</description>
+        <field>Previous_Approvers_ID__c</field>
+        <formula>LastModifiedBy.Id</formula>
+        <name>Update previous approvers ID</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcoun1</fullName>
+        <field>approvalCount__c</field>
+        <formula>1</formula>
+        <name>approvalcoun1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcoun2</fullName>
+        <field>approvalCount__c</field>
+        <formula>2</formula>
+        <name>approvalcoun2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcount0</fullName>
+        <field>approvalCount__c</field>
+        <formula>0</formula>
+        <name>approvalcount0</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcount3</fullName>
+        <field>approvalCount__c</field>
+        <formula>3</formula>
+        <name>approvalcount3</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcount4</fullName>
+        <field>approvalCount__c</field>
+        <formula>4</formula>
+        <name>approvalcount4</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcount5</fullName>
+        <field>approvalCount__c</field>
+        <formula>5</formula>
+        <name>approvalcount5</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcount6</fullName>
+        <field>approvalCount__c</field>
+        <formula>6</formula>
+        <name>approvalcount6</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcount7</fullName>
+        <field>approvalCount__c</field>
+        <formula>7</formula>
+        <name>approvalcount7</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approvalcount8</fullName>
+        <field>approvalCount__c</field>
+        <formula>8</formula>
+        <name>approvalcount8</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

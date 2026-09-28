@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Enable_access_to_edit_Accnt_Reln_to_DealSupport</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>To enable access to the deal support team.
+Refer Jira: CRM-2794</description>
+        <label>Enable access to edit Accnt Reln to DealSupport</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_Deal_Support</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Enable_access_to_edit_Accnt_Reln_to_DealSupport_QISS</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Enable access to edit account relationships to all Deal Support &amp; QIS team</description>
+        <label>Enable access to edit Accnt Reln to DealSupport &amp; QIS</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Mindpearl_Account_Relationships_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Mindpearl Account Relationships Sharing Rule</label>
+        <sharedTo>
+            <group>Mindpearl_Agency_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Relationship__c</field>
+            <operation>equals</operation>
+            <value>Ticketed by</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Account_Relationships_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Account Relationships Sharing Rule</label>
+        <sharedTo>
+            <group>Sales_Support_Team_QIC</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Relationship__c</field>
+            <operation>equals</operation>
+            <value>Ticketed by</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_NA_Account_Relationships_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC NA Account Relationships Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_NA_Support_Team_for_US_and_Canada</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Relationship__c</field>
+            <operation>equals</operation>
+            <value>Ticketed by</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_UK_Account_Relationships_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC UK Account Relationships Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_UK_Support_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Relationship__c</field>
+            <operation>equals</operation>
+            <value>Ticketed by</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QC_TA_Sharing_to_DDP_Support</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QC TA Sharing to DDP Support</label>
+        <sharedTo>
+            <group>QDP_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Relationship__c</field>
+            <operation>equals</operation>
+            <value>Ticketed by</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QC_TA_Sharing_to_QDP_Support</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QC TA Sharing to QDP Support</label>
+        <sharedTo>
+            <role>QF_Support_Sales_and_Distribution_QDP_Support</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Relationship__c</field>
+            <operation>equals</operation>
+            <value>Ticketed by</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_QF_INT_Sales_North_America_USA_Central</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Access to QF-INT-Sales-North America-USA-Central</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_INT_Sales_North_America_USA_Central</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_INT_Sales_North_America_USA_Central</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Access_to_QF_Support_QIC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Access to QF-Support-QIC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

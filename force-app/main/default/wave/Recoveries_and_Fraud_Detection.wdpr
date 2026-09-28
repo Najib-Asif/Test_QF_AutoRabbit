@@ -1,0 +1,1388 @@
+{
+  "version" : "65.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LastModifiedDate", "LastModifiedById", "Last_Name__c", "Id", "CaseNumber", "ContactId", "ParentId", "Type", "RecordTypeId", "Status", "Origin", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "OwnerId", "CreatedDate", "CreatedById", "ContactPhone", "ContactEmail", "Frequent_Flyer_Number__c", "Contact_Fullname__c", "Power_of_One_Case__c", "Sub_Type_1__c", "Sub_Type_2__c", "Arrival_Airport_Code__c", "Arrival_Airport__c", "Booking_PNR__c", "Category__c", "ClosedByLocation__c", "Contact_Phone__c", "Departure_Airport_Code__c", "Departure_Airport__c", "Departure_Date_Time__c", "Flight_Number__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Owner_City__c", "Received_Date__c", "Received_On__c", "Recovery_Quantity__c", "Recovery_Value__c", "Sector__c", "Sub_Category__c", "QCC_Departure_Date__c", "Updated_Departure_Date_Time__c", "Case_Status__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "JOIN5" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ {
+            "argument" : -365,
+            "type" : "N_DAYS"
+          }, {
+            "argument" : 0,
+            "type" : "N_DAYS"
+          } ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Case_Record_Type_Name.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Complaints", "CCC On The Spot Recovery", "CCC Query", "CCC Baggage" ]
+        } ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Recovery_Reason__c", "Id", "OwnerId", "Name", "CurrencyIsoCode", "RecordTypeId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "Contact__c", "Amount__c", "ApprovedBy__c", "Approved_By__c", "Bank_Account_Number__c", "Bank_Name__c", "Case_Number__c", "Equivalent_AUD_Refund_Amount__c", "Monetary_Value__c", "Original_Currency__c", "Payment_Status__c", "Status__c", "Type__c", "Value__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Recovery__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Recovery__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ {
+            "argument" : -365,
+            "type" : "N_DAYS"
+          }, {
+            "argument" : 0,
+            "type" : "N_DAYS"
+          } ]
+        } ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "JOIN3", "JOIN4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "LastModifiedById", "RecordTypeId", "OwnerId", "CreatedById", "Case_Record_Type_Name.Id", "ContactToCase.Id", "CaseOwner.Id", "CaseOwner.UserRoleId", "CaseOwner.ManagerId", "CaseOwner.UserRole.Id", "CaseOwner.UserRole.ParentRoleId", "CaseOwner.UserRole.LastModifiedById", "CasesAndRecoveries.OwnerId", "CasesAndRecoveries.RecordTypeId", "CasesAndRecoveries.CreatedById", "CasesAndRecoveries.LastModifiedById", "CasesAndRecoveries.RecoveryOwner.Id", "CasesAndRecoveries.RecoveryOwner.UserRoleId", "CasesAndRecoveries.RecoveryOwner.ManagerId", "CasesAndRecoveries.RecoveryOwner.UserRole.Id", "CasesAndRecoveries.RecoveryOwner.UserRole.ParentRoleId", "CasesAndRecoveries.RecoveryOwner.UserRole.LastModifiedById" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "CasesAndRecoveries",
+        "rightKeys" : [ "Case_Number__c" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FILTER9" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Complaint Cases w/wo Recoveries",
+          "name" : "Complaint_Cases_w_wo_Recoveries",
+          "folderName" : "Complaints_Resolution"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Case_Issue",
+          "label" : "Case Issue",
+          "formulaExpression" : "concat(Group__c, ' - ', Category__c, ' - ', Sub_Category__c)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CasesAndRecoveries.RecoveryOwner.Name",
+          "newProperties" : {
+            "label" : "Recovery Owner",
+            "name" : "CasesAndRecoveries.RecoveryOwner.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CaseOwner.Name",
+          "newProperties" : {
+            "label" : "Case Owner",
+            "name" : "CaseOwner.Name"
+          }
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "Open_Date",
+          "label" : "Open Date",
+          "formulaExpression" : "CreatedDate - INTERVAL 0 DAY",
+          "format" : "yyyy-M-d",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CasesAndRecoveries.RecoveryOwner.FormulaName",
+          "label" : "Recovery Owner Name",
+          "formulaExpression" : "if(\"CasesAndRecoveries.RecoveryOwner.Name\" = 'QCC API Integration user', 'RedApp Integration', \"CasesAndRecoveries.RecoveryOwner.Name\")",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "LastName", "FirstName", "Name", "Phone", "Email", "CreatedDate", "Frequent_Flyer_Number__c", "Membership_Current_Tier_f__c", "Frequent_Flyer_Tier__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Contact",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Contact"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "ContactId" ],
+        "rightQualifier" : "ContactToCase",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "ParentRoleId", "LastModifiedDate", "LastModifiedById" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Username", "LastName", "FirstName", "Name", "Email", "Phone", "MobilePhone", "UserRoleId", "LanguageLocaleKey", "EmployeeNumber", "ManagerId" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET4", "BUCKET0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "UserRole",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "OwnerId" ],
+        "rightQualifier" : "CaseOwner",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "JOIN2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "OwnerId" ],
+        "rightQualifier" : "RecoveryOwner",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucketV2",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "buckets" : [ {
+          "value" : "Sydney",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-SYD-TL", "QF-QDC-OM-SYD-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Manila",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-MNL-TL", "QF-QDC-OM-MNL-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Suva",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-SUV-TL", "QF-QDC-OM-SUV-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Cape Town",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-CPT-TL", "QF-QDC-OM-CPT-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Auckland",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-AKL-TL", "QF-QDC-OM-AKL-TL-USR" ]
+          } ]
+        }, {
+          "value" : "Hobart",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-HBA-TL", "QF-QDC-OM-HBA-TL-USR" ]
+          } ]
+        }, {
+          "value" : "SN",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-SN-TL", "QF-QDC-OM-SN-TL-USR" ]
+          } ]
+        }, {
+          "value" : "VIP",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC-OM-VIP-TL", "QF-QDC-OM-VIP-TL-USR" ]
+          } ]
+        } ],
+        "nullBucket" : "Other",
+        "defaultBucket" : "Other",
+        "passthroughEnabled" : false,
+        "sourceField" : "Name",
+        "targetField" : {
+          "name" : "Call_Center_Bucket",
+          "label" : "Call Center"
+        }
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "RecordType",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "RecordType"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "RecordTypeId" ],
+        "rightQualifier" : "Case_Record_Type_Name",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Bank_Name_Acct_Number",
+          "label" : "Bank Name and Acct Number",
+          "formulaExpression" : "concat(Bank_Name__c, ' - ', Bank_Account_Number__c)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "SPLIT0" : {
+      "action" : "split",
+      "sources" : [ "FORMULA2" ],
+      "schema" : {
+        "fields" : [ {
+          "name" : "Description_split",
+          "newProperties" : {
+            "typeProperties" : {
+              "type" : "TEXT",
+              "length" : 32000
+            }
+          }
+        } ]
+      },
+      "parameters" : {
+        "sourceField" : "Description",
+        "delimiter" : "CREW MEMBER : ",
+        "targetFields" : [ {
+          "name" : "Description_split",
+          "label" : "Description Split"
+        }, {
+          "name" : "Crew_Member",
+          "label" : "Crew Member"
+        } ]
+      }
+    },
+    "FILTER2" : {
+      "action" : "filter",
+      "sources" : [ "JOIN5" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Case_Record_Type_Name.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Voice" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Booking_PNR__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Contact_Fullname__c",
+          "operator" : "NOT",
+          "operands" : [ "Null27", "Null28", "Null29", "Null30", "Null31", "Null32", "Null33", "Null34", "Null35", "Null36", "Null37", "Null38", "Null39", "Null40", "Null41", "Null42", "Null43", "Null44", "Null45", "Null46", "Null47", "Null48", "Null49", "Null50", "Null51", "Null52", "Null53", "Null54", "Null55", "Null56", "Null57", "Null58", "Null59", "Null60", "Null61", "Null62", "Null63", "Null64", "Null65", "Null66", "Null67", "Null68", "Null69", "Null70", "Null71", "Null72" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "ContactId",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ "1688169600000", "1719705600000" ]
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "formula",
+      "sources" : [ "UPPERCASE1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Same_PNR_Caller",
+          "label" : "Same PNR and Caller",
+          "formulaExpression" : "concat(PNR_Upper_Case, ' + ', Contact_Name_Upper_Case)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "PNR_ContactID",
+          "label" : "PNR + Contact ID",
+          "formulaExpression" : "concat(PNR_Upper_Case, ' + ', ContactId)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "FORMULA7" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Same PNR and Caller",
+          "name" : "Same_PNR_and_Caller"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "UPPERCASE0" : {
+      "action" : "formula",
+      "sources" : [ "FILTER2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Contact_Name_Upper_Case",
+          "label" : "Contact Name Upper Case",
+          "formulaExpression" : "upper(Contact_Fullname__c)",
+          "precision" : 1000
+        } ]
+      }
+    },
+    "UPPERCASE1" : {
+      "action" : "formula",
+      "sources" : [ "UPPERCASE0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "PNR_Upper_Case",
+          "label" : "PNR Upper Case",
+          "formulaExpression" : "upper(Booking_PNR__c)",
+          "precision" : 255
+        } ]
+      }
+    },
+    "FORMULA6" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "partitionBy" : [ "PNR_ContactID" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Repeated_Cases",
+          "label" : "Repeated Cases",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "FORMULA6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "NUMBER",
+          "field" : "Repeated_Cases",
+          "operator" : "EQUAL",
+          "operands" : [ "2" ]
+        } ]
+      }
+    },
+    "JOIN6" : {
+      "action" : "join",
+      "sources" : [ "FORMULA6", "FILTER3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "PNR_ContactID" ],
+        "rightQualifier" : "Join_Repeated",
+        "rightKeys" : [ "PNR_ContactID" ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "CommentBody", "CreatedDate" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseComment",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseComment"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN7" : {
+      "action" : "join",
+      "sources" : [ "JOIN8", "FILTER5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "MULTI_VALUE_LOOKUP",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "CaseCommen",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "QCC_Post_Call_Survey_Sent__c", "Id", "WhoId", "WhatId", "Subject", "Status", "Description", "CreatedDate", "CallDurationInSeconds", "CallType", "CompletedDateTime", "QCC_Classification__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Task",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Task"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN8" : {
+      "action" : "join",
+      "sources" : [ "JOIN6", "FILTER4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Task",
+        "rightKeys" : [ "WhatId" ]
+      }
+    },
+    "FILTER4" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET7" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "CallType",
+          "operator" : "EQUAL",
+          "operands" : [ "Inbound", "Outbound" ]
+        }, {
+          "type" : "NUMBER",
+          "field" : "CallDurationInSeconds",
+          "operator" : "GREATER_THAN",
+          "operands" : [ "10" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CompletedDateTime",
+          "operator" : "IN_RANGE",
+          "operands" : [ "1688169600000", "1719705600000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Status",
+          "operator" : "EQUAL",
+          "operands" : [ "Completed" ]
+        } ]
+      }
+    },
+    "FILTER5" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ "1688169600000", "1719705600000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "CommentBody",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "FORMULA7" : {
+      "action" : "computeRelative",
+      "sources" : [ "JOIN7" ],
+      "parameters" : {
+        "partitionBy" : [ "Id" ],
+        "orderBy" : [ {
+          "fieldName" : "Task.CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Repeated_Calls",
+          "label" : "Repeated Calls",
+          "formulaExpression" : "row_number()",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "JOIN9" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Recoveries Post Automation with History",
+          "name" : "Recoveries_Post_Automation_with_History",
+          "folderName" : "Complaints_Resolution"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET8" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "ParentId", "CreatedById", "CreatedDate", "Field", "DataType", "OldValue", "NewValue" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Recovery__History",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Recovery__History"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN9" : {
+      "action" : "join",
+      "sources" : [ "FILTER7", "FILTER8" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "RecHistory",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "FILTER6" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET8" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1730160000000" ]
+        } ]
+      }
+    },
+    "FILTER7" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET1" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1730160000000" ]
+        } ]
+      }
+    },
+    "FILTER8" : {
+      "action" : "filter",
+      "sources" : [ "FILTER6" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "NewValue",
+          "operator" : "EQUAL",
+          "operands" : [ "Exception" ]
+        } ]
+      }
+    },
+    "FILTER9" : {
+      "action" : "filter",
+      "sources" : [ "SPLIT0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Contact_Fullname__c",
+          "operator" : "NOT",
+          "operands" : [ "Null", "Null Null", "Null Null80", "Null50", "Null51", "Null52", "Null53", "Null54", "Null55", "Null56", "Null57", "Null58", "Null59", "Null60", "Null61", "Null62", "Null63", "Null64", "Null65", "Null66", "Null67", "Null68", "Null69", "Null70", "Null71", "Null72", "Null73", "Null74", "Null75", "Null76", "Null77", "Null78", "Null79", "Null80", "Null81", "Null82", "Null83", "Nulll", "Null49", "Null48", "Null47", "Null46", "Null45", "Null44", "Null43", "Null42", "Null41", "Null40", "Null39", "Null38", "Null37", "Null36", "Null35", "Null34", "Null33", "Null32", "Null31", "Null30", "Null29", "Null28", "Null27", "Null26", "Null25", "Null24", "Null23", "Null22", "Null21", "Null20", "Null19", "Null18", "Null17", "Null16", "Null15", "Null14", "Null13", "Null12", "Null11", "Null10" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "ContactToCase.Name",
+          "operator" : "NOT",
+          "operands" : [ "Null", "Null Null", "Null Null80", "Null10", "Null11", "Null12", "Null13", "Null14", "Null15", "Null16", "Null17", "Null18", "Null19", "Null20", "Null21", "Null22", "Null23", "Null24", "Null25", "Null26", "Null27", "Null28", "Null29", "Null30", "Null31", "Null32", "Null33", "Null34", "Null35", "Null36", "Null37", "Null38", "Null39", "Null40", "Null41", "Null42", "Null43", "Null44", "Null45", "Null46", "Null47", "Null48", "Null49", "Null50", "Null51", "Null52", "Null53", "Null54", "Null55", "Null56", "Null57", "Null58", "Null59", "Null60", "Null61", "Null62", "Null63", "Null64", "Null65", "Null66", "Null67", "Null68", "Null69", "Null70", "Null71", "Null72", "Null73", "Null74", "Null75", "Null76", "Null77", "Null78", "Null79", "Null80", "Null81", "Null82", "Null83", "Null84", "Null85", "Null86" ]
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 532.1,
+        "left" : 112.30000000000001,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Complaint and On the Spot Recovery in last 365 days",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532.1,
+        "left" : 392.3
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Recovery__c",
+        "type" : "LOAD_DATASET",
+        "top" : 672.1,
+        "left" : 112.30000000000001,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER1" : {
+        "label" : "Recoveries in last 365 days",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 672.1,
+        "left" : 392.3
+      },
+      "JOIN0" : {
+        "label" : "Cases with/without Recoveries",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.1,
+        "left" : 1232.3
+      },
+      "OUTPUT0" : {
+        "label" : "Complaint Cases w/wo Recoveries",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532,
+        "left" : 1792
+      },
+      "TRANSFORM0" : {
+        "label" : "Grouping Issues",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532.1,
+        "left" : 1372.3,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Grouping Issues"
+          },
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Recovery Owner"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Case Owner"
+          },
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "DATE_ADD_SUBTRACT_UI"
+            },
+            "label" : "Substract Date"
+          },
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Rename Integration to Red App"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "EDIT_ATTRIBUTES0"
+        }, {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "EDIT_ATTRIBUTES1"
+        }, {
+          "source" : "FORMULA3",
+          "target" : "FORMULA2"
+        }, {
+          "source" : "EDIT_ATTRIBUTES1",
+          "target" : "FORMULA3"
+        } ]
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Contact",
+        "type" : "LOAD_DATASET",
+        "top" : 392.1,
+        "left" : 532,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Contact to Case",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.1,
+        "left" : 532.3
+      },
+      "LOAD_DATASET3" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 1092,
+        "left" : 112.1,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 1232,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "User Role",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 1372,
+        "left" : 252
+      },
+      "JOIN3" : {
+        "label" : "Case Owner",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.1,
+        "left" : 672.3
+      },
+      "JOIN4" : {
+        "label" : "Recovery Owner",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 672.1,
+        "left" : 532.3
+      },
+      "TRANSFORM1" : {
+        "label" : "Call Centers",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 1232,
+        "left" : 252,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET5" : {
+        "label" : "RecordType",
+        "type" : "LOAD_DATASET",
+        "top" : 112.1,
+        "left" : 112.30000000000001,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN5" : {
+        "label" : "Case Record Type Name",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.1,
+        "left" : 252.3
+      },
+      "TRANSFORM3" : {
+        "label" : "Bank Name and Acct Number",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 672.1,
+        "left" : 252.3,
+        "graph" : {
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Bank Name and Acct Number"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "TRANSFORM4" : {
+        "label" : "Get Crew Member",
+        "description" : "For 'On the Spot Recovery' cases.",
+        "type" : "TRANSFORM",
+        "top" : 532.1,
+        "left" : 1512.3,
+        "graph" : {
+          "SPLIT0" : {
+            "label" : "Get Crew Member"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER2" : {
+        "label" : "Voice Cases",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112.1,
+        "left" : 392
+      },
+      "TRANSFORM5" : {
+        "label" : "Calling about Same Case",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 672,
+        "graph" : {
+          "FORMULA4" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Same PNR and Caller"
+          },
+          "FORMULA5" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "PNR + Contact ID"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA4",
+          "target" : "FORMULA5"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Same PNR and Caller",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 1512
+      },
+      "TRANSFORM7" : {
+        "label" : "Upper Case",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 532,
+        "graph" : {
+          "UPPERCASE0" : {
+            "parameters" : {
+              "type" : "UPPER_UI"
+            },
+            "label" : "Contact Name Upper Case"
+          },
+          "UPPERCASE1" : {
+            "parameters" : {
+              "type" : "UPPER_UI"
+            },
+            "label" : "PNR Upper Case"
+          }
+        },
+        "connectors" : [ {
+          "source" : "UPPERCASE0",
+          "target" : "UPPERCASE1"
+        } ]
+      },
+      "TRANSFORM8" : {
+        "label" : "Mark Repeated Cases",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 812,
+        "graph" : {
+          "FORMULA6" : {
+            "label" : "Repeated Cases"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "FILTER3" : {
+        "label" : "Keep Repeated",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 251.7,
+        "left" : 812
+      },
+      "JOIN6" : {
+        "label" : "Join Repeated",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.6,
+        "left" : 952
+      },
+      "LOAD_DATASET6" : {
+        "label" : "CaseComment",
+        "type" : "LOAD_DATASET",
+        "top" : 252.1,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN7" : {
+        "label" : "Get Case Comment",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 1232
+      },
+      "LOAD_DATASET7" : {
+        "label" : "Task",
+        "type" : "LOAD_DATASET",
+        "top" : 392.1,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "JOIN8" : {
+        "label" : "Get Task Classification",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 111.9,
+        "left" : 1092
+      },
+      "FILTER4" : {
+        "label" : "Task Created in 4Q",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 391.9,
+        "left" : 392
+      },
+      "FILTER5" : {
+        "label" : "Case Comment in 4Q",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 251.89999999999998,
+        "left" : 252
+      },
+      "TRANSFORM9" : {
+        "label" : "Mark Repeated Calls",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 1372,
+        "graph" : {
+          "FORMULA7" : {
+            "label" : "Repeated Calls"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "OUTPUT2" : {
+        "label" : "Recoveries Post Automation with History",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 812,
+        "left" : 392
+      },
+      "LOAD_DATASET8" : {
+        "label" : "Recovery__History",
+        "type" : "LOAD_DATASET",
+        "top" : 1092,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN9" : {
+        "label" : "Join Recovery History",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 812,
+        "left" : 252
+      },
+      "FILTER6" : {
+        "label" : "Recovery Post Automation",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 952,
+        "left" : 112
+      },
+      "FILTER7" : {
+        "label" : "Recoveries Post Automation",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 811.9,
+        "left" : 112
+      },
+      "FILTER8" : {
+        "label" : "Exceptions",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 952,
+        "left" : 252
+      },
+      "FILTER9" : {
+        "label" : "Remove Null Contacts",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 532,
+        "left" : 1652
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER7",
+      "target" : "JOIN9"
+    }, {
+      "source" : "JOIN5",
+      "target" : "FILTER0"
+    }, {
+      "source" : "JOIN3",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN4",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN4"
+    }, {
+      "source" : "FILTER9",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN5"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN5"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "FILTER1"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "JOIN5",
+      "target" : "FILTER2"
+    }, {
+      "source" : "TRANSFORM7",
+      "target" : "TRANSFORM5"
+    }, {
+      "source" : "FILTER2",
+      "target" : "TRANSFORM7"
+    }, {
+      "source" : "TRANSFORM5",
+      "target" : "TRANSFORM8"
+    }, {
+      "source" : "TRANSFORM8",
+      "target" : "FILTER3"
+    }, {
+      "source" : "TRANSFORM8",
+      "target" : "JOIN6"
+    }, {
+      "source" : "FILTER3",
+      "target" : "JOIN6"
+    }, {
+      "source" : "TRANSFORM9",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "JOIN8",
+      "target" : "JOIN7"
+    }, {
+      "source" : "JOIN6",
+      "target" : "JOIN8"
+    }, {
+      "source" : "FILTER4",
+      "target" : "JOIN8"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "FILTER4"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "FILTER5"
+    }, {
+      "source" : "FILTER5",
+      "target" : "JOIN7"
+    }, {
+      "source" : "JOIN7",
+      "target" : "TRANSFORM9"
+    }, {
+      "source" : "LOAD_DATASET8",
+      "target" : "FILTER6"
+    }, {
+      "source" : "JOIN9",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "FILTER7"
+    }, {
+      "source" : "FILTER8",
+      "target" : "JOIN9"
+    }, {
+      "source" : "FILTER6",
+      "target" : "FILTER8"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "FILTER9"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

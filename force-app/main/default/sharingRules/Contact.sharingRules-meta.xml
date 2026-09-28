@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>B2B_Contact_Shared_based_on_Contact_record_type</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share &quot;Contact&quot; record type to B2B roles &amp; subordinates</description>
+        <label>B2B Contact Shared based on Contact record type</label>
+        <sharedTo>
+            <group>B2B_Roles_and_Subordinates</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Contact</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>GA_Contact__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Person_Account_to_VIP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>QCC_Share_Person_Account_to_VIP</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Sensitive_Contact__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Sensitive_Contact_for_CCAT</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Sensitive Contact for CCAT</label>
+        <sharedTo>
+            <group>CCAT_and_Fulfilment_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Sensitive_Contact__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Contacts_Write_Access_with_Sensitive_Group</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>CRM-9195 This is to enable write access on QCC contacts for sensitive group.</description>
+        <label>Share Contacts Write Access with Sensitive Group</label>
+        <sharedTo>
+            <group>QCC_Sensitive_Message_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Individual Contact</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>QCC_TECH_RecordType__c</field>
+            <operation>equals</operation>
+            <value>Individual Contact</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_contacts_with_QCC_Users</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share contacts with QCC Users</description>
+        <label>Share contacts with QCC Users</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Sensitive_Contact__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>B2B_Contact_Shared_with_B2B_Roles_and_Subordinates</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>B2B Contact Shared with B2B Roles and Subordinates</label>
+        <sharedTo>
+            <group>B2B_Roles_and_Subordinates</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>B2B_Roles_and_Subordinates</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

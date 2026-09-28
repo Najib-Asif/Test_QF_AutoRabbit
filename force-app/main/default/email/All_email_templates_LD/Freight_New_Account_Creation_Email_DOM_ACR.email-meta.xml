@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Freight - Template to be sent to iCargo Support Team for new domestic account creations</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Freight New Account Creation Email DOM ACR</name>
+    <style>none</style>
+    <subject>New Domestic Customer set up in iCargo</subject>
+    <textOnly>Hi,
+
+Please note the following New Account has been created. 
+
+IMPORTANT: Please verify whether Customer Code exists. If it already exists, please do not create a new account, instead please update the account details as per below.
+
+Customer code (Loc#): {!Account.Freight_Location__c}
+
+Agent/Customer Name: {!Account.Name}
+
+Global Customer Code (FCI): {!Account.Freight_Corporate_Identifier__c}
+
+Address: {!Account.BillingAddress}
+
+ABN: {!Account.ABN_Tax_Reference__c}
+
+Account number (Cust#): {!Account.Freight_eQ_Reference__c}
+
+Financial Address number (Ref#): {!Account.Freight_Reference__c}
+
+Customer Type: Domestic
+
+Billing Calendar: {!Account.Freight_Billing_Calendar__c}
+
+Billing Period: 30 days
+
+Currency: AUD
+
+Contact Details: {!Contact.Name}
+
+Phone: {!Contact.Phone}
+
+Fax: {!Contact.Fax}
+
+Email: {!Contact.Email}
+
+Thanks,
+ 
+{!Account.OwnerFullName}
+
+{!Account.OwnerEmail}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

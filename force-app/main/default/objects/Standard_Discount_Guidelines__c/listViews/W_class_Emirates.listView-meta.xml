@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>W_class_Emirates</fullName>
+    <columns>NAME</columns>
+    <columns>Fare_Structure__c</columns>
+    <columns>Discount_Threshold_AM__c</columns>
+    <columns>Discount_Threshold_DO__c</columns>
+    <columns>Discount_Threshold_NAM__c</columns>
+    <columns>Maximum_Revenue__c</columns>
+    <columns>Minimum_Revenue__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Fare_Combination__c</field>
+        <operation>equals</operation>
+        <value>International</value>
+    </filters>
+    <filters>
+        <field>Fare_Structure__c</field>
+        <operation>equals</operation>
+        <value>W</value>
+    </filters>
+    <label>W class Emirates</label>
+</ListView>

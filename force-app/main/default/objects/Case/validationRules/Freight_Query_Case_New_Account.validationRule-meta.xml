@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Query_Case_New_Account</fullName>
+    <active>true</active>
+    <description>Freight - Account Name and Contact Name to be made mandatory if Sub Type 2 is not a new Account and case is NOT from web-to-case</description>
+    <errorConditionFormula>AND( 
+CONTAINS(RecordType.DeveloperName,&apos;Freight&apos;), 
+OR(ISBLANK(AccountId), 
+ISBLANK( ContactId )),
+IsClosed = True,	
+NOT( OR( 
+ISPICKVAL(Sub_Type_2__c,&quot;New Account&quot;) , 
+ISPICKVAL ( Origin, &quot;FRT Bookings&quot;),
+ISPICKVAL ( Origin, &quot;FRT Cust Service&quot;),
+ISPICKVAL ( Origin, &quot;FRT Phone&quot;),
+ISPICKVAL ( Origin, &quot;FRT Export Spl Moves&quot;),
+ISPICKVAL ( Origin, &quot;FRT Spl Moves&quot;),
+ISPICKVAL ( Origin, &quot;Webchat&quot;),
+ISPICKVAL ( Origin, &quot;Auto Email&quot;),
+ISPICKVAL ( Origin, &quot;Elenium&quot;),
+ISPICKVAL ( Origin, &quot;FRT Claims&quot;),
+ISPICKVAL(Origin, &quot;Web&quot;))),
+$Setup.EnableValidationRule__c.Freight_Query_Case_New_Account__c = False,FCR__c=FALSE
+)</errorConditionFormula>
+    <errorDisplayField>ABN_Tax_Reference__c</errorDisplayField>
+    <errorMessage>Please select an Account and a Contact</errorMessage>
+</ValidationRule>

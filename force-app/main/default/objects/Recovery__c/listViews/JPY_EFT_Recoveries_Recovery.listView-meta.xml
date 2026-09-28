@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>JPY_EFT_Recoveries_Recovery</fullName>
+    <columns>Case_Number__c</columns>
+    <columns>NAME</columns>
+    <columns>Process_Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Contact_First_Name__c</columns>
+    <columns>Contact_LastName__c</columns>
+    <columns>Type__c</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Process_Status__c</field>
+        <operation>equals</operation>
+        <value>Exception</value>
+    </filters>
+    <filters>
+        <field>Original_Currency__c</field>
+        <operation>equals</operation>
+        <value>JPY Japanese Yen</value>
+    </filters>
+    <label>JPY EFT Recoveries</label>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

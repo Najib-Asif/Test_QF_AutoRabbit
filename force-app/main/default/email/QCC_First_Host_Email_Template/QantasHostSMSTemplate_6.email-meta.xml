@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QantasHostSMSTemplate 6</name>
+    <style>none</style>
+    <subject>Pre Departure SMS</subject>
+    <textOnly>Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},
+
+As a Qantas {!QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c} member, we are dedicated to overseeing your Qantas travel and ensuring that you have the smoothest journey possible.
+
+We&apos;ve reviewed your upcoming booking on {!QCC_First_Host__c.QCC_Carrier_Code__c}{!QCC_First_Host__c.QCC_Flight_No__c} on {!QCC_First_Host__c.QCC_Departure_Date__c} and can confirm that your booking is in order. {!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Seat_Number__c)), &quot;Your current seat is &quot;+ QCC_First_Host__c.QCC_Seat_Number__c+&quot;.&quot;,&quot;&quot;)}
+
+Before travel, ensure you check the latest government travel requirements which may include mandatory health declarations, entry permits, pre-approval or you could be denied entry.
+
+Remember, the Qantas VIP Service Team is at your service by phoning + 61 2 6122 1111.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

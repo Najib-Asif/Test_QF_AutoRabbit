@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>QAC_Mindpearl_Passenger_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Mindpearl Passenger Sharing Rule</label>
+        <sharedTo>
+            <group>Mindpearl_Agency_Group</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_NA_Passenger_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC NA Passenger Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_NA_Support_Team_for_US_and_Canada</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Sharing Rule</label>
+        <sharedTo>
+            <role>QF_Support_QIC_Member</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Sharing_Rule_by_Owner</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Sharing Rule by Owner</label>
+        <sharedTo>
+            <role>QF_Support_QIC_Member</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHyAAI</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_UK_Passenger_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC UK Passenger Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_UK_Support_Team</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCCCCPassengerReadWriteAcces</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: CC User in Events Group can edit Passenger</description>
+        <label>QCC CC Passenger Read Write Access</label>
+        <sharedTo>
+            <group>QCC_CCEventsGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>QCC EventPassenger</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCCCCPassengerReadWrite_Access_Offload</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>IOC: Passenger Offload Can be edited by PreTravel Consultants</description>
+        <label>QCC CC Passenger Read Write Access Offload</label>
+        <sharedTo>
+            <group>IOC_OFFLoadCCGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>QCC Offload Passenger</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_CJM_Passenger_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: CJM Can Read write passengers</description>
+        <label>QCC CJM Passenger Access</label>
+        <sharedTo>
+            <group>QCC_CJMPublicGroup</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>QCC Offload Passenger,QCC EventPassenger</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Migrated_Read_Only</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>QCC: read only access to Migrated Passengers for all QCC users</description>
+        <label>QCC Migrated Read Only</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>QCC Migrated Passengers</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Passenger_Insurance_Letters_edit_access_for_CC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: grant read/write access to Qantas CC Journey Manager for Passengers Insurance Letter record type</description>
+        <label>QCC: Passenger Insurance Letters edit access for CC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_OM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Insurance Letter</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QCC_Share_Passenger_to_VIP_Service_Team</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>QCC Share Passenger to VIP Service Team</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>QCC EventPassenger</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>S_D_Corp_Passenger_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>CRM-9382: Flight Events - Sharing enhancements</description>
+        <label>S&amp;D Corp Passenger Rule</label>
+        <sharedTo>
+            <group>S_D_Corp_Passenger_Group</group>
+        </sharedTo>
+        <booleanFilter>1 AND ( 2 OR 3 )</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>QCC Offload Passenger,QCC EventPassenger</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SME_ID__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CORP_ID__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>QANTAS_VIP_Service_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Allow QANTAS VIP Service Team members to access Passengers.</description>
+        <label>QANTAS VIP Service Team</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_QDC_OM_VIP_TL</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

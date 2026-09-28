@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact.Cases$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Type</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Group__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Category__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Origin</field>
+    </columns>
+    <columns>
+        <field>Contact$Frequent_Flyer_Tier__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Description</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Contact.Cases$Case_Age__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Requested by Jenny - 1.	Bounce back – how can we fast track? (Michelle/ Amanda/ Jenny)
+•	CPT already assigned to bounce back queue
+•	@Amanda, could we get some reporting or insights to try and reduce this volume?</description>
+    <filter>
+        <criteriaItems>
+            <column>Contact.Cases$Owner</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>CCC Bounce-back queue-low,CCC Bounce-back queue-medium,CCC Bounce-back queue-high,CCC Bounce-back queue-SLA</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Bounce Back Analysis</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Contacts_with_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Cases$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

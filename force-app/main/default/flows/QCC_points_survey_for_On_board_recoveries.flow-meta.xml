@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Posts proof that the email alert sent to the customer to Chatter.</description>
+        <name>PostEmailtoChatter</name>
+        <label>PostEmailtoChatter</label>
+        <locationX>50</locationX>
+        <locationY>575</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>ChatterTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>$Record.Case_Number__r.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>Qantas_Points_Recovery_Survey</description>
+        <name>Qantas_Points_email</name>
+        <label>Qantas Points email</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <actionName>Case.QCC_Qantas_Points_Survey</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>PostEmailtoChatter</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Case_Number__r.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Case.QCC_Qantas_Points_Survey</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Case_Origin</name>
+        <label>Case Origin</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Origin_RedApp</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Number__r.Origin</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Red App</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Number__r.Is_Response_Requested__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Number__r.Is_Response_Requested__c</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Qantas_Points_email</targetReference>
+            </connector>
+            <label>Is Origin RedApp</label>
+        </rules>
+    </decisions>
+    <description>Automated email to send a survey regarding whether the points sent as a recovery were enough. 
+29/3 added the email reference to customer field check of Yes/Null
+30/3 updated the email alert and used the flow version 8 -saving as a new version
+13/4 post to chatter</description>
+    <environments>Default</environments>
+    <interviewLabel>QCC points survey for On-board recoveries {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QCC points survey for On-board recoveries</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Case_Origin</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND (3 OR 4)</filterLogic>
+        <filters>
+            <field>Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Qantas Points</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Finalised</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Case_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>On the Spot Recovery</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Case_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Further Action Required</stringValue>
+            </value>
+        </filters>
+        <object>Recovery__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>ChatterTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Email alert has been sent out: {!$Record.Name} with {!$Record.Amount__c} {!$Record.Type__c}</text>
+    </textTemplates>
+</Flow>

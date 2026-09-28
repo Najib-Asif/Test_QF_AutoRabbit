@@ -1,0 +1,139 @@
+<apex:page sidebar="false" standardController="Contact" extensions="QCC_OpenAqireContactPageController" showheader="false" standardStylesheets="false" doctype="html-5.0" cache="false" applyHtmlTag="false" applyBodyTag="false">
+    <apex:includeScript value="{!URLFOR($Resource.cnx__CnxSfdcResources,'addons/AgentTimeInState/lib/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.cnx__CnxSfdcResources,'js/ConnectsIntegrationAPI.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.cnx__CnxSfdcResources,'addons/AgentTimeInState/js/AgentTimeInState.min.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.cnx__CnxSfdcResources,'addons/AgentTimeInState/css/AgentTimeInState.min.css')}"/>
+    <apex:includeScript value="/support/console/34.0/integration.js"/>
+    <apex:includeScript value="{!URLFOR($Resource.cnx__CnxSfdcResources,'js/ConnectsIntegrationAPI.min.js')}"/>
+    <apex:includeScript value="/soap/ajax/36.0/connection.js"/>
+    <style>
+        #iframeAqire {
+        	display:none;
+        }
+    </style>
+
+    <apex:form id="form">
+        <table id="variablesTable" class="viewTable">
+            <tr>
+                <td><b>Tier Code: </b></td>
+                <td><span id="tierCode">{!tierCode}</span></td>
+            </tr>
+            <tr>
+                <td><b>FF Number: </b></td>
+                <td><span id="ffNo">{!ffNo}</span></td>
+            </tr>
+            <tr>
+                <td><b>Call Type: </b></td>
+                <td><span id="callType">{!callType}</span></td>
+            </tr>
+            <tr>
+                <td><b>PIN Status: </b></td>
+                <td><span id="PINStatus">{!PINStatus}</span></td>
+            </tr>
+            <tr>
+                <td><b>Caller Origin: </b></td>
+                <td><span id="callerOrigin">{!callerOrigin}</span></td>
+            </tr>
+            <tr>
+                <td><b>Previous Agent: </b></td>
+                <td><span id="previousAgent">{!previousAgent}</span></td>
+            </tr>
+            <tr>
+                <td><b>DNIS: </b></td>
+                <td><span id="DNIS">{!DNIS}</span></td>
+            </tr>
+            <tr>
+                <td><b>IVRD: </b></td>
+                <td><span id="IVRD">{!IVRD}</span></td>
+            </tr>
+        </table>
+            
+        <apex:iframe id="iframeAqire" title="Sample" src="{!aqireURL}" scrolling="true"/>
+        <apex:actionFunction name="OpenAqireApex" action="{!openAqire}" reRender="outputRecordId,iframeAqire,form" oncomplete="openAqireApplication();">
+            <apex:param name="paramTierCode" value="" />
+            <apex:param name="paramFFNo" value="" />
+            <apex:param name="paramCallType" value="" />
+            <apex:param name="paramPINStatus" value="" />
+            <apex:param name="paramCallerOrigin" value="" />
+            <apex:param name="paramPreviousAgent" value="" />
+            <apex:param name="paramDNIS" value="" />
+            <apex:param name="paramIVRD" value="" />
+        </apex:actionFunction>
+        <br/>
+        <!--<apex:outputText id="outputRecordId" label="Contact Id: " value="{!recordId}"></apex:outputText>-->
+        <input type="hidden" id="outputRecordId" value="{!recordId}"/>
+    </apex:form>
+    <script>
+    ConnectsIntegrationAPI.onWorkItemCreate = function(event) {
+        resetFields();
+        console.log('event: ' + event);
+        if (event.item.Channel == "VOICE") {
+            if (event.item.CallType == "PREROUTE_ACD_IN") {
+                var channelType = ConnectsIntegrationAPI.WORKITEM.TYPE.VOICE;
+                console.log('channelType: ' + channelType);
+                var workItemId = ConnectsIntegrationAPI.getFirstWorkItemId(channelType);
+                console.log('workItemId: ' + workItemId);
+                if (workItemId) {
+                    var tierCode = 'N/A', ffNo = 'N/A', callType = 'N/A', PINStatus = 'N/A', callerOrigin = 'N/A', previousAgent = 'N/A', DNIS = 'N/A', IVRD = 'N/A';
+                    if (event.item.Direction == "inbound"){
+                        var namedVariables = event.item.NamedVariables;
+                        for (var k = 0; k < namedVariables.length; k++){
+                            if(namedVariables[k].Key=="user.TCode") {
+                                tierCode = namedVariables[k].Value;
+                            } else if(namedVariables[k].Key == "user.FF_No") {
+                                ffNo = namedVariables[k].Value;
+                            } else if(namedVariables[k].Key == "user.Status") {
+                                PINStatus = namedVariables[k].Value;
+                            } else if(namedVariables[k].Key == "user.DN") {
+                                DNIS = namedVariables[k].Value;
+                        }
+                    }
+                    
+                        callType = event.item.PerVar1;
+                        previousAgent = event.item.PerVar2;
+                        callerOrigin = event.item.PerVar6;
+                        IVRD = event.item.PerVar7;
+                    }
+                    
+                    if(ffNo != 'N/A') {
+                        OpenAqireApex(tierCode, ffNo, callType, PINStatus, callerOrigin, previousAgent, DNIS, IVRD);
+                    }
+                }
+            }
+        }
+    }
+
+    ConnectsIntegrationAPI.onActivitySave= function (event) {
+        try {
+            if (event.created) {
+                sforce.connection.sessionId = '{!$Api.Session_ID}';
+                var task = sforce.connection.retrieve("WhoId", "Task", [event.recordId])[0];
+                task.WhoId = document.getElementById('outputRecordId').value;
+                sforce.connection.update([task]);
+            }
+        }
+        catch (ex) {
+            ConnectsIntegrationAPI.showError("USER","Update problem", "Could not update activity record, exception: " + ex);
+        }
+    };
+
+    function resetFields() {
+        var spanIds = ['tierCode', 'ffNo', 'callType', 'PINStatus', 'callerOrigin', 'previousAgent', 'DNIS', 'IVRD'];
+        for (var x = 0; x < spanIds.length; x++) {
+            document.getElementById(spanIds[x]).innerHTML = "N/A";
+        }
+    }
+    
+    function openAqireApplication() {
+        var recordId = document.getElementById('outputRecordId').value;
+        
+        if (recordId) {
+            ConnectsIntegrationAPI.screenPop(recordId, function (response) {
+                if (!response.success) {
+                    ConnectsIntegrationAPI.showError("USER","ScreenPop failed ", response.error);
+                }
+            });
+        }
+    }
+    </script>
+</apex:page>

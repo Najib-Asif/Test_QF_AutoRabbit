@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Recovery</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Recoveries</value>
+    </caseValues>
+    <recordTypes>
+        <label><!-- Credit Card Recovery --></label>
+        <name>Credit_Card_Recovery</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Customer Connect --></label>
+        <name>Customer_Connect</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- EFT Recovery --></label>
+        <name>EFT_Recovery</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type is used in Exgratia Flight Pass business process. --></description>
+        <label><!-- Exgratia Flight Pass --></label>
+        <name>Exgratia_Flight_Pass</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Freight --></label>
+        <name>FreightFreight</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Other Recovery --></label>
+        <name>Other_Recovery</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Used for QBR Recovery Process --></description>
+        <label><!-- QBR Recovery --></label>
+        <name>QBR_Recovery</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Travel Voucher Recovery --></label>
+        <name>Travel_Voucher_Recovery</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Account number must be 10 digits --></errorMessage>
+        <name>AccountNumber_NZD10Digit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Account Number should be numeric --></errorMessage>
+        <name>AccountNumber_Numeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Branch number should be 6 digits for the selected country --></errorMessage>
+        <name>BSBCode_6DigitNumericMandValidation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Branch Number (BSB/Sort Code/Routing Code) should be alphanumeric --></errorMessage>
+        <name>BSBCode_Numeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Credit Card Expiry Month/Year should be greater than current date --></errorMessage>
+        <name>Card_Expiry_Month_and_Year_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Claim Status is a mandatory field --></errorMessage>
+        <name>Claim_Status_Mandatory_for_Payment_Resp</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Credit Card Token must contain only Uppercase characters and Credit Card Token Length can not be more than 16 characters --></errorMessage>
+        <name>CreditCard_Token_UpperCase_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Credit Card Recoveries to accept AUD only --></errorMessage>
+        <name>Credit_Card_Refund_Currency</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Credit_Card_Refund_Required_Account</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Credit_Card_Refund_Required_Card_Type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Credit_Card_Refund_Required_Cost_Centre</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Credit_Card_Refund_Required_Country</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Credit_Card_Refund_Required_Exp_Month</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Credit_Card_Refund_Required_Exp_Year</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Credit_Card_Refund_Required_Token</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Status can&apos;t be changed to Open --></errorMessage>
+        <name>Donot_change_Recovery_Status_to_open</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Type can&apos;t be changed. --></errorMessage>
+        <name>DonotchangeRecoveryinApprovalProcess</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Recovery Status can&apos;t be changed --></errorMessage>
+        <name>DonotchangeRecoverystatusonce_rejected</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Type or Amount or Value or Stage can&apos;t be changed. --></errorMessage>
+        <name>DonotchangeRecoverywheninprogress</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This recovery cannot be updated to the Status selected --></errorMessage>
+        <name>EFT_Process_Status_Update_From_Expired</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Account</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Bank_Account_Name</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Bank_Account_Number</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Bank_Name</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Branch_Number</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Cost_Centre</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Country</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>EFT_Refund_Required_Description</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- IBAN should be alpha numeric --></errorMessage>
+        <name>IBAN_AlphaNumeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Maximum Recovery Limit is 150K AUD --></errorMessage>
+        <name>Limit_Maximum_Amount_of_Recovery</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Maximum FF points Recovery Limit is 15000000. --></errorMessage>
+        <name>Limit_Maximum_FF_Points_Recovery</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Monetary Value,  Conversion Rate and Currency can&apos;t be changed at this stage! --></errorMessage>
+        <name>Lock_fields_after_currency_conversion</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Lounge Passes can only be a value between 1 and 10 --></errorMessage>
+        <name>LoungePassQuantity10</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Value can not be more than 50,000 --></errorMessage>
+        <name>MonetaryValueCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Monetary_Value_Must_Be_Populated</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This recovery is not available for this Case Type. --></errorMessage>
+        <name>Only_to_be_chosen_by_sydney_users</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Other_Recovery_Required_Description</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Payment details is not complete. Any of the following is blank Account type, Bank Name, Branch Number or Country. --></errorMessage>
+        <name>Payment_details</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Payment details is not complete. Any of the following is blank Card Expiry Month , Card Expiry Year, Refund Cost Centre , Refund Account --></errorMessage>
+        <name>Payment_details_CC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- For type Credit Card country must be AU and Currency must be AUD --></errorMessage>
+        <name>Payment_details_CC_AU</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- IBAN is mandatory for  currency GBP, EUR or DKK --></errorMessage>
+        <name>Payment_details_IBAN</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- NOK 10,000,000 is the maximum allowed --></errorMessage>
+        <name>Payment_details_NOK</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- TAX ID is mandatory for  currency CLP, ARS or CNY --></errorMessage>
+        <name>Payment_details_TAX_Id</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Branch Swift / BIC Code is mandatory when Refund currency is not AUD or NZD for Country of Financial Institution Australia --></errorMessage>
+        <name>Payment_details_swift_Code</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Recovery details cannot be modified --></errorMessage>
+        <name>PreventManualUpdates</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This recovery can only be updated to Approved or Payment Details Received or Cancelled --></errorMessage>
+        <name>Process_Status_Update_From_Exception</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Recovery Type can only be EFT Refund or Credit Card Refund --></errorMessage>
+        <name>QCCStageandRecoveryTypeMismatch</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Bank Account Number must only contain alphanumeric characters. i.e. must not contain dashes, slashes, spaces, etc. --></errorMessage>
+        <name>QCC_BankAccountNumber_Alphanumeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Branch Number (BSB/Sort Code) must only contain alphanumeric characters. i.e. must not contain dashes, slashes, spaces, etc. --></errorMessage>
+        <name>QCC_BranchNumberBSB_Alphanumeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- When original currency is AUD the currency conversion MUST be equal to 1.This field must be populated --></errorMessage>
+        <name>QCC_Currency_Conversion_Rate_Restriction</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Update failed: Invalid email or recovery status --></errorMessage>
+        <name>QCC_EQSubmissionValidations</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can only update this recovery stage by updating its case stage --></errorMessage>
+        <name>QCC_ExpenseStageCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Firm Space Upgrade Recovery can be created only to Cases where Case Type is Medical --></errorMessage>
+        <name>QCC_FirmSpaceUpgradeRecoveryTypeCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Complete this field --></errorMessage>
+        <name>QCC_InvestigatedBy_Bag_Complete</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This case is either closed or the recovery finalised or submitted for finalisation --></errorMessage>
+        <name>QCC_LockRecoveryOnCaseClosed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Monetary Value is missing --></errorMessage>
+        <name>QCC_MonetaryValueCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Refund Account is missing --></errorMessage>
+        <name>QCC_RefundAccountCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Refund Cost Centre is missing --></errorMessage>
+        <name>QCC_RefundCostCenterCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Bag Replacement recovery can only be done for customers in Australia --></errorMessage>
+        <name>QCC_Replace_Bag_Aus_Only</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Complete this field --></errorMessage>
+        <name>QCC_Replacement_Bag_Colour_Complete</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please ensure all of the following fields are populated on the case: Contact Name, Contact Phone, Street Address, Suburb, Postcode, State and Country. --></errorMessage>
+        <name>QCC_Replacement_Bag_Complete_Case</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Complete this field --></errorMessage>
+        <name>QCC_Replacement_Bag_Size_Complete</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Complete this field --></errorMessage>
+        <name>QCC_Replacement_Bag_Type_Complete</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Qantas Hotel and Wine vouchers shall be provided only in-flight. Please select another Recovery Type. --></errorMessage>
+        <name>QCC_Restrict_Users_To_Select_Vouchers</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Voucher Number, Voucher Expiry Date or Voucher Amount can&apos;t be blank --></errorMessage>
+        <name>QCC_TravelVoucherCreation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Validity in month is missing --></errorMessage>
+        <name>QCC_ValidityInmonthCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete this field --></errorMessage>
+        <name>Quantity_Must_Be_Populated</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This field should be blank --></errorMessage>
+        <name>Quantity_field_entered_incorrectly_QCC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please complete the field Monetary Value, Refund Currency and Description --></errorMessage>
+        <name>Required_Monetary_Refund_Currency_Des</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- 100 character limit has been exceeded. Reduce recovery description to 100 characters or less. --></errorMessage>
+        <name>Restrict_Description_to_100_characters</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This recovery is not available for this Case Type. --></errorMessage>
+        <name>Restrict_Other_Recovery_Except_CCAT</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- SWIFT/BIC Code should be 8-11 characters alpha numeric --></errorMessage>
+        <name>SWIFTBICCode_AlphaNumeric</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Recovery can&apos;t be created at this time --></errorMessage>
+        <name>StopNewRecoveryCreationForRecPrjtGoLive</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Monetary Value should be at least $10 and rounded up to the nearest number --></errorMessage>
+        <name>TVAmountShouldbeGreaterthan0</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not add any other reason with US Dot Baggage Refund --></errorMessage>
+        <name>US_Dot_Baggage_validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Cancellation Reason is mandatory when a Recovery is Cancelled --></errorMessage>
+        <name>VR_CancellationReason_Mandatory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>
+            <!-- To cancel a recovery:                                                         
+
+1. You must be the Recovery Creator, a Team Lead or Operating Manager
+2. You must enter a cancellation reason -->
+        </errorMessage>
+        <name>VR_Restrict_CancellingRecovery</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You have exceeded the maximum points as per AirLine Level! --></errorMessage>
+        <name>Validate_QBR_Points</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This field and monetary value field should be blank --></errorMessage>
+        <name>Value_field_entered_incorrectly_QCC</name>
+    </validationRules>
+</CustomObjectTranslation>

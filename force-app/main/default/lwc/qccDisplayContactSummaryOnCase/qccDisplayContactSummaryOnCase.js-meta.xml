@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+      </targets>
+      <targetConfigs>
+      <targetConfig targets="lightning__FlowScreen">
+          <property name="FFName" type="String" label="Name"/>
+          <property name="PrefName" type="String" label="PreferredName"/>
+          <property name="FrequentFlyerNumber" type="String" label="Frequent Flyer Number"/>
+          <property name="StatusCredits" type="String" label="Status Credits"/>
+          <property name="tier" type="String" label="Tier"/>
+          <property name="statusCreditTillNxtLvl" type="String" label="Status Credits Till Next Levels"/>
+          <property name="pointsBalance" type="String" label="Points Balance"/>
+          <property name="TierAnniversaryDate" type="String" label="Tier Anniversary Date"/>
+          <property name="recordId" type="String" label="Record Id"/>
+          <property name="phone" type="String" label="Phone Number"/>
+          <property name="email" type="String" label="Email"/>
+          <!-- CRM-8740 -->
+          <property name="lifeTimeStatus" type="String" label="life Time Status"/>
+      </targetConfig>
+      </targetConfigs>
+</LightningComponentBundle>

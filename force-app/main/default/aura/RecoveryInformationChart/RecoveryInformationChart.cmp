@@ -1,0 +1,283 @@
+<!---
+    **********************************************************************************************
+    Author:        Bharathkumar Narayanan
+    Company:       TCS
+    Description:   Recovery Portfolio technical design component 
+         
+    ************************************************************************************************
+    History
+    ************************************************************************************************
+    01-Feb-2019     Bharathkumar Narayanan               Initial Design
+    
+    **********************************************************************************************
+    -->
+
+<aura:component controller="RecoveryChartInfoController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!--<ltng:require styles="{!$Resource.BootstrapRecovery +'/css/bootstrap.min.css'}"/>-->
+    <ltng:require scripts="{!$Resource.RecoveryChartboardRes}" afterScriptsLoaded="{!c.setup}"/>
+    
+    <aura:attribute name="MemberList" type="List" default=""/> 
+    <aura:attribute name="typeList" type="List" default=""/> 
+    <aura:attribute name="RecoveryList" type="List" default=""/> 
+    <aura:attribute name="recoveries" type="List" default=""/>  
+    
+    
+    <!-- attribute to accept Visualforce page's javascript method -->
+    <aura:attribute name="sendData" type="object"/>
+    
+    <aura:attribute name="Approved" type="Integer" default="0"/>
+    <aura:attribute name="Rejected" type="Integer" default="0"/> 
+    <aura:attribute name="SubmitforFinalisation" type="Integer" default="0"/> 
+    <aura:attribute name="FinalisationDeclined" type="Integer" default="0"/> 
+    <aura:attribute name="Finalised" type="Integer" default="0"/> 
+    <aura:attribute name="AwaitingApproval" type="Integer" default="0"/> 
+    <aura:attribute name="AwaitingCustomerResponse" type="Integer" default="0"/> 
+    <aura:attribute name="Submitted" type="Integer" default="0"/> 
+    <aura:attribute name="SubmitforApproval" type="Integer" default="0"/> 
+    
+    
+    <aura:attribute name="QantasPoints" type="Integer" default="0"/>
+    <aura:attribute name="DomesticClubLoungePassesPoints" type="Integer" default="0"/> 
+    <aura:attribute name="InternationalBusinessLoungePasses" type="Integer" default="0"/>  
+    <aura:attribute name="ValetParkingCarwash" type="Integer" default="0"/> 
+    <aura:attribute name="Travelvouchers" type="Integer" default="0"/> 
+    <aura:attribute name="CreditCardRefund" type="Integer" default="0"/> 
+    <aura:attribute name="EFTRefund" type="Integer" default="0"/> 
+    <aura:attribute name="BagRepair" type="Integer" default="0"/> 
+    <aura:attribute name="BagReplacement" type="Integer" default="0"/>
+    <aura:attribute name="NoGoodwill" type="Integer" default="0"/> 
+    <aura:attribute name="Dinnervouchers" type="Integer" default="0"/> 
+    <aura:attribute name="Flowers" type="Integer" default="0"/> 
+    <aura:attribute name="Wine" type="Integer" default="0"/> 
+    <aura:attribute name="Spaceavailableupgrade" type="Integer" default="0"/> 
+    <aura:attribute name="Firmspaceupgrade" type="Integer" default="0"/> 
+    
+    
+    <aura:attribute name="caseWorkingDays" type="Integer" default="0"/> 
+    
+    <aura:attribute name="AverageQuantity" type="Integer" default="0"/> 
+    <aura:attribute name="AverageValue" type="Integer" default="0"/> 
+    <aura:attribute name="AverageGoodwillMonetaryValue" type="Integer" default="0"/> 
+    <aura:attribute name="MonetaryValue" type="Integer" default="0"/> 
+    <aura:attribute name="backgroundImageURL" type="String" default=""/>
+    <aura:attribute name="TotalRecovery" type="Integer" default=""/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div style="background: white;" class="slds-grid slds-wrap">
+        <!-- <div style="{!'position: relative; background: url(' + v.backgroundImageURL +') no-repeat;background-position: center;background-size: cover;'}">-->
+        <div style="margin-left: 10px;" class="slds-col slds-size_1-of-1 slds-align_absolute-center"> 
+            <b> Select from your team </b> &nbsp;
+            <ui:inputSelect class="selectInputRecovery" aura:id="teamMemberSelectId" change ="{!c.getTeamMemberData}">        
+                <ui:inputSelectOption label="All Team members"/>
+                <aura:iteration items="{!v.MemberList}" var="team">
+                    <ui:inputSelectOption  text="{!team.Id}" label="{!team.Name}"/>
+                </aura:iteration>        
+            </ui:inputSelect>   <br/>
+            <b> Select from your Recovery Type </b> &nbsp;
+            <ui:inputSelect class="selectInputRecovery" aura:id="RecoveryTypeId" change ="{!c.getRecoveryTypeData}">        
+                <ui:inputSelectOption label="Please Choose....." text=''/>
+                <aura:iteration items="{!v.typeList}" var="type">
+                    <ui:inputSelectOption  text="{!type}" label="{!type}"/>
+                </aura:iteration>        
+            </ui:inputSelect>   
+        </div>    
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <lightning:accordion aura:id="accordion" class="slds-col slds-size_1-of-1" activeSectionName="C">
+            <lightning:accordionSection name="A" label="Recovery Average Information" class="slds-col slds-size_1-of-1 sectionOne">
+                <div class="slds-box sectionFive">
+                    <br/>
+                    <table >
+                        <tr>
+                            <th><b style="float:left;margin-left:50px;font-weight: bold;font-size: 150%;">Description</b> &nbsp; <b style="float:right;margin-right:300px;font-weight: bold;font-size: 150%;">Values</b><br/> </th>
+                        </tr>
+                        <br/>
+                        <tr>
+                            <b style="float:left;margin-left:50px">Average Quantity</b> &nbsp; <b style="float:right;margin-right:300px">{!v.AverageQuantity}</b>
+                        </tr>
+                        
+                        <tr>
+                            <b style="float:left;margin-left:50px">Average Monetary value</b> &nbsp; <b style="float:right;margin-right:300px">{!v.MonetaryValue}</b>          
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> Average Equivalent AUD Value</b> &nbsp; <b style="float:right;margin-right:300px">{!v.AverageValue}</b>
+                        </tr>  
+                        <tr>
+                            <b style="float:left;margin-left:50px"> Average Goodwill Monetary value</b> &nbsp; <b style="float:right;margin-right:300px">{!v.AverageGoodwillMonetaryValue}</b>
+                        </tr>  
+                    </table>                                   
+                </div>
+            </lightning:accordionSection>
+             <lightning:accordionSection name="B" label="Recovery Status Information" class="slds-col slds-size_1-of-1 sectionTwo">
+                <!--<div class="slds-col slds-size_1-of-1 slds-align_absolute-center">-->
+                    <!-- Button component to invoke PDF download -->
+                    <!--<lightning:button label="Download Document" onclick="{!c.downloadDocument}" />-->
+                <div class="slds-align_absolute-center">
+                    <b class="selectDate"> Date Range : </b>  
+                    <ui:inputDate aura:id="Fromdate" label="From" class="field" value="" displayDatePicker="true" />  &nbsp;&nbsp; 
+                    <ui:inputDate aura:id="Todate" label="To" class="field" value="" displayDatePicker="true" />
+                <lightning:button variant="Neutral" class="btn fl"  label="Submit" onclick="{!c.searchSelectedDateDate}"/><br/><br/>
+                   
+                </div>                    
+                    <div style="float:left;">
+                    <table >
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries Approved</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.Approved}</b>           
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries Rejected </b>: &nbsp; <b style="float:right;margin-right:300px">{!v.Rejected}</b>
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries SubmitforFinalisation</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.SubmitforFinalisation}</b>         
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries FinalisationDeclined</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.FinalisationDeclined}</b>          
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries Finalised </b>: &nbsp;<b style="float:right;margin-right:300px">{!v.Finalised}</b>
+                            
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries AwaitingApproval </b>: &nbsp;<b style="float:right;margin-right:300px">{!v.AwaitingApproval}</b>         
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries AwaitingCustomerResponse </b>:&nbsp; <b style="float:right;margin-right:300px">{!v.AwaitingCustomerResponse}</b>
+                            
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries Submitted </b>:&nbsp; <b style="float:right;margin-right:300px">{!v.Submitted}</b>
+                            
+                        </tr>
+                        <tr>
+                            <b style="float:left;margin-left:50px"> No of Recoveries SubmitforApproval </b>:&nbsp; <b style="float:right;margin-right:300px">{!v.SubmitforApproval}</b>
+                        </tr>                
+                    </table>   
+                    </div>
+                    <div  class="container" >
+                        <canvas aura:id="chart" id="myChart" style="height: 320px; width: 500px;"/>
+                    </div>
+                
+               <!-- </div>-->
+            </lightning:accordionSection>
+            <lightning:accordionSection name="D" label="Recovery Type Information" class="slds-col slds-size_1-of-1 sectionSix" >
+                <!--<div class="slds-col slds-size_1-of-1 slds-align_absolute-center">-->
+                    <!-- Button component to invoke PDF download -->
+                    <!--<lightning:button label="Download Document" onclick="{!c.downloadDocument}" />-->
+                <div class="slds-align_absolute-center">
+                    <b class="selectDate"> Date Range : </b>  
+                    <ui:inputDate aura:id="TypeFromdate" label="From" class="field" value="" displayDatePicker="true" />  &nbsp;&nbsp; 
+                    <ui:inputDate aura:id="TypeTodate" label="To" class="field" value="" displayDatePicker="true" />
+                <lightning:button variant="Neutral" class="btn fl"  label="Submit" onclick="{!c.searchSelectedDateDateType}"/><br/><br/>
+                   
+                </div>                    
+                    <div style="float:left;">
+                    <table >
+                        <tr>
+								<b style="float:left;margin-left:50px"> No of Qantas Points Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.QantasPoints}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Domestic Qantas Club Lounge Passes Points Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.DomesticClubLoungePassesPoints}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of International Business Lounge Passes Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.InternationalBusinessLoungePasses}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Valet Parking or Carwash Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.ValetParkingCarwash}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Travel vouchers Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.Travelvouchers}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Credit Card Refund Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.CreditCardRefund}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of EFT Refund Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.EFTRefund}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Bag Repair Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.BagRepair}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of BagReplacement Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.BagReplacement}</b>           
+							</tr>
+                        	<tr>
+								<b style="float:left;margin-left:50px"> No of No Goodwill Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.NoGoodwill}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Dinner vouchers Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.Dinnervouchers}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Flowers Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.Flowers}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Wine Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.Wine}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Space available upgrade Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.Spaceavailableupgrade}</b>           
+							</tr>
+							<tr>
+								<b style="float:left;margin-left:50px"> No of Firm space upgrade Recoveries</b> : &nbsp; <b style="float:right;margin-right:300px">{!v.Firmspaceupgrade}</b>           
+							</tr>
+                        </table>   
+                    </div>
+                    <div  class="container" >
+                        <canvas aura:id="pieChart" id="myPieChart" style="height: 320px; width: 500px;"/>
+                    </div>
+                
+               <!-- </div>-->
+            </lightning:accordionSection>
+            <lightning:accordionSection name="C" label="Recovery Data Information" class="slds-col slds-size_1-of-1 sectionThree">
+                
+               
+                <div class="slds-align_absolute-center">
+                    <b >
+                        Filter: 
+                    </b>
+                    <ui:inputSelect  Label="Filter" class="selectInputRecovery" aura:id="statusFilter" change="{!c.getMemberDataFilter}">        
+                        <ui:inputSelectOption text="All" label="All"/>            
+                        <ui:inputSelectOption  text="Rejected" label="Rejected"/>
+                        <ui:inputSelectOption  text="Finalised" label="Finalised"/>  
+                        <ui:inputSelectOption  text="Finalisation Declined" label="Finalisation Declined"/>  
+                        <ui:inputSelectOption  text="Approved" label="Approved"/>              
+                    </ui:inputSelect>
+                      
+                     <lightning:button variant="brand" iconName="utility:download" iconPosition="left" label="Download As CSV" title="Download As CSV" onclick="{! c.downloadCsv }"/><br/><br/>
+                   
+                </div>
+                
+                <div>            	
+                    <table class="slds-table slds-table--bordered slds-table--striped sectionFour">            
+                        <thead>
+                            <tr class="slds-text-heading--label ">	                                      
+                                <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Name</strong></div></th>  
+                                <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Status</strong></div></th>
+                                <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Recovery Type</strong></div></th>                        
+                                <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Refund Amount</strong></div></th>                        
+                                <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Quantity</strong></div></th>                        
+                                <th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Monetary Value</strong></div></th>                        
+
+                                <!--<th class="slds-cell-shrink" scope="row"><div class="slds-truncate"><strong>Approver Comment</strong></div></th> -->
+                                
+                            </tr>    
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.recoveries}" var="recovery">                                                        
+                                <tr>                                        
+                                    <!--<td class="slds-cell-shrink" data-label="Name"> <a onclick="{!c.navigateToRecord}" data-attribute="{!recovery.Id}" "> {!recovery.Name}</a></td>-->
+                                    <td data-record="{!recovery.Id}" class="slds-cell-shrink" data-label="Name"> <a onclick="{!c.navigateToRecord}" data-attribute="{!recovery.Id}" target="_blank"> {!recovery.Name}</a></td>
+                                    <td class="slds-cell-shrink" data-label="Status">{!recovery.Status__c}</td>
+                                    <td class="slds-cell-shrink" data-label="Recovery Type">{!recovery.Type__c}</td>
+                                    <td class="slds-cell-shrink" data-label="Refund Account">{!recovery.Refund_Account__c}</td>
+                                    <td class="slds-cell-shrink" data-label="Quantity">{!recovery.Amount__c}</td>
+                                    <td class="slds-cell-shrink" data-label="Monetary Value">{!recovery.Monetary_Value__c}</td>
+
+                                    <!--<td class="slds-cell-shrink" data-label="Approver Comment">{!recovery.Approver_Comment__c}</td> -->                       
+                                </tr>                            
+                            </aura:iteration>                                                  
+                        </tbody>
+                    </table>
+                </div>
+            </lightning:accordionSection>
+    
+            
+        </lightning:accordion>
+    </div>
+</aura:component>

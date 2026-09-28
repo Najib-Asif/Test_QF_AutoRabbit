@@ -1,0 +1,77 @@
+<!-- 
+Author:        Rinaldo Clucher 
+Company:       Salesforce
+Description:   Implements 3 configurable buttons to be sued in a flow
+               
+Inputs:
+Test Class:     
+************************************************************************************************
+History
+************************************************************************************************
+27-Feb-2021      Rinaldo Clucher               Initial Release
+
+
+
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:availableForFlowScreens" access="global">
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="destinationURL" type="String" default="https://salesforce.com/" />
+    <aura:attribute name="destinationType" type="String" default="standard" />
+    <aura:attribute name="targetRecordId" type="String" />
+    <aura:attribute name="navigationType" type="String" default="next"/>
+    <aura:attribute name="variantType" type="String" default="neutral" />
+    <aura:attribute name="disabledFlag" type="Boolean" default="false" />
+    <aura:attribute name="fire" type="Boolean" default="false" />
+    <aura:attribute name="label2" type="String" />
+    <aura:attribute name="destinationURL2" type="String" default="https://salesforce.com/" />
+    <aura:attribute name="destinationType2" type="String" default="standard" />
+    <aura:attribute name="targetRecordId2" type="String" />
+    <aura:attribute name="navigationType2" type="String" default="next"/>
+    <aura:attribute name="variantType2" type="String" default="neutral" />
+    <aura:attribute name="disabledFlag2" type="Boolean" default="false" />
+    <aura:attribute name="fire2" type="Boolean" default="false" />
+    <aura:attribute name="Buttons2" type="Boolean" default="false" />
+    <aura:attribute name="label3" type="String" />
+    <aura:attribute name="destinationURL3" type="String" default="https://salesforce.com/" />
+    <aura:attribute name="destinationType3" type="String" default="standard" />
+    <aura:attribute name="targetRecordId3" type="String" />
+    <aura:attribute name="navigationType3" type="String" default="next"/>
+    <aura:attribute name="variantType3" type="String" default="neutral" />
+    <aura:attribute name="disabledFlag3" type="Boolean" default="false" />
+    <aura:attribute name="fire3" type="Boolean" default="false" />
+    <aura:attribute name="Buttons3" type="Boolean" default="false" />   
+    <aura:attribute name="floatRight" type="Boolean" default="false" />   
+         
+    <aura:attribute name="h_destinationURL" type="String" />
+    <aura:attribute name="h_destinationType" type="String" />
+    <aura:attribute name="h_targetRecordId" type="String" />
+    <aura:attribute name="h_navigationType" type="String" />
+
+    <!-- Following two parameters are not required -->
+    <aura:attribute name="Theme" type="String" />
+    <aura:attribute name="isLEX" type="Boolean" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    
+    <div aura:id="buttonContainer" class="container slds-p-top_medium slds-p-bottom_medium">
+        <lightning:layout>
+            <lightning:layoutItem >
+                <lightning:button variant="{!v.variantType}" label="{!v.label}" disabled="{!v.disabledFlag}" onclick="{!c.handleClick}" />
+            </lightning:layoutItem>
+            <lightning:layoutItem >
+                <aura:if isTrue="{!v.Buttons2}">
+                    <div class="slds-p-left_small slds-p-right_small">
+                    <lightning:button variant="{!v.variantType2}" label="{!v.label2}" disabled="{!v.disabledFlag2}" onclick="{!c.handleClick2}" />
+                    </div>
+                </aura:if>
+            </lightning:layoutItem>
+            <lightning:layoutItem >
+                <aura:if isTrue="{!v.Buttons3}">
+                    <lightning:button variant="{!v.variantType3}" label="{!v.label3}" disabled="{!v.disabledFlag3}" onclick="{!c.handleClick3}" />
+                </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+
+</aura:component>

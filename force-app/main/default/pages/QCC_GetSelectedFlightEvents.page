@@ -1,0 +1,33 @@
+<!--*========================================================================================================================
+ * Created By   : Gnanavelu
+ * Description  : Get the Selected flight events from Listviews using apex controller QCC_PassSelectedFlightEventtoFlow
+ * JIRA         : CRM-3943
+==========================================================================================================================*-->
+<apex:page standardController="Event__c" recordSetVar="events" standardStylesheets="false" showHeader="false" extensions="QCC_PassSelectedFlightEventtoFlow" lightningStylesheets="true">
+    <apex:includeLightning />
+    
+    <flow:interview name="QCC_AddtoGlobalEvent">
+            <apex:param name="selectedFlightEvents" value="{!SelectedFlightEvents}" />
+    </flow:interview>
+   <!-- <div>
+        hello
+    </div>
+     <div id="LcDisplayId"> </div> -->
+    
+ <script>
+    /* var FlightEvents = '{!SelectedFlightEvents}';
+    console.log("selected values"+FlightEvents);
+
+      $Lightning.use("c:QCC_AddFEtoGEApp", function() {
+    $Lightning.createComponent("c:QCC_AddFlightEventtoGlobalEvent",
+    { 
+        "selectedFlightEvents" : FlightEvents
+    },
+   "LcDisplayId",
+    function(component) {
+     console.log("Component was created");
+    });
+ });*/
+
+ </script>
+</apex:page>

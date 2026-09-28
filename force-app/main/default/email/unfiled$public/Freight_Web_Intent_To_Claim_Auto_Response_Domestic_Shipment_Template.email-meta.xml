@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Freight Web Intent To Claim Auto Response For Both Domestic and International Template CRM-6595/CRM-7346</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Freight Web Intent To Claim Auto Response Shipment Template</name>
+    <style>none</style>
+    <subject>Qantas Freight – Your intent to claim for {!Case.Freight_AWB_Number__c} has been received</subject>
+    <textOnly>Your intent to claim for {!Case.Freight_AWB_Number__c} has been submitted
+Reference number: {!Case.CaseNumber}
+
+Thank you for completing the first step of our claims process.
+
+To proceed to the next step – lodge a formal claim – we will need further details from you. Without these details your claim will not progress and cannot be assessed. Please ensure you carefully follow all steps advised.
+Your Next step: lodge a formal claim To lodge a formal claim, you’ll need to provide additional information. For more details on the required information, please refer to Claims Help on our website.   Formal claims must be lodged within the specified timeframe. Further information is available on our website and in our Conditions of Carriage (within of Australia) or Conditions of Carriage (outside of Australia).
+
+Where to send this information? Claims for domestic shipments (eligible for shippers or receivers)   Reply to this email with the additional information required to lodge a formal claim.   Please note only one party–shipper or receiver–may lodge the formal claim.   Claims for international shipments (eligible for receivers only)
+
+If the final destination is within Australia or New Zealand, reply to this email with the additional information required.
+If the final destination is outside Australia or New Zealand, the receiver must contact their local Qantas Freight office or ground handling agent and follow their claims process as local regulations vary.
+
+Your shipment details
+
+Air waybill:   {!Case.Freight_AWB_Number__c}
+House air waybill:   {!Case.Freight_House_AWB_Num__c}
+Lodgement reason:   {!Case.Request_Reason__c}
+Supplementary lodgement reason:   {!Case.Description}
+Estimated damages:   {!Case.Refund_Amount__c}
+Number of affected pieces:   {!Case.freight_num_of_Affected_Pieces__c}
+Weight of affected pieces:   {!Case.Freight_Weight__c}
+Claimant name:   {!Case.SuppliedName}
+Contact number:   {!Case.SuppliedPhone}
+Company name:   {!Case.SuppliedCompany}
+
+A reminder that strict time limitations apply for lodging your formal claim.    We’re here to help!   If you need assistance with lodging a formal claim or have any further questions, get in touch with our Customer Service Team at 13 12 13 or reply to this email.    Qantas Freight   {!Case.Thread_Token}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

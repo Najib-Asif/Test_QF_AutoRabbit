@@ -1,0 +1,24 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:registerEvent name="iocData" type="c:IOCFlightFailureDataEvent"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="isError" type="Boolean" default="false"/>
+    <lightning:recordEditForm aura:id="recordEditForm"
+                              onsubmit="{!c.handleSubmit}"
+                              objectApiName="FlightFailure__c">
+        <!-- the messages component is for error messages -->
+        <lightning:messages />
+        <lightning:inputField fieldName="Failure_Code__c" />
+        <lightning:inputField fieldName="Affected_Region__c" />
+        <lightning:inputField fieldName="Affect_Sub_Section__c" />
+        <lightning:inputField fieldName="Pre_Flight__c" />
+        <lightning:inputField fieldName="Post_Flight__c" />
+        <aura:renderIf isTrue="{!v.isError}">
+            <div class=" slds-text-color_error slds-text-align_left">{!v.message}</div>
+        </aura:renderIf>
+        <div class="slds-m-top_medium">
+            <lightning:button variant="brand" type="submit" name="save" label="Save" />
+        </div>
+    </lightning:recordEditForm>
+    
+</aura:component>

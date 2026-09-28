@@ -1,0 +1,23 @@
+<div class="col-sm-12">
+    <div ng-show="vm.loadingLightningComponent" align="center" draggable="false" class="animate-show-hide" >
+        <h4>Loading Lightning Component...</h4>
+        <img class="waitingImage" src="/img/loading.gif"/>
+    </div>
+    <div id="customSearchLightning">
+        <div id="customerSearch" />
+    </div>
+    <div class="row" class="case-button">
+      <div class="col-xs-8 col-xs-offset-2">
+          <div ng-show="!vm.buttonStateCaseSelected" style="text-align:center;">
+              <h4> This chat is not currently linked to a case. </h4>
+              <h5> Please use the case search widget above to find or create a case to link to. </h5>
+          </div>
+          <div ng-show="vm.buttonStateCaseSelected" class="animate-show-hide" style="text-align:center;">
+              <h4 ng-show="vm.userHasPermissions">Conversation linked to Case Number: <i>{{ vm.linkedCaseNumber }}</i></h4>
+              <h4 ng-show="!vm.userHasPermissions">Case Selected: <i>{{ vm.linkedCaseNumber }}</i></h4>
+              <button type="button" ng-click="vm.popOutObject(vm.linkedCaseId)" class="btn btn-success btn-block">Open in Salesforce</button>
+          </div>
+      </div>
+  </div>
+
+</div>

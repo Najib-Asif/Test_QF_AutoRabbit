@@ -1,0 +1,11 @@
+<aura:component >
+
+    <aura:registerEvent name="accountSelected" type="c:AccountSelected"/>  
+    <aura:attribute name="account" type="Account"/>
+
+    <td class="slds-cell-shrink" data-label="Account Name">{!v.account.Name}</td>
+    <td class="slds-cell-shrink" data-label="Billing Address">{!v.account.BillingAddress.city}</td>
+    <td class="slds-cell-shrink" data-label="Map Locator"><a onclick="{!c.accountSelected}">Click Here</a></td>    
+  
+
+</aura:component>

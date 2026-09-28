@@ -1,0 +1,311 @@
+<aura:component controller="QCC_DisplaySpecificNeedsController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="caseRecord" type="Object"/>
+    <aura:attribute name="listMetadata" type="list"/>
+    
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.caseRecord}" action="{!c.setActiveSections}"/>
+    <force:recordData aura:id="recordLoader" recordId="{!v.recordId}" fields="QCC_Specific_Needs__c" targetFields="{!v.caseRecord}"/>
+    
+    <aura:attribute name="activeSectionsName" type="List"/>
+    
+    <!--Wheel Chair Attributes-->
+    <aura:attribute name="modeWC" type="String" default="view"/>
+    <aura:attribute name="valueWC" type="List"/>
+    <aura:attribute name="optionsWC" type="List" default="[
+                                                          {'label': 'Update PNR', 'value': 'Update_PNR_WC__c'},
+                                                          {'label': 'Confirm Outcome to Customer', 'value': 'Confirm_Outcome_to_Customer__c'}
+                                                          ]"/>
+    <aura:attribute name="fieldsWC" type="String[]" default=""/>
+    
+    <!--Medical Clearance No Equipment Attributes-->
+    <aura:attribute name="modeMCNE" type="String" default="view"/>
+    <aura:attribute name="valueMCNE" type="List"/>
+    <aura:attribute name="optionsMCNE" type="List" default="[
+                                                          {'label': 'Update PNR', 'value': 'QCC_Update_PNR_MCNE__c'},
+                                                          {'label': 'Confirmation Sent to Customer', 'value': 'QCC_Confirmation_Sent_to_Customer_MCNE__c'},
+                                                          {'label': 'Send Notification to Airline (where required) ', 'value': 'QCC_Send_Notification_to_Airline_MCNE__c'}
+                                                          ]"/>
+    <aura:attribute name="fieldsMCNE" type="String[]" default=""/>
+    
+    <!--Medical Clearance CPAP/BPAP/VPAP-->
+    <aura:attribute name="modeMCPAP" type="String" default="view"/>
+    <aura:attribute name="valueMCPAP" type="List"/>
+    <aura:attribute name="optionsMCPAP" type="List" default="[
+                                                             {'label': 'Update PNR', 'value': 'QCC_Update_PNR_MC__c'},
+                                                             {'label': 'Confirmation Sent to Customer', 'value': 'QCC_Confirmation_Sent_to_Customer_MC__c'},
+                                                             {'label':'Send Notification to Departure Airport (-3 Days From Flight Departure)', 'value' : 'QCC_Notify_Departure_Airport_3_Days_PAP__c'}
+                                                             ]"/>
+    <aura:attribute name="fieldsMCPAP" type="String[]" default=""/>
+
+    <!--Medical Clearance - Oxygen - Domestic-->
+    <aura:attribute name="modeMCOD" type="String" default="view"/>
+    <aura:attribute name="valueMCOD" type="List"/>
+    <aura:attribute name="optionsMCOD" type="List" default="[
+                                                            {'label': 'MEDA Completed/Approved', 'value': 'QCC_MEDA_Completed_Approved__c'},
+                                                            {'label': 'Quote Provided to Customer', 'value': 'QCC_Quote_Provided_to_Customer_MCOD__c'},
+                                                            {'label': 'Customer has accepted Quote', 'value': 'QCC_Customer_has_accepted_Quote_MCOD__c'},
+                                                            {'label': 'PNR Updated', 'value': 'QCC_PNR_Updated_MCOD__c'},
+                                                            {'label': 'Confirmation sent to Customer', 'value': 'QCC_Confirmation_sent_to_Customer_MCOD__c'},
+                                                            {'label': 'Advise sent to Engineering/Airport/Crew at - 48 hours', 'value': 'QCC_Notify_Eng_Airport_Crew_2_days_OD__c'}
+                                                            ]"/>
+    <aura:attribute name="fieldsMCOD" type="String[]" default=""/>
+    
+    <!--Medical Clearance - Oxygen - International - Qantas Supplied-->
+    <aura:attribute name="modeMCOIQ" type="String" default="view"/>
+    <aura:attribute name="valueMCOIQ" type="List"/>
+    <aura:attribute name="optionsMCOIQ" type="List" default="[
+                                                             {'label': 'MEDA Completed/Approved', 'value': 'QCC_MEDA_Completed_Approved_MCQS__c'},
+                                                             {'label': 'Quote Provided to Customer', 'value': 'QCC_Quote_Provided_to_Customer_MCOQS__c'},
+                                                             {'label': 'Customer has accepted Quote', 'value': 'QCC_Customer_has_accepted_Quote_MCOQS__c'},
+                                                             {'label': 'Oxygen Ordered from QF Stores (max 14 days prior)', 'value': 'QCC_Oxygen_Ordered__c'},
+                                                             {'label': 'PNR Updated', 'value': 'QCC_PNR_Updated_MCOQS__c'},
+                                                             {'label': 'Confirmation sent to Customer', 'value': 'QCC_Confirmation_sent_to_Customer_MCOQS__c'},
+                                                             {'label':'Advise sent to Engineering/Airport/Crew at - 48 hours', 'value': 'QCC_Notify_Eng_Airport_Crew_2_days_QS__c'}
+                                                             ]"/>
+    <aura:attribute name="fieldsMCOIQ" type="String[]" default=""/>
+    
+    <!-- Medical Clearance - Oxygen - International - Travelling with Own-->
+    <aura:attribute name="modeMCOITO" type="String" default="view"/>
+    <aura:attribute name="valueMCOITO" type="List"/>
+    <aura:attribute name="optionsMCOITO" type="List" default="[
+                                                              {'label': 'MEDA Completed/Approved', 'value': 'QCC_MEDA_Completed_Approved_MCIT__c'},
+                                                              {'label': 'PNR Updated', 'value': 'QCC_PNR_Updated_MCIT__c'},
+                                                              {'label': 'Confirmation sent to Customer', 'value': 'QCC_Confirmation_sent_to_Customer_MCIT__c'},
+                                                              {'label': 'Advise sent to Engineering/Airport/Crew at - 48 hours', 'value': 'QCC_Notify_Eng_Airport_Crew_2_days_IT__c'}
+                                                              ]"/>
+    <aura:attribute name="fieldsMCOITO" type="String[]" default=""/>
+    
+    <!--Medical Clearance Stretcher-->
+    <aura:attribute name="modeMCS" type="String" default="view"/>
+    <aura:attribute name="valueMCS" type="List"/>
+    <aura:attribute name="optionsMCS" type="List" default="[
+                                                           {'label': 'Quote Provided to Requester', 'value': 'QCC_Quote_Provided_to_Requester_MCST__c'},
+                                                           {'label': 'Booking Created', 'value': 'QCC_Booking_Created__c'},
+                                                           {'label': 'Payment Received', 'value': 'QCC_Payment_Received__c'},
+                                                           {'label': 'MEDA Clearance Confirmed', 'value': 'QCC_MEDA_Clearance_Confirmed__c'},
+                                                           {'label': 'Update Intelex', 'value': 'QCC_Update_Intelex__c'},
+                                                           {'label': 'Update PNR', 'value': 'QCC_Update_PNR_MCST__c'},
+                                                           {'label': 'Final Confirmation Sent to Requester', 'value': 'QCC_Final_Confirmation_Sent_to_Requester__c'},
+                                                           {'label': 'Send Notification to Departure Airport (-3 Days From Flight Departure)', 'value': 'QCC_Notify_Departure_Airport_3_Days_ST__c'}
+                                                           ]"/>
+    <aura:attribute name="fieldsMCS" type="String[]" default=""/>
+
+    <!--Service Dog Attributes -->
+    <aura:attribute name="modeSD" type="String" default="view"/>
+    <aura:attribute name="valueSD" type="List"/>
+    <aura:attribute name="optionsSD" type="List" default="[
+                                                          {'label': 'Compliance Approval Request Sent (optional)', 'value': 'QCC_Compliance_Approval_Request_Sent_SD__c'},
+                                                          {'label': 'Updating Service Dog Register', 'value': 'QCC_Updating_Service_Dog_Register__c'},
+                                                          {'label': 'Compliance Outcome Received (optional)', 'value': 'QCC_Compliance_Outcome_Received_SD__c'},
+                                                          {'label': 'Outcome Confirmation Sent to Customer', 'value': 'QCC_Outcome_Confirmation_Sent_to_Cst_SD__c'},
+                                                          {'label': 'PNR Updated', 'value': 'QCC_PNR_Updated_SD__c'},
+                                                          {'label': 'International Flight Notification Sent to Cabin Crew  CJMs?', 'value': 'QCC_Notify_Cabin_Crew_CJMs_SD__c'}
+                                                          ]"/>
+    <aura:attribute name="fieldsSD" type="String[]" default =""/>
+
+    <!--Baggage - Cabin Baggage Attributes-->
+    <aura:attribute name="modeBCB" type="String" default="view"/>
+    <aura:attribute name="valueBCB" type="List"/>
+    <aura:attribute name="optionsBCB" type="List" default="[
+                                                           {'label': 'Update PNR', 'value': 'QCC_Update_PNR_CBBG__c'},
+                                                           {'label': 'Seating Allocated for Customer', 'value': 'QCC_Seating_Allocated_for_Customer_CBBG__c'},
+                                                           {'label': 'Send Pre-Departure Notification to Airport and Crew (-1 Day From Flight Departure)', 'value': 'QCC_Notify_Airport_and_Crew_1_Day__c'}
+                                                           ]"/>
+    <aura:attribute name="fieldsBCB" type="String[]" default=""/>
+    
+    <!--Baggage - Musical Baggage Waiver-->
+    <aura:attribute name="modeBMBW" type="String" default="view"/>
+    <aura:attribute name="valueBMBW" type="List"/>
+    <aura:attribute name="optionsBMBW" type="List" default="[
+                                                            {'label': 'Update PNR', 'value': 'QCC_Update_PNR_MBW__c'},
+                                                            {'label': 'Confirmation Sent to Requestor', 'value': 'QCC_Confirmation_Sent_to_Requestor_MBW__c'}
+                                                            ]"/>
+    <aura:attribute name="fieldsBMBW" type="String[]" default=""/>
+    
+    <div class="slds-p-around_medium">
+        <lightning:accordion activeSectionName= "{!v.activeSectionsName}" allowMultipleSectionsOpen="true">
+            <lightning:accordionSection aura:id="sectionWC" name="sectionWC" label="Wheelchair">
+                <lightning:checkboxGroup aura:id="checkboxGroupWC"
+                                         name="Checkbox Group WC"
+                                         label="Task checklist"
+                                         options="{!v.optionsWC}"
+                                         value="{!v.valueWC}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormWC"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsWC}"
+                                          mode="{!v.modeWC}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionMCNE" name="sectionMCNE" label="Medical Clearance - No Equipment">
+                <lightning:checkboxGroup aura:id="checkboxGroupMCNE"
+                                         name="Checkbox Group MCNE"
+                                         label="Task checklist"
+                                         options="{!v.optionsMCNE}"
+                                         value="{!v.valueMCNE}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormMCNE"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsMCNE}"
+                                          mode="{!v.modeMCNE}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionMCPAP" name="sectionMCPAP" label="Medical Clearance - CPAP/BPAP/VPAP">
+                <lightning:checkboxGroup aura:id="checkboxGroupMCPAP"
+                                         name="Checkbox Group MCPAP"
+                                         label="Task checklist"
+                                         options="{!v.optionsMCPAP}"
+                                         value="{!v.valueMCPAP}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormMCPAP"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsMCPAP}"
+                                          mode="{!v.modeMCPAP}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionMCOD" name="sectionMCOD" label="Medical Clearance - Oxygen - Domestic">
+                <lightning:checkboxGroup aura:id="checkboxGroupMCOD"
+                                         name="Checkbox Group MCOD"
+                                         label="Task checklist"
+                                         options="{!v.optionsMCOD}"
+                                         value="{!v.valueMCOD}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormMCOD"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsMCOD}"
+                                          mode="{!v.modeMCOD}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionMCOIQ" name="sectionMCOIQ" label="Medical Clearance - Oxygen – International - Qantas Supplied">
+                <lightning:checkboxGroup aura:id="checkboxGroupMCOIQ"
+                                         name="Checkbox Group MCOIQ"
+                                         label="Task checklist"
+                                         options="{!v.optionsMCOIQ}"
+                                         value="{!v.valueMCOIQ}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormMCOIQ"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsMCOIQ}"
+                                          mode="{!v.modeMCOIQ}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionMCOITO" name="sectionMCOITO" label="Medical Clearance - Oxygen – International - Travelling with own">
+                <lightning:checkboxGroup aura:id="checkboxGroupMCOITO"
+                                         name="Checkbox Group MCOITO"
+                                         label="Task checklist"
+                                         options="{!v.optionsMCOITO}"
+                                         value="{!v.valueMCOITO}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormMCOITO"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsMCOITO}"
+                                          mode="{!v.modeMCOITO}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionMCS" name="sectionMCS" label="Medical Clearance - Stretcher">
+                <lightning:checkboxGroup aura:id="checkboxGroupMCS"
+                                         name="Checkbox Group MCS"
+                                         label="Task checklist"
+                                         options="{!v.optionsMCS}"
+                                         value="{!v.valueMCS}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormMCS"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsMCS}"
+                                          mode="{!v.modeMCS}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionSD" name="sectionSD" label="Service Dog">
+                <lightning:checkboxGroup aura:id="checkboxGroupSD"
+                                         name="Checkbox Group Service Dog"
+                                         label="Task checklist"
+                                         options="{!v.optionsSD}"
+                                         value="{!v.valueSD}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormSD"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsSD}"
+                                          mode="{!v.modeSD}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionBCB" name="sectionBCB" label="Baggage - Cabin Baggage (CBBG)">
+                <lightning:checkboxGroup aura:id="checkboxGroupBCB"
+                                         name="Checkbox Group BCB"
+                                         label="Task checklist"
+                                         options="{!v.optionsBCB}"
+                                         value="{!v.valueBCB}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormBCB"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsBCB}"
+                                          mode="{!v.modeBCB}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+            <lightning:accordionSection aura:id="sectionBMBW" name="sectionBMBW" label="Baggage - Musical Baggage Waiver">
+                <lightning:checkboxGroup aura:id="checkboxGroupBMBW"
+                                         name="Checkbox Group BMBW"
+                                         label="Task checklist"
+                                         options="{!v.optionsBMBW}"
+                                         value="{!v.valueBMBW}"
+                                         onchange="{!c.handleChange}"/>
+                <div class = "slds-p-top_small">
+                    <lightning:recordForm aura:id="recordFormBMBW"
+                                          recordId="{!v.caseRecord.QCC_Specific_Needs__c}"
+                                          columns="2"
+                                          objectApiName="QCC_Specific_Needs__c"
+                                          fields="{!v.fieldsBMBW}"
+                                          mode="{!v.modeBMBW}"
+                                          onsuccess="{!c.handleSuccess}">
+                    </lightning:recordForm>  
+                </div>
+            </lightning:accordionSection>
+        </lightning:accordion>
+    </div>   
+</aura:component>

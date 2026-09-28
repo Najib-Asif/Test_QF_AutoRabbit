@@ -1,0 +1,27 @@
+<apex:page standardController="Case" showHeader="false" sidebar="false">
+    <!-- 
+        sforce.one.navigateToURL('{!'/one/one.app#/sObject/00Oo0000005vU4jEAE/view?fv0=' & LEFT(Account.Id,15) }');
+        '/{!Case.Id}/e?clone=1&cloneparent=1&00N9000000Dg8b5=&retURL=%2F{!Case.Id}&RecordType=01290000001IINO&ent=Case'            
+        //window.top.location = '{!'/00Oo0000005vU4jEAE?pv0=' & LEFT(Account.Id,15)}';
+        -->
+    
+    <script>
+        /* this if condition checks if the user is in Lightning experience or Classic */
+        
+        if(typeof sforce !== 'undefined' && sforce !== null && '{!$User.UIThemeDisplayed}' === 'Theme4d'){
+            var defaultValues = {
+               'Description' : '{!Case.Description}',
+               'Status' : 'Open',
+               'Priority' : '{!Case.Priority}',
+               'Type' : '{!Case.Type}',
+               'ParentId' : '{!Case.Id}',
+               'Region_Code__c' : '{!Case.Region_Code__c}',
+               'Subject' : '{!Case.Subject}'
+            };
+            sforce.one.createRecord('Case','01290000001IINO',defaultValues);
+        }
+        else {
+            window.top.location = '/{!Case.Id}/e?clone=1&cloneparent=1&00N9000000Dg8b5=&retURL=%2F{!Case.Id}&RecordType=01290000001IINO&ent=Case';
+        }
+    </script>
+</apex:page>

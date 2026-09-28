@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Invoking Apex to Parse the Platform Event payload in to JSON</description>
+        <name>getJsonPayload</name>
+        <label>getJsonPayload</label>
+        <locationX>110</locationX>
+        <locationY>792</locationY>
+        <actionName>QantasMObileAppAPIJSONFormatter</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Assign_Request_Tracker_Record</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error_Msg</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>contactId</name>
+            <value>
+                <elementReference>contactFFNumber</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>isresponseRequired</name>
+            <value>
+                <elementReference>isReponseRequired</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>methodName</name>
+            <value>
+                <stringValue>parseRecoveryPayload</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>originalCaseNumber</name>
+            <value>
+                <elementReference>Get_Parent_Case_Record.CaseNumber</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recCreatedDate</name>
+            <value>
+                <elementReference>$Record.CreatedDate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recoveryNumber</name>
+            <value>
+                <elementReference>$Record.Name</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recProcessStatus</name>
+            <value>
+                <elementReference>$Record.Status__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recType</name>
+            <value>
+                <elementReference>$Record.Type__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QantasMObileAppAPIJSONFormatter</nameSegment>
+        <outputParameters>
+            <assignToReference>jsonPayload</assignToReference>
+            <name>output</name>
+        </outputParameters>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Assigning Platfrom Event field values</description>
+        <name>Assign_Request_Tracker_Record</name>
+        <label>Assign Request Tracker Record</label>
+        <locationX>110</locationX>
+        <locationY>900</locationY>
+        <assignmentItems>
+            <assignToReference>RequestTrackerNotPE.Message__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Recovery Status Updated</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>RequestTrackerNotPE.Payload__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>jsonPayload</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>RequestTrackerNotPE.Case_Number__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Parent_Case_Record.CaseNumber</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Publish_Request_Tracker_Notification</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigning standalone case id value</description>
+        <name>Case_Id_Assignment</name>
+        <label>Case Id Assignment</label>
+        <locationX>638</locationX>
+        <locationY>384</locationY>
+        <assignmentItems>
+            <assignToReference>originalCaseId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Case_Number__r.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Parent_Case_Record</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigning parent case id value</description>
+        <name>Parent_CaseId_Assignment</name>
+        <label>Parent CaseId Assignment</label>
+        <locationX>374</locationX>
+        <locationY>384</locationY>
+        <assignmentItems>
+            <assignToReference>originalCaseId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Case_Number__r.ParentId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Parent_Case_Record</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Checking the criterias to publish the Platform Event</description>
+        <name>Check_Is_Valid_Case_to_Publish_the_PE</name>
+        <label>Check Is Valid Case to Publish the PE</label>
+        <locationX>506</locationX>
+        <locationY>684</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Valid_Case</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Number__r.ContactId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Number__r.Contact.Frequent_Flyer_Number__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>isValidRecoveryType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>valid</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>isValidCaseRecordType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>valid</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>isValidCaseOrigin</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>valid</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>isValidCaseGroup</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>valid</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>isValidCaseCategory</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>valid</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Parent_Case_Record.CreatedDate</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>Date120DaysBack</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>isReponseRequired</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>getJsonPayload</targetReference>
+            </connector>
+            <label>Yes Valid Case</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>checking is recovery tagged to Child/Parent Cases</description>
+        <name>Original_Case_Check</name>
+        <label>Original Case Check</label>
+        <locationX>506</locationX>
+        <locationY>276</locationY>
+        <defaultConnector>
+            <targetReference>Case_Id_Assignment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No Parent Case</defaultConnectorLabel>
+        <rules>
+            <name>Has_Parent_Case</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Number__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Number__r.ParentId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Parent_CaseId_Assignment</targetReference>
+            </connector>
+            <label>Has Parent Case</label>
+        </rules>
+    </decisions>
+    <description>CRM-8421: Publish Request Tracker Notification Platform Event</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>contactFFNumber</name>
+        <dataType>String</dataType>
+        <expression>IF (ISBLANK({!$Record.Case_Number__r.ParentId}), {!$Record.Case_Number__r.Contact.Frequent_Flyer_Number__c}, {!$Record.Case_Number__r.Parent.Contact.Frequent_Flyer_Number__c} )</expression>
+    </formulas>
+    <formulas>
+        <name>Date120DaysBack</name>
+        <dataType>Date</dataType>
+        <expression>TODAY() - 120</expression>
+    </formulas>
+    <formulas>
+        <name>isReponseRequired</name>
+        <dataType>String</dataType>
+        <expression>IF (ISBLANK({!$Record.Case_Number__r.ParentId}), IF (ISBLANK(TEXT({!$Record.Case_Number__r.Is_Response_Requested__c})), &apos;Yes&apos;, TEXT({!$Record.Case_Number__r.Is_Response_Requested__c}) ),  IF (ISBLANK(TEXT({!$Record.Case_Number__r.Parent.Is_Response_Requested__c})), &apos;Yes&apos;, TEXT({!$Record.Case_Number__r.Parent.Is_Response_Requested__c}) )  )</expression>
+    </formulas>
+    <formulas>
+        <name>isValidCaseCategory</name>
+        <dataType>String</dataType>
+        <expression>CASE( {!Get_Parent_Case_Record.Category__c},
+&apos;Customer behaviour/Customer offload&apos;, &apos;invalid&apos;,
+&apos;Customer Behaviour&apos;, &apos;invalid&apos;,
+&apos;Medical - Assistance Provided&apos;,&apos;invalid&apos;,
+&apos;Medical - Patient&apos;, &apos;invalid&apos;,
+&apos;Customs/Immigration&apos;, &apos;invalid&apos;,
+&apos;Theft&apos;, &apos;invalid&apos;,
+&apos;valid&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>isValidCaseGroup</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Get_Parent_Case_Record.Group__c},
+&apos;GMC&apos;,&apos;invalid&apos;,
+&apos;valid&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>isValidCaseOrigin</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Get_Parent_Case_Record.Origin},
+&apos;Social_Media&apos;, &apos;valid&apos;,
+&apos;SHR QCC&apos;, &apos;valid&apos;,
+&apos;Qantas.com&apos;, &apos;valid&apos;,
+&apos;Phone&apos;,&apos;valid&apos;,
+&apos;invalid&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>isValidCaseRecordType</name>
+        <dataType>String</dataType>
+        <expression>CASE ( {!Get_Parent_Case_Record.RecordType.Name},
+&apos;CCC Complaints&apos;,&apos;valid&apos;,
+&apos;CCC Baggage&apos;,&apos;valid&apos;,
+&apos;CCC Insurance Letter Case&apos;, &apos;valid&apos;,
+&apos;CCC Query&apos;,&apos;valid&apos;,
+&apos;invalid&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>isValidRecoveryType</name>
+        <dataType>String</dataType>
+        <expression>CASE( {!$Record.Type__c},
+&apos;Qantas Points&apos;, &apos;valid&apos;,
+&apos;Domestic Qantas Club Lounge Passes&apos;, &apos;valid&apos;,
+&apos;International Business Lounge Passes&apos;, &apos;valid&apos;,
+&apos;Travel vouchers&apos;, &apos;valid&apos;,
+&apos;Credit Card Refund&apos;, &apos;valid&apos;,
+&apos;EFT Refund&apos;, &apos;valid&apos;,
+&apos;Bag Repair&apos;,&apos;valid&apos;,
+&apos;Bag Replacement&apos;, &apos;valid&apos;,
+&apos;Payment (EFT)&apos;, &apos;valid&apos;,
+&apos;Payment (Credit Card)&apos;, &apos;valid&apos;,
+&apos;Lounge Passes&apos;, &apos;valid&apos;,
+&apos;First Lounge Pass&apos;, &apos;valid&apos;,
+&apos;invalid&apos;)</expression>
+    </formulas>
+    <interviewLabel>RecoveryAsyncAfterUpdateTriggerFlowQCC_PublishCaseNotificationEvent {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>RecoveryAsyncAfterUpdateTriggerFlowQCC_PublishCaseNotificationEvent</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>inserting log record, if there is any exception</description>
+        <name>Log_Error_Msg</name>
+        <label>Log Error Msg</label>
+        <locationX>374</locationX>
+        <locationY>1116</locationY>
+        <inputAssignments>
+            <field>Business_Function_Name__c</field>
+            <value>
+                <stringValue>QCC Qantas Mobile App Error Logging</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Error_Message__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Exception_Type__c</field>
+            <value>
+                <stringValue>Get Element Failure</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FailedRecordID__c</field>
+            <value>
+                <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LoggedIn_User__c</field>
+            <value>
+                <elementReference>$User.Username</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>ErrorLogRecordTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Log__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Publishing Platform Event</description>
+        <name>Publish_Request_Tracker_Notification</name>
+        <label>Publish Request Tracker Notification</label>
+        <locationX>110</locationX>
+        <locationY>1008</locationY>
+        <faultConnector>
+            <targetReference>Log_Error_Msg</targetReference>
+        </faultConnector>
+        <inputReference>RequestTrackerNotPE</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Get original Case Record details</description>
+        <name>Get_Parent_Case_Record</name>
+        <label>Get Parent Case Record</label>
+        <locationX>506</locationX>
+        <locationY>576</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Is_Valid_Case_to_Publish_the_PE</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>originalCaseId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Recovery__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>Original_Case_Check</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>ErrorLogRecordTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>012Mo000000Tlht</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>jsonPayload</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>originalCaseId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>RequestTrackerNotPE</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Request_Tracker_Notification__e</objectType>
+    </variables>
+</Flow>

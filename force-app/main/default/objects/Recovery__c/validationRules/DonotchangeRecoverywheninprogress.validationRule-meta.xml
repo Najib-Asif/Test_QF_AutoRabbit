@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DonotchangeRecoverywheninprogress</fullName>
+    <active>true</active>
+    <description>QCC: Don&apos;t change Recovery details when Recovery is in progress and finalised.</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_Donot_changeRecoverydetailsonceAppro__c,
+RecordType.DeveloperName = &apos;Customer_Connect&apos;, NOT(ISCHANGED(Status__c)), 
+Text(Status__c) &lt;&gt; &apos;Open&apos;, 
+Text(Status__c) &lt;&gt; &apos;Awaiting Approval&apos;, 
+Text(Type__c) &lt;&gt; &apos;Bag Replacement&apos;, 
+OR( 
+PRIORVALUE(Value__c) &lt;&gt; Value__c,PRIORVALUE(Amount__c) &lt;&gt; Amount__c,Text(PRIORVALUE(Type__c)) &lt;&gt; Text(Type__c), Text(PRIORVALUE(Stage__c)) &lt;&gt; Text(Stage__c) 
+) 
+)</errorConditionFormula>
+    <errorMessage>Type or Amount or Value or Stage can&apos;t be changed.</errorMessage>
+</ValidationRule>

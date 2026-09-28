@@ -1,0 +1,27 @@
+<aura:component controller="KM_NoticeBoardController" implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="cbaseURL" type="String"/>
+    <aura:attribute name="ctopic" type="String"/>
+    <aura:attribute name="ctopicid" type="Id"/>
+    <aura:attribute name="ctopicurl" type="String"/>
+    <aura:attribute name="showtopic" type="boolean" default="false"/>
+    <aura:handler name="init" value="{! this }" action="{! c.myAction }"/>
+    <div/>
+    <nav role="navigation" aria-label="Breadcrumbs">
+        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+            <li class="slds-breadcrumb__item">
+                <a class = "linkLabel" href="https://www.qantas.com" target="_self">Home</a>
+            </li>
+            <li class="slds-breadcrumb__item">
+                <a class = "linkLabel" href="{! v.cbaseURL }">Help and Support</a>
+            </li>
+            <aura:if isTrue="{!v.showtopic}">
+                <li class="slds-breadcrumb__item">
+                    <a class = "linkLabel" href="{!v.ctopicurl}">{! v.ctopic }</a>
+                </li>
+            </aura:if>
+            <li class="slds-breadcrumb__item">
+                <a class = "textLabel" href="javascript:void(0);">Article Detail</a>
+            </li>                                             
+        </ol>
+    </nav>
+</aura:component>

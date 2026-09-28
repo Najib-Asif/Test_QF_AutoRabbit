@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_No_Save_Case_Escalated_Resolution</fullName>
+    <active>false</active>
+    <description>VR to stop saving a new case if Escalated and Resolution Method is selected</description>
+    <errorConditionFormula>AND( RecordType.DeveloperName  = &apos;QCC_Case&apos;, ISNEW(), OR(IsEscalated =  true,!ISNULL(Resolution_Method__c)))</errorConditionFormula>
+    <errorMessage>Can&apos;t save the record!</errorMessage>
+</ValidationRule>

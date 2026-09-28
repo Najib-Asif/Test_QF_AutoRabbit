@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_MonetaryValueCheck</fullName>
+    <active>true</active>
+    <errorConditionFormula>TEXT(Process_Status__c) = &apos;Pending Approval&apos; &amp;&amp;
+ISCHANGED(Process_Status__c) &amp;&amp;
+ISBLANK(Monetary_Value__c) &amp;&amp;
+TEXT(Type__c) = &apos;Travel Vouchers&apos;</errorConditionFormula>
+    <errorMessage>Monetary Value is missing</errorMessage>
+</ValidationRule>

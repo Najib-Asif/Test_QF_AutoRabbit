@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ActivePermSetLicenseMetric$ParentEnumOrId</field>
+    </columns>
+    <columns>
+        <field>ActivePermSetLicenseMetric$MetricsDate</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>ActivePermSetLicenseMetric$AssignedUserCount</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>ActivePermSetLicenseMetric$ActiveUserCount</field>
+    </columns>
+    <columns>
+        <field>ActivePermSetLicenseMetric$Id</field>
+    </columns>
+    <currency>AUD</currency>
+    <format>Tabular</format>
+    <name>Active Permission set Licenses metrics</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Active_Permission_Set_License_Metrics__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>ActivePermSetLicenseMetric$MetricsDate</dateColumn>
+        <interval>INTERVAL_LAST7</interval>
+    </timeFrameFilter>
+</Report>

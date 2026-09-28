@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_34321264</developerName>
+        <masterLabel>Tier</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Case$Frequent_Flyer_Tier__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairman&apos;s Lounge Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chairmans Lounge</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Platinum One</sourceValue>
+            </sourceValues>
+            <value>1. Chair/Plat1</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Gold</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Lifetime Gold</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Platinum</sourceValue>
+            </sourceValues>
+            <value>2. Plat/Gold</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Bronze</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Lifetime Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Club Bronze</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Qantas Club Silver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Silver</sourceValue>
+            </sourceValues>
+            <value>3. Sil/Bnze</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>RowCount</column>
+        </chartSummaries>
+        <chartType>HorizontalBarStacked</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>Case$RecordType</groupingColumn>
+        <legendPosition>Right</legendPosition>
+        <location>CHART_BOTTOM</location>
+        <secondaryGroupingColumn>Case$Owner_City__c</secondaryGroupingColumn>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case$Owner</field>
+    </columns>
+    <columns>
+        <field>Case$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Case$ClosedDate</field>
+    </columns>
+    <columns>
+        <field>Case$Due_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case$Original_Due_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case$Original_Closed_Date__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case$No_of_Days_Case_is_Due_In__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>report taking into account graphite life cycle changes_Clayton</description>
+    <filter>
+        <criteriaItems>
+            <column>Case$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.QCC_Assistance,Case.QCC_Disruption,Case.QCC_Elite_Process,Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Compliment,Case.CCC_Further_Action_Required,Case.CCC_Medical,Case.CCC_On_The_Spot_Recovery,Case.CCC_Query,Case.QCC_Insurance_Letter_Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Resolved,Closed,Waiting for Approval,Waiting for Customer,Waiting for Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Closed_By__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>QCC API Integration User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Type</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Welcome to Platinum One,Welcome to SSU,Welcome to Life Time Platinum,PNR Health Check,PNR Health Check - Watchlist</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$RecordType</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Owner_City__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_34321264</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case$Origin</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Cases Resolved Today</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_or_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case$Resolve_Closeddate__c</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

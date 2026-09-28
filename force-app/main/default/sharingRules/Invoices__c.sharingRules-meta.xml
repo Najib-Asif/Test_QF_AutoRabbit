@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Agency_Payments_shared_with_Account_Managers</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Sharing Agency Payment records with account managers</description>
+        <label>Agency Payments shared with Account Managers</label>
+        <sharedTo>
+            <group>Agency_Account_Managers</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Approved Agency Payments,Agency Payments</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Agency_Payments_shared_with_Sales_Performance_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing agency payment records with Sales Performance Team</description>
+        <label>Agency Payments shared with Sales Performance Team</label>
+        <sharedTo>
+            <group>Agency_Sales_Performance_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Approved Agency Payments,Agency Payments</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Edit_Access_for_Sales_Support_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>OWD is private, and R/W access given to Sales Support Team</description>
+        <label>Edit Access for Sales Support Team</label>
+        <sharedTo>
+            <group>Sales_Support_Team_QIC</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Approved Corporate Payments,New Corporate Payments</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Read_access_to_the_SME_payments_for_QBR_strategy</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Read access to the  SME  payments for QBR strategy</label>
+        <sharedTo>
+            <group>QBR_Strategy_group</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Read_access_to_the_contract_payments_for_SME</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>To share the contract payments and payments records across the team. Please refer: CRM-2795</description>
+        <label>Read access to the contract payments for SME</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_SME</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Read_access_to_the_payments_for_B_G</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>To share the contract payments and payments records across the team. Please refer: CRM-2795</description>
+        <label>Read access to the payments for B&amp;G</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_B_G</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales_B_G</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Read_access_to_the_payments_for_Deal_Optimization_team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>To share the contract payments and payments records across the team. Please refer: CRM-2795</description>
+        <label>Read access to the payments for Deal Optimization team</label>
+        <sharedTo>
+            <role>QF_Support_B_G_Deal_Optimisation_Pricing</role>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Share_records_owned_by_Sales_Support_QIC_to_Roles_QF_Dom_sales_and_QF_support</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>sharing rule for record owned by group &quot; Group: Sales Support Team (QIC)&quot; with Role and Subordinates: QF-DOM-Sales and Role: QF-Support-B&amp;G-Deal Optimisation/Pricing.</description>
+        <label>Share records owned by Sales Support(QIC) to Roles QF Dom sales and QF support</label>
+        <sharedTo>
+            <group>Sales_Support_Team_QIC_for_Payments</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sales_Support_Team_QIC</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

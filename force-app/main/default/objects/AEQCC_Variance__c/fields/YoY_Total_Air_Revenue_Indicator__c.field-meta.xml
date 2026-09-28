@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>YoY_Total_Air_Revenue_Indicator__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( YoY_Total_Air_Reveue__c != 0, 
+IF( 
+(YoY_Total_Air_Reveue__c &gt;= 0.001), 
+IMAGE(&quot;/resource/Green_Up&quot;, &quot;Up&quot;), 
+IF( 
+(YoY_Total_Air_Reveue__c &lt;= - 0.001), 
+IMAGE(&quot;/resource/Red_Down&quot;, &quot;Down&quot;), 
+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;) 
+) 
+), 
+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;)
+)</formula>
+    <label>YoY Total Air Revenue Indicator</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

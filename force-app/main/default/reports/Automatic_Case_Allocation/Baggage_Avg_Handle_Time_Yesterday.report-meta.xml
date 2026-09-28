@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case_value_changes__c.Case_Status_Changed_Duration__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>Case_value_changes__c.Total_Case_Status_Duration_in_minutes__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>CUST_OWNER_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Abigael Bea Bernardino,Alliah Faith Noelle Tarlit,Azile Mthunzini,Bradny Gumede,Caroline Maenetja,Cherelloi Adolfo,Christina Joyzen Pasia,Damian De Vos,Daniel Arendse,Elton Isaacs,Erica Tikili,Escaraman Ma. Danilly Jane Mendoza,Eugene Agpoon,Hani Leila Mallari,Iris Banua,Isobelle Jane Soreno,James Patrick Abdula,Jean Kate Favila,Jemar Rey Alvarez,Joannelyn Silang,Jocelyn Belonio,Joevic Macapagal,Julian Ludick,Kristine Joy Bondoc,Larriane Grace Almazar,Maria Cabajes,Maria Cecilia Collantes,Maria Pinili,Masithembe Nono,Nasria Dacillo Hadjiaziz,Neo Pan,Noah Buys,Raffy Dida-agun,Raul Taga-an,Rebecca Oliquino,Rizaline Saavedra,Samantha Chakanetsa,Shamiel Jonathan,Sibongile Phama,Sigman Rhee Elarcosa,Steven Clint Velasco,Waldrex Jr Bautista</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.Old_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>In progress</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.New_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Waiting for customer,Waiting for Internal,Pending Recovery,closed,on hold,reply received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.Total_Case_Status_Duration_in_minutes__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>0</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_$Case.Case_Number__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CUST_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Baggage: Avg Handle Time Yesterday</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Case_value_changes__c@Case_value_changes__c.Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_YESTERDAY</interval>
+    </timeFrameFilter>
+</Report>

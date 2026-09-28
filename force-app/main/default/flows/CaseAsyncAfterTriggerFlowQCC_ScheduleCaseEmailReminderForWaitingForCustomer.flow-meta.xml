@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>myWaitEvent_myWait_myRule_1_event_0_SA1</name>
+        <label>3rd day Send Case Email Reminder</label>
+        <locationX>76</locationX>
+        <locationY>492</locationY>
+        <actionName>QCC_SendCaseStatusEmailReminderInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailTemplateName</name>
+            <value>
+                <stringValue>Email_Reminder_Day_3</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>caseRecord</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QCC_SendCaseStatusEmailReminderInvocable</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>myWaitEvent_myWait_myRule_1_event_1_SA1</name>
+        <label>7th day Send Case  Email Reminder</label>
+        <locationX>604</locationX>
+        <locationY>492</locationY>
+        <actionName>QCC_SendCaseStatusEmailReminderInvocable</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Check_If_GW_Case</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailTemplateName</name>
+            <value>
+                <stringValue>Email_Reminder_Day_7_Final</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>caseRecord</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QCC_SendCaseStatusEmailReminderInvocable</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Add_WorkOrder_Ids</name>
+        <label>Add WorkOrder Ids</label>
+        <locationX>780</locationX>
+        <locationY>1116</locationY>
+        <assignmentItems>
+            <assignToReference>WorkOrderId</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_on_Workorder.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_on_Workorder.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>WorkOrdersToUpdate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_on_Workorder</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_on_Workorder</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assignment_2</name>
+        <label>Assignment 2</label>
+        <locationX>780</locationX>
+        <locationY>1524</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_on_WorkOrderLineItems.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Rejected</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>WOLIsToUpdate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_on_WorkOrderLineItems</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_on_WorkOrderLineItems</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>This Decision is added to identify if the case is GW and to reject all the relared WOLIs so that case can be updated to &apos;Closed&apos;</description>
+        <name>Check_If_GW_Case</name>
+        <label>Check If GW Case</label>
+        <locationX>824</locationX>
+        <locationY>684</locationY>
+        <defaultConnector>
+            <targetReference>myWaitEvent_myWait_myRule_1_event_1_SA2</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_is_GW_Case</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>CCC_Query</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Claims and Reimbursements</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01.Group__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Flight Disruptions</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01.Category__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Accommodation/Reimbursement of Expenses</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Case_owner_update_to_Running_user</targetReference>
+            </connector>
+            <label>Yes is GW Case</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks if case owner is QCC or Specific needs or VIP waiting for customer</description>
+        <name>Owner_Check</name>
+        <label>Owner Check</label>
+        <locationX>208</locationX>
+        <locationY>384</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Criteria_Met</name>
+            <conditionLogic>1 AND (2 OR 3 )</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record.OwnerName__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>QCC_Waiting_for_Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record.OwnerName__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>QCC_Specific_Needs_Waiting_for_Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_1_event_0_SA1</targetReference>
+            </connector>
+            <label>Checks if case is with Waiting for customer Q</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks if case owner is QCC or Specific needs or VIP waiting for customer</description>
+        <name>Owner_Check_01</name>
+        <label>Owner Check</label>
+        <locationX>824</locationX>
+        <locationY>384</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Criteria_Met_01</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01.OwnerName__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>QCC_Waiting_for_Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01.OwnerName__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>QCC_Specific_Needs_Waiting_for_Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_1_event_1_SA1</targetReference>
+            </connector>
+            <label>Checks if case is with Waiting for customer Q</label>
+        </rules>
+        <rules>
+            <name>VIP_Waiting_for_customer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record_01.OwnerName__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>QCC_VIP_Waiting_for_Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_If_GW_Case</targetReference>
+            </connector>
+            <label>Is Owner VIP Waiting for customer</label>
+        </rules>
+    </decisions>
+    <description>CRM-7513, Migrated from the QCC_ScheduleCaseEmailReminder process using Waiting for Customer criteria.
+Schedule an Email Reminder for Case where status is Waiting for Customer
+Removed Email send logic for cases in &apos;VIP Waiting for Customer Queue&apos;
+CRM-13545 - Workorder Closure and WOLI rejection before Case closure</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>SenderEmailAddress</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!$Record.Contact_Email__c}), &apos;&apos;, {!$Record.Contact_Email__c})</expression>
+    </formulas>
+    <interviewLabel>CaseAsyncAfterTriggerFlowQCC_ScheduleCaseEmailReminderForWaitingForCustomer {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAsyncAfterTriggerFlowQCC_ScheduleCaseEmailReminderForWaitingForCustomer</label>
+    <loops>
+        <description>To loop on each related Work order under Case to get the list of Work Order Line Items</description>
+        <name>Loop_on_Workorder</name>
+        <label>Loop on Workorder</label>
+        <locationX>692</locationX>
+        <locationY>1008</locationY>
+        <collectionReference>Get_Work_Order</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Add_WorkOrder_Ids</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_WorkOrder_LineItem_Id</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_on_WorkOrderLineItems</name>
+        <label>Loop on WorkOrderLineItems</label>
+        <locationX>692</locationX>
+        <locationY>1416</locationY>
+        <collectionReference>Get_WorkOrder_LineItem_Id</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assignment_2</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_WOLIs</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Case_Record</name>
+        <label>Get Case Record</label>
+        <locationX>208</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Owner_Check</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Case_Record_01</name>
+        <label>Get Case Record</label>
+        <locationX>824</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Owner_Check_01</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Case&apos;s related WorkOrder records</description>
+        <name>Get_Work_Order</name>
+        <label>Get Work Order</label>
+        <locationX>692</locationX>
+        <locationY>900</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_on_Workorder</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CaseId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>LineItemCount</field>
+            <operator>GreaterThan</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>WorkOrder</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_WorkOrder_LineItem_Id</name>
+        <label>Get WorkOrder LineItem Id</label>
+        <locationX>692</locationX>
+        <locationY>1308</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_on_WorkOrderLineItems</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WorkOrderId</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>WorkOrderId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>WorkOrderLineItem</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>This updates the case owner from &apos;Waiting for Customer&apos; to &apos;Running user&apos;, in orher to bypass the validation rule: QCC_GW_Case_start_work_and_owner_rule</description>
+        <name>Case_owner_update_to_Running_user</name>
+        <label>Case owner update to Running user</label>
+        <locationX>692</locationX>
+        <locationY>792</locationY>
+        <connector>
+            <targetReference>Get_Work_Order</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myWaitEvent_myWait_myRule_1_event_1_SA2</name>
+        <label>Update Case status to Close</label>
+        <locationX>824</locationX>
+        <locationY>2016</locationY>
+        <inputAssignments>
+            <field>Resolution_Method__c</field>
+            <value>
+                <stringValue>Case auto closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Reject the related work order line item records</description>
+        <name>Update_WOLIs</name>
+        <label>Update WOLIs</label>
+        <locationX>692</locationX>
+        <locationY>1716</locationY>
+        <connector>
+            <targetReference>Update_WorkOrders</targetReference>
+        </connector>
+        <inputReference>WOLIsToUpdate</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Update workorder to &apos;Closed&apos; Status</description>
+        <name>Update_WorkOrders</name>
+        <label>Update WorkOrders</label>
+        <locationX>692</locationX>
+        <locationY>1824</locationY>
+        <connector>
+            <targetReference>myWaitEvent_myWait_myRule_1_event_1_SA2</targetReference>
+        </connector>
+        <inputReference>WorkOrdersToUpdate</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterFormula>AND (ISPICKVAL({!$Record.Status} , &apos;Waiting for Customer&apos;), OR (
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Baggage&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Query&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCCOffload&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;QCC_Assistance&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Refund&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;QCC_Disruption&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;QCC_Elite_Process&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;QCC_Sensitive_Case&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Complaints&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Compliment&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Further_Action_Required&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Medical&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_On_The_Spot_Recovery&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;QCC_Insurance_Letter_Case&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;QCC_Migrated_Case&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Email_Bounced_Back&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Event&apos;,
+{!$Record.RecordType.DeveloperName} == &apos;CCC_Voice&apos;
+))</filterFormula>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>myWaitEvent_myWait_myRule_1_event_0</name>
+            <connector>
+                <targetReference>Get_Case_Record</targetReference>
+            </connector>
+            <label>ScheduledPath_1</label>
+            <offsetNumber>3</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>QCC_Status_Changed_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>myWaitEvent_myWait_myRule_1_event_1</name>
+            <connector>
+                <targetReference>Get_Case_Record_01</targetReference>
+            </connector>
+            <label>ScheduledPath_2</label>
+            <offsetNumber>7</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>QCC_Status_Changed_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>WOLIsToUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>WorkOrderLineItem</objectType>
+    </variables>
+    <variables>
+        <name>WorkOrderId</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>WorkOrdersToUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>WorkOrder</objectType>
+    </variables>
+</Flow>

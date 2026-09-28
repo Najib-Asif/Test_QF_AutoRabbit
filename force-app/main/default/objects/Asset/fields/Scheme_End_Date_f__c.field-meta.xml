@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheme_End_Date_f__c</fullName>
+    <formula>IF(
+RecordType.DeveloperName == &apos;Corporate_Scheme&apos;,
+Contract__r.Contract_End_Date__c,
+IF(
+RecordType.DeveloperName == &apos;Public_Scheme&apos;,
+Public_Scheme_End_Date__c,
+null
+)
+)</formula>
+    <label>Scheme End Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

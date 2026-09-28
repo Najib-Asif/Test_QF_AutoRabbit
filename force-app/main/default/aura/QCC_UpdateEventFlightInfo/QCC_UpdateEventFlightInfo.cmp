@@ -1,0 +1,36 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader"
+                controller="QCC_UpdateEventFlightInfoController" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/> 
+    <aura:if isTrue="{!v.showSpinner}">
+            <div>
+                <div role="status" class="slds-spinner slds-spinner_medium">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+            <aura:set attribute="else">
+                <div class="message--result">
+                    <article class="slds-card"> 
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate"> 
+                                
+                                    <div class="slds-media__body">
+                                        <h2>
+                                            The flight info is updated for this Event.
+                                        </h2>
+                                    </div>
+                            </header>
+                        </div>
+                        <footer class="slds-card__footer">
+                            <lightning:button label="OK" onclick="{!c.doClosePanel}"/>
+                        </footer>
+                    </article>
+                </div>
+            </aura:set>
+        </aura:if> 
+    
+    
+</aura:component>

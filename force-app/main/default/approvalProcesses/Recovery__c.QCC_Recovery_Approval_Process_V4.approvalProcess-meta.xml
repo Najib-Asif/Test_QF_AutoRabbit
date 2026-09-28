@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Case_Number__c</field>
+        <field>Status__c</field>
+        <field>Type__c</field>
+        <field>Value__c</field>
+        <field>Amount__c</field>
+        <field>Owner</field>
+        <field>Description__c</field>
+        <field>Case_Category__c</field>
+        <field>Case_Sub_Category__c</field>
+        <field>Case_Record_Type__c</field>
+        <field>Case_Group__c</field>
+        <field>Cost_Centre_Account_Number__c</field>
+        <field>Suggested_Maximum__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>approvalcoun1</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_previous_approvers_ID</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_TL_Approved</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Level 1 Approval</description>
+        <entryCriteria>
+            <formula>OR(AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Consultant&apos;,AND(OR(CONTAINS(CreatedBy.Profile.Name,&apos;QCC Contact Center Agent&apos;),CONTAINS(CreatedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),NOT(ISPICKVAL(CreatedBy.Operational_Group__c, &apos;Team Leader&apos;))))
+,
+  OR(
+   AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c &gt; 1000),
+   AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 5000),
+   AND($User.CCAT_User__c == False,OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 500),
+   AND(Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 20000),
+   AND(Text(Type__c)=&apos;Ticket Refund EFT&apos;,Value__c&gt;2000),
+   AND($User.CCAT_User__c == False,Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; Suggested_Maximum__c),
+   AND($User.CCAT_User__c == False,Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 0,ISBLANK(Suggested_Maximum__c)),
+   AND($User.CCAT_User__c == False,Text(Type__c) = &apos;Travel vouchers&apos;, Value__c &gt; 200)
+   )
+   ),
+   AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Team Lead&apos;,AND(OR( CONTAINS(CreatedBy.Profile.Name, &apos;QCC Contact Center Agent&apos;),CONTAINS(CreatedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),ISPICKVAL(CreatedBy.Operational_Group__c, &apos;Team Leader&apos;)))
+,
+   OR(
+   AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c &gt; 2500),
+   AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 10000),
+   AND(Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 50000),
+   AND(Text(Type__c)=&apos;Ticket Refund EFT&apos;,Value__c&gt;2000),
+   AND($User.CCAT_User__c == False,Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 25000),
+   AND($User.CCAT_User__c == False,OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 2000),
+   AND($User.CCAT_User__c == False,Text(Type__c) = &apos;Travel vouchers&apos;, Value__c &gt; 2500)
+    )
+    ),
+   AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Operational Manager&apos;,CreatedBy.Profile.Name = &apos;QCC Operational Manager&apos;),
+   OR(
+   AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c &gt; 2500),
+   AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 20000),
+   AND(Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 100000),
+   AND(Text(Type__c)=&apos;Ticket Refund EFT&apos;,Value__c &gt; 2000),
+   AND($User.CCAT_User__c == False,Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 100000),
+   AND($User.CCAT_User__c == False,OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 5000),
+   AND($User.CCAT_User__c == False,Text(Type__c) = &apos;Travel vouchers&apos;, Value__c &gt; 5000)
+    )
+    ) 
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approval</name>
+        <rejectionActions>
+            <action>
+                <name>approvalcoun2</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_TL_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>approvalcount3</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_OM_Approved</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Level 2 Approval</description>
+        <entryCriteria>
+            <formula>OR(AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Consultant&apos;,AND(OR(CONTAINS(CreatedBy.Profile.Name,&apos;QCC Contact Center Agent&apos;),CONTAINS(CreatedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),NOT(TEXT(CreatedBy.Operational_Group__c) = &quot;Team Leader&quot;)))
+,
+  OR(
+   AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c&gt;2500),
+   AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 10000),
+   AND($User.CCAT_User__c == False ,OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 2000),
+   AND(Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 50000),
+   AND(Text(Type__c)=&apos;Ticket Refund EFT&apos;,Value__c&gt;2000)
+   )
+   ),
+   AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Team Lead&apos;,AND(OR( CONTAINS(CreatedBy.Profile.Name, &apos;QCC Contact Center Agent&apos;),CONTAINS(CreatedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),ISPICKVAL(CreatedBy.Operational_Group__c, &quot;Team Leader&quot;))),
+   OR(
+   AND(Text(Type__c)=&apos;Travel vouchers&apos;,Value__c&gt;2500),
+   AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 20000),
+   AND(Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 100000),
+   AND(Text(Type__c)=&apos;Ticket Refund EFT&apos;,Value__c&gt;2000)
+    )
+    ) 
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+        <rejectionActions>
+            <action>
+                <name>approvalcount4</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_OM_Rejected</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>approvalcount5</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Top Level Management Approval</description>
+        <entryCriteria>
+            <formula>OR(AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Consultant&apos;,AND(OR(CONTAINS(CreatedBy.Profile.Name,&apos;QCC Contact Center Agent&apos;),CONTAINS(CreatedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),NOT(ISPICKVAL(CreatedBy.Operational_Group__c, &apos;Team Leader&apos;))))
+,
+  OR(
+   AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Payment (Credit Card)&apos;),Value__c &gt; 20000),
+   AND(Text(Type__c) = &apos;Qantas Points&apos;,Amount__c &gt; 100000),
+   AND(Text(Type__c)=&apos;Ticket Refund EFT&apos;,Value__c&gt;5000)
+   )
+   ),
+   AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Team Lead&apos;,AND(OR( CONTAINS(CreatedBy.Profile.Name, &apos;QCC Contact Center Agent&apos;),CONTAINS(CreatedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),ISPICKVAL(CreatedBy.Operational_Group__c, &apos;Team Leader&apos;)))
+,
+   OR(
+   AND(Text(Type__c)=&apos;Payment (Credit Card)&apos;,Value__c&gt;30000,Value__c&lt;=150000),
+   AND(OR(Text(Type__c)=&apos;Payment (EFT)&apos;, Text(Type__c)=&apos;Ticket Refund EFT&apos;),Value__c&gt;30000,Value__c&lt;=150000),
+   AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;3000000,Amount__c&lt;=15000000)
+    )
+    )
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Level 3 Approval</label>
+        <name>Level_3_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+        <rejectionActions>
+            <action>
+                <name>approvalcount6</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>approvalcount7</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Top Management Approval</description>
+        <entryCriteria>
+            <formula>AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Consultant&apos;,AND(OR(CONTAINS(CreatedBy.Profile.Name,&apos;QCC Contact Center Agent&apos;),CONTAINS(CreatedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),NOT(ISPICKVAL(CreatedBy.Operational_Group__c, &apos;Team Leader&apos;)))) 
+,OR(AND(Text(Type__c)=&apos;Payment (Credit Card)&apos;,Value__c&gt;30000,Value__c&lt;=150000) 
+,AND(OR(Text(Type__c)=&apos;Payment (EFT)&apos;, Text(Type__c)=&apos;Ticket Refund EFT&apos;),Value__c&gt;30000,Value__c&lt;=150000)
+,AND(Text(Type__c)= &apos;Qantas Points&apos;,Amount__c&gt;3000000,Amount__c&lt;=15000000)
+) 
+)</formula>
+        </entryCriteria>
+        <label>Level 4 Approval</label>
+        <name>Level_4_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+        <rejectionActions>
+            <action>
+                <name>approvalcount8</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>QCC: Recovery Approval Process, updated #CRM-11994</description>
+    <emailTemplate>QCC_Email_Templates/QCC_Approval_Template</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+OR(
+/* Consultant Sydney/Other */
+AND(OR(LastModifiedBy.Profile.Name = &apos;Qantas CC Consultant&apos;,AND(OR(CONTAINS(LastModifiedBy.Profile.Name,&apos;QCC Contact Center Agent&apos;),CONTAINS(LastModifiedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),NOT(ISPICKVAL(LastModifiedBy.Operational_Group__c, &apos;Team Leader&apos;)))),
+/* Consultant Other */
+AND(OR(
+Text(LastModifiedBy.Location__c) = &apos;Manila&apos;, Text(LastModifiedBy.Location__c) = &apos;Hobart&apos;,
+Text(LastModifiedBy.Location__c) = &apos;Auckland&apos;,
+Text(LastModifiedBy.Location__c) = &apos;Suva&apos;,
+Text(LastModifiedBy.Location__c) = &apos;Capetown&apos;)
+, OR(AND(Text(Type__c) =
+&apos;Qantas Points&apos;, Amount__c &gt; Suggested_Maximum__c)
+, AND(Text(Type__c) = &apos;Qantas Points&apos;, Amount__c &gt; 0, ISBLANK(Suggested_Maximum__c))
+, AND(Amount__c &gt; 2,
+OR(
+Text(Type__c) = &apos;Lounge Passes&apos;
+)
+)
+, AND(Text(Type__c) = &apos;Payment (Credit Card)&apos;, Value__c &gt; 500)
+, AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Ticket Refund EFT&apos;), Value__c &gt; 500)
+, AND(Text(Type__c) = &apos;Travel vouchers&apos;, Value__c &gt; 200)
+))
+/* Consultant Sydney */
+, AND(Text(LastModifiedBy.Location__c) = &apos;Sydney&apos;,
+OR(AND(Text(Type__c) = &apos;Payment (Credit Card)&apos;, Value__c &gt; 5000)
+, AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Ticket Refund EFT&apos;), Value__c &gt; 5000)
+, AND(Text(Type__c) = &apos;Travel vouchers&apos;, Value__c &gt; 500),
+AND(Amount__c &gt; 4,
+OR(
+Text(Type__c) = &apos;Lounge Passes&apos;
+)
+)
+, AND(Text(Type__c) = &apos;Qantas Points&apos;, Amount__c &gt; 20000)
+))
+)
+/* Consultant Sydney/Other */
+, AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Team Lead&apos;,AND( OR(CONTAINS(LastModifiedBy.Profile.Name,&apos;QCC Contact Center Agent&apos;),CONTAINS(LastModifiedBy.Profile.Name,&apos;QCC Customer Advocacy Agent&apos;)),ISPICKVAL(CreatedBy.Operational_Group__c, &apos;Team Leader&apos;)) )
+, OR(AND(Text(Type__c) = &apos;Payment (Credit Card)&apos;, Value__c &gt; 2000)
+, AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Ticket Refund EFT&apos;), Value__c &gt; 2000)
+, AND(Text(Type__c) = &apos;Travel vouchers&apos;, Value__c &gt; 2500)
+, AND(Text(Type__c) = &apos;Qantas Points&apos;, Amount__c &gt; 25000)
+)),
+/* Operational Manager Other */
+AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Operational Manager&apos;,CreatedBy.Profile.Name = &apos;QCC Operational Manager&apos;), (Text(LastModifiedBy.Location__c) != &apos;Sydney&apos;)
+, OR( AND(Text(Type__c) = &apos;Payment (Credit Card)&apos;, Value__c &gt; 5000)
+, AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Ticket Refund EFT&apos;), Value__c &gt; 5000)
+, AND(Text(Type__c) = &apos;Qantas Points&apos;, Amount__c &gt; 100000)
+)),
+/* Operational Manager Sydney */
+AND(OR(CreatedBy.Profile.Name = &apos;Qantas CC Operational Manager&apos;,CreatedBy.Profile.Name = &apos;QCC Operational Manager&apos;) ,(Text(LastModifiedBy.Location__c) = &apos;Sydney&apos;)
+, OR(AND(Text(Type__c) = &apos;Payment (Credit Card)&apos;, Value__c &gt; 10000)
+, AND(OR(Text(Type__c) = &apos;Payment (EFT)&apos;,Text(Type__c) = &apos;Ticket Refund EFT&apos;), Value__c &gt; 10000)
+, AND(Text(Type__c) = &apos;Qantas Points&apos;, Amount__c &gt; 100000)
+))
+)
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Update_Approved_By_on_Recovery</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Process_Status_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Set_Retrigger_Approval_Flag</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Process_Status_ActionReq</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>approvalcount0</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>QCC Recovery Approval Process V4</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>1</processOrder>
+    <recallActions>
+        <action>
+            <name>Set_Retrigger_Approval_Flag</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_OM_Approved_Recall</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Process_Status_to_New</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_TL_Approved_Recall</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

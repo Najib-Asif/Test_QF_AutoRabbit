@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_User_from_Editing_Spl_Condn</fullName>
+    <active>true</active>
+    <description>Restrict user from Editing Spl condition&apos;s if the Status of Proposal is Approved,Rejected</description>
+    <errorConditionFormula>AND(
+$Setup.EnableValidationRule__c.EnableVR_to_prevent_DO_Users_from_Editin__c,
+NOT($UserRole.DeveloperName  = &apos;QF_Support_Deal_Support&apos;),
+NOT(TEXT(Proposal__r.Approval_Status__c) =&apos;Not Required&apos;),
+NOT(ISPICKVAL(Contract__r.Status__c,&apos;Draft&apos;)),
+OR(
+ISCHANGED(QEC_KgPc__c),
+ISCHANGED(QEC_Baggagecode__c),
+ISCHANGED(QEC_Conditions__c),
+ISCHANGED(QEC_Class__c),
+ISCHANGED(QEC_Destination__c),
+ISCHANGED(QEC_Cabin__c),
+ISCHANGED(QEC_Fare_Type__c),
+ISCHANGED(QEC_Discount__c),
+ISCHANGED(QEC_Booking_Class__c),
+ISCHANGED(QEC_Cancellation__c),
+ISCHANGED(QEC_NoShow__c),
+ISCHANGED(QEC_Type__c),
+ISCHANGED(QEC_Network__c),
+ISCHANGED(QEC_Numberofpieces__c),
+ISCHANGED(QEC_TimefromDeparture__c),
+ISCHANGED(QEC_Origin__c),
+ISCHANGED(QEC_Fare__c),
+ISCHANGED(QEC_FromDate__c),
+ISCHANGED(QEC_ToDate__c)
+))</errorConditionFormula>
+    <errorMessage>Special Conditions cannot be edited for the above proposal</errorMessage>
+</ValidationRule>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_save_when_Status_is_In_Progress</fullName>
+    <active>true</active>
+    <description>CRM-5333.</description>
+    <errorConditionFormula>AND(
+($Profile.Name != &apos;System Administrator&apos;), 
+($Profile.Name != &apos;Qantas System Administrator&apos;),
+($Profile.Name != &apos;Qantas System Admin - Freight&apos;),
+($Profile.Name != &apos;Qantas System Admin - QCC&apos;),
+($Profile.Name != &apos;Qantas System Admin - SND&apos;),
+($Profile.Name != &apos;Qantas CC Operational Manager&apos;),
+($Profile.Name != &apos;QCC Operational Manager&apos;),
+($Profile.Name != &apos;CRM Administrator&apos;),
+($Profile.Name != &apos;CRM Administrator - Freight&apos;),
+($Profile.Name != &apos;CRM Administrator - Global&apos;),
+($Profile.Name != &apos;CRM Administrator - QCC&apos;),
+($Profile.Name != &apos;CRM Administrator - SND&apos;),
+    OR(
+        RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+        RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+        RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+        RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+        RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,        
+        RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+        RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+        RecordType.DeveloperName = &apos;CCC_Query&apos;,
+        RecordType.DeveloperName = &apos;Contact_Center&apos;,
+        RecordType.DeveloperName = &apos;Service_Delivery&apos;,
+        RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;,
+        RecordType.DeveloperName = &apos;CCC_Refund&apos;,
+        RecordType.DeveloperName = &apos;CCC_Event&apos;,
+        RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;,
+        RecordType.DeveloperName = &apos;QCC_Elite_Process&apos;,
+        RecordType.DeveloperName = &apos;QCC_Disruption&apos;,
+        RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+        RecordType.DeveloperName = &apos;QCC_Sensitive_Case&apos;
+        ),
+        
+ISCHANGED(OwnerId),
+OwnerId != $User.Id,
+ISPICKVAL(Status, &apos;In Progress&apos;))</errorConditionFormula>
+    <errorMessage>You must change the status from In Progress to the previous status before changing the owner of this case.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restricted_QCI_s</fullName>
+    <columns>QCI__c</columns>
+    <columns>NAME</columns>
+    <columns>Company__c</columns>
+    <columns>Company_Name__c</columns>
+    <columns>Travel_Manager__c</columns>
+    <columns>Used__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Company__c</field>
+        <operation>equals</operation>
+        <value>Cannot be used for allocation</value>
+    </filters>
+    <label>Restricted QCI&apos;s</label>
+</ListView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Criteria_to_trigger_outbound_for_deleted_SME_accounts</name>
+        <label>Criteria to trigger outbound for deleted SME accounts</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Criteria_to_sent_deleted_SME_accounts</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$User.Alias</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>apiuser</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_event_records</targetReference>
+            </connector>
+            <label>Criteria to sent deleted SME accounts</label>
+        </rules>
+    </decisions>
+    <description>Triggers the Outbound when the SME Account is deleted which is sent to the Notification Queue-STME 1909.CRM 5671</description>
+    <environments>Default</environments>
+    <interviewLabel>Trigger Outbound For Deleted SME Accounts {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Trigger Outbound For Deleted SME Accounts</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_event_records</name>
+        <label>Create event records</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>ABN__c</field>
+            <value>
+                <elementReference>$Record.ABN__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Id__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordName__c</field>
+            <value>
+                <elementReference>$Record.RecordName__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SObject_Id__c</field>
+            <value>
+                <elementReference>$Record.SObjectId__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Notify_Outbound_for_the_Deleted_SME_Acco__e</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Criteria_to_trigger_outbound_for_deleted_SME_accounts</targetReference>
+        </connector>
+        <object>Delete_Tracker_Log__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

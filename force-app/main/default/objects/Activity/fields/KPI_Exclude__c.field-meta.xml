@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KPI_Exclude__c</fullName>
+    <formula>IF( CreatedBy.Division = &quot;CS - Qantas Inside Sales (07618)&quot; &amp;&amp; LastModifiedBy.UserRole.Name &lt;&gt; &quot;QF-DOM-Sales-SME-QIS-Operations&quot;, False, True)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>KPI Exclude</label>
+    <type>Checkbox</type>
+</CustomField>

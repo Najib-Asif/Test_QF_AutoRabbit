@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Modifying_Required_fields_Sign</fullName>
+    <active>true</active>
+    <description>Restrict to modify required fields after on record ty Signed by Customer</description>
+    <errorConditionFormula>AND(OR(ISCHANGED(Name), ISCHANGED( Opportunity__c )), RecordType.DeveloperName =&apos;Signed_by_Customer&apos;)</errorConditionFormula>
+    <errorMessage>You can not modified the requested field value as record is read only.</errorMessage>
+</ValidationRule>

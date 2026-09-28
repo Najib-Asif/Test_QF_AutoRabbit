@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>CUST_OWNER_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Justin Leonard Abrahams,Siphokazi Bholo,Nompumelelo Bloom,Nwabisa Booi,Dei Bayard Bouya-Otchoundi,Assumani Byaombe,Wesley Caine,Asive Cegcuwana,Kenneth Copiso,Yonela Duda,Shireen Edwards,Raiesha Hiles,Moeghammad Jacobs,Ever Juru,Wiaam Karam,Kabelo Lekhanye,Cailine Links,Liziwe Maneli,Onke Mangxola,Zizipho Manzi,Sibabalwe Mbovane,Kuhle Mkefa,Anathi Mthekeli,Zandile Ntlabathi,Thandokazi Zide,Nontsha Panya,Alanzo Rabie,Yolanda Ruselo,Ziyanda Songanga,Matlaletsa Thabo,Kim Tshambu,Kitungano Wasso,Zaibun-Nissa Frieslaar,Helen Odinga,Batisai Chingombe</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>DD&amp;R: Avg Handle Time Yesterday</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Case_value_changes__c@Case_value_changes__c.Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_YESTERDAY</interval>
+    </timeFrameFilter>
+</Report>

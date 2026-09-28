@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Replace_Bag_Aus_Only</fullName>
+    <active>true</active>
+    <description>Ensuring that when Country is populated on the case then it can only be Australia when the recovery type = Australia</description>
+    <errorConditionFormula>IF( AND(ISPICKVAL(Type__c, &apos;Bag Replacement&apos;), NOT(ISBLANK( Country_Code__c ))), 
+NOT(OR(ISPICKVAL(Case_Number__r.Country__c, &apos;Australia&apos;))), 
+false 
+)</errorConditionFormula>
+    <errorMessage>Bag Replacement recovery can only be done for customers in Australia</errorMessage>
+</ValidationRule>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cost_Queue</fullName>
+    <columns>NAME</columns>
+    <columns>Closed_Date_Time__c</columns>
+    <columns>CloseAction__c</columns>
+    <columns>Closed_By__c</columns>
+    <columns>FlightNumber__c</columns>
+    <columns>Scheduled_Departure__c</columns>
+    <columns>Plane_Number__c</columns>
+    <columns>DeparturePort__c</columns>
+    <columns>ArrivalPort__c</columns>
+    <columns>DelayFailureCode__c</columns>
+    <columns>Non_Delay_Failure_Code__c</columns>
+    <columns>TotalCostSpentOnFlight_Event__c</columns>
+    <columns>TECH_FlightTrackerId__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>3/10/2020 12:00 AM</value>
+    </filters>
+    <label>Event Costs</label>
+    <queue>QCC_EventCostQueue</queue>
+    <sharedTo>
+        <group>QCC_CJMPublicGroup</group>
+    </sharedTo>
+</ListView>

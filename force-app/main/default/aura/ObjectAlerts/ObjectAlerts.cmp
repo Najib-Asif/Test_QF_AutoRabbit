@@ -1,0 +1,25 @@
+<aura:component implements="force:hasRecordId,force:hasSObjectName,flexipage:availableForRecordHome" controller="IndicatorController" access="public">
+  <aura:attribute name="objLabel" type="String" />
+  <aura:attribute name="badgeList" type="Object[]"/>
+    <aura:attribute name="layoutitems" type="Integer" default="2"/>
+    <aura:attribute name="showheader" type="Boolean"/>
+    <aura:attribute name="onContact" type="Boolean" default="false"/>
+    <aura:attribute name="contactId" type="String"/>
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  <force:recordData recordId="{!v.recordId}" layoutType="FULL" recordUpdated="{!c.doInit}"/>
+  <lightning:card iconName="standard:announcement" title="{! v.objLabel +' Alerts'}" class="slds-p-left_x-small slds-p-right_x-small">    
+      <div class="slds-p-left--medium slds-p-right--medium slds-box slds-theme_default" style="box-shadow: 2px 2px 3px #888888; ">
+      <lightning:layout class="alert-div" verticalAlign="stretch" horizontalAlign="start" multipleRows="true" pullToBoundary="small">
+          <aura:if isTrue="{!v.onContact}">
+            <c:QCC_DisruptionWarning recordId="{!v.contactId}"/>
+          </aura:if>
+          <aura:iteration items="{!v.badgeList}" var="thisBadge" aura:id="theList">
+              <lightning:layoutItem class="alert-icon" size="{!v.layoutitems}"  padding="horizontal-small">
+                  <c:IndicatorBadge badge="{!thisBadge}" />
+              </lightning:layoutItem>
+          </aura:iteration>
+          
+      </lightning:layout>
+    </div>
+  </lightning:card>
+</aura:component>

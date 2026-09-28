@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MBG_Checklist_Required_On_Decision_Pendi</fullName>
+    <active>true</active>
+    <description>Created for CRM-12151</description>
+    <errorConditionFormula>AND(
+    /* 1. Only target MBG sub-type cases */
+    ISPICKVAL(Sub_Type_1__c, &quot;MBG&quot;),
+    
+    /* 2. Triggers when the Claim Stage is set to Decision Pending */
+    ISPICKVAL(Claim_Stage__c, &quot;Decision Pending&quot;),
+    
+    /* 3. Throws the error if the checklist is blank/false */
+    NOT(MBG_Checklist__c)
+)</errorConditionFormula>
+    <errorMessage>The MBG Checklist must be completed when the Claim Stage is set to Decision Pending.</errorMessage>
+</ValidationRule>

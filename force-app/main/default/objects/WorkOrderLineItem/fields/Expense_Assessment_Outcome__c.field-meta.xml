@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expense_Assessment_Outcome__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Assessment result for the WOLI</description>
+    <label>Expense Assessment Outcome</label>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Approved Receipt</fullName>
+                <default>false</default>
+                <label>Approved Receipt</label>
+            </value>
+            <value>
+                <fullName>Approved Partial - Receipt Amended</fullName>
+                <default>false</default>
+                <label>Approved Partial - Receipt Amended</label>
+            </value>
+            <value>
+                <fullName>Rejected - Outside Policy</fullName>
+                <default>false</default>
+                <label>Rejected - Outside Policy</label>
+            </value>
+            <value>
+                <fullName>Rejected - Non Policy Item Included</fullName>
+                <default>false</default>
+                <label>Rejected - Non Policy Item Included</label>
+            </value>
+            <value>
+                <fullName>Rejected - Duplicate Claim</fullName>
+                <default>false</default>
+                <label>Rejected - Duplicate Claim</label>
+            </value>
+            <value>
+                <fullName>Rejected - Insufficient Documentation</fullName>
+                <default>false</default>
+                <label>Rejected - Insufficient Documentation</label>
+            </value>
+            <value>
+                <fullName>Pending - clarification required</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Pending - clarification required</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

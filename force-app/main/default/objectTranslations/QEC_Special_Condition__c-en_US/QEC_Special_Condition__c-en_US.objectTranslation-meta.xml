@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Special Condition</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Special Conditions</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please choose Network. If the Type is Route Deal, Incentive Fare, Fixed Fare, Excess Baggage, Advance Res/Ticketing, Penalties. --></errorMessage>
+        <name>Mandatory_Network_filed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Special Conditions cannot be edited for the above proposal --></errorMessage>
+        <name>Restrict_User_from_Editing_Spl_Condn</name>
+    </validationRules>
+</CustomObjectTranslation>

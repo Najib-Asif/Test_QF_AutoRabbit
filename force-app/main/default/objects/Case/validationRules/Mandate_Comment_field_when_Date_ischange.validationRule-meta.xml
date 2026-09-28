@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandate_Comment_field_when_Date_ischange</fullName>
+    <active>true</active>
+    <description>Make the comment field mandatory when Date ischanged</description>
+    <errorConditionFormula>OR(AND(ISNEW(),ISBLANK(Comments__c),$RecordType.DeveloperName= &quot;Dealing_Model_Request&quot;,/*Dealing Model Request 
+*/ ISPICKVAL(Status,&quot;with Deal Optimisation for processing&quot;),( Expected_Completion_Date__c - TODAY())&lt;6),AND((RecordType.Name = &apos;Dealing Model Request&apos;), 
+OR(OwnerId = $User.Id, 
+$UserRole.Id = &apos;00E90000001P6KH&apos;, 
+$User.Id = &apos;00590000004hkhl&apos;, 
+$Profile.Name = &quot;System Administrator&quot;,
+$Profile.Name = &quot;Qantas System Administrator&quot;,
+$Profile.Name = &quot;Qantas System Admin - Freight&quot;,
+$Profile.Name = &quot;Qantas System Admin - QCC&quot;,
+$Profile.Name = &quot;Qantas System Admin - SND&quot;), 
+
+OR( 
+AND(ISCHANGED(Expected_Completion_Date__c), 
+ISBLANK(Comments__c)), 
+
+AND(NOT(ISBLANK(Expected_Completion_Date__c)),ISBLANK(Comments__c),DateIschecked__c = False))))</errorConditionFormula>
+    <errorMessage>Please enter the value for Comments</errorMessage>
+</ValidationRule>

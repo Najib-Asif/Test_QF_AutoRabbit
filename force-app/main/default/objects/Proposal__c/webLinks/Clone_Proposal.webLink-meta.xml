@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Clone_Proposal</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Clone</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+
+try{
+var query = &quot;SELECT Id,Opportunity__r.StageName,Group_Travel_Offer__c,Forecast_Group_Booking_Expenditure__c,Forecast_MCA_Revenue__c ,Reason_for_Discount__c ,Proposal_Start_Date__c,Proposal_End_Date__c,Name,Account__c,Commercial_TC__c,RecordTypeId,Domestic_Annual_Share__c,Charter_Price__c,International_Annual_Share__c,Legal_TC__c,Opportunity__c,Contact__c,Qantas_Annual_Expenditure__c,Qantas_Club_Join_Discount_Offer__c,Status__c,Valid_From_Date__c,Valid_To_Date__c,Standard__c,Deal_Type__c,MCA_Routes_Annual_Share__c,Agent_Name__c,Agent_Fax__c,Agent_Email__c,Agent_Address__c,Frequent_Flyer_Status_Upgrade__c,Frequent_Flyer_Status_Upgrade_Offer__c,Qantas_Club_Discount__c,Qantas_Club_Discount_Offer__c,TMC_Code__c,Travel_Fund__c,Travel_Fund_Amount__c,Type__c,NAM_Approved1__c,Pricing_Approved1__c,DO_Approved__c,Approval_Required_Others__c,Leadership_Rejected__c,TeamLead_Approved__c,SBD_Approved__c,QIS_Approved__c,QIS_Rejected__c,Additional_Change_Details__c,No_of_Cps__c,(SELECT Id, Route_Origin__c,Route_Destination__c,FareStructure__c, Comment__c, Discount__c, Discount_Threshold_AM__c, Discount_Threshold_NAM__c,Approved_by_NAM__c,Approved_by_Pricing__c,Cabin__c,Category__c,Fare_Combination__c,Market__c,Network__c,Proposal_Type__c,Qantas_Published_Airfare__c,QBS_Deafualt_Discount__c,Segment__c,TeamLead_Approved__c,DO_Approved__c FROM Fare_Structure_Lists__r),(SELECT Id,Contract_Agreement__c,Aircraft_Type__c,ETD__c,Flight_Date__c,Flight_Number__c,Seating_Space__c,Sector__c,Useable_Seats__c FROM Charter_Flight_Information__r),(SELECT Id,Amount__c,Contract_Agreement__c,Paid_As__c,Payment_Criteria__c,Payment_Frequency__c,Proposal__c,Type__c FROM Contract_Payments__r),(SELECT Market__c,Proposal__c,Aligned_with_EK_sales__c,Cost_of_sale_Incremental_opportunity__c,Current_performance_in_the_route_s__c,What_else_have_you_considered__c,How_did_you_arrive_with_this_proposal__c,Is_there_competitive_MI__c,Requested_routes__c,Supplementary_Materials_Sharepoint_Link__c,What_is_the_current_booking_mix__c FROM Justifications__r) FROM Proposal__c where Active__c=true AND Id=\&apos;&quot;+&apos;{!Proposal__c.Id}&apos;+&quot;\&apos; limit 1&quot;;
+
+var records = sforce.connection.query(query);
+var records1 = records.getArray(&apos;records&apos;);
+
+if(records1.length&gt;0){
+
+if(records1[0].Opportunity__r.StageName != &apos;Closed - Accepted&apos; &amp;&amp; records1[0].Opportunity__r.StageName != &apos;Closed - Not Accepted&apos;){
+// Contract Creation
+
+var proposal = new sforce.SObject(&quot;Proposal__c&quot;);
+
+proposal.Name = records1[0].Name;
+proposal.Account__c = records1[0].Account__c;
+proposal.Active__c = true;
+proposal.Charter_Price__c = records1[0].Charter_Price__c;
+proposal.Commercial_TC__c = records1[0].Commercial_TC__c;
+proposal.Contact__c = records1[0].Contact__c;
+proposal.Domestic_Annual_Share__c = records1[0].Domestic_Annual_Share__c;
+proposal.International_Annual_Share__c = records1[0].International_Annual_Share__c;
+proposal.Legal_TC__c = records1[0].Legal_TC__c;
+proposal.Opportunity__c = records1[0].Opportunity__c;
+proposal.Qantas_Annual_Expenditure__c = records1[0].Qantas_Annual_Expenditure__c;
+proposal.Valid_From_Date__c = records1[0].Valid_From_Date__c;
+proposal.Type__c = records1[0].Type__c;
+proposal.Travel_Fund__c = records1[0].Travel_Fund__c;
+proposal.Travel_Fund_Amount__c = records1[0].Travel_Fund_Amount__c;
+proposal.Standard__c = records1[0].Standard__c;
+proposal.Additional_Change_Details__c = records1[0].Additional_Change_Details__c;
+proposal.Deal_Type__c = records1[0].Deal_Type__c;
+proposal.MCA_Routes_Annual_Share__c = records1[0].MCA_Routes_Annual_Share__c;
+proposal.Agent_Name__c = records1[0].Agent_Name__c;
+proposal.Agent_Fax__c = records1[0].Agent_Fax__c;
+proposal.Agent_Email__c = records1[0].Agent_Email__c;
+proposal.Agent_Address__c = records1[0].Agent_Address__c;
+proposal.Frequent_Flyer_Status_Upgrade__c = records1[0].Frequent_Flyer_Status_Upgrade__c;
+proposal.Frequent_Flyer_Status_Upgrade_Offer__c = records1[0].Frequent_Flyer_Status_Upgrade_Offer__c;
+proposal.Qantas_Club_Discount__c = records1[0].Qantas_Club_Discount__c;
+proposal.Qantas_Club_Discount_Offer__c = records1[0].Qantas_Club_Discount_Offer__c;
+proposal.TMC_Code__c = records1[0].TMC_Code__c;
+proposal.Qantas_Club_Join_Discount_Offer__c = records1[0].Qantas_Club_Join_Discount_Offer__c;
+proposal.Forecast_MCA_Revenue__c = records1[0].Forecast_MCA_Revenue__c;
+proposal.Reason_for_Discount__c = records1[0].Reason_for_Discount__c;
+proposal.Proposal_Start_Date__c=records1[0].Proposal_Start_Date__c;
+proposal.Proposal_End_Date__c =records1[0].Proposal_End_Date__c;
+proposal.Group_Travel_Offer__c =records1[0].Group_Travel_Offer__c;
+proposal.Forecast_Group_Booking_Expenditure__c =records1[0].Forecast_Group_Booking_Expenditure__c;
+proposal.No_of_Cps__c = records1[0].No_of_Cps__c;
+
+proposal.NAM_Approved1__c = records1[0].NAM_Approved1__c;
+proposal.Pricing_Approved1__c = records1[0].Pricing_Approved1__c;
+proposal.DO_Approved__c = records1[0].DO_Approved__c;
+if(records1[0].Status__c == &apos;Rejected - Internal&apos; &amp;&amp; records1[0].Leadership_Rejected__c == &apos;true&apos;){
+proposal.Approval_Required_Others__c = true;
+}else{
+proposal.Approval_Required_Others__c = records1[0].Approval_Required_Others__c;
+}
+
+if(records1[0].QIS_Rejected__c != &apos;true&apos;){
+proposal.TeamLead_Approved__c = records1[0].TeamLead_Approved__c;
+
+proposal.SBD_Approved__c = records1[0].SBD_Approved__c;
+proposal.QIS_Approved__c = records1[0].QIS_Approved__c;
+}
+var rtype;
+if(records1[0].Type__c == &apos;Qantas Business Savings&apos;){
+rtype = &apos;QBS - Draft&apos;;
+}else if(records1[0].Type__c == &apos;Corporate Airfares&apos;){
+rtype = &apos;CA - Draft&apos;;
+}else if(records1[0].Type__c == &apos;Adhoc&apos;){
+rtype = &apos;Adhoc Charter - Approval Required - Customer&apos;;
+}else if(records1[0].Type__c == &apos;Scheduled&apos;){
+rtype = &apos;Adhoc Charter - Approval Required - Customer&apos;;
+}
+var queryC = &quot;SELECT Id, Name FROM RecordType where Name like &apos;%&quot;+rtype+&quot;%&apos; AND sObjectType=&apos;Proposal__c&apos; limit 1&quot;;
+var rtypes = sforce.connection.query(queryC);
+var rtypes1 = rtypes.getArray(&apos;records&apos;);
+proposal.RecordTypeId = rtypes1[0].Id;
+
+var result = sforce.connection.create([proposal]);
+
+if(result[0].success){
+
+var discounts = records1[0].Fare_Structure_Lists__r;
+
+if(discounts != null){
+
+// Discount List Creation
+var conDiscounts1 = discounts.getArray(&quot;records&quot;);
+var discounts = [];
+for(var i=0; i&lt;conDiscounts1.length; i++){
+var discount = new sforce.SObject(&quot;Discount_List__c&quot;);
+discount.Approval_Comment_NAM__c = conDiscounts1[i].Approval_Comment_NAM__c;
+discount.Approval_Comment_Pricing__c = conDiscounts1[i].Approval_Comment_Pricing__c;
+discount.FareStructure__c = conDiscounts1[i].FareStructure__c;
+discount.Comment__c = conDiscounts1[i].Comment__c;
+discount.Proposal__c = result[0].id;
+discount.Route_Origin__c =conDiscounts1[i].Route_Origin__c;
+discount.Route_Destination__c=conDiscounts1[i].Route_Destination__c;
+discount.Discount__c = conDiscounts1[i].Discount__c;
+discount.Discount_Threshold_AM__c = conDiscounts1[i].Discount_Threshold_AM__c;
+discount.Discount_Threshold_NAM__c = conDiscounts1[i].Discount_Threshold_NAM__c;
+discount.Qantas_Published_Airfare__c = conDiscounts1[i].Qantas_Published_Airfare__c;
+discount.Approved_by_NAM__c = conDiscounts1[i].Approved_by_NAM__c;
+discount.Approved_by_Pricing__c = conDiscounts1[i].Approved_by_Pricing__c;
+discount.DO_Approved__c = conDiscounts1[i].DO_Approved__c;
+discount.Segment__c = conDiscounts1[i].Segment__c;
+discount.Category__c = conDiscounts1[i].Category__c;
+discount.Cabin__c = conDiscounts1[i].Cabin__c;
+discount.Fare_Combination__c = conDiscounts1[i].Fare_Combination__c;
+discount.Market__c = conDiscounts1[i].Market__c;
+discount.Network__c = conDiscounts1[i].Network__c;
+discount.Proposal_Type__c = conDiscounts1[i].Proposal_Type__c;
+discount.Qantas_Published_Airfare__c = conDiscounts1[i].Qantas_Published_Airfare__c;
+discount.QBS_Deafualt_Discount__c = conDiscounts1[i].QBS_Deafualt_Discount__c;
+if(records1[0].QIS_Rejected__c != &apos;true&apos; &amp;&amp; records1[0].Status__c != &apos;Rejected - Internal&apos; ){
+
+discount.TeamLead_Approved__c = conDiscounts1[i].TeamLead_Approved__c;
+}
+
+discounts.push(discount);
+}
+var result1 = sforce.connection.create(discounts);
+}
+var charters = records1[0].Charter_Flight_Information__r;
+
+if(charters != null){
+//Charters creation
+var charters1 = charters.getArray(&quot;records&quot;);
+
+var charterValues = [];
+
+for(var i=0; i&lt;charters1.length; i++){
+var charterValue = new sforce.SObject(&quot;Charter_Flight_Information__c&quot;);
+charterValue.Proposal__c = result[0].id;
+charterValue.Aircraft_Type__c = charters1[i].Aircraft_Type__c;
+charterValue.ETD__c = charters1[i].ETD__c;
+charterValue.Flight_Date__c = charters1[i].Flight_Date__c;
+charterValue.Flight_Number__c = charters1[i].Flight_Number__c;
+charterValue.Seating_Capacity__c = charters1[i].Seating_Capacity__c;
+charterValue.Sector__c = charters1[i].Sector__c;
+
+charterValues.push(charterValue);
+}
+var result2 = sforce.connection.create(charterValues);
+
+}
+
+var payments = records1[0].Contract_Payments__r;
+
+if(payments != null){
+//Contract Payment creation
+var payments1 = payments.getArray(&quot;records&quot;);
+
+var paymentValues = [];
+
+for(var i=0; i&lt;payments1.length; i++){
+var paymentValue = new sforce.SObject(&quot;Contract_Payments__c&quot;);
+paymentValue.Proposal__c = result[0].id;
+paymentValue.Amount__c = payments1[i].Amount__c;
+paymentValue.Contract_Agreement__c = payments1[i].Contract_Agreement__c;
+paymentValue.Paid_As__c = payments1[i].Paid_As__c;
+paymentValue.Payment_Criteria__c = payments1[i].Payment_Criteria__c;
+paymentValue.Payment_Frequency__c = payments1[i].Payment_Frequency__c;
+paymentValue.Type__c = payments1[i].Type__c;
+
+paymentValues.push(paymentValue);
+}
+var result3 = sforce.connection.create(paymentValues);
+
+}
+
+var business = records1[0].Justifications__r;
+if(business != null){
+//Business Case creation
+var business1 = business.getArray(&quot;records&quot;);
+var businessValues = [];
+
+for(var i=0; i&lt;business1.length; i++){
+var businessValue = new sforce.SObject(&quot;Business_Case__c&quot;);
+businessValue.Proposal__c = result[0].id;
+businessValue.Aligned_with_EK_sales__c = business1[i].Aligned_with_EK_sales__c;
+businessValue.Cost_of_sale_Incremental_opportunity__c = business1[i].Cost_of_sale_Incremental_opportunity__c;
+businessValue.Current_performance_in_the_route_s__c = business1[i].Current_performance_in_the_route_s__c;
+businessValue.What_else_have_you_considered__c = business1[i].What_else_have_you_considered__c;
+businessValue.How_did_you_arrive_with_this_proposal__c = business1[i].How_did_you_arrive_with_this_proposal__c;
+businessValue.Is_there_competitive_MI__c = business1[i].Is_there_competitive_MI__c;
+businessValue.Market__c = business1[i].Market__c;
+businessValue.Requested_routes__c = business1[i].Requested_routes__c;
+businessValue.Supplementary_Materials_Sharepoint_Link__c = business1[i].Supplementary_Materials_Sharepoint_Link__c;
+businessValue.What_is_the_current_booking_mix__c = business1[i].What_is_the_current_booking_mix__c;
+
+
+businessValues.push(businessValue);
+}
+var result4 = sforce.connection.create(businessValues);
+
+}
+
+
+
+window.location.href = &apos;/&apos;+result[0].id+&apos;/e?retURL=&apos;+result[0].id;
+}
+
+} else{
+alert(&apos;Please note that you cannot create a proposal for a closed opportunity.&apos;);
+}
+}else if(records1.length==0){
+alert(&quot;You can&apos;t clone in active Proposal.&quot;);
+}
+
+}
+catch(e){
+alert(&apos;An Error has Occured. Error:&apos; +e);
+}</url>
+</WebLink>

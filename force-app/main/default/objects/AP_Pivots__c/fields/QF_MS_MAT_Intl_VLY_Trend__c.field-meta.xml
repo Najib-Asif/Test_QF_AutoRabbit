@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QF_MS_MAT_Intl_VLY_Trend__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( QF_MS_MAT_Intl_VLY__c  != 0, 
+IF( 
+(QF_MS_MAT_Intl_VLY__c  &gt; 0), 
+LEFT((Text(QF_MS_MAT_Intl_VLY__c )),5)+ &quot;  &quot; +IMAGE(&quot;/resource/Green_up&quot;, &quot;Up&quot;), 
+IF( 
+(QF_MS_MAT_Intl_VLY__c  &lt;0), 
+LEFT((Text(QF_MS_MAT_Intl_VLY__c )),5)+ &quot;  &quot;+IMAGE(&quot;/resource/Red_Down&quot;, &quot;Down&quot;), 
+LEFT((Text(QF_MS_MAT_Intl_VLY__c )),5)+ &quot;  &quot;+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;) 
+) 
+), 
+Text(QF_MS_MAT_Intl_VLY__c )+ &quot;  &quot;+IMAGE(&quot;/resource/Inc_NoChange&quot;, &quot;No Change&quot;) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>% QF MS (MAT) Intl VLY Trend</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_CWB</fullName>
+    <active>true</active>
+    <description>To create a New CWB</description>
+    <label>New CWB</label>
+    <picklistValues>
+        <picklist>Component_Deactivated_in__c</picklist>
+        <values>
+            <fullName>Dev</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dev1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FiTest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Level1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lightning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-Prod</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Production</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIT1</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Component__c</picklist>
+        <values>
+            <fullName>Apex Classes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approval Processes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Buttons</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Label</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Settings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dashboards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Duplicate Rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email Template</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Field</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Flexi_Pages</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flows</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Global Actions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Global Picklist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lightning Web Components</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Links</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>List View</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matching Rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OWD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Objects</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Org Wide Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Page Layouts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Path</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permission Sets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Process Builders</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Profile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public Groups</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Queue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Record Type</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Report Types</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reports</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales Process</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sharing Rules</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Static Resources</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Support Process</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Triggers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VF Pages</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Validation Rules</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Actions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workflow Rules</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Data_Type__c</picklist>
+        <values>
+            <fullName>Auto Number</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Checkbox</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Currency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Date</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Date%2FTime</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email Alert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>External Lookup Relationship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Field Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formula</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Geolocation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lookup Relationship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Master-Detail Relationship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Number</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound Message</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Percent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Picklist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Picklist %28Multi-Select%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roll-Up Summary%C2%A0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Task</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text %28Encrypted%29%C2%A0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text Area</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text Area %28Long%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text Area %28Rich%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>URL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Developed_In__c</picklist>
+        <values>
+            <fullName>AEQCC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dev</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dev1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FiTest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Level1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lightning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Route</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sit1</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Downstream_Systems__c</picklist>
+        <values>
+            <fullName>AMEX %28AEQCC%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aquire %28iFly%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CTR%2FIPR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executive Summary in Salesforce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QBD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Radar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scorpio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tradesite</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>iCargo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>iDeal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Project_Team__c</picklist>
+        <values>
+            <fullName>BAU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Corporate Schemes %28Loyalty%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loyalty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SME Proposition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tradesite</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Related_to_Object__c</picklist>
+        <values>
+            <fullName>AP Hierarchy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AP Insights</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Classifications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Contact Relation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Eligibility Log</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Ownership</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Relationships</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Activities</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Performance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Airport City</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approval Matrix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CWB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Campaign</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Campaign Channel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Campaign Expense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Campaign Member</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Charter Flight Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Competitor Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract %26 Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Fare Discount</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Payments</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Corporate Scheme</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DataStage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Events</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fare</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fare Discount Guidelines</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freight Capacity Forecast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freight Revenue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frequent Flyer Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Justification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Market Intelligence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Member</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Multi POS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Network Intelligence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opportunity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opportunity Maintenance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Loyalty Schemes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partnership Objective</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payments</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prism Detail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Product Registration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal Fare Discount</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Strategy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QCI Register</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QF Contract in QDM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QMR Target</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quote</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regional Routes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revenue %26 Share</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Risk Record</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Routes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Routes Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SME Offers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales Region</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Snapshot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spend Analytics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Strategic Account Plan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Strategic Priority</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>System Picklist</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TMC Info</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Target</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Task</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Travel Fund Expense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Travel Tracker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>User</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Source_of_Truth__c</picklist>
+        <values>
+            <fullName>AMEX %28AEQCC%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aquire %28iFly%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IATA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IPR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRISM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Profile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QBD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QDM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Radar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tradesite</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>eQ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>iCargo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Domestic template for Case Claims CRM-6589</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Freight Email To Case claims - Domestic</name>
+    <style>none</style>
+    <subject>{!Case.Subject} - Qantas Freight Customer Support - {!Case.CaseNumber}</subject>
+    <textOnly>Thanks for contacting Qantas Freight. We’ve received your request and your reference number is {!Case.CaseNumber}.
+
+This email is to let you know we&apos;ve received your Domestic Intent to Claim. Please note shipments within Australia, Qantas Freight is not liable for any loss, damage, delay or penalty which the carrier may incur, as per our domestic conditions of carriage. Qantas does not provide transit insurance coverage, which is why we recommend customers source private insurance.
+
+Qantas freight always aims at providing a great service and we apologise that on this occasion this was not the case. We will get back to you shortly after your incident has been investigated.
+
+All the best,
+Qantas Freight Team
+www.qantasfreight.com</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Value_field_entered_incorrectly_QCC</fullName>
+    <active>true</active>
+    <description>If the field should be populated in amount except Space available upgrade and Firm space upgrade instead due to recovery type</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_Value_field_entered_incorrectly_QCC__c = TRUE, 
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+OR(AND(ISPICKVAL(Type__c, &apos;International Business Lounge Passes&apos;), NOT( ISBLANK( Value__c ) ) ), AND(ISPICKVAL(Type__c, &apos;Domestic Qantas Club Lounge Passes&apos;), NOT( ISBLANK( Value__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;Valet Parking or Carwash&apos;), NOT(ISPICKVAL(Case_Number__r.Origin,&apos;Red App&apos;)),NOT( ISBLANK( Value__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;Space available upgrade&apos;), NOT( ISBLANK( Value__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;Firm space upgrade&apos;), NOT( ISBLANK( Value__c ) ) ), 
+AND(ISPICKVAL(Type__c, &apos;Qantas Points&apos;), NOT( ISBLANK( Value__c ) ) ) ))</errorConditionFormula>
+    <errorDisplayField>Value__c</errorDisplayField>
+    <errorMessage>This field and monetary value field should be blank</errorMessage>
+</ValidationRule>

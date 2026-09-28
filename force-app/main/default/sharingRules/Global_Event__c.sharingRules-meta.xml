@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Edit_All_Global_Events</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>QCC: Give CJM edit access to all global events</description>
+        <label>Edit All Global Events</label>
+        <sharedTo>
+            <role>QF_QDC_CJM</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Airport Event,Aircraft Rego</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Read_All_Global_Events</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>QCC: Give all Consultants read access to all global events</description>
+        <label>Read All Global Events</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Airport Event,Aircraft Rego</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>KnowledgeiQ_Guest_User_Global_Events</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>sharing rule for Knowledge iQ guest user to see global events</description>
+        <label>KnowledgeiQ Guest User Global Events</label>
+        <sharedTo>
+            <guestUser>Knowledge_iQ</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aircraft Rego,Airport Event</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+</SharingRules>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>Freight_AWB_Number__c</field>
+        <field>Total_Adjustment_Due__c</field>
+        <field>Justification__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Regional_Manager_Queue_AU_NZ</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Total_Adjustment_Due__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>&quot;AUD 1,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Australia Region Manager Approval 3 Level</label>
+        <name>Australia_Region_Manager_Approval_3_Level</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>mallorylogan@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Total_Adjustment_Due__c</field>
+                <operation>greaterOrEqual</operation>
+                <value>&quot;AUD 20,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Global Head of Sales and Customer Approval 3 Level</label>
+        <name>Global_Head_of_Sales_and_Customer_Approval_3_Level</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>This approval process created for Freight Invoicing type cases&apos; approval for Eloise, Mai,Vicki -CRM-9188,9332.</description>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+ISPICKVAL( Status , &apos;In Progress&apos;),
+Approved__c != true,
+Owner:Queue.QueueName !=&apos;Freight Invoices Queue&apos;,
+OR( ISPICKVAL( Freight_Shipment__c , &apos;Domestic&apos;),
+ISPICKVAL( Freight_Shipment__c , &apos;International&apos;)),
+RecordType.Name =&apos;Freight Invoicing&apos;,
+Owner:Queue.QueueName != &apos;Freight Global Sales Optimisation Queue&apos;,
+OR( ISPICKVAL( Type, &apos;Claims&apos;),
+ISPICKVAL( Type, &apos;Billing Discrepancy&apos;)),
+Account.BillingCountry =&apos;AU&apos;,CCA_Approval_Level_Check_new__c = 2,
+ OR(Created_By_Name__c = &apos;Mai Pham&apos;,Created_By_Name__c = &apos;Eloise Tsoukas&apos;,Created_By_Name__c = &apos;Vicki Park&apos; ))</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Check_the_Approved_checkbox</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_to_QF_Rate_Audit</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Update_Status_as_Pending_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>CCA/Freight Invoicing Eloise and Mai</label>
+    <processOrder>52</processOrder>
+    <recallActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

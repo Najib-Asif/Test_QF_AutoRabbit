@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Repair_Cost_Text__c</fullName>
+    <description>QCC: Displays the repair cost of damage baggage</description>
+    <externalId>false</externalId>
+    <formula>IF( OR(INCLUDES( Damage_Sustained__c , &quot;Frame crushed&quot;), INCLUDES( Damage_Sustained__c , &quot;Completely destroyed&quot;) ) ,
+ &quot;Unrepairable&quot;,  IF(INCLUDES( Damage_Sustained__c , &quot;Other&quot;), &quot;Not Known&quot;,  IF(INCLUDES( Damage_Sustained__c ,
+ &quot;Wheel snapped or broken off&quot;),  &quot;AUD &quot; &amp; text(floor(Repair_Cost_numeric__c)) &amp;&quot;.&quot;&amp; lpad(text((Repair_Cost_numeric__c-floor(Repair_Cost_numeric__c))*100),2,&quot;0&quot;) &amp; &quot; (+ $41 per additional wheel)&quot;, &quot;AUD &quot; &amp; text(floor(Repair_Cost_numeric__c)) &amp;&quot;.&quot;&amp; lpad(text((Repair_Cost_numeric__c-floor(Repair_Cost_numeric__c))*100),2,&quot;0&quot;)) ) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estimated Repair Cost</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

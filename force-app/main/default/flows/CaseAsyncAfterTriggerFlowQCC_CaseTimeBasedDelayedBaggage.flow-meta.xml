@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Migrated from the QCC_CaseTimeBased process using DelayedBaggage criteria.
+QCC: Case Email Alerts to be sent for compliment and non compliment records(Platform change)</description>
+    <environments>Default</environments>
+    <interviewLabel>CaseAsyncAfterTriggerFlowQCC_CaseTimeBasedQantas.com3 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAsyncAfterTriggerFlowQCC_CaseTimeBasedDelayedBaggage</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>myWaitEvent_myWait_myRule_111_event_0_SA1</name>
+        <label>Update Recalculate Emergency Expense to True</label>
+        <locationX>50</locationX>
+        <locationY>276</locationY>
+        <inputAssignments>
+            <field>Recalculate_Emergency_Expense__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myWaitEvent_myWait_myRule_111_event_1_SA1</name>
+        <label>Update Recalculate Emergency Expense to true</label>
+        <locationX>314</locationX>
+        <locationY>276</locationY>
+        <inputAssignments>
+            <field>Recalculate_Emergency_Expense__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myWaitEvent_myWait_myRule_111_event_2_SA1</name>
+        <label>Update Bag Delayed + 21 Days to true</label>
+        <locationX>578</locationX>
+        <locationY>276</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Located_Date__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Bag_Delayed_21_Days__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Baggage</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Group__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Delayed Baggage</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Customer_Not_In_Home_Port__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>myWaitEvent_myWait_myRule_111_event_0</name>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_111_event_0_SA1</targetReference>
+            </connector>
+            <label>24 Hours After Arrival DateTime</label>
+            <offsetNumber>24</offsetNumber>
+            <offsetUnit>Hours</offsetUnit>
+            <recordField>Arrival_DateTime_Backend__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>myWaitEvent_myWait_myRule_111_event_1</name>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_111_event_1_SA1</targetReference>
+            </connector>
+            <label>48 Hours After Arrival DateTime</label>
+            <offsetNumber>48</offsetNumber>
+            <offsetUnit>Hours</offsetUnit>
+            <recordField>Arrival_DateTime_Backend__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>myWaitEvent_myWait_myRule_111_event_2</name>
+            <connector>
+                <targetReference>myWaitEvent_myWait_myRule_111_event_2_SA1</targetReference>
+            </connector>
+            <label>21 Days After Arrival DateTime</label>
+            <offsetNumber>21</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Arrival_DateTime_Backend__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

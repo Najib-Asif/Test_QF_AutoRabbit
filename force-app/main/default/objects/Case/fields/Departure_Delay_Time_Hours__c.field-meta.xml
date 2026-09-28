@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Departure_Delay_Time_Hours__c</fullName>
+    <description>Added for Insurance Letters in &apos;QCC Insurance Letter Layout&apos;  Case  Page Layout</description>
+    <externalId>false</externalId>
+    <formula>FLOOR((DATETIMEVALUE(/* Year Logic */ 
+MID(Actual_Departure_Date_Time__c, 7,4) +&apos;-&apos;+ 
+/* Month Logic */ 
+MID(Actual_Departure_Date_Time__c, 
+FIND(&quot;/&quot;,Actual_Departure_Date_Time__c) + 1, 
+FIND(&quot;/&quot;,Actual_Departure_Date_Time__c, FIND(&quot;/&quot;,Actual_Departure_Date_Time__c) + 1) - 
+FIND(&quot;/&quot;,Actual_Departure_Date_Time__c) - 1 
+)+&apos;-&apos;+    
+/* Day Logic */ 
+LEFT(Actual_Departure_Date_Time__c, 
+FIND(&quot;/&quot;,Actual_Departure_Date_Time__c) - 1) +&apos; &apos;+ 
+/* Time Logic */ 
+RIGHT(Actual_Departure_Date_Time__c, 8) )  - DATETIMEVALUE( /* Year Logic */ 
+MID(Departure_Date_Time__c, 7,4) +&apos;-&apos;+ 
+/* Month Logic */ 
+MID(Departure_Date_Time__c, 
+FIND(&quot;/&quot;,Departure_Date_Time__c) + 1, 
+FIND(&quot;/&quot;,Departure_Date_Time__c, FIND(&quot;/&quot;,Departure_Date_Time__c) + 1) - 
+FIND(&quot;/&quot;,Departure_Date_Time__c) - 1 
+)+&apos;-&apos;+    
+/* Day Logic */ 
+LEFT(Departure_Date_Time__c, 
+FIND(&quot;/&quot;,Departure_Date_Time__c) - 1) +&apos; &apos;+ 
+/* Time Logic */ 
+RIGHT(Departure_Date_Time__c, 8) ))* 24)</formula>
+    <label>Departure Delay Time (Hours)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

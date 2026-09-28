@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_PaymentCriteria_Qualified_JR</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+OR(
+RecordType.DeveloperName = &apos;New_Corporate_Payments&apos;,
+RecordType.DeveloperName = &apos;Approved_Corporate_Payments&apos;
+),
+ISPICKVAL(Payment_required__c , &quot;Yes&quot;),
+OR(
+ISBLANK(Payment_Criteria__c),
+ISBLANK(TEXT( Payment_Qualified__c )),
+ISBLANK(Comment__c)
+)
+)</errorConditionFormula>
+    <errorMessage>Please provide value to the following fields if Payment required is &quot;Yes&quot;.
+*Payment Criteria, 
+*Payment Qualified,
+*Justification/ Reasons</errorMessage>
+</ValidationRule>

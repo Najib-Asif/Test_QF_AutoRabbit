@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Approved_Rejected</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( NOT(ISPICKVAL( Legal_Approval__c , &apos;Approved&apos;)),NOT(ISPICKVAL( Legal_Approval__c , &apos;Rejected&apos;)), NOT( ISBLANK( Approved_Rejected_Date__c ) ) )</errorConditionFormula>
+    <errorDisplayField>Approved_Rejected_Date__c</errorDisplayField>
+    <errorMessage>You can&apos;t enter Approved/Rejected Date if Legal Approval is not &quot;Approved&quot; or &quot;Rejected&quot;.</errorMessage>
+</ValidationRule>

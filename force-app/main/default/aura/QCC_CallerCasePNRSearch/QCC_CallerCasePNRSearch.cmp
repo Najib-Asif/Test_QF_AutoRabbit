@@ -1,0 +1,151 @@
+<!-- ADT-189 
+    -Jamie Wang
+    subtask 1
+    Add 'availableForFlowScreens' in implements -->
+
+<!-- ADT-202 
+    -Darwin Herbert Lubas
+    subtask 1
+    Add '<lightning:messageChannel type="QCC_Case_Channel__c" aura:id="qccCaseChannel"/> -->    
+
+<aura:component
+implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:availableForFlowScreens"
+    access="global" controller="QCC_CasePNRSearchController">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="componentId" type="String" />
+    <aura:attribute name="pnr" type="String" />
+    <aura:attribute name="creationDate" type="String" />
+    <aura:attribute name="lastName" type="String" />
+    <aura:attribute name="lstCurrentBook" type="Object[]"/>
+    <aura:attribute name="showMsg" type="Boolean" default="false"/>
+    <aura:attribute name="noBookings" type="Boolean" default="false"/>
+    <aura:attribute name="history" type="Boolean" default="false" />
+    <aura:handler name="init" value="{! this}" action="{! c.doInit}" />
+
+    <lightning:messageChannel type="QCC_Case_Channel__c" aura:id="qccCaseChannel"/>
+    
+    <!--Spinner Component-->
+    <lightning:spinner aura:id="pnrSpinner" variant="brand" alternativeText="Fetching Data..." class="slds-hide spins" />
+   
+    
+    <div iconName="standard:search" class="background">
+        <aura:set attribute="title">
+            <div class="slds-media__body">
+                <h2>
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="PNR Search">
+                        <span class="slds-text-heading_small" style="margin: bottom 0px">PNR Search</span>
+                    </a>
+                </h2>
+            </div>
+        </aura:set>
+        <!-- <aura:set attribute="footer">
+                    <lightning:button variant="brand" label="Previous" iconName="utility:left" iconPosition="left" onclick="{!c.Previous}" disabled="{!v.hidePrev}" />
+                    &nbsp;&nbsp;&nbsp;&nbsp; {!v.pageNumber} &nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning:button variant="brand" label="Next" iconName="utility:right" iconPosition="right" onclick="{!c.Next}" disabled="{!v.hideNext}"/>
+                </aura:set> -->
+
+        <!-- styling from here -->
+         <!-- CRM-8619-->
+        <div class="slds-grid slds-wrap slds-grid_vertical" style="background-color:transparent">
+            <div class="slds-col slds-size_5-of-6 slds-align-middle" style="margin-left: 1em">
+                <lightning:input label="PNR: " name="pnrInput" maxlength="10" value="{!v.pnr}"
+                    onchange="{!c.capitalisePNR}" />
+            </div>
+            <div class="slds-col slds-size_5-of-6 slds-align-middle" style="margin-left: 1em">
+                <lightning:input label="Last Name: " name="lastnameInput" value="{!v.lastName}"
+                    onchange="{!c.turnOffMsg}" />
+            </div>
+            <div class="slds-col slds-align-bottom" style="margin: 1em; text-align: right">
+                <div class="slds-button-group" role="group">
+                    <div class="slds-form-element" data-aura-rendered-by="4977:0">
+                        <!-- <label class="slds-form-element__label" for="4911:0" data-aura-rendered-by="4917:0">
+                            <span class="" data-aura-rendered-by="4919:0"></span>
+                        </label> -->
+                        <lightning:button variant="brand" label="Search" title="PNR Seach"
+                            onclick="{! c.searchButtonClick }" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- styling end here -->
+
+        <div class="slds-grid slds-grid_vertical-align-center" style="text-align: center; background-color: rgba(255, 255, 255, 0)">
+            <div class="slds-form-element" style="margin: 1em">Search History</div>
+            <lightning:input type="checkbox" label="" title="{! $Label.c.QCC_SearchHistoryHelpText}"
+                checked="{!v.history}" onchange="{!c.turnOffMsg}" />
+        </div>
+        <aura:renderIf isTrue="{!and(v.showMsg, or(empty(v.lstCurrentBook),empty(v.pnr)))}">
+            <aura:renderIf isTrue="{!and(v.showMsg, v.noBookings)}">
+                <div class="slds-text-color_default slds-text-align_center">
+                    {!$Label.c.QCC_CallNoBookingsErrorMsg}
+                </div>
+                <aura:set attribute="else">
+                    <aura:renderIf isTrue="{!and(v.showMsg, empty(v.pnr))}">
+                        <div class="slds-text-color_error slds-text-align_center">
+                            {!$Label.c.QCC_CasePNREmptyPNRmsg}
+                        </div>
+                        <aura:set attribute="else">
+                            <div class="slds-text-color_error slds-text-align_center">
+                                {!$Label.c.QCC_CallPNRSearchErrorMsg}
+                            </div>
+                        </aura:set>
+                    </aura:renderIf>
+                </aura:set>
+            </aura:renderIf>
+
+            <aura:set attribute="else">
+                <aura:renderIf isTrue="{!not(empty(v.lstCurrentBook))}">
+                    <table class="slds-table slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout">
+                        <!--Table must be responsive-->
+                        <thead>
+                            <tr class="slds-text-title_caps slds-line-height_reset" style="height: 18px">
+                                <th scope="col" style="width: 25%">
+                                    <div class="slds-truncate" title="PNR">PNR</div>
+                                </th>
+                                <th scope="col" style="width: 15%">
+                                    <div class="slds-truncate" title="Departure Port">DEP</div>
+                                </th>
+                                <th scope="col" style="width: 15%">
+                                    <div class="slds-truncate" title="Arrival Port">ARR</div>
+                                </th>
+                                <th scope="col" style="width: 45%">
+                                    <div class="slds-truncate" title="Departure Date">
+                                        Departure Date
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.lstCurrentBook}" var="item" indexVar="i">
+                                <tr class="slds-hint-parent record onhover" data-record="{!i}"
+                                    onclick="{!c.navigateToMyComponent}">
+                                    <td data-label="PNR">
+                                        <div class="slds-truncate" title="{!item.reloc}">
+                                            {!item.reloc}
+                                        </div>
+                                    </td>
+                                    <td data-label="Depature Port">
+                                        <div class="slds-truncate" title="{!item.departurePort}">
+                                            {!item.departurePort}
+                                        </div>
+                                    </td>
+                                    <td data-label="Arrival Port">
+                                        <div class="slds-truncate" title="{!item.arrivalPort}">
+                                            {!item.arrivalPort}
+                                        </div>
+                                    </td>
+                                    <td data-label="Depature Date">
+                                        <div class="slds-truncate" title="{!item.departureTimeStamp}">
+                                            {!item.departureTimeStamp}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </aura:renderIf>
+            </aura:set>
+        </aura:renderIf>
+    </div>
+</aura:component>

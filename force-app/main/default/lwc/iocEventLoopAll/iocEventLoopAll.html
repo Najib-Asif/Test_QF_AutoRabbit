@@ -1,0 +1,15 @@
+<template>
+    <lightning-layout tittle="Event Checklist View" vertical-align="center" multiple-rows="true">
+        <lightning-layout-item size="12">
+            <template if:true={allRecords}>
+                <template for:each={allRecords} for:item="rec">
+                    <c-ioc-action-card onupdated={refreshScreen} onmycustomevent={handleCustomEvent} key={rec} rec={rec}></c-ioc-action-card>
+                </template>
+            </template>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12">
+            <c-ioc-dynamic-add onnewrecord={refreshScreen} record-id={recordId} selected-option={option}></c-ioc-dynamic-add>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

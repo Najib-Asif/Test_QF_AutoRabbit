@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Cases_Reimbursements</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <columns>CASES.ORIGIN</columns>
+    <columns>Event__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>Submit_to_Admin__c</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Claims and Reimbursements</value>
+    </filters>
+    <label>My Cases - Reimbursements</label>
+</ListView>

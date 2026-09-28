@@ -1,0 +1,33 @@
+<template>
+    <div class="ivr-selection-div">
+        <!--End of Caller Verification-->
+        
+        <p class="call-details"><b>PNR: </b> 
+            <lightning-formatted-url
+                class="slds-var-m-left_xx-small"
+                value={varARDURLValue} 
+                label={varPNRNumber} 
+                target="_blank">
+            </lightning-formatted-url>                            
+        </p>
+        <p class="call-details"><b>Passenger: </b>
+            <lightning-formatted-text 
+                class="slds-var-m-left_xx-small"
+                value={varPassengerFullName}>
+            </lightning-formatted-text>
+        </p>
+        <p class="call-details"><b>Caller Type: </b>
+            <lightning-formatted-text
+                class="slds-var-m-left_medium" 
+                value={callerTypePicklist}>
+            </lightning-formatted-text>
+        </p>
+        <p class="call-details"><b>Caller: </b>
+            <lightning-formatted-text 
+                class="slds-var-m-left_xx-small"
+                value={callerFullName}>
+            </lightning-formatted-text>
+        </p>
+      
+    </div>
+</template>

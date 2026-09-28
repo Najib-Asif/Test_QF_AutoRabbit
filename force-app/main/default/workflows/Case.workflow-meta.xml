@@ -1,0 +1,2480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Auto_user_creation_Email_alert</fullName>
+        <description>Auto user creation Email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>User_s_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Welcome_to_Qantas_Salesforce</template>
+    </alerts>
+    <alerts>
+        <fullName>CCC_Query_French</fullName>
+        <description>CCC Query French</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>noresponse@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/QCC_Query_French_1719456764697</template>
+    </alerts>
+    <alerts>
+        <fullName>Cargo_Correction_Advice_has_been_approved_for_processing</fullName>
+        <ccEmails>wellspring.qfrateaudit@tcs.com</ccEmails>
+        <ccEmails>gulnar.kapadia@tcs.com</ccEmails>
+        <description>Cargo Correction Advice has been approved for processing</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>freightsalessupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/CCA</template>
+    </alerts>
+    <alerts>
+        <fullName>Corporate_Scheme_Change_of_Coordinator_Details_notification_to_Loyalty</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Corporate Scheme - Change of Coordinator Details notification to Loyalty</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>busgovsalessolutions@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Corporate_Scheme_Change_of_Coordinator</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_on_CCA_case_approval_reject</fullName>
+        <description>Email on CCA case-approval reject</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>Account_Owner__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderAddress>freightcustomerservice@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Email_on_CCA_case_approval_reject</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Customer_on_Case_Closure_Alert</fullName>
+        <description>Email to Customer on Case Closure Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Email_to_Customer_on_Case_Closure</template>
+    </alerts>
+    <alerts>
+        <fullName>FreightInvoicesEmailAlert</fullName>
+        <ccEmails>freightinvoices@qantas.com.au</ccEmails>
+        <description>FreightInvoicesEmailAlert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>freightinvoices@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Freight_Web_Invoices_Auto_Response_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Freight_Email_Alert_to_FRT_Cust_Service</fullName>
+        <description>Freight Email Alert to FRT Cust Service</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>freightcustomerservice@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Freight_Email_to_case_Acknowledgement_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Frequent_Flyer_Bulk_Request_Notification</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Frequent Flyer - Bulk Request Notification</description>
+        <protected>false</protected>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Events/Frequent_Flyer_Bulk_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Frequent_Flyer_High_Priority_Notification</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Frequent Flyer - High Priority Notification</description>
+        <protected>false</protected>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Frequent_Flyer_High_Priority</template>
+    </alerts>
+    <alerts>
+        <fullName>QAC_SLA_ViolationEmailAlert</fullName>
+        <ccEmails>qicspvr@qantas.com.au</ccEmails>
+        <description>QAC SLA Violation Email Alert</description>
+        <protected>false</protected>
+        <senderAddress>qantasagencyconnectau@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QAC_Sla_Violation_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>QAC_SLA_Violation_EmailAlert</fullName>
+        <ccEmails>qicspvr@qantas.com.au</ccEmails>
+        <description>QAC SLA Violation Email Alert</description>
+        <protected>false</protected>
+        <senderAddress>qantasagencyconnectau@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QAC_Sla_Violation_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>QAC_SLA_Violation_EmailAlerts</fullName>
+        <ccEmails>qicspvr@qantas.com.au</ccEmails>
+        <description>QAC SLA Violation Email Alert</description>
+        <protected>false</protected>
+        <senderAddress>qantasagencyconnectau@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QAC_Sla_Violation_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>QAC_SLA_Violation_Email_Alert</fullName>
+        <description>QAC SLA Violation Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>system.updates@qantas.com.au</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>qantasagencyconnectau@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/QAC_Sla_Violation_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_7_days_Closure_email</fullName>
+        <description>QCC 7 days Closure email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Reminder_Email_Templates/Email_Reminder_Day_7_Final</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Arrival_Airport_Alert_1</fullName>
+        <description>QCC Arrival Airport Alert 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Arrival_Airport_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Arrival_Airport_Alert_2</fullName>
+        <description>QCC Arrival Airport Alert 2</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Arrival_Airport_Letter_2C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Arrival_Airport_Alert_3</fullName>
+        <description>QCC Arrival Airport Alert 3</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Arrival_Airport_Letter_3C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Contact_Centre_Alert_1</fullName>
+        <description>QCC Contact Centre Alert 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Contact_Centre_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Contact_Centre_Alert_2</fullName>
+        <description>QCC Contact Centre Alert 2</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Contact_Centre_Letter_2C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Contact_Centre_Alert_3</fullName>
+        <description>QCC Contact Centre Alert 3</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Contact_Centre_Letter_3C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Departure_Airport_Alert_1</fullName>
+        <description>QCC Departure Airport Alert 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Departure_Airport_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Departure_Airport_Alert_2</fullName>
+        <description>QCC Departure Airport Alert 2</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Departure_Airport_Letter_2C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Departure_Airport_Alert_3</fullName>
+        <description>QCC Departure Airport Alert 3</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Departure_Airport_Letter_3C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_EmailToCaseSpecificNeedsAcknowledgement</fullName>
+        <description>QCC_SpecificNeedsAcknowledgementForEmail2Case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>specificneeds@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Specific_Needs/Specific_Need_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Email_Bounced_Back</fullName>
+        <description>QCC Email Bounced Back</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Email_Bounced_Back</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Frequent_Flyer_Alert_1</fullName>
+        <description>QCC Frequent Flyer Alert 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Frequent_Flyer_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Frequent_Flyer_Alert_2</fullName>
+        <description>QCC Frequent Flyer Alert 2</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Frequent_Flyer_Letter_2C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Frequent_Flyer_Alert_3</fullName>
+        <description>QCC Frequent Flyer Alert 3</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Frequent_Flyer_Letter_3C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_In_flight_Alert_1</fullName>
+        <description>QCC In-flight Alert 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_In_Flight_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_In_flight_Alert_2</fullName>
+        <description>QCC In-flight Alert 2</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_In_Flight_Letter_2C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_In_flight_Alert_3</fullName>
+        <description>QCC In-flight Alert 3</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_In_Flight_Letter_3C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Insurance_Letter_Delated_Flight</fullName>
+        <ccEmails>rclucher@salesforce.com</ccEmails>
+        <description>QCC Insurance Letter Delated Flight</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Contact_Centre_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Insurance_Letter_Proof_of_Boarding</fullName>
+        <ccEmails>rclucher@salesforce.com</ccEmails>
+        <description>QCC Insurance Letter Proof of Boarding</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Insurance_POB/QCC_Insur_POB</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Lounges_Alert_1</fullName>
+        <description>QCC Lounges Alert 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Lounges_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Lounges_Alert_2</fullName>
+        <description>QCC Lounges Alert 2</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Lounges_Letter_2C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Lounges_Alert_3</fullName>
+        <description>QCC Lounges Alert 3</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Lounges_Letter_3C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Qantas_Points_Survey</fullName>
+        <description>QCC Qantas Points Survey</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/Qantas_Points_Recovery_Survey</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Qantas_com_Alert_1</fullName>
+        <description>QCC Qantas.com Alert 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Qantas_com_Letter_1C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Qantas_com_Alert_2</fullName>
+        <description>QCC Qantas.com Alert 2</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Qantas_com_Letter_2C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Qantas_com_Alert_3</fullName>
+        <description>QCC Qantas.com Alert 3</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Qantas_com_Letter_3C</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Send_a_Reminder_after_3_days</fullName>
+        <description>QCC Send a Reminder after 3 days</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Reminder_Email_Templates/Email_Reminder_Day_3</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Send_out_Acknowledgement_email_alert</fullName>
+        <description>QCC Send out Acknowledgement email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Acknowledgement_Letter</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Send_out_Acknowledgement_email_alert_for_Hot_words_Critical_Queue_High</fullName>
+        <description>QCC Send out Acknowledgement email alert for Hot words Critical Queue-High</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QCC_Email_Templates/QCC_Acknowledgement_Letter_for_Hot_words_Critical_Queue_High</template>
+    </alerts>
+    <alerts>
+        <fullName>QCC_Specific_Needs_Acknowledgement</fullName>
+        <description>Specific Needs Acknowledgement</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>specificneeds@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Specific_Needs/Specific_Needs_Acknowledgement_Form</template>
+    </alerts>
+    <alerts>
+        <fullName>SLA_Breached</fullName>
+        <description>SLA Breached</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Welcome_to_Qantas_Salesforce</template>
+    </alerts>
+    <alerts>
+        <fullName>Sales_Offer_Bespoke_IncentiveApproval_Required</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Sales Offer - Bespoke Incentive Approval Required</description>
+        <protected>false</protected>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Sales_Solution_Sales_Offers_Bespoke_Incentive</template>
+    </alerts>
+    <alerts>
+        <fullName>Sales_Offers_Bespoke_Incentive_Approved</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Sales Offers - Bespoke Incentive - Approved</description>
+        <protected>false</protected>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Sales_Solution_Sales_Offers_Bespoke_Incentive_Approved</template>
+    </alerts>
+    <alerts>
+        <fullName>Sales_Offers_Bulk_FF_Request_Notification</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Sales Offers - Bulk FF Request Notification</description>
+        <protected>false</protected>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Sales_Offers_Bulk_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Sales_Offers_Corporate_Trigger_50_Bonus_Trigger_Notification</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Sales Offers - Corporate Trigger 50% Bonus Trigger Notification</description>
+        <protected>false</protected>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Sales_Offers_Corporate_Trigger_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Acknowledgement_Email_for_CCC_KC_Campaign_E2C</fullName>
+        <description>Send Acknowledgement Email for CCC KC Campaign E2C</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>QCC_Email_Templates/KC_campaign</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_alert_to_CL_Renewal_near_due</fullName>
+        <description>Email alert to CL Renewal near due</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>B_G_SME/CL_Renewal_near_due</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Sales_Offer_Adhoc_Notification_to_SHR_B_G</fullName>
+        <ccEmails>BusGovSalesSolutions@qantas.com.au</ccEmails>
+        <description>Send Sales Offer Adhoc Notification to SHR B&amp;G</description>
+        <protected>false</protected>
+        <senderAddress>busgovsalessolutions@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All_email_templates_LD/Sales_Solution_Adhoc_Sales_Offers</template>
+    </alerts>
+    <alerts>
+        <fullName>Specific_Needs_Email_enquiries_Alert</fullName>
+        <description>Specific Needs Email enquiries Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>qantas_customer_care@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Specific_Needs_Email_Enquiry_Bounce_back_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Tcketing_Autority_Email</fullName>
+        <description>Tcketing Autority Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>qantasticketingauthority@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Sales_Support/X2202_Application_received_confirmation_for_Ticketing_Authority</template>
+    </alerts>
+    <alerts>
+        <fullName>Ticketing_Authority_Approval_Email_alert</fullName>
+        <description>Ticketing Authority Approval EmailAlert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Sales_Support/X2309_Application_for_Ticketing_Authority_2026</template>
+    </alerts>
+    <alerts>
+        <fullName>Ticketing_Authority_Rejection_Email_alert</fullName>
+        <description>Ticketing Authority Rejection Email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>salesforcesupport@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Sales_Support/X130225_Rejection_for_Ticketing_Authority_2026</template>
+    </alerts>
+    <alerts>
+        <fullName>Warning_2_hours_remaining</fullName>
+        <ccEmails>osilorio@salesforce.com</ccEmails>
+        <description>Warning : 2 hours remaining</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Welcome_to_Qantas_Salesforce</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Account_Handover_Case_No_New_Team</fullName>
+        <description>For Account Handover Case, flag No Team = TRUE</description>
+        <field>No_New_Team__c</field>
+        <literalValue>1</literalValue>
+        <name>Account Handover Case - No New Team</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Admin_cases_to_S_D_Queue</fullName>
+        <description>Push all system admin cases raised by S&amp;D business unit to S&amp;D queue for triaging.</description>
+        <field>OwnerId</field>
+        <lookupValue>S_D_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Admin cases to S&amp;D Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_Change</fullName>
+        <field>Approval_Status__c</field>
+        <name>Approval Status Change</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_asApproved</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Approval Status as Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Step_Increment</fullName>
+        <field>Approval_steps__c</field>
+        <formula>Approval_steps__c  + 1</formula>
+        <name>Approval Step Increment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Step_reversal</fullName>
+        <description>Reversal of approval step to allow reentry</description>
+        <field>Approval_steps__c</field>
+        <formula>Approval_steps__c  * 0</formula>
+        <name>Approval Step reversal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Case_owner</fullName>
+        <description>Assign case to US Case queue</description>
+        <field>OwnerId</field>
+        <lookupValue>US_Case_Assignment_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign Case owner</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_Case_owner_to_Hobart_Queue_High</fullName>
+        <field>OwnerId</field>
+        <lookupValue>CCC_R1_Hobart_Q</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign Case owner to Hobart Queue-High</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_QBR_cases_to_QBR_Data_Support</fullName>
+        <field>OwnerId</field>
+        <lookupValue>QBR_Data_Support</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign QBR cases to QBR Data Support</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_case_owner_to_Exco_Queue</fullName>
+        <description>Assign the case owner to CCC Exco Queue</description>
+        <field>OwnerId</field>
+        <lookupValue>ExCo_Queue_High</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign case owner to Exco Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_case_owner_to_Platinum_one_High</fullName>
+        <description>Assign the case owner to CCC-Platinum Queue-High</description>
+        <field>OwnerId</field>
+        <lookupValue>QANTAS_VIP_Post_Travel_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign case owner to Platinum one-High</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_case_owner_to_critical_queue_High</fullName>
+        <field>OwnerId</field>
+        <lookupValue>CCC_R1_Critical_Q</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign case owner to critical queue-High</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_case_to_COmpliance_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Compliance_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign case to COmpliance Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_owner_to_QDM_Report_Queue</fullName>
+        <description>Assign ownership of Case to PRISM Queue</description>
+        <field>OwnerId</field>
+        <lookupValue>QDM_Reports</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign owner to Prism Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Account_Review_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Account_Review_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Account Review Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Compliance_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Compliance_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Compliance Queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Deal_Optimisation_Queue</fullName>
+        <description>Assign dealing model requests with specific status to Deal Optimisation Queue.</description>
+        <field>OwnerId</field>
+        <lookupValue>Deal_Optimisation_Team_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Deal Optimisation Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Deal_Support_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Deal_Support_Request_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Deal Support Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Fare_Distribution_Team_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Fare_Distribution_Team_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Fare Distribution Team Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_NZ_Sales_Support_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>NZ_Sales_Support_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to NZ Sales Support Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_QCC_Enhancement_Review_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>QCC_Enhancements_Review</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to QCC Enhancement Review Queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_QDM_Queue</fullName>
+        <description>Assign deal support cases with specific status to QDM Queue.</description>
+        <field>OwnerId</field>
+        <lookupValue>QDM_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to QDM Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_QIC_Sales_Support_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>QIC_Sales_Support_Escalation_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to QIC Sales Support Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Sales_Solution_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Sales_Solution_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Sales Solution Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Sales_Support_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Sales_Support_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Sales Support Queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Sys_Admin_QBR_Duplicate_Acco</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Sys_Admin_QBR_Duplicate_Account_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Sys Admin - QBR Duplicate Acco</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_US_Sales_Support_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>US_Sales_Support_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to US Sales Support Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_WNS_queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>WNS_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to WNS queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assign_to_Zero_Octa_queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Accelya_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to Zero Octa queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Assigned_to_US_Sales_Support</fullName>
+        <field>Status</field>
+        <literalValue>Assigned to US Sales Support</literalValue>
+        <name>Assigned to US Sales Support</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Auto_Populate_Expected_Completion_10Day</fullName>
+        <description>Auto Populate Expected Completion Date + 10days</description>
+        <field>Expected_Completion_Date__c</field>
+        <formula>IF(MOD(DATEVALUE(CreatedDate) - Date(1970,01,05) , 7) &lt;=3 , DATEVALUE(CreatedDate) + 10 + 2, 
+IF(MOD(DATEVALUE(CreatedDate) - Date(1970,01,05) , 7) =4 , DATEVALUE(CreatedDate) + 10 + 4, 
+IF(MOD(DATEVALUE(CreatedDate) - Date(1970,01,05) , 7) =5 , DATEVALUE(CreatedDate) + 10 + 3, 
+DATEVALUE(CreatedDate) + 10 + 2)))</formula>
+        <name>Auto Populate Expected Completion +10Day</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Auto_Populate_Expection_Completion_Date</fullName>
+        <field>Expected_Completion_Date__c</field>
+        <formula>IF(MOD(DATEVALUE(CreatedDate) - Date(1970,01,05) , 7) &lt;=3 , DATEVALUE(CreatedDate) + 6 + 2, 
+IF(MOD(DATEVALUE(CreatedDate) - Date(1970,01,05) , 7) =4 , DATEVALUE(CreatedDate) + 6 + 4, 
+IF(MOD(DATEVALUE(CreatedDate) - Date(1970,01,05) , 7) =5 , DATEVALUE(CreatedDate) + 6 + 3, 
+DATEVALUE(CreatedDate) + 6 + 2)))</formula>
+        <name>Auto Populate Expection Completion Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>BCP_Auto_check_the_Escalated_button</fullName>
+        <field>IsEscalated</field>
+        <literalValue>1</literalValue>
+        <name>BCP Auto-check the Escalated button</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>BCP_Update_Status_Escalated</fullName>
+        <field>Status</field>
+        <literalValue>Escalated</literalValue>
+        <name>BCP Update Status Escalated</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CL_Back_to_QAC1</fullName>
+        <field>OwnerId</field>
+        <lookupValue>CL_Renewal_SSU</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>CL Back to QAC-Kris</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Reset_CCAT_Type</fullName>
+        <description>Introduced as part of CCC Reimagine.</description>
+        <field>CCC_R1_CCAT_Type__c</field>
+        <name>Case Reset CCAT Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Status_Update_With_Salesforce_Spp</fullName>
+        <description>Case Status = with Salesforce Support Queue</description>
+        <field>Status</field>
+        <literalValue>with Salesforce Support  Admin Team</literalValue>
+        <name>Case Status Update - With Salesforce Spp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Status_to_In_progress</fullName>
+        <field>Status</field>
+        <literalValue>In Progress</literalValue>
+        <name>Case Status to In progress</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Update_Priority_High</fullName>
+        <description>Introduced as part of CCC Reimagine.</description>
+        <field>Priority</field>
+        <literalValue>High</literalValue>
+        <name>Case Update Priority High</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Update_Priority_Low</fullName>
+        <description>Introduced as part of CCC Reimagine.</description>
+        <field>Priority</field>
+        <literalValue>Low</literalValue>
+        <name>Case Update Priority Low</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Update_Priority_Medium</fullName>
+        <description>Introduced as part of CCC Reimagine.</description>
+        <field>Priority</field>
+        <literalValue>Medium</literalValue>
+        <name>Case Update Priority Medium</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_owner_to_Insurance_High</fullName>
+        <description>Assign the case owner as Insurance Queue-High</description>
+        <field>OwnerId</field>
+        <lookupValue>CCC_R1_Insurance_Q</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Case owner to Insurance High</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_owner_to_Insurance_Low</fullName>
+        <description>Assign the case owner as Insurance queue-Low</description>
+        <field>OwnerId</field>
+        <lookupValue>CCC_R1_Insurance_Q</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Case owner to Insurance Low</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_owner_to_Insurance_Medium</fullName>
+        <description>Assign the case owner as Insurance Queue-Medium</description>
+        <field>OwnerId</field>
+        <lookupValue>CCC_R1_Insurance_Q</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Case owner to Insurance Medium</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_owner_to_North_America_Distribution</fullName>
+        <description>Update ownership the Deal Support Cases raised bu US users to North America Distribution queue</description>
+        <field>OwnerId</field>
+        <lookupValue>QIC_Sales_Support_Escalation_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Case owner to North America Distribution</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_owner_update</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Deal_Support_Request_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Case owner update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_status_to_Closed</fullName>
+        <field>Status</field>
+        <literalValue>Closed</literalValue>
+        <name>Case status to Closed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Owner_to_System_Admin_Queue</fullName>
+        <description>When a case with record type &quot;System Admin Request&quot; is created, the case is automatically assigned to the System Admin Request.</description>
+        <field>OwnerId</field>
+        <lookupValue>System_Admin_Request_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Change Owner to System Admin Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Owner_to_System_Admin_Updates</fullName>
+        <description>For Email Bounced Back cases, this workflow will update the record type to system admin request and auto close the case and send reply to customer. Jira CRM-5503</description>
+        <field>OwnerId</field>
+        <lookupValue>system.updates@qantas.com.au</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Change Owner to System Admin Updates</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Status_to_Assigned_for_Approval</fullName>
+        <description>Change Status to Assigned for Approval</description>
+        <field>Status</field>
+        <literalValue>Assigned for Approval</literalValue>
+        <name>Change Status to Assigned for Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Check_the_Approved_checkbox</fullName>
+        <field>Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Check the Approved checkbox</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ContactCenter_Case_Owner_to_Queue</fullName>
+        <description>For Internal Cases</description>
+        <field>OwnerId</field>
+        <lookupValue>Service_Delivery_Support</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>ContactCenter Case Owner to Queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DO_Queue</fullName>
+        <description>Case Ownership to Deal Optimisation queue</description>
+        <field>OwnerId</field>
+        <lookupValue>Deal_Optimisation_Team_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>DO Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DateIschecked</fullName>
+        <field>DateIschecked__c</field>
+        <literalValue>1</literalValue>
+        <name>DateIschecked</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Escalate_to_field_update_to_blank</fullName>
+        <description>Updates the escalate to field to blank when a case is closed.</description>
+        <field>Escalate_To__c</field>
+        <name>Escalate to field update to blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Claim_Approval_action</fullName>
+        <field>Claim_Stage__c</field>
+        <literalValue>Finalised</literalValue>
+        <name>Freight Claim Approval action</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Claim_Payment</fullName>
+        <description>CCA_Freight_Claim_approvals - CRM 9062</description>
+        <field>Claim_Stage__c</field>
+        <literalValue>Approvals</literalValue>
+        <name>Freight Claim Payment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Claim_Recall_action</fullName>
+        <field>Claim_Stage__c</field>
+        <literalValue>Open</literalValue>
+        <name>Freight Claim Recall action</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Claim_Rejection_action</fullName>
+        <field>Claim_Stage__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Freight Claim Rejection action</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Claim_approval_submission</fullName>
+        <field>Claim_Stage__c</field>
+        <literalValue>In Progress</literalValue>
+        <name>Freight Claim approval submission</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_SLA_Closed_Success</fullName>
+        <description>Freight - To Close SLA Milestone once Milestone successfully completed.</description>
+        <field>Freight_Case_Milestone_Status__c</field>
+        <literalValue>Compliant</literalValue>
+        <name>Freight SLA Closed Success</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_SLA_Violation</fullName>
+        <description>Freight - To monitor SLA Violation flag once SLA breached.</description>
+        <field>Freight_Case_Milestone_Status__c</field>
+        <literalValue>Open Violation</literalValue>
+        <name>Freight SLA Violation</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_SLA_Warning</fullName>
+        <description>Freight - SLA warning to be shown for Milestones breach.</description>
+        <field>Freight_Case_Milestone_Status__c</field>
+        <literalValue>Reaching SLA</literalValue>
+        <name>Freight SLA Warning</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Set_Type_as_Customer_Query</fullName>
+        <description>Set Case Type to Customer Query</description>
+        <field>Type</field>
+        <literalValue>Customer Query</literalValue>
+        <name>Freight - Set Type as Customer Query</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Set_Type_as_Freight_Claims</fullName>
+        <description>Set Case Type to Claim</description>
+        <field>Type</field>
+        <literalValue>Claims</literalValue>
+        <name>Freight - Set Type as Freight Claims</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Set_Type_as_Freight_Shipments</fullName>
+        <description>Set Case Type to Shipment</description>
+        <field>Type</field>
+        <literalValue>Shipment</literalValue>
+        <name>Freight - Set Type as Freight Shipments</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Set_Type_to_Blank</fullName>
+        <description>Set Case Type to Blank</description>
+        <field>Type</field>
+        <name>Freight - Set Type to Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Update_Preferred_customer</fullName>
+        <description>When Case Origin = &quot;Auto Email&quot;, update Preferred customer advice method to &quot;Email&quot;</description>
+        <field>Customer_Advice_Method__c</field>
+        <literalValue>Email</literalValue>
+        <name>Freight - Update Preferred customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Update_to_Freight_Claims</fullName>
+        <description>Update Case Record Type to Freight Claims</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Freight_Claims</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Freight - Update to Freight Claims</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Update_to_Freight_Feedback</fullName>
+        <description>Update Case Record Type to Freight Feedback</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Freight_Feedback</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Freight - Update to Freight Feedback</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Update_to_Freight_Query_Case</fullName>
+        <description>Update Case Record Type to Freight Query Record Type</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Freight_Query</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Freight - Update to Freight Query Case</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Update_to_Freight_Shipment</fullName>
+        <description>Update Case Record Type to Freight Shipment Record Type</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Freight_Shipment</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Freight - Update to Freight Shipment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Hot_word_check</fullName>
+        <description>Hot word check for Critical Queue High cases</description>
+        <field>Hot_words_check__c</field>
+        <literalValue>1</literalValue>
+        <name>Hot word check</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>In_Approval_Process</fullName>
+        <field>Status</field>
+        <literalValue>With Account Owner&apos;s Manager</literalValue>
+        <name>In Approval Process</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Last_Approved_By_update</fullName>
+        <description>To update the field &apos;Approval Received From&apos;</description>
+        <field>Most_Recent_Approver__c</field>
+        <formula>$User.FirstName &amp; &quot; &quot; &amp; $User.LastName</formula>
+        <name>Last Approved By update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NAM_Approved_is_Ticked</fullName>
+        <description>NAM Approved is Ticked</description>
+        <field>NAM_s_Approval__c</field>
+        <literalValue>1</literalValue>
+        <name>NAM Approved is Ticked</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NZ_Lounge_Access_Zubbi_Kutty</fullName>
+        <field>OwnerId</field>
+        <lookupValue>zubbi.kutty@qantas.com.au</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>NZ - Lounge Access Zubbi Kutty</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>New_User_Rep_Acc_Status_Approved</fullName>
+        <field>Status</field>
+        <literalValue>Open</literalValue>
+        <name>New User/Rep Acc Status Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>New_User_Rep_Acc_Status_Rejected</fullName>
+        <field>Status</field>
+        <literalValue>Closed - Rejected</literalValue>
+        <name>New User/Rep Acc Status Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Null_baggage_assessment_outcome</fullName>
+        <field>Baggage_Assessment_Outcome__c</field>
+        <name>Null baggage assessment outcome</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Pending_with_Sales_Solutions</fullName>
+        <description>Case Status = Approved</description>
+        <field>Status</field>
+        <literalValue>Approved</literalValue>
+        <name>Pending with Sales Solutions</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QAC_AU_Case_Owner_Update</fullName>
+        <description>QAC</description>
+        <field>OwnerId</field>
+        <lookupValue>QAC_AU_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>QAC AU Case Owner Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QAC_Case_Status_In_Progress</fullName>
+        <field>Status</field>
+        <literalValue>In Progress</literalValue>
+        <name>QAC Case Status In Progress</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Set_Case_Priority_Internal</fullName>
+        <field>Priority</field>
+        <literalValue>Internal Escalation</literalValue>
+        <name>QCC Set Case Priority Internal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Set_Case_Priority_to_Urgent</fullName>
+        <field>Priority</field>
+        <literalValue>Urgent</literalValue>
+        <name>QCC Set Case Priority to Urgent</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Set_Case_Status_to_Resolved</fullName>
+        <field>Status</field>
+        <literalValue>Closed</literalValue>
+        <name>QCC Set Case Status to Resolved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Set_Case_to_In_Progress</fullName>
+        <field>Status</field>
+        <literalValue>In Progress</literalValue>
+        <name>QCC Set Case to In Progress</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Update_Assistance_Case_Owner</fullName>
+        <description>Auto Create Child Case instead of using &quot;reopen&quot;. CRM-4843</description>
+        <field>OwnerId</field>
+        <lookupValue>QCC_VIP_Reply_Received_Decommissioned</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>QCC Update Assistance Case Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Update_Case_Priority_to_High</fullName>
+        <field>Priority</field>
+        <literalValue>High</literalValue>
+        <name>QCC Update Case Priority to High</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QCC_Update_Specific_Needs_Case_Owner</fullName>
+        <description>Auto Create Child Case instead of using &quot;reopen&quot;. CRM-4843</description>
+        <field>OwnerId</field>
+        <lookupValue>QCC_Specific_Needs_Bounce_Back_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>QCC Update Specific Needs Case Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QIC_Escalation_Assignment_to_Level6</fullName>
+        <field>OwnerId</field>
+        <lookupValue>QIC_Level_6_Escalation_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>QIC Escalation Assignment to Level6</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>QIC_Escalation_Flag</fullName>
+        <field>IsEscalated</field>
+        <literalValue>1</literalValue>
+        <name>QIC Escalation Flag</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Recent_Approval_Date_Time</fullName>
+        <description>To capture the date/time of the most recent approval</description>
+        <field>Approval_Date_Time__c</field>
+        <formula>NOW()</formula>
+        <name>Recent Approval Date/Time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected_by_AM</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Ticketing Rejected</literalValue>
+        <name>Rejected by AM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Remove_Approval_Date_Time</fullName>
+        <field>Approval_Date_Time__c</field>
+        <name>Remove Approval Date/ Time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SR_Groups_Escaated_set_to_TRUE</fullName>
+        <description>SR Groups Escaated set to TRUE</description>
+        <field>IsEscalated</field>
+        <literalValue>1</literalValue>
+        <name>SR Groups Escaated set to TRUE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Service_Request_Approve</fullName>
+        <description>Check approve field when Service Request is approved</description>
+        <field>Approve__c</field>
+        <literalValue>Yes</literalValue>
+        <name>Service Request - Approve</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Service_Request_Approve_No</fullName>
+        <field>Approve__c</field>
+        <literalValue>No</literalValue>
+        <name>Service Request - Approve - No</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_No_of_Days_to_Travel_to_Null</fullName>
+        <field>Travel_expected_date__c</field>
+        <name>Set No of Days to Travel to Null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Change</fullName>
+        <description>Status field to be updated with Closed-Rejected after reject the manager.</description>
+        <field>Status</field>
+        <literalValue>Closed - Rejected</literalValue>
+        <name>Status Change</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_as_Approved</fullName>
+        <field>Status</field>
+        <literalValue>Approved &amp; Assigned to Loyalty</literalValue>
+        <name>Status as Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_as_Pending</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Status as Pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_as_Reject</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Reject</literalValue>
+        <name>Status as Reject</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_to_QF_Rate_Audit</fullName>
+        <field>Status</field>
+        <literalValue>QF Rate Audit</literalValue>
+        <name>Status to QF Rate Audit</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_update</fullName>
+        <field>Status</field>
+        <literalValue>Assigned-Deal Support-iDeal loading</literalValue>
+        <name>Status update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_with_Deal_Optimisation_Queue</fullName>
+        <field>Status</field>
+        <literalValue>with Deal Optimisation Team</literalValue>
+        <name>Status with Deal Optimisation Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Travel_Expected_Date_calculation</fullName>
+        <field>Travel_expected_date__c</field>
+        <formula>First_Flight_Date__c -DATEVALUE(CreatedDate)</formula>
+        <name>Travel Expected Date calculation</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Upd_Status_to_Not_yet_assigned_with_AM</fullName>
+        <field>Status</field>
+        <literalValue>Not yet assigned - with Account Manager</literalValue>
+        <name>Upd Status to Not yet assigned - with AM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Account_Owner</fullName>
+        <description>Update Previous Account Owner with Account Owner</description>
+        <field>Previous_Owner__c</field>
+        <formula>Account.Owner.FirstName &amp; &quot; &quot; &amp; Account.Owner.LastName</formula>
+        <name>Update Account Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Account_Review_Close_Date</fullName>
+        <field>Auto_Account_Review_Case_Date__c</field>
+        <formula>CASE( 
+  MOD( DATEVALUE(LastModifiedDate) - DATE( 1900, 1, 7 ), 7 ),
+  1, DATEVALUE(LastModifiedDate) + 2 + 5,
+  2, DATEVALUE(LastModifiedDate) + 2 + 5,
+  3, DATEVALUE(LastModifiedDate) + 2 + 5,
+  4, DATEVALUE(LastModifiedDate) + 2 + 5,
+  5, DATEVALUE(LastModifiedDate) + 2 + 5,
+  6, DATEVALUE(LastModifiedDate) + 1 + 5,
+  DATEVALUE(LastModifiedDate) + 5
+)</formula>
+        <name>Update Account Review Close Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_Status_as_Rejected</fullName>
+        <field>Status</field>
+        <literalValue>Rejected</literalValue>
+        <name>Update Approval Status as Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Authority_Status_to_Approved</fullName>
+        <field>Authority_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Update Authority Status to Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Authority_Status_to_Denied</fullName>
+        <field>Authority_Status__c</field>
+        <literalValue>Denied</literalValue>
+        <name>Update Authority Status to Denied</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_Counter</fullName>
+        <field>Case_Status_Counter__c</field>
+        <formula>BLANKVALUE(Case_Status_Counter__c, 0) + 1</formula>
+        <name>Update Case Counter</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_Owner1</fullName>
+        <description>Update Case Owner to SSU/Kris Chippendale when Closed Renew/Downgrade</description>
+        <field>OwnerId</field>
+        <lookupValue>CL_Renewal_SSU</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Update Case Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_Owner_Queue</fullName>
+        <description>CCA/Freight Claim approvals - CRM 9199</description>
+        <field>OwnerId</field>
+        <lookupValue>Freight_CSU_AU_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Update Case Owner Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_Owner_To_Freight_Claim_Queue</fullName>
+        <description>CCA/Freight Claim approvals - CRM-9199</description>
+        <field>OwnerId</field>
+        <lookupValue>Freight_Claims_Coordinator_approvals</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Update Case Owner To Freight Claim Queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_Owner_to_BCP</fullName>
+        <field>OwnerId</field>
+        <lookupValue>BCP_Portal_Support</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Update Case Owner to BCP</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_Record_Type</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>CCC_Query</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Case Record Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_Reopened_status_to_true</fullName>
+        <field>Case_Reopened_Status__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Case Reopened status to true</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Case_owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>CCC_Exception_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Update Case owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Claim_Stage_to_Investigating</fullName>
+        <description>CCA/Freight Claim approvals - CRM-9199</description>
+        <field>Claim_Stage__c</field>
+        <literalValue>Investigation</literalValue>
+        <name>Update Claim Stage to Investigating</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Due_Date</fullName>
+        <description>Update due date as Case Creation Date + 3 days</description>
+        <field>Due_Date__c</field>
+        <formula>CreatedDate + 3</formula>
+        <name>Update Due Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Due_Date_for_CL</fullName>
+        <description>Due Date = case create date + 11</description>
+        <field>Due_Date__c</field>
+        <formula>CreatedDate + 11</formula>
+        <name>Update Due Date for CL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_No_of_days_for_Ticketing</fullName>
+        <field>No_of_Days_for_Ticketing__c</field>
+        <formula>Ticketing_Time_Limit__c - DATEVALUE(CreatedDate)</formula>
+        <name>Update No of days for Ticketing</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_No_of_days_for_Ticketing_to_Null</fullName>
+        <field>No_of_Days_for_Ticketing__c</field>
+        <name>Update No of days for Ticketing to Null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Previous_Portfolio</fullName>
+        <description>For Account Handover, update Previous Portfolio with Account Owner Reporting Team</description>
+        <field>Previous_Portfolio__c</field>
+        <name>Update Previous Portfolio</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Qualtrics_Outbound_Notifcation</fullName>
+        <description>Update Qualtrics Outbound Notifcation Date/Time</description>
+        <field>Qualtrics_Outbound_Notification__c</field>
+        <formula>NOW()</formula>
+        <name>Update Qualtrics Outbound Notifcation</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Sensitive_to_False</fullName>
+        <field>Sensitive__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Sensitive to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Sensitive_to_True</fullName>
+        <field>Sensitive__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Sensitive to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Step_1_Approved</fullName>
+        <field>Status</field>
+        <literalValue>With NAM</literalValue>
+        <name>Update Status Step 1 - Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_as_Pending_Approval</fullName>
+        <field>Status</field>
+        <literalValue>Pending Approval</literalValue>
+        <name>Update Status as Pending Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_as_Waiting_for_Approval</fullName>
+        <field>Status</field>
+        <literalValue>Waiting for Approval</literalValue>
+        <name>Update Status as Waiting for Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_Approved_Case</fullName>
+        <description>Update Status to Approved</description>
+        <field>Status</field>
+        <literalValue>Approved</literalValue>
+        <name>Update Status to Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_Auto_Closed</fullName>
+        <field>Status</field>
+        <literalValue>Auto Closed</literalValue>
+        <name>Update Status to Auto Closed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_Closed</fullName>
+        <description>QAC Agency Credits</description>
+        <field>Status</field>
+        <literalValue>Closed</literalValue>
+        <name>Update Status to Closed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_New</fullName>
+        <field>Status</field>
+        <literalValue>New</literalValue>
+        <name>Update Status to New</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_With_AU_Sales_Support</fullName>
+        <description>Update Status to With AU Sales Support when owner is with  AU Sales Support Queue</description>
+        <field>Status</field>
+        <literalValue>with AU Sales Support</literalValue>
+        <name>Update Status to With AU Sales Support</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_with_QDM_Team</fullName>
+        <description>Update Case Status to &quot;with QDM Team&quot;</description>
+        <field>Status</field>
+        <literalValue>with QDM Team</literalValue>
+        <name>Update Status - with QDM Team</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_with_Team_Lead</fullName>
+        <field>Status</field>
+        <literalValue>with Team Lead</literalValue>
+        <name>Update Status - with Team Lead</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Stopped_to_True</fullName>
+        <field>IsStopped</field>
+        <literalValue>1</literalValue>
+        <name>Update Stopped to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_case_origin</fullName>
+        <field>Origin</field>
+        <literalValue>SHR QCC</literalValue>
+        <name>Update case origin</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_case_record_to_SystemAdminReq</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>System_Admin_Request</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update case record to SystemAdminReq</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_case_type_to_Agency_Assist</fullName>
+        <field>Type</field>
+        <literalValue>Agency Assist</literalValue>
+        <name>Update case type to Agency Assist</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_case_type_to_Email_Bounced_Back</fullName>
+        <description>For Email Bounced Back cases, updating case type to Email Bounced Back. Jira CRM-5503</description>
+        <field>Type</field>
+        <literalValue>Bounce Back</literalValue>
+        <name>Update case type to Email Bounced Back</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_escalated_checkbox_to_blank</fullName>
+        <description>Updates the escalated check box to blank, when a case is closed rejected</description>
+        <field>IsEscalated</field>
+        <literalValue>0</literalValue>
+        <name>Update escalated checkbox to blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_owner</fullName>
+        <description>Update owner of the case to the queue</description>
+        <field>OwnerId</field>
+        <lookupValue>SHR_QIS_Support_Services</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Update owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_owner_to_SHR_QIS_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>SHR_QIS_Support_Services</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Update owner to SHR QIS Queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_reopened_date_and_time</fullName>
+        <field>Reopened_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Update reopened date and time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_to_QDP_Qantas_Channel</fullName>
+        <field>Status</field>
+        <literalValue>QDP/Qantas Channel</literalValue>
+        <name>Update status to QDP/Qantas Channel</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_to_Waiting_for_Approval</fullName>
+        <field>Status</field>
+        <literalValue>Waiting for Approval</literalValue>
+        <name>Update status to Waiting for Approval</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_to_assigned</fullName>
+        <field>Status</field>
+        <literalValue>Assigned for QDP loading</literalValue>
+        <name>Update status to assigned</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_to_closed_Approved</fullName>
+        <field>Status</field>
+        <literalValue>Closed - Approved</literalValue>
+        <name>Update status to closed Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_stopped_to_false</fullName>
+        <field>IsStopped</field>
+        <literalValue>0</literalValue>
+        <name>Update stopped to false</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_Case_Status_to_Assigned</fullName>
+        <field>Status</field>
+        <literalValue>Assigned</literalValue>
+        <name>Update the Case Status to Assigned</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>YPO</fullName>
+        <field>Type</field>
+        <literalValue>YPO</literalValue>
+        <name>YPO</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>assign_to_DRA_queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>DRA_Queue</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>assign to DRA queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>case_owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>kathryn.robertson@qantas.com.au</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>case owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_CL_Endorsed_By</fullName>
+        <description>Update CL Endorsed By field with Case Owner</description>
+        <field>CL_Endorsed_By__c</field>
+        <formula>Owner:User.FirstName +  &quot; &quot; + Owner:User.LastName</formula>
+        <name>update CL Endorsed By</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_Owner_to_SME_QBR_Support_queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>SME_QBR_Support</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>update Owner to SME QBR Support queue</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_the_Tier_change_start_date</fullName>
+        <field>Tier_Change_Start_Date__c</field>
+        <formula>NOW()</formula>
+        <name>update the Tier change start date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>QAC_Case_Notification</fullName>
+        <apiVersion>43.0</apiVersion>
+        <description>Notify QAC webstie on all the case records related to agency service request created or updated in salesforce including the onces which is coming from the website itsel</description>
+        <endpointUrl>https://qac.api.qantas.com/qac/notification/caseevent</endpointUrl>
+        <fields>CreatedDate</fields>
+        <fields>External_System_Reference_Id__c</fields>
+        <fields>Id</fields>
+        <fields>LastModifiedDate</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>system.updates@qantas.com.au</integrationUser>
+        <name>QAC Case Notification</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>QCC_Generate_Conga_PDF_Files_for_Emails</fullName>
+        <apiVersion>64.0</apiVersion>
+        <description>It will invoke the Conga Server, and generate the merge document, and attached the generated document to the Case record.</description>
+        <endpointUrl>https://workflow.congamerge.com/OBMListener.ashx</endpointUrl>
+        <fields>Conga_Trigger_Formula__c</fields>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>congatriggerintegrationuser@qantas.com.au</integrationUser>
+        <name>QCC Generate Conga PDF Files for Emails</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Send_Qualtrics_Survey</fullName>
+        <apiVersion>45.0</apiVersion>
+        <endpointUrl>https://syd1.qualtrics.com/triggers/api/v1/event?eventType=SalesforceOutboundMessage&amp;s=SV_80rClfgZj9oVeYJ&amp;u=UR_eWMPgo9B5stFMOx&amp;t=OC_1Ns53cj8b2x6AYC&amp;b=qantasgroup</endpointUrl>
+        <fields>AccountId</fields>
+        <fields>Cabin_Class__c</fields>
+        <fields>Case_Number__c</fields>
+        <fields>Category__c</fields>
+        <fields>Classification__c</fields>
+        <fields>ClosedByLocation__c</fields>
+        <fields>Contact_Email__c</fields>
+        <fields>CreatedDate</fields>
+        <fields>First_Name__c</fields>
+        <fields>Frequent_Flyer_Tier__c</fields>
+        <fields>Group__c</fields>
+        <fields>Id</fields>
+        <fields>Origin</fields>
+        <fields>Owner_City__c</fields>
+        <fields>Sub_Category__c</fields>
+        <fields>Type</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>apiintegration@qantas.com.au</integrationUser>
+        <name>Send Qualtrics Survey</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>true</useDeadLetterQueue>
+    </outboundMessages>
+    <tasks>
+        <fullName>Sent_Change_of_Coordinator_Notifcation</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>You have send the Change of Coordinator Details to qcschemerenewals@qantasloyalty.com</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Sent Change of Coordinator Notifcation</subject>
+    </tasks>
+</Workflow>

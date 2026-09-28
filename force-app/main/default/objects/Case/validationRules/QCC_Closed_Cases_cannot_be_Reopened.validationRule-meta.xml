@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Closed_Cases_cannot_be_Reopened</fullName>
+    <active>true</active>
+    <description>Once the case is closed, it cannot be reopened.- CRM-5155</description>
+    <errorConditionFormula>AND( ISCHANGED( Status ) , NOT(TEXT(Status)=&apos;Awaiting Goodwill Approval&apos;), TEXT(PRIORVALUE(Status))=&apos;Closed&apos;,OR(RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+RecordType.DeveloperName = &apos;CCC_Query&apos;,
+RecordType.DeveloperName = &apos;CCC_Refund&apos;,
+RecordType.DeveloperName = &apos;CCC_Event&apos;,
+RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;,
+RecordType.DeveloperName = &apos;CCCOffload&apos;,
+RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+RecordType.DeveloperName = &apos;Contact_Center&apos;,
+RecordType.DeveloperName = &apos;QCC_Sensitive_Case&apos;,
+RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;,
+RecordType.DeveloperName = &apos;Service_Delivery&apos;
+),
+NOT(AND( PRIORVALUE( Record_Type_auto_populate__c )  = &quot;System_Admin_Request&quot; ,Record_Type_auto_populate__c  = &apos;CCC_Complaints&apos;))
+)</errorConditionFormula>
+    <errorMessage>Parent case closed, create child case or new stand-alone case</errorMessage>
+</ValidationRule>

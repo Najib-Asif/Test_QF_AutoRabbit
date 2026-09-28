@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_MandatoryCustomerCode</fullName>
+    <active>true</active>
+    <description>Freight Implementation: Customer Code is mandatory when Account is of Branch Type.</description>
+    <errorConditionFormula>AND( 
+
+OR( 
+$RecordType.DeveloperName = &quot;Freight_Account&quot; 
+), 
+
+ISPICKVAL( Type , &quot;Freight-Branch&quot;),
+
+(ISBLANK(Freight_Customer_Code__c)) 
+
+)</errorConditionFormula>
+    <errorMessage>Customer Code is required</errorMessage>
+</ValidationRule>

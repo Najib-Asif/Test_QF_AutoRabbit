@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Closure_Chatter_Notification</name>
+        <label>Closure Chatter Notification</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>SalesOfferCompletedStatusChatterMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>myRule_13</name>
+        <label>Sales Offer - NAM Approver AM&apos;S Manager SO2, SO3,SO4</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>FALSE_Sales Offer - NAM Approver AM&apos;S Manager SO2, SO3,SO4</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_13</name>
+            <conditionLogic>1 AND NOT (2 OR 3 OR 4 ) AND (5 OR 6)</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sales_Offers_Request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.CreatedBy.Level__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>SO3</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.CreatedBy.Level__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>SO4</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.CreatedBy.Level__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>SO2</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed - Activated</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed - Not Activated</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Closure_Chatter_Notification</targetReference>
+            </connector>
+            <label>TRUE_Sales Offer - NAM Approver AM&apos;S Manager SO2, SO3,SO4</label>
+        </rules>
+    </decisions>
+    <description>Migrated from the Case - On Record Create Process Builder process using multiple criteria.
+CCC value for exception queue(Platform change)</description>
+    <environments>Default</environments>
+    <interviewLabel>CaseAfterTriggerSubFlow-OtherCase {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-OtherCaseSalesOffer</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>myRule_13</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>SalesOfferCompletedStatusChatterMsg</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;span style=&quot;color: rgb(68, 68, 68);&quot;&gt;Hi {!objNewCase.CreatedBy.Id} the Status of the Sales Offer Case Type: {!objNewCase.Type} - {!objNewCase.Sub_Type__c} for {!objNewCase.Account.Name} has been changed to {!objNewCase.Status}. Thanks.&lt;/span&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <description>trigger.new</description>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>trigger.old</description>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

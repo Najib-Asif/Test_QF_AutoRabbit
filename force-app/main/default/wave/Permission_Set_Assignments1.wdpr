@@ -1,0 +1,2162 @@
+{
+  "version" : "65.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "PermissionSetId", "PermissionSetGroupId", "AssigneeId", "SystemModstamp", "ExpirationDate", "IsActive", "IsRevoked" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "PermissionSetAssignment",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "PermissionSetAssignment"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Label", "LicenseId", "ProfileId", "IsOwnedByProfile", "IsCustom", "PermissionsEmailSingle", "PermissionsEmailMass", "PermissionsEditTask", "PermissionsEditEvent", "PermissionsExportReport", "PermissionsImportPersonal", "PermissionsDataExport", "PermissionsManageUsers", "PermissionsEditPublicFilters", "PermissionsEditPublicTemplates", "PermissionsModifyAllData", "PermissionsEditBillingInfo", "PermissionsManageCases", "PermissionsMassInlineEdit", "PermissionsEditKnowledge", "PermissionsManageKnowledge", "PermissionsManageSolutions", "PermissionsCustomizeApplication", "PermissionsEditReadonlyFields", "PermissionsRunReports", "PermissionsViewSetup", "PermissionsTransferAnyEntity", "PermissionsNewReportBuilder", "PermissionsActivateContract", "PermissionsActivateOrder", "PermissionsImportLeads", "PermissionsManageLeads", "PermissionsTransferAnyLead", "PermissionsViewAllData", "PermissionsEditPublicDocuments", "PermissionsViewEncryptedData", "PermissionsEditBrandTemplates", "PermissionsEditHtmlTemplates", "PermissionsChatterInternalUser", "PermissionsManageTranslation", "PermissionsManageEncryptionKeys", "PermissionsDeleteActivatedContract", "PermissionsChatterInviteExternalUsers", "PermissionsSendSitRequests", "PermissionsOverrideForecasts", "PermissionsViewAllForecasts", "PermissionsApiUserOnly", "PermissionsManageRemoteAccess", "PermissionsCanUseNewDashboardBuilder", "PermissionsManageCategories", "PermissionsConvertLeads", "PermissionsPasswordNeverExpires", "PermissionsUseTeamReassignWizards", "PermissionsEditActivatedOrders", "PermissionsInstallPackaging", "PermissionsPublishPackaging", "PermissionsChatterOwnGroups", "PermissionsEditOppLineItemUnitPrice", "PermissionsManageTerritories", "PermissionsCreatePackaging", "PermissionsBulkApiHardDelete", "PermissionsInboundMigrationToolsUser", "PermissionsSolutionImport", "PermissionsManageCallCenters", "PermissionsManageSynonyms", "PermissionsOutboundMigrationToolsUser", "PermissionsViewContent", "PermissionsManageEmailClientConfig", "PermissionsEnableNotifications", "PermissionsIsSsoEnabled", "PermissionsManageDataIntegrations", "PermissionsDistributeFromPersWksp", "PermissionsViewDataCategories", "PermissionsManageDataCategories", "PermissionsAuthorApex", "PermissionsManageMobile", "PermissionsApiEnabled", "PermissionsManageCustomReportTypes", "PermissionsEditCaseComments", "PermissionsTransferAnyCase", "PermissionsContentAdministrator", "PermissionsCreateWorkspaces", "PermissionsManageContentPermissions", "PermissionsManageContentProperties", "PermissionsManageContentTypes", "PermissionsScheduleJob", "PermissionsManageExchangeConfig", "PermissionsManageAnalyticSnapshots", "PermissionsScheduleReports", "PermissionsManageBusinessHourHolidays", "PermissionsManageEntitlements", "PermissionsManageDynamicDashboards", "PermissionsManageInteraction", "PermissionsViewMyTeamsDashboards", "PermissionsModerateChatter", "PermissionsResetPasswords", "PermissionsFlowUFLRequired", "PermissionsCanInsertFeedSystemFields", "PermissionsActivitiesAccess", "PermissionsManageKnowledgeImportExport", "PermissionsEmailTemplateManagement", "PermissionsEmailAdministration", "PermissionsManageChatterMessages", "PermissionsAllowEmailIC", "PermissionsForceTwoFactor", "PermissionsViewEventLogFiles", "PermissionsManageNetworks", "PermissionsManageAuthProviders", "PermissionsRunFlow", "PermissionsViewGlobalHeader", "PermissionsManageQuotas", "PermissionsCreateCustomizeDashboards", "PermissionsCreateDashboardFolders", "PermissionsViewPublicDashboards", "PermissionsManageDashbdsInPubFolders", "PermissionsCreateCustomizeReports", "PermissionsCreateReportFolders", "PermissionsViewPublicReports", "PermissionsManageReportsInPubFolders", "PermissionsEditMyDashboards", "PermissionsEditMyReports", "PermissionsViewAllUsers", "PermissionsBypassEmailApproval", "PermissionsAllowUniversalSearch", "PermissionsConnectOrgToEnvironmentHub", "PermissionsCreateCustomizeFilters", "PermissionsContentHubUser", "PermissionsModerateNetworkFeeds", "PermissionsModerateNetworkFiles", "PermissionsGovernNetworks", "PermissionsSalesConsole", "PermissionsTwoFactorApi", "PermissionsDeleteTopics", "PermissionsEditTopics", "PermissionsCreateTopics", "PermissionsAssignTopics", "PermissionsIdentityEnabled", "PermissionsIdentityConnect", "PermissionsAllowViewKnowledge", "PermissionsContentWorkspaces", "PermissionsCreateWorkBadgeDefinition", "PermissionsManageSearchPromotionRules", "PermissionsCustomMobileAppsAccess", "PermissionsViewHelpLink", "PermissionsManageProfilesPermissionsets", "PermissionsAssignPermissionSets", "PermissionsManageRoles", "PermissionsManageIpAddresses", "PermissionsManageSharing", "PermissionsManageInternalUsers", "PermissionsManagePasswordPolicies", "PermissionsManageLoginAccessPolicies", "PermissionsViewPlatformEvents", "PermissionsManageCustomPermissions", "PermissionsCanVerifyComment", "PermissionsManageUnlistedGroups", "PermissionsStdAutomaticActivityCapture", "PermissionsFreezeUsers", "PermissionsInsightsAppDashboardEditor", "PermissionsShareFilesWithNetworks", "PermissionsManageTwoFactor", "PermissionsInsightsAppUser", "PermissionsInsightsAppAdmin", "PermissionsInsightsAppEltEditor", "PermissionsInsightsAppUploadUser", "PermissionsInsightsCreateApplication", "PermissionsDebugApex", "PermissionsLightningExperienceUser", "PermissionsViewDataLeakageEvents", "PermissionsConfigCustomRecs", "PermissionsSubmitMacrosAllowed", "PermissionsBulkMacrosAllowed", "PermissionsShareInternalArticles", "PermissionsModerateNetworkMessages", "PermissionsManageSessionPermissionSets", "PermissionsManageTemplatedApp", "PermissionsUseTemplatedApp", "PermissionsSendAnnouncementEmails", "PermissionsChatterEditOwnPost", "PermissionsChatterEditOwnRecordPost", "PermissionsAdminAnalyticsUser", "PermissionsServiceAnalyticsUser", "PermissionsCreateAuditFields", "PermissionsUpdateWithInactiveOwner", "PermissionsAssignUserToSkill", "PermissionsWaveTrendReports", "PermissionsWaveTabularDownload", "PermissionsWaveCommunityUser", "PermissionsManageSandboxes", "PermissionsAutomaticActivityCapture", "PermissionsImportCustomObjects", "PermissionsSalesforceIQInbox", "PermissionsDelegatedTwoFactor", "PermissionsChatterComposeUiCodesnippet", "PermissionsSelectFilesFromSalesforce", "PermissionsModerateNetworkUsers", "PermissionsMergeTopics", "PermissionsViewForecastingPredictive", "PermissionsSubscribeToLightningReports", "PermissionsManagePvtRptsAndDashbds", "PermissionsLeadScoreUser", "PermissionsCampaignInfluence2", "PermissionsViewDataAssessment", "PermissionsRemoveDirectMessageMembers", "PermissionsCanApproveFeedPost", "PermissionsAddDirectMessageMembers", "PermissionsAllowViewEditConvertedLeads", "PermissionsShowCompanyNameAsUserBadge", "PermissionsAccessCMC", "PermissionsArchiveArticles", "PermissionsPublishArticles", "PermissionsViewHealthCheck", "PermissionsManageHealthCheck", "PermissionsPackaging2", "PermissionsManageCertificates", "PermissionsCreateReportInLightning", "PermissionsPreventClassicExperience", "PermissionsHideReadByList", "PermissionsOpportunityScoreUser", "PermissionsSubmitForTranslation", "PermissionsEditTranslation", "PermissionsPublishTranslation", "PermissionsUseSmartDataDiscovery", "PermissionsGetSmartDataDiscovery", "PermissionsCreateUpdateSDDDataset", "PermissionsCreateUpdateSDDStory", "PermissionsManageSmartDataDiscovery", "PermissionsShareSmartDataDiscoveryStory", "PermissionsManageSmartDataDiscoveryModel", "PermissionsListEmailSend", "PermissionsFeedPinning", "PermissionsChangeDashboardColors", "PermissionsManageRecommendationStrategies", "PermissionsManagePropositions", "PermissionsPipelineInspectorUser", "PermissionsCloseConversations", "PermissionsSubscribeReportRolesGrps", "PermissionsSubscribeDashboardRolesGrps", "PermissionsUseWebLink", "PermissionsEinsteinArticleRecUser", "PermissionsHasUnlimitedNBAExecutions", "PermissionsViewOnlyEmbeddedAppUser", "PermissionsAdoptionAnalyticsUser", "PermissionsViewAllActivities", "PermissionsSubscribeReportToOtherUsers", "PermissionsLightningConsoleAllowedForUser", "PermissionsSubscribeReportsRunAsUser", "PermissionsSubscribeToLightningDashboards", "PermissionsSubscribeDashboardToOtherUsers", "PermissionsCreateLtngTempInPub", "PermissionsTransactionalEmailSend", "PermissionsViewPrivateStaticResources", "PermissionsViewCustomerSentiment", "PermissionsCreateLtngTempFolder", "PermissionsApexRestServices", "PermissionsEnableCommunityAppLauncher", "PermissionsGiveRecognitionBadge", "PermissionsCanRunAnalysis", "PermissionsSalesforceIQInternal", "PermissionsUseMySearch", "PermissionsLtngPromoReserved01UserPerm", "PermissionsManageSubscriptions", "PermissionsWaveManagePrivateAssetsUser", "PermissionsCanEditDataPrepRecipe", "PermissionsAddAnalyticsRemoteConnections", "PermissionsManageSurveys", "PermissionsUseAssistantDialog", "PermissionsUseQuerySuggestions", "PermissionsPackaging2PromoteVersion", "PermissionsRecordVisibilityAPI", "PermissionsViewRoles", "PermissionsSmartDataDiscoveryForCommunity", "PermissionsCanManageMaps", "PermissionsStoryOnDSWithPredicate", "PermissionsCustomTabBarOnMobile", "PermissionsLMOutboundMessagingUserPerm", "PermissionsModifyDataClassification", "PermissionsPrivacyDataAccess", "PermissionsQueryAllFiles", "PermissionsModifyMetadata", "PermissionsManageCMS", "PermissionsSandboxTestingInCommunityApp", "PermissionsCanEditPrompts", "PermissionsViewUserPII", "PermissionsMobileAppSecurity", "PermissionsViewDraftArticles", "PermissionsViewArchivedArticles", "PermissionsManageHubConnections", "PermissionsB2BMarketingAnalyticsUser", "PermissionsTraceXdsQueries", "PermissionsSCEViewAllData", "PermissionsReplyRecommendationUser", "PermissionsViewAllCustomSettings", "PermissionsViewAllForeignKeyNames", "PermissionsAddWaveNotificationRecipients", "PermissionsHeadlessCMSAccess", "PermissionsLMEndMessagingSessionUserPerm", "PermissionsEinsteinReplyManager", "PermissionsConsentApiUpdate", "PermissionsManageMobileAppSecurity", "PermissionsManageDSARPolicies", "PermissionsExecuteDSARPolicies", "PermissionsAccessContentBuilder", "PermissionsEmployeeExperience", "PermissionsAccountSwitcherUser", "PermissionsViewAnomalyEvents", "PermissionsManageC360AConnections", "PermissionsIsContactCenterAgent", "PermissionsManageReleaseUpdates", "PermissionsViewAllProfiles", "PermissionsSkipIdentityConfirmation", "PermissionsCanToggleCallRecordings", "PermissionsCaseWrapUpUser", "PermissionsIsContactCenterAdminBYOT", "PermissionsIsContactCenterAgentBYOT", "PermissionsSendCustomNotifications", "PermissionsPackaging2Delete", "PermissionsAutonomousAnalyticsPrivacy", "PermissionsCallCoachingUser", "PermissionsViewRestrictionAndScopingRules", "PermissionsAllowERIBasicAccess", "PermissionsDecisionTableExecUserAccess", "PermissionsFSCComprehensiveUserAccess", "PermissionsBotManageBots", "PermissionsBotManageBotsTrainingData", "PermissionsManageTrustMeasures", "PermissionsViewTrustMeasures", "PermissionsVideoConferenceZoomUser", "PermissionsIsContactCenterSupervisor", "PermissionsIsotopeCToCUser", "PermissionsUseSvcCatalog", "PermissionsManageSvcCatalog", "PermissionsManagePreferenceCenter", "PermissionsCanAccessCE", "PermissionsHasUnlimitedErbScoringRequests", "PermissionsFSCAlertFrameworkUserAccess", "PermissionsSalesforceMeetingsUserPerm", "PermissionsIsotopeAccess", "PermissionsIsotopeLEX", "PermissionsGetSmartDataDiscoveryExternal", "PermissionsExplainabilityUserAccess", "PermissionsExplainabilityCmtyAccess", "PermissionsQuipMetricsAccess", "PermissionsQuipUserEngagementMetrics", "PermissionsIdentityVerificationUserAccess", "PermissionsServiceExcellencePlatformUser", "PermissionsRemoteMediaVirtualDesktop", "PermissionsTransactionSecurityExempt", "PermissionsInteractionCalcUserPerm", "PermissionsInteractionCalcAdminPerm", "PermissionsManageExternalConnections", "PermissionsManageUserAccessPolicies", "PermissionsUseSubscriptionEmails", "PermissionsAIViewInsightObjects", "PermissionsAICreateInsightObjects", "PermissionsViewMLModels", "PermissionsLeadScoreResultPublisher", "PermissionsManageGlobalPrivacyCenterVO", "PermissionsNativeWebviewScrolling", "PermissionsViewDeveloperName", "PermissionsBypassMFAForUiLogins", "PermissionsEventLogReadAccess", "PermissionsUpdateReportTypeReferences", "PermissionsAccessToServiceProcess", "PermissionsManagePrivacyHold", "PermissionsMicrobatching", "PermissionsManageOrchInstsAndWorkItems", "PermissionsCMSECEAuthoringAccess", "PermissionsVideoConferenceTeamsUser", "PermissionsManageDataspaceScope", "PermissionsConfigureDataspaceScope", "PermissionsOmniSupervisorManageQueue", "PermissionsManagePrivacyCenterPolicies", "PermissionsManageDevSandboxes", "PermissionsCdcReportingCreateReports", "PermissionsCdcReportingViewReports", "PermissionsCdcReportingManageFolders", "PermissionsVideoConferenceMeetUser", "PermissionsDeleteCrMemoAndInvoice", "PermissionsEmbeddedMessagingAgent", "PermissionsManageForecastingCustomData", "PermissionsManageNamedCredentials", "PermissionsCanInitiateMessagingSessions", "PermissionsManageDataMaskPolicies", "PermissionsCanUpdateEmailMessage", "PermissionsDownloadPackageVersionZips", "PermissionsCodeBuilderUser", "PermissionsReassignOrchestrationWorkItems", "PermissionsManageOrchestrationRuns", "PermissionsDigitalLendingUser", "PermissionsManageCertificatesExpiration", "PermissionsEnableIPFSUpload", "PermissionsEnableBCTransactionPolling", "PermissionsLobbyManagementUserAccess", "PermissionsOrgPerformanceAccess", "PermissionsPerformanceAnalysisAccess", "PermissionsMonitorLoginHistory", "PermissionsRunDecisionMatrix", "PermissionsRunExpressionSet", "PermissionsSimpleCsvDataImportUser", "PermissionsAdvancedCsvDataImportUser", "PermissionsAccessToComplaintMgmt", "PermissionsAccessToDisputeManagement", "PermissionsPersonalizedFinanceUserAccess", "PermissionsBREAlertsUserAccess", "PermissionsCustomAppsOnFSMobile", "PermissionsStageManagementDesignUser", "PermissionsSegmentIntelligenceUser", "PermissionsFSCArcGraphCommunityUser", "PermissionsManageCdpMlModels", "PermissionsDigitalLendingAdminUser", "PermissionsActivateSystemModeFlows", "PermissionsPersonalizationPlatform", "PermissionsLeadInspectorUser", "PermissionsContactInspectorUser", "PermissionsMetadataStudioUser", "PermissionsPrismPlaygroundUser", "PermissionsUseServiceCatalogForGuest", "PermissionsRunCatalogItemsOnBehalfOf", "PermissionsManageCustomDomains", "PermissionsPersonalizationIntelUser", "PermissionsAccessDisputePrompts", "PermissionsViewAllCalls", "PermissionsDigitalLendingWorkbench", "PermissionsDigitalLendingEditReadOnly", "PermissionsHeadlessPublishNudges", "PermissionsYourAccountCDAPublishEvents", "PermissionsAccessServiceEinstein", "PermissionsManageAccessPolicies", "Description", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "NamespacePrefix", "HasActivationRequired", "PermissionSetGroupId", "Type" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "PermissionSet",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "PermissionSet"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Username", "LastName", "FirstName", "Name", "CompanyName", "Division", "Department", "Title", "IsActive", "TimeZoneSidKey", "UserRoleId", "LocaleSidKey", "DefaultCurrencyIsoCode", "CurrencyIsoCode", "ProfileId", "UserType", "LanguageLocaleKey", "EmployeeNumber", "LastLoginDate", "CreatedDate", "Role_Classification__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "JOIN5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "PermissionSetId" ],
+        "rightQualifier" : "PermissionSet",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "JOIN7", "BUCKET0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "UserRoleId" ],
+        "rightQualifier" : "UserRole",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "ParentRoleId", "DeveloperName" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "UserRole",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "UserRole"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Permission Set Assignments",
+          "name" : "Permission_Set_Assignments",
+          "folderName" : "User_login_history"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "IsActive",
+          "operator" : "EQUAL",
+          "operands" : [ "true" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "UserType",
+          "operator" : "EQUAL",
+          "operands" : [ "Standard" ]
+        } ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "JOIN10", "FORMULA1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "AssigneeId" ],
+        "rightQualifier" : "PermissionSetUser",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucketV2",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "buckets" : [ {
+          "value" : "Freight",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-Freight", "QF-Freight-AU", "QF-Freight-AU-Account Manager", "QF-Freight-Asia", "QF-Freight-Asia-Account Manager", "QF-Freight-Customer-Service-Support", "QF-Freight-Customer-Service-Support-Team", "QF-Freight-Customer-Service-Unit", "QF-Freight-Customer-Service-Unit-Team", "QF-Freight-Service-Support", "QF-Freight-Support", "QF-Freight-Support-AU", "QF-Freight-Support-Asia", "QF-Freight-Support-UK", "QF-Freight-Support-US", "QF-Freight-UK", "QF-Freight-UK-Account Manager", "QF-Freight-US", "QF-Freight-US-Account Manager" ]
+          } ]
+        }, {
+          "value" : "QCC",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF-QDC", "QF-QDC-CJM", "QF-QDC-Commercial Ops", "QF-QDC-Commercial Ops-TL", "QF-QDC-Commercial Ops-USR", "QF-QDC-Customer Ops", "QF-QDC-Customer Ops-TL", "QF-QDC-Customer Ops-USR", "QF-QDC-OM", "QF-QDC-OM-AKL-TL", "QF-QDC-OM-AKL-TL-USR", "QF-QDC-OM-CPT-TL", "QF-QDC-OM-CPT-TL-USR", "QF-QDC-OM-HBA-TL", "QF-QDC-OM-HBA-TL-USR", "QF-QDC-OM-MNL-TL", "QF-QDC-OM-MNL-TL-USR", "QF-QDC-OM-SN-TL", "QF-QDC-OM-SN-TL-USR", "QF-QDC-OM-SUV-TL", "QF-QDC-OM-SUV-TL-USR", "QF-QDC-OM-SYD-TL", "QF-QDC-OM-SYD-TL-USR", "QF-QDC-OM-VIP-TL", "QF-QDC-OM-VIP-TL-USR", "QF-QDC-Service Delivery", "QF-QDC-Service Delivery-TL", "QF-QDC-Service Delivery-TL-USR" ]
+          } ]
+        }, {
+          "value" : "S&D",
+          "terms" : [ {
+            "operator" : "EQUAL",
+            "opType" : "TEXT",
+            "operands" : [ "QF Loyalty - Coalition Partnerships", "QF Loyalty - Coalition Partnerships - Account Manager", "QF Loyalty - Commercial Performance", "QF Loyalty - Financial Services", "QF Loyalty - QBR", "QF Loyalty - QBR - Account Manager", "QF-Airports", "QF-Airports-Sales-Account Manager", "QF-DOM-Distribution & Ancillaries", "QF-DOM-Distribution & Ancillaries-Ancillaries", "QF-DOM-Distribution & Ancillaries-Distribution Operations", "QF-DOM-Distribution & Ancillaries-Strategy", "QF-DOM-Sales", "QF-DOM-Sales Performance", "QF-DOM-Sales-AP-Corporate", "QF-DOM-Sales-AP-Corporate-Account Manager", "QF-DOM-Sales-AP-Flight Centre", "QF-DOM-Sales-AP-Flight Centre-Account Manager", "QF-DOM-Sales-AP-Helloworld", "QF-DOM-Sales-AP-Helloworld-Account Manager", "QF-DOM-Sales-AP-Leisure", "QF-DOM-Sales-AP-Leisure-Account Manager", "QF-DOM-Sales-AP-Leisure-Agency Development", "QF-DOM-Sales-AP/Regional", "QF-DOM-Sales-B&G", "QF-DOM-Sales-B&G-Charter", "QF-DOM-Sales-B&G-Development-Other States-Lead", "QF-DOM-Sales-B&G-Development-Other States-Manager", "QF-DOM-Sales-B&G-New Business", "QF-DOM-Sales-B&G-New Business & Development", "QF-DOM-Sales-B&G-New Business-Manager", "QF-DOM-Sales-B&G-Regional ACT", "QF-DOM-Sales-B&G-Regional ACT-Manager", "QF-DOM-Sales-B&G-Regional Development", "QF-DOM-Sales-B&G-Regional Development-Manager", "QF-DOM-Sales-B&G-Regional QLD", "QF-DOM-Sales-B&G-Regional QLD-Manager", "QF-DOM-Sales-B&G-Regional VIC/TAS", "QF-DOM-Sales-B&G-Regional VIC/TAS-Manager", "QF-DOM-Sales-B&G-Regional WA/SA", "QF-DOM-Sales-B&G-Resources NSW/VIC", "QF-DOM-Sales-B&G-Resources NSW/VIC-Manager", "QF-DOM-Sales-B&G-Resources QLD", "QF-DOM-Sales-B&G-Resources WA", "QF-DOM-Sales-B&G-Resources WA-Manager", "QF-DOM-Sales-B&G-Resources and Charters", "QF-DOM-Sales-B&G-Resources-Global Accounts", "QF-DOM-Sales-B&G-Strategic Accounts", "QF-DOM-Sales-B&G-Strategic Accounts-Lead", "QF-DOM-Sales-B&G-Strategic Accounts-Manager", "QF-DOM-Sales-Future Planet", "QF-DOM-Sales-QBR/Strategy", "QF-DOM-Sales-SME", "QF-DOM-Sales-SME-QIS", "QF-DOM-Sales-SME-QIS-A&G", "QF-DOM-Sales-SME-QIS-A&G-Lead Account Manager1", "QF-DOM-Sales-SME-QIS-A&G-Lead Account Manager2", "QF-DOM-Sales-SME-QIS-A&G-Lead Account Manager4", "QF-DOM-Sales-SME-QIS-A&G-Lead Account Manager5", "QF-DOM-Sales-SME-QIS-Operations", "QF-DOM-Sales-SME-QIS-R&G", "QF-DOM-Sales-SME-QIS-R&G-Account Manager10", "QF-DOM-Sales-SME-QIS-R&G-Account Manager11", "QF-DOM-Sales-SME-QIS-R&G-Account Manager2", "QF-DOM-Sales-SME-QIS-R&G-Account Manager3", "QF-DOM-Sales-SME-QIS-R&G-Account Manager4", "QF-DOM-Sales-SME-QIS-R&G-Account Manager5", "QF-DOM-Sales-SME-QIS-R&G-Account Manager6", "QF-DOM-Sales-SME-QIS-SME Callout", "QF-DOM-Sales-SME-QIS-Sr Manager", "QF-Government Affairs", "QF-INT-Sales", "QF-INT-Sales-Asia", "QF-INT-Sales-Asia-CN", "QF-INT-Sales-Asia-CN-Account Manager", "QF-INT-Sales-Asia-GSA-Account Manager", "QF-INT-Sales-Asia-HK", "QF-INT-Sales-Asia-HK-Account Manager", "QF-INT-Sales-Asia-Marketing/Performance", "QF-INT-Sales-Asia-Other Regions-Account Manager", "QF-INT-Sales-Asia-Other Regions/GSA", "QF-INT-Sales-Asia-SG", "QF-INT-Sales-Asia-SG-Account Manager", "QF-INT-Sales-North America", "QF-INT-Sales-North America-JP", "QF-INT-Sales-North America-JP-Account Manager", "QF-INT-Sales-North America-NZ", "QF-INT-Sales-North America-NZ-Agency", "QF-INT-Sales-North America-NZ-Agency Manager", "QF-INT-Sales-North America-NZ-Agency Support", "QF-INT-Sales-North America-NZ-Corporate", "QF-INT-Sales-North America-NZ-Corporate Manager", "QF-INT-Sales-North America-NZ-Pacific Region", "QF-INT-Sales-North America-NZ-South America", "QF-INT-Sales-North America-USA", "QF-INT-Sales-North America-USA-Account Manager", "QF-INT-Sales-North America-USA-East", "QF-INT-Sales-North America-USA-East-Account Manager", "QF-INT-Sales-North America-USA-West", "QF-INT-Sales-North America-USA-West-Account Manager", "QF-INT-Sales-UKEMEIA", "QF-INT-Sales-UKEMEIA-Europe", "QF-INT-Sales-UKEMEIA-Europe-Account Manager", "QF-INT-Sales-UKEMEIA-GSA", "QF-INT-Sales-UKEMEIA-India", "QF-INT-Sales-UKEMEIA-MEIA-IN-Account Manager", "QF-INT-Sales-UKEMEIA-Support", "QF-INT-Sales-UKEMEIA-UK", "QF-INT-Sales-UKEMEIA-UK-Corporate", "QF-INT-Sales-UKEMEIA-UK-Corporate-Account Manager", "QF-INT-Sales-UKEMEIA-UK-Groups-Account Manager", "QF-INT-Sales-UKEMEIA-UK-Leisure & Groups", "QF-INT-Sales-UKEMEIA-UK-Leisure-Account Manager", "QF-INT-Sales-UKEMEIA-UK-OTA", "QF-INT-Sales-UKEMEIA-ZA", "QF-INT-Sales-UKEMEIA-ZA-Account Manager", "QF-Loyalty-Sales", "QF-Loyalty-Sales-Commercial Executive", "QF-Loyalty-Sales-Commercial Executive-Commercial Manager", "QF-Loyalty-Sales-Commercial Operations", "QF-Sales & Distribution", "QF-Sales & Distribution-GSA", "QF-Sales & Distribution-GSA- Singapore", "QF-Sales & Distribution-GSA-Africa", "QF-Sales & Distribution-GSA-Africa-AM", "QF-Sales & Distribution-GSA-Africa-Service", "QF-Sales & Distribution-GSA-America", "QF-Sales & Distribution-GSA-China-AM", "QF-Sales & Distribution-GSA-Chinese Taipei-AM", "QF-Sales & Distribution-GSA-Europe", "QF-Sales & Distribution-GSA-Europe-AM", "QF-Sales & Distribution-GSA-Europe-Service", "QF-Sales & Distribution-GSA-Korea-AM", "QF-Sales & Distribution-GSA-Middle East", "QF-Sales & Distribution-GSA-Middle East-AM", "QF-Sales & Distribution-GSA-Middle East-Service", "QF-Sales & Distribution-GSA-Pakistan", "QF-Sales & Distribution-GSA-Pakistan-AM", "QF-Sales & Distribution-GSA-Pakistan-Service", "QF-Sales & Distribution-GSA-Singapore- AM", "QF-Sales & Distribution-GSA-Singapore- Service", "QF-Sales & Distribution-GSA-South America", "QF-Sales & Distribution-GSA-South America-AM", "QF-Sales & Distribution-GSA-South America-Service", "QF-Sales & Distribution-GSA-South East Asia-AM", "QF-Sales & Distribution-GSA-Sri Lanka", "QF-Sales & Distribution-GSA-Sri Lanka-AM", "QF-Sales & Distribution-GSA-Sri Lanka-Service", "QF-Sales & Distribution-GSA-US-Canada-AM", "QF-Sales & Distribution-GSA-US-Canada-Service", "QF-Support", "QF-Support-Agency Support", "QF-Support-Agency Support - WNS", "QF-Support-Agency Support - Zero Octa", "QF-Support-Agency Support-Group Sales-TL/Supervisor", "QF-Support-Agency Support-Groups Sales", "QF-Support-Agency Support-QAC", "QF-Support-Commercial Development", "QF-Support-Commercial Development-Commercial Dealing", "QF-Support-Commercial Development-Deal Optimisation/Pricing", "QF-Support-Commercial Development-Planning", "QF-Support-Deal Support", "QF-Support-INT-USA", "QF-Support-INT-USA-Deal Support", "QF-Support-Loyalty Contact Centre", "QF-Support-Marketing", "QF-Support-QC Support", "QF-support-Sales-Engagement & Capability" ]
+          } ]
+        } ],
+        "nullBucket" : "Other",
+        "defaultBucket" : "Other",
+        "passthroughEnabled" : false,
+        "sourceField" : "Name",
+        "targetField" : {
+          "name" : "Name_bucket",
+          "label" : "Business Unit"
+        }
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "SobjectType", "PermissionsCreate", "PermissionsRead", "PermissionsEdit", "PermissionsDelete", "PermissionsViewAllRecords", "PermissionsModifyAllRecords" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "ObjectPermissions",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "ObjectPermissions"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN5" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET1", "LOAD_DATASET4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "ObjectPerm",
+        "rightKeys" : [ "ParentId" ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "CreatedDate", "UserId", "Username", "EventDate", "CountryIso", "ForwardedForIp", "LoginLatitude", "LoginLongitude", "Country", "City", "PostalCode", "Subdivision", "LoginType", "LoginUrl", "Status", "UserType", "LoginSubType" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "LoginEvent",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "LoginEvent"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN6" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "FORMULA1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "UserId", "User.Id", "User.UserRoleId", "User.ProfileId", "User.Profile.Id", "User.UserRole.Id", "User.Profile.UserLicenseId", "User.Profile.CreatedById", "User.Profile.LastModifiedById" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "UserId" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "PermissionsEmailSingle", "PermissionsEmailMass", "PermissionsEditTask", "PermissionsEditEvent", "PermissionsExportReport", "PermissionsImportPersonal", "PermissionsDataExport", "PermissionsManageUsers", "PermissionsEditPublicFilters", "PermissionsEditPublicTemplates", "PermissionsModifyAllData", "PermissionsEditBillingInfo", "PermissionsManageCases", "PermissionsMassInlineEdit", "PermissionsEditKnowledge", "PermissionsManageKnowledge", "PermissionsManageSolutions", "PermissionsCustomizeApplication", "PermissionsEditReadonlyFields", "PermissionsRunReports", "PermissionsViewSetup", "PermissionsTransferAnyEntity", "PermissionsNewReportBuilder", "PermissionsActivateContract", "PermissionsActivateOrder", "PermissionsImportLeads", "PermissionsManageLeads", "PermissionsTransferAnyLead", "PermissionsViewAllData", "PermissionsEditPublicDocuments", "PermissionsViewEncryptedData", "PermissionsEditBrandTemplates", "PermissionsEditHtmlTemplates", "PermissionsChatterInternalUser", "PermissionsManageTranslation", "PermissionsManageEncryptionKeys", "PermissionsDeleteActivatedContract", "PermissionsChatterInviteExternalUsers", "PermissionsSendSitRequests", "PermissionsOverrideForecasts", "PermissionsViewAllForecasts", "PermissionsApiUserOnly", "PermissionsManageRemoteAccess", "PermissionsCanUseNewDashboardBuilder", "PermissionsManageCategories", "PermissionsConvertLeads", "PermissionsPasswordNeverExpires", "PermissionsUseTeamReassignWizards", "PermissionsEditActivatedOrders", "PermissionsInstallMultiforce", "PermissionsPublishMultiforce", "PermissionsChatterOwnGroups", "PermissionsEditOppLineItemUnitPrice", "PermissionsManageTerritories", "PermissionsCreateMultiforce", "PermissionsBulkApiHardDelete", "PermissionsInboundMigrationToolsUser", "PermissionsSolutionImport", "PermissionsManageCallCenters", "PermissionsManageSynonyms", "PermissionsOutboundMigrationToolsUser", "PermissionsViewContent", "PermissionsManageEmailClientConfig", "PermissionsEnableNotifications", "PermissionsIsSsoEnabled", "PermissionsManageDataIntegrations", "PermissionsDistributeFromPersWksp", "PermissionsViewDataCategories", "PermissionsManageDataCategories", "PermissionsAuthorApex", "PermissionsManageMobile", "PermissionsApiEnabled", "PermissionsManageCustomReportTypes", "PermissionsEditCaseComments", "PermissionsTransferAnyCase", "PermissionsContentAdministrator", "PermissionsCreateWorkspaces", "PermissionsManageContentPermissions", "PermissionsManageContentProperties", "PermissionsManageContentTypes", "PermissionsScheduleJob", "PermissionsManageExchangeConfig", "PermissionsManageAnalyticSnapshots", "PermissionsScheduleReports", "PermissionsManageBusinessHourHolidays", "PermissionsManageEntitlements", "PermissionsManageDynamicDashboards", "PermissionsManageInteraction", "PermissionsViewMyTeamsDashboards", "PermissionsModerateChatter", "PermissionsResetPasswords", "PermissionsFlowUFLRequired", "PermissionsCanInsertFeedSystemFields", "PermissionsActivitiesAccess", "PermissionsManageKnowledgeImportExport", "PermissionsEmailTemplateManagement", "PermissionsEmailAdministration", "PermissionsManageChatterMessages", "PermissionsAllowEmailIC", "PermissionsForceTwoFactor", "PermissionsViewEventLogFiles", "PermissionsManageNetworks", "PermissionsManageAuthProviders", "PermissionsRunFlow", "PermissionsViewGlobalHeader", "PermissionsManageQuotas", "PermissionsCreateCustomizeDashboards", "PermissionsCreateDashboardFolders", "PermissionsViewPublicDashboards", "PermissionsManageDashbdsInPubFolders", "PermissionsCreateCustomizeReports", "PermissionsCreateReportFolders", "PermissionsViewPublicReports", "PermissionsManageReportsInPubFolders", "PermissionsEditMyDashboards", "PermissionsEditMyReports", "PermissionsViewAllUsers", "PermissionsBypassEmailApproval", "PermissionsAllowUniversalSearch", "PermissionsConnectOrgToEnvironmentHub", "PermissionsCreateCustomizeFilters", "PermissionsContentHubUser", "PermissionsModerateNetworkFeeds", "PermissionsModerateNetworkFiles", "PermissionsGovernNetworks", "PermissionsSalesConsole", "PermissionsTwoFactorApi", "PermissionsDeleteTopics", "PermissionsEditTopics", "PermissionsCreateTopics", "PermissionsAssignTopics", "PermissionsIdentityEnabled", "PermissionsIdentityConnect", "PermissionsAllowViewKnowledge", "PermissionsContentWorkspaces", "PermissionsCreateWorkBadgeDefinition", "PermissionsManageSearchPromotionRules", "PermissionsCustomMobileAppsAccess", "PermissionsViewHelpLink", "PermissionsManageProfilesPermissionsets", "PermissionsAssignPermissionSets", "PermissionsManageRoles", "PermissionsManageIpAddresses", "PermissionsManageSharing", "PermissionsManageInternalUsers", "PermissionsManagePasswordPolicies", "PermissionsManageLoginAccessPolicies", "PermissionsViewPlatformEvents", "PermissionsManageCustomPermissions", "PermissionsCanVerifyComment", "PermissionsManageUnlistedGroups", "PermissionsStdAutomaticActivityCapture", "PermissionsFreezeUsers", "PermissionsInsightsAppDashboardEditor", "PermissionsShareFilesWithNetworks", "PermissionsManageTwoFactor", "PermissionsInsightsAppUser", "PermissionsInsightsAppAdmin", "PermissionsInsightsAppEltEditor", "PermissionsInsightsAppUploadUser", "PermissionsInsightsCreateApplication", "PermissionsDebugApex", "PermissionsLightningExperienceUser", "PermissionsViewDataLeakageEvents", "PermissionsConfigCustomRecs", "PermissionsSubmitMacrosAllowed", "PermissionsBulkMacrosAllowed", "PermissionsShareInternalArticles", "PermissionsModerateNetworkMessages", "PermissionsManageSessionPermissionSets", "PermissionsManageTemplatedApp", "PermissionsUseTemplatedApp", "PermissionsSendAnnouncementEmails", "PermissionsChatterEditOwnPost", "PermissionsChatterEditOwnRecordPost", "PermissionsAdminAnalyticsUser", "PermissionsServiceAnalyticsUser", "PermissionsCreateAuditFields", "PermissionsUpdateWithInactiveOwner", "PermissionsAssignUserToSkill", "PermissionsWaveTrendReports", "PermissionsWaveTabularDownload", "PermissionsWaveCommunityUser", "PermissionsManageSandboxes", "PermissionsAutomaticActivityCapture", "PermissionsImportCustomObjects", "PermissionsSalesforceIQInbox", "PermissionsDelegatedTwoFactor", "PermissionsChatterComposeUiCodesnippet", "PermissionsSelectFilesFromSalesforce", "PermissionsModerateNetworkUsers", "PermissionsMergeTopics", "PermissionsViewForecastingPredictive", "PermissionsSubscribeToLightningReports", "PermissionsManagePvtRptsAndDashbds", "PermissionsLeadScoreUser", "PermissionsCampaignInfluence2", "PermissionsViewDataAssessment", "PermissionsRemoveDirectMessageMembers", "PermissionsCanApproveFeedPost", "PermissionsAddDirectMessageMembers", "PermissionsAllowViewEditConvertedLeads", "PermissionsShowCompanyNameAsUserBadge", "PermissionsAccessCMC", "PermissionsArchiveArticles", "PermissionsPublishArticles", "PermissionsViewHealthCheck", "PermissionsManageHealthCheck", "PermissionsPackaging2", "PermissionsManageCertificates", "PermissionsCreateReportInLightning", "PermissionsPreventClassicExperience", "PermissionsHideReadByList", "PermissionsOpportunityScoreUser", "PermissionsSubmitForTranslation", "PermissionsEditTranslation", "PermissionsPublishTranslation", "PermissionsUseSmartDataDiscovery", "PermissionsGetSmartDataDiscovery", "PermissionsCreateUpdateSDDDataset", "PermissionsCreateUpdateSDDStory", "PermissionsManageSmartDataDiscovery", "PermissionsShareSmartDataDiscoveryStory", "PermissionsManageSmartDataDiscoveryModel", "PermissionsListEmailSend", "PermissionsFeedPinning", "PermissionsChangeDashboardColors", "PermissionsManageRecommendationStrategies", "PermissionsManagePropositions", "PermissionsPipelineInspectorUser", "PermissionsCloseConversations", "PermissionsSubscribeReportRolesGrps", "PermissionsSubscribeDashboardRolesGrps", "PermissionsUseWebLink", "PermissionsEinsteinArticleRecUser", "PermissionsHasUnlimitedNBAExecutions", "PermissionsViewOnlyEmbeddedAppUser", "PermissionsAdoptionAnalyticsUser", "PermissionsViewAllActivities", "PermissionsSubscribeReportToOtherUsers", "PermissionsLightningConsoleAllowedForUser", "PermissionsSubscribeReportsRunAsUser", "PermissionsSubscribeToLightningDashboards", "PermissionsSubscribeDashboardToOtherUsers", "PermissionsCreateLtngTempInPub", "PermissionsTransactionalEmailSend", "PermissionsViewPrivateStaticResources", "PermissionsViewCustomerSentiment", "PermissionsCreateLtngTempFolder", "PermissionsApexRestServices", "PermissionsEnableCommunityAppLauncher", "PermissionsGiveRecognitionBadge", "PermissionsCanRunAnalysis", "PermissionsSalesforceIQInternal", "PermissionsUseMySearch", "PermissionsLtngPromoReserved01UserPerm", "PermissionsManageSubscriptions", "PermissionsWaveManagePrivateAssetsUser", "PermissionsCanEditDataPrepRecipe", "PermissionsAddAnalyticsRemoteConnections", "PermissionsManageSurveys", "PermissionsUseAssistantDialog", "PermissionsUseQuerySuggestions", "PermissionsPackaging2PromoteVersion", "PermissionsRecordVisibilityAPI", "PermissionsViewRoles", "PermissionsSmartDataDiscoveryForCommunity", "PermissionsCanManageMaps", "PermissionsStoryOnDSWithPredicate", "PermissionsCustomTabBarOnMobile", "PermissionsLMOutboundMessagingUserPerm", "PermissionsModifyDataClassification", "PermissionsPrivacyDataAccess", "PermissionsQueryAllFiles", "PermissionsModifyMetadata", "PermissionsManageCMS", "PermissionsSandboxTestingInCommunityApp", "PermissionsCanEditPrompts", "PermissionsViewUserPII", "PermissionsMobileAppSecurity", "PermissionsViewDraftArticles", "PermissionsViewArchivedArticles", "PermissionsManageHubConnections", "PermissionsB2BMarketingAnalyticsUser", "PermissionsTraceXdsQueries", "PermissionsSCEViewAllData", "PermissionsReplyRecommendationUser", "PermissionsViewAllCustomSettings", "PermissionsViewAllForeignKeyNames", "PermissionsAddWaveNotificationRecipients", "PermissionsHeadlessCMSAccess", "PermissionsLMEndMessagingSessionUserPerm", "PermissionsEinsteinReplyManager", "PermissionsConsentApiUpdate", "PermissionsManageMobileAppSecurity", "PermissionsManageDSARPolicies", "PermissionsExecuteDSARPolicies", "PermissionsAccessContentBuilder", "PermissionsEmployeeExperience", "PermissionsAccountSwitcherUser", "PermissionsViewAnomalyEvents", "PermissionsManageC360AConnections", "PermissionsIsContactCenterAgent", "PermissionsManageReleaseUpdates", "PermissionsViewAllProfiles", "PermissionsSkipIdentityConfirmation", "PermissionsCanToggleCallRecordings", "PermissionsCaseWrapUpUser", "PermissionsIsContactCenterAdminBYOT", "PermissionsIsContactCenterAgentBYOT", "PermissionsSendCustomNotifications", "PermissionsPackaging2Delete", "PermissionsAutonomousAnalyticsPrivacy", "PermissionsCallCoachingUser", "PermissionsViewRestrictionAndScopingRules", "PermissionsAllowERIBasicAccess", "PermissionsDecisionTableExecUserAccess", "PermissionsFSCComprehensiveUserAccess", "PermissionsBotManageBots", "PermissionsBotManageBotsTrainingData", "PermissionsManageTrustMeasures", "PermissionsViewTrustMeasures", "PermissionsVideoConferenceZoomUser", "PermissionsIsContactCenterSupervisor", "PermissionsIsotopeCToCUser", "PermissionsUseSvcCatalog", "PermissionsManageSvcCatalog", "PermissionsManagePreferenceCenter", "PermissionsCanAccessCE", "PermissionsHasUnlimitedErbScoringRequests", "PermissionsFSCAlertFrameworkUserAccess", "PermissionsSalesforceMeetingsUserPerm", "PermissionsIsotopeAccess", "PermissionsIsotopeLEX", "PermissionsGetSmartDataDiscoveryExternal", "PermissionsExplainabilityUserAccess", "PermissionsExplainabilityCmtyAccess", "PermissionsQuipMetricsAccess", "PermissionsQuipUserEngagementMetrics", "PermissionsIdentityVerificationUserAccess", "PermissionsServiceExcellencePlatformUser", "PermissionsRemoteMediaVirtualDesktop", "PermissionsTransactionSecurityExempt", "PermissionsInteractionCalcUserPerm", "PermissionsInteractionCalcAdminPerm", "PermissionsManageExternalConnections", "PermissionsManageUserAccessPolicies", "PermissionsUseSubscriptionEmails", "PermissionsAIViewInsightObjects", "PermissionsAICreateInsightObjects", "PermissionsViewMLModels", "PermissionsLeadScoreResultPublisher", "PermissionsManageGlobalPrivacyCenterVO", "PermissionsNativeWebviewScrolling", "PermissionsViewDeveloperName", "PermissionsBypassMFAForUiLogins", "PermissionsEventLogReadAccess", "PermissionsUpdateReportTypeReferences", "PermissionsAccessToServiceProcess", "PermissionsManagePrivacyHold", "PermissionsMicrobatching", "PermissionsManageOrchInstsAndWorkItems", "PermissionsCMSECEAuthoringAccess", "PermissionsVideoConferenceTeamsUser", "PermissionsManageDataspaceScope", "PermissionsConfigureDataspaceScope", "PermissionsOmniSupervisorManageQueue", "PermissionsManagePrivacyCenterPolicies", "PermissionsManageDevSandboxes", "PermissionsCdcReportingCreateReports", "PermissionsCdcReportingViewReports", "PermissionsCdcReportingManageFolders", "PermissionsVideoConferenceMeetUser", "PermissionsDeleteCrMemoAndInvoice", "PermissionsEmbeddedMessagingAgent", "PermissionsManageForecastingCustomData", "PermissionsManageNamedCredentials", "PermissionsCanInitiateMessagingSessions", "PermissionsManageDataMaskPolicies", "PermissionsCanUpdateEmailMessage", "PermissionsDownloadPackageVersionZips", "PermissionsCodeBuilderUser", "PermissionsReassignOrchestrationWorkItems", "PermissionsManageOrchestrationRuns", "PermissionsDigitalLendingUser", "PermissionsManageCertificatesExpiration", "PermissionsEnableIPFSUpload", "PermissionsEnableBCTransactionPolling", "PermissionsLobbyManagementUserAccess", "PermissionsOrgPerformanceAccess", "PermissionsPerformanceAnalysisAccess", "PermissionsMonitorLoginHistory", "PermissionsRunDecisionMatrix", "PermissionsRunExpressionSet", "PermissionsSimpleCsvDataImportUser", "PermissionsAdvancedCsvDataImportUser", "PermissionsAccessToComplaintMgmt", "PermissionsAccessToDisputeManagement", "PermissionsPersonalizedFinanceUserAccess", "PermissionsBREAlertsUserAccess", "PermissionsCustomAppsOnFSMobile", "PermissionsStageManagementDesignUser", "PermissionsSegmentIntelligenceUser", "PermissionsFSCArcGraphCommunityUser", "PermissionsManageCdpMlModels", "PermissionsDigitalLendingAdminUser", "PermissionsActivateSystemModeFlows", "PermissionsPersonalizationPlatform", "PermissionsLeadInspectorUser", "PermissionsContactInspectorUser", "PermissionsMetadataStudioUser", "PermissionsPrismPlaygroundUser", "PermissionsUseServiceCatalogForGuest", "PermissionsRunCatalogItemsOnBehalfOf", "PermissionsManageCustomDomains", "PermissionsPersonalizationIntelUser", "PermissionsAccessDisputePrompts", "PermissionsViewAllCalls", "PermissionsDigitalLendingWorkbench", "PermissionsDigitalLendingEditReadOnly", "PermissionsHeadlessPublishNudges", "PermissionsYourAccountCDAPublishEvents", "PermissionsAccessServiceEinstein", "PermissionsManageAccessPolicies", "UserLicenseId", "UserType", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "IsSsoEnabled", "Description", "LastViewedDate", "LastReferencedDate" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Profile",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Profile"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN7" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET6" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "ProfileId" ],
+        "rightQualifier" : "Profile",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN6" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "User Login History",
+          "name" : "User_Login_History",
+          "folderName" : "User_login_history"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "EDIT_ATTRIBUTES1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Business_Unit_Name",
+          "label" : "Business Unit Name",
+          "formulaExpression" : "IF( \"Role_Classification__c\" = 'Technology', 'Technology',\r\nIF( \"Role_Classification__c\" = 'Technology - Freight', 'Technology - Freight',\r\nIF( \"Role_Classification__c\" = 'Technology - QCC', 'Technology - QCC',\r\nIF( \"Role_Classification__c\" = 'Technology - S&D', 'Technology - S&D', \r\nIF( \"Role_Classification__c\" = 'CRM Team', 'CRM TEAM', \r\nIF( \"Role_Classification__c\" = null, 'System', \"UserRole.Name_bucket\"))))))",
+          "precision" : 10,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "ParentId", "SobjectType", "Field", "PermissionsEdit", "PermissionsRead", "SystemModstamp" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "FieldPermissions",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "FieldPermissions"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        },
+        "preserveCurrencyFields" : [ ]
+      }
+    },
+    "JOIN8" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET7", "JOIN4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "PermissionSetAssignment.PermissionSetUser.Profile.UserLicenseId", "PermissionSetAssignment.PermissionSetUser.Profile.CreatedById", "PermissionSetAssignment.PermissionSetUser.Profile.LastModifiedById", "Id", "ParentId", "PermissionSetAssignment.Id", "PermissionSetAssignment.PermissionSetId", "PermissionSetAssignment.PermissionSetGroupId", "PermissionSetAssignment.AssigneeId", "PermissionSetAssignment.PermissionSet.Id", "PermissionSetAssignment.PermissionSet.LicenseId", "PermissionSetAssignment.PermissionSet.ProfileId", "PermissionSetAssignment.PermissionSet.CreatedById", "PermissionSetAssignment.PermissionSet.LastModifiedById", "PermissionSetAssignment.PermissionSet.ObjectPerm.Id", "PermissionSetAssignment.PermissionSet.ObjectPerm.ParentId", "PermissionSetAssignment.PermissionSetUser.Id", "PermissionSetAssignment.PermissionSetUser.UserRoleId", "PermissionSetAssignment.PermissionSetUser.ProfileId", "PermissionSetAssignment.PermissionSetUser.Profile.Id", "PermissionSetAssignment.PermissionSetUser.UserRole.Id", "PermissionSetAssignment.PermissionSetUser.UserRole.ParentRoleId" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "ParentId" ],
+        "rightQualifier" : "PermissionSetAssignment",
+        "rightKeys" : [ "PermissionSetId" ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "JOIN8" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Field Permissions",
+          "name" : "Field_Permissions",
+          "folderName" : "User_login_history"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Active Users",
+          "name" : "Active_Users",
+          "folderName" : "User_login_history"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET5" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "EventDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1719792000000" ]
+        } ]
+      }
+    },
+    "OUTPUT4" : {
+      "action" : "save",
+      "sources" : [ "JOIN9" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Permission Sets with Object Details",
+          "name" : "Permission_Sets_with_Object_Details",
+          "folderName" : "User_login_history"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "JOIN9" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "FORMULA1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "AssigneeId" ],
+        "rightQualifier" : "PermissionSetUser",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN10" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "PermissionSetId" ],
+        "rightQualifier" : "PermissionSet",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EDIT_ATTRIBUTES0" : {
+      "action" : "schema",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "UserRole.Name",
+          "newProperties" : {
+            "label" : "Role",
+            "name" : "UserRole.Name"
+          }
+        } ]
+      }
+    },
+    "EDIT_ATTRIBUTES1" : {
+      "action" : "schema",
+      "sources" : [ "EDIT_ATTRIBUTES0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Profile.Name",
+          "newProperties" : {
+            "label" : "Profile",
+            "name" : "Profile.Name"
+          }
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "PermissionSetAssignment",
+        "type" : "LOAD_DATASET",
+        "top" : 392.1,
+        "left" : 532.2,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "PermissionSet",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 392,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 672.1,
+        "left" : 392.2,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Permission Set Joining",
+        "description" : "To get Permission Set name.",
+        "type" : "JOIN",
+        "top" : 110.69999999999999,
+        "left" : 252
+      },
+      "JOIN2" : {
+        "label" : "User Joining",
+        "description" : "To get role names.",
+        "type" : "JOIN",
+        "top" : 532.2,
+        "left" : 812.2
+      },
+      "LOAD_DATASET3" : {
+        "label" : "UserRole",
+        "type" : "LOAD_DATASET",
+        "top" : 812.1,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "Permission Set Assignments",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 532.2,
+        "left" : 1372.2
+      },
+      "FILTER0" : {
+        "label" : "Active Users",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 672.1,
+        "left" : 532.2
+      },
+      "JOIN4" : {
+        "label" : "Permission Set Assignments",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532,
+        "left" : 1232
+      },
+      "TRANSFORM0" : {
+        "label" : "Business Units",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 812.1,
+        "left" : 392.2,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Business Unit"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET4" : {
+        "label" : "ObjectPermissions",
+        "type" : "LOAD_DATASET",
+        "top" : 672.1,
+        "left" : 112.19999999999999,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "JOIN5" : {
+        "label" : "Object Permissions to Permission Sets",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392.1,
+        "left" : 252.2
+      },
+      "LOAD_DATASET5" : {
+        "label" : "LoginEvent",
+        "type" : "LOAD_DATASET",
+        "top" : 812.1,
+        "left" : 1092.3,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN6" : {
+        "label" : "User to Login",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 812.1,
+        "left" : 1232.3
+      },
+      "LOAD_DATASET6" : {
+        "label" : "Profile",
+        "type" : "LOAD_DATASET",
+        "top" : 532.1,
+        "left" : 392.2,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN7" : {
+        "label" : "Profile to User",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 532.1,
+        "left" : 672.2
+      },
+      "OUTPUT1" : {
+        "label" : "User Login History",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 812.1,
+        "left" : 1372.3
+      },
+      "TRANSFORM2" : {
+        "label" : "Business Unit 2",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532,
+        "left" : 1092,
+        "graph" : {
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Business Unit 2"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "LOAD_DATASET7" : {
+        "label" : "FieldPermissions",
+        "type" : "LOAD_DATASET",
+        "top" : 391.9,
+        "left" : 1511.4,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN8" : {
+        "label" : "Permission Set to Field",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 391.9,
+        "left" : 1651.4
+      },
+      "OUTPUT2" : {
+        "label" : "Field Permissions",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 391.9,
+        "left" : 1791.4
+      },
+      "OUTPUT3" : {
+        "label" : "Active Users",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 811.9,
+        "left" : 951.9
+      },
+      "FILTER1" : {
+        "label" : "Current FY",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 952.1,
+        "left" : 1092.3
+      },
+      "OUTPUT4" : {
+        "label" : "Permission Sets with Object Details",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 1372
+      },
+      "JOIN9" : {
+        "label" : "User to Permission Sets",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112.4,
+        "left" : 1091.9
+      },
+      "JOIN10" : {
+        "label" : "Get Permission Set Name",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 392,
+        "left" : 672
+      },
+      "TRANSFORM3" : {
+        "label" : "Edit Attributes",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 532,
+        "left" : 952,
+        "graph" : {
+          "EDIT_ATTRIBUTES0" : {
+            "label" : "Edit Attributes"
+          },
+          "EDIT_ATTRIBUTES1" : {
+            "label" : "Edit Attributes"
+          }
+        },
+        "connectors" : [ {
+          "source" : "EDIT_ATTRIBUTES0",
+          "target" : "EDIT_ATTRIBUTES1"
+        } ]
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN10",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN5",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN7",
+      "target" : "JOIN2"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "FILTER0"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "JOIN4"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN5"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN6"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN7"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "JOIN7"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN5"
+    }, {
+      "source" : "JOIN6",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "JOIN4",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "JOIN6"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "JOIN8"
+    }, {
+      "source" : "JOIN8",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "JOIN4",
+      "target" : "JOIN8"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "OUTPUT3"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "FILTER1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN9"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN10"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN10"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "JOIN9"
+    }, {
+      "source" : "JOIN2",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "JOIN9",
+      "target" : "OUTPUT4"
+    } ],
+    "hiddenColumns" : [ {
+      "fieldName" : "PermissionsManageChatterMessages",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAllowEmailIC",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsForceTwoFactor",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewEventLogFiles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageNetworks",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageAuthProviders",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsRunFlow",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewGlobalHeader",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageQuotas",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateCustomizeDashboards",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateDashboardFolders",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewPublicDashboards",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageDashbdsInPubFolders",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateCustomizeReports",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateReportFolders",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewPublicReports",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageReportsInPubFolders",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEditMyDashboards",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEditMyReports",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewAllUsers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsBypassEmailApproval",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAllowUniversalSearch",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsConnectOrgToEnvironmentHub",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateCustomizeFilters",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsContentHubUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsModerateNetworkFeeds",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsModerateNetworkFiles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsGovernNetworks",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSalesConsole",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsTwoFactorApi",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDeleteTopics",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEditTopics",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateTopics",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAssignTopics",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIdentityEnabled",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIdentityConnect",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAllowViewKnowledge",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsContentWorkspaces",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateWorkBadgeDefinition",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSearchPromotionRules",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCustomMobileAppsAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewHelpLink",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageProfilesPermissionsets",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAssignPermissionSets",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageRoles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageIpAddresses",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSharing",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageInternalUsers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManagePasswordPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageLoginAccessPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewPlatformEvents",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageCustomPermissions",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanVerifyComment",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageUnlistedGroups",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsStdAutomaticActivityCapture",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsFreezeUsers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInsightsAppDashboardEditor",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsShareFilesWithNetworks",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageTwoFactor",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInsightsAppUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInsightsAppAdmin",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInsightsAppEltEditor",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInsightsAppUploadUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInsightsCreateApplication",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDebugApex",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLightningExperienceUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewDataLeakageEvents",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsConfigCustomRecs",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubmitMacrosAllowed",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsBulkMacrosAllowed",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsShareInternalArticles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsModerateNetworkMessages",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSessionPermissionSets",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageTemplatedApp",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseTemplatedApp",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSendAnnouncementEmails",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsChatterEditOwnPost",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsChatterEditOwnRecordPost",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAdminAnalyticsUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsServiceAnalyticsUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateAuditFields",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUpdateWithInactiveOwner",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAssignUserToSkill",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsWaveTrendReports",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsWaveTabularDownload",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsWaveCommunityUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSandboxes",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAutomaticActivityCapture",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsImportCustomObjects",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSalesforceIQInbox",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDelegatedTwoFactor",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsChatterComposeUiCodesnippet",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSelectFilesFromSalesforce",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsModerateNetworkUsers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsMergeTopics",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewForecastingPredictive",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubscribeToLightningReports",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManagePvtRptsAndDashbds",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLeadScoreUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCampaignInfluence2",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewDataAssessment",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsRemoveDirectMessageMembers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanApproveFeedPost",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAddDirectMessageMembers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAllowViewEditConvertedLeads",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsShowCompanyNameAsUserBadge",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccessCMC",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsArchiveArticles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPublishArticles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewHealthCheck",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageHealthCheck",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPackaging2",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageCertificates",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateReportInLightning",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPreventClassicExperience",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsHideReadByList",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsOpportunityScoreUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubmitForTranslation",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEditTranslation",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPublishTranslation",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseSmartDataDiscovery",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsGetSmartDataDiscovery",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateUpdateSDDDataset",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateUpdateSDDStory",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSmartDataDiscovery",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsShareSmartDataDiscoveryStory",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSmartDataDiscoveryModel",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsListEmailSend",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsFeedPinning",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsChangeDashboardColors",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageRecommendationStrategies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManagePropositions",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPipelineInspectorUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCloseConversations",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubscribeReportRolesGrps",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubscribeDashboardRolesGrps",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseWebLink",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEinsteinArticleRecUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsHasUnlimitedNBAExecutions",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewOnlyEmbeddedAppUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAdoptionAnalyticsUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewAllActivities",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubscribeReportToOtherUsers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLightningConsoleAllowedForUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubscribeReportsRunAsUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubscribeToLightningDashboards",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSubscribeDashboardToOtherUsers",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateLtngTempInPub",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsTransactionalEmailSend",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewPrivateStaticResources",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewCustomerSentiment",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCreateLtngTempFolder",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsApexRestServices",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEnableCommunityAppLauncher",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsGiveRecognitionBadge",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanRunAnalysis",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSalesforceIQInternal",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseMySearch",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLtngPromoReserved01UserPerm",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSubscriptions",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsWaveManagePrivateAssetsUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanEditDataPrepRecipe",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAddAnalyticsRemoteConnections",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSurveys",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseAssistantDialog",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseQuerySuggestions",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPackaging2PromoteVersion",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsRecordVisibilityAPI",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewRoles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSmartDataDiscoveryForCommunity",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanManageMaps",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsStoryOnDSWithPredicate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCustomTabBarOnMobile",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLMOutboundMessagingUserPerm",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsModifyDataClassification",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPrivacyDataAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsQueryAllFiles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsModifyMetadata",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageCMS",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSandboxTestingInCommunityApp",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanEditPrompts",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewUserPII",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsMobileAppSecurity",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewDraftArticles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewArchivedArticles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageHubConnections",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsB2BMarketingAnalyticsUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsTraceXdsQueries",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSCEViewAllData",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsReplyRecommendationUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewAllCustomSettings",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewAllForeignKeyNames",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAddWaveNotificationRecipients",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsHeadlessCMSAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLMEndMessagingSessionUserPerm",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEinsteinReplyManager",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsConsentApiUpdate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageMobileAppSecurity",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageDSARPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsExecuteDSARPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccessContentBuilder",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEmployeeExperience",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccountSwitcherUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewAnomalyEvents",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageC360AConnections",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIsContactCenterAgent",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageReleaseUpdates",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewAllProfiles",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSkipIdentityConfirmation",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanToggleCallRecordings",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCaseWrapUpUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIsContactCenterAdminBYOT",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIsContactCenterAgentBYOT",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSendCustomNotifications",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPackaging2Delete",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAutonomousAnalyticsPrivacy",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCallCoachingUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewRestrictionAndScopingRules",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAllowERIBasicAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDecisionTableExecUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsFSCComprehensiveUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsBotManageBots",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsBotManageBotsTrainingData",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageTrustMeasures",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewTrustMeasures",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsVideoConferenceZoomUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIsContactCenterSupervisor",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIsotopeCToCUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseSvcCatalog",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageSvcCatalog",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManagePreferenceCenter",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanAccessCE",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsHasUnlimitedErbScoringRequests",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsFSCAlertFrameworkUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSalesforceMeetingsUserPerm",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIsotopeAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIsotopeLEX",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsGetSmartDataDiscoveryExternal",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsExplainabilityUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsExplainabilityCmtyAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsQuipMetricsAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsQuipUserEngagementMetrics",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsIdentityVerificationUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsServiceExcellencePlatformUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsRemoteMediaVirtualDesktop",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsTransactionSecurityExempt",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInteractionCalcUserPerm",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsInteractionCalcAdminPerm",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageExternalConnections",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageUserAccessPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseSubscriptionEmails",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAIViewInsightObjects",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAICreateInsightObjects",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewMLModels",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLeadScoreResultPublisher",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageGlobalPrivacyCenterVO",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsNativeWebviewScrolling",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewDeveloperName",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsBypassMFAForUiLogins",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEventLogReadAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUpdateReportTypeReferences",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccessToServiceProcess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManagePrivacyHold",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsMicrobatching",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageOrchInstsAndWorkItems",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCMSECEAuthoringAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsVideoConferenceTeamsUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageDataspaceScope",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsConfigureDataspaceScope",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsOmniSupervisorManageQueue",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManagePrivacyCenterPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageDevSandboxes",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCdcReportingCreateReports",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCdcReportingViewReports",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCdcReportingManageFolders",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsVideoConferenceMeetUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDeleteCrMemoAndInvoice",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEmbeddedMessagingAgent",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageForecastingCustomData",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageNamedCredentials",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanInitiateMessagingSessions",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageDataMaskPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCanUpdateEmailMessage",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDownloadPackageVersionZips",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCodeBuilderUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsReassignOrchestrationWorkItems",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageOrchestrationRuns",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDigitalLendingUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageCertificatesExpiration",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEnableIPFSUpload",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsEnableBCTransactionPolling",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLobbyManagementUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsOrgPerformanceAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPerformanceAnalysisAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsMonitorLoginHistory",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsRunDecisionMatrix",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsRunExpressionSet",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSimpleCsvDataImportUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAdvancedCsvDataImportUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccessToComplaintMgmt",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccessToDisputeManagement",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPersonalizedFinanceUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsBREAlertsUserAccess",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsCustomAppsOnFSMobile",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsStageManagementDesignUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsSegmentIntelligenceUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsFSCArcGraphCommunityUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageCdpMlModels",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDigitalLendingAdminUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsActivateSystemModeFlows",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPersonalizationPlatform",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsLeadInspectorUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsContactInspectorUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsMetadataStudioUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPrismPlaygroundUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsUseServiceCatalogForGuest",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsRunCatalogItemsOnBehalfOf",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageCustomDomains",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsPersonalizationIntelUser",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccessDisputePrompts",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsViewAllCalls",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDigitalLendingWorkbench",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsDigitalLendingEditReadOnly",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsHeadlessPublishNudges",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsYourAccountCDAPublishEvents",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsAccessServiceEinstein",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "PermissionsManageAccessPolicies",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "UserLicenseId",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "UserType",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "CreatedDate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "CreatedById",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "LastModifiedDate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "LastModifiedById",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "SystemModstamp",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "IsSsoEnabled",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "Description",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "LastViewedDate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    }, {
+      "fieldName" : "LastReferencedDate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Profile"
+    } ]
+  },
+  "runMode" : "full"
+}

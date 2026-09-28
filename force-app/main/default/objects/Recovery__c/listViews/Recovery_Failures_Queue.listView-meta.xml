@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recovery_Failures_Queue</fullName>
+    <columns>Case_Number__c</columns>
+    <columns>NAME</columns>
+    <columns>Process_Status__c</columns>
+    <columns>Recovery_System_log__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Contact_First_Name__c</columns>
+    <columns>Contact_LastName__c</columns>
+    <columns>Type__c</columns>
+    <columns>RITM_Number__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Process_Status__c</field>
+        <operation>equals</operation>
+        <value>Exception</value>
+    </filters>
+    <filters>
+        <field>Type__c</field>
+        <operation>equals</operation>
+        <value>Payment (EFT),Payment (Credit Card),Travel vouchers,Ticket Refund EFT</value>
+    </filters>
+    <label>Recovery Failures Queue</label>
+    <sharedTo>
+        <group>Recovery_Failures</group>
+    </sharedTo>
+</ListView>

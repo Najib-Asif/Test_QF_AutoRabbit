@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Intl_Revenue_Target_65__c</fullName>
+    <description>For QIS internal reporting only</description>
+    <formula>IF (QF_International_Market_Share__c!= 0,((QF_International_Revenue__c/ QF_International_Market_Share__c)*0.01*65),null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Intl Revenue Target (65%)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

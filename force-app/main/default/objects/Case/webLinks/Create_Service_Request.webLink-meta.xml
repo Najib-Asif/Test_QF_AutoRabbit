@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Service_Request</fullName>
+    <availability>online</availability>
+    <description>The button does the following actions:-
+1) Creates a new Case with Service Request as Record Type
+2) Copies Description, Region Code and Waiver Type field from Parent case to Child case.</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Create Service Request</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>/{!Case.Id}/e?clone=1&amp;cloneparent=1&amp;00N9000000Dg8b5=&amp;retURL=%2F{!Case.Id}&amp;RecordType=01290000001IINO&amp;ent=Case</url>
+</WebLink>

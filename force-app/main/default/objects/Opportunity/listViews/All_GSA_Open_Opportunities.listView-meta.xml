@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_GSA_Open_Opportunities</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Sub_Type_Level_1__c</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Proposed_DOM_Revenue_Amount__c</columns>
+    <columns>Proposed_INT_Revenue_Amount__c</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.GSA</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>notEqual</operation>
+        <value>Closed - Accepted,Closed - Not Accepted</value>
+    </filters>
+    <label>All GSA Open Opportunities</label>
+    <sharedTo>
+        <role>QF</role>
+        <role>QF_DOM_Sales_AP_Agency_Development</role>
+        <role>QF_DOM_Sales_AP_Flight_Centre</role>
+        <role>QF_DOM_Sales_AP_Helloworld</role>
+        <role>QF_DOM_Sales_AP_Key_Partners</role>
+        <role>QF_DOM_Sales_AP_Regional</role>
+        <role>QF_DOM_Sales_B_G</role>
+        <role>QF_DOM_Sales_B_G_Business_and_Govt</role>
+        <role>QF_DOM_Sales_B_G_Regional_Development</role>
+        <role>QF_DOM_Sales_SME</role>
+        <role>QF_DOM_Sales_SME_QIS</role>
+        <role>QF_DOM_Sales_SME_QIS_Sr_Manager</role>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,35 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+	<aura:attribute name="lstOfEmailTemplate" type="Object[]"/>
+    <aura:attribute name="caseId" type="String"/>
+	<aura:attribute name="overlayPanel" type="Aura.Component[]" />
+    <aura:attribute name="isShowMessage" type="Boolean" default="false"/>
+    <aura:attribute name="message" type="String"/>
+
+    
+    <aura:registerEvent name="emailTemplateEvent" type="c:QCC_EmailTemplateEvent"/>
+	<div class="slds-p-top--small slds-p-bottom--small" >
+        <aura:if isTrue="{!v.isShowMessage}">
+            <ui:message title="Note:" severity="info" closable="false">
+                <ui:outputText value="{!v.message}"/>
+            </ui:message>
+        </aura:if>
+        <fieldset class="slds-form-element">
+            <div class="slds-form-element__control">
+                <aura:iteration items="{!v.lstOfEmailTemplate}" var="wrapperEmailTemp">
+                    <label class="slds-radio slds-p-top--small">
+                        <tr>
+                            <td>
+                                <ui:inputRadio name="{!wrapperEmailTemp.emailTemplate}" text="{!wrapperEmailTemp.congaEmailTemplate}" change="{!c.onSelectedEmailTemplate}"/>
+                                <span class="slds-radio--faux"></span>
+                            </td>
+                            <td>
+                                <span class="slds-form-element__label">{!wrapperEmailTemp.emailTemplate}</span>
+                            </td>
+                        </tr>
+                    </label>
+                    
+                </aura:iteration>
+            </div>
+        </fieldset>
+    </div>
+</aura:component>

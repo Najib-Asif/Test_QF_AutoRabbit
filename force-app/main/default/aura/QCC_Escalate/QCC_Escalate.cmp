@@ -1,0 +1,13 @@
+<aura:component controller="QCC_CustomerDetailController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="caseRecord" type="Case"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="isValid" type="Boolean"/>
+    <!--<lightning:layout horizontalAlign="end">-->
+    <aura:renderIf isTrue="{!v.isValid}">
+        
+        <lightning:button variant="neutral" label="Escalate" onclick="{! c.escalateCase}"/>
+    </aura:renderIf>
+    <!--</lightning:layout>-->
+   <lightning:spinner aura:id="mySpinner" class="slds-hide" variant="brand"/>
+   
+</aura:component>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account$Owner</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Full Question: What of the following topics were raised as blockers to adoption and the perceive level of difficulty? OBT, GDS, Customer Preference, Internal Change Management
+Applies to: Agency
+Response options: Low, Medium, High, Topic not raised</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.SurveySubjectEntities.SurveyResponses.SurveyQuestionResponses$Question</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>OBT,GDS,Customer Preference,Internal change management</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.SurveySubjectEntities.SurveyResponses.SurveyQuestionResponses$Question</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.SurveySubjectEntities.SurveyResponses.SurveyQuestionResponses$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Blockers and percieved difficulty</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_Survey_Questions_Answers__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

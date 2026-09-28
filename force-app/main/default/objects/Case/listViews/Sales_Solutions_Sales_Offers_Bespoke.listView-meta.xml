@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Solutions_Sales_Offers_Bespoke</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>Sub_Type__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>Most_Recent_Approver__c</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CASES.LAST_UPDATE</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Sales_Offers_Request</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Bespoke Incentive</value>
+    </filters>
+    <label>Sales Solutions - Sales Offers - Bespoke</label>
+    <queue>Sales_Solution_Queue</queue>
+    <sharedTo>
+        <group>Sales_Solution_Team</group>
+    </sharedTo>
+</ListView>

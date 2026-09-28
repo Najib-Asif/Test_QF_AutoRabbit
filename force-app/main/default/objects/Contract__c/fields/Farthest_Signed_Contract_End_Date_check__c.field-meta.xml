@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Farthest_Signed_Contract_End_Date_check__c</fullName>
+    <formula>IF(Account__r.Contracted__c = TRUE &amp;&amp; Account__r.Contract_Expiry_Date__c = Contract_End_Date__c, TRUE,FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Farthest Signed Contract End Date check</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

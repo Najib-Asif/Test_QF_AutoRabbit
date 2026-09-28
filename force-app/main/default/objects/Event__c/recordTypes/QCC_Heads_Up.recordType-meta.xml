@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Heads_Up</fullName>
+    <active>true</active>
+    <description>Possible disruption event as communicated by CJM to QANTAS VIP Service Team</description>
+    <label>Heads Up</label>
+    <picklistValues>
+        <picklist>ApprovalStatus__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AssignedtoTeam__c</picklist>
+        <values>
+            <fullName>AKL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HBA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MNL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CloseAction__c</picklist>
+        <values>
+            <fullName>Close-Offload</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comms not required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comms sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Event Auto-Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recoveries created and comms sent</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DelayFailureCode__c</picklist>
+        <values>
+            <fullName>Add Stop</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air Turn Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diversion Due to Mechanical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diversion Due to Medical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diversion Due to Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diversion Due to Weather</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flight Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flight Delay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heads Up</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Flight_Status__c</picklist>
+        <values>
+            <fullName>BOARDING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOARDING-CLOSE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOARDING-FINAL-CALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOARDING-OPEN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANCELLED</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEPARTED</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTIMATED</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LANDED</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Global_Event_Sub_Type__c</picklist>
+        <values>
+            <fullName>Adverse Weather</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baggage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baggage Belt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Catering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cyclone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Winds</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hurricane</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IFE %E2%80%93 Full</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Infrastructure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lights</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Q-Entertainment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Strike Action</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Thunderstorm Activity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Toilets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volcano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wifi</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Global_Event_Type__c</picklist>
+        <values>
+            <fullName>Aircraft Rego</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Airport Event</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IntDom__c</picklist>
+        <values>
+            <fullName>Domestic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>International</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Non_Delay_Failure_Code__c</picklist>
+        <values>
+            <fullName>A%2FC Downgrade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baggage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Catering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IFE Failure - Full</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IFE Failure - Partial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lights</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offload</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Q-Entertainment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Strike Action</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Toilets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wifi</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Overnight__c</picklist>
+        <values>
+            <fullName>Confirmed Overnight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Potential Overnight</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Primary_Root_Cause__c</picklist>
+        <values>
+            <fullName>8KM Radius Weather Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Acft%2FRamp Handling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air Closure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air Traffic Control</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Air Traffic Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aircraft Cleaning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aircraft Grounded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aircrew Rotation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Airport %26 Govt Auth</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Airport Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apt Infrastructure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auto Equipment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bird Strike</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cabin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cabin Crew</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Catering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Curfew</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Delay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cyclone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Damage to Aircraft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engineering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enroute delays</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flight Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freight %26 Mail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fuelling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Temperature</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Icing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Late Arrival of Aircraft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lightning Strike</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Load Control</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low-Visibility</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maintenance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Network %26 Airline Op</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Group Allocated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Weather</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Requirements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rotation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Safety</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Security</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volcano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weather</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Winds</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ReasonforOffload__c</picklist>
+        <values>
+            <fullName>AC downgrade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aircraft change</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Crew must ride</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High temps</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inbound Connection</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oversale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payload restrictions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Runway works</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Root_Cause__c</picklist>
+        <values>
+            <fullName>Air Traffice Flow Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mechanical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operational</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weather</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Assigned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In-Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Re-Opened</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

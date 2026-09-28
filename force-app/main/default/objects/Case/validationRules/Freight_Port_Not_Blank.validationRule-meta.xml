@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Port_Not_Blank</fullName>
+    <active>false</active>
+    <description>Freight Port field/lookup should not be left blank when Case types are shipment or Claims.</description>
+    <errorConditionFormula>AND(CONTAINS(RecordType.DeveloperName,&apos;Freight&apos;), OR ((ISPICKVAL(Type, &quot;Shipment&quot;)),(ISPICKVAL(Type, &quot;Claims&quot;))), 
+ISBLANK( Freight_Port__c ),FCR__c=FALSE,
+OR (NOT ( $Profile.Id = &apos;00e90000001yRSS&apos; ),
+NOT ($Profile.Id=&apos;00e90000001wK8z&apos;)) /*Data Administrator and System admin*/)</errorConditionFormula>
+    <errorDisplayField>Freight_Port__c</errorDisplayField>
+    <errorMessage>To allocate this case to the correct terminal the &quot;port&quot; is a required field</errorMessage>
+</ValidationRule>

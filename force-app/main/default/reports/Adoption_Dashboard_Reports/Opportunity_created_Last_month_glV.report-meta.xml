@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Opportunity$Owner.Profile_Name__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Opportunity$Amount.CONVERT</field>
+    </columns>
+    <currency>AUD</currency>
+    <customDetailFormulas>
+        <calculatedFormula>CASE(Opportunity.Owner.Profile_Name__c,&quot;Qantas Freight Sales&quot;, &quot;Freight&quot;, &quot;Qantas Loyalty -Commercial Sales&quot;, &quot;Loyalty&quot;,&quot;QL_Qantas_Sales&quot;,&quot;Sales&quot;,&quot;QL_Qantas_US_Sales&quot;,&quot;Sales&quot;,&quot;Rest of QF group&quot;)</calculatedFormula>
+        <dataType>Text</dataType>
+        <description>Business unit</description>
+        <developerName>CDF1</developerName>
+        <label>Business Unit</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CDF1</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Opportunity created Last month</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunity_Custom__c</reportType>
+    <roleHierarchyFilter>QF</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Opportunity$CreatedDate</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

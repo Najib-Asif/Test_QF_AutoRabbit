@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>this template will be used to send flight disruption letters to departure ports. CRM-5566 CRM-8664</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QCC Flight Disruption Email</name>
+    <style>none</style>
+    <subject>Disruption Letter for {!Event__c.FlightNumber__c}</subject>
+    <textOnly>Dear Airport Team,
+
+Please find attached delay letter for {!Event__c.FlightNumber__c}.
+
+NOTE:   To protect the quality of the letter, please ensure letter is printed from OUTLOOK not Web Mail otherwise formatting will be lost.
+
+Kind regards,
+Customer Journey Team
+
+
+
+
+
+
+
+{!Event__c.Custom_Thread_ID__c}
+
+Qantas Airways Limited, ABN 16 009 661 901
+10 Bourke Road Mascot NSW 2020 Australia</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>KnowledgeArticle$Title</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>KnowledgeArticle.ViewStats$ViewCount</field>
+    </columns>
+    <currency>AUD</currency>
+    <dataCategoryFilters>
+        <dataCategory>Q_com_FAQ_s</dataCategory>
+        <dataCategoryGroup>External_Topics</dataCategoryGroup>
+        <operator>at</operator>
+    </dataCategoryFilters>
+    <dataCategoryFilters>
+        <dataCategory>Qcom_Frequent_Flyer</dataCategory>
+        <dataCategoryGroup>External_Topics</dataCategoryGroup>
+        <operator>at</operator>
+    </dataCategoryFilters>
+    <description>This report is knowledge article stats for topic Frequent Flyer</description>
+    <format>Tabular</format>
+    <name>Articles Stats For Frequent Flyer Topic</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Knowledge_Article_Stats_c__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>KnowledgeArticle$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

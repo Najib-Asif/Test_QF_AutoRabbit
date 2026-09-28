@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Open_Email_Cases_Americas</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Freight_Case_Status_Flag__c</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>Freight_Port__c</columns>
+    <columns>Freight_Shipment__c</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Freight_AWB_Number__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>Created_By_Name__c</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.ORIGIN</field>
+        <operation>equals</operation>
+        <value>Auto Email</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Freight_Email_to_Case</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Open</value>
+    </filters>
+    <label>Freight Open Email Cases Americas</label>
+    <queue>Freight_CSS_Americas_Queue</queue>
+    <sharedTo>
+        <group>Freight_Service_Team</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>QAC_NA_Work_Order_Sharing_rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC NA Work Order Sharing rule</label>
+        <sharedTo>
+            <group>QAC_NA_Support_Team_for_US_and_Canada</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Sharing_Rule_for_WorkOrder_Owned_By_QAC_Integration_User</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Sharing Rule for WorkOrder Owned By QAC Integration User</label>
+        <sharedTo>
+            <group>Mindpearl_Agency_Group</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Sharing_Rule_for_WorkOrder_Owned_By_QAC_User</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Sharing Rule for WorkOrder Owned By QAC User</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Sharing_Rule_for_Work_Order_Service_Request</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Sharing Rule for Work Order Service Request</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_UK_Work_Order_Sharing_rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC UK Work Order Sharing rule</label>
+        <sharedTo>
+            <group>QAC_UK_Support_Team</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QF_QDC_Work_Order_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QF-QDC Work Order Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Refund Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CCC Ticketing Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Disruption Expenses</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

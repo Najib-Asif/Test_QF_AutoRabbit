@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_CSU_AU_Queue_OPEN_BKGS</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 and 6 and 7 and 8 and 9 and 10</booleanFilter>
+    <columns>CASES.PRIORITY</columns>
+    <columns>Product__c</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Freight_AWB_Number__c</columns>
+    <columns>Freight_Unresolved_Time__c</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>Freight_Port__c</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>NAME</columns>
+    <columns>Ready_for_Collection__c</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.EMAIL</columns>
+    <columns>Email__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Freight_Claims,Case.Freight_Email_to_Case,Case.Freight_Feedback,Case.Freight_Invoicing,Case.Freight_Query,Case.Freight_Shipment,Case.Freight_Track_Trace_Exceptions,Case.Qantas_Freight</value>
+    </filters>
+    <filters>
+        <field>CASES.CLOSED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Freight CSU AU Queue</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>notEqual</operation>
+        <value>Invalid Case,Special Moves,Export Moves,Booking</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Open</value>
+    </filters>
+    <filters>
+        <field>CASES.ORIGIN</field>
+        <operation>equals</operation>
+        <value>FRT Bookings</value>
+    </filters>
+    <filters>
+        <field>Product__c</field>
+        <operation>notEqual</operation>
+        <value>Q-GO Priority</value>
+    </filters>
+    <filters>
+        <field>CASES.PRIORITY</field>
+        <operation>notEqual</operation>
+        <value>Premium,Urgent,Medium,High</value>
+    </filters>
+    <filters>
+        <field>CASES.SUBJECT</field>
+        <operation>notContain</operation>
+        <value>offload,0ffld,offld</value>
+    </filters>
+    <filters>
+        <field>CASES.SUBJECT</field>
+        <operation>notContain</operation>
+        <value>interline</value>
+    </filters>
+    <label>Freight CSU AU Queue - OPEN- BKGS</label>
+</ListView>

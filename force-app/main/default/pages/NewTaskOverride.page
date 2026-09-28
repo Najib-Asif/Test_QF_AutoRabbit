@@ -1,0 +1,63 @@
+<apex:page contentType="text/html" standardController="Task">
+<!--
+redirect page for the 'New' task button override .
+**update the record type Id manually**
+-- the Master record type is defaulted to all profiles.
+-- the 'Risk' record type id is appended as a parameter for the tasks that are created from the risk detail page.
+-->
+<apex:includeScript value="/soap/ajax/26.0/connection.js"/>
+<apex:includeScript value="/support/console/32.0/integration.js"/>
+<script>
+
+var returl = "{!$CurrentPage.parameters.retURL}";
+    var whatId = "{!$CurrentPage.parameters.what_id}";
+    var campaignId = "{!$CurrentPage.parameters.CF00N9000000FGBRF}";
+    var whoId = "{!$CurrentPage.parameters.who_id}";
+    var redirUrl = '/00T/e?retURL='+returl+'&nooverride=1&what_id='+whatId+'&CF00N9000000FGBRF='+campaignId+'&who_id='+whoId+'&tsk5=Call &tsk12=Not Started';
+    if(whatId != null){
+        if(whatId.indexOf("a0m") == 0) {
+            redirUrl += '&RecordType=01290000001Iabp'; // 'Risk' Recordtype id for task object.
+        }
+    }
+if(!sforce.console.isInConsole()){
+    window.top.location =  redirUrl ;
+}
+else{  
+       sforce.console.getFocusedPrimaryTabObjectId(function(result){
+
+       if(result.id != 'null'){
+           sforce.console.getFocusedPrimaryTabId(function(result){
+
+                sforce.console.openSubtab(result.id, redirUrl, true, 'New Task', null, function(result1){                
+                    sforce.console.getFocusedSubtabId(function(result2){                
+                         sforce.console.closeTab(splitTabNumber(result2.id));    
+                    });
+                });
+            
+            });
+        }else{
+            sforce.console.openPrimaryTab(null, redirUrl, true, 'New Task', function(result){
+                sforce.console.closeTab(splitTabNumber(result.id));
+            });
+
+        }
+        
+        });
+    }
+    
+    function splitTabNumber(currentTabId){
+        var subTabId = currentTabId;
+        var splitted = subTabId.split("-");
+        var tabNumber = splitted[splitted.length - 1] - 1;                
+        var closeSubTabId = '';
+       
+        for(var i=0; i< splitted.length - 1; i++){                    
+           closeSubTabId = closeSubTabId+splitted[i]+'-';                    
+        }
+                            
+        closeSubTabId = closeSubTabId + tabNumber;        
+        return closeSubTabId;
+    }
+       
+</script>
+</apex:page>

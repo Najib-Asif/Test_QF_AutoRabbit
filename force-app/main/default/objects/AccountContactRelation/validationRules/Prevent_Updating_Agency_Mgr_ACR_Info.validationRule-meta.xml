@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Updating_Agency_Mgr_ACR_Info</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.Prevent_updating_Agency_Mgr_Contact_info__c = FALSE,
+Contact.RecordType.DeveloperName == &quot;Non_Agency_Contact&quot;,
+OR(ISPICKVAL (Contact.QAC_Contact__c, &quot;Yes&quot;),Contact.Source__c = &quot;PING&quot;),
+OR(
+ISCHANGED(Job_Role__c),
+ISCHANGED(Job_Title__c),
+ISCHANGED(Related_Email__c),
+ISCHANGED(Primary_Contact__c),
+ISCHANGED(PING_Role__c),
+ISCHANGED(Related_Phone__c)))</errorConditionFormula>
+    <errorMessage>Job Title, Job Role, PING Role, Phone and Email cannot be modified for Agency Contacts created from Online/Gateway</errorMessage>
+</ValidationRule>

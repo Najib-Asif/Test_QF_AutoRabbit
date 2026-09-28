@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Submitting for Flight Event approval Process.</description>
+        <name>Submit_for_QCC_FlightRecoveryApproval_Approval_Process</name>
+        <label>Submit for QCC_FlightRecoveryApproval Approval Process</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>submit</actionName>
+        <actionType>submit</actionType>
+        <connector>
+            <targetReference>Approval_Process_Success_Msg</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Approval_Process_Error_Msg</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>objectId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>comment</name>
+            <value>
+                <elementReference>Comments</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>submit</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>increasing the count of affected passengers tagged with event comms variable.</description>
+        <name>Assign_Event_Comms_Tagged_Pax_Count</name>
+        <label>Assign Event Comms Tagged Pax Count</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>EventCommsTaggedAffectedPaxCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_the_Affected_Passengers</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>This varaiable will store the all the affected passengers count.</description>
+        <name>Set_Affected_Pax_Count</name>
+        <label>Set Affected Pax Count</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>affectedPaxCount</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Get_Affected_Passengers_List</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_All_Affected_Pax_tagged_to_Event_Comms</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check wheterh Event Comms are created for this FE or not</description>
+        <name>Check_Event_Comms_Record_Is_Present_or_Not</name>
+        <label>Check Event Comms Record Is Present or Not?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Event_Comms_Records_Are_Not_Exist</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Event_Comms_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Event_Comms_Records</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Affected_Passengers_List</targetReference>
+            </connector>
+            <label>Event Comms Exists</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check whether Flight Failure record is tagged to FE or not.</description>
+        <name>Check_Flight_Failure_Record_is_Present_or_Not</name>
+        <label>Check Flight Failure Record is Present or Not?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Flight_Failure_Record_Is_Not_Exist</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Flight_Failure_Record_is_Present</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Flight_Failure_Record</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Event_Comms_Records</targetReference>
+            </connector>
+            <label>Flight Failure Record is Present</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check whether Affected passengers are tagged to Flight Event or not</description>
+        <name>Check_Flight_Has_Affected_Pax</name>
+        <label>Check Flight Has Affected Pax?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Affected_Pax_Records_Are_Not_Exist</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Affected_Passengers_List</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_the_Affected_Passengers</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check Event comm was tagged to affected passenger?</description>
+        <name>Check_Is_Event_Comm_tagged_to_Passenger_Or_Not</name>
+        <label>Check Is Event Comm tagged to Passenger Or Not?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Through_the_Affected_Passengers</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>EVent_Comm_tagged_to_Passenger</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Through_the_Affected_Passengers.EventCommunication__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Event_Comms_Tagged_Pax_Count</targetReference>
+            </connector>
+            <label>EVent Comm tagged to Passenger</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checking all the affected passengers were tagged to the event comms are not?</description>
+        <name>Is_All_Affected_Pax_tagged_to_Event_Comms</name>
+        <label>Is All Affected Pax tagged to Event Comms?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Affected_Pax_Records_Are_Not_Tagged_to_Event_Comms</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Tagged</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>affectedPaxCount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>EventCommsTaggedAffectedPaxCount</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Approval_Comments</targetReference>
+            </connector>
+            <label>Yes Tagged</label>
+        </rules>
+    </decisions>
+    <description>CRM-9743: Validation of required steps on Flight Event submission
+Validating Flight failure, Event comms, and Affected passengers records against Flight event record, before submitting the recoveries for approval.</description>
+    <environments>Default</environments>
+    <interviewLabel>QCC Flight Event Submit For Approval Validation {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QCC Flight Event Submit For Approval Validation</label>
+    <loops>
+        <description>looping all the affected passengers, to get the event comms tagged affected passenger count.</description>
+        <name>Loop_Through_the_Affected_Passengers</name>
+        <label>Loop Through the Affected Passengers</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Affected_Passengers_List</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_Is_Event_Comm_tagged_to_Passenger_Or_Not</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Set_Affected_Pax_Count</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>Get the Affected passengers list of the Flight Event.</description>
+        <name>Get_Affected_Passengers_List</name>
+        <label>Get  Affected Passengers List</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Flight_Has_Affected_Pax</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Event__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Affected__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Affected_Passenger__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get the Event Comms record, which is tagged to FE</description>
+        <name>Get_Event_Comms_Records</name>
+        <label>Get Event Comms Records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Event_Comms_Record_Is_Present_or_Not</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FlightEvent__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>EventCommunication__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get the Flight Failure record, wchich is tagged to Flight Event.</description>
+        <name>Get_Flight_Failure_Record</name>
+        <label>Get Flight Failure Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Flight_Failure_Record_is_Present_or_Not</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Flight_Event__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>FlightFailure__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>Affected_Pax_Records_Are_Not_Exist</name>
+        <label>Affected Pax Records Are Not Exist</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_1_of_FlightFailureErrorMsg</name>
+            <fieldText>&lt;p&gt;There’s no affected passenger for this flight.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Affected_Pax_Records_Are_Not_Tagged_to_Event_Comms</name>
+        <label>Affected Pax Records Are Not Tagged to Event Comms</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_1_of_Copy_1_of_FlightFailureErrorMsg</name>
+            <fieldText>&lt;p&gt;Some affected passengers don’t have Event Communication tagged, please double check.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Approval comments to send to the approval process.</description>
+        <name>Approval_Comments</name>
+        <label>Approval Comments</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Submit_for_QCC_FlightRecoveryApproval_Approval_Process</targetReference>
+        </connector>
+        <fields>
+            <name>Comments</name>
+            <fieldText>Comments</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Submit</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Displaying approval process fault message</description>
+        <name>Approval_Process_Error_Msg</name>
+        <label>Approval Process Error Msg</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>ApprovalProcessErrorMsg</name>
+            <fieldText>&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <description>Approval Process success message.</description>
+        <name>Approval_Process_Success_Msg</name>
+        <label>Approval Process Success Msg</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Copy_1_of_ApprovalProcessErrorMsg</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Flight Event was submitted for approval.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Event_Comms_Records_Are_Not_Exist</name>
+        <label>Event Comms Records Are Not Exist</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>EventCommsErrorMsg</name>
+            <fieldText>&lt;p&gt;No Event Communication has been created, please double check.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Flight_Failure_Record_Is_Not_Exist</name>
+        <label>Flight Failure Record Is Not Exist</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>FlightFailureErrorMsg</name>
+            <fieldText>&lt;p&gt;No Flight Failure has been created, please double check.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Flight_Failure_Record</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>affectedPaxCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <name>EventCommsTaggedAffectedPaxCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

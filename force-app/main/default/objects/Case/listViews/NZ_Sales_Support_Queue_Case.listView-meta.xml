@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NZ_Sales_Support_Queue_Case</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>PNR_number__c</columns>
+    <columns>Passenger_Name__c</columns>
+    <columns>Approval_Status__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.CLOSED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>NZ Sales Support Queue</label>
+    <queue>NZ_Sales_Support_Queue</queue>
+    <sharedTo>
+        <role>QF_INT_Sales_North_America_NZ</role>
+        <role>QF_INT_Sales_North_America_NZ_Account_Manager2</role>
+        <role>QF_INT_Sales_North_America_NZ_Agency_Support</role>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offer_SME_Type</fullName>
+    <active>false</active>
+    <description>For Sales Offer Cases, SO(SME) Level&apos;s can&apos;t select Bespoke Incentive, Survey.</description>
+    <errorConditionFormula>AND( 
+RecordType.DeveloperName = &apos;Sales_Offers_Request&apos;, 
+ NOT (   $UserRole.Id   = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/
+CONTAINS( $User.Level__c, &quot;SO(SME)&quot;),
+CONTAINS( $User.Level__c, &quot;SO(SPS)&quot;),
+
+OR (
+ISPICKVAL ( Type , &quot;Bespoke Incentive&quot;),
+ISPICKVAL ( Type , &quot;Survey&quot;)
+)
+
+
+)</errorConditionFormula>
+    <errorDisplayField>Type</errorDisplayField>
+    <errorMessage>QIS/ SME Users are not allowed to select either Bespoke Incentive, Campaign or Survey.</errorMessage>
+</ValidationRule>

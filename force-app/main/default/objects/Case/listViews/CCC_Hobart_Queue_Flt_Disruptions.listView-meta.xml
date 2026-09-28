@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CCC_Hobart_Queue_Flt_Disruptions</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>Due_Date__c</columns>
+    <columns>Departure_Date_Time__c</columns>
+    <columns>Flight_Number__c</columns>
+    <columns>Group__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Resolved,Closed</value>
+    </filters>
+    <filters>
+        <field>Group__c</field>
+        <operation>equals</operation>
+        <value>Flight Disruptions</value>
+    </filters>
+    <label>CCC Hobart Queue - Flt Disruptions</label>
+    <queue>CCC_R1_Hobart_Q</queue>
+</ListView>

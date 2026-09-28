@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Airline_Eligibility__c</fullName>
+    <description>AMEX_Holds the AIrline Eligibility of the Account</description>
+    <externalId>false</externalId>
+    <formula>IF (
+	NOT(ISPICKVAL(Account__r.Aquire_Override__c,&apos;Y&apos;)), 
+			IF (
+			ISPICKVAL(Account__r.Agency__c, &apos;N&apos;), 
+			IF (
+				Account__r.SME_Deal__c = false, 
+				IF (
+					ISPICKVAL(Account__r.Dealing_Flag__c, &apos;N&apos;), &apos;Y&apos;, 
+				&apos;N&apos;), 
+			&apos;Y&apos;), 
+		&apos;N&apos;), 
+	&apos;N&apos;)</formula>
+    <label>Airline Eligibility</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Update_no_of_email_sent_or_calls</fullName>
+    <active>false</active>
+    <description>This validation rule is to ensure that the SME callout user is updating the no of emails sent or no of calls fields each time, they update the Campaign Member record.
+The rule is applicable only for SME Campaign record types.</description>
+    <errorConditionFormula>CreatedDate  &lt;&gt;  LastModifiedDate 
+&amp;&amp; NOT(ISNEW()) 
+&amp;&amp; (NOT(ISCHANGED( No_of_Calls__c ))) 
+&amp;&amp; (NOT(ISCHANGED( No_of_Email_Sent__c ))) 
+&amp;&amp; Campaign.CampaignMemberRecordTypeId  = &apos;01290000000ucbf&apos; 
+&amp;&amp; NOT(CONTAINS( $User.Profile_Name__c , &apos;Administrator&apos;) )
+&amp;&amp; ISBLANK(Log_call_url__c)</errorConditionFormula>
+    <errorMessage>Please update &apos;No of Email Sent&apos; or &apos;No of Calls&apos; accordingly.</errorMessage>
+</ValidationRule>

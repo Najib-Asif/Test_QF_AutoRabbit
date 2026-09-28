@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QF_International_Market_Share_LY__c</fullName>
+    <formula>IF((International_Air_Travel_Spend_LY__c != 0) &amp;&amp; (QF_International_Revenue_LY__c !=0),(Intl_QF_EK_Revenue_LY__c / International_Air_Travel_Spend_LY__c),null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>QF International Market Share (LY)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <type>Percent</type>
+</CustomField>

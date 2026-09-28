@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Cases_Account_Validation</fullName>
+    <active>true</active>
+    <description>Freight - All Freight cases to be tagged to Freight Account only</description>
+    <errorConditionFormula>AND(
+    CONTAINS(RecordType.DeveloperName,&apos;Freight&apos;),
+    NOT(ISBLANK(AccountId)),
+    NOT(Account.RecordTypeId = &apos;01290000000ibKV&apos;),
+    $User.FirstName &lt;&gt; &apos;System Admin&apos;,
+    $User.LastName &lt;&gt; &apos;Updates&apos;
+)</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Please select a Freight Account to relate to a Freight case</errorMessage>
+</ValidationRule>

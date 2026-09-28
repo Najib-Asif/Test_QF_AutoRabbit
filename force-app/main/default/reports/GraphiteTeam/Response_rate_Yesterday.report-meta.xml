@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_70371239</developerName>
+        <masterLabel>Service Type</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>TYPE</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>PNR Health Check</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PNR Health Check - Watchlist</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to SSU</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Welcome to Life Time Platinum</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Air Turn Back</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Diversion</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Domestic Delay</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Pre-Flight Watchlist Check</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Potential Downgrade</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Quarterly Health Check Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Retain Platinum One</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Watch list is Expiring</sourceValue>
+            </sourceValues>
+            <value>Proactive</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>CDF1</field>
+    </columns>
+    <columns>
+        <field>BucketField_70371239</field>
+    </columns>
+    <columns>
+        <field>Case.First_email_to_customer__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <customDetailFormulas>
+        <calculatedFormula>(Case.First_email_to_customer__c-CREATED_DATE)*24*60</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>Response rate</description>
+        <developerName>CDF1</developerName>
+        <label>Response Rate (Minutes)</label>
+        <scale>0</scale>
+    </customDetailFormulas>
+    <description>Based on Cases that were open Yesterday excluding Proactive</description>
+    <filter>
+        <booleanFilter>((1 OR 3) AND 2 AND 4 AND 5) OR ((1 OR 3) AND 2 AND 4 AND 6)</booleanFilter>
+        <criteriaItems>
+            <column>Case.FF_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Platinum One,Chairmans Lounge,Chairmans Lounge Platinum One,Chairman&apos;s Lounge,Chairman&apos;s Lounge Platinum One</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CREATED_DATE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>YESTERDAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Frequent_Flyer_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Lounge,one</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.First_email_to_customer__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_70371239</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Proactive</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>TYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CASE_NUMBER</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Response rate Yesterday</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseEmail</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

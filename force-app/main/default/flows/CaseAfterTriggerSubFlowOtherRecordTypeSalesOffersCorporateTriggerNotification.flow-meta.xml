@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Sales_Offers_Corporate_Trigger_50_Bonus_Trigger_Notification</name>
+        <label>Sales Offers - Corporate Trigger 50% Bonus Trigger Notification</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <stringValue>BusGovSalesSolutions@qantas.com.au</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>salesforcesupport@qantas.com.au</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Sales Offers Corporate Trigger - Case Number {!CaseRecord.CaseNumber}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>relatedRecordId</name>
+            <value>
+                <elementReference>CaseRecord.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>60.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>ValidateTheRecordTypeAndSubType</name>
+        <label>ValidateTheRecordTypeAndSubType</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>RecordTypeAndSubType</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CaseRecord.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sales Offers Request</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>CaseRecord.Sub_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Corporate Trigger - 50% Bonus Status</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Sales_Offers_Corporate_Trigger_50_Bonus_Trigger_Notification</targetReference>
+            </connector>
+            <label>RecordTypeAndSubType</label>
+        </rules>
+    </decisions>
+    <description>For Sales Offers, Sub Type = Corporate Trigger - 50% Bonus Status, email notification is sent to SHR BUSGOV.(Platform change)</description>
+    <environments>Default</environments>
+    <interviewLabel>CaseAfterTriggerSubFlow-OtherRecordTypeSubmitTicketingAuthorityApproval {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-OtherRecordTypeSalesOffers-CorporateTriggerNotification</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ValidateTheRecordTypeAndSubType</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>EmailTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi,
+
+{!CaseRecord.Case_Creator__c} has raised a Sales Offer Case for Corporate Trigger - 50% Bonus Status in Salesforce.
+
+Case Number: {!CaseRecord.CaseNumber}
+Account Name: {!CaseRecord.Account.Name}
+Campaign Start Date: {!CaseRecord.Campaign_Start_Date__c}
+Campaign End Date: {!CaseRecord.Campaign_End_Date__c}
+Last Approved By: {!CaseRecord.Most_Recent_Approver__c} {!CaseRecord.Approval_Date_Time__c}
+Justification: {!CaseRecord.Justification__c}
+
+URL: https://qantas.my.salesforce.com/{!CaseRecord.Id}
+
+Thanks,
+Salesforce Support Team</text>
+    </textTemplates>
+    <variables>
+        <name>CaseRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

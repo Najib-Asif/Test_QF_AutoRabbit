@@ -1,0 +1,38 @@
+{
+  "version" : "67.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "OwnerId", "IsDeleted", "Name", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "UserId", "WorkItemId", "Status", "ServiceChannelId", "OriginalQueueId", "CapacityWeight", "CapacityPercentage", "RequestDateTime", "AcceptDateTime", "DeclineDateTime", "CloseDateTime", "SpeedToAnswer", "AgentCapacityWhenDeclined", "PendingServiceRoutingId", "PushTimeout", "PushTimeoutDateTime", "HandleTime", "ActiveTime", "DeclineReason", "CancelDateTime", "ShouldSkipCapacityCheck", "RoutingType", "RoutingModel", "RoutingPriority", "AssignedDateTime", "PreferredUserId", "OriginalGroupId" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "AgentWork",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "AgentWork",
+          "mode" : "SYNCED"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "AgentWork",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      }
+    },
+    "connectors" : [ ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

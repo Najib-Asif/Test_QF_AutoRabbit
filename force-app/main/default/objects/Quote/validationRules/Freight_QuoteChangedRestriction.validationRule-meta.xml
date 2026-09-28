@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_QuoteChangedRestriction</fullName>
+    <active>true</active>
+    <description>Freight Implementation: Quote line item should not be modified once Opportunity closed.</description>
+    <errorConditionFormula>AND(
+
+Opportunity.RecordType.DeveloperName == &quot;Freight&quot;,
+RecordType.DeveloperName  = &quot;Freight_Quote&quot;,
+
+	OR(
+		ISPICKVAL(Opportunity.StageName, &quot;Closed - Accepted&quot;),
+		ISPICKVAL(Opportunity.StageName, &quot;Closed - Not Accepted&quot;)
+	)
+
+)</errorConditionFormula>
+    <errorMessage>Quote should not be modified once Opportunity is Closed.</errorMessage>
+</ValidationRule>

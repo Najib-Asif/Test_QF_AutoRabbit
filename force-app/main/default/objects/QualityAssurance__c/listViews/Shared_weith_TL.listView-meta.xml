@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shared_weith_TL</fullName>
+    <columns>NAME</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Call_Topic__c</columns>
+    <columns>Call_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Share_with_Team_Leads__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Shared with Team Leads</label>
+    <sharedTo>
+        <group>QIS_QA_Escalation_Group</group>
+        <group>QIS_QA_Group</group>
+        <group>System_Admins</group>
+    </sharedTo>
+</ListView>

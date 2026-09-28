@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitlementProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <SObjectType>Case</SObjectType>
+    <active>true</active>
+    <description>Entitlement process for Complaint, Query, Further Action Required, Insurance Letter, Compliment, Assistance QCC cases</description>
+    <entryStartDateField>Case.CreatedDate</entryStartDateField>
+    <exitCriteriaFilterItems>
+        <field>Case.Status</field>
+        <operation>equals</operation>
+        <value>Closed</value>
+    </exitCriteriaFilterItems>
+    <isVersionDefault>false</isVersionDefault>
+    <name>QCC VIP Others</name>
+    <versionMaster>552O00000004GBD</versionMaster>
+    <versionNumber>1</versionNumber>
+</EntitlementProcess>

@@ -1,0 +1,1592 @@
+{
+  "version" : "61.0",
+  "nodes" : {
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "KnowledgeArticleId", "PublishStatus", "VersionNumber", "IsLatestVersion", "Title", "ArticleNumber", "ArticleCaseAttachCount", "RecordTypeId", "ArticleTotalViewCount" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__kav",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__kav"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "LOAD_DATASET3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "kav_ID_15",
+          "label" : "Knowledge Article Version ID 15 digit",
+          "formulaExpression" : "substr(Id, 1, 15)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "KnowledgeArticleId_formula",
+          "label" : "Knowledge Article ID 15 digit",
+          "formulaExpression" : "substr(KnowledgeArticleId, 1, 15)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "BUCKET1" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordTypeId_bucket",
+          "label" : "Record Type ID Bucket",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "RecordTypeId",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Informational",
+              "sourceValues" : [ "0122v000001r4quAAA" ]
+            }, {
+              "value" : "Marketing and Promotional",
+              "sourceValues" : [ "0122v000001r4qvAAA" ]
+            }, {
+              "value" : "Policy",
+              "sourceValues" : [ "0122v000001r4qwAAA" ]
+            }, {
+              "value" : "Process & Procedure",
+              "sourceValues" : [ "0122v000001r4qxAAA" ]
+            }, {
+              "value" : "Public Facing FAQ",
+              "sourceValues" : [ "0122v000002BBv0AAG" ]
+            }, {
+              "value" : "Triage",
+              "sourceValues" : [ "0122v000001r4qyAAA" ]
+            }, {
+              "value" : "Nat Memo",
+              "sourceValues" : [ "0122v000002BBuzAAG" ]
+            }, {
+              "value" : "Freight",
+              "sourceValues" : [ "0122v000000jZXVAA2" ]
+            }, {
+              "value" : "S&D",
+              "sourceValues" : [ "0122v000001ed3bAAA" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "BUCKET3" : {
+      "action" : "bucket",
+      "sources" : [ "BUCKET1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Title_bucket",
+          "label" : "Call Guide",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "Title",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Call Guide",
+              "sourceValues" : [ "Call Guide - BAGGAGE ( test for pilot only)", "Call Guide - CREDITS ( test for pilot only)", "Call Guide - Customer Care (Pilot only)", "Call Guide - REFUNDS (test for pilot only)" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Usual Kb view",
+          "name" : "Usual_Kb_view",
+          "folderName" : "Knowledge_Articles_and_Cases_Attach"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "DROP_FIELDS2", "BUCKET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "ARTICLE_VERSION_ID", "ARTICLE_ID" ],
+        "rightQualifier" : "Transform0",
+        "rightKeys" : [ "kav_ID_15", "KnowledgeArticleId_formula" ]
+      }
+    },
+    "FILTER3" : {
+      "action" : "filter",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Transform0.ArticleNumber",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN4" : {
+      "action" : "join",
+      "sources" : [ "FILTER3", "LOAD_DATASET4" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "USER_ID_DERIVED" ],
+        "rightQualifier" : "BasicUserM",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ProfileId", "UserRoleId", "IsActive", "UserRole.ParentRoleId", "Profile.Name", "UserRole.Name", "Name", "Freight_Reporting_Team__c", "Transform1.StartDate", "Profile.Id", "FederationIdentifier", "Transform1.LastCallDate", "Location__c", "UserRole.Name_bucket", "UserRole.DeveloperName", "Transform1.StaffID", "FirstName", "Id_formula_formula_formula_bucket", "RadarUser__c", "UserRole.Id", "Username", "Profile.Name_bucket", "Id_formula", "Id", "LastName", "Id_formula_formula", "Id_formula_formula_formula" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FORMULA2" : {
+      "action" : "formula",
+      "sources" : [ "APPEND10" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "Month1",
+          "label" : "Month",
+          "formulaExpression" : "month(TIMESTAMP_DERIVED)",
+          "precision" : 10,
+          "scale" : 0,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "Month_name",
+          "label" : "Month Name",
+          "formulaExpression" : "case\r\nwhen Month1='1' then 'Jan'\r\nwhen Month1='2' then 'Feb'\r\nwhen Month1='3' then 'Mar'\r\nwhen Month1='4' then 'Apr'\r\nwhen Month1='5' then 'May'\r\nwhen Month1='6' then 'Jun'\r\nwhen Month1='7' then 'Jul'\r\nwhen Month1='8' then 'Aug'\r\nwhen Month1='9' then 'Sep'\r\nwhen Month1='10' then 'Oct'\r\nwhen Month1='11' then 'Nov'\r\nwhen Month1='12' then 'Dec'\r\nend",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "DROP_FIELDS0" : {
+      "action" : "schema",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "ARTICLE_VERSION" ]
+        }
+      }
+    },
+    "DROP_FIELDS1" : {
+      "action" : "schema",
+      "sources" : [ "DROP_FIELDS0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "TIMESTAMP" ]
+        }
+      }
+    },
+    "DROP_FIELDS2" : {
+      "action" : "schema",
+      "sources" : [ "DROP_FIELDS1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "LAST_VERSION" ]
+        }
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Aug2023 Master",
+          "name" : "Aug2023_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "ARTICLE_ID", "SESSION_ID", "USER_ID_DERIVED", "LAST_VERSION", "TIMESTAMP", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "KavJul2023",
+          "name" : "KavJul2023"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET7" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Sept 2023 KavArticleView",
+          "name" : "Sept_2023_KavArticleView"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET6", "LOAD_DATASET5" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "APPEND1" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND0", "LOAD_DATASET7" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "APPEND2" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND1", "APPEND11" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "LOAD_DATASET9" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Oct 2023 KavArticleView",
+          "name" : "Oct_2023_KavArticleView"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET10" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Nov_2023_KnowledgeArticleView",
+          "name" : "Nov_2023_KnowledgeArticleView"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND3" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND2", "LOAD_DATASET10" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "LOAD_DATASET12" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Dec 2023 Knowledge View Master",
+          "name" : "Dec_2023_Knowledge_View_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND4" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND3", "LOAD_DATASET12" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "APPEND5" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND4", "LOAD_DATASET14" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "LOAD_DATASET14" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Jan master 2024",
+          "name" : "Jan_master_2024"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND6" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND5", "LOAD_DATASET15" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "LOAD_DATASET15" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Feb master 1_10 Feb",
+          "name" : "Feb_master_1_10_Feb"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND7" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND6", "LOAD_DATASET16" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "LOAD_DATASET16" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "LAST_VERSION", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "TIMESTAMP", "ARTICLE_ID", "SESSION_ID", "ARTICLE_VERSION", "USER_ID_DERIVED" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Mar_master",
+          "name" : "Mar_master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER4" : {
+      "action" : "filter",
+      "sources" : [ "JOIN4" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "Transform0.ArticleNumber",
+          "operator" : "EQUAL",
+          "operands" : [ "000005773", "000005765", "000005767", "000005772", "000005781" ]
+        } ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "FILTER4" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Call Guide",
+          "name" : "Callguide",
+          "folderName" : "Knowledge_Articles_and_Cases_Attach"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "APPEND8" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND7", "LOAD_DATASET18" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "LOAD_DATASET18" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "ARTICLE_ID", "SESSION_ID", "USER_ID_DERIVED", "LAST_VERSION", "TIMESTAMP", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2024 April Master",
+          "name" : "X2024_April_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET19" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "ARTICLE_ID", "SESSION_ID", "USER_ID_DERIVED", "LAST_VERSION", "TIMESTAMP", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2024 05 Knowledge Article View",
+          "name" : "X2024_05_Knowledge_Article_View"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND9" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND8", "LOAD_DATASET19" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    },
+    "LOAD_DATASET20" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "ARTICLE_ID", "SESSION_ID", "USER_ID_DERIVED", "LAST_VERSION", "TIMESTAMP", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "June_Master_1-16",
+          "name" : "June_Master_1_16"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "APPEND10" : {
+      "action" : "appendV2",
+      "sources" : [ "APPEND9", "LOAD_DATASET20" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        }, {
+          "top" : "LAST_VERSION",
+          "bottom" : "LAST_VERSION"
+        }, {
+          "top" : "TIMESTAMP",
+          "bottom" : "TIMESTAMP"
+        }, {
+          "top" : "ARTICLE_VERSION",
+          "bottom" : "ARTICLE_VERSION"
+        } ]
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "APPEND10" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Neo - Knowledge View 2024",
+          "name" : "Neo_Knowledge_View_2024",
+          "folderName" : "Knowledge_Articles_Engagement"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET21" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "LANGUAGE", "EVENT_TYPE", "LARGE_LANGUAGE_MODEL", "USER_ID", "REQUEST_ID", "ARTICLE_VERSION_ID", "CONTEXT", "ARTICLE_STATUS", "ORGANIZATION_ID", "ENTITY", "TIMESTAMP_DERIVED", "USER_TYPE", "ARTICLE_ID", "SESSION_ID", "USER_ID_DERIVED", "LAST_VERSION", "TIMESTAMP", "ARTICLE_VERSION" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "2023 10 31 Knowledge Article View",
+          "name" : "X2023_10_31_Knowledge_Article_View"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "APPEND11" : {
+      "action" : "appendV2",
+      "sources" : [ "LOAD_DATASET9", "LOAD_DATASET21" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "LANGUAGE",
+          "bottom" : "LANGUAGE"
+        }, {
+          "top" : "EVENT_TYPE",
+          "bottom" : "EVENT_TYPE"
+        }, {
+          "top" : "USER_ID",
+          "bottom" : "USER_ID"
+        }, {
+          "top" : "REQUEST_ID",
+          "bottom" : "REQUEST_ID"
+        }, {
+          "top" : "ARTICLE_VERSION_ID",
+          "bottom" : "ARTICLE_VERSION_ID"
+        }, {
+          "top" : "CONTEXT",
+          "bottom" : "CONTEXT"
+        }, {
+          "top" : "ARTICLE_STATUS",
+          "bottom" : "ARTICLE_STATUS"
+        }, {
+          "top" : "ORGANIZATION_ID",
+          "bottom" : "ORGANIZATION_ID"
+        }, {
+          "top" : "ENTITY",
+          "bottom" : "ENTITY"
+        }, {
+          "top" : "TIMESTAMP_DERIVED",
+          "bottom" : "TIMESTAMP_DERIVED"
+        }, {
+          "top" : "USER_TYPE",
+          "bottom" : "USER_TYPE"
+        }, {
+          "top" : "ARTICLE_ID",
+          "bottom" : "ARTICLE_ID"
+        }, {
+          "top" : "SESSION_ID",
+          "bottom" : "SESSION_ID"
+        }, {
+          "top" : "USER_ID_DERIVED",
+          "bottom" : "USER_ID_DERIVED"
+        } ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET3" : {
+        "label" : "Knowledge__kav",
+        "type" : "LOAD_DATASET",
+        "top" : 530.2,
+        "left" : 532,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "TRANSFORM0" : {
+        "label" : "Transform 0",
+        "type" : "TRANSFORM",
+        "top" : 390.2,
+        "left" : 532,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "BUCKET1" : {
+            "label" : "Bucket"
+          },
+          "BUCKET3" : {
+            "label" : "Call Guide"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "BUCKET1"
+        }, {
+          "source" : "BUCKET1",
+          "target" : "BUCKET3"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Knowledge View FY 23",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 2212
+      },
+      "JOIN3" : {
+        "label" : "Evet files Join with Kav",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 1932
+      },
+      "FILTER3" : {
+        "label" : "Filter Null Rows",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 1792
+      },
+      "JOIN4" : {
+        "label" : "User info Join",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 2072
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Basic User Master",
+        "type" : "LOAD_DATASET",
+        "top" : 390.2,
+        "left" : 812,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "TRANSFORM1" : {
+        "label" : "Transform 1",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 1232,
+        "graph" : {
+          "FORMULA2" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA3" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "DROP_FIELDS0" : {
+            "label" : "Drop Columns"
+          },
+          "DROP_FIELDS1" : {
+            "label" : "Drop Columns"
+          },
+          "DROP_FIELDS2" : {
+            "label" : "Drop Columns"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA2",
+          "target" : "FORMULA3"
+        }, {
+          "source" : "FORMULA3",
+          "target" : "DROP_FIELDS0"
+        }, {
+          "source" : "DROP_FIELDS0",
+          "target" : "DROP_FIELDS1"
+        }, {
+          "source" : "DROP_FIELDS1",
+          "target" : "DROP_FIELDS2"
+        } ]
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Aug2023 Master",
+        "type" : "LOAD_DATASET",
+        "top" : 250.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET6" : {
+        "label" : "KavJul2023",
+        "type" : "LOAD_DATASET",
+        "top" : 390.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET7" : {
+        "label" : "Sept 2023 KavArticleView",
+        "type" : "LOAD_DATASET",
+        "top" : 390.2,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND0" : {
+        "label" : "July",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 250.2,
+        "left" : 252
+      },
+      "APPEND1" : {
+        "label" : "Sept",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 250.2,
+        "left" : 392
+      },
+      "APPEND2" : {
+        "label" : "October",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 250.2,
+        "left" : 532
+      },
+      "LOAD_DATASET9" : {
+        "label" : "Oct 2023 KavArticleView",
+        "type" : "LOAD_DATASET",
+        "top" : 530.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET10" : {
+        "label" : "Nov_2023_KnowledgeArticleView",
+        "type" : "LOAD_DATASET",
+        "top" : 670.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND3" : {
+        "label" : "Nov 23",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 250.2,
+        "left" : 672
+      },
+      "LOAD_DATASET12" : {
+        "label" : "Dec 2023 Knowledge View Master",
+        "type" : "LOAD_DATASET",
+        "top" : 810.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND4" : {
+        "label" : "Dec 2023",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 250.2,
+        "left" : 812
+      },
+      "APPEND5" : {
+        "label" : "Jan 2024",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 250.2,
+        "left" : 952
+      },
+      "LOAD_DATASET14" : {
+        "label" : "Jan master 2024",
+        "type" : "LOAD_DATASET",
+        "top" : 1090.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND6" : {
+        "label" : "Feb 2024",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 250.2,
+        "left" : 1092
+      },
+      "LOAD_DATASET15" : {
+        "label" : "Feb master 1_10 Feb",
+        "type" : "LOAD_DATASET",
+        "top" : 950.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND7" : {
+        "label" : "Mar 2024",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 252.10000000000002,
+        "left" : 1232
+      },
+      "LOAD_DATASET16" : {
+        "label" : "Mar_master",
+        "type" : "LOAD_DATASET",
+        "top" : 1230.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER4" : {
+        "label" : "Filter 4",
+        "type" : "FILTER",
+        "top" : 390.2,
+        "left" : 1932
+      },
+      "OUTPUT2" : {
+        "label" : "Call Guide",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 390.2,
+        "left" : 2072
+      },
+      "APPEND8" : {
+        "label" : "April 2024",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 1372
+      },
+      "LOAD_DATASET18" : {
+        "label" : "2024 April Master",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET19" : {
+        "label" : "2024 05 Knowledge Article View",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND9" : {
+        "label" : "May 2024",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 251.89999999999998,
+        "left" : 1512
+      },
+      "LOAD_DATASET20" : {
+        "label" : "June_Master_1-16",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 392,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND10" : {
+        "label" : "June 2024",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 251.89999999999998,
+        "left" : 1652
+      },
+      "OUTPUT3" : {
+        "label" : "Neo - Reuse",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392.3,
+        "left" : 1792
+      },
+      "LOAD_DATASET21" : {
+        "label" : "2023 10 31 Knowledge Article View",
+        "type" : "LOAD_DATASET",
+        "top" : 531.6,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND11" : {
+        "label" : "All October",
+        "description" : "",
+        "type" : "APPEND",
+        "top" : 532,
+        "left" : 392
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER3",
+      "target" : "JOIN4"
+    }, {
+      "source" : "TRANSFORM1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN3",
+      "target" : "FILTER3"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN4"
+    }, {
+      "source" : "JOIN4",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "APPEND0"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "APPEND0"
+    }, {
+      "source" : "APPEND0",
+      "target" : "APPEND1"
+    }, {
+      "source" : "LOAD_DATASET7",
+      "target" : "APPEND1"
+    }, {
+      "source" : "APPEND1",
+      "target" : "APPEND2"
+    }, {
+      "source" : "APPEND11",
+      "target" : "APPEND2"
+    }, {
+      "source" : "APPEND2",
+      "target" : "APPEND3"
+    }, {
+      "source" : "LOAD_DATASET10",
+      "target" : "APPEND3"
+    }, {
+      "source" : "APPEND3",
+      "target" : "APPEND4"
+    }, {
+      "source" : "LOAD_DATASET12",
+      "target" : "APPEND4"
+    }, {
+      "source" : "APPEND4",
+      "target" : "APPEND5"
+    }, {
+      "source" : "LOAD_DATASET14",
+      "target" : "APPEND5"
+    }, {
+      "source" : "APPEND5",
+      "target" : "APPEND6"
+    }, {
+      "source" : "LOAD_DATASET15",
+      "target" : "APPEND6"
+    }, {
+      "source" : "APPEND6",
+      "target" : "APPEND7"
+    }, {
+      "source" : "LOAD_DATASET16",
+      "target" : "APPEND7"
+    }, {
+      "source" : "APPEND10",
+      "target" : "TRANSFORM1"
+    }, {
+      "source" : "JOIN4",
+      "target" : "FILTER4"
+    }, {
+      "source" : "FILTER4",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "APPEND7",
+      "target" : "APPEND8"
+    }, {
+      "source" : "LOAD_DATASET18",
+      "target" : "APPEND8"
+    }, {
+      "source" : "APPEND8",
+      "target" : "APPEND9"
+    }, {
+      "source" : "LOAD_DATASET19",
+      "target" : "APPEND9"
+    }, {
+      "source" : "APPEND9",
+      "target" : "APPEND10"
+    }, {
+      "source" : "LOAD_DATASET20",
+      "target" : "APPEND10"
+    }, {
+      "source" : "APPEND10",
+      "target" : "OUTPUT3"
+    }, {
+      "source" : "LOAD_DATASET9",
+      "target" : "APPEND11"
+    }, {
+      "source" : "LOAD_DATASET21",
+      "target" : "APPEND11"
+    } ],
+    "hiddenColumns" : [ {
+      "fieldName" : "RecordTypeId",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Knowledge__kav"
+    }, {
+      "fieldName" : "IsLatestVersion",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Knowledge__kav"
+    }, {
+      "fieldName" : "VersionNumber",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Knowledge__kav"
+    }, {
+      "fieldName" : "PublishStatus",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Knowledge__kav"
+    }, {
+      "fieldName" : "KnowledgeArticleId",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Knowledge__kav"
+    }, {
+      "fieldName" : "Id",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Knowledge__kav"
+    } ]
+  },
+  "runMode" : "full"
+}

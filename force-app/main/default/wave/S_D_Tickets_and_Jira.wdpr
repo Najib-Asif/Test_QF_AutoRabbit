@@ -1,0 +1,97 @@
+{
+  "version" : "61.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "MasterRecordId", "CaseNumber", "Type", "RecordTypeId", "Status", "Reason", "Subject", "Priority", "Description", "IsClosed", "ClosedDate", "OwnerId", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "Contact_Fullname__c", "CRM_Number__c", "Created_By_Name__c", "Power_of_One_Case__c", "Sub_Type_1__c", "Sub_Type_2__c", "Created_by_Role__c", "Aircraft_Type_Code__c", "Arrival_Airport_Code__c", "Arrival_Airport__c", "Booking_PNR__c", "Category__c", "Classification__c", "ClosedByLocation__c", "Contact_Phone__c", "Departure_Airport_Code__c", "Departure_Airport__c", "Departure_Date_Time__c", "Flight_Number__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Owner_City__c", "Passenger_Id__c", "Received_Date__c", "Received_On__c", "Sub_Category__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "RecordTypeId",
+          "operator" : "EQUAL",
+          "operands" : [ "01290000001IINPAA4" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Sub_Type_1__c",
+          "operator" : "EQUAL",
+          "operands" : [ "Sales and Distribution" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "IN_RANGE",
+          "operands" : [ {
+            "argument" : 0,
+            "type" : "N_YEARS"
+          }, {
+            "argument" : 0,
+            "type" : "N_YEARS"
+          } ]
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "FILTER0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "S&D Tickets and Jira",
+          "folderName" : "Sales_Distribution",
+          "name" : "S_D_Tickets_and_Jira"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Filter 0",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "OUTPUT0" : {
+        "label" : "S&D Cases plus Jira",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 392
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

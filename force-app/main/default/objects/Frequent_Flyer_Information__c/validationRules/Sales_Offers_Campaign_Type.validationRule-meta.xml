@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Campaign_Type</fullName>
+    <active>true</active>
+    <description>For Sales Offers, Presence of FF Information &gt; 10, Type has to be Campaign.</description>
+    <errorConditionFormula>AND (
+ Case__r.RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/ 
+NOT ( Case__r.Bulk_Frequent_Flyer_Request__c = TRUE ),
+
+OR ( 
+ ISPICKVAL ( Case__r.Type , &quot;Campaign&quot; ),
+ ISPICKVAL ( Case__r.Sub_Type__c , &quot;FOC Qantas Club Waiver&quot;)
+)
+
+)</errorConditionFormula>
+    <errorMessage>For Campaign Type Sales Offers OR FOC Qantas Club Waiver Request, you are not allow to add a Frequent Flyer to the Case.</errorMessage>
+</ValidationRule>

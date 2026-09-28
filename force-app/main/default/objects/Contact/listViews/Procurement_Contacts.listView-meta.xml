@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Procurement_Contacts</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>CONTACT.TITLE</columns>
+    <columns>Job_Role_Sort_System__c</columns>
+    <columns>Job_Title__c</columns>
+    <columns>Job_Function__c</columns>
+    <columns>Job_Role__c</columns>
+    <columns>CONTACT.PHONE1</columns>
+    <columns>CONTACT.EMAIL</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Job_Title__c</field>
+        <operation>contains</operation>
+        <value>Procurement</value>
+    </filters>
+    <label>Procurement Contacts</label>
+    <sharedTo>
+        <group>QF</group>
+        <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

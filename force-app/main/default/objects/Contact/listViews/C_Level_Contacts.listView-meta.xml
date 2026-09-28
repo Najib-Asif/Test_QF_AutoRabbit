@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_Level_Contacts</fullName>
+    <columns>Account_Manager_s_Contact__c</columns>
+    <columns>FULL_NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>CONTACT.TITLE</columns>
+    <columns>Job_Function__c</columns>
+    <columns>Job_Level__c</columns>
+    <columns>Job_Role__c</columns>
+    <columns>Job_Title__c</columns>
+    <columns>CONTACT.PHONE1</columns>
+    <columns>CONTACT.EMAIL</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Job_Role__c</field>
+        <operation>equals</operation>
+        <value>,Board Member,Chairman,Chief Executive Officer,Chief Information Officer</value>
+    </filters>
+    <label>C Level Contacts</label>
+    <sharedTo>
+        <group>QF</group>
+        <roleAndSubordinatesInternal>QF_DOM</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

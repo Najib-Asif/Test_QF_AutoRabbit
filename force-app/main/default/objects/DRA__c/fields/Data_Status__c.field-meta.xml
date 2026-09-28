@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Status__c</fullName>
+    <inlineHelpText>Current - Data available to current reporting period.
+Late 30/60/90 days: Indicates a delay from TMC in sending the data to PRISM.
+Setup Incomplete: Indicates setup of feed between TMC and PRISM is not complete yet.
+New: Indicates Initial setup.</inlineHelpText>
+    <label>Data Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Current</fullName>
+                <default>false</default>
+                <label>Current</label>
+            </value>
+            <value>
+                <fullName>Expired</fullName>
+                <default>false</default>
+                <label>Expired</label>
+            </value>
+            <value>
+                <fullName>Late 30 days</fullName>
+                <default>false</default>
+                <label>Late 30 days</label>
+            </value>
+            <value>
+                <fullName>Late 60 days</fullName>
+                <default>false</default>
+                <label>Late 60 days</label>
+            </value>
+            <value>
+                <fullName>Late 90 days +</fullName>
+                <default>false</default>
+                <label>Late 90 days +</label>
+            </value>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>No Date 30 days</fullName>
+                <default>false</default>
+                <label>No Date 30 days</label>
+            </value>
+            <value>
+                <fullName>No Data 60 days</fullName>
+                <default>false</default>
+                <label>No Data 60 days</label>
+            </value>
+            <value>
+                <fullName>No Data 90 days +</fullName>
+                <default>false</default>
+                <label>No Data 90 days +</label>
+            </value>
+            <value>
+                <fullName>Setup Incomplete</fullName>
+                <default>false</default>
+                <label>Setup Incomplete</label>
+            </value>
+            <value>
+                <fullName>Source Inactive</fullName>
+                <default>false</default>
+                <label>Source Inactive</label>
+            </value>
+            <value>
+                <fullName>Source Incomplete</fullName>
+                <default>false</default>
+                <label>Source Incomplete</label>
+            </value>
+            <value>
+                <fullName>Status Not Tracked</fullName>
+                <default>false</default>
+                <label>Status Not Tracked</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

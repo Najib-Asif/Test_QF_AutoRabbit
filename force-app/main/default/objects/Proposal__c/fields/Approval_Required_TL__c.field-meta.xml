@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Required_TL__c</fullName>
+    <description>Approval Required (TeamLead)  for CA</description>
+    <formula>AND(No_of_TL_Approvals_Required__c&gt;0,
+NOT(TL_Approved__c),NOT(TL_Rejected__c),ISPICKVAL(Type__c, &apos;Corporate Airfares&apos;),
+NOT(CONTAINS(CreatedBy.Level__c,&apos;P3&apos;)),NOT(CONTAINS(CreatedBy.Level__c,&apos;P4(QIS)&apos;)),CreatedDate &gt; DATETIMEVALUE(&quot;2022-03-25 00:00:00&quot;))</formula>
+    <label>Approval Required (TeamLead)</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

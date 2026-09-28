@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCCRefundMandatorySteps</fullName>
+    <active>true</active>
+    <description>CRM-7224: Assign Ticketing/Refund request to queue as a TC</description>
+    <errorConditionFormula>Owner:Queue.QueueName ==&apos;QCC Refunds&apos; &amp;&amp;  RecordType.DeveloperName == &apos;QCC_Refund_Request&apos; &amp;&amp;  Have_the_mandatory_steps_been_completed__c  &lt;&gt; TRUE</errorConditionFormula>
+    <errorMessage>Ensure that mandatory checks have been completed.</errorMessage>
+</ValidationRule>

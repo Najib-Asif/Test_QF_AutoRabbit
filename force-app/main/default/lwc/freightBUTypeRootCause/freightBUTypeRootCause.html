@@ -1,0 +1,94 @@
+<!--CRM-10002 This componnent is built for creating a dualControlled Field dependancy for 
+Business Type, Root Cause and Issue Type
+-->
+<template>
+
+    <lightning-card title="Root Cause">   
+        <template if:true={canEditFields}>
+            <lightning-button-icon
+                slot="actions"
+                icon-name="utility:edit"
+                variant="bare"
+                alternative-text="Edit"
+                title="Edit"
+                onclick={openModal}>
+            </lightning-button-icon>
+            <!--
+            <lightning-button label="Edit" slot="actions" onclick={openModal}></lightning-button>
+            -->
+        </template>     
+        
+        <div class="slds-card__body slds-card__body_inner">
+            <lightning-record-view-form record-id={recordId} object-api-name="Case">
+                <div class="slds-form">
+                    <lightning-output-field field-name={level1FieldApiName} class="slds-border_bottom"></lightning-output-field>
+                    <lightning-output-field field-name={level2FieldApiName} class="slds-border_bottom"></lightning-output-field>
+                    <lightning-output-field field-name={level3FieldApiName} class="slds-border_bottom"></lightning-output-field>
+                    <lightning-output-field field-name={resolutionCommentApiName} class="slds-border_bottom"></lightning-output-field>
+                </div>
+            </lightning-record-view-form>
+        </div> 
+
+    <template if:true={showModal}>
+        <section role="dialog"  aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">Edit Root cause</h1>
+                </div>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <c-dual-controlled-dependent-picklist
+                        record-id = {recordId}
+                        record-type-id = {recordTypeId}
+                        object-api-name = {objectApiName}
+                        level1-field-label={level1FieldLabel}
+                        level2-field-label={level2FieldLabel}
+                        level3-field-label={level3FieldLabel}
+                        level1-field-api-name = {level1FieldApiName}
+                        level2-field-api-name = {level2FieldApiName}
+                        level3-field-api-name = {level3FieldApiName}
+                        level1-value = {originalLevel1Value}
+                        level2-value = {originalLevel2Value}
+                        level3-value = {originalLevel3Value}
+                        ondualcontrolledpicklistchange={handledualControlledPicklistChange}
+                        onready={handleReady}>
+                    </c-dual-controlled-dependent-picklist>
+                 
+                    <lightning-input
+                        type="text"
+                        label="Resolve Comments"
+                        value={originalResolutionComments}
+                        required={isResolutionCommentRequired}
+                        onchange={handleResolutionCommentsChange}>
+                    </lightning-input>
+                        
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button
+                        variant="neutral"
+                        label="Cancel"
+                        class="slds-p-left_x-small"
+                        onclick={handleCancel}
+                        disabled={isLoading}>
+                    </lightning-button>
+
+                    <lightning-button
+                        variant="brand"
+                        label="Save"
+                        class="slds-p-left_x-small"
+                        onclick={handleSave}
+                        disabled={isSaveDisabled}>
+                    </lightning-button>
+                </div>
+            </div>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Saving..." size="medium" variant="brand"></lightning-spinner>
+            </template>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>        
+    </template>
+    </lightning-card>
+    
+
+
+</template>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Freight Web Invoices Auto Response Template</name>
+    <style>none</style>
+    <subject>Qantas Freight Customer Support – Ref No {!Case.CaseNumber}</subject>
+    <textOnly>Thanks for contacting Qantas Freight. We’ve received your request and your reference number is {!Case.CaseNumber}.
+
+
+Your query details:
+
+Invoice Number:  {!Case.Freight_AWB_Number__c}
+Agent Account Number:  {!Case.Agent_Organisation_Name__c}
+Comments:  {!Case.Description}
+Air Way Bill:   {!Case.Freight_AWB_s__c}
+Amount in AUD:  {!Case.Refund_Amount__c}
+Reason for Query :  {!Case.Request_Reason_Others__c}
+Return Email Address :   {!Case.SuppliedEmail}
+Contact Name :   {!Case.SuppliedName}
+Contact Telephone Number :   {!Case.SuppliedPhone}
+Company Name :   {!Case.SuppliedCompany}
+Date/time of Query Submission:   {!Case.CreatedDate}
+
+
+
+We’ll do our best to get back to you as soon as we can.
+
+
+Thanks for your patience,
+The Qantas Freight Team
+
+{!Case.Thread_Id}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

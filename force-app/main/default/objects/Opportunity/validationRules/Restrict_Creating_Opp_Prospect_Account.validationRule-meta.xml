@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Creating_Opp_Prospect_Account</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(CreatedBy.FirstName = &apos;Data&apos;,   ISPICKVAL( Account.Type, &apos;Prospect Account&apos;) , OR( ISPICKVAL(Sub_Type_Level_2__c, &apos;Renewal&apos;), ISPICKVAL(Sub_Type_Level_2__c, &apos;Variation&apos;)  ) )</errorConditionFormula>
+    <errorDisplayField>Sub_Type_Level_2__c</errorDisplayField>
+    <errorMessage>You can&apos;t create Renewal or Variation Opportunity for Prospect Account</errorMessage>
+</ValidationRule>

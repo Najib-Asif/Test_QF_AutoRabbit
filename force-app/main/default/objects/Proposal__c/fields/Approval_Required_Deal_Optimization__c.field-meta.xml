@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Required_Deal_Optimization__c</fullName>
+    <description>Removal of JQ inclusion from DO Approval Process CRM-6126.</description>
+    <formula>AND(NOT(DO_Approved__c), NOT(DO_Rejected__c) , OR(No_of_DO_Approvals_Required__c&gt;0,QL_IsSpecialConditionDOApplied__c,QL_IsEKStockEnabled__c,QL_IsClubDiscountEnabled__c,
+QL_IsAnnualExpenditureEnabled__c,QL_IsDomesticAnnualShareEnabled__c),CreatedDate &gt; DATETIMEVALUE(&quot;2022-03-25 00:00:00&quot;))</formula>
+    <inlineHelpText>This approval is triggered for any one or more of the following conditions:
+-Offered discount is outside the std. guideline
+-Proposed Revenue is greater than AUD 5M
+-Any other changes are reqd. in the proposal doc</inlineHelpText>
+    <label>Approval Required (Deal Optimization)</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

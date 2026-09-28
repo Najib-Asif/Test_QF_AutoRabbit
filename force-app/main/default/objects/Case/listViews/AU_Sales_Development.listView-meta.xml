@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AU_Sales_Development</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Due_Date__c</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>Sub_Type__c</columns>
+    <columns>CASES.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Open,New,In Progress,Pending with Sales Solutions,Assigned,On Hold,Reopened,With Deal Support - Pending Distribution,with AU Sales Support</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>contains</operation>
+        <value>Donna Hill,Amanda Young,Corena St Ledger,Tracy Theise,Kristine Chippendale,AU Sales Support</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Niche Fares</value>
+    </filters>
+    <label>AU Sales Development</label>
+    <sharedTo>
+        <role>QF_INT_Sales</role>
+        <roleAndSubordinatesInternal>QF_Support_Deal_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

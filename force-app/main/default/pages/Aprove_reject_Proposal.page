@@ -1,0 +1,11 @@
+<apex:page standardController="Proposal__c" extensions="ChangePropoalStatusExt">
+  <apex:sectionHeader title="Proposal" subtitle="{!Proposal__c.Name}"/>
+  <apex:pageMessages ></apex:pageMessages>
+  <apex:form > 
+        <apex:selectRadio value="{!response}">
+        <apex:selectOptions value="{!status}"/>
+        </apex:selectRadio><p/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<apex:commandButton action="{!saveStatus}" value="Save"/>&nbsp;&nbsp;
+        <apex:commandButton action="{!cancelStatus}" value="Cancel"/>
+ </apex:form>    
+  </apex:page>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LightningSystem_Admin_Request</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CRM_Number__c</columns>
+    <columns>Object__c</columns>
+    <columns>Business_Unit_Case_Creater__c</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>On_hold_Reason__c</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed - Approved,Closed - Rejected,Closed - Account moved</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed - Incomplete Details</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Lightning</value>
+    </filters>
+    <label>Lightning System Admin Request</label>
+    <sharedTo>
+        <group>System_Admins</group>
+    </sharedTo>
+</ListView>

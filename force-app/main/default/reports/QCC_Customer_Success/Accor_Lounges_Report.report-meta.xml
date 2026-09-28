@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact.Cases$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Departure_Airport__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$QCC_Flight_Type_Code__c</field>
+    </columns>
+    <columns>
+        <field>Contact$Frequent_Flyer_Tier__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Description</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>For Lounges team for continuous improvement with Accor-run loungs</description>
+    <filter>
+        <booleanFilter>1 AND 2 AND ((3 AND 4 AND 5 AND 6) OR 7 OR (8 AND 9 AND 10)) AND 11</booleanFilter>
+        <criteriaItems>
+            <column>Contact.Cases$Group__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lounges</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>thongs,flip flop,flip-flop,sandal,footwear,foot wear</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Staff Assistance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Sub_Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>,Staff attitude,Wait times</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>desk,counter,entry,access,linked</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Origin</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>QF Internal,Red App,SHR QCC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Beverage Quality/Selection,Catering Quality/Selection</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Facilities/Signage</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Sub_Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Facilities or cleanliness</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>sky,fox</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Departure_Airport__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>,Adelaide,ADL,Brisbane,BNE,Canberra,CBR,Melbourne,MEL,Tullamarine,PER,Perth,Sydney,SYD,Singapore,SIN,Changi,Los Angeles,LAX,LA,London,LON,LHR,Heathrow,London - Heathrow</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Accor Lounges Complaints</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Contacts_with_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Cases$CreatedDate</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

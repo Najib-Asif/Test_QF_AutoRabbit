@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>KnowledgeArticle$ArticleNumber</field>
+    </columns>
+    <columns>
+        <field>KnowledgeArticle$Title</field>
+    </columns>
+    <columns>
+        <field>KnowledgeArticle$LastPublishedDate</field>
+    </columns>
+    <currency>AUD</currency>
+    <dataCategoryFilters>
+        <dataCategory>Knowledge_Articles</dataCategory>
+        <dataCategoryGroup>Internal_Topics</dataCategoryGroup>
+        <operator>below</operator>
+    </dataCategoryFilters>
+    <description>Article Score Stats for Internal Knowledge Articles</description>
+    <filter>
+        <criteriaItems>
+            <column>KnowledgeArticle$IsLatestVersion</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>KnowledgeArticle.VoteStats$Channel</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>KnowledgeArticle.VoteStats$NormalizedScore</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <name>New IA.Article Score KIQ</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Knowledge_Article_Vote_Stats_c__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>KnowledgeArticle$LastPublishedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2022-09-01</startDate>
+    </timeFrameFilter>
+</Report>

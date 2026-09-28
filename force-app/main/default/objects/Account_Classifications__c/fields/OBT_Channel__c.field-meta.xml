@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OBT_Channel__c</fullName>
+    <description>Directly contracted with OBT providers or indirectly dealt via TMC</description>
+    <inlineHelpText>Directly contracted with OBT providers or indirectly dealt via TMC</inlineHelpText>
+    <label>OBT Channel</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Classification__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Direct</fullName>
+                <default>false</default>
+                <label>Direct</label>
+            </value>
+            <value>
+                <fullName>Indirect</fullName>
+                <default>false</default>
+                <label>Indirect</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>OBT</controllingFieldValue>
+            <valueName>Direct</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OBT</controllingFieldValue>
+            <valueName>Indirect</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,112 @@
+<aura:component >
+    <aura:attribute name="singleRecInfo" type="Object"/>
+    <aura:method name="singleMethod" action="{!c.getSingleDetails}"> 
+        <aura:attribute name="singleDetail" type="Object"/> 
+    </aura:method>
+    <!--<div class="c-container">-->
+        <lightning:card title="Booking Details" iconName="custom:custom40">
+            <aura:set attribute="title">
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                            <span class="slds-text-heading_small">Booking Details</span>
+                        </a>
+                    </h2>
+                </div>
+            </aura:set>
+            <lightning:layout horizontalAlign="spread" multipleRows="true" title="Booking Details" >
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">PNR</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.PNR}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Passenger in Booking</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.passengerCount}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Booking Date</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.bookingDate}</dd>
+                    </dl>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </lightning:card>
+        <lightning:card title="Flight Details" iconName="custom:custom62">
+            <aura:set attribute="title">
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                            <span class="slds-text-heading_small">Flight Details</span>
+                        </a>
+                    </h2>
+                </div>
+            </aura:set>
+            <lightning:layout multipleRows="true" title="Flight Details" horizontalAlign="spread">
+                <lightning:layoutItem size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Airline</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.airLine}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Airline (marketed)</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.airLineMarket}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Flight Number</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.flightNumber}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Flight Number (marketed)</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.flightNumberMarket}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Departure Port</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.depaturePort}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Arrival Port</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.arrivalPort}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Departure Date/Time</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.depatureDateTime}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Arrival Date/Time</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.arrivalDateTime}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Actual Departure Date/Time</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.actualDepatureDateTime}</dd>
+                    </dl>
+                </lightning:layoutItem>
+                <lightning:layoutItem title="Booking Details" size="6" flexibility="auto" padding="around-small">
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">Actual Arrival Date/Time</dt>
+                        <dd class="slds-dl_horizontal__detail">{!v.singleRecInfo.actualArrivalDateTime}</dd>
+                    </dl>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </lightning:card>
+    <!--</div>-->
+</aura:component>

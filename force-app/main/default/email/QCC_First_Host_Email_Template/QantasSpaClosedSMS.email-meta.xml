@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QantasSpaClosedSMS</name>
+    <style>none</style>
+    <subject>Your Qantas spa appointment request</subject>
+    <textOnly>Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},
+
+Thank you for your enquiry regarding a spa appointment in the Qantas First Lounge.
+
+Unfortunately, we’re unable to confirm an appointment for you on this occasion as your departure is outside of the spa’s operating hours. 
+
+We do apologise for the inconvenience, however trust you’ll enjoy the Qantas Lounge experience.
+
+Warm regards,
+{!User.FirstName}
+Customer Relationship Specialist
+Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, &quot;Special&quot;,&quot;VIP&quot;)} Service Team
+{!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, &quot;World Wide +61 (2) 6250 8204&quot;, IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Chairmans Lounge&quot; || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Platinum One&quot; || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Chairmans Lounge Platinum One&quot; || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c =&quot;FFLP&quot; ,&quot;World Wide +61 1300 752 801&quot;,&quot;vipserviceteam@qantas.com.au&quot;))}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

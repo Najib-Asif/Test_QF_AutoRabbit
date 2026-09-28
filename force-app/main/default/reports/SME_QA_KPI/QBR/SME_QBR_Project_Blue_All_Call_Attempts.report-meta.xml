@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_48041461</developerName>
+        <masterLabel>1</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Activity$Requirement__c</sourceColumnName>
+        <useOther>false</useOther>
+    </buckets>
+    <columns>
+        <field>Activity$Subject</field>
+    </columns>
+    <columns>
+        <field>Activity$Subtype__c</field>
+    </columns>
+    <columns>
+        <field>Activity$Account</field>
+    </columns>
+    <columns>
+        <field>Activity$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Activity$ActivityDate</field>
+    </columns>
+    <columns>
+        <field>Activity$Status</field>
+    </columns>
+    <columns>
+        <field>Activity$Description</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Project Blue Call Attempts</description>
+    <filter>
+        <criteriaItems>
+            <column>Activity$CreatedBy</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>startsWith</operator>
+            <value>CHRISTIE,MELISSA deacon,Jk Krubally,Benjamin,Paula,Aleksandar,kelly</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Activity$Account</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>HVAC Australia Pty Ltd,PACIFIC AIR EXPRESS AUSTRALIA PTY. LIMITED,HERITAGE BANK LIMITED,AECOM AUSTRALIA PTY LTD,LAND SURVEYS NO PROBLEMS JUST,Applied Medical,Good Drinks Australia,TravelCLICK Asia Pty Ltd,PENSKE POWER SYSTEMS PTY LTD,Transit Systems,BOC LIMITED,AUSHEALTH CORPORATE PTY LTD,MACHINEMONITOR PTY LIMITED,VETPARTNERS AUSTRALIA PTY LTD,CROSSMARK Australia Pty Ltd.,Australian Maritime Systems,Halley and Mellowes Pty Ltd [WA],SOVEREIGN CLOUD AUSTRALIA PTY LTD,Noetic Solutions Pty Limited,ONRSR,CIVEO PTY LTD,VISION AUSTRALIA LIMITED,ST HILLIERS PROPERTY PTY LIMITED,Globalx Legal Solutions Pty Ltd,Pacific Shopping Centres Australia Pty Ltd,L.E.K. CONSULTING AUSTRALIA PTY LTD,HDI Global SE,eReports Pty Ltd</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Activity$CreatedBy</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>SME-QBR_Project Blue (All Call Attempts)</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activities__c</reportType>
+    <roleHierarchyFilter>QF</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Activity$LastModifiedDate</dateColumn>
+        <endDate>2021-03-18</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2021-03-01</startDate>
+    </timeFrameFilter>
+</Report>

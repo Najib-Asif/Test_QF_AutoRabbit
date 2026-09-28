@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Review_Due_Date_Mandatory</fullName>
+    <active>true</active>
+    <description>Due Date is mandatory when Subtype = Account Review</description>
+    <errorConditionFormula>AND ( 
+NOT( $User.ProfileId = &apos;00e90000001wK8z&apos;), /*SysAdmins*/ 
+ISPICKVAL ( Subtype__c , &quot;Account Review&quot;), 
+ISBLANK ( ActivityDate ) ,
+LEFT(WhatId, 3) = &apos;001&apos;  /*Account RelatedTo only*/
+)</errorConditionFormula>
+    <errorDisplayField>ActivityDate</errorDisplayField>
+    <errorMessage>Due Date is mandatory when Account Review is selected.</errorMessage>
+</ValidationRule>

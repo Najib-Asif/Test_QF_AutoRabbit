@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Restrict_Editing_Contact_Name</fullName>
+    <active>false</active>
+    <description>QCC: Only &quot;Qantas CC Operational Manager&quot; profile users are having permission to edit Contact Name on Case. Jira- CRM-4844</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_QCC_Restrict_Editing_Contact_Name__c = FALSE,
+NOT(ISBLANK(PRIORVALUE(ContactId))),
+ISCHANGED(ContactId),
+OR(RecordType.DeveloperName = &apos;CCC_Baggage&apos;,
+RecordType.DeveloperName = &apos;CCC_Complaints&apos;,
+RecordType.DeveloperName = &apos;CCC_Compliment&apos;,
+RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;,
+RecordType.DeveloperName = &apos;CCC_Medical&apos;,
+RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;,
+RecordType.DeveloperName = &apos;CCC_Query&apos;,
+RecordType.DeveloperName = &apos;CCC_Refund&apos;,
+RecordType.DeveloperName = &apos;CCC_Event&apos;,
+RecordType.DeveloperName = &apos;CCC_Email_Bounced_Back&apos;,
+RecordType.DeveloperName = &apos;CCCOffload&apos;,
+RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;,
+RecordType.DeveloperName = &apos;Contact_Center&apos;,
+RecordType.DeveloperName = &apos;Service_Delivery&apos;,
+RecordType.DeveloperName = &apos;Platinum_One_or_SSU&apos;,
+RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;,
+RecordType.DeveloperName = &apos;QCC_Assistance&apos;
+))</errorConditionFormula>
+    <errorMessage>Contact Name Can&apos;t be modified.</errorMessage>
+</ValidationRule>

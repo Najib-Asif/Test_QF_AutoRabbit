@@ -1,0 +1,742 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "RecordType.DeveloperName", "CCC_R1_CCAT_Type__c", "RecordType.Id", "Sub_Type_2__c", "Tasks.TaskSubtype", "Tasks.CallType", "Type", "Origin", "Tasks.ActivityDate", "LastModifiedDate", "Origin_bucket", "AccountId", "Frequent_Flyer_Tier__c", "Tasks.QCC_Classification__c", "Tasks.TECH_Original_Case_Id__c", "Case_Number__c", "Is_QCC_Case__c", "FirstTaskCreatedDate", "Booking_PNR__c", "Tasks.TECH_Genesys_Wrapup_URL__c", "Tasks.QCC_IVR_Selection__c", "MasterRecordId", "Tasks.QCC_Caller_Phone__c", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "CaseOriginForFirstCaseCreated", "RecordType.DeveloperName_bucket", "Tasks.CreatedDate", "Tasks.CallObject", "Tasks.TECH_Genesys_Participant_Id__c", "Tasks.CallDisposition", "FirstTaskCreatedDate_extract", "IsEscalated", "Tasks.QCC_Wrap_Up_Notes__c", "Category__c", "CreatedDate", "Tasks.Priority", "Tasks.QCC_PNR__c", "Id", "FirstCaseAssignedRole", "Description", "Tasks.OwnerId", "Tasks.QCC_Caller_Verified__c", "CalculatedChannel", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "Tasks.Id", "CalculatedPNR", "CalculatedPNRContactIdConcat", "CalculatedCallReason", "Tasks.QCC_Call_Reason__c" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case With Task Raw",
+          "name" : "CaseWithTaskRaw"
+        },
+        "sampleDetails" : {
+          "type" : "Custom",
+          "filters" : {
+            "filterExpressions" : [ {
+              "type" : "TEXT",
+              "field" : "CalculatedCallReason",
+              "operator" : "NOT",
+              "operands" : [ "No Reason Specified" ]
+            } ]
+          },
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "UNIQUE_Tasks.Id_bucket", "FirstCaseAssignedRole", "CalculatedPNRContactIdConcat", "CaseOriginForFirstCaseCreated", "UNIQUE_CaseIDTaskIDConcatenate2_bucket", "LatestTaskCreatedMonthName", "UNIQUE_CalculatedChannel_bucket", "UNIQUE_Origin", "MAX_DaysBetweenFirstAndLatestInteraction", "UNIQUE_CalculatedChannel", "UNIQUE_CaseIDTaskIDConcatenate2", "UNIQUE_Tasks.Id", "UNIQUE_CaseNumber", "LatestWorkDate_extract" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "PNRWithActivitiesAggregated",
+          "name" : "PNRWithActivitiesAggregated"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "LastModifiedDate", "AccountId", "Frequent_Flyer_Tier__c", "CalculatedCategorisationReasoning", "Case_Number__c", "Is_QCC_Case__c", "CalculatedCaseReason", "RecordType.DeveloperName", "Booking_PNR__c", "CCC_R1_CCAT_Type__c", "RecordType.Id", "MasterRecordId", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "RecordType.DeveloperName_bucket", "IsEscalated", "Sub_Type_2__c", "Category__c", "CreatedDate", "Id", "Aircraft_Type_Code__c", "Description", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "ComplaintRefinedCategory.NewCategory", "Frequent_Flyer_Number__c", "OwnerId", "OwnerName__c", "RecordTypeId", "CaseNumber", "Sub_Type_1__c", "Created_by_Role__c", "LatestCreatedDateTime", "ParentId", "Record_Type__c", "Type", "Contact_Fullname__c", "ClosedDate", "Recovery_Quantity__c", "Recovery_Value__c", "ComplaintRefinedCategory.CaseRecordType2" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Non Voice Case Categorisation",
+          "name" : "NonVoiceCaseCategorisation"
+        },
+        "sampleDetails" : {
+          "type" : "Custom",
+          "filters" : {
+            "filterExpressions" : [ {
+              "type" : "TEXT",
+              "field" : "CalculatedCategorisationReasoning",
+              "operator" : "NOT",
+              "operands" : [ "Non Voice Default Category" ]
+            } ]
+          },
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET2", "LOAD_DATASET0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "RIGHT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "CaseWithORWithoutTasks",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "CaseWithORWithoutTasks.CalculatedPNRContactIdConcat" ],
+        "rightQualifier" : "CaseAndActivitiesWithTouchPoints",
+        "rightKeys" : [ "CalculatedPNRContactIdConcat" ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Contact Intent",
+          "name" : "ContactIntent",
+          "folderName" : "Repeat_Call_Analytics"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "FORMULA0" : {
+      "action" : "formula",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ConsolidatedReason",
+          "label" : "ConsolidatedReason",
+          "formulaExpression" : "case when \"CaseWithORWithoutTasks.CalculatedCallReason\"!='No Reason Specified' then \"CaseWithORWithoutTasks.CalculatedCallReason\"\nwhen CalculatedCaseReason!='No Category Found' then CalculatedCaseReason\nelse \"CaseWithORWithoutTasks.CalculatedCallReason\"\nend",
+          "precision" : 50,
+          "defaultValue" : "No Reason Specified"
+        } ]
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ConsolidatedReasoning2",
+          "label" : "ConsolidatedReasoning2",
+          "formulaExpression" : "case when \"CaseWithORWithoutTasks.CalculatedCallReason\"!='No Reason Specified' then \"CaseWithORWithoutTasks.CalculatedCallReason\"\nwhen CalculatedCategorisationReasoning!='No Category Found' then CalculatedCategorisationReasoning\nelse \"ComplaintRefinedCategory.NewCategory\"\nend",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "CaseWithORWithoutTasks.Type_bucket",
+          "label" : "Case Type Bucket",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Non Proactive",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "CaseWithORWithoutTasks.Type",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "proactive",
+              "sourceValues" : [ "Air Turn Back", "Diversion", "Domestic Delay", "PNR Health Check", "PNR Health Check - Watchlist", "Potential Downgrade", "Pre-Flight Watchlist Check", "Quarterly Health Check Call", "Retain Platinum One", "Watch list is Expiring", "Welcome to Life Time Platinum", "Welcome to Platinum One", "Welcome to SSU" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "CalculatedCategorisationReasoning",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        }, {
+          "type" : "TEXT",
+          "field" : "CaseWithORWithoutTasks.CalculatedCallReason",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ],
+        "filterBooleanLogic" : "1 OR 2"
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "UserRole.Name_bucket", "Id_formula_formula_formula", "Id_formula_formula_formula_bucket" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "BUCKET0", "LOAD_DATASET3" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CaseWithORWithoutTasks.Tasks.OwnerId" ],
+        "rightQualifier" : "BasicUserM",
+        "rightKeys" : [ "Id" ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Case With Task Raw",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "PNRWithActivitiesAggregated",
+        "type" : "LOAD_DATASET",
+        "top" : 111.9,
+        "left" : 392,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Non Voice Case Categorisation",
+        "type" : "LOAD_DATASET",
+        "top" : 252.2,
+        "left" : 112.1,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join Non Voice Case with Voice Cases",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 252
+      },
+      "JOIN1" : {
+        "label" : "Join for Touch Points",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 672
+      },
+      "OUTPUT0" : {
+        "label" : "Contact Intent",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 1372
+      },
+      "TRANSFORM0" : {
+        "label" : "Consolidate Contact Intent",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252.10000000000002,
+        "left" : 953,
+        "graph" : {
+          "FORMULA0" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA0",
+          "target" : "FORMULA1"
+        }, {
+          "source" : "FORMULA1",
+          "target" : "BUCKET0"
+        } ]
+      },
+      "FILTER0" : {
+        "label" : "Filter 0",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 392
+      },
+      "LOAD_DATASET3" : {
+        "label" : "Basic User Master",
+        "type" : "LOAD_DATASET",
+        "top" : 392.2,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 1092
+      }
+    },
+    "connectors" : [ {
+      "source" : "FILTER0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "JOIN1",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ {
+      "fieldName" : "Origin",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "LastModifiedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "AccountId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Description",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Frequent_Flyer_Tier__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "ContactId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "IsClosed",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "RecordType.Name",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Reason",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Case_Number__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Is_QCC_Case__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Frequent_Flyer_Number__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "OwnerId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "OwnerName__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "RecordType.DeveloperName",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Booking_PNR__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "CCC_R1_CCAT_Type__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "RecordTypeId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Sub_Type_1__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Created_by_Role__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "RecordType.Id",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "MasterRecordId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "LatestCreatedDateTime",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "ParentId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Status",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Priority",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Is_CCAT_User__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Record_Type__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Type",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "IsEscalated",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Sub_Type_2__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Contact_Fullname__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "CreatedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "ClosedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Aircraft_Type_Code__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Recovery_Value__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Recovery_Quantity__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    }, {
+      "fieldName" : "Origin",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.ActivityDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "LastModifiedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "AccountId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Frequent_Flyer_Tier__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.QCC_Classification__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.TECH_Original_Case_Id__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Is_QCC_Case__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "FirstTaskCreatedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "RecordType.DeveloperName",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Booking_PNR__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.TECH_Genesys_Wrapup_URL__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "CCC_R1_CCAT_Type__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.QCC_IVR_Selection__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "RecordType.Id",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "MasterRecordId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.QCC_Caller_Phone__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Status",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Sub_Category__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Priority",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Is_CCAT_User__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "CaseOriginForFirstCaseCreated",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "RecordType.DeveloperName_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.CreatedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.CallObject",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.TECH_Genesys_Participant_Id__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.CallDisposition",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "FirstTaskCreatedDate_extract",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "IsEscalated",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Sub_Type_2__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.QCC_Wrap_Up_Notes__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Category__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "CreatedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.Priority",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.QCC_PNR__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.TaskSubtype",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "FirstCaseAssignedRole",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Description",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.OwnerId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.QCC_Caller_Verified__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "CalculatedChannel",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "ContactId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "IsClosed",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "RecordType.Name",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Group__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Reason",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Tasks.Id",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "Origin_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseWithTaskRaw"
+    }, {
+      "fieldName" : "UNIQUE_Tasks.Id_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "FirstCaseAssignedRole",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "CaseOriginForFirstCaseCreated",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "LatestTaskCreatedMonthName",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "UNIQUE_CalculatedChannel_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "UNIQUE_Origin",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "MAX_DaysBetweenFirstAndLatestInteraction",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "UNIQUE_CalculatedChannel",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "UNIQUE_Tasks.Id",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "UNIQUE_CaseNumber",
+      "objectType" : "analyticsDataset",
+      "objectName" : "PNRWithActivitiesAggregated"
+    }, {
+      "fieldName" : "RecordType.DeveloperName_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "NonVoiceCaseCategorisation"
+    } ]
+  },
+  "runMode" : "full"
+}

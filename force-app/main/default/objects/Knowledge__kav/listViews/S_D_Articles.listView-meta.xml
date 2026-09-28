@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>S_D_Articles</fullName>
+    <columns>ARTICLE_NUMBER</columns>
+    <columns>TITLE</columns>
+    <columns>ARTICLE_TOTAL_VIEW_COUNT</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>PUBLISH_STATUS</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>LAST_PUBLISHED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PUBLISH_STATUS</field>
+        <operation>equals</operation>
+        <value>2</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Knowledge__kav.Qantas_S_D</value>
+    </filters>
+    <label>S&amp;D Articles</label>
+    <sharedTo>
+        <group>QCC_users_with_S_D_article_access</group>
+        <role>QF_DOM_Sales_SME</role>
+        <roleAndSubordinatesInternal>QF_DOM_Distribution_Ancillaries</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_DOM_Sales_AP_Regional</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_INT_Sales</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_INT_Sales_Asia</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Sales_Distribution_GSA</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

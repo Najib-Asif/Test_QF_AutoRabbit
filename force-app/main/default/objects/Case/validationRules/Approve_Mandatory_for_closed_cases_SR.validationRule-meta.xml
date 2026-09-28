@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approve_Mandatory_for_closed_cases_SR</fullName>
+    <active>false</active>
+    <description>Service Request created manually
+Status = Closed, Approve is mandatory.</description>
+    <errorConditionFormula>AND(ISPICKVAL( Status , &apos;closed&apos;),  RecordTypeId =  &apos;01290000001IINO&apos;,  ISBLANK(TEXT(Approve__c )), NOT ( $Profile.Id = &apos;00e90000001wK8z&apos; ))</errorConditionFormula>
+    <errorMessage>&apos;Fulfilled&apos; is mandatory</errorMessage>
+</ValidationRule>

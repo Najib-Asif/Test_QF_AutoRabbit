@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>QEC_Spl_Condition_Indicator</fullName>
+        <description>Set the field to true when new records get created on the special condition child object.</description>
+        <field>Spl_Cond_Indicator__c</field>
+        <literalValue>1</literalValue>
+        <name>QEC Spl Condition Indicator</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Proposal__c</targetObject>
+    </fieldUpdates>
+    <rules>
+        <fullName>New special condition</fullName>
+        <actions>
+            <name>QEC_Spl_Condition_Indicator</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Spl_Cond_Indicator__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

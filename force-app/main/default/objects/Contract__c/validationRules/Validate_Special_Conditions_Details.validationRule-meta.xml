@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Special_Conditions_Details</fullName>
+    <active>true</active>
+    <description>When Special Fare Conditions is ticked, mandatory to enter Special Fare Conditions Category and Special Conditions Details</description>
+    <errorConditionFormula>AND(Special_Fare_Conditions__c = TRUE, OR(ISPICKVAL( Special_Fare_Conditions_Details__c , &quot;&quot;),(ISBLANK( RoutesConditionsRouting_Other_Details__c))))</errorConditionFormula>
+    <errorMessage>Please select Special Fare Conditions Category and enter Special Conditions Details</errorMessage>
+</ValidationRule>

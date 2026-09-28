@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Knowledge__ka.Knowledge__kav$RecordType</field>
+    </columns>
+    <columns>
+        <field>Knowledge__ka$ArticleNumber</field>
+    </columns>
+    <columns>
+        <field>Knowledge__ka.Knowledge__kav$Title</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Knowledge__ka.Knowledge__kav$VersionNumber</field>
+    </columns>
+    <currency>AUD</currency>
+    <dataCategoryFilters>
+        <dataCategory>TEMP_QCC</dataCategory>
+        <dataCategoryGroup>Security</dataCategoryGroup>
+        <operator>at</operator>
+    </dataCategoryFilters>
+    <filter>
+        <criteriaItems>
+            <column>Knowledge__ka.Knowledge__kav$PublishStatus</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>2</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Temp QCC Category - Articles</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>KnowledgeExtensiveSearch1__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Knowledge__ka$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

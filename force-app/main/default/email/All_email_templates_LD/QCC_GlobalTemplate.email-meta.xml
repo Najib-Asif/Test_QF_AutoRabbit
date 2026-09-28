@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>QCC: Global Email Template for Customer</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>QCC_BlankLetterhead</letterhead>
+    <name>QCC_GlobalTemplate</name>
+    <style>freeForm</style>
+    <subject>Qantas Customer Care</subject>
+    <textOnly>Hi {!Affected_Passenger__c.FirstName__c},
+
+We’d like to provide an update following your experience on flight {!Affected_Passenger__c.FlightNumber__c} from {!Affected_Passenger__c.Departure_Port_Name__c} to {!Affected_Passenger__c.Arrival_Port_Name__c} on {!Affected_Passenger__c.Schedule_Departure_Date__c}.
+
+{!Affected_Passenger__c.EmailContent__c}
+
+{!Affected_Passenger__c.EmailFooter__c}
+
+Kind regards,
+
+
+
+Sarah Burkitt
+Head of Customer Care
+
+
+
+Qantas Airways Limited, ABN 16 009 661 901
+
+10 Bourke Road Mascot NSW 2020 Australia
+
+
+Note: This email was sent from a notification only address that cannot accept incoming email. Please do not reply to this message.
+
+
+
+**************PLEASE CONSIDER OUR ENVIRONMENT BEFORE PRINTING**************
+
+*******************************Confidentiality and Privilege Notice *******************************
+
+This e-mail is intended only to be read or used by the addressee. It is confidential and may contain legally privileged information. If you are not the addressee indicated in this message (or responsible for delivery of the message to such person), you may not copy or deliver this message to anyone, and you should destroy this message and kindly notify the sender by reply e-mail. Confidentiality and legal privilege are not waived or lost by reason of mistaken delivery to you. Qantas Airways Limited ABN 16 009 661 901</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

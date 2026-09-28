@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldOverrides>
+        <field>HtmlBody</field>
+        <formula>&apos;&lt;center&gt;&lt;img src=&quot;/resource/QantasLetterhead&quot; alt=&quot;QantasLetterhead&quot;/&gt;&lt;br/&gt;&lt;br/&gt;&lt;/center&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&apos;+ IF(Case.RecordType.DeveloperName = &quot;QCC_Specific_Needs&quot;,&quot;Ref No: &quot;+Case.CaseNumber,&quot;&quot;)+&apos;&lt;br/&gt;&lt;br/&gt;&apos;+ IF(Case.RecordType.DeveloperName = &quot;QCC_Specific_Needs&quot;,&quot;Dear  &quot;+Case.First_Name__c+&quot;,&quot;,&quot;&quot;)+&apos;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Kind Regards&lt;br/&gt;&lt;br/&gt;&apos;
++&apos; &apos;+ $User.FirstName + 
+&apos;&lt;br/&gt;&apos;+IF(Case.RecordType.DeveloperName = &quot;QCC_Specific_Needs&quot;,&quot;Qantas Customer Specific Needs Team&quot;,
+IF(Case.Contact.SSU__c = TRUE,&quot;Qantas Special Service Unit Team&quot;,
+IF(TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairman&apos;s Lounge&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairmans Lounge&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairman&apos;s Lounge Platinum One&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairmans Lounge Platinum One&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Platinum One&quot;,&quot;Qantas VIP Service Team&quot;,
+&quot;Qantas Customer Care Team&quot;)))+&apos;&lt;br/&gt;&lt;br/&gt;&lt;img src=&quot;/resource/QantasFooter&quot; alt=&quot;QantasFooter&quot; /&gt;&apos;+&apos;&lt;center&gt;Qantas Airways Limited, ABN 16 009 661 901&lt;center&gt;&apos;+&apos;&lt;center&gt;10 Bourke Road Mascot NSW 2020 Australia | qantas.com&lt;/center&gt;&apos;</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>QCC_TECH_Email_Tab__c</field>
+        <formula>&apos;EmailDPT&apos;</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>QCC_Tech_Is_Internal_Email__c</field>
+        <formula>True</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Subject</field>
+        <formula>IF(Case.RecordType.DeveloperName = &quot;QCC_Specific_Needs&quot;,&quot;Qantas Customer Specific Needs - &quot;,
+IF(Case.Contact.SSU__c = TRUE,&quot;Qantas Special Service Unit - &quot;,
+IF(TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairman&apos;s Lounge&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairmans Lounge&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairman&apos;s Lounge Platinum One&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairmans Lounge Platinum One&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Platinum One&quot;,&quot;Qantas VIP Service Team - &quot;,
+&quot;Qantas Customer Care - &quot;)))+ Case.CaseNumber + &apos; - &apos; + Case.Last_Name__c</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>TECH_FromChatter__c</field>
+        <formula>TRUE</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>ValidatedFromAddress</field>
+        <formula>IF(Case.RecordType.DeveloperName = &quot;QCC_Specific_Needs&quot;,$Label.QCC_EmailCustomer_ValidatedFrom_SN,
+IF(Case.Contact.SSU__c = TRUE,$Label.QCC_EmailCustomer_ValidatedFrom_SSU,
+IF(TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairman&apos;s Lounge&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairmans Lounge&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairman&apos;s Lounge Platinum One&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Chairmans Lounge Platinum One&quot; || TEXT(Case.Contact.Frequent_Flyer_Tier__c) = &quot;Platinum One&quot;,$Label.QCC_EmailCustomer_ValidatedFrom_VIP,
+$Label.QCC_EmailCustomer_ValidatedFrom_CC)))</formula>
+    </fieldOverrides>
+    <label>Qantas correspondence</label>
+    <optionsCreateFeedItem>true</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>To_Address__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>ValidatedFromAddress</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Subject</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>HtmlBody</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+        <quickActionLayoutColumns/>
+    </quickActionLayout>
+    <quickActionSendEmailOptions>
+        <defaultEmailTemplateName>QCC_Email_Templates/QCC_Default_Template_For_Email_Quick_Action</defaultEmailTemplateName>
+        <ignoreDefaultEmailTemplateSubject>false</ignoreDefaultEmailTemplateSubject>
+    </quickActionSendEmailOptions>
+    <targetObject>EmailMessage</targetObject>
+    <targetParentField>Parent</targetParentField>
+    <type>SendEmail</type>
+</QuickAction>

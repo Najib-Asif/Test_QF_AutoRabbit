@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_QBR_NotClosed_InProgressRecover</fullName>
+    <active>true</active>
+    <description>Validate not allow to close this case when Recoveries are in approval.</description>
+    <errorConditionFormula>AND(RecordType.DeveloperName = &apos;QBR_Recovery_Case&apos;,ISPICKVAL(Status, &quot;Closed&quot;), Recovery_Inprogress__c =TRUE)</errorConditionFormula>
+    <errorMessage>You are allowed to close this case Only Recoveries are approved/rejected!</errorMessage>
+</ValidationRule>

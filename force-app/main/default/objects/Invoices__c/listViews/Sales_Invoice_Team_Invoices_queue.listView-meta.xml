@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Invoice_Team_Invoices_queue</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Company_Name__c</columns>
+    <columns>ABN__c</columns>
+    <columns>Start_Date__c</columns>
+    <columns>End_Date__c</columns>
+    <columns>Paid__c</columns>
+    <columns>Comment__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>RECORDTYPE</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>Paid__c</field>
+        <operation>notEqual</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Invoices__c.New_Corporate_Payments,Invoices__c.Approved_Corporate_Payments</value>
+    </filters>
+    <label>Sales Invoice Team queue</label>
+    <queue>Sales_Invoice_Team</queue>
+</ListView>

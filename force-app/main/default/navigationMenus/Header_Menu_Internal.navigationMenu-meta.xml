@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NavigationMenu xmlns="http://soap.sforce.com/2006/04/metadata">
+    <container>Knowledge iQ</container>
+    <containerType>Network</containerType>
+    <label>Header Menu - Internal</label>
+    <navigationMenuItem>
+        <label>Popular Topics</label>
+        <position>1</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>Topics</target>
+        <type>NavigationalTopic</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>List Views</label>
+        <position>2</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <subMenu>
+            <navigationMenuItem>
+                <label>Flight Events</label>
+                <position>0</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/flight-events-list</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Knowledge Articles</label>
+                <position>1</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/knowledge-articles-list-page</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+        </subMenu>
+        <type>MenuLabel</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Other Useful Links</label>
+        <position>3</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <subMenu>
+            <navigationMenuItem>
+                <label>Qantas.com</label>
+                <position>0</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>https://www.qantas.com/au/en.html</target>
+                <type>ExternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Global Contact Centres - SharePoint</label>
+                <position>1</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>https://qantas.sharepoint.com/teams/ContactCentres/SitePages/Global-Contact-Centres.aspx</target>
+                <type>ExternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Salesforce</label>
+                <position>2</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>https://qantas.my.salesforce.com/home/home.jsp</target>
+                <targetPreference>OpenExternalLinkInSameTab</targetPreference>
+                <type>ExternalLink</type>
+            </navigationMenuItem>
+        </subMenu>
+        <type>MenuLabel</type>
+    </navigationMenuItem>
+</NavigationMenu>

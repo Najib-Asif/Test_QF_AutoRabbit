@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Case_Account_Validation_NonAU</fullName>
+    <active>true</active>
+    <description>Freight invoicing cases to be tagged to Freight  Account (Only to users local region) CRM 7893 and CRM-8116</description>
+    <errorConditionFormula>AND(
+CONTAINS(RecordType.DeveloperName,&apos;Freight_Invoicing&apos;),
+NOT(ISBLANK( AccountId )),
+NOT( CONTAINS(Account.RecordTypeId, &apos;01290000000ibKVAAY&apos;)),
+NOT( CONTAINS(Owner:User.Country,&apos;AU&apos;)),
+NOT((ISPICKVAL(Account.Type, &quot;Freight-Country&quot;) &amp;&amp; CONTAINS(Owner:User.Country, Account.BillingCountry ))),
+$User.FirstName &lt;&gt; &apos;System Admin&apos;,
+$User.LastName &lt;&gt; &apos;Updates&apos;,
+TEXT($User.Freight_Department__c) &lt;&gt; &apos;Freight Support&apos;
+)</errorConditionFormula>
+    <errorMessage>Please select only Freight Country Account in your local region, if not in AU.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>Account</field>
+        <field>Problem_Type__c</field>
+        <field>CreatedDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>((1 OR 2 OR 3) AND 4) OR (5 OR (4 AND 6)) OR 7</booleanFilter>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Space Available Upgrade - Economy to Premium Economy,Space Available Upgrade - Economy to Business,Space Available Upgrade - Economy to First</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Space Available Upgrade - Premium Economy to Business,Space Available Upgrade - Premium Economy to First,Space Available Upgrade - Business to First</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Excess Baggage</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Service Request</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Commercial Waiver (BART),Commercial Waiver (non BART),Operational Waiver</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Problem_Type__c</field>
+                <operation>equals</operation>
+                <value>Advance Seat Selection,Agent Discount Travel,Change of TMC,Prizewinner</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>User.Level__c</field>
+                <operation>contains</operation>
+                <value>SR-SS</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Manual Approval / Rejection</label>
+        <name>Manual_Approval_Rejection</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>deanhowarth@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Approval for QF First Lounge Access = Dean Howarth</description>
+        <entryCriteria>
+            <formula>AND(ISPICKVAL(Type,&apos;Service Request&apos;),ISPICKVAL(Problem_Type__c,&apos;Lounge Access - Qantas First Lounge&apos;),CONTAINS(CreatedBy.Level__c ,&apos;SR-B&amp;G&apos;))</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>QIC Case - QF First Lounge Access</label>
+        <name>QIC_Case_QF_First_Lounge_Access</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>oronzomiccoli@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>This step is for users with level SR-AP</description>
+        <entryCriteria>
+            <formula>AND(ISPICKVAL(Type,&apos;Service Request&apos;),ISPICKVAL(Problem_Type__c,&apos;Lounge Access - Qantas First Lounge&apos;),CONTAINS(CreatedBy.Level__c ,&apos;SR-AP&apos;))</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>QIC Case - QF First Lounge Access Level</label>
+        <name>QIC_Case_QF_First_Lounge_Access_Level</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Approval for the rest
+B&amp;G - Account Managers</description>
+        <entryCriteria>
+            <formula>AND(CONTAINS(CreatedBy.Level__c,&apos;SR-B&amp;G&apos;), OR(ISPICKVAL(Problem_Type__c,&apos;QF Domestic Business Lounge&apos;),ISPICKVAL(Problem_Type__c,&apos;QF Club Lounge Access&apos;)),ISPICKVAL(Type,&apos;Service Request&apos;))</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>QIC Case - Approval for Others</label>
+        <name>QIC_Case_Approval_for_Others</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Approval for the rest
+B&amp;G - Account Managers</description>
+        <entryCriteria>
+            <formula>AND(CONTAINS(CreatedBy.Level__c,&apos;SR-AP&apos;), OR(ISPICKVAL(Problem_Type__c,&apos;QF Domestic Business Lounge&apos;),ISPICKVAL(Problem_Type__c,&apos;QF Club Lounge Access&apos;)),ISPICKVAL(Type,&apos;Service Request&apos;))</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>QIC Case - Approval for Others</label>
+        <name>QIC_Case_Approval_for_Others_SR_AP</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>rdrakoulis@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>QIS -&gt; QIS Head (Rebecca)</description>
+        <entryCriteria>
+            <formula>AND(CONTAINS(CreatedBy.Level__c,&apos;SR-QIS&apos;), OR(ISPICKVAL(Problem_Type__c,&apos;QF Domestic Business Lounge&apos;),ISPICKVAL(Problem_Type__c,&apos;QF Club Lounge Access&apos;)),ISPICKVAL(Type,&apos;Service Request&apos;))</formula>
+        </entryCriteria>
+        <label>QIC Case - Approval for QIS</label>
+        <name>QIC_Case_Approval_for_QIS</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Included the New level SR-AP to the Approval process and added new step to go to Rob Harrison</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approval_Status__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.BillingCountry</field>
+            <operation>notEqual</operation>
+            <value>US</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status_as_Pending</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Service Requests - non US_v1</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>1</processOrder>
+    <recallActions>
+        <action>
+            <name>Approval_Status_Change</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

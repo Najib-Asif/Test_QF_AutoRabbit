@@ -1,0 +1,189 @@
+<aura:component controller="FreightACRTileController" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    
+    <!-- Id of the Account the page hosting this component is showing -->
+    <aura:attribute name="recordId" type="Id" />
+    
+    <!-- Handler to run from JS Controller -->	
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:handler event="force:refreshView" action="{!c.doInit}" />
+    
+    <aura:attribute name="accCR" type="AccountContactRelation"/>
+    <aura:attribute name="menuSwitch" type="Boolean" default="false" />
+    
+	<!-- <div class="VIEW slds-card" style="{!v.accCR.Id == NULL ? 'display:none' : 'display:block'}"> -->
+    <div class="VIEW slds-card">
+        <div class="slds-card__header slds-grid slds-m-bottom--none">
+            
+            <div class="slds-media slds-media--center slds-has-flexi-truncate"> 
+                <div class="slds-media__figure">
+                    <lightning:icon iconName="action:view_relationship" size="x-small"/>
+                </div>
+                
+                <div class="slds-media__body slds-text-heading--small">
+                    <h2>
+                        <a class="slds-card__header-link slds-truncate slds-show--inline-block uiOutputURL" dir="ltr" title="">
+                            Account Contact Relation 
+                        </a></h2>
+                </div>
+                
+                <!-- we need to add that drop down for View and remove options --> 
+                <div class="slds-no-flex" onclick="{!c.toggleMenu}">
+                    <div class="optionsMenu uiMenu">
+                        <div aura:id="menu" class="uiPopupTrigger">
+                            <a style = "padding-right: 4px;" class="slds-button slds-button--icon slds-button--icon-border slds-button--icon-x-small" aria-disabled="false" aria-haspopup="true" tabindex="0" role="button" title="">
+                                <span class="slds-icon_container slds-icon-utility-down sldsButtonIconFix--x-small relatedRecordActionIcon slds-button__icon forceIcon" >
+                                    <span>
+                                        <lightning:icon iconName="utility:down" size="x-small"/>
+                                    </span>  
+                                    <span class="slds-assistive-text">Show available actions</span>
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <aura:if isTrue="{!v.menuSwitch}">
+                            <div aura:id="submenu" class="popupTargetContainer uiPopupTarget uiMenuList uiMenuList--right uiMenuList--default visible positioned">
+                                <div role="menu">
+                                    <ul class="scrollable" role="presentation">
+                                        <li role="presentation" class="uiMenuItem">
+                                            <a href="{!'/' + v.accCR.Id}" role="menuitem" tabindex="0" title="View">View</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </aura:if>
+                        
+                    </div>
+                </div>
+                <!-- we need to add that drop down for View and remove options --> 
+            </div>
+        </div>
+        <div class="slds-card__body">
+            <div class="slds-card__body--inner">
+                <div class="slds-tile__detail slds-text-body--small">
+                    <div class="slds-grid slds-grid--align-center slds-show  slds-m-bottom--small">
+                    </div>
+                    <div class="slds-show">
+                        <div class="container VIEW forceQuickActionLayout inlineEditEnabled">
+                            <div></div>
+                            <div class="pageLevelErrors"></div>
+                            <section>
+                                <div class="riseTransitionEnabled">
+                                    <div class="mdp forcePageBlock forceRecordlayout">
+                                        <div class="slds-section mdp forcePageBlockSection forcePageBlockSectionView">
+                                            <div class="slds-form">
+                                                
+                                                <div class="slds-grid mdp forcePageBlockSectionRow">
+                                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                        <div class="test-id__field-label-container">
+                                                            <span>Account Name:</span>
+                                                        </div>
+                                                        <div class="slds-form-element_control slds-grid itemBody">
+                                                            <span>
+                                                                <a aura:id="aId" href="{!'/' + v.accCR.AccountId}" title="{!v.accCR.Account.Name}">{!v.accCR.Account.Name}</a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="slds-grid mdp forcePageBlockSectionRow">
+                                                    <div class="slds-has-flexi-truncate slds-has-divider_top slds-p-horizontal_x-small mdp forcePageBlockItem forcePageBlockItemView">
+                                                        <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                            <div class="test-id__field-label-container">
+                                                                <span> Contact First Name: </span>
+                                                            </div>
+                                                            <div class="slds-form-element_control slds-grid itemBody">
+                                                                <span> 
+                                                                    <a aura:id="cfnId" href="{!'/' + v.accCR.ContactId}" title="{!v.accCR.Contact.FirstName}">{!v.accCR.Contact.FirstName}</a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-has-flexi-truncate slds-has-divider_top slds-p-horizontal_x-small mdp forcePageBlockItem forcePageBlockItemView">
+                                                        <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                            <div class="test-id__field-label-container">
+                                                                <span> Contact Last Name: </span>
+                                                            </div>
+                                                            <div class="slds-form-element_control slds-grid itemBody">
+                                                                <span> 
+                                                                    <a aura:id="clnId" href="{!'/' + v.accCR.ContactId}" title="{!v.accCR.Contact.LastName}">{!v.accCR.Contact.LastName}</a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="slds-grid mdp forcePageBlockSectionRow">
+                                                    <div class="slds-has-flexi-truncate slds-has-divider_top slds-p-horizontal_x-small mdp forcePageBlockItem forcePageBlockItemView">
+                                                        <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                            <div class="test-id__field-label-container">
+                                                                <span> City (Related): </span>
+                                                            </div>
+                                                            <div class="slds-form-element_control slds-grid itemBody">
+                                                                <span> <ui:outputText value="{!v.accCR.Freight_City__c}"/> </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-has-flexi-truncate slds-has-divider_top slds-p-horizontal_x-small mdp forcePageBlockItem forcePageBlockItemView">
+                                                        <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                            <div class="test-id__field-label-container">
+                                                                <span> Phone (Related): </span>
+                                                            </div>
+                                                            <div class="slds-form-element_control slds-grid itemBody">
+                                                                <span> <ui:outputPhone value="{!v.accCR.Related_Phone__c}"/> </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="slds-grid mdp forcePageBlockSectionRow">
+                                                    <div class="slds-has-flexi-truncate slds-has-divider_top slds-p-horizontal_x-small mdp forcePageBlockItem forcePageBlockItemView">
+                                                        <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                            <div class="test-id__field-label-container">
+                                                                <span> Job Title: </span>
+                                                            </div>
+                                                            <div class="slds-form-element_control slds-grid itemBody">
+                                                                <span> <ui:outputText value="{!v.accCR.Job_Title__c}"/> </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-has-flexi-truncate slds-has-divider_top slds-p-horizontal_x-small mdp forcePageBlockItem forcePageBlockItemView">
+                                                        <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                            <div class="test-id__field-label-container">
+                                                                <span> Persona: </span>
+                                                            </div>
+                                                            <div class="slds-form-element_control slds-grid itemBody">
+                                                                <span> <ui:outputText value="{!v.accCR.Freight_Persona__c}"/> </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="slds-grid mdp forcePageBlockSectionRow">
+                                                    <div class="slds-has-flexi-truncate slds-has-divider_top slds-p-horizontal_x-small mdp forcePageBlockItem forcePageBlockItemView">
+                                                        <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent slds-p-vertical_xx-small override--slds-form-element">
+                                                            <div class="test-id__field-label-container">
+                                                                <span> Email (Related): </span>
+                                                            </div>
+                                                            <div class="slds-form-element_control slds-grid itemBody">
+                                                                <span> <ui:outputEmail value="{!v.accCR.Related_Email__c}"/> </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

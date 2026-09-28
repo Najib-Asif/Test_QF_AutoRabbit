@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Campaign_Type_Mandatory</fullName>
+    <active>true</active>
+    <description>When Case = Sales Offers Request &amp; Type = Campaign or Adhoc, Campaign Start Date is mandatory</description>
+    <errorConditionFormula>AND (
+ RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/
+NOT ( $User.UserRoleId = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/ 
+NOT ( $Profile.Name = &quot;System Administrator&quot;), /*System Administrator*/
+NOT ( $Profile.Name = &quot;Qantas System Administrator&quot;),
+NOT ( $Profile.Name = &quot;Qantas System Admin - Freight&quot;),
+NOT ( $Profile.Name = &quot;Qantas System Admin - QCC&quot;),
+NOT ( $Profile.Name = &quot;Qantas System Admin - SND&quot;), 
+OR (
+ ISPICKVAL ( Type , &quot;Campaign&quot; ),
+ AND(ISPICKVAL ( Type , &quot;Adhoc&quot; ),NOT(ISPICKVAL(Sub_Type__c,&quot;QC Member Gifting&quot;))) 
+),
+
+OR (
+ ISBLANK( Campaign_Start_Date__c ),
+ Campaign_Start_Date__c &lt; TODAY(),
+ DAY( Campaign_Start_Date__c ) &lt;&gt; 1
+
+)
+
+)</errorConditionFormula>
+    <errorDisplayField>Campaign_Start_Date__c</errorDisplayField>
+    <errorMessage>For all Campaign and Adhoc Type, Campaign Start Date has to be on the 1st day of any month and it has to be future dated.</errorMessage>
+</ValidationRule>

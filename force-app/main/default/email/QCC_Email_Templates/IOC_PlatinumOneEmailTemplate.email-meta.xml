@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>IOC: Template sent to PO team on any disruption</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>QCC_BlankLetterhead</letterhead>
+    <name>IOC_PlatinumOneEmailTemplate</name>
+    <style>freeForm</style>
+    <subject>Flight Disruption {!Event__c.FlightNumber__c} {!Event__c.ScheduledDepDate__c}</subject>
+    <textOnly>Hi Platinum One Team,
+
+
+Please be advised of the following flight disruption:
+
+
+Flight Number : {!Event__c.FlightNumber__c}
+
+Departure Port : {!Event__c.DeparturePort__c}
+
+Arrival Port : {!Event__c.ArrivalPort__c}
+
+
+
+Delay Failure: {!Event__c.DelayFailureCode__c}
+
+Non -Delay: {!Event__c.Non_Delay_Failure_Code__c}
+
+
+Scheduled Local Departure Date/Time : {!Event__c.Scheduled_Departure_Date_Time__c}
+
+Scheduled Local Arrival Date/Time : {!Event__c.ScheduledArrDateTime__c}
+
+Estimated Local Departure Date/Time : {!Event__c.EstimatedDepDateTime__c}
+
+Estimated Local Arrival Date/Time : {!Event__c.EstimatedArrDateTime__c}
+
+Departure Delay Length: {!Event__c.DepartureDelayinHRSandMIN__c}
+
+
+Please do not reply to this mail.
+
+
+
+Regards,
+
+Qantas Operations.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

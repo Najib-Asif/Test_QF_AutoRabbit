@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Email_alert_to_CL_Renewal_near_due</name>
+        <label>Email alert to CL Renewal near due</label>
+        <locationX>176</locationX>
+        <locationY>479</locationY>
+        <actionName>Case.Send_Email_alert_to_CL_Renewal_near_due</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Case.Send_Email_alert_to_CL_Renewal_near_due</nameSegment>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>migrated from Send Email Alert on CL Due Date workflow(Platform change)</description>
+    <environments>Default</environments>
+    <interviewLabel>CaseAsyncAfterTriggerFlowQCC_ {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAsyncAfterTriggerFlowOther_SendEmailAlertonCLDueDate</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>1 AND 2 AND 3 AND (4 OR 5)</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0122v000001r3VLAAY</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>OwnerName__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Kristine Chippendale</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsClosed</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>AM Review</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>RM Review</stringValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Send_Email_Alert_on_CL_Due_Date_3_Days_Before</name>
+            <connector>
+                <targetReference>Email_alert_to_CL_Renewal_near_due</targetReference>
+            </connector>
+            <label>Send Email Alert on CL Due Date 3 Days Before</label>
+            <offsetNumber>-3</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Due_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>Send_Email_Alert_on_CL_Due_Date_2_Days_After</name>
+            <connector>
+                <targetReference>Email_alert_to_CL_Renewal_near_due</targetReference>
+            </connector>
+            <label>Send Email Alert on CL Due Date 2 Days After</label>
+            <offsetNumber>2</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Due_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>Send_Email_Alert_on_CL_Due_Date_5_Days_After</name>
+            <connector>
+                <targetReference>Email_alert_to_CL_Renewal_near_due</targetReference>
+            </connector>
+            <label>Send Email Alert on CL Due Date 5 Days After</label>
+            <offsetNumber>5</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Due_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

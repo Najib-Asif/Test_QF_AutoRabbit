@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_MandatoryParentForEntities</fullName>
+    <active>true</active>
+    <description>Freight Implementation: Parent Account Id is mandatory while creation of Enitities/Branches</description>
+    <errorConditionFormula>AND( 
+	
+		OR( 
+		$RecordType.DeveloperName = &quot;Freight_Account&quot;
+		),
+		
+		ISPICKVAL( Type , &quot;Freight-Branch&quot;),
+
+		(ISBLANK(ParentId))
+		
+	)</errorConditionFormula>
+    <errorDisplayField>Ability_to_Influence__c</errorDisplayField>
+    <errorMessage>Parent Account is Mandatory for Freight Branch Accounts.</errorMessage>
+</ValidationRule>

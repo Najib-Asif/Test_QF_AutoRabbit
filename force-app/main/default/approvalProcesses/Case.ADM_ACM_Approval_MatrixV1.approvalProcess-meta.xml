@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>AM_s_Manager__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Asian Countries</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>IN,HK,CN,ID,PH,TH,SG,MY,VN,TW,KR,PG,SB,IL,LK,CN,MO,PK,SA,EG,QA,OM,KE,KW,LB,KH,BH,KZ,JO,BD,CY,ET,TN,BN,FJ,NC,PF,WS,VU,GU,CK,TO,WF,LA,MN</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approvals1</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Reports_To__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>IN,HK,CN,ID,PH,TH,SG,MY,VN,TW,KR,PG,SB,IL,LK,CN,MO,PK,SA,EG,QA,OM,KE,KW,LB,KH,BH,KZ,JO,BD,CY,ET,TN,BN,FJ,NC,PF,WS,VU,GU,CK,TO,WF,LA,MN</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approval_AU</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Requested_By__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>1 AND 2</booleanFilter>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>IN,HK,CN,ID,PH,TH,SG,MY,VN,TW,KR,PG,SB,IL,LK,CN,MO,PK,SA,EG,QA,OM,KE,KW,LB,KH,BH,KZ,JO,BD,CY,ET,TN,BN,FJ,NC,PF,WS,VU,GU,CK,TO,WF,LA,MN</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.ACM_Value__c</field>
+                <operation>greaterThan</operation>
+                <value>&quot;AUD 1,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 3 Approval</label>
+        <name>Level_3_Approval_GT_1k</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <description>New Zealand,UK,US,South Africa,Canada,Mexico</description>
+        <entryCriteria>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>,GB,ZA,CA,US,MX,FR,BR,DE,JP,ES,IT,SE,AE,CO,NL,PL,AR,CH,RU,AT,NP,GH,UG,MA,TZ,NA,BW,NG,CM,MW,ZM,AO,CD,CG,NA,SZ,ZW,BJ,BI,TD,CI,GA,GN,GW,MG,MV,ML,MR,MU,MZ,RW,SN,SL,SD,TG,NO,BE,TR,HU,DK,IE,CL,CZ,GR,PE,FI,PT,VE,RO,SK,MT,HR,LU,UA,PA,RS,CR,SV,LT,SI</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>AZ,HN,IS,LV,MK,ME,MC,MQ,BS,DO,NI,PY,BL,SM,SX</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approvals</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Reports_To__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>,GB,ZA,CA,US,MX,FR,BR,DE,JP,ES,IT,SE,AE,CO,NL,PL,AR,CH,RU,AT,NP,GH,UG,MA,TZ,NA,BW,NG,CM,MW,ZM,AO,CD,CG,NA,SZ,ZW,BJ,BI,TD,CI,GA,GN,GW,MG,MV,ML,MR,MU,MZ,RW,SN,SL,SD,TG,NO,BE,TR,HU,DK,IE,CL,CZ,GR,PE,FI,PT,VE,RO,SK,MT,HR,LU,UA,PA,RS,CR,SV,LT,SI</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>AZ,HN,IS,LV,MK,ME,MC,MQ,BS,DO,NI,PY,BL,SM,SX</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approvals</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Requested_By__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>,GB,ZA,CA,US,MX,FR,BR,DE,JP,ES,IT,SE,AE,CO,NL,PL,AR,CH,RU,AT,NP,GH,UG,MA,TZ,NA,BW,NG,CM,MW,ZM,AO,CD,CG,NA,SZ,ZW,BJ,BI,TD,CI,GA,GN,GW,MG,MV,ML,MR,MU,MZ,RW,SN,SL,SD,TG,NO,BE,TR,HU,DK,IE,CL,CZ,GR,PE,FI,PT,VE,RO,SK,MT,HR,LU,UA,PA,RS,CR,SV,LT,SI</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.BillingCountry</field>
+                <operation>equals</operation>
+                <value>AZ,HN,IS,LV,MK,ME,MC,MQ,BS,DO,NI,PY,BL,SM,SX</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.ACM_Value__c</field>
+                <operation>greaterThan</operation>
+                <value>&quot;AUD 1,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 3 Approval</label>
+        <name>Level_3_Approvals1</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <description>Billing Country = AU</description>
+        <entryCriteria>
+            <formula>Account.BillingCountry = &apos;AU&apos; &amp;&amp; NOT(ISPICKVAL(Waiver_Sub_Type__c ,&apos;Qantas Error&apos;))</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 1 Approval</label>
+        <name>Level_1_Approval_AU1</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>Account.BillingCountry = &apos;AU&apos; &amp;&amp; NOT(ISPICKVAL(Waiver_Sub_Type__c ,&apos;Qantas Error&apos;))</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Level 2 Approval</label>
+        <name>Level_2_Approval_AU2</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Requested_By__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>Account.BillingCountry = &apos;AU&apos; &amp;&amp; ACM_Value__c &gt; 1000 &amp;&amp; 
+NOT(ISPICKVAL(Waiver_Sub_Type__c ,&apos;Qantas Error&apos;))</formula>
+        </entryCriteria>
+        <label>Level 3 Approval</label>
+        <name>Level_2_ApprovalAU3</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>All regions ADM approvals have been handled here</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>Account.BillingCountry  &lt;&gt;  &apos;NZ&apos; &amp;&amp;
+RecordType.DeveloperName = &apos;QIC_Service_request&apos;  &amp;&amp;
+ISPICKVAL(Problem_Type__c, &apos;Internal - ADM/ACM&apos;)  &amp;&amp;  
+(ACM_Value__c  &lt; 1000  || ACM_Value__c  &gt; 1000) &amp;&amp; NOT(ISPICKVAL(Approval_Status__c,&apos;Approved&apos;) || ISPICKVAL(Approval_Status__c,&apos;Reject&apos;))</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Last_Approved_By_update</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_as_Reject</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Case_Status_to_In_progress</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>ADM ACM Approval Matrix</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>7</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

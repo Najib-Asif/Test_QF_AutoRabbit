@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_The_Owner_AssignedTo</fullName>
+    <active>true</active>
+    <description>Restrict the Owner to be as Assigned To</description>
+    <errorConditionFormula>AND( ISPICKVAL( Subtype__c , &apos;Senior Executive Action&apos;), $User.Id == Owner:User.Id )</errorConditionFormula>
+    <errorDisplayField>OwnerId</errorDisplayField>
+    <errorMessage>Activities which required senior executive action cannot be owned by you.</errorMessage>
+</ValidationRule>

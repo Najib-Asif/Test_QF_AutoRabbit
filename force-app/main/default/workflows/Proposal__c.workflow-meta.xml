@@ -1,0 +1,1962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Proposal_Approval_Response_to_Submitter_Approved</fullName>
+        <description>Proposal Approval Response to Submitter - Approved</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Proposal_Approval_Response_to_Submitter_Approved</template>
+    </alerts>
+    <alerts>
+        <fullName>Proposal_Approval_Response_to_Submitter_Rejected</fullName>
+        <description>Proposal Approval Response to Submitter - Rejected</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All_email_templates_LD/Proposal_Approval_Response_to_Submitter_Rejected</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approval_Completion_Date_TIme</fullName>
+        <field>Approval_Completion_Date_Time__c</field>
+        <formula>NOW()</formula>
+        <name>Approval Completion Date/TIme</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Required_Customer</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Approval_Required_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Approval Required - Customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Required_Internal</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Approval_Required_Internal</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Approval Required - Internal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_Customer</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Approved_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Approved - Customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_by_SBD</fullName>
+        <field>Approved_by_SBD__c</field>
+        <literalValue>1</literalValue>
+        <name>Approved by SBD</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Auto_Populate_Expected_Approval_Date</fullName>
+        <field>Expected_Approval_Date__c</field>
+        <formula>Today() + 14</formula>
+        <name>Auto Populate Expected Approval Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DO_Recalled_to_False</fullName>
+        <field>DO_Recalled__c</field>
+        <literalValue>0</literalValue>
+        <name>DO Recalled to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DO_Recalled_to_True</fullName>
+        <field>DO_Recalled__c</field>
+        <literalValue>1</literalValue>
+        <name>DO Recalled to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Last_Actioned_By</fullName>
+        <description>Update Last Approved By field</description>
+        <field>Last_Approved_By__c</field>
+        <formula>CASESAFEID($User.Id)</formula>
+        <name>Last Actioned By</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Last_Approved_By</fullName>
+        <description>Update Last Approved By field</description>
+        <field>Last_Approved_By__c</field>
+        <formula>$User.Id</formula>
+        <name>Last Approved By</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Last_Rejected_By</fullName>
+        <description>To capture the Last Rejected by user</description>
+        <field>Last_Rejected_By__c</field>
+        <formula>$User.FirstName &amp; &quot; &quot; &amp; $User.LastName</formula>
+        <name>Last Rejected By</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_1_Approver</fullName>
+        <field>TL_Approval__c</field>
+        <formula>$User.FirstName &amp; &quot; &quot; &amp; $User.LastName</formula>
+        <name>Level 1 Approver</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_1_Approver_DateTime</fullName>
+        <field>TL_Approval_DateTime__c</field>
+        <formula>NOW()</formula>
+        <name>Level 1 Approver DateTime</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_2_Approver</fullName>
+        <field>NAM_Approval__c</field>
+        <formula>$User.FirstName &amp; &quot; &quot; &amp; $User.LastName</formula>
+        <name>Level 2 Approver</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_2_Approver_DateTime</fullName>
+        <field>NAM_Approval_DateTime__c</field>
+        <formula>NOW()</formula>
+        <name>Level 2 Approver DateTime</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_3_Approver</fullName>
+        <field>DO_Approval__c</field>
+        <formula>$User.FirstName &amp; &quot; &quot; &amp; $User.LastName</formula>
+        <name>Level 3 Approver</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_3_Approver_DateTime</fullName>
+        <field>DO_Approval_DateTime__c</field>
+        <formula>NOW()</formula>
+        <name>Level 3 Approver DateTime</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_4_Approver</fullName>
+        <field>Pricing_Approval__c</field>
+        <formula>$User.FirstName &amp; &quot; &quot; &amp; $User.LastName</formula>
+        <name>Level 4 Approver</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Level_4_Approver_DateTime</fullName>
+        <field>Pricing_Approval_DateTime__c</field>
+        <formula>NOW()</formula>
+        <name>Level 4 Approver DateTime</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NAMRecalled_to_False</fullName>
+        <field>NAMRecalled__c</field>
+        <literalValue>0</literalValue>
+        <name>NAMRecalled to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NAMRecalled_to_True</fullName>
+        <field>NAMRecalled__c</field>
+        <literalValue>1</literalValue>
+        <name>NAMRecalled to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Null_group_booking_if_group_offer_is_no</fullName>
+        <field>Forecast_Group_Booking_Expenditure__c</field>
+        <name>Null group booking if group offer is no</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Approved_TeamLead</fullName>
+        <field>TeamLead_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal Approved TeamLead</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_DO_Approved</fullName>
+        <field>DO_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal DO Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_DO_Approved1</fullName>
+        <description>Deselects the Approval Required (DO) flag</description>
+        <field>Approval_Required_DO__c</field>
+        <literalValue>0</literalValue>
+        <name>Proposal DO Approved1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_NAM_Approved</fullName>
+        <field>NAM_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal NAM Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_NAM_Approved1</fullName>
+        <field>NAM_Approved1__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal NAM Approved1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Pricing_Approved</fullName>
+        <field>Pricing_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal Pricing Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Pricing_Approved1</fullName>
+        <field>Pricing_Approved1__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal Pricing Approved1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_QIS_Approved</fullName>
+        <field>QIS_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal QIS Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_QIS_Approved1</fullName>
+        <field>Escalate_To_Manager_QIS__c</field>
+        <literalValue>0</literalValue>
+        <name>Proposal QIS Approved1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_QIS_Approved2</fullName>
+        <field>QIS_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Proposal QIS Approved2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_QIS_Rejected</fullName>
+        <field>QIS_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal QIS Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_RType_AR_Customer_Adhoc</fullName>
+        <description>Update the record type once Acceptance Required - Customer to Approval Required - Customer</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Adhoc_Charter_Approval_Required_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal RType AR - Customer (Adhoc)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_RType_Approved_Customer_Adhoc</fullName>
+        <description>Update the Record Type to Adhoc Charter - Approved - Customer</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Adhoc_Charter_Approved_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal RType Approved- Customer(Adhoc)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_RType_Approved_Customer_QBS</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>QBS_Approved_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal RType Approved- Customer(QBS)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_RType_Change_AR_Lega_CA</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>CA_Approval_Required_Legal</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal RType Change AR - Lega(CA)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_RType_Change_AR_Lega_QBS</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>QBS_Approval_Required_Legal</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal RType Change AR - Lega(QBS)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_RType_Rejected_Customer_Adhoc</fullName>
+        <description>Update the record type to Rejected - Customer</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Adhoc_Charter_Rejected_External</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal RType Rejected- Customer(Adhoc)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Record_Type_AR_Customer_QBS</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>QBS_Approval_Required_Customer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal Record Type AR- Customer(QBS)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Record_Type_AR_Internal_QBS</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>QBS_Approval_Required_Internal</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal Record Type AR- Internal(QBS)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Record_Type_Change_Reject_QBS</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>QBS_Rejected_Internal_External</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal Record Type Change Reject(QBS)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Record_Type_Change_Rejected_CA</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>CA_Rejected_Internal_External</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Proposal Record Type Change Rejected(CA)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Rejected_DO</fullName>
+        <field>DO_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal Rejected DO</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Rejected_Internal</fullName>
+        <field>Status__c</field>
+        <literalValue>Rejected - Internal</literalValue>
+        <name>Proposal Rejected Internal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Rejected_NAM</fullName>
+        <field>NAM_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal Rejected NAM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Rejected_Pricing</fullName>
+        <field>Pricing_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal Rejected Pricing</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_SBD_Approval_Required</fullName>
+        <field>SBD_Approval_Required__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal SBD Approval Required</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_SBD_Approved</fullName>
+        <field>SBD_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal SBD Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_SBD_Approved1</fullName>
+        <field>SBD_Approval_Required__c</field>
+        <literalValue>0</literalValue>
+        <name>Proposal SBD Approved1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_SBD_Approved2</fullName>
+        <field>SBD_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Proposal SBD Approved2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_SBD_Rejected</fullName>
+        <field>SBD_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal SBD Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Status_Change_AR_Legal</fullName>
+        <field>Status__c</field>
+        <literalValue>Approval Required – Legal</literalValue>
+        <name>Proposal Status Change AR- Legal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Status_Change_Rejected_Legal</fullName>
+        <field>Status__c</field>
+        <literalValue>Rejected – Legal</literalValue>
+        <name>Proposal Status Change Rejected Legal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Status_Update_AR_Customer</fullName>
+        <field>Status__c</field>
+        <literalValue>Acceptance Required - Customer</literalValue>
+        <name>Proposal Status Update AR- Customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Status_Update_AR_Internal</fullName>
+        <field>Status__c</field>
+        <literalValue>Approval Required - Internal</literalValue>
+        <name>Proposal Status Update AR- Internal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_Status_Update_AR_Internal1</fullName>
+        <field>TeamLead_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Proposal Status Update AR- Internal1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Proposal_TeamLead_Rejected</fullName>
+        <field>TeamLead_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Proposal TeamLead Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected_by_SBD</fullName>
+        <field>Rejected_by_SBD__c</field>
+        <literalValue>1</literalValue>
+        <name>Rejected by SBD</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SBD_CA_Recalled_to_False</fullName>
+        <field>SBD_CA_Recalled__c</field>
+        <literalValue>0</literalValue>
+        <name>SBD CA Recalled to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SBD_CA_Recalled_to_True</fullName>
+        <field>SBD_CA_Recalled__c</field>
+        <literalValue>1</literalValue>
+        <name>SBD CA Recalled to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SBD_QBS_Recalled_to_False</fullName>
+        <field>SBD_QBS_Recalled__c</field>
+        <literalValue>0</literalValue>
+        <name>SBD QBS Recalled to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SBD_QBS_Recalled_to_True</fullName>
+        <field>SBD_QBS_Recalled__c</field>
+        <literalValue>1</literalValue>
+        <name>SBD QBS Recalled to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Approval_Recalled_to_Not_Recalled</fullName>
+        <field>Approval_Recalled__c</field>
+        <literalValue>Not Recalled</literalValue>
+        <name>Set Approval Recalled to Not Recalled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Approval_Recalled_to_Recalled</fullName>
+        <field>Approval_Recalled__c</field>
+        <literalValue>Recalled</literalValue>
+        <name>Set Approval Recalled to Recalled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Approval_Status_to_Approved</fullName>
+        <description>Update Approval Status as Approved</description>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Set Approval Status to Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Approval_Status_to_Not_Required</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Not Required</literalValue>
+        <name>Set Approval Status to Not Required</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Approval_Status_to_Rejected</fullName>
+        <description>Update Approval Status as Rejected</description>
+        <field>Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Set Approval Status to Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Approval_Status_to_Submitted</fullName>
+        <description>Update Approval Status as Approved</description>
+        <field>Approval_Status__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Set Approval Status to Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Forecast_MCA_Revenue_to_Zero_when_bl</fullName>
+        <field>Forecast_MCA_Revenue__c</field>
+        <formula>0</formula>
+        <name>Set Forecast MCA Revenue to Zero when bl</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Proposal_Submission_Date</fullName>
+        <field>Proposal_Submission_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Set Proposal Submission Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Proposal_status_to_Draft</fullName>
+        <field>Status__c</field>
+        <literalValue>Draft</literalValue>
+        <name>Set Proposal status to Draft</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_to_Draft</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Corporate_Airfares</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type to CA Draft</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Record_Type_to_QBS_Draft</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Qantas_Business_Savings</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Record Type to QBS Draft</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Special_Condition_Approved_DO</fullName>
+        <description>Special Condition Approved - DO</description>
+        <field>Approval_Status__c</field>
+        <literalValue>Special Condition Approved - DO</literalValue>
+        <name>Special Condition Approved - DO</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Special_Condition_Approved_RM</fullName>
+        <description>Special Condition Approved - RM</description>
+        <field>Approval_Status__c</field>
+        <literalValue>Special Condition Approved - RM</literalValue>
+        <name>Special Condition Approved - RM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Special_Condition_Rejected_DO</fullName>
+        <description>Special Condition Rejected - DO</description>
+        <field>Approval_Status__c</field>
+        <literalValue>Special Condition Rejected - DO</literalValue>
+        <name>Special Condition Rejected - DO</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Special_Condition_Rejected_RM</fullName>
+        <description>Special Condition Rejected - RM</description>
+        <field>Approval_Status__c</field>
+        <literalValue>Special Condition Rejected - RM</literalValue>
+        <name>Special Condition Rejected - RM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Team_Lead_Approved</fullName>
+        <field>TL_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Team Lead Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Team_Lead_CA_Recalled_to_False</fullName>
+        <field>Team_Lead_CA_Recalled__c</field>
+        <literalValue>0</literalValue>
+        <name>Team Lead CA Recalled to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Team_Lead_CA_Recalled_to_True</fullName>
+        <field>Team_Lead_CA_Recalled__c</field>
+        <literalValue>1</literalValue>
+        <name>Team Lead CA Recalled to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Team_Lead_QBS_Recalled_to_False</fullName>
+        <field>Team_Lead_QBS_Recalled__c</field>
+        <literalValue>0</literalValue>
+        <name>Team Lead QBS Recalled to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Team_Lead_QBS_Recalled_to_True</fullName>
+        <field>Team_Lead_QBS_Recalled__c</field>
+        <literalValue>1</literalValue>
+        <name>Team Lead QBS Recalled to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Team_Lead_Rejected</fullName>
+        <field>TL_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Team Lead Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UncheckTeamLead_Approved</fullName>
+        <field>TeamLead_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>UncheckTeamLead Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Approved_by_SBD_c</fullName>
+        <field>Approved_by_SBD__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Approvedby SBD</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_DO_Approved</fullName>
+        <field>DO_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck DO Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_NAM_Approved</fullName>
+        <field>NAM_Approved1__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck NAM Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Pricing_Approved1</fullName>
+        <field>Pricing_Approved1__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Pricing Approved1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_SBD_Approved</fullName>
+        <field>SBD_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck SBD Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Team_Lead_Approved</fullName>
+        <field>TL_Approved__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Team Lead Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_DateIschecked_to_True</fullName>
+        <description>This is referred in Validation rule</description>
+        <field>DateIsChecked__c</field>
+        <literalValue>1</literalValue>
+        <name>Update DateIschecked to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Forecast_QF_Spend</fullName>
+        <description>Auto Populate the value of Forecast charter spend to Forecast QF Spend</description>
+        <field>Qantas_Annual_Expenditure__c</field>
+        <formula>Forecast_Charter_Spend__c</formula>
+        <name>Update Forecast QF Spend</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Proposal_RecordType</fullName>
+        <description>Update Proposal RecordType to CA_Approved_Customer_Locked</description>
+        <field>RecordTypeId</field>
+        <lookupValue>QL_CA_Approved_Customer_Locked</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Proposal RecordType</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_proposal_status</fullName>
+        <field>Status__c</field>
+        <literalValue>Acceptance Required - Customer</literalValue>
+        <name>Update proposal status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>set_proposal_record_type_to_CA</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Approval_Required_Internal</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>set proposal record type to CA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>QL_Sales_Generate_Prpsl_By_Conga_Trigger</fullName>
+        <apiVersion>64.0</apiVersion>
+        <description>It will invoke Conga Server, and generate the merge document, and attached the generated document to the proposal record.</description>
+        <endpointUrl>https://workflow.congamerge.com/OBMListener.ashx</endpointUrl>
+        <fields>Generate_Proposal_Formula__c</fields>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>congatriggerintegrationuser@qantas.com.au</integrationUser>
+        <name>QL Sales Generate Prpsl By Conga Trigger</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Auto Populate Expected Approval Date</fullName>
+        <actions>
+            <name>Auto_Populate_Expected_Approval_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_DateIschecked_to_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(     OR(        (RecordType.Name = &apos;CA - Approval Required - Internal&apos;),        (RecordType.Name = &apos;QBS - Approval Required - Internal&apos;),        (RecordType.Name = &apos;CA - Draft&apos;),        (RecordType.Name = &apos;QBS - Draft&apos;)       ),     ISPICKVAL(Approval_Status__c,&apos;Submitted&apos;),     OR(        (ISNULL(Expected_Approval_Date__c)),        ((Expected_Approval_Date__c) &lt; (Today () + 14))       )    )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Auto Populate Expected Approval Date on save</fullName>
+        <actions>
+            <name>Auto_Populate_Expected_Approval_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CA - Approval Required - Customer,CA - Approval Required - Internal,CA - Approved - Customer,CA - Rejected Internal/ External,CA - Draft,QBS - Approval Required - Customer,QBS - Approval Required - Internal,QBS - Approved - Customer,QBS - Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Expected_Approval_Date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>To display the expected approval date + 14 days only during creation.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Auto Populate Forecast Charter Spend to Forecast QF Spend</fullName>
+        <actions>
+            <name>Update_Forecast_QF_Spend</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Adhoc Charter - Approval Required - Customer,Adhoc Charter - Approved - Customer,Adhoc Charter - Rejected - External</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Blank the value of group booking and discount</fullName>
+        <actions>
+            <name>Null_group_booking_if_group_offer_is_no</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Group_Travel_Offer__c</field>
+            <operation>equals</operation>
+            <value>No</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lock Proposal Record when Converted to contract</fullName>
+        <actions>
+            <name>Update_Proposal_RecordType</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Lock Proposal Record when proposal ger Converted to contract</description>
+        <formula>AND(ISCHANGED( QL_Is_Locked__c ),QL_Is_Locked__c =True)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change AR - Customer%28Adhoc%29</fullName>
+        <actions>
+            <name>Proposal_RType_AR_Customer_Adhoc</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Adhoc</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Regular</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Acceptance Required - Customer</value>
+        </criteriaItems>
+        <description>To change the record type to Acceptance Required - Customer once the status changes to Rejected - External</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change AR- Customer%28CA%29</fullName>
+        <actions>
+            <name>Approval_Required_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Acceptance Required - Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Approval Required - Customer</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change AR- Customer%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_Record_Type_AR_Customer_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Acceptance Required - Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change AR- Internal%28CA%29</fullName>
+        <actions>
+            <name>Approval_Required_Internal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Approval Required - Internal</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change AR- Internal%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_Record_Type_AR_Internal_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change Approved- Customer%28Adhoc%29</fullName>
+        <actions>
+            <name>Proposal_RType_Approved_Customer_Adhoc</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Adhoc</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Regular</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Accepted by Customer</value>
+        </criteriaItems>
+        <description>To change the record type to Approved - Customer once the status changes to Acceptedy by Customer</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change Approved- Customer%28CA%29</fullName>
+        <actions>
+            <name>Approved_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Accepted by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Approved - Customer the record will be changed to Read Only</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change Approved- Customer%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_RType_Approved_Customer_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 3 AND 2 AND 4</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Accepted by Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change Rejected- Customer%28Adhoc%29</fullName>
+        <actions>
+            <name>Proposal_RType_Rejected_Customer_Adhoc</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Adhoc</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Regular</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - External</value>
+        </criteriaItems>
+        <description>To change the record type to Rejected - External once the status changes to Rejected - External</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change Rejected- Customer%28CA%29</fullName>
+        <actions>
+            <name>Proposal_Record_Type_Change_Rejected_CA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2 ) AND 3 AND 4</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - External</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <description>CRM - 56 once the status is Rejected - Customer, Rejected - Internal the record will be changed to Read Only</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Record Type Change Rejected- Customer%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_Record_Type_Change_Reject_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected - External</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change AR - Legal%28CA%29</fullName>
+        <actions>
+            <name>Proposal_RType_Change_AR_Lega_CA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Change_AR_Legal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change AR - Legal%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_RType_Change_AR_Lega_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Change_AR_Legal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change AR- Customer%28CA%29</fullName>
+        <actions>
+            <name>Proposal_Status_Update_AR_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(   ISPICKVAL(Approval_Recalled__c, &apos;Not Recalled&apos;),   if( Domestic_Annual_Share__c &lt; 0.90, if( Domestic_Annual_Share__c &gt;= 0.80, NAM_Approved1__c, if( Domestic_Annual_Share__c &lt; 0.80, Pricing_Approved1__c,false)),true) , Approval_Required_NAM__c == false, Approval_Required_TL__c == false,Approval_Required_SBD__c == false, Approval_Required_Deal_Optimization__c == false, Approval_Required_Pricing__c == false, Approval_Required_Others__c == false, Discountlist_Count__c &gt; 0, ISPICKVAL(Type__c, &apos;Corporate Airfares&apos;), ISPICKVAL(Approval_Status__c, &apos;Approved&apos;),  OR(ISPICKVAL(Status__c, &apos;Approval Required - Internal&apos;)) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change AR- Customer%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_Status_Update_AR_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( ISPICKVAL(Type__c, &apos;Qantas Business Savings&apos;), ISPICKVAL(Approval_Recalled__c, &apos;Not Recalled&apos;), Approval_Required_Team_Lead__c == false, Approval_Required_Manager_SBD__c == false, Approval_Required_NAM__c == false, Approval_Required_Deal_Optimization__c == false, Approval_Required_Pricing__c == false, Approval_Required_Others__c == false,Discountlist_Count__c &gt; 0, IF(Approval_Required_Manager_SBD__c, SBD_Approved__c,true), IF(Escalate_To_Manager_QIS__c, QIS_Approved__c, true),ISPICKVAL(Approval_Status__c, &apos;Approved&apos;), OR( ISPICKVAL(Status__c, &apos;Approval Required - Internal&apos;) ))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change AR- Internal%28CA%29</fullName>
+        <actions>
+            <name>Proposal_Status_Update_AR_Internal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>(((1 OR 2 OR 3 OR 4 OR 5 OR 10 OR 11) AND 6) AND (7 OR 8)) AND 9 AND 12 AND 13 AND 14</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.Domestic_Annual_Share__c</field>
+            <operation>lessThan</operation>
+            <value>0.90</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_Deal_Optimization__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_NAM__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_Others__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_Pricing__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Discountlist_Count__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Acceptance Required - Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Draft</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_TL__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_SBD__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>CA - Draft</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Not Required</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change AR- Internal%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_QIS_Approved2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_SBD_Approved1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_SBD_Approved2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Update_AR_Internal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Update_AR_Internal1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9) AND (2 AND 3) AND 10 AND 11 AND 12</booleanFilter>
+        <criteriaItems>
+            <field>Proposal__c.No_of_TeamLead_Approvals_Required__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Discountlist_Count__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_Team_Lead__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_Manager_SBD__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Escalate_To_Manager_QIS__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_NAM__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_Deal_Optimization__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Required_Pricing__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>QBS - Draft</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Not Required</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change Approved Legal%28CA%29</fullName>
+        <actions>
+            <name>Approval_Required_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Update_AR_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change Approved Legal%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_Record_Type_AR_Customer_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Update_AR_Customer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change Rejected Legal%28CA%29</fullName>
+        <actions>
+            <name>Proposal_Record_Type_Change_Rejected_CA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Change_Rejected_Legal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal Status Change Rejected Legal%28QBS%29</fullName>
+        <actions>
+            <name>Proposal_Record_Type_Change_Reject_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Change_Rejected_Legal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Legal_Approval__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal recalled flow for CA</fullName>
+        <actions>
+            <name>Set_Proposal_status_to_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Record_Type_to_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Recalled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal recalled flow for QBS</fullName>
+        <actions>
+            <name>Set_Proposal_status_to_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Record_Type_to_QBS_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Recalled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal status change to Draft for CA</fullName>
+        <actions>
+            <name>Set_Proposal_status_to_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Record_Type_to_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Not Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Proposal status change to Draft for QBS</fullName>
+        <actions>
+            <name>Set_Proposal_status_to_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Record_Type_to_QBS_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Not Required</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Approval Required - Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Approval Recalled status</fullName>
+        <actions>
+            <name>Set_Approval_Recalled_to_Not_Recalled</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Forecast MCA Revenue to Zero when blank</fullName>
+        <actions>
+            <name>Set_Forecast_MCA_Revenue_to_Zero_when_bl</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Forecast_MCA_Revenue__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>This is a temporary workflow that will set the Forecast MCA Revenue to Zero when it is left blank</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set QBS Draft record type for recalled</fullName>
+        <actions>
+            <name>Set_Proposal_status_to_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Record_Type_to_QBS_Draft</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Recalled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CA - Draft</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>set proposal status to internal for submitted for CA</fullName>
+        <actions>
+            <name>Proposal_Status_Update_AR_Internal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>set_proposal_record_type_to_CA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted,Approved,Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Draft</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Corporate Airfares</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>set proposal status to internal for submitted for QBS</fullName>
+        <actions>
+            <name>Proposal_Record_Type_AR_Internal_QBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Proposal_Status_Update_AR_Internal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted,Approved,Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Approval_Recalled__c</field>
+            <operation>equals</operation>
+            <value>Not Recalled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Draft</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Proposal__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Savings</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

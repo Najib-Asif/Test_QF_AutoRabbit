@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Modifying_Proand_Acc_Name</fullName>
+    <active>true</active>
+    <description>Validation for restricting user to modify Proposal name and Account Name once proposal record type assign as Read only proposal layout.</description>
+    <errorConditionFormula>AND(OR(ISCHANGED(Name),ISCHANGED(Account__c)),  RecordType.DeveloperName =&apos;Approved_Customer&apos;)</errorConditionFormula>
+    <errorMessage>You can not modified the requested field value as record is read only.</errorMessage>
+</ValidationRule>

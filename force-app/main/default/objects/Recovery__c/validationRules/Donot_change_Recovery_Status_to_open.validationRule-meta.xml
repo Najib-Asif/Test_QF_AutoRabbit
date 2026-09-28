@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Donot_change_Recovery_Status_to_open</fullName>
+    <active>true</active>
+    <description>QCC: Don&apos;t change Recovery Status back to Open</description>
+    <errorConditionFormula>AND( $Setup.EnableValidationRule__c.VR_Donot_change_Recovery_Status__c = True,
+RecordType.DeveloperName = &apos;Customer_Connect&apos;,
+Text(Status__c)=&apos;Open&apos;, Text(PRIORVALUE(Status__c))&lt;&gt;&apos;Rejected&apos;,
+Text(PRIORVALUE(Status__c))&lt;&gt;&apos;Open&apos;)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Status can&apos;t be changed to Open</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MaximumTrackDate__c</fullName>
+    <description>This field is used to track the maximum date to trigger the flow. Created as a part of CRM-6729.</description>
+    <formula>TODAY()- History_Track_Date__c &gt;=4</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>MaximumTrackDate</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

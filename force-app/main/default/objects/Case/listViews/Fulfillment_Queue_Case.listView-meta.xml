@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fulfillment_Queue_Case</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>First_Name__c</columns>
+    <columns>Last_Name__c</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <columns>Recovery_Status__c</columns>
+    <columns>Recovery_Type__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>Recovery_Status__c</field>
+        <operation>notEqual</operation>
+        <value>Finalised</value>
+    </filters>
+    <filters>
+        <field>CASES.SUBJECT</field>
+        <operation>notContain</operation>
+        <value>Travel Voucher,TRV VOUCH,Travelvoucher</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Closed</value>
+    </filters>
+    <label>CCC Fulfillment Queue</label>
+    <queue>Fulfillment_Queue</queue>
+    <sharedTo>
+        <group>CCC_User</group>
+    </sharedTo>
+</ListView>

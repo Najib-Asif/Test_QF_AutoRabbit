@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Other Waiver</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Other Waivers</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- Custom Record Type for Managing Other Waivers --></description>
+        <label><!-- Other Waiver --></label>
+        <name>Other_Waiver</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Waivers over $500 or 20,000 PTS or those with &quot;Bonus&quot; / &quot;PO Retail&quot; Category must be submitted for approval. --></errorMessage>
+        <name>QCC_Waiver_Approval</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Cannot edit the record while the status is Awaiting Approval. --></errorMessage>
+        <name>Records_cannot_be_changed</name>
+    </validationRules>
+</CustomObjectTranslation>

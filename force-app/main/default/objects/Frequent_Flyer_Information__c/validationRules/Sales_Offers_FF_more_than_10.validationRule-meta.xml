@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_FF_more_than_10</fullName>
+    <active>true</active>
+    <description>For Sales Offers, Presence of FF Information &gt; 10, Type has to be Campaign.</description>
+    <errorConditionFormula>AND (
+ Case__r.RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/ 
+ Case__r.Presence_of_Frequent_Flyer_Information__c &gt;= 10,
+ ISPICKVAL ( Case__r.Type , &quot;Adhoc&quot; )
+
+)</errorConditionFormula>
+    <errorMessage>For more than 10 Frequent Flyer Request, you will have to request a Sales Offer Campaign</errorMessage>
+</ValidationRule>

@@ -1,0 +1,19 @@
+<!-- sldsValidatorIgnore -->
+<template>
+        <p style="margin-bottom: 1%;"><lightning-formatted-text value="Passenger Details" ></lightning-formatted-text></p>
+        <template if:true={passengers}>
+            <lightning-datatable
+                key-field="passengerId"
+                data={passengers}
+                columns={columns}
+                max-row-selection="1"
+                onrowselection={handleRowSelection}
+                selected-rows={selectedRows}
+                wrap-text-max-lines="3"
+            >
+            </lightning-datatable>
+        </template>
+        <template if:false={passengers}>
+            No passenger data available
+        </template>
+</template>

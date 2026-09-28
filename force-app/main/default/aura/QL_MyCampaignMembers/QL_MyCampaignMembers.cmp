@@ -1,0 +1,47 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="QL_CampaignMemberDetails" access="global" >
+    <aura:attribute name="campaignmems" type="Object[]"/>
+    <aura:attribute name="totalcampaignmems" type="Object[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    
+    <aura:attribute name="sortedBy" type="String" default="Name"/>
+    <aura:attribute name="sortedDirection" type="String" default="asc"/>
+    
+    <aura:attribute name="page" type="integer" description="using for store page Number"/>
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+    <aura:attribute name="total" type="integer" description="total records count store "/>
+    
+    <aura:attribute name="searchVal" type="String"/>
+    <aura:attribute name="issearching" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card title="{!'My Campaign Members (Total : '+v.total+')'}" iconName="standard:campaign_members" >
+  
+        <div class="slds-m-around_small">
+            <lightning:datatable data="{! v.campaignmems }" 
+                                 columns="{! v.mycolumns }" 
+                                 keyField="id" 
+                                 hideCheckboxColumn="true"
+                                 onsort="{!c.updateColumnSorting}"
+                                 sortedBy="{!v.sortedBy}"  
+                                 sortedDirection="{!v.sortedDirection}"/><br/>
+            <lightning:layout horizontalAlign="spread">
+                <div class="slds-size--1-of-12" >
+                    <ui:inputSelect aura:id="recordSize" label="Record Per Page: " change="{!c.onSelectChange}">
+                        <ui:inputSelectOption text="5" label="5" value="true"/>
+                        <ui:inputSelectOption text="10" label="10"/>
+                        <ui:inputSelectOption text="25" label="25"/>
+                        <ui:inputSelectOption text="50" label="50"/>  
+                    </ui:inputSelect>
+                </div>
+                <div >            
+                    <lightning:button disabled="{!v.page == 1}" variant="brand" label="Previous Page" onclick="{! c.navigate }" />            
+                    <lightning:button disabled="{!v.page == v.pages}" aura:id="previousPage" variant="brand" label="Next Page" onclick="{! c.navigate }" />
+                </div>
+                <div >
+                    page {!v.page} / {!v.pages}
+                </div>
+            </lightning:layout>
+        </div>
+    </lightning:card>    
+</aura:component>

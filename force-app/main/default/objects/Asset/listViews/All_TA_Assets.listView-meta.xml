@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_TA_Assets</fullName>
+    <columns>ASSET.NAME</columns>
+    <columns>Scheme_Number_f__c</columns>
+    <columns>POS__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Scheme_Type__c</columns>
+    <columns>CONTACT.NAME</columns>
+    <columns>Scheme_End_Date_f__c</columns>
+    <columns>Scheme_Active_Member_Count__c</columns>
+    <columns>ASSET.STATUS</columns>
+    <columns>ASSET.CREATED_DATE</columns>
+    <columns>Country_Code_f__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ASSET.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Asset.Ticketing_Authority</value>
+    </filters>
+    <label>All TA Assets</label>
+    <sharedTo>
+        <group>S_D_Knowledge_champs</group>
+    </sharedTo>
+</ListView>

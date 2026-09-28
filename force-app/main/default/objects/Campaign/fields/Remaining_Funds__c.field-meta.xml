@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Remaining_Funds__c</fullName>
+    <description>Marketing-Parent RT only</description>
+    <formula>Total_Campaign_Budgeted_Cost__c +  Rollover_Budget_Cost__c  -  HierarchyActualCost</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Total Campaign Budgeted Cost + Rollover Campaign Budget Cost - Actual Cost in Hierarchy</inlineHelpText>
+    <label>Remaining Funds</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

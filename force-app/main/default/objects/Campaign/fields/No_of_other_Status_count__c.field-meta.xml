@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_other_Status_count__c</fullName>
+    <inlineHelpText>Indicates if the campaign member status is set as &quot;Invalid&quot; or &quot;Incomplete&quot;</inlineHelpText>
+    <label>Other</label>
+    <summaryFilterItems>
+        <field>CampaignMember.Status</field>
+        <operation>equals</operation>
+        <value>Closed – Incomplete/Email Preferred, Closed - Invalid Details, Closed – Invalid Details, Closed – Not Completed, Closed - Incomplete/Email Preferred, Closed - Not Completed, Closed Not Completed, Closed Incomplete/Email Preferred</value>
+    </summaryFilterItems>
+    <summaryForeignKey>CampaignMember.CampaignId</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

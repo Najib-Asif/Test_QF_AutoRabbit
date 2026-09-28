@@ -1,0 +1,174 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "IsDeleted", "ActionedDateText", "OldValue", "CaseId", "ActionedDate", "Field", "CreatedById", "RelevantActionedDateText", "CreatedDate", "DataType", "NewValue", "RelevantActionedDate", "ValidHistoryRecord", "Id" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CaseHistoryWRelevantActionedDate",
+          "name" : "CaseHistoryWRelevantActionedDate1"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ProfileId", "UserRoleId", "FirstName", "IsActive", "UserRole.ParentRoleId", "Profile.Name", "UserRole.Name", "Name", "UserRole.Id", "Profile.Name_bucket", "Profile.Id", "Id", "LastName", "UserRole.Name_bucket", "UserRole.DeveloperName", "Id_formula_formula_formula_bucket" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "BasicUserM",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "grainExtractions" : [ {
+          "source" : "CreatedDate",
+          "targets" : [ {
+            "name" : "CreatedDate_DAY",
+            "label" : "Created Date Day",
+            "grainType" : "DAY"
+          }, {
+            "name" : "CreatedDate_MONTH",
+            "label" : "Created Date Month",
+            "grainType" : "MONTH"
+          }, {
+            "name" : "CreatedDate_WEEK",
+            "label" : "Created Date Week",
+            "grainType" : "WEEK"
+          } ]
+        } ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "BasicUserM.Name",
+          "name" : "UNIQUE_BasicUserM.Name",
+          "label" : "Unique Full Name"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "CaseId",
+          "name" : "UNIQUE_CaseId",
+          "label" : "Unique Case ID"
+        } ],
+        "groupings" : [ "BasicUserM.Name", "CreatedDate_DAY", "CreatedDate_MONTH", "CreatedDate_WEEK", "BasicUserM.UserRole.Name_bucket", "BasicUserM.UserRole.Name", "BasicUserM.Id_formula_formula_formula_bucket" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Agent Worked on Case",
+          "name" : "Agent_Worked_on_Case"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "CaseHistoryWRelevantActionedDate",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Basic User Master",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "AGGREGATE0" : {
+        "label" : "Aggregate 0",
+        "type" : "AGGREGATE",
+        "top" : 112,
+        "left" : 532,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "Site Agent work Login Trend",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 672
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "AGGREGATE0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

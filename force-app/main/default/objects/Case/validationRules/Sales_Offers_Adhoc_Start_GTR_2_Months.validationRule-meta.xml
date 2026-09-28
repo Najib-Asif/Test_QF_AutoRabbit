@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Adhoc_Start_GTR_2_Months</fullName>
+    <active>true</active>
+    <description>When Case = Sales Offers Request &amp; Type = Ad hoc &amp; Created Date &gt;=25, Campaign Start Date &gt; 2 Months
+Platinum, Gold, 50% Bonus Status Credits</description>
+    <errorConditionFormula>AND (
+ RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/
+ NOT (   $UserRole.Id   = $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/
+
+ ISPICKVAL ( Type , &quot;Adhoc&quot; ),
+
+OR ( 
+ ISPICKVAL ( Sub_Type__c , &quot;Platinum Accelerate&quot;),
+ ISPICKVAL ( Sub_Type__c , &quot;50% Bonus Status Credits&quot;),
+ ISPICKVAL ( Sub_Type__c , &quot;Gold Accelerate&quot;)
+),
+
+OR(
+ DAY( DATEVALUE( CreatedDate ) ) &gt;= 25,
+ NOT ( MONTH ( Campaign_Start_Date__c ) &gt; MONTH ( DATEVALUE( CreatedDate ))+ 1)),
+
+OR(
+ AND (
+ DAY( DATEVALUE( CreatedDate ) ) &gt;= 1,
+ DAY( DATEVALUE( CreatedDate ) ) &lt; 25 ),
+ MONTH ( Campaign_Start_Date__c ) = MONTH ( DATEVALUE( CreatedDate ))),
+ Campaign_Start_Date__c = TODAY()
+ )</errorConditionFormula>
+    <errorDisplayField>Campaign_Start_Date__c</errorDisplayField>
+    <errorMessage>For Adhoc Case, if Case is created before the 25th of the month, Campaign Start Date has to be in the next month. If Case is created after the 25th of the month, Campaign Start Date has to be in the following month.</errorMessage>
+</ValidationRule>

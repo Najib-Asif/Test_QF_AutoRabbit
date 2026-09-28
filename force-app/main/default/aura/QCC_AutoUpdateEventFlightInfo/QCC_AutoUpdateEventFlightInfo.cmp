@@ -1,0 +1,32 @@
+<!---
+    **********************************************************************************************
+    Author:        Bharathkumar Narayanan
+    Company:       TCS
+    Description:   Flight Events Autorefresh technical design component
+    Jira No :      CRM-3913
+         
+    ************************************************************************************************
+    History
+    ************************************************************************************************
+    15-Oct-2019     Bharathkumar Narayanan               Initial Design
+    
+    **********************************************************************************************
+    -->
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader"
+                controller="QCC_AutoEventFlightInfoUpdateHelper" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/> 
+    <aura:if isTrue="{!v.showSpinner}">
+            <div>
+                <div role="status" class="slds-spinner slds-spinner_medium">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>            
+        </aura:if> 
+    
+    
+</aura:component>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Strategies</fullName>
+    <columns>NAME</columns>
+    <columns>QF_Emp_Name__c</columns>
+    <columns>Review_Year__c</columns>
+    <columns>Number_of_Calls__c</columns>
+    <columns>Call_Average__c</columns>
+    <columns>Status__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Open,Invalid</value>
+    </filters>
+    <label>Open Strategies</label>
+    <sharedTo>
+        <group>QIS_QA_Group</group>
+        <group>System_Admins</group>
+    </sharedTo>
+</ListView>

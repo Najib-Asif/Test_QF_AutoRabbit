@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_CannotManuallyAssignToCCC</fullName>
+    <active>true</active>
+    <description>QCC - Validation rule to restrict CJM from manually assigning to CCC without clicking the assign button</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_QCC_CannotManuallyAssignToCCC__c=TRUE,
+			TEXT(Status__c) = &apos;Open&apos;,
+				CONTAINS(Owner:User.UserRole.Name, &quot;QF-QDC-OM&quot;),
+				 RecordType.DeveloperName ==  &apos;Active_Event&apos;
+			)</errorConditionFormula>
+    <errorDisplayField>OwnerId</errorDisplayField>
+    <errorMessage>Event cannot be directly assign to a Customer Care user, please use the &apos;Assign to Customer Care&apos; button</errorMessage>
+</ValidationRule>

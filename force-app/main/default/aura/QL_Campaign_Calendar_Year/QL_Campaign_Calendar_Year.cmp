@@ -1,0 +1,243 @@
+<aura:component >
+    
+    <!--Attributes -->
+    <aura:attribute name="Spinner" type="Boolean"/>
+    <aura:attribute name="CurrentMonth" type="Date"/>
+    <aura:attribute name="Months" type="Date[]"/>
+    <aura:attribute name="campaignFrYearlyview" type="Object[]" />
+    <aura:attribute name="AllcampaignFrYearlyview" type="Object[]" />
+    <aura:attribute name="monthInNumber" type="Object[]" />
+    <aura:attribute name="recordToDisply" type="integer"/>
+    <aura:attribute name="page" type="integer"/>
+    <aura:attribute name="SplitDates" type="Object[]" />
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+    <aura:attribute name="total" type="integer" description="total records count store "/>
+    
+    <!--Handlers-->
+    <aura:handler name="init" value="{!this}" action ="{!c.InitYearlyView}"/>
+    <aura:handler name="change" value="{!v.CurrentMonth}" action="{!c.NextPreviousYears}"/>
+    
+    <!--CustomEvents-->
+    <aura:registerEvent name="SendYear" type="c:QL_CurrentMonthYear"/>
+    
+    <!--Aura Methods-->
+    <aura:method name="GetMonths" action="{!c.NextPreviousYears}"> 
+        <aura:attribute name="BtnValue" type="String"/> 
+    </aura:method>
+    
+    <div class="slds slds-p-around_small slds-scrollable">
+        <aura:if isTrue="{!not(empty(v.campaignFrYearlyview))}">
+            <div style="height: 35px;">
+                <div class="slds-align_absolute-center" style="left: 40rem;">
+                    <ui:button disabled="{!v.page == 1}" aura:id="toggleButton" class="slds-button--neutral sldsicon Staticpostition">
+                        <lightning:icon class="sldsicon" iconName="utility:chevronleft" size="x-Small" onclick="{!c.navigatePrevious}"/>
+                        <span class="slds-assistive-text">Settings</span>
+                    </ui:button>
+                    
+                    <p class="slds-truncate">{!v.page} / {!v.pages}</p>
+                    
+                    <ui:button disabled="{!v.page == v.pages}" class="slds-button--neutral Staticpostition">
+                        <lightning:icon iconName="utility:chevronright" size="x-Small" onclick="{!c.navigatetoNext}"/>
+                        <span class="slds-assistive-text">Settings</span>
+                    </ui:button>
+                </div> 
+            </div>
+        </aura:if>
+        <div class="slds-grid">
+            <div class="lwc-resource slds-size_1-of-6 slds-p-around_small slds-border_right slds-text-heading_medium" >
+                Campaigns 
+            </div>
+            <aura:if isTrue="{!not(v.Spinner)}">
+                <aura:iteration items="{!v.Months}" var="month">
+                    <div class="slds-col slds-align_absolute-center lwc-timeslot">
+                        <lightning:formattedDateTime value="{!month}" month="short" />
+                    </div>
+                </aura:iteration>
+            </aura:if>
+        </div>
+        <div>
+            <aura:if isTrue="{!v.Spinner}">
+                <div class="slds-spinner_container" aura:id="spinnerdiv"></div>
+            </aura:if>
+            <aura:if isTrue="{!empty(v.campaignFrYearlyview)}">
+                <aura:if isTrue="{!not(v.Spinner)}">
+                    <p class="slds-text-heading_large slds-align_absolute-center slds-p-around_small" style="font-size: 1.5rem;">
+                        Nothing Much this Year!
+                    </p>
+                </aura:if>
+                <aura:set attribute="else"> 
+                    
+                    <aura:iteration items="{!v.campaignFrYearlyview}" var="monthcamp" indexVar="idx">
+                        <div class="slds-grid">
+                            
+                            <div data-record="{!idx}" onclick="{!c.goToRecord}" class="Buttoneffect lwc-resource slds-size_1-of-6 slds-p-around_small slds-border_right textoverflow" >
+                                <span title="{!monthcamp.Name}">{!monthcamp.Name}</span>
+                            </div>
+                            
+                            <aura:if isTrue="{!not(v.Spinner)}">
+                                <aura:iteration items="{!v.monthInNumber}" var="month">
+                                    <div class="slds-col slds-p-vertical_x-small lwc-timeslot">
+                                        <aura:if isTrue="{!and(month.Month == monthcamp.StartMonth,month.Month == monthcamp.EndMonth)}">
+                                            <aura:if isTrue="{!and(month.Year == monthcamp.StartYear,month.Year == monthcamp.EndYear)}">
+                                                <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft' : 
+                                                            monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft': 
+                                                            monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                            monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                            monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                            monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                            monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                            monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                            monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':''}"></div>
+                                            </aura:if>
+                                            <aura:set attribute="else">   
+                                                <aura:if isTrue="{!monthcamp.StartYear == monthcamp.EndYear}">
+                                                    <aura:if isTrue="{!month.Month == monthcamp.StartMonth}">
+                                                        <aura:if isTrue="{!month.Year == monthcamp.StartYear}">
+                                                            <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusleft' : 
+                                                                        monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusleft': 
+                                                                        monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusleft':''}"></div>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                    <aura:if isTrue="{!month.Month == monthcamp.EndMonth}">
+                                                        <aura:if isTrue="{!month.Year == monthcamp.EndYear}">
+                                                            <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusright' : 
+                                                                        monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusright': 
+                                                                        monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusright':''}"></div>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                </aura:if>
+                                            </aura:set>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!and(monthcamp.StartYear != monthcamp.EndYear)}">
+                                            <aura:if isTrue="{!and(lessthan(monthcamp.StartYear,month.Year),greaterthan(monthcamp.EndYear,month.Year))}">
+                                                <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress' : 
+                                                            monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress': 
+                                                            monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress':''}"></div>
+                                            </aura:if>
+                                            <aura:if isTrue="{!and(greaterthan(month.Month,monthcamp.StartMonth),month.Year == monthcamp.StartYear)}">
+                                                <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress' : 
+                                                            monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress': 
+                                                            monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress':''}"></div>
+                                            </aura:if>
+                                            <aura:if isTrue="{!and(lessthan(month.Month,monthcamp.EndMonth),month.Year == monthcamp.EndYear)}">
+                                                <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress' : 
+                                                            monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress': 
+                                                            monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress':
+                                                            monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress':''}"></div>
+                                            </aura:if>
+                                            <aura:if isTrue="{!month.Month == monthcamp.StartMonth}">
+                                                <aura:if isTrue="{!month.Year == monthcamp.StartYear}">
+                                                    <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusleft' : 
+                                                                monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusleft': 
+                                                                monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusleft':''}"></div>
+                                                </aura:if>
+                                            </aura:if>
+                                            <aura:if isTrue="{!month.Month == monthcamp.EndMonth}">
+                                                <aura:if isTrue="{!month.Year == monthcamp.EndYear}">
+                                                    <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusright' : 
+                                                                monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusright': 
+                                                                monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusright':''}"></div>
+                                                </aura:if>
+                                            </aura:if>
+                                            <aura:set attribute="else"> 
+                                                <aura:if isTrue="{!and(greaterthan(month.Month,monthcamp.StartMonth),lessthan(month.Month,monthcamp.EndMonth))}">
+                                                    <aura:if isTrue="{!and(month.Year == monthcamp.StartYear,month.Year == monthcamp.EndYear)}">
+                                                        <div class="{!monthcamp.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress' : 
+                                                                    monthcamp.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress': 
+                                                                    monthcamp.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress':
+                                                                    monthcamp.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress':
+                                                                    monthcamp.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress':
+                                                                    monthcamp.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress':
+                                                                    monthcamp.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress':
+                                                                    monthcamp.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress':
+                                                                    monthcamp.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress':''}"></div>
+                                                    </aura:if>
+                                                </aura:if>
+                                            </aura:set>
+                                        </aura:if>
+                                        
+                                    </div>
+                                </aura:iteration>
+                            </aura:if>
+                            
+                        </div>
+                    </aura:iteration>
+                </aura:set>
+            </aura:if>
+        </div>
+    </div>
+    
+    <aura:if isTrue="{!not(empty(v.campaignFrYearlyview))}">
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <div style="padding-left: 620px;" class="ptop slds-align--absolute-center">
+                <ui:button disabled="{!v.page == 1}" aura:id="toggleButton" class="slds-button--neutral">
+                    <lightning:icon iconName="utility:chevronleft" size="x-Small" onclick="{!c.navigatePrevious}"/>
+                    <span class="slds-assistive-text">Settings</span>
+                </ui:button>
+                
+                <p class="slds-truncate">{!v.page} / {!v.pages}</p>
+                
+                <ui:button disabled="{!v.page == v.pages}" class="slds-button--neutral">
+                    <lightning:icon iconName="utility:chevronright" size="x-Small" onclick="{!c.navigatetoNext}"/>
+                    <span class="slds-assistive-text">Settings</span>
+                </ui:button>
+            </div> 
+        </div>
+        <div class="slds-col" style="padding-left: 200px;">
+            <p style="width: 160px; display: flex;" class="ptop slds-p-around--medium">{!v.total} Campaigns.</p>
+            </div>
+        <div class="slds-col" style="padding-left: unset; padding-right: unset;">
+            <div style="padding-top: 6px;">
+                <ui:inputSelect class = "combobox" aura:id="recordSize" label="Display Record Per Page: " change="{!c.ChangeInRecordNumber}">
+                    <ui:inputSelectOption text="50" label="50" value="true"/>
+                    <ui:inputSelectOption text="100" label="100"/>
+                    <ui:inputSelectOption text="200" label="200"/>
+                </ui:inputSelect>
+            </div>
+        </div>
+    </div>
+    </aura:if>
+</aura:component>

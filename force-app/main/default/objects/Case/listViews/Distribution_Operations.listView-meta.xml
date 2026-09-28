@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distribution_Operations</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>QAC_Request_Country__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>GDS_DI__c</columns>
+    <columns>Sub_Category__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>Ticket_Status__c</columns>
+    <columns>CASES.LAST_UPDATE</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.ORIGIN</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Resolved,Closed,Closed - Incomplete Details,Closed - Not Applicable,Closed - Duplicate</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>NDC</value>
+    </filters>
+    <label>Distribution Operations</label>
+    <queue>Distribution_Operations</queue>
+</ListView>

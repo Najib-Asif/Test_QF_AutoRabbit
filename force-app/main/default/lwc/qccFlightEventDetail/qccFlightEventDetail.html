@@ -1,0 +1,115 @@
+<template>
+    <template lwc:if={isHeader}>
+        <lightning-layout multiple-rows class="slds-var-p-bottom_xx-small">
+            <lightning-layout-item size="6">
+                <span style="font-size: 18px;font-weight: 700;line-height: 27px;color:#080707;">{flghtEvnt.departureAirportCode}</span>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" class="slds-text-align_right">
+                <span style="font-size: 18px;font-weight: 700;line-height: 27px;color:#080707;">{flghtEvnt.arrivalAirportCode}</span>
+            </lightning-layout-item>
+            <lightning-layout-item size="6"><span class="slds-var-p-right_xx-small slds-truncate" style="display: block;font-size: 12px;font-weight: 400;line-height: 18px;color:#3E3E3C;">
+                                    {departureInfo}</span>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-text-align_right" size="6">
+                <span class="slds-var-p-left_xx-small slds-truncate" style="display: block; font-size: 12px;font-weight: 400;line-height: 18px;color:#3E3E3C;">
+                                        {arrivalInfo}</span>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+        <!-- Scheduled Arrivals and Departures -->
+        <lightning-layout multiple-rows class="slds-var-p-bottom_xx-small">
+            <lightning-layout-item size="6">
+                <span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#080707;">Scheduled Dep.</span>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-text-align_right" size="6">
+                <span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#080707;">Scheduled Arr.</span>
+            </lightning-layout-item>
+            <lightning-layout-item size="6"><span style="font-size: 16px;font-weight: 510;line-height: 24px;color:#080707;">
+                                    {flghtEvnt.scheduledDepartureTime}</span>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-text-align_right" size="6"><span style="font-size: 16px;font-weight: 510;line-height: 24px;color:#080707;">
+                                    {flghtEvnt.scheduledArrivalTime}</span>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#3E3E3C;">
+                                    {flghtEvnt.scheduledDepartureDate}</span>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-text-align_right" size="6"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#3E3E3C;">
+                                    {flghtEvnt.scheduledArrivalDate}</span>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <!-- Actual Arrivals and Departures -->       
+        <lightning-layout multiple-rows class="slds-var-p-bottom_xx-small">
+            <lightning-layout-item size="6">
+                <span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#080707;">{isEstimatedDept}</span>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-text-align_right" size="6">
+                <span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#080707;">{isEstimatedArrival}</span>
+            </lightning-layout-item>
+            <lightning-layout-item size="6"><span style="font-size: 16px;font-weight: 510;line-height: 24px;color:#080707;">
+                                    {departTime}</span>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-text-align_right" size="6"><span style="font-size: 16px;font-weight: 510;line-height: 24px;color:#080707;">
+                                    {arrivalTime}</span>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#3E3E3C;">
+                                    {departDate}</span>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-text-align_right" size="6"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#3E3E3C;">
+                                    {arrivalDate}</span>
+            </lightning-layout-item>
+        </lightning-layout>
+        
+
+        <!-- FE Flight Delays -->
+        <template lwc:if={isDelayed}>
+            <lightning-layout multiple-rows class="slds-var-p-bottom_xx-small">                
+                <lightning-layout-item size="6"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#C23934;">{flghtEvnt.departureDelay}</span>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-text-align_right" size="6"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#C23934;">{flghtEvnt.arrivalDelay}</span>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        
+        <template lwc:if={flghtEvnt.disruptionDetails}>
+            <lightning-layout class="slds-var-p-bottom_xx-small">
+                <lightning-layout-item size="12"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#080707;">Disruption Details</span>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div class="slds-list_inline slds-wrap">  
+                <div  class="slds-var-p-bottom_xx-small slds-var-p-right_xxx-small">
+                    <strong>{flghtEvnt.disruptionCause}</strong>: {flghtEvnt.disruptionDetails} 
+                </div> 
+            </div>
+        </template>
+        <!-- FE Flight Failures -->
+        <template lwc:if={flghtEvnt.isflightFailuresPresent}>
+            <lightning-layout class="slds-var-p-bottom_xx-small">
+                <lightning-layout-item size="12"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#080707;">Flight Failures</span>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div class="slds-list_inline slds-wrap">
+                <template for:each={flghtEvnt.flightFailures} for:item="flightFailures" for:index="indexOne">
+                    <div key={flightFailures.failureCode} class="slds-var-p-bottom_xx-small slds-var-p-right_xxx-small">
+                        <div class="slds-badge">
+                            {flightFailures.name}
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template lwc:if={flghtEvnt.isflightFailuresPresent}>
+            <lightning-layout class="slds-var-p-bottom_xx-small">
+                <lightning-layout-item size="12"><span style="font-size: 12px;font-weight: 400;line-height: 18px;color:#080707;">Flight Event</span>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div class="slds-list_inline slds-wrap">
+                    <div  class="slds-var-p-bottom_xx-small slds-var-p-right_xxx-small">
+                            <a href="#" onclick={handleOpenRecord}>{flghtEvnt.eventName} </a>                            
+                    </div>                
+            </div>
+        </template>
+
+</template>

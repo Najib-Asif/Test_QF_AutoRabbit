@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Modify_LegalApp_Noneto_AppOrRej</fullName>
+    <active>true</active>
+    <description>Will restrict to user for making Legal Approve filed value from None to Approve or Reject.</description>
+    <errorConditionFormula>AND(ISCHANGED(Legal_Approval__c),PRIORVALUE( Legal_Approval__c ) =&apos;&apos;, OR (ISPICKVAL(Legal_Approval__c, &apos;Approved&apos;), ISPICKVAL(Legal_Approval__c, &apos;Rejected&apos;) ) )</errorConditionFormula>
+    <errorDisplayField>Legal_Approval__c</errorDisplayField>
+    <errorMessage>You can not make the value as &quot;Approved&quot; or &quot;Rejected&quot; from &apos;None&apos; Value. Please select the value as &quot;Required&quot;.</errorMessage>
+</ValidationRule>

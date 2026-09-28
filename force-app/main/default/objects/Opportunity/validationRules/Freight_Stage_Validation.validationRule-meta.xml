@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Stage_Validation</fullName>
+    <active>true</active>
+    <description>Freight - Users are only able to change the Stage from Closed-Accepted to Closed-Not Accepted ie, they cannot change Stage from Closed-Accepted to Identify, Qualify, or Propose &amp; Negotiate</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_extend_update_privilege_to_superusers__c=False, $RecordType.DeveloperName = &quot;Freight&quot;, 
+    NOT (ISNEW()) ,
+    NOT(  CONTAINS($User.Profile_Name__c, &quot;Administrator&quot;)),
+	OR(AND(ISPICKVAL(PRIORVALUE( StageName) , &quot;Closed - Accepted&quot;),OR(ISPICKVAL(StageName, &apos;Identify&apos;),ISPICKVAL(StageName, &apos;Qualify&apos;),ISPICKVAL(StageName, &apos;Propose &amp; Negotiate&apos;))),
+	   AND(ISPICKVAL(PRIORVALUE( StageName) , &quot;Closed - Not Accepted&quot;),OR(ISPICKVAL(StageName, &apos;Closed - Accepted&apos;),ISPICKVAL(StageName, &apos;Identify&apos;),ISPICKVAL(StageName, &apos;Qualify&apos;),ISPICKVAL(StageName, &apos;Propose &amp; Negotiate&apos;)))),
+	   
+	 ISCHANGED( StageName )  
+	
+	)</errorConditionFormula>
+    <errorMessage>You do not have the permission to change the Stage</errorMessage>
+</ValidationRule>

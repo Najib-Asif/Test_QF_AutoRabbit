@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description_field_is_locked_QCC</fullName>
+    <active>true</active>
+    <description>Description field is locked for QCC users after case creation.
+CRM-6162: Only System admins can update case description.</description>
+    <errorConditionFormula>AND(
+$Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - Freight&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - QCC&apos;,
+$Profile.Name &lt;&gt; &apos;Qantas System Admin - SND&apos;,
+$Profile.Name &lt;&gt; &apos;CRM Administrator&apos;,
+$Profile.Name &lt;&gt; &apos;CRM Administrator - Freight&apos;,
+$Profile.Name &lt;&gt; &apos;CRM Administrator - Global&apos;,
+$Profile.Name &lt;&gt; &apos;CRM Administrator - QCC&apos;,
+$Profile.Name &lt;&gt; &apos;CRM Administrator - SND&apos;,
+IsDescriptionChanged__c, NOT(ISBLANK(PRIORVALUE(Description))),
+OR(
+RecordType.DeveloperName = &apos;CCC_Baggage&apos;, RecordType.DeveloperName = &apos;CCC_Complaints&apos;, RecordType.DeveloperName = &apos;CCC_Compliment&apos;, RecordType.DeveloperName = &apos;CCC_Further_Action_Required&apos;, RecordType.DeveloperName = &apos;QCC_Insurance_Letter_Case&apos;, RecordType.DeveloperName = &apos;CCC_Medical&apos;, RecordType.DeveloperName = &apos;CCC_On_The_Spot_Recovery&apos;, RecordType.DeveloperName = &apos;CCC_Query&apos;,
+RecordType.DeveloperName = &apos;QCC_Assistance&apos;,
+RecordType.DeveloperName = &apos;QCC_Specific_Needs&apos;
+)
+
+)</errorConditionFormula>
+    <errorDisplayField>Description</errorDisplayField>
+    <errorMessage>Description field cannot be changed.</errorMessage>
+</ValidationRule>

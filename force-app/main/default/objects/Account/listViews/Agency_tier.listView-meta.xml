@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agency_tier</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Customer_Category__c</columns>
+    <columns>Qantas_Industry_Centre_ID__c</columns>
+    <columns>ACCOUNT.CREATED_DATE</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <columns>CORE.USERS.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACCOUNT.TYPE</field>
+        <operation>equals</operation>
+        <value>Agency Account</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.FIRST_NAME</field>
+        <operation>equals</operation>
+        <value>Kellie</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.LAST_NAME</field>
+        <operation>equals</operation>
+        <value>Sullivan</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Qantas_Industry_Centre_ID__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>ROW Agency Accounts with Kellie</label>
+    <sharedTo>
+        <role>QF_Support_B_G_Deal_Optimisation_Pricing</role>
+    </sharedTo>
+</ListView>

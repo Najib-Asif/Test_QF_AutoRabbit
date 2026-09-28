@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>Case_value_changes__c.Old_Value__c</field>
+    </columns>
+    <columns>
+        <field>FK_CASE_STATUS</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case_value_changes__c.Total_Case_Status_Duration_in_minutes__c</field>
+    </columns>
+    <columns>
+        <field>Case_value_changes__c.New_Value__c</field>
+    </columns>
+    <columns>
+        <field>CUST_LAST_UPDATE_NAME</field>
+    </columns>
+    <columns>
+        <field>Case_value_changes__c.Modified_Date_Time__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>FK_CASE_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Baggage</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.Old_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>In progress</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case_value_changes__c.New_Value__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Waiting for customer,Waiting for Internal,Pending Recovery,closed,on hold,reply received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CUST_LAST_UPDATE_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Abigael Bea Bernardino,Alliah Faith Noelle Tarlit,Azile Mthunzini,Bradny Gumede,Caroline Maenetja,Cherelloi Adolfo,Christina Joyzen Pasia,Daniel Arendse,Elton Isaacs,Erica Tikili,Escaraman Ma. Danilly Jane Mendoza,Eugene Agpoon,Hani Leila Mallari,Iris Banua,Isobelle Jane Soreno,James Patrick Abdula,Jean Kate Favila,Jemar Rey Alvarez,Joannelyn Silang,Jocelyn Belonio,Joevic Macapagal,Julian Ludick,Kristine Joy Bondoc,Larriane Grace Almazar,Maria Cabajes,Maria Cecilia Collantes,Maria Pinili,Masithembe Nono,Neo Pan,Noah Buys,Raul Taga-an,Rizaline Saavedra,Samantha Chakanetsa,Shamiel Jonathan,Sibongile Phama,Sigman Rhee Elarcosa,Steven Clint Velasco,Waldrex Jr Bautista</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Baggage - August 2026 - AHT</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Case_value_changes__c@Case_value_changes__c.Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Case_value_changes__c.Total_Case_Status_Duration_in_minutes__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Case_value_changes__c.Modified_Date_Time__c</dateColumn>
+        <endDate>2026-08-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2026-08-03</startDate>
+    </timeFrameFilter>
+</Report>

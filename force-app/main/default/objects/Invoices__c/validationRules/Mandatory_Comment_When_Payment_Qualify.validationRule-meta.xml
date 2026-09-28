@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Comment_When_Payment_Qualify</fullName>
+    <active>true</active>
+    <description>Mandatory if &apos;Payment Qualified&apos; is No, and &apos;Payment Required&apos; is Yes.</description>
+    <errorConditionFormula>AND(
+OR(
+RecordType.DeveloperName = &apos;New_Corporate_Payments&apos;,
+RecordType.DeveloperName = &apos;Approved_Corporate_Payments&apos;
+),
+Comment__c=&apos;&apos;,
+ISPICKVAL(Payment_Qualified__c,&apos;No&apos;),  ISPICKVAL(Payment_required__c,&apos;Yes&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>Comment__c</errorDisplayField>
+    <errorMessage>Please Enter Comment if &apos;Payment Qualified&apos; is No, and &apos;Payment Required&apos; is Yes.!</errorMessage>
+</ValidationRule>

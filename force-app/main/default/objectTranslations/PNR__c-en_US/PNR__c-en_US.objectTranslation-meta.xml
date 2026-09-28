@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>PNR</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>PNRs</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- The PNR field must contain exactly 6 alphanumeric characters. --></errorMessage>
+        <name>PNR_Alphanumeric_6_Char_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Additional PNR’s cannot be entered without a PNR in the Details tab --></errorMessage>
+        <name>PrimaryPNRNotNull</name>
+    </validationRules>
+</CustomObjectTranslation>

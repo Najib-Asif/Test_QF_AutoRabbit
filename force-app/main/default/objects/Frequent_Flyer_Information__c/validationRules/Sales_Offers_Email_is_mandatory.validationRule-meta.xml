@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Email_is_mandatory</fullName>
+    <active>true</active>
+    <description>For Sales Offer Request, email address is mandatory</description>
+    <errorConditionFormula>AND( 
+Case__r.RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/ 
+
+ISBLANK (  Frequent_Flyer_Email__c )
+
+)</errorConditionFormula>
+    <errorDisplayField>Frequent_Flyer_Email__c</errorDisplayField>
+    <errorMessage>For Sales Offer Request, email address is mandatory</errorMessage>
+</ValidationRule>

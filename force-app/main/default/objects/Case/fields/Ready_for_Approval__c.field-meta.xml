@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ready_for_Approval__c</fullName>
+    <description>Sales Offer - to return whether for Platinum/ Gold/ 50% Bonus - either Presence of FF Information or Number of Frequent Flyer is populated before approval is allowed.</description>
+    <formula>IF (
+    OR (
+
+        /*Adhoc*/
+        AND (
+            ISPICKVAL ( Type , &quot;Adhoc&quot;),
+            OR (
+                ISPICKVAL ( Sub_Type__c , &quot;Platinum Accelerate&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;Gold Accelerate&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;50% Bonus Status Credits&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;Gold Accelerate + 90 Days QC&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;Platinum Accelerate + 90 Days QC&quot;)
+            ),
+            Presence_of_Frequent_Flyer_Information__c &gt;= 1 
+        ),
+
+        /*Adhoc*/
+        AND (
+            ISPICKVAL ( Type , &quot;Adhoc&quot;),
+            OR (
+                ISPICKVAL ( Sub_Type__c , &quot;FOC Qantas Club Waiver&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;QC Member Gifting&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;90 Days QC FOC&quot;)
+            )
+        ),
+
+        /*Campaign*/
+        AND (
+            ISPICKVAL ( Type , &quot;Campaign&quot;),
+            OR (
+                ISPICKVAL ( Sub_Type__c , &quot;Platinum Accelerate&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;Gold Accelerate&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;50% Bonus Status Credits&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;FOC Qantas Club Waiver&quot;),
+                ISPICKVAL ( Sub_Type__c , &quot;Corporate Trigger - 50% Bonus Status&quot;)
+            )
+        ),
+
+        AND(
+            NOT ( ISPICKVAL ( Type ,&quot; &quot;)),
+            NOT( ISPICKVAL ( Sub_Type__c , &quot;Platinum Accelerate&quot;)),
+            NOT ( ISPICKVAL ( Sub_Type__c , &quot;Gold Accelerate&quot;)),
+            NOT (ISPICKVAL ( Sub_Type__c , &quot;50% Bonus Status Credits&quot;)),
+            NOT(ISPICKVAL ( Sub_Type__c , &quot;QC Member Gifting&quot;))
+        )
+    )
+
+,TRUE, FALSE 
+)</formula>
+    <label>Ready for Approval?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

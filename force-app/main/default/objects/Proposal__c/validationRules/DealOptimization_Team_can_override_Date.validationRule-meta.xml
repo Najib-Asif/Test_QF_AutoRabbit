@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DealOptimization_Team_can_override_Date</fullName>
+    <active>true</active>
+    <description>Only the Deal Optimization has privilege to override the Expected Approval date</description>
+    <errorConditionFormula>AND(ISCHANGED(Expected_Approval_Date__c), 
+OR((RecordType.Name = &apos;CA - Approval Required - Internal&apos;),(RecordType.Name = &apos;QBS - Approval Required - Internal&apos;),(RecordType.Name = &apos;CA - Draft&apos;),(RecordType.Name = &apos;QBS - Draft&apos;)),
+Opportunity__r.OwnerId &lt;&gt; $User.Id,
+NOT($UserRole.Id = &apos;00E90000001P6KH&apos;), /*Deal Optimization */ 
+NOT($User.Id = &apos;00590000004hkhl&apos;), /*Nikki Suters */
+NOT($UserRole.Id = &apos;00E90000001P7am&apos;), /* B&amp;G - National Manager - Resources */
+NOT($UserRole.Id = &apos;00E90000001P6Kb&apos;), /* National Manager - Business &amp; Government */
+NOT($UserRole.Id = &apos;00E90000001P6Lj&apos;), /*Head of QIS */
+NOT($UserRole.Id = &apos;00E90000001P6Iz&apos;), /*Head of Agency Partnerships */
+NOT($UserRole.Id = &apos;00E90000001P6J4&apos;), /*Head of Bus&amp;Gov */
+NOT($Profile.Name = &quot;System Administrator&quot;),
+NOT($Profile.Name = &quot;Qantas System Administrator&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - Freight&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - QCC&quot;),
+NOT($Profile.Name = &quot;Qantas System Admin - SND&quot;))</errorConditionFormula>
+    <errorMessage>Only the Account manager and  Deal Optimization team can override the Expected Approval Date</errorMessage>
+</ValidationRule>

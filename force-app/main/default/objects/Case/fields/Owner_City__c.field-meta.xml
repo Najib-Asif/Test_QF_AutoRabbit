@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Owner_City__c</fullName>
+    <description>Case owners City</description>
+    <externalId>false</externalId>
+    <formula>IF(
+ISPICKVAL(Owner:User.Location__c, &quot;&quot;),&quot;Sydney&quot;,
+TEXT(Owner:User.Location__c)
+)</formula>
+    <label>Owner City</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

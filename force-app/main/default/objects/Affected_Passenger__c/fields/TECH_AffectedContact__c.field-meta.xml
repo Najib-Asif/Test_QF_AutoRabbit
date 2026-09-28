@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TECH_AffectedContact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>QCC: this is a backend technical lookup to show Related Events to Contact only if the Contact is affected.  There is a Process Builder that will automatically set this lookup if Affected is checked and remove it if Affected is unchecked.</description>
+    <label>Affected Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Related Events</relationshipLabel>
+    <relationshipName>Passengers</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

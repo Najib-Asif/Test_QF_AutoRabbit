@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Credits_Asset_Cannot_be_Modified</fullName>
+    <active>true</active>
+    <description>To ensure that all QAC Credit Assets records should not be modified after it is created.</description>
+    <errorConditionFormula>AND( 
+$Setup.EnableValidationRule__c.VR_QAC_Credits_Asset_Cannot_be_Modified__c,
+RecordType.DeveloperName = &apos;Agency_Credit&apos;, 
+NOT(ISNEW()),
+OR(ISCHANGED(Name), ISCHANGED( AccountId ), ISCHANGED(OwnerId), ISCHANGED(Asset_Year__c) ,  ISCHANGED(Active__c) ,  ISCHANGED(Total_Acquired_Credits__c) ,  ISCHANGED(Total_Consumed_Credits__c) ,  ISCHANGED(Total_Outstanding_Credits__c) ,  ISCHANGED(Description) ,  ISCHANGED(PurchaseDate) ,  ISCHANGED(UsageEndDate) ),
+NOT(OR($Profile.Name = &quot;QAC API Integration Profile&quot;, $Profile.Name = &quot;Data Administrator&quot;, $Profile.Name = &quot;Qantas Service Lightning&quot;, $Profile.Name = &quot;Qantas Agency Connect and Agency Sales&quot; )),NOT( $User.Id = $CustomMetadata.QAC_Agency_Credit_Detail__mdt.TrevorWorganUserID.UserID__c)
+)</errorConditionFormula>
+    <errorMessage>You cannot modify Agency Credit Asset records.</errorMessage>
+</ValidationRule>

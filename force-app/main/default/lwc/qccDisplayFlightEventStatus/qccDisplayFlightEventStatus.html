@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Flight Events">
+        <!--lightning-button variant="destructive-text" label="Refresh" name="refresh" title="Refresh Flight Events Table" onclick={handleClick} slot="actions"></lightning-button-->
+        <lightning-button-icon label="refresh button" icon-name="utility:refresh" name="refresh" alternative-text="Refresh" title="Refresh Flight Events Table" onclick={handleClick} slot="actions"></lightning-button-icon>
+        <div class="slds-m-around_medium">
+            <template lwc:if={messageToDisplay} >
+                <p>{ messageToDisplay } </p>
+            </template> 
+            <template lwc:else>
+                <lightning-datatable hide-table-header="true" key-field="Id" id="Id" columns={tableColumns} data={tableData} onrowaction={handleOnRowAction} hide-checkbox-column="true"></lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>
+    
+</template>

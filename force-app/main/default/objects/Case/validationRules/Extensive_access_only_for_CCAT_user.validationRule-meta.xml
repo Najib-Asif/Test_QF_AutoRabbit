@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Extensive_access_only_for_CCAT_user</fullName>
+    <active>true</active>
+    <description>CRM-8711: Only CCAT user should have access to submit a case with case origin as &quot;ACA Website&quot; and Dispute type as &quot;ACA Eligible&quot; or &quot;ACA Ineligible&quot;</description>
+    <errorConditionFormula>AND(OR( 
+AND(
+ISPICKVAL(Origin , &apos;ACA Website&apos;),
+OR( 
+ ISPICKVAL( QCC_Dispute_Type__c , &apos;ACA Eligible&apos;), 
+ ISPICKVAL(QCC_Dispute_Type__c , &apos;ACA Ineligible&apos;) 
+ )
+),
+AND(
+NOT(ISPICKVAL(Origin , &apos;ACA Website&apos;)),
+OR(
+ ISPICKVAL(QCC_Dispute_Type__c , &apos;ACA Ineligible&apos;), 
+ ISPICKVAL( QCC_Dispute_Type__c , &apos;ACA Eligible&apos;)
+)
+),
+AND(
+OR(
+NOT(ISPICKVAL(QCC_Dispute_Type__c , &apos;ACA Ineligible&apos;)), 
+NOT(ISPICKVAL( QCC_Dispute_Type__c , &apos;ACA Eligible&apos;))
+),
+ISPICKVAL(Origin , &apos;ACA Website&apos;)
+)
+),
+NOT($User.CCAT_User__c), 
+$Profile.Name  &lt;&gt;  &apos;System Administrator&apos;, 
+$Profile.Name  &lt;&gt;  &apos;Qantas System Administrator&apos;,
+$Profile.Name  &lt;&gt;  &apos;Qantas System Admin - Freight&apos;,
+$Profile.Name  &lt;&gt;  &apos;Qantas System Admin - QCC&apos;,
+$Profile.Name  &lt;&gt;  &apos;Qantas System Admin - SND&apos;,
+$Profile.Name  &lt;&gt;  &apos;CRM Administrator&apos;,
+$Profile.Name  &lt;&gt;  &apos;CRM Administrator - Freight&apos;,
+$Profile.Name  &lt;&gt;  &apos;CRM Administrator - Global&apos;,
+$Profile.Name  &lt;&gt;  &apos;CRM Administrator - QCC&apos;,
+$Profile.Name  &lt;&gt;  &apos;CRM Administrator - SND&apos;
+)</errorConditionFormula>
+    <errorMessage>Only CCAT user should have access to submit a case with case origin as &quot;ACA Website&quot; and Dispute type as &quot;ACA Eligible&quot; or &quot;ACA Ineligible&quot;</errorMessage>
+</ValidationRule>

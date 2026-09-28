@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Post_Recovery_Finalisation_Declined_msg_to_Case</name>
+        <label>Post Recovery Finalisation Declined msg to Case</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>declinedChatterMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewRecovery.Case_Number__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Post_Recovery_Finalised_msg_to_Case</name>
+        <label>Post Recovery Finalised msg to Case</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>finalisedChatterMsg</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>objNewRecovery.Case_Number__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>59.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Recovery_Status_Check</name>
+        <label>Recovery Status Check</label>
+        <locationX>314</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Finalised_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewRecovery.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Finalised</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Post_Recovery_Finalised_msg_to_Case</targetReference>
+            </connector>
+            <label>Finalised Status</label>
+        </rules>
+        <rules>
+            <name>Finalisation_Declined_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>objNewRecovery.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Finalisation Declined</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Post_Recovery_Finalisation_Declined_msg_to_Case</targetReference>
+            </connector>
+            <label>Finalisation Declined Status</label>
+        </rules>
+    </decisions>
+    <description>migrated from LoyaltyAPIHelper.invokeLoyaltyAPI future class</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>chatterMsg</name>
+        <dataType>String</dataType>
+        <expression>IF ( ISPICKVAL({!objNewRecovery.Status__c} , &apos;Finalised&apos;), &apos;Loyalty API call successful after Attempt # noofAttemptsCount&apos;, IF (ISPICKVAL({!objNewRecovery.Status__c}, &apos;Finalisation Declined&apos;), &apos;Loyalty API call unsuccessful Attempt # objNewRecovery.API_Attempts__c \n noFFMsg&apos;,&apos;&apos;))</expression>
+    </formulas>
+    <formulas>
+        <name>noFFMsg</name>
+        <dataType>String</dataType>
+        <expression>IF (ISBLANK({!objNewRecovery.FF_Number__c}), &apos;Frequent Flyer Number not available&apos;, &apos;&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>noofAttemptsCount</name>
+        <dataType>Number</dataType>
+        <expression>{!objNewRecovery.API_Attempts__c} + 1</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>RecoveryAfterTriggerSubFlow-CC {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>RecoveryAfterTriggerSubFlow-CCChatterNotification</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Recovery_Status_Check</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>declinedChatterMsg</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Loyalty API call unsuccessful Attempt # {!objNewRecovery.API_Attempts__c}
+{!noFFMsg}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>finalisedChatterMsg</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Loyalty API call successful after Attempt # {!noofAttemptsCount}</text>
+    </textTemplates>
+    <variables>
+        <name>objNewRecovery</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Recovery__c</objectType>
+    </variables>
+    <variables>
+        <description>objOldRecovery</description>
+        <name>objOldRecovery</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Recovery__c</objectType>
+    </variables>
+</Flow>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Account_Classification_Access</fullName>
+    <active>true</active>
+    <description>Restrict access to Account Classification including creating a new record</description>
+    <errorConditionFormula>AND( OR(ISPICKVAL(Classification__c,&apos;Agency Tier&apos;),ISPICKVAL(Classification__c,&apos;SME TIER&apos;)), 
+RecordType.DeveloperName = &apos;Account_Classifications&apos;,
+$Setup.EnableValidationRule__c.Restrict_Account_Classification_Access__c=False)</errorConditionFormula>
+    <errorDisplayField>Classification__c</errorDisplayField>
+    <errorMessage>Only system Admin has access to select the Agency Tier/SME Tier info!</errorMessage>
+</ValidationRule>

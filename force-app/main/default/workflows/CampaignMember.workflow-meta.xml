@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Member_Status_Last_Changed_By_Update</fullName>
+        <field>Member_Status_Last_Changed_By__c</field>
+        <formula>Assigned_To__c</formula>
+        <name>Member Status Last Changed By Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>No_of_calls_update</fullName>
+        <field>Calls_count__c</field>
+        <formula>VALUE(Text(No_of_Calls__c))</formula>
+        <name>No of calls update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Latest_Period_Date</fullName>
+        <description>Update Latest Period Date from Account to Campaign Member</description>
+        <field>As_at__c</field>
+        <formula>Contact.Account.Latest_Period_Date__c</formula>
+        <name>Update Latest Period Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_QF_Domestic_Share</fullName>
+        <field>QF_Domestic_Share__c</field>
+        <formula>Contact.Account.QF_Domestic_Market_Share__c</formula>
+        <name>Update QF Domestic Share</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_QF_International_Share</fullName>
+        <field>QF_International_Share__c</field>
+        <formula>Contact.Account.QF_International_Market_Share__c</formula>
+        <name>Update QF International Share</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_QF_Revenue</fullName>
+        <description>Update QF Revenue from Account to Campaign Member QF Revenue</description>
+        <field>QF_Revenue__c</field>
+        <formula>Contact.Account.QF_Revenue__c</formula>
+        <name>Update QF Revenue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_change_update</fullName>
+        <field>Campaign_Member_Status_Changed_Date__c</field>
+        <formula>((LastModifiedDate+0.04167)-1/24)</formula>
+        <name>status change update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>AU - Update Revenue Details</fullName>
+        <actions>
+            <name>Update_Latest_Period_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_QF_Domestic_Share</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_QF_International_Share</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_QF_Revenue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>CampaignMember.Account_Name__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>CampaignMember.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Marketing - Event</value>
+        </criteriaItems>
+        <description>To update Revenue Details from Account to Campaign Member</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Campaign Member Status</fullName>
+        <actions>
+            <name>Member_Status_Last_Changed_By_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>status_change_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(Campaign.RecordType.Name = &quot;SME Campaigns&quot;,    ISCHANGED(Status) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>No of calls count</fullName>
+        <actions>
+            <name>No_of_calls_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>CampaignMember.No_of_Calls__c</field>
+            <operation>equals</operation>
+            <value>0,1,2,3,4</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

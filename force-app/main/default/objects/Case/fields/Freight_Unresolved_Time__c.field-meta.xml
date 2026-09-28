@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Unresolved_Time__c</fullName>
+    <description>FCRM-848
+This field is created to display the wait icon along with the number of days a case has been in a Queue.</description>
+    <externalId>false</externalId>
+    <formula>IF(AND(ISPICKVAL(Origin, &apos;Web&apos;), CONTAINS(RecordType.Name, &apos;Qantas Freight&apos;), OR(ISPICKVAL(Status, &apos;Closed&apos;),ISPICKVAL(Status, &apos;Resolved&apos;))),
+IMAGE(&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0152v00000IRHhh&amp;oid=00D8s00000IDoz7&amp;lastMod=1647355817000&quot;,
+Text(Status), 30, 30)+&apos; &apos;+Text(Status),
+IF(AND( ISPICKVAL(Origin, &apos;Web&apos;), CONTAINS(RecordType.Name, &apos;Qantas Freight&apos;),
+If(Hour(TIMENOW())&gt;Hour(TIMEVALUE(CreatedDate)),
+(Hour(TIMENOW())- Hour(TIMEVALUE(CreatedDate)) +(Today()-DATEVALUE(CreatedDate))*24) &lt;= 24,
+(Hour(TIMEVALUE(CreatedDate)) - Hour(TIMENOW())+(Today()-DATEVALUE(CreatedDate))*24) &lt;= 24 )
+),
+IMAGE(&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0152v00000IRHhi&amp;oid=00D8s00000IDoz7&amp;lastMod=1647355817000&quot;,
+Text(Case_Open_Time_Hours__c), 20, 20)+&apos; &apos; +
+
+If(Hour(TIMENOW())&gt;Hour(TIMEVALUE(CreatedDate)),
+Text(Hour(TIMENOW())- Hour(TIMEVALUE(CreatedDate))+(Today()-DATEVALUE(CreatedDate))*24),
+Text(Hour(TIMEVALUE(CreatedDate))- Hour(TIMENOW())+(Today()-DATEVALUE(CreatedDate))*24))+&apos; Hours&apos;,
+
+
+IF(AND( ISPICKVAL(Origin, &apos;Web&apos;), CONTAINS(RecordType.Name, &apos;Qantas Freight&apos;),
+If(Hour(TIMENOW())&gt;Hour(TIMEVALUE(CreatedDate)),
+(Hour(TIMENOW())- Hour(TIMEVALUE(CreatedDate)) +(Today()-DATEVALUE(CreatedDate))*24) &gt; 24,
+(Hour(TIMEVALUE(CreatedDate)) - Hour(TIMENOW())+(Today()-DATEVALUE(CreatedDate))*24) &gt; 24 )
+
+), IMAGE(&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0152v00000IRHhj&amp;oid=00D8s00000IDoz7&amp;lastMod=1647355817000&quot;,
+Text(Case_Open_Time_Hours__c), 20, 20)+&apos; &apos; +
+
+If(Hour(TIMENOW())&gt;Hour(TIMEVALUE(CreatedDate)),
+Text(Hour(TIMENOW())- Hour(TIMEVALUE(CreatedDate))+(Today()-DATEVALUE(CreatedDate))*24),
+Text(Hour(TIMEVALUE(CreatedDate))- Hour(TIMENOW())+(Today()-DATEVALUE(CreatedDate))*24))+&apos; Hours&apos;, Text(Status)) ) )</formula>
+    <label>Case Unresolved Period</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

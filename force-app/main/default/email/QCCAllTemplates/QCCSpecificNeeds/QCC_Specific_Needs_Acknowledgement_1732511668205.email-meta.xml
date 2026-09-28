@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Auto acknowledgement email for Specific Needs form on Qantas.com</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QCC Specific Needs Acknowledgement</name>
+    <relatedEntityType>Case</relatedEntityType>
+    <style>none</style>
+    <subject>We&apos;ve received your Specific Needs Request - {{{Case.CaseNumber}}}</subject>
+    <textOnly>Hello {{{Case.First_Name__c}}}, 
+
+Thank you for submitting an Accessibility, Medical and Inclusion Request. We understand how important these requests are for safe and supportive travel, and we will get back to you as soon as possible. 
+
+Your case number is: {{{Case.CaseNumber}}}
+
+Our Customer Specific Needs team will review your request and once processed, will contact you on your preferred contact method. 
+
+If you need further information to follow up on the status of your request, please respond directly to this email. 
+
+Imminent Travel Requirements 
+
+What timeframe classifies as an imminent travel request? 
+ - Request submitted 2 daysbefore intended travel for deaf or hearing impaired passengers, blind or vision impaired passengers, hidden disabilities, or child, car seats
+ - Request submitted 14 daysbefore intended travel for service dogs 
+ - Request submitted 5 daysbefore intended travel for medical clearances and CPAP 
+ - Request submitted 7 daysbefore intended travel for stretchers 
+
+For travel that is submittedwithin the above timeframesand requires attention for imminent travel, please call us so we can expedite the processing of your request. 
+
+ - The Specific Needs team is available between 6am and 10pm (AEST), Monday to Sunday on 1800 177 474 (within Australia) or +61 2 9123 7471 (outside Australia). 
+ - Please select option 3 and reference your case number provided above. 
+
+Kind regards,
+
+{{{Sender.FirstName}}}
+
+Qantas Customer Specific Needs
+
+[Image alt text: QantasFooter]
+
+Qantas Airways Limited, ABN 16 009 661 901 
+
+10 Bourke Road Mascot NSW 2020 Australia 
+
+***PLEASE CONSIDER OUR ENVIRONMENT BEFORE PRINTING*** 
+
+*******************Confidentiality and Privilege Notice******************* 
+
+This e-mail is intended only to be read or used by the addressee. It is confidential and may contain legally privileged information. If you are not the addressee indicated in this message (or responsible for delivery of the message to such person), you may not copy or deliver this message to anyone, and you should destroy this message and kindly notify the sender by reply e-mail. Confidentiality and legal privilege are not waived or lost by reason of mistaken delivery to you. Qantas Airways Limited ABN 16 009 661 901 
+
+******************************************************************************************************</textOnly>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

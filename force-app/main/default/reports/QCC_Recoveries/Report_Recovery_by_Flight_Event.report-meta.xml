@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Event__c.Cases__r.Recoveries_Case__r$Contact__c</field>
+    </columns>
+    <columns>
+        <field>Event__c.Cases__r.Recoveries_Case__r$Type__c</field>
+    </columns>
+    <columns>
+        <field>Event__c.Cases__r.Recoveries_Case__r$Recovery_Points__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <format>Tabular</format>
+    <name>Report Recovery by Flight Event</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Recoveries_with_Case_with_Flight_Event__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Event__c.Cases__r.Recoveries_Case__r$Contact__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Event__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

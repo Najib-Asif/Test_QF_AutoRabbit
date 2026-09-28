@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- default --></label>
+        <name>sortablegrid__default</name>
+    </fieldSets>
+    <recordTypes>
+        <description><!-- To be used for all contacts. --></description>
+        <label><!-- Contact --></label>
+        <name>Non_Agency_Contact</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- QCC: This is used as a placeholder to attach Cases for non Frequent Flyers. This is not to be treated as a Contact person --></description>
+        <label><!-- Placeholder --></label>
+        <name>Placeholder</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This Record Type is used in QAC Live Chat --></description>
+        <label><!-- QAC contact us web chat --></label>
+        <name>QAC_contact_us_web_chat</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for QCC contacts --></description>
+        <label><!-- Individual Contact --></label>
+        <name>QCC_Individual_Contact</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- First Name, Last Name, Job Title, Job Role, Mobile Number and Email cannot be modified for Agency Contacts created from Online/Gateway --></errorMessage>
+        <name>Prevent_Updating_Agency_Mgr_Contact_Info</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot edit Frequent Flyer or Non-Frequent Flyer contacts. Please refer to the Frequent Flyer Service Centre. --></errorMessage>
+        <name>QCC_Restrict_Individual_Contact_Creation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Contact must be Chairman&apos;s Lounge Platinum One to receive this service --></errorMessage>
+        <name>QCC_Restrict_ticking_for_QHAlways_Call</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Null Contacts are not to be edited. --></errorMessage>
+        <name>Restrict_Editing_Placeholder_Contact</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Special characters other than hyphens ( - ), apostrophes ( &apos; ) or spaces are not allowed in the Last Name field --></errorMessage>
+        <name>Restrict_special_Character_for_LastName</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Contact must be Chairman&apos;s Lounge Platinum One or Chairman&apos;s Lounge to receive this service. --></errorMessage>
+        <name>Restrict_ticking_for_Always_Call_field</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Job Title has exceeded 50 character limit --></errorMessage>
+        <name>SnD_Job_Title</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter Phone, Mobile or Email --></errorMessage>
+        <name>Validate_Email_Or_Phone_Or_Mobile</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Verification Number should accept only numbers which is of 10 digits --></errorMessage>
+        <name>Validate_Verification_Number_Length</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Conga_Composer_OAuth --></label>
+        <name>APXTConga4__Conga_Composer_OAuth</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Mail_Merge --></label>
+        <name>APXTConga4__Conga_Mail_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Contact --></label>
+        <name>New_Contact</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Search_Frequent_Flyer --></label>
+        <name>Search_Frequent_Flyer</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SendGmail --></label>
+        <name>SendGmail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooWeather --></label>
+        <name>YahooWeather</name>
+    </webLinks>
+    <webLinks>
+        <label>Anrufen</label>
+        <name>cnx__CallToPhoneButton</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Qualtrics_Survey --></label>
+        <name>qualtrics__Send_Qualtrics_Survey</name>
+    </webLinks>
+</CustomObjectTranslation>

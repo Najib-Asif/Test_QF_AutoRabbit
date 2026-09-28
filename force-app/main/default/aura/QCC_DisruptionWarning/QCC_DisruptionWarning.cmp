@@ -1,0 +1,77 @@
+<aura:component controller="QCC_DisruptionWarningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!--attributes-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <aura:attribute name="iconToDisplay" type="String" default=""/>
+    <aura:attribute name="isTableVisible" type="Boolean" default="false"/>
+    <aura:attribute name="disruptionEvents" type="List"/>
+    <aura:attribute name="descriptionToDisplay" type="String" default=""/>
+    <!--body-->
+    <aura:renderIf isTrue="{!v.iconToDisplay != ''}">
+        <c:QCC_UtilityPopover variant="panels" placement="bottom" theme="default" withClose="false">
+            <aura:set attribute="popoverBody">
+                <table class="slds-table slds-table--bordered table-pop" style="border: 1px solid gray;">
+                    
+                  
+                    <tbody>
+                        <aura:iteration items="{!v.disruptionEvents}" var="row">
+                            <tr class="slds-hint-parent slds-text-align_right">
+                                <td class="col" colspan="2" ><strong>Disruption Events</strong></td>
+                            
+        </tr>
+                            <tr class="slds-hint-parent ">
+                                 <td class="col"><strong>Delay Failure Code</strong> </td>
+                                <td class="col"> {!row.delayFailureCode}</td>
+                            </tr>
+                            <tr class="slds-hint-parent ">
+                                 <td class="col"><strong>Flight No.</strong> </td>
+                                <td class="col"> {!row.flightNumber}</td>
+                            </tr>
+                            <tr class="slds-hint-parent ">
+                                 <td class="col"><strong>Sch Dep. Date/Time</strong> </td>
+                                <td class="col"> {!row.scheduleDepartureDateTime}</td>
+                            </tr>
+                            <tr class="slds-hint-parent ">
+                                 <td class="col"><strong>Root Cause</strong> </td>
+                                <td class="col"> {!row.rootCause}</td>
+                            </tr>
+                            <tr class="slds-hint-parent ">
+                                 <td class="col"><strong>Primary Root Cause</strong> </td>
+                                <td class="col"> {!row.primaryRootcause}</td>
+                            </tr>
+                            <tr class="slds-hint-parent ">
+                                 <td class="col"><strong>Employee Message</strong> </td>
+                               <td>
+                                <div class="col slds-cell-wrap">{!row.employeeMessage}
+</div>
+        </td>                        
+                            </tr>         
+  
+                            
+                            <!--<p>{!v.descriptionToDisplay}</p>-->
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </aura:set>
+            	<!--<img src="{!$Resource.QCC_DisruptionWarningActiveDisruption}" width="50" height="50"/>-->
+            
+            <aura:renderIf isTrue="{!v.iconToDisplay == 'redIcon'}">
+                <img class="disruption-img" src="{!$Resource.QCC_DisruptionWarningActiveDisruption}" width="50" height="50"/>
+                 <p class="li-icon-label" style="text-align:center">
+                 Disruption Alert
+                </p>
+            </aura:renderIf>
+            <aura:renderIf isTrue="{!v.iconToDisplay == 'yellowIcon'}">
+                <img class="disruption-img" src="{!$Resource.QCC_DisruptionWarningHeadsUp}" width="50" height="50"/>
+                <p class="li-icon-label" style="text-align:center">
+                 Disruption Alert
+                </p>
+            </aura:renderIf>
+            <aura:renderIf isTrue="{!v.iconToDisplay == 'greenIcon'}">
+                <img class="disruption-img" src="{!$Resource.QCC_DisruptionWarningClear}" width="50" height="50"/>
+                 <p class="li-icon-label" style="text-align:center">
+                 Disruption Alert
+                </p>
+            </aura:renderIf>
+        </c:QCC_UtilityPopover>
+      </aura:renderIf>
+</aura:component>

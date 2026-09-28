@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rebooked_Flight_Delay_Hours__c</fullName>
+    <description>Added for Insurance Letters in &apos;QCC Insurance Letter Layout&apos;  Case  Page Layout</description>
+    <externalId>false</externalId>
+    <formula>FLOOR((IF ( ISBLANK(Rebooked_Flight_Actual_Arrival_Date_Time__c), 0, IF(ISBLANK(Arrival_Date_Time__c), 0, IF (ISBLANK(DATETIMEVALUE(
+/* Year Logic */
+MID(Arrival_Date_Time__c, 7,4) +&apos;-&apos;+
+/* Month Logic */
+MID(Arrival_Date_Time__c,
+FIND(&quot;/&quot;,Arrival_Date_Time__c) + 1,
+FIND(&quot;/&quot;,Arrival_Date_Time__c, FIND(&quot;/&quot;,Arrival_Date_Time__c) + 1) -
+FIND(&quot;/&quot;,Arrival_Date_Time__c) - 1
+)+&apos;-&apos;+
+/* Day Logic */
+LEFT(Arrival_Date_Time__c,
+FIND(&quot;/&quot;,Arrival_Date_Time__c) - 1) +&apos; &apos;+
+/* Time Logic */
+RIGHT(Arrival_Date_Time__c, 8)
+)), 0, IF (ISBLANK(DATETIMEVALUE(
+/* Year Logic */
+MID(Arrival_Date_Time__c, 7,4) +&apos;-&apos;+
+/* Month Logic */
+MID(Arrival_Date_Time__c,
+FIND(&quot;/&quot;,Arrival_Date_Time__c) + 1,
+FIND(&quot;/&quot;,Arrival_Date_Time__c, FIND(&quot;/&quot;,Arrival_Date_Time__c) + 1) -
+FIND(&quot;/&quot;,Arrival_Date_Time__c) - 1
+)+&apos;-&apos;+
+/* Day Logic */
+LEFT(Arrival_Date_Time__c,
+FIND(&quot;/&quot;,Arrival_Date_Time__c) - 1) +&apos; &apos;+
+/* Time Logic */
+RIGHT(Arrival_Date_Time__c, 8)
+)), 0, (Rebooked_Flight_Actual_Arrival_Date_Time__c -  DATETIMEVALUE(
+/* Year Logic */
+MID(Arrival_Date_Time__c, 7,4) +&apos;-&apos;+
+/* Month Logic */
+MID(Arrival_Date_Time__c,
+FIND(&quot;/&quot;,Arrival_Date_Time__c) + 1,
+FIND(&quot;/&quot;,Arrival_Date_Time__c, FIND(&quot;/&quot;,Arrival_Date_Time__c) + 1) -
+FIND(&quot;/&quot;,Arrival_Date_Time__c) - 1
+)+&apos;-&apos;+
+/* Day Logic */
+LEFT(Arrival_Date_Time__c,
+FIND(&quot;/&quot;,Arrival_Date_Time__c) - 1) +&apos; &apos;+
+/* Time Logic */
+RIGHT(Arrival_Date_Time__c, 8)
+))) ))) )*24)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Rebooked Flight Delay (Hours)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

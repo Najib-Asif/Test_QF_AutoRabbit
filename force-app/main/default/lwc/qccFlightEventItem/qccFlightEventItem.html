@@ -1,0 +1,22 @@
+<template>
+    <lightning-card>
+        <!-- Qantas Logo, Flight Number and Delay Failure Code -->
+        <lightning-layout class="slds-var-p-bottom_xx-small">
+            <p class="slds-hide">isDefault{flghtEvnt.isDefault}</p>
+            <lightning-layout-item size="6">
+                <div>
+                    <img lwc:if={flghtEvnt.isQantas} src={qantasLogo}><span style="font-weight: 700;line-height: 24px;color:#3E3E3C;">{flghtEvnt.flightNumber}</span>
+                </div>
+            </lightning-layout-item>
+            
+        </lightning-layout>
+        <c-qcc-flight-event-detail flght-evnt={flghtEvnt} card-name="header"></c-qcc-flight-event-detail>
+        
+            <template for:each={flghtEvnt.flightEventWrapperList} for:item="flghtEvntItem" for:index="index">
+                <article key={flghtEvntItem.eventId} class="slds-card_boundary slds-p-around_x-small">
+                    <c-qcc-flight-event-accordion  flght-evnt-item={flghtEvntItem}></c-qcc-flight-event-accordion>          
+                </article>  
+            </template>
+        
+    </lightning-card>
+</template>

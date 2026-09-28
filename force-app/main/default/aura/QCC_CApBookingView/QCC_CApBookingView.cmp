@@ -1,0 +1,43 @@
+<aura:component controller="QCC_DisplayBookingController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="lstBooking" type="Object[]" />
+    <aura:attribute name="mycolumn" type="Object" />
+    <aura:attribute name="sortedBy" type="string" default="pnr" />
+    <aura:attribute name="sortedDirection" type="string" default="asc" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="hidePrev" type="Boolean" />
+    <aura:attribute name="hideNext" type="Boolean" />
+    <aura:attribute name="pageNumber" type="Integer" default="1" />
+    <aura:attribute name="maxRecord" type="Integer" />
+    <aura:attribute name="lstCurrentBook" type="Object[]" />
+    <aura:attribute name="rowsPerPage" type="Integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    
+    <lightning:card iconName="standard:recent">
+        <aura:set attribute="title">
+            <lightning:spinner variant="brand" size="small" aura:id="mySpinner" />
+            <div class="slds-media__body">
+                <h2>
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                        <span class="slds-text-heading_small">Bookings</span>
+                    </a>
+                </h2>
+            </div>
+        </aura:set>
+        
+        <aura:set attribute="footer">
+            <lightning:button variant="brand" label="Previous" iconName="utility:left" iconPosition="left" onclick="{!c.Previous}" disabled="{!v.hidePrev}" />
+            &nbsp;&nbsp;&nbsp;&nbsp; {!v.pageNumber} &nbsp;&nbsp;&nbsp;&nbsp;
+            <lightning:button variant="brand" label="Next" iconName="utility:right" iconPosition="right" onclick="{!c.Next}" disabled="{!v.hideNext}"/>
+        </aura:set>
+        
+        <aura:renderIf isTrue="{!empty(v.lstCurrentBook)}">
+            <div class=" slds-text-color_error slds-text-align_center">{!$Label.c.QCC_No_BookingMsg}</div>
+            <aura:set attribute="else">
+                <lightning:datatable hideCheckboxColumn="true" data="{!v.lstCurrentBook}" columns="{!v.mycolumn}" keyField="keyVal" sortedBy="{!v.sortedBy}" 
+                                     sortedDirection="{!v.sortedDirection}" 
+                                     onsort="{!c.updateColumnSorting}" />
+            </aura:set>
+        </aura:renderIf>
+    </lightning:card>
+</aura:component>

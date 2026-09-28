@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- Log Tracking Fields --></label>
+        <name>Log_Tracking_Fields</name>
+    </fieldSets>
+    <recordTypes>
+        <description><!-- To be used for all Industry Accounts having a contract with Qantas --></description>
+        <label><!-- Agency Account --></label>
+        <name>Agency_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for all Charter or Charter Broker Accounts --></description>
+        <label><!-- Charter Account --></label>
+        <name>Charter_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for all non-Agency accounts having a contract with Qantas - this covers Corporate &amp; Government, University Consortiums, SMEs &amp; Multi-national accounts --></description>
+        <label><!-- Customer Account --></label>
+        <name>Customer_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for Freight Accounts. Accounts owned by Qantas Freight. --></description>
+        <label><!-- Freight Account --></label>
+        <name>Freight_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Shell account for the local POS accounts. --></description>
+        <label><!-- Global Account --></label>
+        <name>Global_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for non-customer accounts like Suppliers, Sponsors etc. --></description>
+        <label><!-- Other Account --></label>
+        <name>Other_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Individual Frequent Flyers --></description>
+        <label><!-- Person Account --></label>
+        <name>Person_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- QCC: This is used as a placeholder to attach Placeholder Account --></description>
+        <label><!-- Placeholder --></label>
+        <name>Placeholder</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for prospect accounts - this covers Aquire/Amex accounts and any other prospect accounts that are manually captured --></description>
+        <label><!-- Prospect Account --></label>
+        <name>Prospect_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used for monitoring the performance of regional ports --></description>
+        <label><!-- Regional Account --></label>
+        <name>Regional_Account</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage>
+            <!-- •     ABN must have exactly 11 numbers with no spaces 
+•     You cannot change the ABN if the Account has a product registration
+
+Please raise a System Admin Case to change the ABN. -->
+        </errorMessage>
+        <name>ABN_11_Digit_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Incorrect ABN. Can only contain numbers and should be exactly 11 digits. --></errorMessage>
+        <name>ABN__ABN_Should_always_be_11_digits</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Incorrect Industry.Please assign Industry as Travel for Agency Accounts --></errorMessage>
+        <name>AU_Agency_Accounts_Industry_Travel</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please raise an Account Handover Case except if it is of type Prospect Account where you just need to reach out to SME Callout team. --></errorMessage>
+        <name>AU_Ownership_Changes_Restriction</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Aquire Override End Date Field should be more than Today. --></errorMessage>
+        <name>Aquire_End_Date_more_than_Today</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Estimated MCA Revenue should be less than Estimated QF Annual Revenue --></errorMessage>
+        <name>FMCA_Revenue_should_be_lesser_Total_MCA</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Freight Account Ownership change is restricted to System Admin and Team Leads. --></errorMessage>
+        <name>FreightAcc_Ownership_Changes_Restriction</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter an IATA# --></errorMessage>
+        <name>Freight_Agent_Type_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Customer Code is required --></errorMessage>
+        <name>Freight_MandatoryCustomerCode</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide eQ Customer #, If Revenue stream is DOM. --></errorMessage>
+        <name>Freight_MandatoryEQNumber</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter either an IATA # or eQ Customer # if Revenue Stream is International --></errorMessage>
+        <name>Freight_MandatoryIATA</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Parent Account is Mandatory for Freight Branch Accounts. --></errorMessage>
+        <name>Freight_MandatoryParentForEntities</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select a value for IATA BSP Level. --></errorMessage>
+        <name>IATA_BSP_is_mandatory_if_eticket_is_true</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select the value for Aquire Override reason field. --></errorMessage>
+        <name>Mandatory_Aquire_Override_reason</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter reasons for risk. --></errorMessage>
+        <name>Mandatory_resaon_for_account_risk</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Agency Account cannot be reactivated. Please register a new agency account. Independent accounts can be created automatically by the agency manager online.  --></errorMessage>
+        <name>Prevent_Reactivation_of_Agency_Accounts</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You are not entitled to change the Account owner and Type for the Prospect Account --></errorMessage>
+        <name>Prevent_user_from_changing_Owner_Type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- IATA#/TIDS# field should contain 7 digits Numeric characters --></errorMessage>
+        <name>QAC_Validate_IATA_TIDS_AgencyAccount</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You are not allowed to edit the Account Tier Information! --></errorMessage>
+        <name>Restrict_Editing_Agency_Tier_update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the Verified Override Reason to proceed further. --></errorMessage>
+        <name>VR_To_Enforce_VerifiedOverrideReason</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You are not entitled to change the Verified Customer.Please contact System Administrator for further assistance --></errorMessage>
+        <name>VR_To_Prevent_Editing_VerifiedCustomer</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Validate_ABN --></label>
+        <name>ABN__Validate_ABN</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Composer_OAuth --></label>
+        <name>APXTConga4__Conga_Composer_OAuth</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Conga_Mail_Merge --></label>
+        <name>APXTConga4__Conga_Mail_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Account_Relationship_Report --></label>
+        <name>Account_Relationship_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- AltavistaNews --></label>
+        <name>AltavistaNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Clone --></label>
+        <name>Clone</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Deal_on_a_page --></label>
+        <name>Deal_on_a_page</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Executive_Summary --></label>
+        <name>Executive_Summary</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Executive_Summary_Lightning --></label>
+        <name>Executive_Summary_Lightning</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Future_Planet_Report --></label>
+        <name>Future_Planet_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- HooversProfile --></label>
+        <name>HooversProfile</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Loyalty_Executive_Summary --></label>
+        <name>Loyalty_Executive_Summary</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- QF_Revenue --></label>
+        <name>QF_Revenue</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- QL_Valiadate_ABN_LEx --></label>
+        <name>QL_Valiadate_ABN_LEx</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_Corporate_Customers --></label>
+        <name>Top_Corporate_Customers</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_Customer_Spend_on_YY_MAT --></label>
+        <name>Top_Customer_Spend_on_YY_MAT</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_Domestic_Flyers_MAT --></label>
+        <name>Top_Domestic_Flyers_MAT</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_Domestic_Routes_American_Airlines --></label>
+        <name>Top_Domestic_Routes_American_Airlines</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_Domestic_Routes_Emirates --></label>
+        <name>Top_Domestic_Routes_Emirates</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_Domestic_Routes_Qantas --></label>
+        <name>Top_Domestic_Routes_Qantas</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_International_Flyers_MAT --></label>
+        <name>Top_International_Flyers_MAT</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_International_Routes_American_Airlines --></label>
+        <name>Top_International_Routes_American_Airlines</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_International_Routes_Emirates --></label>
+        <name>Top_International_Routes_Emirates</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Top_International_Routes_Qantas --></label>
+        <name>Top_International_Routes_Qantas</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- iDeal_Check --></label>
+        <name>iDeal_Check</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ensure_Minimum_30_Chars_entered</fullName>
+    <active>true</active>
+    <description>Atleast 30 Characters are required</description>
+    <errorConditionFormula>LEN(How_did_you_arrive_with_this_proposal__c)&lt; 30</errorConditionFormula>
+    <errorDisplayField>How_did_you_arrive_with_this_proposal__c</errorDisplayField>
+    <errorMessage>Please enter atleast 30 Characters</errorMessage>
+</ValidationRule>

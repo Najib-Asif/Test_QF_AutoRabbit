@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Corporate_Scheme_Renewals</fullName>
+    <columns>Due_Date__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Scheme_Start_Date__c</columns>
+    <columns>Scheme_End_Date__c</columns>
+    <columns>New_Discount__c</columns>
+    <columns>Existing_Discount__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Corporate_Scheme_Service_Request</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Renewal</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>,Open,Closed - Actioned</value>
+    </filters>
+    <label>Corporate Scheme Renewals</label>
+    <sharedTo>
+        <group>Sales_Solution_Team</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,314 @@
+<!-- 
+Description: Enables to display the multiple combinations & based on the combination the related Fares.
+Also allows user to select multiple fares at a time. Providing the discounts for those fares in next page. So finally user can Save/ Save & More/ Cancel.
+-->
+
+<apex:page standardController="Proposal__c" extensions="proposalProductEntryController" docType="html-5.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <apex:sectionHeader Title="Manage {!$ObjectType.Fare_Structure__c.LabelPlural}" subtitle="{!Proposal__c.Name} - Discount Model Chosen: {!Proposal__c.QL_Discount_Model__c}" />
+          
+        <apex:messages style="color:red"/>
+            
+            <style>
+            .search{
+                font-size:12pt;
+                margin-right: 20px;    
+            }
+    .fyi{
+        color:red;
+        font-style:italic;
+    }
+    .label{
+        margin-right:10px;
+        font-weight:bold;
+    }
+    .pgntButton{
+        margin-right:20px;          
+    }
+    
+    /*
+        div.tooltip {
+            width: 195px;
+            float: left;
+        }
+        div.tooltip:hover {
+            background: #ffffff;
+            text-decoration: none;
+        }*/
+    /*BG color is a must for IE6*/
+    
+    /*
+        div.tooltip span {
+            background: red;
+            display: none;
+            padding: 2px 3px;
+            margin-left: 8px;
+            width: 195px;
+        }
+        div.tooltip:hover span {
+            display: inline;
+            position: absolute;
+            border: 1px solid #cccccc;
+            background: #FFC;
+            color: #000000;
+        }
+        */
+    
+    </style>
+    
+    <script type='text/javascript'>    
+       
+        function refreshPage(){
+        window.location.href = window.location.href;
+    }
+    
+    function disableSelect(){            
+        var selectId =$("[id$='selectRecords']");
+        selectId.hide();
+        
+        var cancelId =$("[id$='cancelRecords']");
+        cancelId.hide();                                 
+    }
+    
+    
+    
+    </script>
+    
+    
+    <apex:form >
+        
+        <apex:outputPanel id="mainBody">
+            
+            
+            <!-- After selecting the Fares, redirects to Save, Save & More, Cancel -->
+            
+            <!-- Notice we use a lot of $ObjectType merge fields... I did that because if you have changed the labels of fields or objects it will reflect your own lingo -->
+            <div style="width:1100px;" >
+                <apex:pageBlock title="Selected {!$ObjectType.Fare_Structure__c.LabelPlural}" id="selected" rendered="{!displaySelected}">
+                    
+                    <apex:pageblockTable value="{!shoppingCart}" var="s" width="100%">                         
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.QL_QF_EK__c.Label}" rendered="{!selectedPicklistValue=='International'}"> <!--EK Changes CRM-5337-->
+                            <apex:outputField value="{!s.QL_QF_EK__c}"/> 
+                        </apex:column>
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Network__c.Label}" rendered="{!selectedPicklistValue=='International'}">
+                            <apex:outputField value="{!s.Network__c}"/> 
+                        </apex:column>
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Market__c.Label}">
+                            <apex:outputField value="{!s.Market__c}"/> 
+                        </apex:column>
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Category__c.Label}">
+                            <apex:outputField value="{!s.Category__c}"/> 
+                        </apex:column>                 
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Qantas_Published_Airfare__c.Label}" rendered="{!AND(selectedPicklistValue!='International',selectedPicklistValue!='INT MCA Route Deal',selectedPicklistValue!='INT Non MCA Route Deal')}">
+                            <apex:outputField value="{!s.Qantas_Published_Airfare__c}"/> 
+                        </apex:column>  
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Network__c.Label}" rendered="{!OR(selectedPicklistValue=='INT MCA Route Deal',selectedPicklistValue=='INT Non MCA Route Deal')}">
+                            <apex:outputField value="{!s.Network__c}"/> 
+                        </apex:column>
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Segment__c.Label}" rendered="{!OR(selectedPicklistValue=='INT MCA Route Deal',selectedPicklistValue=='INT Non MCA Route Deal')}">
+                            <apex:outputField value="{!s.Segment__c}"/> 
+                        </apex:column> 
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Cabin__c.Label}">
+                            <apex:outputField value="{!s.Cabin__c}"/> 
+                        </apex:column> 
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Name.Label}">
+                            <apex:outputField value="{!s.FareStructure__c}"/> 
+                        </apex:column>                     
+                        
+                        <!--Added additional Tier 1 Column - Proposal 2 Tier Channges - CRM 5211-->
+                        <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.QL_Tier_1_Offering__c.Label}" rendered="{!IF(s.Cabin__c == 'Premium Economy' || (s.Fare_Combination__c == 'INT MCA Route Deal' || s.Fare_Combination__c!='International') || s.Proposal_Type__c == 'Corporate Airfares', true , false)}">
+                            <apex:inputField value="{!s.QL_Tier_1_Offering__c}" style="width:70px" />
+                        </apex:column>
+                        
+                        <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Discount__c.Label}" rendered="{!IF(s.Cabin__c == 'Premium Economy' || (s.Fare_Combination__c == 'INT MCA Route Deal' || s.Fare_Combination__c!='International') || s.Proposal_Type__c == 'Corporate Airfares', true , false)}">
+                            <apex:inputField value="{!s.Discount__c}" style="width:70px" />
+                        </apex:column>
+                        
+                          <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.QL_Tier_1_Offering__c.Label}" rendered="{!IF(s.Cabin__c != 'Premium Economy' && s.Fare_Combination__c == 'International' && s.Proposal_Type__c != 'Corporate Airfares', true , false)}">
+                            <apex:outputField value="{!s.QL_Tier_1_Offering__c}" style="width:70px" />
+                        </apex:column> 
+                        
+                        <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Discount__c.Label}" rendered="{!IF(s.Cabin__c != 'Premium Economy' && s.Fare_Combination__c == 'International' && s.Proposal_Type__c != 'Corporate Airfares', true , false)}">
+                            <apex:outputField value="{!s.Discount__c}" style="width:70px" />
+                        </apex:column>   
+                        
+                        <!--   <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Route_Origin__c.Label}" rendered="{!selectedPicklistValue == 'INT MCA Route Deal'}">
+<apex:inputField value="{!s.Route_Origin__c}"/>
+</apex:column>
+
+<apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Route_Destination__c.Label}" rendered="{!selectedPicklistValue == 'INT MCA Route Deal'}">
+<apex:inputField value="{!s.Route_Destination__c}"/>
+</apex:column>      -->    
+                        
+                        <apex:column rendered="{!OR(selectedPicklistValue == 'DOM Route Deal',selectedPicklistValue == 'INT MCA Route Deal',selectedPicklistValue == 'INT Non MCA Route Deal')}">
+                            <apex:facet name="header">
+                                {!$ObjectType.Discount_List__c.Fields.Route_Origin__c.Label}
+                                <div class="tooltip" style="display:inline">
+                                    <img src="/img/s.gif" alt="" class="helpOrb" title="{!$ObjectType.Discount_List__c.Fields.Route_Origin__c.InlineHelpText}"/>
+                                </div>
+                            </apex:facet>
+                            <!-- CRM-2999 -->
+                            <apex:inputField value="{!s.Route_Origin__c}" style="text-transform:uppercase" html-maxlength="255" rendered="{!selectedPicklistValue = 'DOM Route Deal'}"/>
+                            <apex:inputField value="{!s.Route_Origin__c}" style="text-transform:uppercase" html-maxlength="3" rendered="{!selectedPicklistValue != 'DOM Route Deal'}"/>
+                            <!-- CRM-2999 -->
+                        </apex:column>
+                        
+                        <apex:column rendered="{!OR(selectedPicklistValue == 'DOM Route Deal',selectedPicklistValue == 'INT MCA Route Deal',selectedPicklistValue == 'INT Non MCA Route Deal')}">
+                            <apex:facet name="header">
+                                {!$ObjectType.Discount_List__c.Fields.Route_Destination__c.Label}
+                                <div class="tooltip" style="display:inline">
+                                    <img src="/img/s.gif" alt="" class="helpOrb" title="{!$ObjectType.Discount_List__c.Fields.Route_Destination__c.InlineHelpText}"/>
+                                </div>
+                            </apex:facet>
+                            <!--CRM-2999 -->
+                            <apex:inputField value="{!s.Route_Destination__c}" style="text-transform:uppercase" html-maxlength="255" rendered="{!selectedPicklistValue = 'DOM Route Deal'}"/>
+                            <apex:inputField value="{!s.Route_Destination__c}" style="text-transform:uppercase" html-maxlength="3" rendered="{!selectedPicklistValue != 'DOM Route Deal'}"/>
+                            <!-- CRM-2999 -->   
+                        </apex:column> 
+                        <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Discount_Threshold_AM__c.Label}" >
+                            <apex:outputField value="{!s.Discount_Threshold_AM__c}"/>
+                        </apex:column>
+                        <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Discount_Threshold_TL__c.Label}" >
+                            <apex:outputField value="{!s.Discount_Threshold_TL__c}"/>
+                        </apex:column>
+                        <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Discount_Threshold_NAM__c.Label}" >
+                            <apex:outputField value="{!s.Discount_Threshold_NAM__c}"/>
+                        </apex:column>
+                        <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Discount_Threshold_DO__c.Label}" >
+                            <apex:outputField value="{!s.Discount_Threshold_DO__c}"/>
+                        </apex:column>
+                        <!--  <apex:column headerValue="{!$ObjectType.Discount_List__c.Fields.Comment__c.Label}" rendered="{!IF(s.Proposal_Type__c == 'Corporate Airfares', true, selectedPicklistValue!='International')}">
+<apex:inputField value="{!s.Comment__c}"/>
+</apex:column> -->
+                        
+                    </apex:pageblockTable>
+                    
+                    
+                    <apex:pageBlockButtons >
+                        <apex:commandButton action="{!onSave}" value="Save"/>
+                        <apex:commandButton value="Save & More" action="{!onSaveMore}" oncomplete="refreshPage();"/>
+                        <!--   <apex:commandButton action="{!onCancel}" value="Cancel" immediate="true"/> -->
+                        <apex:commandButton action="{!onCancel}" value="Cancel" immediate="true" html-formnovalidate="true"/>
+                    </apex:pageBlockButtons>
+                    
+                </apex:pageBlock>
+            </div>
+            <!-- Fare Combination -->
+            <!--  <apex:pageBlock rendered="{!displayFareCombination}">
+<apex:pageBlockSection columns="1">
+
+<apex:selectList id="fareCombinations" value="{!selectedPicklistValue}" size="1" required="true">
+<apex:outputText value="Select Fare Class Combination" styleClass="search"/> &nbsp; &nbsp;   
+<apex:selectOptions value="{!FareCombinations}">                           
+</apex:selectOptions>
+<apex:actionSupport event="onchange" action="{!fareCombinationChange}" reRender="available,errorMsg"/>
+</apex:selectList>                    
+
+</apex:pageBlockSection>            
+</apex:pageBlock>  -->
+            
+            
+            <!-- Displays Fare combination & related Fares below to the fare combination. On change of Fare combination the Fare also changes -->
+            
+            <apex:pageBlock id="available" rendered="{!displayAvailable}">
+                
+                <!--  <apex:outputPanel styleClass="search" >
+Search for Fare Class:
+&nbsp; &nbsp;<apex:inputText value="{!searchString}" style="width:300px"/>
+</apex:outputPanel>                                        
+
+<apex:commandButton value="Search" action="{!updateAvailableList}" />  -->
+                
+                <apex:selectList id="fareCombinations" value="{!selectedPicklistValue}" size="1" required="true">
+                    <apex:outputText value="Select Fare Class Combination" styleClass="search"/> &nbsp; &nbsp;   
+                    <apex:selectOptions value="{!FareCombinations}">                           
+                    </apex:selectOptions>
+                    <apex:actionSupport onsubmit="disableSelect();" event="onchange" action="{!fareCombinationChange}" reRender="available,errorMsg"/>
+                </apex:selectList>
+                
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Search" action="{!updateAvailableList}" style="display:none;"/>
+                    <apex:commandButton value="Select" action="{!onSelect}" id="selectRecords" style="display:inline;"/>
+                    <apex:commandButton value="Cancel" action="{!Cancel}" id="cancelRecords"/>
+                    
+                </apex:pageBlockButtons>
+                
+                <br/>
+                <br/>
+                
+                <apex:outputPanel styleClass="pgntButton" id="pageBlockButtons"><center>
+                    <apex:commandButton value="<<" action="{!previous}" disabled="{!PreviousDisplay}" reRender="searchResults,pageBlockButtons,pageBlockButtons1"/>&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <apex:commandButton value=">>" action="{!next}" disabled="{!NextDisplay}" reRender="searchResults,pageBlockButtons,pageBlockButtons1"/></center>
+                </apex:outputPanel>
+                
+                <br/>
+                <br/>  
+                
+                <!-- Displaying all the Fares based on the Combinations -->                  
+                <apex:outputPanel id="searchResults">
+                    
+                    <apex:pageBlockTable value="{!limitedProducts}" var="a">
+                        
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:inputCheckbox id="checkAllBox" value="{!selectAll}">
+                                    <apex:actionSupport event="onclick" action="{!onSelectAll}" reRender="selected,searchResults"/>
+                                </apex:inputCheckbox>                                
+                            </apex:facet>
+                            <apex:inputCheckbox value="{!a.selected}" id="selected" disabled="{!disableIndividual}"/>                      
+                        </apex:column>  
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.QL_QF_EK__c.Label}" value="{!a.product.QL_QF_EK__c}" rendered="{!(selectedPicklistValue=='International')}"/> <!--EK Changes CRM-5329 -->
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Name.Label}" value="{!a.product.Name}" />
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Segment__c.Label}" value="{!a.product.Segment__c}" />
+                        <!-- Commented on 8th April for CRM -54 by Prateek 
+<apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.ProductCode__c.Label}" value="{!a.product.ProductCode__c}" />-->
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Market__c.Label}" value="{!a.product.Market__c}" />
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Category__c.Label}" value="{!a.product.Category__c}" />
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Cabin__c.Label}" value="{!a.product.Cabin__c}" /> 
+                        
+                        <apex:column headerValue="{!$ObjectType.Fare_Structure__c.Fields.Qantas_Published_Airfare__c.Label}" value="{!a.product.Qantas_Published_Airfare__c}" rendered="{!AND(selectedPicklistValue!='International',selectedPicklistValue!='INT MCA Route Deal',selectedPicklistValue!='INT Non MCA Route Deal')}"/> 
+                        
+                        
+                    </apex:pageBlockTable>
+                    
+                    <!-- We put up a warning if results exceed 100 rows -->
+                    <apex:outputPanel styleClass="fyi" rendered="{!overLimit}">
+                        <br/>
+                        Your search returned over 100 results, use a more specific search string if you do not see the desired {!$ObjectType.Product2.Label}.
+                        <br/>
+                    </apex:outputPanel>
+                    
+                </apex:outputPanel>
+                <br/><br/>
+                
+                <!-- Pagination for the Fares -->                
+                <apex:outputPanel styleClass="pgntButton" id="pageBlockButtons1"><center>
+                    <apex:commandButton value="<<" action="{!previous}" disabled="{!PreviousDisplay}" styleClass="pgntButton" reRender="searchResults,pageBlockButtons,pageBlockButtons1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:commandButton value=">>" action="{!next}" disabled="{!NextDisplay}" styleClass="pgntButton" reRender="searchResults,pageBlockButtons,pageBlockButtons1" /></center>
+                </apex:outputPanel>
+            </apex:pageBlock>
+            
+            <apex:outputPanel style="color:red;" id="errorMsg" rendered="{!errorMsg}">
+                No Matches Found
+            </apex:outputPanel>           
+            
+        </apex:outputPanel>
+        
+    </apex:form>
+    
+</apex:page>

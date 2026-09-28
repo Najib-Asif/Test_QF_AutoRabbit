@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Omni_User_owned_to_ResQ</fullName>
+    <booleanFilter>1 AND (2 OR 3 OR 4 OR 5) AND 6 AND 7</booleanFilter>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>Category__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>OWNER_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Reply Received,New</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Adi Rua Naulivou,Atasa Bolatolu,Dikove Babakobau,Kelera Tuva,Sera Ravueta,Susana Tagilala,Savenaca Tubamasi,MerI Leqe,Laura Tora,Seini Gonekalou,Nina Tafunai,Vasemaca Saumadu,Frances Naigia,Savenca Tubamasi</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Sera Matavesi,Meredani Banuve,Vasiti Tinainamatalevu,Esther Madigi,Suliana Radikedike,Meresimani Finau,Elenoa Tuirara,Isireli Lagicere,Lavenia Dakulala,Mario Stephens,Racheal Levu,Samuela Tuinaceva,Yvette September,Shoneez Adams</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Keysha Lee Richardson,Fawwaaz Jansen,Robyn Peterson,Yullah Dhliwayo,Charne Abrahams,Keanu Samuels,Marlyn Van Graan,Bongiwe Nkam,Imelda Ambrosio,Manilyn Amit,Ramie Michael Bambilla,Chaipen Bersabe,John Ashi Cristobal,Maria Rita Cruz</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>equals</operation>
+        <value>Jona Mae Gavarra,Pamela Jerusalem,Kimberly Llarenas,Arnel Nolasco,Darwin Sumalinog,Mere Domo,Ayakha Fulumeni,Arrah Mae Espiritu</value>
+    </filters>
+    <filters>
+        <field>Category__c</field>
+        <operation>notEqual</operation>
+        <value>Refunds</value>
+    </filters>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>notEqual</operation>
+        <value>Case.CCC_Voice</value>
+    </filters>
+    <label>Omni - User owned to Resolutions Queue</label>
+</ListView>

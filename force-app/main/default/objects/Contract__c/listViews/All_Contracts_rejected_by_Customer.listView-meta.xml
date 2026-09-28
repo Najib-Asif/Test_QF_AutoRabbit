@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Contracts_rejected_by_Customer</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Type__c</columns>
+    <columns>Contract_Start_Date__c</columns>
+    <columns>Contract_End_Date__c</columns>
+    <columns>Qantas_Annual_Expenditure__c</columns>
+    <columns>Domestic_Annual_Share__c</columns>
+    <columns>International_Annual_Share__c</columns>
+    <columns>MCA_Routes_Annual_Share__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Rejected - Customer</value>
+    </filters>
+    <label>All Contracts rejected by Customer</label>
+    <sharedTo>
+        <role>QF</role>
+        <role>QF_DOM_Sales_AP_Agency_Development</role>
+        <role>QF_DOM_Sales_AP_Flight_Centre</role>
+        <role>QF_DOM_Sales_AP_Helloworld</role>
+        <role>QF_DOM_Sales_AP_Key_Partners</role>
+        <role>QF_DOM_Sales_AP_Regional</role>
+        <role>QF_DOM_Sales_B_G</role>
+        <role>QF_DOM_Sales_B_G_Business_and_Govt</role>
+        <role>QF_DOM_Sales_B_G_Regional_Development</role>
+        <role>QF_DOM_Sales_SME</role>
+        <role>QF_DOM_Sales_SME_QIS</role>
+        <role>QF_DOM_Sales_SME_QIS_Sr_Manager</role>
+    </sharedTo>
+</ListView>

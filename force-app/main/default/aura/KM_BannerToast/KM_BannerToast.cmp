@@ -1,0 +1,28 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="KM_Banner_Controller" access="global">
+    <aura:attribute name="myVal" type="Object" />
+    <aura:handler name="init" value="{!this}" action="{! c.doInit }"/>
+    <aura:if isTrue="{!v.myVal.Banner_Text__c}">
+        <div aura:id="banner" class="demo-only" >
+            <div class="slds-notify_container slds-is-fixed">
+                <div class="slds-notify slds-notify_toast slds-theme_warning" >
+                    <span class="slds-assistive-text">info</span>
+                    <span class="slds-icon_container slds-icon-utility-info slds-m-right_small slds-no-flex " title="Description of icon when needed">
+                        <div class="slds-p-bottom_xx-small">
+                            <lightning:icon iconName="utility:info" size="x-small" alternativeText="Information!" title="Information" />
+                        </div>
+                    </span>
+                    <div class="slds-notify--content slds-p-bottom_xx-small">
+                        <div class="slds-text-heading_small"><lightning:formattedRichText aura:id="formText" value="{!v.myVal.Banner_Text__c}"></lightning:formattedRichText>
+                        </div>
+                    </div>
+                    <div class="slds-notify--close slds-p-bottom_xx-small slds-p-left_small" style="margin-right:10px" onclick="{!c.closeMsg}">
+                        <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close">
+                            <lightning:icon iconName="utility:close" size="x-small" alternativeText="Close!" title="Close" />
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

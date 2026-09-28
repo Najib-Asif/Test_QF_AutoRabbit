@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>TMC Info</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>TMC Info</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- To be used for Customer and Agency Accounts --></description>
+        <label><!-- Distribution --></label>
+        <name>Distribution</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used only for Agency Accounts --></description>
+        <label><!-- GDS --></label>
+        <name>GDS</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- To be used only for Agency Accounts --></description>
+        <label><!-- Market Segment --></label>
+        <name>Market_Segment</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You are not allowed to edit GDS Status --></errorMessage>
+        <name>GDS_Status_Restrict</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- PCC or Pseudo City Code field should have a value when a TMC info transaction is related to GDS - this helps us to minimise downstream errors for iDeal. --></errorMessage>
+        <name>Mandatory_PCC_for_GDS_Recordtype</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can inactivate PCC only when GDS Status is New/Blank. --></errorMessage>
+        <name>Prevent_Inactivation_of_PCC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can change the PCC only when GDS Status is blank --></errorMessage>
+        <name>Restrict_PCC_Changes</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- PCC should not contain Special characters or spaces --></errorMessage>
+        <name>Restrict_PCC_To_AlphaNumeric</name>
+    </validationRules>
+</CustomObjectTranslation>

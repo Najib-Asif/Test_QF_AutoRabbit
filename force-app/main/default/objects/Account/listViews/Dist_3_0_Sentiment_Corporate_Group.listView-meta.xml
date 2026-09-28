@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dist_3_0_Sentiment_Corporate_Group</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>ABN_Tax_Reference__c</columns>
+    <columns>Qantas_Corporate_Identifier__c</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <columns>Contracted__c</columns>
+    <columns>ACCOUNT.ADDRESS1_COUNTRY_CODE</columns>
+    <columns>Account_Owner_Role__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Contracted__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Account.Customer_Account</value>
+    </filters>
+    <filters>
+        <field>Account_Owner_Role__c</field>
+        <operation>startsWith</operation>
+        <value>QF-DOM-Sales-B&amp;G-Strategic,QF-DOM-Sales-B&amp;G-Development,QF-DOM-Sales-SME-QIS-R&amp;G</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.ALIAS</field>
+        <operation>notEqual</operation>
+        <value>vbrom,bdrui</value>
+    </filters>
+    <label>Demand Survey - Sentiment</label>
+</ListView>

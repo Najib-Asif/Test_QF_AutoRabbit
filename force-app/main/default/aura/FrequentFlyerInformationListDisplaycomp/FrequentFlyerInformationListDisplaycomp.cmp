@@ -1,0 +1,36 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="Case_Controller" access="global" >
+   
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="FrequentFlyers" type="Object"/>
+    <aura:attribute name="error" type="string"/>
+    
+    <aura:attribute name="isSystemAdmin" type="Boolean" default="false"/>
+    
+    
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card >
+        <aura:set attribute="actions">
+        	<aura:if isTrue="{!v.isSystemAdmin}">
+        		<lightning:button label="New Frequent Flyer Information" onclick="{!c.handleNewFFClick}"></lightning:button>
+        	</aura:if>
+            </aura:set>
+    	<aura:if isTrue="{!not(empty(v.FrequentFlyers))}">
+        	<lightning:datatable keyField="id"
+                                 data="{!v.FrequentFlyers}"
+                                 columns="{!v.columns}"
+                                 hideCheckboxColumn="true"
+                                 wrapTableHeader="true"
+                                 onrowaction="{! c.handleRowAction }"
+           />
+        </aura:if>
+        <aura:if isTrue="{!and(empty(v.FrequentFlyers),empty(v.error)) }">
+        	<p> No Frequent Flyer Information available</p>
+        </aura:if>
+        <aura:if isTrue="{!not(empty(v.error))}">
+        	<p>{!v.error}</p>
+        </aura:if>
+    </lightning:card>
+</aura:component>

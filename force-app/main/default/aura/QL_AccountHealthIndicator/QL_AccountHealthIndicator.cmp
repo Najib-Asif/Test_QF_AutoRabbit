@@ -1,0 +1,358 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global" controller="QL_AccountHealthIndicator">
+    
+    <aura:attribute name="sObjectName" type="String" default="Account" description="API name of record on which this component is hosted." />
+    <aura:attribute name="Legend" type="String" description="Legend to display"/>
+    
+    <aura:attribute name="perText" type="String" default="0%" description="Text to display inside circle. It is auto calculated field and used internally." />
+    <aura:attribute name="cirDeg" type="String" default="0" description="Degree of Progress to show. It is auto calculated field and used internally." />
+    
+    <aura:attribute name="theme" type="String" default="green" description="Theme of Circular Progress Bar. Possible values are blue, green, orange." />
+    <aura:attribute name="size" type="String" default="small" description="Size of Circular Progress Bar. Possible values are small, medium, big." />
+    
+    <!-- attributes for health indicator calculation-->
+    <aura:attribute name="activeSAP" type="String" />
+    <aura:attribute name="activeContact" type="String" />
+    <aura:attribute name="updatedSAP" type="String" />
+    <aura:attribute name="accReview" type="String" />
+    <aura:attribute name="actReview" type="String" />
+    <aura:attribute name="noOverdueOpp" type="String" />
+    <aura:attribute name="contractSigned" type="String" />
+    <aura:attribute name="industry" type="String" />
+    <aura:attribute name="activeB2BContact" type="String" />
+    <aura:attribute name="listToDisplay" type="Account[]" />
+    <aura:attribute name="activeSAPAccs" type="Account[]" />
+    <aura:attribute name="updatedSAPAccs" type="Account[]" />
+    <aura:attribute name="accReviewAccs" type="Account[]" />
+    <aura:attribute name="actReviewAccs" type="Account[]" />
+    <aura:attribute name="noOverdueOppAccs" type="Account[]" />
+    <aura:attribute name="contractSignedAccs" type="Account[]" />
+    <aura:attribute name="activeB2BContactAccs" type="Account[]" />
+    <aura:attribute name="industryAccs" type="Account[]" />
+    <aura:attribute name="accCategory" type="String" />
+    <aura:attribute name="simpleAccRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="accFreightRecType" type="String" />
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    
+    <aura:attribute name="pfAccId" type="String[]"/>
+    <aura:attribute name="ownerObj" type="Object"/>
+    <aura:attribute name="accountDetailsList" type="Object[]"/>
+    <aura:attribute name="accTableColumns" type="List"/>
+    <aura:attribute name="sortedBy" type="String" default="Name"/>
+    <aura:attribute name="sortedDirection" type="String" default="asc"/>
+    
+    <aura:attribute name="PaginationList" type="Object[]"/>
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    
+    <!--aura system init event handler-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <force:recordData aura:id="accRecord" recordId="{!v.recordId}" 
+                      fields="Name,RecordTypeId,Type,Contracted__c,Aquire_System__c" 
+                      targetFields="{!v.simpleAccRecord}"
+                      targetError="{!v.recordError}"
+                      recordUpdated="{!c.handleRecordUpdated}"
+                      />
+    <lightning:card >
+        <aura:if isTrue="{!and(v.recordId == null,v.ownerObj != null) }">
+            <div class="slds-align_absolute-center slds-text-title_caps slds-p-bottom_large" style="font-size:14px;color:#0000FF;"><div class="slds-avatar slds-avatar_small slds-p-right_xx-small"><img src="{!v.ownerObj.photoURL}" title="{!v.ownerObj.value}"/></div><u><a href="{!'/one/one.app?#/sObject/'+ v.ownerObj.id + '/view'}" target="_blank" title="">{!v.ownerObj.value}</a></u> <div class="slds-p-left_large"><div onclick="{!c.exportAll}" data-value="all"><lightning:button iconName="utility:download" label="Download Key Accounts"/></div></div></div>
+        </aura:if>
+        <div>
+            <lightning:layout>
+                <!-- div for progress circle-->
+				<aura:if isTrue="{!or(and(v.simpleAccRecord.Contracted__c,notequals(v.simpleAccRecord.RecordTypeId,v.accFreightRecType)),equals(v.simpleAccRecord.RecordTypeId,v.accFreightRecType))}"> 
+                <div class="slds-p-right_xx-small slds-p-top_x-large slds-p-left_x-small"><!--class="slds-m-right_small slds-m-top_xx-large slds-m-left_small"-->
+                    <aura:if isTrue="{!v.recordId == null}">
+                        <div class="slds-p-bottom--large"> </div>
+                    </aura:if>
+                    <div class="{! ( v.cirDeg > 179 ) ? 'container p50plus '+v.theme+' '+v.size : 'container '+v.theme +' '+v.size }">
+                        <span>{!v.perText}</span> 
+                        
+                        <div class="slice">
+                            
+                            <div class="bar" style="{! '-webkit-transform: rotate('+v.cirDeg+'deg); -moz-transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg); -o-transform: rotate('+v.cirDeg+'deg); transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg);'}"></div>
+                            
+                            <div class="fill"></div>
+                        </div>
+                    </div>  
+                </div>
+                </aura:if>
+                <!-- div for progress legend-->
+                <aura:if isTrue="{!and(v.recordId,notequals(v.simpleAccRecord.RecordTypeId,v.accFreightRecType))}">
+                 <aura:if isTrue="{!(v.simpleAccRecord.Contracted__c)}"> 
+                    <div class="slds-m-around_small legend"> 
+                        <aura:if isTrue="{!v.activeSAP == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>SAP Active<br/>
+                        <aura:if isTrue="{!v.updatedSAP == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>SAP Updated Last 3 months<br/>
+                        <aura:if isTrue="{!v.accReview == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Account Reviewed Last 90 Days<br/>
+                        <aura:if isTrue="{!v.actReview == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Activity Created Last 90 Days<br/>
+                        <aura:if isTrue="{!v.noOverdueOpp == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>No Overdue Opportunity<br/>
+                        <aura:if isTrue="{!v.contractSigned == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>No Unsigned Contracts<br/>
+                    </div>  
+               </aura:if>
+                </aura:if>
+                                <!-- Non Contracted and QBRdiv for progress circle-->
+				<aura:if isTrue="{!and(!v.simpleAccRecord.Contracted__c,v.simpleAccRecord.Aquire_System__c)}"> 
+                <div class="slds-p-right_xx-small slds-p-top_x-large slds-p-left_x-small"><!--class="slds-m-right_small slds-m-top_xx-large slds-m-left_small"-->
+                    <aura:if isTrue="{!v.recordId == null}">
+                        <div class="slds-p-bottom--large"> </div>
+                    </aura:if>
+                    <div class="{! ( v.cirDeg > 179 ) ? 'container p50plus '+v.theme+' '+v.size : 'container '+v.theme +' '+v.size }">
+                        <span>{!v.perText}</span> 
+                        
+                        <div class="slice">
+                            
+                            <div class="bar" style="{! '-webkit-transform: rotate('+v.cirDeg+'deg); -moz-transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg); -o-transform: rotate('+v.cirDeg+'deg); transform: rotate('+v.cirDeg+'deg); -ms-transform: rotate('+v.cirDeg+'deg);'}"></div>
+                            
+                            <div class="fill"></div>
+                        </div>
+                    </div>  
+                </div>
+                </aura:if>
+                    <!-- Non Contracted and QBR progress legend-->
+                  <aura:if isTrue="{!and(!v.simpleAccRecord.Contracted__c,v.simpleAccRecord.Aquire_System__c)}"> 
+                    <div class="slds-m-around_small legend"> 
+                        <aura:if isTrue="{!v.activeSAP == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>SAP Active<br/>
+                        <aura:if isTrue="{!v.updatedSAP == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>SAP Updated Last 3 months<br/>
+                        <aura:if isTrue="{!v.accReview == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Account Reviewed Last 90 Days<br/>
+                        <aura:if isTrue="{!v.actReview == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Activity Created Last 90 Days<br/>
+                       <aura:if isTrue="{!v.industry == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Industry<br/>
+                        <aura:if isTrue="{!v.activeB2BContact == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Key Contact<br/>
+                        </div>
+                     </aura:if>
+                    <aura:if isTrue="{!and(v.recordId,equals(v.simpleAccRecord.RecordTypeId,v.accFreightRecType))}">
+                    <div class="slds-m-around_large legend " >
+                        <aura:if isTrue="{!v.activeSAP == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Active SAP<br/>
+                        <aura:if isTrue="{!v.activeContact == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Active Key Contact<br/>
+						<aura:if isTrue="{!v.actReview == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Active Customer Engagement<br/>
+                        <aura:if isTrue="{!v.noOverdueOpp == '1'}">
+                            <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/TrueImage.png'}"/>
+                            <aura:set attribute="else">
+                                <img class="slds-m-right_x-small" width="20" height="20" src="{!$Resource.AHI_Images + '/AHIImages/FalseImage.png'}"/>
+                            </aura:set>
+                        </aura:if>Active Opportunity (Opps where status has changed in last 30 days)<br/>
+                        
+                    </div>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.recordId == null}">
+                    <div class="slds-m-around_small legend"> 
+                        <div class="slds-p-bottom_small"><u>CUSTOMER ACCOUNTS OWNED</u> : {!v.pfAccId.length} <a href=""><span onclick="{!c.openOverallInd}"><lightning:icon iconName="action:preview" size="xx-small" class="slds-m-left_x-small" title="Show/Hide Overall Health Details" /></span></a></div>
+                        <ul style="list-style-type:square">
+                            <li><div onclick="{!c.fetchSAPActive}">Accounts with SAP active : <a>{!v.activeSAP}</a></div></li>
+                            <li><div onclick="{!c.fetchSAPUpdated}">Accounts with SAP updated last 3 months : <a>{!v.updatedSAP}</a></div></li>
+                            <li><div onclick="{!c.fetchAccReview}">Accounts with reviews completed last 90 days : <a>{!v.accReview}</a></div></li>
+                            <li><div onclick="{!c.fetchActReview}">Accounts with activities created last 90 days : <a>{!v.actReview}</a></div></li>
+                            <li><div onclick="{!c.fetchAccOverdueOpp}">Accounts with overdue opportunities : <a>{!v.noOverdueOpp}</a></div></li>
+                            <li><div onclick="{!c.fetchAccContractUnsigned}">Accounts with unsigned contracts : <a>{!v.contractSigned}</a></div></li>
+                        </ul>
+                    </div>    
+                </aura:if>
+                <aura:if isTrue="{!v.listToDisplay.length > 0}">
+                    
+                    <div class="slds-size_4-of-7">
+                        <div data-value="single" onclick="{!c.exportAll}" style="width:145px;"><lightning:button class="slds-m-left--large" iconName="utility:download" label="Download"/></div>
+                        <ul class="slds-wrap slds-list--horizontal slds-has-dividers--right slds-has-inline-block-links--space">
+                            <aura:iteration items="{!v.listToDisplay}" var="acc">
+                                <li class="slds-list--item slds-list--dotted "><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li> 
+                            </aura:iteration>
+                        </ul>
+                    </div>    
+                </aura:if>
+            </lightning:layout>
+            
+        </div>
+        
+        <aura:if isTrue="{!and(v.recordId == null,v.accountDetailsList.length > 0)}">
+            <div aura:id="overallHealthDiv" class="slds-hide slds-m-around_small">
+                <aura:if isTrue="{!$Browser.formFactor == 'DESKTOP'}">
+                    <lightning:datatable         
+                                         keyField="AcntId"
+                                         data="{!v.PaginationList}"
+                                         columns="{!v.accTableColumns}"
+                                         hideCheckboxColumn="true"
+                                         onsort="{!c.updateColumnSorting}"
+                                         sortedBy="{!v.sortedBy}"  
+                                         sortedDirection="{!v.sortedDirection}"/>
+                    <aura:set attribute="else">
+                        <aura:iteration items="{!v.PaginationList}" var="ct">
+                            <lightning:tile class="cardColor" >
+                                
+                                <lightning:layout horizontalAlign="spread" multipleRows="true">
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Account Name :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.AcntName}">{!ct.AcntName}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Dom Revenue :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.accDomRev}">{!ct.accDomRev}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Dom Share :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.accDomShare}">{!ct.accDomShare}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Int Revenue :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.accIntRev}">{!ct.accIntRev}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Int Share :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.accIntShare}">{!ct.accIntShare}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Active SAP :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.activeSAP}">{!if(ct.activeSAP == 1,'Yes','No')}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Updated SAP (Last 3 Months) :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.updatedSAP}">{!if(ct.updatedSAP == 1,'Yes','No')}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Account Review (Last 3 Months) :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.accReviewed}">{!if(ct.accReviewed == 1,'Yes','No')}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >Activity Created (Last 3 Months) :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.actCreated}">{!if(ct.actCreated == 1,'Yes','No')}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >No Overdue Opportunity :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.noOverdueOpp}">{!if(ct.noOverdueOpp == 1,'Yes','No')}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="around-small">
+                                        <dl class="slds-list_inline">
+                                            <dt class="slds-item_label  slds-text-title_caps " >No Unsigned Contract :</dt>
+                                            <dd class="slds-item_detail slds-text-color_weak slds-text-title" title="{!ct.noUnsignedContracts}">{!if(ct.noUnsignedContracts == 1,'Yes','No')}</dd>
+                                        </dl>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </lightning:tile>
+                        </aura:iteration>
+                    </aura:set>
+                </aura:if>
+                
+                <div class="slds-align_absolute-center slds-m-top_large">
+                    <lightning:button label="Previous" 
+                                      disabled="{!v.startPage == 0}"  
+                                      onclick="{!c.previous}" 
+                                      variant="brand"
+                                      iconName='utility:back'
+                                      class="slds-p-right_large"/>
+                    <lightning:button label="Next" 
+                                      disabled="{!v.endPage + 1 >= v.totalRecords}" 
+                                      variant="brand"
+                                      onclick="{!c.next}" 
+                                      iconName='utility:forward'/>
+                </div>
+            </div>
+        </aura:if>    
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Copy_Review_date_to_Start_Date</fullName>
+        <field>Start_Date__c</field>
+        <formula>Reviewed_Date__c</formula>
+        <name>Copy Review date to Start Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Joint_AA_Customer_on_Acc_to_False</fullName>
+        <field>Joint_AA_Customer__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Joint AA Customer on Acc to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Account__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Joint_AA_Customer_to_False</fullName>
+        <field>Joint_AA_Customer__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Joint AA Customer to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Account__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Joint_EK_Customer_on_Acc_to_False</fullName>
+        <field>Joint_EK_Customer__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Joint EK Customer on Acc to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Account__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Joint_EK_Customer_on_Acc_to_True</fullName>
+        <field>Joint_EK_Customer__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Joint EK Customer on Acc to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Account__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Multinational_Cst_on_acc_to_False</fullName>
+        <field>Multinational_Customer__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Multinational Cst on acc to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Account__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Multinational_Cust_on_acc_to_True</fullName>
+        <field>Multinational_Customer__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Multinational Cust on acc to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Account__c</targetObject>
+    </fieldUpdates>
+    <rules>
+        <fullName>Uncheck the Joint AA Customer to False when end date is passed</fullName>
+        <actions>
+            <name>Update_Joint_AA_Customer_to_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account_Classifications__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Account Classifications</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.Classification__c</field>
+            <operation>equals</operation>
+            <value>Joint Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.Sub_Classification__c</field>
+            <operation>equals</operation>
+            <value>American Airlines</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.End_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <description>Update Joint AA Customer to False when End date is less than today</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Uncheck the Joint EK Customer to False when end date is passed</fullName>
+        <actions>
+            <name>Update_Joint_EK_Customer_on_Acc_to_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account_Classifications__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Account Classifications</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.Classification__c</field>
+            <operation>equals</operation>
+            <value>Joint Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.Sub_Classification__c</field>
+            <operation>equals</operation>
+            <value>Emirates</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.End_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <description>Update Joint EK Customer to False when End date is less than today</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Uncheck the Multinational Customer to False when end date is passed</fullName>
+        <actions>
+            <name>Update_Multinational_Cst_on_acc_to_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account_Classifications__c.Classification__c</field>
+            <operation>equals</operation>
+            <value>Multi POS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Account Classifications</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.End_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <description>Update MultiNational Customer to False when End date is less than today</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Joint AA Customer on Account v1</fullName>
+        <actions>
+            <name>Copy_Review_date_to_Start_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Joint_AA_Customer_on_Acc_to_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account_Classifications__c.Classification__c</field>
+            <operation>equals</operation>
+            <value>Joint Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.Sub_Classification__c</field>
+            <operation>equals</operation>
+            <value>American Airlines</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Account Classifications</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Joint EK Customer on Account v1</fullName>
+        <actions>
+            <name>Copy_Review_date_to_Start_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Joint_EK_Customer_on_Acc_to_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account_Classifications__c.Classification__c</field>
+            <operation>equals</operation>
+            <value>Joint Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.Sub_Classification__c</field>
+            <operation>equals</operation>
+            <value>Emirates</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Account Classifications</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Multinational Customer on account v1</fullName>
+        <actions>
+            <name>Copy_Review_date_to_Start_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Multinational_Cust_on_acc_to_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account_Classifications__c.Classification__c</field>
+            <operation>equals</operation>
+            <value>Multi POS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account_Classifications__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Account Classifications</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

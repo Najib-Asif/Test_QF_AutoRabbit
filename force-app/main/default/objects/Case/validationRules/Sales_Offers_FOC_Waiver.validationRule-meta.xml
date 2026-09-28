@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_FOC_Waiver</fullName>
+    <active>false</active>
+    <description>When Case = Sales Offers Request &amp; Sub Type = FOC Waiver, Corporate Scheme is mandatory</description>
+    <errorConditionFormula>AND (
+ RecordTypeId = &quot;01290000001UPUR&quot;, /*Sales Offers Request*/
+ ISPICKVAL (  Sub_Type__c , &quot;FOC Qantas Club Waiver&quot; ),
+OR (
+ISPICKVAL (  Access_through__c , &quot; &quot;),
+ ISBLANK (  AssetId  )
+)
+)</errorConditionFormula>
+    <errorMessage>For FOC Qantas Club Waiver, you will need to add the Corporate Scheme to this Case and fill up the Access Through picklist.</errorMessage>
+</ValidationRule>

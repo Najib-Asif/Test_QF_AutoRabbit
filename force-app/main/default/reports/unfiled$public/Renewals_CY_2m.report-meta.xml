@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_64450856</developerName>
+        <masterLabel>Product Combo</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account$Product_Flag_combined_value__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>1001</sourceValue>
+            </sourceValues>
+            <value>QBS+QBD</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>1111</sourceValue>
+            </sourceValues>
+            <value>All Products</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>1100</sourceValue>
+            </sourceValues>
+            <value>QBS+AEQCC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>1110</sourceValue>
+            </sourceValues>
+            <value>QBS+AEQCC+Aquire</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>1010</sourceValue>
+            </sourceValues>
+            <value>QBS+Aquire</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>1101</sourceValue>
+            </sourceValues>
+            <value>QBS+AEQCC+QBD</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>1000</sourceValue>
+            </sourceValues>
+            <value>QBS Only</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>1011</sourceValue>
+            </sourceValues>
+            <value>QBS+Aquire+QBD</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_62396589</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Account.Opportunities$Owner.UserRole</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager1</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Lead Account Manager5</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager1</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-A&amp;G-Account Manager5</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-Acquisition and Growth</sourceValue>
+            </sourceValues>
+            <value>A&amp;G</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager1</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager2</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager3</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-R&amp;G-Account Manager4</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>QIS-Retention and Growth</sourceValue>
+            </sourceValues>
+            <value>R&amp;G</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Account$Qantas_Corporate_Identifier__c</field>
+    </columns>
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account$Owner</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Incremental_Revenue__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Amount</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities.Contracts__r$Qantas_Annual_Expenditure__c</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities$CloseDate</field>
+    </columns>
+    <columns>
+        <field>Account.Opportunities.Contracts__r$Contract_Start_Date__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Account.Opportunities$StageName</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Closed - Accepted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Sub_Type_Level_2__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Renewal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities.Contracts__r$Version__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities.Contracts__r$Qantas_Annual_Expenditure__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>AUD 2000000</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Owner.UserRole</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>DOM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Opportunities$Amount</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>AUD 2000000</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Opportunities$Sub_Type_Level_2__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Renewals - CY - 2m+</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunities_with_without_Contracts__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Account.Opportunities.Contracts__r$Qantas_Annual_Expenditure__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Account.Opportunities$CloseDate</dateColumn>
+        <interval>INTERVAL_CURY</interval>
+    </timeFrameFilter>
+</Report>

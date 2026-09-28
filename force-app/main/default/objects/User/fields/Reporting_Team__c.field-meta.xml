@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reporting_Team__c</fullName>
+    <description>Formula to return Team of the Roles</description>
+    <externalId>false</externalId>
+    <formula>/*US*/
+IF (CONTAINS (UserRole.Name, &quot;North America-USA-&quot;), &quot;North America&quot;,
+/*Agency*/
+IF (CONTAINS (UserRole.Name, &quot;Flight Centre&quot;), &quot;Agency - Flight Centre&quot;,
+IF ( UserRole.Name = &quot;QF-DOM-Sales-AP&quot;, &quot;Head of Agency Partnership&quot;,
+IF (CONTAINS (UserRole.Name, &quot;AP-Corporate&quot;), &quot;Agency - Corporate&quot;,
+IF (CONTAINS (UserRole.Name, &quot;Helloworld&quot;), &quot;Agency - Helloworld&quot;,
+IF (CONTAINS (UserRole.Name, &quot;AP-Leisure&quot;), &quot;Agency - Leisure&quot;,
+/*B&amp;G*//*Resources*/
+IF ( CONTAINS(UserRole.Name , &quot;Resources NSW/VIC&quot;), &quot;B&amp;G - Resources NSW/VIC&quot;,
+IF (CONTAINS (UserRole.Name , &quot;Resources QLD&quot;) , &quot;B&amp;G - Resources QLD&quot;,
+IF (CONTAINS(UserRole.Name , &quot;Resources WA&quot; ), &quot;B&amp;G - Resources WA&quot;,
+IF ( UserRole.Name = &quot;QF-DOM-Sales-B&amp;G-Resources and Charters&quot;, &quot;B&amp;G - National Manager - Resources&quot;,
+IF (CONTAINS (UserRole.Name, &quot;Charter&quot;), &quot;B&amp;G - Charter&quot;,
+IF (CONTAINS (UserRole.Name, &quot;Global Accounts&quot;), &quot;B&amp;G - Global Accounts&quot;,
+/*Strategic Accounts*/
+IF ( UserRole.Name = &quot;QF-DOM-Sales-B&amp;G-Strategic Accounts&quot;, &quot;B&amp;G - National Manager - Strategic Accounts&quot;,
+IF (CONTAINS (UserRole.Name , &quot;B&amp;G-Strategic Accounts&quot;) , &quot;B&amp;G - Strategic Accounts&quot;,
+/*Business Development &amp; New Business*/
+IF ( UserRole.Name = &quot;QF-DOM-Sales-B&amp;G-New Business &amp; Development&quot;, &quot;B&amp;G - National Manager - Development &amp; New Business&quot;,
+IF (CONTAINS (UserRole.Name , &quot;QF-DOM-Sales-B&amp;G-Development-VIC-&quot;) , &quot;B&amp;G - Business Development - VIC&quot;,
+IF (CONTAINS (UserRole.Name , &quot;QF-DOM-Sales-B&amp;G-Development-Other States-&quot;) , &quot;B&amp;G - Business Development - Other States&quot;,
+IF (CONTAINS (UserRole.Name , &quot;QF-DOM-Sales-B&amp;G-New Business&quot;) , &quot;B&amp;G - New Business&quot;,
+/*Regional Manager*/
+IF ( CONTAINS ( UserRole.Name , &quot;B&amp;G-Regional QLD/NT &quot;), &quot;B&amp;G - Regional - QLD/NT&quot;,
+IF ( CONTAINS ( UserRole.Name , &quot;B&amp;G-Regional VIC/TAS&quot;), &quot;B&amp;G - Regional - VIC/TAS&quot;,
+IF ( CONTAINS ( UserRole.Name , &quot;B&amp;G-Regional ACT&quot;), &quot;B&amp;G - Regional - ACT&quot;,
+IF ( CONTAINS ( UserRole.Name , &quot;B&amp;G-Regional WA/SA&quot;), &quot;B&amp;G - Regional - WA/SA&quot;,
+/*Regional Development*/
+IF (CONTAINS (UserRole.Name, &quot;B&amp;G-Regional Development&quot;), &quot;B&amp;G - Regional Development&quot;,
+/*QIS*/
+IF (OR( UserRole.Name = &quot;QF-DOM-Sales-SME-QIS-R&amp;G&quot;,CONTAINS (UserRole.Name,&quot;QIS-R&amp;G&quot;)), &quot;QIS - Retention and Growth&quot;,
+IF (OR(UserRole.Name = &quot;QF-DOM-Sales-SME-QIS-A&amp;G&quot;,CONTAINS (UserRole.Name,&quot;QIS-A&amp;G&quot;)), &quot;QIS - Acquisition and Growth&quot;,
+IF (OR( UserRole.Name = &quot;QF-DOM-Sales-SME-QIS-Sr Manager&quot;, UserRole.Name = &quot;QF-DOM-Sales-SME-QIS&quot;), &quot;QIS - Senior Manager&quot;,
+IF ( CONTAINS ( UserRole.Name , &quot;QIS&quot;), &quot;QIS&quot;,&quot;Other&quot;)
+))))))))))))))))))))))))))</formula>
+    <label>Reporting Team</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IATA_with_Check_Sum__c</fullName>
+    <description>Appended the 7 digit IATA number with 1 in order to not lose the starting Zero from the IATA number for some, it also serves as a unique way to do lookups.
+
+For Multi Numbers the M is replaced with 1 as well.</description>
+    <externalId>false</externalId>
+    <formula>IF( Is_it_Multi__c = False, Value(&quot;1&quot; &amp;  Agency_Number__c),Value(&quot;1&quot; &amp;  LEFT(Agency_Number__c,3)&amp; &quot;1&quot;  &amp;  Right(Agency_Number__c,3)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>1 appended ahead of 7 digit IATA number for internal lookup purposes.</inlineHelpText>
+    <label>IATA with Check Sum</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

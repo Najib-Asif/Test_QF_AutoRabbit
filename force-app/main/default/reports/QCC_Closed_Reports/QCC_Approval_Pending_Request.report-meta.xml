@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CreatedDate</field>
+    </columns>
+    <columns>
+        <field>SubmittedBy</field>
+    </columns>
+    <columns>
+        <field>TargetEntity</field>
+    </columns>
+    <columns>
+        <field>TargetType</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Actor</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>CCC SUV Recovery Approval Queue,CCC OM Recovery Approval Queue,CCC CPT Recovery Approval Queue,CCC HBA Recovery Approval Queue,CCC AKL Recovery Approval Queue,CCC MNL Recovery Approval Queue,CCC SYD Recovery Approval Queue</value>
+        </criteriaItems>
+        <language>en_AU</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <aggregateType>RowCount</aggregateType>
+        <dateGranularity>Day</dateGranularity>
+        <field>Actor</field>
+        <sortByName>RowCount</sortByName>
+        <sortOrder>Asc</sortOrder>
+        <sortType>Aggregate</sortType>
+    </groupingsDown>
+    <name>QCC Approval Pending Request</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AllPendingWorkitems</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

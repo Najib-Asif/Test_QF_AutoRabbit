@@ -1,0 +1,32 @@
+<template>
+    <lightning-card>
+        <template if:true={showFlow}>
+            <c-qcc-wrap-up-flow 
+                case-id={caseId} 
+                interaction-id={interactionId} 
+                call-reason={callReason}
+                outbound-case-id={outboundCaseId}
+                genesys-user-id={genesysUserId}
+                participant-id={participantId}
+                ivr-selection={ivrSelection}
+                >
+            </c-qcc-wrap-up-flow>
+        </template>
+
+        <template if:false={showFlow}>
+            <template if:true={showSpinner}>
+                <lightning-spinner
+                    alternative-text="Loading..." variant="brand">
+                </lightning-spinner>
+            </template>
+
+            <template if:false={showSpinner}>
+                <lightning-card title="Wrap-up Call">
+                    <div>
+                        <p style="padding:1.5em; font-size: smaller; font-weight: 700;">No previous call.</p>
+                    </div>
+                </lightning-card>
+            </template>
+        </template>
+    </lightning-card>
+</template>

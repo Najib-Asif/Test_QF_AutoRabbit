@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Prevent_SchType_Change_from_Retail</fullName>
+    <active>false</active>
+    <description>Schme type can be changed from Reatil to Other only when Oveeride threshold is true or Below threshold is false</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Prevent_SchType_Change_from_Retail__c &amp;&amp; RecordType.DeveloperName == &apos;Public_Scheme&apos;  &amp;&amp; ISPICKVAL(PRIORVALUE(Scheme_Type__c) , &apos;Retail&apos;) &amp;&amp;  NOT(Override_Threshold__c)</errorConditionFormula>
+    <errorMessage>Please check Overrride Threshold to Modify Scheme type from Reatil.</errorMessage>
+</ValidationRule>

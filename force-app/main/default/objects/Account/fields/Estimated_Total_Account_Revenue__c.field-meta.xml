@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estimated_Total_Account_Revenue__c</fullName>
+    <description>Shows the estimated revenue of the account (100%*Account Revenue)/Current Market Share = Estimated Total Account Revenue</description>
+    <formula>IF(Current_Market_Share__c != null,(QF_Revenue__c *1)/ Current_Market_Share__c,null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estimated Account Revenue</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

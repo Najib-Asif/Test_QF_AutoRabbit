@@ -1,0 +1,1354 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "WhatId", "WhoCount", "WhatCount", "Subject", "ActivityDate", "Status", "Priority", "OwnerId", "IsClosed", "CreatedDate", "LastModifiedDate", "CallDurationInSeconds", "CallType", "CallDisposition", "CallObject", "TaskSubtype", "Number_of_Activities__c", "QCC_Interaction_Recording__c", "QCC_Authentication_Status__c", "QCC_Call_Reason__c", "QCC_Caller_Full_Name__c", "QCC_Caller_Location__c", "QCC_Caller_Phone__c", "QCC_Caller_Verified__c", "QCC_IVR_Selection__c", "QCC_On_Behalf_Caller_Type__c", "QCC_PNR__c", "QCC_PhoneCaller__c", "QCC_Post_Call_Survey_Sent__c", "QCC_Queue_Type__c", "QCC_Wrap_Up_Notes__c", "TECH_Genesys_Participant_Id__c", "TECH_Original_Case_Id__c", "QCC_Classification__c", "TECH_Genesys_Wrapup_URL__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Task",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Task"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "WhatId",
+          "operator" : "STARTS_WITH",
+          "operands" : [ "500" ]
+        }, {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1672531200000" ]
+        } ],
+        "filterBooleanLogic" : "1 AND 2"
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "FILTER0" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "Id" ],
+        "rightQualifier" : "Tasks",
+        "rightKeys" : [ "WhatId" ]
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "AGGREGATE1" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "UNIQUE_Tasks.Id_bucket",
+          "label" : "Touch Points",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "nullBucketValue" : "Other",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "UNIQUE_Tasks.Id",
+              "type" : "NUMBER"
+            },
+            "buckets" : [ {
+              "value" : "First Contact",
+              "rangeEnd" : 2.0
+            }, {
+              "value" : "Repeat Contact",
+              "rangeStart" : 2.0
+            } ]
+          }
+        } ]
+      }
+    },
+    "FORMULA6" : {
+      "action" : "formula",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "LatestTaskCreatedMonthName",
+          "label" : "LatestTaskCreatedMonthName",
+          "formulaExpression" : "case\nwhen LatestTaskCreatedDate_extract='01' then 'Jan'\nwhen LatestTaskCreatedDate_extract='02' then 'Feb'\nwhen LatestTaskCreatedDate_extract='03' then 'Mar'\nwhen LatestTaskCreatedDate_extract='04' then 'Apr'\nwhen LatestTaskCreatedDate_extract='05' then 'May'\nwhen LatestTaskCreatedDate_extract='06' then 'Jun'\nwhen LatestTaskCreatedDate_extract='07' then 'Jul'\nwhen LatestTaskCreatedDate_extract='08' then 'Aug'\nwhen LatestTaskCreatedDate_extract='09' then 'Sep'\nwhen LatestTaskCreatedDate_extract='10' then 'Oct'\nwhen LatestTaskCreatedDate_extract='11' then 'Nov'\nwhen LatestTaskCreatedDate_extract='12' then 'Dec'\nend",
+          "precision" : 10,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "BUCKET2" : {
+      "action" : "bucket",
+      "sources" : [ "BUCKET8" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "UNIQUE_CalculatedChannel_bucket",
+          "label" : "WhichChannels",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "UNIQUE_CalculatedChannel",
+              "type" : "NUMBER"
+            },
+            "buckets" : [ {
+              "value" : "Single Channel",
+              "rangeEnd" : 2.0
+            }, {
+              "value" : "Cross Channel",
+              "rangeStart" : 2.0
+            } ]
+          }
+        } ]
+      }
+    },
+    "BUCKET8" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA6" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "UNIQUE_CaseIDTaskIDConcatenate2_bucket",
+          "label" : "TouchPoints2",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "UNIQUE_CaseIDTaskIDConcatenate2",
+              "type" : "NUMBER"
+            },
+            "buckets" : [ {
+              "value" : "First Contact",
+              "rangeEnd" : 2.0
+            }, {
+              "value" : "Repeat Contact",
+              "rangeStart" : 2.0
+            } ]
+          }
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "BUCKET2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "PNRWithActivitiesAggregated",
+          "name" : "PNRWithActivitiesAggregated"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "EXTRACT0" : {
+      "action" : "extractGrains",
+      "sources" : [ "FORMULA13" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE1" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT0" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "CaseNumber",
+          "name" : "UNIQUE_CaseNumber",
+          "label" : "Unique Case Number"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Tasks.Id",
+          "name" : "UNIQUE_Tasks.Id",
+          "label" : "Unique Activity ID"
+        }, {
+          "action" : "MAX",
+          "source" : "DaysBetweenFirstAndLatestInteraction",
+          "name" : "MAX_DaysBetweenFirstAndLatestInteraction",
+          "label" : "Maximum Days between First and Latest Interaction"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Origin",
+          "name" : "UNIQUE_Origin",
+          "label" : "Unique Case Origin"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "CalculatedChannel",
+          "name" : "UNIQUE_CalculatedChannel",
+          "label" : "Unique CalculatedChannel"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "CaseIDTaskIDConcatenate2",
+          "name" : "UNIQUE_CaseIDTaskIDConcatenate2",
+          "label" : "Unique CaseIDTaskIDConcatenate2"
+        } ],
+        "groupings" : [ "LatestTaskCreatedDate_extract", "CalculatedPNRContactIdConcat", "CaseOriginForFirstCaseCreated", "FirstCaseAssignedRole" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET2" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "DATETIME",
+          "field" : "CreatedDate",
+          "operator" : "GREATER_OR_EQUAL",
+          "operands" : [ "1672531200000" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "Is_QCC_Case__c",
+          "operator" : "EQUAL",
+          "operands" : [ "true" ]
+        }, {
+          "type" : "TEXT",
+          "field" : "RecordType.Name",
+          "operator" : "EQUAL",
+          "operands" : [ "CCC Voice" ]
+        } ],
+        "filterBooleanLogic" : "1 AND (2 OR 3)"
+      }
+    },
+    "FORMULA1" : {
+      "action" : "formula",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedPNR",
+          "label" : "CalculatedPNR",
+          "formulaExpression" : "case when Booking_PNR__c is not null then upper(Booking_PNR__c)\n\t when \"Tasks.QCC_PNR__c\" is not null then upper(\"Tasks.QCC_PNR__c\")\n\telse 'PNR Not Found'\nend",
+          "precision" : 20,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA2" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA1" ],
+      "parameters" : {
+        "partitionBy" : [ "CalculatedPNR" ],
+        "orderBy" : [ {
+          "fieldName" : "Tasks.CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "NUMBER",
+          "name" : "DaysBetweenFirstAndLatestInteraction",
+          "label" : "Days between First and Latest Interaction",
+          "formulaExpression" : "(to_unix_timestamp(first_value(\"Tasks.CreatedDate\"))-to_unix_timestamp(last_value(\"Tasks.CreatedDate\")))/(60*60*24)",
+          "precision" : 5,
+          "scale" : 2,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA3" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA2" ],
+      "parameters" : {
+        "partitionBy" : [ "CalculatedPNR" ],
+        "orderBy" : [ {
+          "fieldName" : "Tasks.CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "FirstTaskCreatedDate",
+          "label" : "FirstTaskCreatedDate",
+          "formulaExpression" : "first_value(\"Tasks.CreatedDate\")",
+          "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EXTRACT1" : {
+      "action" : "extractGrains",
+      "sources" : [ "FORMULA4" ],
+      "parameters" : {
+        "grainExtractions" : [ {
+          "source" : "FirstTaskCreatedDate",
+          "targets" : [ {
+            "name" : "FirstTaskCreatedDate_extract",
+            "label" : "FirstTaskCreatedMonth",
+            "grainType" : "MONTH"
+          } ]
+        } ]
+      }
+    },
+    "FORMULA4" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA3" ],
+      "parameters" : {
+        "partitionBy" : [ "CalculatedPNR" ],
+        "orderBy" : [ {
+          "fieldName" : "Tasks.CreatedDate",
+          "direction" : "DESC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "DATETIME",
+          "name" : "LatestTaskCreatedDate",
+          "label" : "LatestTaskCreatedDate",
+          "formulaExpression" : "first_value(\"Tasks.CreatedDate\")",
+          "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "EXTRACT2" : {
+      "action" : "extractGrains",
+      "sources" : [ "EXTRACT1" ],
+      "parameters" : {
+        "grainExtractions" : [ {
+          "source" : "LatestTaskCreatedDate",
+          "targets" : [ {
+            "name" : "LatestTaskCreatedDate_extract",
+            "label" : "LatestTaskCreatedMonth",
+            "grainType" : "MONTH"
+          } ]
+        } ]
+      }
+    },
+    "FORMULA5" : {
+      "action" : "formula",
+      "sources" : [ "EXTRACT2" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedChannel",
+          "label" : "CalculatedChannel",
+          "formulaExpression" : "case \nwhen \"Tasks.CallType\"='Inbound' then 'Voice'\nwhen \"Tasks.CallType\"='Outbound' then 'Voice'\nelse 'Non Voice'\nend",
+          "precision" : 10,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA7" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA5" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedPNRContactIdConcat",
+          "label" : "CalculatedPNRContactIdConcat",
+          "formulaExpression" : "concat(CalculatedPNR,ContactId)",
+          "precision" : 50,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA8" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA7" ],
+      "parameters" : {
+        "partitionBy" : [ "CalculatedPNRContactIdConcat" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CaseOriginForFirstCaseCreated",
+          "label" : "CaseOriginForFirstCaseCreated",
+          "formulaExpression" : "first_value(Origin)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA10" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA8" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CalculatedCallReason",
+          "label" : "CalculatedCallReason",
+          "formulaExpression" : "case when \"Tasks.QCC_Call_Reason__c\" is null then 'No Reason Specified' else \"Tasks.QCC_Call_Reason__c\"\nend",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA11" : {
+      "action" : "computeRelative",
+      "sources" : [ "FORMULA10" ],
+      "parameters" : {
+        "partitionBy" : [ "CalculatedPNR" ],
+        "orderBy" : [ {
+          "fieldName" : "CreatedDate",
+          "direction" : "ASC"
+        } ],
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "FirstCaseAssignedRole",
+          "label" : "FirstCaseAssignedRole",
+          "formulaExpression" : "first_value(Created_by_Role__c)",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA12" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA11" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CaseIDTaskIDConcat",
+          "label" : "CaseIDTaskIDConcat",
+          "formulaExpression" : "concat(Id, \"Tasks.Id\")",
+          "precision" : 255,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "FORMULA13" : {
+      "action" : "formula",
+      "sources" : [ "FORMULA12" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "CaseIDTaskIDConcatenate2",
+          "label" : "CaseIDTaskIDConcatenate2",
+          "formulaExpression" : "case when \"Tasks.Id\" is null then Id\nelse concat(Id,\"Tasks.Id\")\nend",
+          "precision" : 50,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "BUCKET5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case With Task Raw",
+          "name" : "CaseWithTaskRaw"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "EXTRACT3" : {
+      "action" : "extractGrains",
+      "sources" : [ "FORMULA13" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE3" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT3" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "CaseNumber",
+          "name" : "UNIQUE_CaseNumber",
+          "label" : "Unique Case Number"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "CalculatedChannel",
+          "name" : "UNIQUE_CalculatedChannel",
+          "label" : "Unique CalculatedChannel"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Tasks.Id",
+          "name" : "UNIQUE_Tasks.Id",
+          "label" : "Unique Activity ID"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "CaseIDTaskIDConcatenate2",
+          "name" : "UNIQUE_CaseIDTaskIDConcatenate2",
+          "label" : "Unique CaseIDTaskIDConcatenate2"
+        } ],
+        "groupings" : [ "LatestTaskCreatedDate_extract", "CalculatedPNRContactIdConcat" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "BUCKET9" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "PNR With Channel",
+          "name" : "PNRWithChannel"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Origin", "LastModifiedDate", "Origin_bucket", "AccountId", "Description", "Frequent_Flyer_Tier__c", "ContactId", "IsClosed", "RecordType.Name", "Group__c", "Reason", "Case_Number__c", "Is_QCC_Case__c", "Frequent_Flyer_Number__c", "OwnerId", "OwnerName__c", "RecordType.DeveloperName", "Booking_PNR__c", "CCC_R1_CCAT_Type__c", "RecordTypeId", "CaseNumber", "Sub_Type_1__c", "Created_by_Role__c", "RecordType.Id", "MasterRecordId", "ParentId", "Status", "Sub_Category__c", "Priority", "Is_CCAT_User__c", "RecordType.DeveloperName_bucket", "Record_Type__c", "Type", "IsEscalated", "Sub_Type_2__c", "Contact_Fullname__c", "Category__c", "CreatedDate", "ClosedDate", "Id", "Type_bucket" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "CaseRawDataSet",
+          "name" : "CaseRawDataSet"
+        },
+        "sampleDetails" : {
+          "type" : "Custom",
+          "filters" : {
+            "filterExpressions" : [ {
+              "type" : "TEXT",
+              "field" : "Booking_PNR__c",
+              "operator" : "IS_NOT_NULL",
+              "operands" : [ ]
+            } ]
+          },
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "FORMULA9" : {
+      "action" : "formula",
+      "sources" : [ "AGGREGATE3" ],
+      "parameters" : {
+        "expressionType" : "SQL",
+        "fields" : [ {
+          "type" : "TEXT",
+          "name" : "ChannelClassification",
+          "label" : "Channel Classification",
+          "formulaExpression" : "case when UNIQUE_CalculatedChannel>1 then 'Cross Channel'\nelse 'Single Channel'\nend",
+          "precision" : 20,
+          "defaultValue" : ""
+        } ]
+      }
+    },
+    "BUCKET3" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA9" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "UNIQUE_Tasks.Id_bucket",
+          "label" : "TouchPoint",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "nullBucketValue" : "Other",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "UNIQUE_Tasks.Id",
+              "type" : "NUMBER"
+            },
+            "buckets" : [ {
+              "value" : "First Contact",
+              "rangeEnd" : 2.0
+            }, {
+              "value" : "Repeat Contact",
+              "rangeStart" : 2.0
+            } ]
+          }
+        } ]
+      }
+    },
+    "BUCKET9" : {
+      "action" : "bucket",
+      "sources" : [ "BUCKET3" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "UNIQUE_CaseIDTaskIDConcatenate2_bucket",
+          "label" : "TouchPoints2",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "UNIQUE_CaseIDTaskIDConcatenate2",
+              "type" : "NUMBER"
+            },
+            "buckets" : [ {
+              "value" : "First Contact",
+              "rangeEnd" : 2.0
+            }, {
+              "value" : "Repeat Contact",
+              "rangeStart" : 2.0
+            } ]
+          }
+        } ]
+      }
+    },
+    "BUCKET4" : {
+      "action" : "bucket",
+      "sources" : [ "FORMULA13" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "Frequent_Flyer_Tier__c_bucket",
+          "label" : "FF Groups",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "nullBucketValue" : "No Contact in SFDC",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "Frequent_Flyer_Tier__c",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "VIP",
+              "sourceValues" : [ "Chairman's Lounge", "Chairman's Lounge Platinum One", "Chairmans Lounge", "Chairmans Lounge Platinum One", "Platinum One", "Platinum_one" ]
+            }, {
+              "value" : "Platinum",
+              "sourceValues" : [ "Platinum" ]
+            }, {
+              "value" : "Gold",
+              "sourceValues" : [ "Gold", "Lifetime Gold" ]
+            }, {
+              "value" : "Silver",
+              "sourceValues" : [ "Lifetime Silver", "Silver" ]
+            }, {
+              "value" : "Non-tiered",
+              "sourceValues" : [ "Non-tiered" ]
+            }, {
+              "value" : "Bronze",
+              "sourceValues" : [ "Bronze" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "BUCKET5" : {
+      "action" : "bucket",
+      "sources" : [ "BUCKET4" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "RecordType.Name_bucket",
+          "label" : "Case Type",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "isPassthroughEnabled" : false,
+            "sourceField" : {
+              "name" : "RecordType.Name",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "CC&B",
+              "sourceValues" : [ "CCC Baggage", "CCC Complaints", "CCC Compliment", "CCC Further Action Required", "CCC Insurance Letter Case", "CCC On The Spot Recovery", "CCC Query" ]
+            }, {
+              "value" : "Voice",
+              "sourceValues" : [ "CCC Voice" ]
+            }, {
+              "value" : "Refunds",
+              "sourceValues" : [ "CCC Refund" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "EXTRACT4" : {
+      "action" : "extractGrains",
+      "sources" : [ "FORMULA13" ],
+      "parameters" : {
+        "grainExtractions" : [ ]
+      }
+    },
+    "AGGREGATE5" : {
+      "action" : "aggregate",
+      "sources" : [ "EXTRACT4" ],
+      "parameters" : {
+        "aggregations" : [ {
+          "action" : "UNIQUE",
+          "source" : "CaseNumber",
+          "name" : "UNIQUE_CaseNumber",
+          "label" : "Unique Case Number"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Tasks.Id",
+          "name" : "UNIQUE_Tasks.Id",
+          "label" : "Unique Activity ID"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "Origin",
+          "name" : "UNIQUE_Origin",
+          "label" : "Unique Case Origin"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "CalculatedChannel",
+          "name" : "UNIQUE_CalculatedChannel",
+          "label" : "Unique CalculatedChannel"
+        }, {
+          "action" : "UNIQUE",
+          "source" : "CaseIDTaskIDConcatenate2",
+          "name" : "UNIQUE_CaseIDTaskIDConcatenate2",
+          "label" : "Unique CaseIDTaskIDConcatenate2"
+        } ],
+        "groupings" : [ "CalculatedPNRContactIdConcat", "CaseOriginForFirstCaseCreated" ],
+        "pivots" : [ ],
+        "nodeType" : "STANDARD"
+      }
+    },
+    "OUTPUT3" : {
+      "action" : "save",
+      "sources" : [ "AGGREGATE5" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "PNR with Activities Debug",
+          "name" : "PNR_with_Activities_Debug"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Task",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "FILTER0" : {
+        "label" : "Tasks Related to Case(Filtered)",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "JOIN0" : {
+        "label" : "Case With Tasks",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 532
+      },
+      "TRANSFORM0" : {
+        "label" : "Transformations",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 952,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Bucket"
+          },
+          "FORMULA6" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "BUCKET2" : {
+            "label" : "Bucket"
+          },
+          "BUCKET8" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "BUCKET0",
+          "target" : "FORMULA6"
+        }, {
+          "source" : "BUCKET8",
+          "target" : "BUCKET2"
+        }, {
+          "source" : "FORMULA6",
+          "target" : "BUCKET8"
+        } ]
+      },
+      "OUTPUT0" : {
+        "label" : "PNR With Activities Aggregated",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112.1,
+        "left" : 1231.4
+      },
+      "AGGREGATE0" : {
+        "label" : "Group By  Cases and Tasks",
+        "description" : "",
+        "type" : "AGGREGATE",
+        "top" : 112,
+        "left" : 812,
+        "graph" : {
+          "EXTRACT0" : null,
+          "AGGREGATE1" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT0",
+          "target" : "AGGREGATE1"
+        } ]
+      },
+      "FILTER1" : {
+        "label" : "Cases (Filtered based on Created Date)",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252,
+        "left" : 252
+      },
+      "TRANSFORM2" : {
+        "label" : "Calculations",
+        "description" : "PNR,Days between Created Dates of Tasks",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 672,
+        "graph" : {
+          "FORMULA1" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA2" : {
+            "label" : "Difference between Created Dates of Tasks"
+          },
+          "FORMULA3" : {
+            "label" : "Formula"
+          },
+          "EXTRACT1" : {
+            "label" : "Extract Date Component"
+          },
+          "FORMULA4" : {
+            "label" : "Formula"
+          },
+          "EXTRACT2" : {
+            "label" : "Extract Date Component"
+          },
+          "FORMULA5" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA7" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA8" : {
+            "label" : "Formula"
+          },
+          "FORMULA10" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA11" : {
+            "label" : "Formula"
+          },
+          "FORMULA12" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "FORMULA13" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA1",
+          "target" : "FORMULA2"
+        }, {
+          "source" : "FORMULA2",
+          "target" : "FORMULA3"
+        }, {
+          "source" : "FORMULA4",
+          "target" : "EXTRACT1"
+        }, {
+          "source" : "FORMULA3",
+          "target" : "FORMULA4"
+        }, {
+          "source" : "EXTRACT1",
+          "target" : "EXTRACT2"
+        }, {
+          "source" : "EXTRACT2",
+          "target" : "FORMULA5"
+        }, {
+          "source" : "FORMULA5",
+          "target" : "FORMULA7"
+        }, {
+          "source" : "FORMULA7",
+          "target" : "FORMULA8"
+        }, {
+          "source" : "FORMULA8",
+          "target" : "FORMULA10"
+        }, {
+          "source" : "FORMULA10",
+          "target" : "FORMULA11"
+        }, {
+          "source" : "FORMULA11",
+          "target" : "FORMULA12"
+        }, {
+          "source" : "FORMULA12",
+          "target" : "FORMULA13"
+        } ]
+      },
+      "OUTPUT1" : {
+        "label" : "Case With Task Raw",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 1232.3
+      },
+      "AGGREGATE2" : {
+        "label" : "Group By Channel",
+        "description" : "",
+        "type" : "AGGREGATE",
+        "top" : 252,
+        "left" : 812.1,
+        "graph" : {
+          "EXTRACT3" : null,
+          "AGGREGATE3" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT3",
+          "target" : "AGGREGATE3"
+        } ]
+      },
+      "OUTPUT2" : {
+        "label" : "PNR With Channel",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252.10000000000002,
+        "left" : 1232.3
+      },
+      "LOAD_DATASET2" : {
+        "label" : "CaseRawDataSet",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 10000
+        }
+      },
+      "TRANSFORM3" : {
+        "label" : "Transformations",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 252,
+        "left" : 952,
+        "graph" : {
+          "FORMULA9" : {
+            "parameters" : {
+              "type" : "BASE_FORMULA_UI"
+            },
+            "label" : "Formula"
+          },
+          "BUCKET3" : {
+            "label" : "Bucket"
+          },
+          "BUCKET9" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "FORMULA9",
+          "target" : "BUCKET3"
+        }, {
+          "source" : "BUCKET3",
+          "target" : "BUCKET9"
+        } ]
+      },
+      "TRANSFORM4" : {
+        "label" : "Bucketing",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 392,
+        "left" : 672.4,
+        "graph" : {
+          "BUCKET4" : {
+            "label" : "Bucket"
+          },
+          "BUCKET5" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ {
+          "source" : "BUCKET4",
+          "target" : "BUCKET5"
+        } ]
+      },
+      "AGGREGATE4" : {
+        "label" : "Aggregate 4",
+        "type" : "AGGREGATE",
+        "top" : 392.4,
+        "left" : 812,
+        "graph" : {
+          "EXTRACT4" : null,
+          "AGGREGATE5" : null
+        },
+        "connectors" : [ {
+          "source" : "EXTRACT4",
+          "target" : "AGGREGATE5"
+        } ]
+      },
+      "OUTPUT3" : {
+        "label" : "PNR with activities Debug",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 392,
+        "left" : 952
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "TRANSFORM2"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "AGGREGATE0"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "AGGREGATE2"
+    }, {
+      "source" : "TRANSFORM3",
+      "target" : "OUTPUT2"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "FILTER1"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "TRANSFORM4"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "AGGREGATE0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "AGGREGATE2",
+      "target" : "TRANSFORM3"
+    }, {
+      "source" : "TRANSFORM4",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "TRANSFORM2",
+      "target" : "AGGREGATE4"
+    }, {
+      "source" : "AGGREGATE4",
+      "target" : "OUTPUT3"
+    } ],
+    "hiddenColumns" : [ {
+      "fieldName" : "QCC_PNR__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "WhatId",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "WhoCount",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "WhatCount",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "Subject",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "ActivityDate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "Status",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "Priority",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "OwnerId",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "IsClosed",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "CreatedDate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "LastModifiedDate",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "CallDurationInSeconds",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "CallType",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "CallDisposition",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "CallObject",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "TaskSubtype",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "Number_of_Activities__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Interaction_Recording__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Authentication_Status__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Caller_Full_Name__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Caller_Location__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Caller_Phone__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Caller_Verified__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_IVR_Selection__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_On_Behalf_Caller_Type__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_PhoneCaller__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Post_Call_Survey_Sent__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Queue_Type__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Wrap_Up_Notes__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "TECH_Genesys_Participant_Id__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "TECH_Original_Case_Id__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "QCC_Classification__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "TECH_Genesys_Wrapup_URL__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    }, {
+      "fieldName" : "Origin",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "LastModifiedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Origin_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "AccountId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Description",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "ContactId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "IsClosed",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Group__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Reason",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Case_Number__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Frequent_Flyer_Number__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "OwnerId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "OwnerName__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordType.DeveloperName",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Booking_PNR__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "CCC_R1_CCAT_Type__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordTypeId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Sub_Type_1__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Created_by_Role__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordType.Id",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "MasterRecordId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "ParentId",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Status",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Sub_Category__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Priority",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Is_CCAT_User__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "RecordType.DeveloperName_bucket",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Record_Type__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Type",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "IsEscalated",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Sub_Type_2__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Contact_Fullname__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "Category__c",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "CreatedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "ClosedDate",
+      "objectType" : "analyticsDataset",
+      "objectName" : "CaseRawDataSet"
+    }, {
+      "fieldName" : "QCC_Call_Reason__c",
+      "objectType" : "connectedDataset",
+      "objectName" : "SFDC_LOCAL$Task"
+    } ]
+  },
+  "runMode" : "full"
+}

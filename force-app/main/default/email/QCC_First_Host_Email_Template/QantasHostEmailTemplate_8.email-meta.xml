@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>QantasHostEmailTemplate 8</name>
+    <style>none</style>
+    <subject>Your upcoming Qantas flight {!QCC_First_Host__c.QCC_Carrier_Code__c}{!QCC_First_Host__c.QCC_Flight_No__c}</subject>
+    <textOnly>Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},
+
+As a Qantas {!QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c} member, the Qantas VIP Service Team is dedicated to overseeing your Qantas travel and ensuring that you have the smoothest journey possible.
+
+We’ve reviewed your upcoming booking on {!QCC_First_Host__c.QCC_Carrier_Code__c}{!QCC_First_Host__c.QCC_Flight_No__c} to {!QCC_First_Host__c.Qcc_Arrival_Airport__c} in {!QCC_First_Host__c.QCC_Cabin__c} class on {!QCC_First_Host__c.QCC_Departure_Date__c} {!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_CONX_Arrival_Airport_Name__c)),&quot;with a connection to &quot;+QCC_First_Host__c.QCC_CONX_Arrival_Airport_Name__c,&quot;&quot;)} and can confirm that your booking is in order. {!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Seat_Number__c)), &quot;Your current seat is &quot;+ QCC_First_Host__c.QCC_Seat_Number__c+&quot;.&quot;,&quot;&quot;)} View my booking.
+
+{!IF(QCC_First_Host__c.QCC_Departure_Airport__c = &quot;LAX&quot;, &quot;Important update regarding the Qantas First Lounge in Los Angeles
+
+&quot;,&quot;&quot;)}  {!IF(QCC_First_Host__c.QCC_Departure_Airport__c = &quot;LAX&quot;, &quot;We are sorry to inform you that the Qantas First Lounge is temporarily closed due to unexpected flooding in the terminal. In the meantime, we invite you to relax in the dedicated VIP space at Oneworld Business Lounge, located on Level 5 of the Tom Bradley International Terminal. Our team is ready to welcome you and ensure your pre flight experience is as comfortable as possible. We sincerely apologise for this disruption and appreciate your understanding.
+
+&quot;,&quot;&quot;)}  {!IF(QCC_First_Host__c.QCC_Departure_Airport__c = &quot;BNE&quot;, &quot;Important changes to the Brisbane International Lounge
+
+&quot;,&quot;&quot;)}  {!IF(QCC_First_Host__c.QCC_Departure_Airport__c = &quot;BNE&quot;, &quot;The Brisbane International Lounge will be undertaking essential works to the lounge entrance escalators and elevators until late 2026. During this time, you will need to access the lounge directly after checking in, before security and passport control. Please allow additional time when leaving the lounge to clear security and passport control before boarding your flight.
+
+&quot;,&quot;&quot;)}  {!IF(QCC_First_Host__c.QCC_Departure_Airport__c = &quot;BNE&quot;, &quot;Find out more &gt;
+
+&quot;,&quot;&quot;)}   {!IF(ISPICKVAL(QCC_First_Host__c.QCC_Special_Meal__c, &quot;&quot;),&quot;&quot;,&quot;We’ve noted your special meal request for &quot;)} {!QCC_First_Host__c.QCC_Special_Meal__c} {!IF(ISPICKVAL(QCC_First_Host__c.QCC_Special_Meal__c, &quot;&quot;),&quot;&quot;,&quot; in your booking as requested.
+
+&quot;)}   {!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Other_Services_Formula__c)),&quot;Additionally, there’s a request for &quot; +QCC_First_Host__c.QCC_Other_Services_Formula__c+&quot;
+
+&quot;,&quot;&quot;)}
+Before travel, ensure you check the latest government travel requirements which may include mandatory health declarations, entry permits, pre-approval or you could be denied entry.
+
+Remember, we’re on hand to assist you with your Qantas travel needs. From bookings and routine requirements to unusual requests, we are available and can be contacted on + 61 2 6122 1111. To make changes to a travel agent booking before your travel commences, please contact your agent.
+
+Finally, should you prefer to receive this communication via SMS, or to opt out of receiving it, please visit Your Profile.
+
+Kind regards,
+Qantas VIP Service Team
+{!IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Chairmans Lounge&quot; || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Platinum One&quot; || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = &quot;Chairmans Lounge Platinum One&quot; || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c =&quot;FFLP&quot; ,&quot;Worldwide + 61 2 6122 1111&quot;,&quot;&quot;)}
+
+
+
+--------------------------------------------------------------------
+Important Information
+
+The Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, &quot;Special&quot;,&quot;VIP&quot;)} Service Team monitors travel on Qantas operated flights and this communication is sent for Qantas International flights only. Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, &quot;Special&quot;,&quot;VIP&quot;)} Service Team does all possible to secure the preferred seat requests however it cannot be guaranteed as seats may need to be changed for operational, safety or security reasons, even after boarding the aircraft. For through flights, travel preferences are displayed for the first flight sector only. View full terms and conditions for seat selection and view full terms and conditions for Specific Needs including meal and assistance during your journey.
+
+Ref#{!QCC_First_Host__c.Name}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

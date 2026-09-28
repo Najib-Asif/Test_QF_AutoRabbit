@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LYTD_International_Qantas_Revenue__c</fullName>
+    <label>LYTD International Qantas Revenue</label>
+    <summarizedField>AEQCC_Performance__c.YTD_QF_Intl_CV__c</summarizedField>
+    <summaryFilterItems>
+        <field>AEQCC_Performance__c.Rollup__c</field>
+        <operation>equals</operation>
+        <value>LY</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AEQCC_Performance__c.Variance_Link__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valiadate_Only_Active_Accounts_Selected</fullName>
+    <active>true</active>
+    <description>Valiadate_Only_Active_Accounts_Selected</description>
+    <errorConditionFormula>AND( 
+$Profile.Name &lt;&gt; &quot;Qantas CC Consultant&quot;, 
+$Profile.Name &lt;&gt; &quot;QCC Contact Center Agent Hobart&quot;,
+$Profile.Name &lt;&gt; &quot;QCC Contact Center Agent Manila&quot;,
+$Profile.Name &lt;&gt; &quot;QCC Contact Center Agent Capetown&quot;,
+$Profile.Name &lt;&gt; &quot;QCC Contact Center Agent Suva&quot;,
+$Profile.Name &lt;&gt; &quot;QCC Contact Center Agent Auckland&quot;,
+$Profile.Name &lt;&gt; &quot;QCC Contact Center Agent Mumbai&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas CC Operational Manager&quot;, 
+$Profile.Name &lt;&gt; &quot;QCC Operational Manager&quot;,
+$Profile.Name &lt;&gt; &quot;Qantas CC Team Lead&quot;, 
+(Account.Active__c=False), 
+NOT(CONTAINS(RecordType.DeveloperName,&apos;Account_Maintenance&apos;)),NOT(CONTAINS(RecordType.DeveloperName,&apos;System_Admin_Request&apos;)) 
+)
+&amp;&amp; $Permission.QCC_Bypass_Account_Contact_Case_Triggers = False</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>The case record is being added to an inactive account. Please check if the correct account is added or raise a System Admin case requesting to reactivate the account</errorMessage>
+</ValidationRule>

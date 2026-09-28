@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Freight US Email to Case to send Acknowledgement</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Freight US - Email to Case Acknowledgement</name>
+    <style>none</style>
+    <subject>Re: {!Case.CaseNumber} - {!Case.Subject}         {!Case.Thread_Id}</subject>
+    <textOnly>We’ve received your enquiry and will respond to you as soon as we can.
+
+Your reference number is {!Case.CaseNumber}.
+
+If you have a question regarding your freight or pet travelling today, call us on +1 800 227-0290  - we’re available within the hours below. Please have your reference number ready so we can assist you.
+
+Freight Customer Service
+Qantas Airways Limited
+
+P. +1 800 227-0290
+E. qffreightusa@qantas.com.au
+
+H.  Monday - Friday: 7am to 8pm AEST
+Saturday - Sunday: 8am to 4pm AEST
+
+qantas.com  |  facebook.com/qantasNA  |  twitter @QantasUSA  |  youtube.com/qantas
+
+{!Case.Thread_Id}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

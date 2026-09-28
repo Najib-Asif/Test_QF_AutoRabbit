@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Name_validation</fullName>
+    <active>true</active>
+    <description>To ensure the account name in the Case and Frequent Flyer Info are the same</description>
+    <errorConditionFormula>Account__r.Name  &lt;&gt;  Case__r.Account.Name &amp;&amp; $User.Business_Unit__c &lt;&gt; &quot;Freight&quot;</errorConditionFormula>
+    <errorDisplayField>Account__c</errorDisplayField>
+    <errorMessage>If you would like to change the Account Name, Please do so in the Case related to this Frequent Flyer.</errorMessage>
+</ValidationRule>

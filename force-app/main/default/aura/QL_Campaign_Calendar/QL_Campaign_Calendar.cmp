@@ -1,0 +1,260 @@
+<aura:component controller ="QLCampaignCalendar" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="calendarview" type="List" default="[
+                                                             {'label': 'Monthly View', 'value': 'monthlyview'},
+                                                             {'label': 'Financial Year View', 'value': 'yearlyview'},
+                                                             ]"/>
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'All', 'value': 'all'},
+                                                        {'label': 'My Campaigns', 'value': 'mycampaigns'},
+                                                        {'label': 'My Team\'s Campaigns', 'value': 'myteamscampaigns'}
+                                                        ]"/>
+    <aura:attribute name="listViewOptions" type="List" />
+    
+    <aura:attribute name="Campaigns" type="Campaign[]" />
+    <aura:attribute name="CampaignRecord" type="Campaign[]" />
+    <aura:attribute name="ButtonValue" type="String" default=""/>
+    <aura:attribute name="Month" type="Date"/>
+    <aura:attribute name="Spinner" type="Boolean" default="true"/>
+    <aura:attribute name="buttonobj" type="Object" />
+    <aura:attribute name="Months" type="Date[]"/>
+    <aura:attribute name="monthInNumber" type="Object[]" />
+    <aura:attribute name="campaignFrYearlyview" type="Object[]" />
+    <aura:attribute name="CampaignRecordtypes" type="String[]" />
+    <aura:attribute name="HideMonthBox" type="Boolean" default="true" />
+    <aura:attribute name="Statuses" type="Object[]" />
+    <aura:attribute name="CampaignType" type="String" />
+    <aura:attribute name="StartDate" type="Date"/>
+    <aura:attribute name="EndDate" type="Date"/>
+    <aura:attribute name="CampaignRecordType" type="String" />
+    <aura:attribute name="view" type="String" />
+    <aura:attribute name="recordToDisply" type="integer"/>
+    <aura:attribute name="page" type="integer"/>
+    <aura:attribute name="SplitDates" type="Object[]" />
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+    <aura:attribute name="total" type="integer" description="total records count store "/>
+    <aura:attribute name="value" type="String" default="All"/>
+    <aura:attribute name="userIds" type="Id[]" default="All"/>
+    <aura:attribute name="Typeofcampaings" type="String" default="All"/>
+    <aura:attribute name="Regionofcampaings" type="String" default="All Regions"/>
+    <aura:attribute name="Typetemp" type="String"/>
+    <aura:attribute name="Regiontemp" type="String"/>
+    <aura:attribute name="types" type="String[]"/>    
+    <aura:attribute name="regions" type="String[]"/> 
+    <aura:attribute name="TypeofcampaingsArray" type="String[]" />
+    <aura:attribute name="TypeofcampaingsArraytemp" type="String[]" />
+    <aura:attribute name="RegionofcampaingsArray" type="String[]" />
+    <aura:attribute name="RegionofcampaingsArraytemp" type="String[]" />
+    <aura:attribute name="Footerapplybuttonid" type="String"/>
+    <aura:attribute name="open" type="Boolean" default="false"/>
+    <aura:attribute name="opentypefilter" type="Boolean" default="false"/>
+    <aura:attribute name="openregionfilter" type="Boolean" default="false"/>
+    <aura:attribute name="Financialyear" type="String" />
+    <aura:attribute name="Regiontempplaceholder" type="String" />
+    <aura:attribute name="SelectedCampaignRecordType" type="String" default="inProgress" />
+    <aura:attribute name="selectedCalendarView" type="String" default="inProgress" />
+    <aura:attribute name="selectedRecordView" type="String" default="all" />
+    <aura:attribute name="selectedRegion" type="String" default="all" />
+    
+    <!--Handlers-->
+    <aura:handler name="init" value="{!this}" action ="{!c.Initialize}"/>
+    <aura:handler name="SendMonth" event="c:QL_CurrentMonthYear" action="{!c.SetTheMonthYear}"/>
+    <aura:handler name="SendYear" event="c:QL_CurrentMonthYear" action="{!c.SetTheMonthYear}"/>
+    <aura:handler name="selectChange" event="c:QL_SelectChange" action="{!c.GetSelectedValues}"/>
+
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <lightning:card>
+        <div class="slds-float_right slds-m-right_small">
+             <!-- href="{!$Label.c.CampaignCalendar_help_article}" target="_self"-->
+              <a href="javascript:void(0);" onclick="{!c.handleLinkClick}">
+                Click here to learn how to use the filters
+            </a>
+        </div>
+        <div class="slds-text-heading_medium slds-align_absolute-center" style="font-weight: 800;">
+            Campaign Calendar</div>
+        <div aura:id="Stickydiv" class="slds-p-around_medium slds-border_bottom">
+            <div class="slds-grid slds-grid_align-center slds-grid_vertical-align-end slds-wrap" >
+    
+                <!--Month/Year Display -->
+                <div >
+                    <h1 class="slds-text-heading_medium slds-truncate slds-m-right_x-small">
+                        <aura:if isTrue="{!v.buttonobj.options == 'monthlyview'}">
+                            <lightning:formattedDateTime value="{!v.Month}" month="long" year="numeric" />
+                        </aura:if>
+                        <aura:if isTrue="{!v.buttonobj.options == 'yearlyview'}">
+                            <p>{!v.Financialyear}</p>
+                        </aura:if>
+                    </h1>
+                </div>
+            
+                <div >
+                    <aura:if isTrue="{!v.buttonobj.options != null}">
+                        <div class="slds-show_inline-block" >
+                            <lightning:buttonIcon iconName="utility:left" title="{!v.buttonobj.leftBtvalue}" alternativeText="{!v.buttonobj.leftBtvalue}" onclick="{!c.Previousperiod}" class="slds-m-bottom_xxx-small"/>
+                            <lightning:button label="{!v.buttonobj.currentBtvalue}" title="{!v.buttonobj.currentBtvalue}" onclick="{!c.Currentperiod}" class="slds-m-bottom_xxx-small"/>
+                            <lightning:buttonIcon iconName="utility:right" title="{!v.buttonobj.rightBtvalue}" alternativeText="{!v.buttonobj.leftBtvalue}" onclick="{!c.NextPeriod}" class="slds-m-bottom_xxx-small"/>
+                        </div>
+                    </aura:if>
+                </div>
+            
+                <!-- Campaign Type Combobox -->
+                <div style="width: 15rem;">
+                    <lightning:combobox aura:id="campaigntype" class="slds-m-left_small slds-form-element" name="Campaign Type" label="Campaign Type" value="{!v.SelectedCampaignRecordType}" placeholder="Please Select the Type" options="{!v.CampaignRecordtypes}" onchange="{! c.RecordTypeChanged }"/>
+                </div>
+            
+                <!-- Calendar View Combobox -->
+                <div style="width: 13rem;" >
+                    <lightning:combobox readonly="{!v.HideMonthBox}" class="slds-m-left_small slds-form-element" name="progress" label="Calendar View" value="{!v.selectedCalendarView}" placeholder="Please Select the view" options="{! v.calendarview }" onchange="{! c.handleChange }"/>
+                </div>
+            
+                <!-- Region Filter Buttons -->
+                <div style="width: 15rem;" class="slds-m-left_small">
+                    
+                    <div >
+                        <label class="slds-form-element__label" for="Filterfieldregion">Regions Equals</label>
+                        <button style="width: 12rem;" class="slds-button slds-button_neutral slds-truncate" id="Filterfieldregion" onclick="{!c.ShowHidefilter}">
+                            <span class="slds-assistive-text">Edit filter:</span>
+                            <span class="slds-show">{!v.Regionofcampaings}</span>
+                        </button>
+                        <button disabled="{!v.opentypefilter}" id="Filterregionreset" class="slds-button slds-m-left_small" onclick="{!c.CloseFilter}" style="width: 2rem;">
+                            <lightning:icon size="xx-small" iconName="action:delete" title="Reset Filter" alternativeText="Reset Filter" style="margin-left: 0;"/>
+                        </button>
+                    </div>
+                </div>
+            
+                <!-- Filter List Button -->
+                <div>
+                    <lightning:buttonIcon class="slds-m-bottom_xxx-small slds-form-element" iconName="utility:filterList" alternativeText="Filters" onclick="{! c.CollapsePane }"/>
+                </div>
+            </div>
+            
+            
+            <div aura:id="FilterPanel" style="height: 25rem; position: absolute !important;" class="slds-panel slds-size_medium slds-hide slds-panel_animated slds-panel_docked slds-panel_docked-right" aria-hidden="false">
+                <div class="slds-panel__header">
+                    <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title="Panel Header">Filters</h2>
+                    <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close" onclick="{!c.CollapsePane}" title="Collapse Panel Header">
+                        <lightning:icon size="x-Small" iconName="utility:forward" alternativeText="Utility image" />
+                        <span class="slds-assistive-text">Collapse Panel</span>
+                    </button>
+                </div>
+                <div class="slds-panel__body">
+                    <div class="slds-filters">
+                        <!--Record View-->
+                        <ol class="slds-list_vertical slds-list_vertical-space">
+                            <li class="slds-item slds-hint-parent">
+                                <lightning:combobox aura:id="campaigntype" class="slds-m-left_xxx-small slds-form-element" name="Campaign Type" label="List Views" value="{!v.selectedRecordView}" placeholder="All" options="{!v.listViewOptions}" onchange="{! c.RecordView }"/>
+                            </li>
+                        </ol>
+                        <h3 class="slds-text-body_small slds-m-vertical_x-small">Matching all these filters</h3>
+                        <ol class="slds-list_vertical slds-list_vertical-space">
+                            <li class="slds-item slds-hint-parent">
+                                <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+                                    <button disabled = "{!v.openregionfilter}" class="slds-button_reset slds-truncate slds-has-blur-focus " onclick="{!c.ShowHidefilter}" id="Filterfieldtype">
+                                        <span  class="slds-assistive-text">Edit filter:</span>
+                                        <span  class="slds-show slds-text-body_small">Type Equals</span>
+                                        <span  class="slds-show">{!v.Typeofcampaings}</span>
+                                    </button>       
+                                    <button disabled = "{!v.openregionfilter}" id="Filtertypereset" class="slds-button" onclick="{!c.CloseFilter}">
+                                        <lightning:icon size="xx-small" iconName="action:delete" title="Reset Fileter" alternativeText="Reset Fileter" />
+                                    </button>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <aura:if isTrue="{!v.open == true}">
+                <section aura:id="FilterPopup" style="position: absolute; right: 335px;" aria-label="Dialog title" aria-describedby="popover-body-id" class="slds-popover " role="dialog">
+                    <header class="slds-popover__header" style="border-bottom: unset;">
+                        <h2 class="slds-text-heading_small" id="dialog-heading-id-105">Edit Filter</h2>
+                    </header>
+                    
+                    <aura:if isTrue="{!v.opentypefilter == true}">
+                        <p aura:id="FiltertypeHeading" class="slds-p-left--x-large">Type</p>
+                        <div id="popover-body-id" aura:id="Filtertypecmp" class="slds-popover__body">
+                            <c:QL_MultiSelectComponent aura:id="MultiSelectComponent" options_="{!v.types}" selectedItems="{!v.TypeofcampaingsArraytemp}"/>    
+                        </div>   
+                    </aura:if> 
+                    <!--Region multiselect-->
+                    <aura:if isTrue="{!v.openregionfilter == true}">
+                        <p aura:id="FiltertypeHeading" class="slds-p-left--x-large">Type</p>
+                        <div id="popover-body-id" aura:id="Filterregioncombox" class="slds-popover__body">
+                            <c:QL_MultiSelectComponent aura:id="MultiSelectComponentRegion" options_="{!v.regions}" selectedItems="{!v.RegionofcampaingsArraytemp}"/>    
+                        </div>   
+                    </aura:if>
+                   
+                    <footer class="slds-popover__footer" style="border-top: unset;">
+                        <aura:if isTrue="{!v.opentypefilter == true}">
+                            <div aura:id="Filtertypebuttons" class="filter-button-group" style="float: right; padding-bottom: 10px;">
+                                <button id="Filtertypebuttonclose" class="slds-button" onclick="{!c.CloseFilter}">
+                                    <lightning:icon size="xx-small" iconName="action:close" title="Close" alternativeText="Approved" />
+                                </button>
+                                <button id="Filtertypebuttonapply" class="slds-button" onclick="{!c.ApplyTypefilterconditions}">
+                                    <lightning:icon size="xx-small" iconName="action:approval" title="Apply" alternativeText="Approved" />
+                                </button></div>
+                        </aura:if>
+                        <!--Region Filter-->
+                        <aura:if isTrue="{!v.openregionfilter == true}">
+                            <div aura:id="Filterregionbuttons" class="filter-button-group" style="float: right; padding-bottom: 10px;">
+                                <button id="Filterregionbuttonclose" class="slds-button" onclick="{!c.CloseFilter}">
+                                    <lightning:icon size="xx-small" iconName="action:close" title="Close" alternativeText="Approved" />
+                                </button>
+                                <button id="Filterregionbuttonapply" class="slds-button" onclick="{!c.ApplyRegionfiltercondition}">
+                                    <lightning:icon size="xx-small" iconName="action:approval" title="Apply" alternativeText="Approved" />
+                                </button></div>
+                        </aura:if>
+                    </footer>
+                </section>
+            </aura:if>
+            
+            <div class="slds-text-heading_large slds-align_absolute-center slds-p-around_small" style="font-size: 1.5rem;">
+                {!v.CampaignType}
+            </div>
+            <div class="slds-grid slds-gutters slds-align_absolute-center">
+                <aura:iteration items="{!v.Statuses}" var="status">
+                    <div aura:id="{!status.value}" class="slds-col">
+                        <div style="width: 25px; height: 25px;" class="{!status.value == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'InProgress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'PendingReporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'ConceptPhase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'Onhold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'Active' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                       status.value == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':''}"></div>
+                        <div style="padding-top: 4px;">{!status.label}</div>
+                    </div>
+                </aura:iteration>
+            </div>
+        </div>
+        
+        <aura:if isTrue="{!v.buttonobj.options == 'monthlyview'}">
+            <c:QL_Campaign_Calendar_Month aura:id="CampaignCalendarMonth" Spinner="{!v.Spinner}" Campaigns="{!v.Campaigns}" 
+                                          SplitDates="{!v.SplitDates}" page ="{!v.page}" pages="{!v.pages}"
+                                          total="{!v.total}"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.buttonobj.options == 'yearlyview'}">
+            <c:QL_Campaign_Calendar_Year aura:id="CampaignCalendarYear" Spinner="{!v.Spinner}" campaignFrYearlyview="{!v.campaignFrYearlyview}" 
+                                         page ="{!v.page}" pages="{!v.pages}" total="{!v.total}" CurrentMonth="{!v.Month}"/>
+        </aura:if>
+        
+        
+        <div aura:id="Parentcmp" class="slds-text-heading_large slds-align_absolute-center slds-p-around_small" style="font-size: 1.5rem;">
+            <aura:if isTrue="{!v.Spinner}">
+                <div class="loader slds-spinner_container" aura:id="spinnerdiv"></div>
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!empty(v.Statuses)}">
+                        Please select Campaign Type!
+                    </aura:if>
+                    <aura:if isTrue="{!and(not(empty(v.Statuses)),v.buttonobj == null)}">
+                        Please select Calendar View!
+                    </aura:if>
+                </aura:set>
+            </aura:if>
+        </div>
+        
+    </lightning:card>
+</aura:component>

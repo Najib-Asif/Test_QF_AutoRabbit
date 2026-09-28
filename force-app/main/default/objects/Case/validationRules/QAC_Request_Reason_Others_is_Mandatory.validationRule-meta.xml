@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Request_Reason_Others_is_Mandatory</fullName>
+    <active>false</active>
+    <description>QAC -  if reasons is others, Request Reason Others field is mandatory</description>
+    <errorConditionFormula>AND( RecordType.Name == &apos;Service Request&apos; ,  ISPICKVAL(Reason_for_Waiver__c, &apos;Other&apos;),  OR( ISBLANK( Request_Reason_Others__c ), ISNULL(Request_Reason_Others__c ) )  )</errorConditionFormula>
+    <errorMessage>&apos;Request Reason Others&apos; field is mandatory when reason is ‘Others’.</errorMessage>
+</ValidationRule>

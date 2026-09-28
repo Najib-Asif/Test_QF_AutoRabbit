@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>DPP_Partner_platform_Email_Notification</fullName>
+        <ccEmails>ndc@qantas.com.au</ccEmails>
+        <description>DPP-Partner platform Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>ndc@qantas.com.au</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>QDP/QDP_Lead_Autoresponse</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Freight</fullName>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(ISPICKVAL(  Freight_Revenue_Stream__c  , &quot;&quot;),0,10) + 
+IF(LEN( Legal_Name__c ) = 0, 0,10) + IF(LEN(  ABN_Tax_Reference__c  ) = 0, 0,10) + IF(LEN(   Freight_eQ_Customer__c  ) = 0, 0,10)+ IF(LEN(    Freight_Corporate_Identifier__c  ) = 0, 0,15)+IF(LEN(     Freight_Customer_Code__c  ) = 0, 0,10)+IF( LEN( Street ) = 0, 0,10) + 
+IF(LEN( FirstName ) = 0, 0,5) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,5) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,5) + IF( LEN( Job_Title__c ) = 0, 0,5) + 
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 5,0)</formula>
+        <name>Freight Update Data Quality Score DOM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Upd_Data_Quality_Score_INT_IATA</fullName>
+        <description>Freight Lead score for INT IATA Agent</description>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(ISPICKVAL( Freight_Revenue_Stream__c , &quot;&quot;),0,5) + 
+IF(LEN( Legal_Name__c ) = 0, 0,10) + IF(LEN(IATA__c )!=0, 10,0) + IF(LEN(Freight_CAS__c)!=0,  10,0) + IF(LEN(Freight_Controlling_Location__c)!= 0,10,0)
++ IF(LEN( Freight_Corporate_Identifier__c ) = 0, 0,10)+IF(LEN( Freight_Customer_Code__c ) = 0, 0,10)+IF( LEN( Street ) = 0, 0,10) + 
+IF(LEN( FirstName ) = 0, 0,5) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,5) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,5) + IF( LEN( Job_Title__c ) = 0, 0,5) + 
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 5,0)</formula>
+        <name>Freight Upd Data Quality Score INT(IATA)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Upd_Data_Score_INT_Non_IATA</fullName>
+        <description>Data Quality score for INT(Non-IATA)</description>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(ISPICKVAL( Freight_Revenue_Stream__c , &quot;&quot;),0,10) + 
+IF(LEN( Legal_Name__c ) = 0, 0,10) + IF(LEN(IATA__c )!=0, 15,0) + IF(LEN(Freight_Controlling_Location__c)!= 0, 10,0)
++ IF(LEN( Freight_Corporate_Identifier__c ) = 0, 0,10)+IF(LEN( Freight_Customer_Code__c ) = 0, 0,10)+IF( LEN( Street ) = 0, 0,10) + 
+IF(LEN( FirstName ) = 0, 0,5) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,5) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,5) + IF( LEN( Job_Title__c ) = 0, 0,5) + 
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 5,0)</formula>
+        <name>Freight Upd Data Score INT(Non-IATA)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Freight_Update_Data_Quality_Score_INT</fullName>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(ISPICKVAL( Freight_Revenue_Stream__c , &quot;&quot;),0,10) + 
+IF(LEN( Legal_Name__c ) = 0, 0,10) + IF(OR(LEN(  IATA__c )!=0, LEN( Freight_eQ_Customer__c )!=0),  20,0)+ IF(LEN( Freight_Corporate_Identifier__c ) = 0, 0,15)+IF(LEN( Freight_Customer_Code__c ) = 0, 0,10)+IF( LEN( Street ) = 0, 0,10) + 
+IF(LEN( FirstName ) = 0, 0,5) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,5) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,5) + IF( LEN( Job_Title__c ) = 0, 0,5) + 
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 5,0)</formula>
+        <name>Freight Update Data Quality Score INT</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateLoyaltyLeadScore</fullName>
+        <description>To Calculate Lead Score</description>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(ISBLANK( Company ), 0, 5) +  IF( ISBLANK( Email ) , 0, 5) + IF( ISPICKVAL( Industry , &quot;&quot;) , 0, 15)+ IF( ISBLANK( OwnerId ) , 0, 10) + IF( ISBLANK( FirstName ) , 0, 10)+ IF( ISBLANK( LastName ) , 0, 10)  + IF( ISBLANK( Website ) , 0, 5)  + IF( ISBLANK( ABN_Tax_Reference__c ) , 0, 10) + IF( ISPICKVAL(   Freight_Account_Business_Type__c  , &quot;&quot;) , 0, 5) +  IF( ISBLANK(  City ) , 0, 5) + IF( ISBLANK(   Job_Title__c   ) , 0, 15)+ IF( ISBLANK( Legal_Name__c ) , 0, 5)</formula>
+        <name>UpdateLoyaltyLeadScore</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Data_Quality_Score_AU_Agency</fullName>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>(IF(LEN( ABN_Tax_Reference__c ) = 0, 0,10) + 
+IF(LEN( Legal_Name__c ) = 0, 0,10) + IF( LEN( Street ) = 0, 0,5) + 
+IF(LEN( FirstName ) = 0, 0,10) + IF(LEN(  Job_Title__c  ) = 0, 0,5) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,5) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,5) + 
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 10,0) + 
+IF(LEN( Parent_Account__c ) = 0,0, 10) + 
+IF(LEN( Agency_Sales_Region__c ) = 0,0, 10) + 
+IF(ISPICKVAL( Account_Tier__c, &quot;&quot;),0,10) + 
+IF(OR(LEN( IATA__c)!=0, LEN( Agency_TIDS__c)!=0,LEN(Qantas_Pseudo_Number__c)!=0),10,0))</formula>
+        <name>Update Data Quality Score AU Agency</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Data_Quality_Score_Customer</fullName>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(LEN( ABN_Tax_Reference__c ) = 0, 0,15) + 
+IF(LEN( Legal_Name__c ) = 0, 0,15) + IF( LEN( Street ) = 0, 0,10) + 
+IF(LEN( FirstName ) = 0, 0,15) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,10) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,10) + IF( LEN(  Job_Title__c  ) = 0, 0,10) + 
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 15,0)</formula>
+        <name>Update Data Quality Score AU Customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Data_Quality_Score_Int</fullName>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(LEN( Legal_Name__c ) = 0, 0,15) + IF( LEN( Street ) = 0, 0,15) + 
+IF(LEN( FirstName ) = 0, 0,20) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,10) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,10) + IF( LEN( Job_Title__c ) = 0, 0,10) + 
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 20,0)</formula>
+        <name>Update Data Quality Score Int</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Data_Quality_Score_US_UK_Agency</fullName>
+        <field>Data_Quality_Score_for_All__c</field>
+        <formula>IF(LEN( Legal_Name__c ) = 0, 0,15) + IF( LEN( Street ) = 0, 0,10) + 
+IF(LEN( FirstName ) = 0, 0,15) + IF(ISPICKVAL( Job_Role__c , &quot;&quot;),0,10) + 
+IF(ISPICKVAL( Function__c , &quot;&quot;),0,10) + IF(LEN(  Job_Title__c ) = 0, 0,10) +
+IF(OR(LEN( MobilePhone)!=0, LEN( Phone )!=0, LEN( Email )!=0), 15,0) + 
+IF(OR(LEN( IATA__c)!=0, LEN( Agency_TIDS__c)!=0,LEN(Qantas_Pseudo_Number__c)!=0),15,0)</formula>
+        <name>Update Data Quality Score US UK Agency</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_business_type_value_to_Agency</fullName>
+        <description>This field update will change the value of Business Type to &apos;Agency</description>
+        <field>Business_Type__c</field>
+        <literalValue>Agency</literalValue>
+        <name>Update the business type value to Agency</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_business_type_value_to_B_G</fullName>
+        <description>This field update will change the value of Business Type to &apos;B&amp;G&apos;.</description>
+        <field>Business_Type__c</field>
+        <literalValue>B&amp;G</literalValue>
+        <name>Update the business type value to B&amp;G</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_business_type_value_to_Charte</fullName>
+        <description>This field update will change the value of Business Type to &apos;Charter&apos;.</description>
+        <field>Business_Type__c</field>
+        <literalValue>Charter</literalValue>
+        <name>Update the business type value to Charte</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>change_lead_business_type_to_Loyalty</fullName>
+        <description>Change the Account Business Type to Loyalty</description>
+        <field>Freight_Account_Business_Type__c</field>
+        <literalValue>Loyalty</literalValue>
+        <name>change lead business type to &apos;Loyalty&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Calculate Loyalty Lead Score</fullName>
+        <actions>
+            <name>UpdateLoyaltyLeadScore</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Lead.Freight_Account_Business_Type__c</field>
+            <operation>equals</operation>
+            <value>Loyalty</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Freight_Business_Sub_Type__c</field>
+            <operation>equals</operation>
+            <value>Qantas Business Rewards,Qantas Frequent Flyer,QBR and QFF,New Business</value>
+        </criteriaItems>
+        <description>To Calculate Lead Score for Loyalty</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Freight Update Data Quality Score DOM Branch</fullName>
+        <actions>
+            <name>Freight</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Lead.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Freight-Branch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Freight_Revenue_Stream__c</field>
+            <operation>equals</operation>
+            <value>DOM</value>
+        </criteriaItems>
+        <description>Updates the lead scoring for a Freight DOM Branch Account</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Freight Update Data Quality Score INT Branch</fullName>
+        <actions>
+            <name>Freight_Update_Data_Quality_Score_INT</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Lead.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Freight-Branch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Freight_Revenue_Stream__c</field>
+            <operation>equals</operation>
+            <value>INT,DOM/INT</value>
+        </criteriaItems>
+        <description>Updates the lead scoring for a Freight INT Branch Account</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Freight Update Data Quality Score INT Branch IATA Agent type</fullName>
+        <actions>
+            <name>Freight_Upd_Data_Quality_Score_INT_IATA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Lead.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Freight-Branch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Freight_Revenue_Stream__c</field>
+            <operation>equals</operation>
+            <value>INT,DOM/INT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Freight_Agent_Type__c</field>
+            <operation>equals</operation>
+            <value>IATA Agent</value>
+        </criteriaItems>
+        <description>Updates the lead scoring for a Freight INT Branch Account with Agent type as &quot;IATA Agent&quot;</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Freight Update Data Quality Score INT Branch Non - IATA Agent type</fullName>
+        <actions>
+            <name>Freight_Upd_Data_Score_INT_Non_IATA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Lead.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Freight-Branch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Freight_Revenue_Stream__c</field>
+            <operation>equals</operation>
+            <value>INT,DOM/INT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Freight_Agent_Type__c</field>
+            <operation>equals</operation>
+            <value>Non-IATA Agent</value>
+        </criteriaItems>
+        <description>Updates the lead scoring for a Freight INT Branch Account with Agent type as &quot;Non-IATA Agent&quot;</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the business type value to Agency</fullName>
+        <actions>
+            <name>Update_the_business_type_value_to_Agency</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Agency</value>
+        </criteriaItems>
+        <description>This workflow will update the Business Type value to &apos;Agency&apos; when the New Account Type is &apos;Agency Account&apos;.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the business type value to B%26G</fullName>
+        <actions>
+            <name>Update_the_business_type_value_to_B_G</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Customer,Prospect</value>
+        </criteriaItems>
+        <description>This workflow will update the Business Type value to &apos;B&amp;G&apos; when the New Account Type is &apos;Customer Account&apos; or &apos;Prospect Account&apos;.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the business type value to Charter</fullName>
+        <actions>
+            <name>Update_the_business_type_value_to_Charte</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.New_Account_Type__c</field>
+            <operation>equals</operation>
+            <value>Charter</value>
+        </criteriaItems>
+        <description>This workflow will update the Business Type value to &apos;Charter&apos; when New Account Type is &apos;Charter Account&apos;.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>change lead business type to %27Loyalty%27</fullName>
+        <actions>
+            <name>change_lead_business_type_to_Loyalty</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>When the Loyalty Account Manager creates a lead, the &apos;Business Type&apos; value should be defaulted to &apos;Loyalty&apos;.
+This is done as an enhancement BAU team to support the Loyalty commercial go-live on 30th oct.</description>
+        <formula>Owner:User.Profile.Name = &quot;Qantas Loyalty -Commercial Sales&quot;</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

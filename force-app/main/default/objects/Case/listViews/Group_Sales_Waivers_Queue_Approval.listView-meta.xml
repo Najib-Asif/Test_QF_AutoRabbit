@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group_Sales_Waivers_Queue_Approval</fullName>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>Account_Skill_Group__c</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.ESCALATION_STATE</columns>
+    <columns>Condition_Met__c</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>Reason_for_Waiver__c</columns>
+    <columns>CASES.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.QIC_Service_request</value>
+    </filters>
+    <filters>
+        <field>Approval_Status__c</field>
+        <operation>equals</operation>
+        <value>Pending</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Group Waivers,SBT</value>
+    </filters>
+    <label>3. Group Sales Waivers Queue - Approval</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_Support_QIC_Group_Sales_TL_Supervisor</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

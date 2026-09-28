@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>QANTAS_VIP_Service_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Allow QANTAS VIP Service Team members to Read/Write Travel Delegate records</description>
+        <label>QANTAS VIP Service Team</label>
+        <sharedTo>
+            <group>QANTAS_VIP_Service_Team</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>QANTAS_VIP_Service_Team_for_TL</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Allow QF-QDC-OM-VIP-TL under QANTAS VIP Service Team to Read/Write Travel Delegate records</description>
+        <label>QANTAS VIP Service Team for TL</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC_OM_VIP_TL</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>QF_QDC_Travel_Delegate_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QF-QDC Travel Delegate Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_QDC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>QF</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

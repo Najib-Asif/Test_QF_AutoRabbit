@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_photo_mandate</fullName>
+    <active>true</active>
+    <description>Freight shipment photo mandatory when oversize is ticked</description>
+    <errorConditionFormula>AND( 
+
+Opportunity.RecordType.DeveloperName == &quot;Freight&quot;, 
+RecordType.DeveloperName = &quot;Freight_Quote&quot;, 
+Oversized__c == True,
+photos_or_drawings_of_Cargo__c == False,
+ISPICKVAL( Approval_Required__c , &apos;Approval Level - 4&apos;) 
+
+)</errorConditionFormula>
+    <errorDisplayField>photos_or_drawings_of_Cargo__c</errorDisplayField>
+    <errorMessage>Photos or drawings of Cargo are mandatory on the record given the shipment is deemed oversized, please attach to receive quote.</errorMessage>
+</ValidationRule>

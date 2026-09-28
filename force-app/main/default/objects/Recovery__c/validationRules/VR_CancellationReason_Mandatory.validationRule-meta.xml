@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_CancellationReason_Mandatory</fullName>
+    <active>true</active>
+    <description>CDP2-430</description>
+    <errorConditionFormula>AND( ISCHANGED(Process_Status__c ) ,
+ISPICKVAL(Process_Status__c , &apos;Cancelled&apos;),
+ISBLANK(Cancellation_Reason__c ),
+$Profile.Name = &apos;System Administrator&apos;,
+$Profile.Name = &apos;Qantas System Administrator&apos;,
+$Profile.Name = &apos;Qantas System Admin - Freight&apos;,
+$Profile.Name = &apos;Qantas System Admin - QCC&apos;,
+$Profile.Name = &apos;Qantas System Admin - SND&apos;,
+OR(
+
+/* EFT Record Type check */ 
+AND(RecordType.DeveloperName = &apos;EFT_Recovery&apos;,
+OR(ISPICKVAL(PRIORVALUE(Process_Status__c ), &apos;Submitted to Finance&apos;),
+ISPICKVAL(PRIORVALUE(Process_Status__c ), &apos;Findel Approved&apos;),
+ISPICKVAL(PRIORVALUE(Process_Status__c ), &apos;Payment Ready&apos;))),
+
+/* CC Record Type check */ 
+AND(RecordType.DeveloperName = &apos;Credit_Card_Recovery&apos;,
+ISPICKVAL(PRIORVALUE(Process_Status__c ), &apos;Submitted to Finance&apos;)
+),
+
+/* TV Record Type check */ 
+AND(RecordType.DeveloperName = &apos;Travel_Voucher_Recovery&apos;,
+ISPICKVAL(PRIORVALUE(Process_Status__c ), &apos;Submitted for Voucher Issuance&apos;))
+)
+)</errorConditionFormula>
+    <errorDisplayField>Cancellation_Reason__c</errorDisplayField>
+    <errorMessage>Cancellation Reason is mandatory when a Recovery is Cancelled</errorMessage>
+</ValidationRule>

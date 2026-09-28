@@ -1,0 +1,387 @@
+<apex:page standardController="Product_Registration__c" extensions="prodregextensions,AEQCCrebate">
+
+<style type="text/css">
+        .col1 {text-align:center;}
+        .col2 {text-align:center;}
+        .col3 {text-align:center;}   
+        .col4 {text-align:center;}   
+        .col5 {text-align:center;}    
+        .col6 {text-align:center;}   
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+tr{
+    background-color: #F5F5F5;
+}
+        .bpageBlock.detailList tr td.dataCol, 
+        .bpageBlock.detailList tr td.labelCol
+        {
+            border-top:1px solid #1797c0;
+            border-bottom:2px solid #1797c0;
+        }   
+</style>
+
+ <apex:pageBlock >
+ <apex:outputLabel > <font color="black" size="3"><b>Note:</b> 
+ {!$Label.AMEX_Performance}
+</font> </apex:outputLabel>
+    <apex:pageBlockTable value="{!relatedCustObjRecs}" var="var"  columns="5" cellpadding="0" cellspacing="30" width="100%" headerclass="textalign" >
+        <apex:column width="100%">  
+          
+          <apex:pageBlockSection columns="5">
+      <!-- Header Starts --->
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Year till Date"> <b> <font color="blue">Revenue / Share</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                                        
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Year till Date"> <b> <font color="blue">This Year ({!var.Reporting_Period__c})</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel title="Last Year"> <b> <font color="blue">Last Year ({!var.Reporting_Period__c}) </font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel style="float: left;width:150px;" title="To"> <b> <font color="blue">Var %</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel style="float: left;width:150px;" title="To"> <b> <font color="blue">Trend</font> </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+        <!-- Header Ends --->
+        
+        <!-- Sub-Header Starts -->
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Qantas Revenue" > <b> Total Revenue </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+        <!-- Sub-Header Ends -->            
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Total Air Revenue</font> </b></apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Total_Air_Revenue__c}"> </apex:outputField>                                              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_Total_Air_Revenue__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                       <apex:outputField value="{!var.YoY_Total_Air_Reveue__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Total_Air_Revenue_Indicator__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+        <!-- Sub-Header Starts -->            
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Qantas Revenue" > <b> Qantas Revenue </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+        <!-- Sub-Header Ends -->             
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Total Qantas Revenue</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Total_Qantas_Revenue__c}"> </apex:outputField>                         
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_Total_Qantas_Revenue__c}"> </apex:outputField>              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Total_Qantas_Revenue__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Total_QF_Revenue_Indicator__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>
+              
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic Qantas Revenue</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Domestic_Qantas_Revenue__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_Domestic_Qantas_Revenue__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Domestic_Qantas_Revenue__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Dom_QF_Revenue_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                                        <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic Qantas Market Share</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Domestic_Qantas_Marketshare__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_Domestic_Qantas_Marketshare__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Domestic_Qantas_Marketshare__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Dom_QF_MS_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">International Qantas Revenue</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_International_Qantas_Revenue__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_International_Qantas_Revenue__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_Qantas_Revenue__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_QF_Revenue_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48"> International Qantas Market Share</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_International_Qantas_Marketshare__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_International_Qantas_Marketshare__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_Qantas_MarketShare__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_QF_MS_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+        <!-- Sub-Header Starts -->
+                    
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; height:18px;">
+                        <apex:outputLabel title="Other Carrier" > <b> Other Carrier </b> </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                     </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+ 
+                    <apex:pageBlockSectionItem dataStyle="text-align:center; height:18px;">
+                        <apex:outputLabel > </apex:outputLabel>
+                    </apex:pageBlockSectionItem>
+                    
+        <!-- Sub-Header Ends --> 
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Total Other Carrier Revenue</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Total_Other_Carrier_Revenue__c}"> </apex:outputField>                         
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_Total_Other_Carrier_Revenue__c}"> </apex:outputField>              
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Total_Other_Carrier_Revenue__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Total_Other_Carrier_Revenue_Indicato__c}"> </apex:outputField>
+                    </apex:pageBlockSectionItem>        
+                    
+                                        <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic Other Carrier Revenue</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Domestic_Other_Carrier_Revenue__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_Domestic_Other_Carrier_Revenue__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Dom_Other_Carrier_Revenue__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Dom_Other_Carrier_Revenue_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48">Domestic Other Carrier Market Share</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Domestic_Other_Carrier_Marketshare__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_Domestic_Other_Carrier_Marketshare__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Dom_Other_Carrier_Marketshare__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Dom_Other_Carrier_MS_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48"> International Other Carrier Revenue</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_International_Other_Carrier_Revenue__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_International_Other_Carrier_Revenue__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_Other_Carrier_Revenue__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_Other_Carrier_Revenue_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:right; height:18px;">
+                        <apex:outputLabel > <b> <font color="#7b2b48"> International Other Carrier Market Share</font> </b></apex:outputLabel>                       
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center;">
+                        <apex:outputField value="{!var.YTD_Int_Other_Carrier_Marketshare__c}"> </apex:outputField>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.LYTD_International_Other_Carrier_Markets__c}"> </apex:outputField>  
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_Other_Carrier_Marketshare__c}"> </apex:outputField> 
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem datastyle="text-align:center; height:18px;">
+                        <apex:outputField value="{!var.YoY_Intl_Other_Carrier_MS_Indicator__c}"> </apex:outputField>   
+                    </apex:pageBlockSectionItem>
+                      
+          </apex:pageBlockSection>           
+        </apex:column> 
+    </apex:pageBlockTable>                    
+  </apex:pageBlock> 
+
+<apex:form > 
+<apex:pageBlock title="AEQCC Rebate (last 3 Periods)">
+<apex:pageBlockTable value="{!relatedCustObjRecs1}" var="aer"  columns="6" cellpadding="0" cellspacing="30" width="100%" columnclasses="col1,col2,col3,col4,col5,col6" headerclass="textalign" >
+<apex:column width="30" headerClass="col1">              
+                <apex:facet name="header" > <font color="blue"> Rebate Year </font> </apex:facet> 
+                <apex:outputField value="{!aer.Rebate_Year__c}"> </apex:outputField>    
+                <br>  </br> 
+</apex:column>
+
+<apex:column width="30" headerClass="col2" >              
+                <apex:facet name="header" > <font color="blue"> Rebate Period </font> </apex:facet> 
+                <apex:outputField value="{!aer.Rebate_term__c}"> </apex:outputField>    
+                <br>  </br> 
+</apex:column>
+
+<apex:column width="40" headerClass="col3">              
+                <apex:facet name="header" > <font color="blue"> Rebate Tier </font> </apex:facet> 
+                <apex:outputField value="{!aer.Rebate_Tier__c}"> </apex:outputField>    
+                <br>  </br> 
+</apex:column>
+
+<apex:column width="40" headerClass="col4">              
+                <apex:facet name="header" > <font color="blue"> Rebate Payment </font> </apex:facet> 
+                <apex:outputField value="{!aer.Rebate_Payment__c}"> </apex:outputField>    
+                <br>  </br> 
+</apex:column>
+
+<apex:column width="40" headerClass="col5">              
+                <apex:facet name="header"><font color="blue"> Rebate Cheque Amount </font> </apex:facet> 
+                <apex:outputField value="{!aer.Cheque_Amount__c}"> </apex:outputField>    
+                <br>  </br>
+</apex:column>
+
+<apex:column width="160" headerClass="col6">              
+                <apex:facet name="header" > <font color="blue"> Rebate Sent to </font> </apex:facet> 
+                 <apex:outputField value="{!aer.Rebate_Sent_to__c}"> </apex:outputField>    
+                <br>  </br>
+</apex:column>
+    </apex:pageBlockTable>                    
+  </apex:pageBlock> 
+</apex:form>
+</apex:page>

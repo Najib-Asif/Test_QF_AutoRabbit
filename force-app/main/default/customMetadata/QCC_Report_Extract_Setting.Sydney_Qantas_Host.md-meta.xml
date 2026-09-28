@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Sydney Qantas Host</label>
+    <protected>false</protected>
+    <values>
+        <field>QCC_Filename__c</field>
+        <value xsi:type="xsd:string">FFPO SYD Qantas Host Service Report [inputDate].csv</value>
+    </values>
+    <values>
+        <field>QCC_Query_Column__c</field>
+        <value xsi:type="xsd:string">QCC_First_Host_Contact__c,QCC_First_Host_First_Name__c,QCC_Contact_Lastname__c,QCC_Frequent_Flyer_Tier_Formula__c,QCC_First_Host_Contact__r.SSU__c,QCC_Flight_No__c,tolabel(QCC_Cabin__c),QCC_Class_of_Service__c,QCC_Flight_Departure_Time__c,QCC_Qantas_Porter_Service__c,QCC_Expected_Arrival_Time__c,QCC_Number_of_Bags__c,QCC_Other_Details__c,QCC_Qantas_First_Spa_Lounge__c,QCC_Spa_Booking_Time__c,QCC_Spa_Booking_Status__c,QCC_Additional_Comments__c</value>
+    </values>
+    <values>
+        <field>QCC_Query_Filter_Condition__c</field>
+        <value xsi:type="xsd:string">WHERE QCC_Departure_Airport__c = &apos;SYD&apos; AND (QCC_Qantas_Porter_Service__c=True OR QCC_Qantas_First_Spa_Lounge__c=True)  AND QCC_Departure_Local_Date__c = [extractDate] ORDER BY QCC_Expected_Arrival_Time__c ASC</value>
+    </values>
+    <values>
+        <field>QCC_Report_Header__c</field>
+        <value xsi:type="xsd:string">First Name, Last Name,Frequent Flyer Tier,SSU,Flight Number,Cabin,Booking Class,Flight Departure Time,Qantas Porter Service,Expected Arrival Time,Number of Bags,Other Details,Qantas First Spa Lounge,Spa Booking Time,Spa Booking Status,Additional Comments,Number of Disruptions last 7 days,Disrupted Departure Date,Disrupted Flight Number,Delay Failure Code,Departure Delay Length</value>
+    </values>
+    <values>
+        <field>QCC_Sharepoint_Folder_Location__c</field>
+        <value xsi:type="xsd:string">callout:QantasHostSYD/sites/SydneyInternationalFirstHosts-FirstHostDocuments/_api/web/GetFolderByServerRelativeUrl</value>
+    </values>
+    <values>
+        <field>QCC_Sharepoint_Folder_Name__c</field>
+        <value xsi:type="xsd:string">/sites/SydneyInternationalFirstHosts-FirstHostDocuments/Shared Documents/First Host Documents/Qantas Host Reports/</value>
+    </values>
+    <values>
+        <field>QCC_Target_Object__c</field>
+        <value xsi:type="xsd:string">QCC_First_Host__c</value>
+    </values>
+</CustomMetadata>

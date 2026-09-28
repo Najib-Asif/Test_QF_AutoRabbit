@@ -1,0 +1,22 @@
+<template>
+    
+        <div class="flex-container01">
+            <div>
+                <img src={qantasLogoUrl} alt="Qantas Logo">
+            </div>
+            <div>
+                <p>{messageToDisplay}</p>
+            </div>
+            <template lwc:if={isConfirmationRequired}>
+            <div>
+                
+                <span  class="flex-container02">
+                    <lightning-button variant="destructive" icon-name="utility:close"  label="Reject" title="Reject action" onclick={handleClick} value="reject"></lightning-button>
+                </span>
+                <span  class="flex-container02">
+                    <lightning-button variant="success" icon-name="utility:success"  label="Accept" title="Accept action" onclick={handleClick} value="accept"></lightning-button>
+                </span>
+            </div>
+        </template>
+        </div>
+</template>

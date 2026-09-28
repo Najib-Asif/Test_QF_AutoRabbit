@@ -1,0 +1,22 @@
+<template>
+
+        <lightning-quick-action-panel header="Create a Case Action">
+            <template if:true={hasPermission}>
+                <template if:true={caseDetails}>
+                    <lightning-flow
+                    flow-api-name={flowApiName}
+                    flow-input-variables={flowInputVariables}
+                    onstatuschange={handleFlowStatusChange}
+                >
+                </lightning-flow>
+                </template>
+            </template>
+            <template if:false={hasPermission}>
+                <p>You don't have permission to open the Create Case Flow.</p>
+            </template>
+        <!-- <div slot="footer">
+            <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+          </div> -->
+        </lightning-quick-action-panel>
+
+</template>

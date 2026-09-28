@@ -1,0 +1,1965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>49.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_boolean_to_true</name>
+        <label>Assign boolean to true</label>
+        <locationX>1171</locationX>
+        <locationY>180</locationY>
+        <assignmentItems>
+            <assignToReference>checkConfirmationError</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Confirmation_Page</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>This is used to assign the Formula Field  to Contract End Date.</description>
+        <name>Assign_Contract_End_Date</name>
+        <label>Assign Contract End Date</label>
+        <locationX>574</locationX>
+        <locationY>235</locationY>
+        <assignmentItems>
+            <assignToReference>Contract_End_Date</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ChnEndDate_ContractCreation</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Payment_Type_Decision</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Populate Recipient List with owner of the account</description>
+        <name>PopulateRecipientList</name>
+        <label>PopulateRecipientList</label>
+        <locationX>1442</locationX>
+        <locationY>379</locationY>
+        <assignmentItems>
+            <assignToReference>RecipientList</assignToReference>
+            <operator>AddAtStart</operator>
+            <value>
+                <elementReference>curAccount.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>End_Flow</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <description>Choices for Category</description>
+        <name>Category_New</name>
+        <choiceText>New</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>New Contract</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Category_Renewal</name>
+        <choiceText>Renewal</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Renewal Contract</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Category_Variation</name>
+        <choiceText>Variation</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Variation Contract</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Contract Term should be 12 or 24 months.</description>
+        <name>contractTerm_12</name>
+        <choiceText>12</choiceText>
+        <dataType>Number</dataType>
+        <value>
+            <numberValue>12.0</numberValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Contract Term should be 12 or 24 months</description>
+        <name>contractTerm_24</name>
+        <choiceText>24</choiceText>
+        <dataType>Number</dataType>
+        <value>
+            <numberValue>24.0</numberValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Contract term can be 12,24 or 36</description>
+        <name>contractTerm_36</name>
+        <choiceText>36</choiceText>
+        <dataType>Number</dataType>
+        <value>
+            <numberValue>36.0</numberValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Determines the ISO Currency Code of the Contract / Contract payments</description>
+        <name>CurrencyISO_AUD</name>
+        <choiceText>AUD</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>AUD</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>CurrencyISO_CAD</name>
+        <choiceText>CAD</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>CAD</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>CurrencyISO_EUR</name>
+        <choiceText>EUR</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>EUR</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>CurrencyISO_GBP</name>
+        <choiceText>GBP</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>GBP</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>CurrencyISO_INR</name>
+        <choiceText>INR</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>INR</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Determines the ISO Currency Code of the Contract / Contract payments</description>
+        <name>CurrencyISO_NZD</name>
+        <choiceText>NZD</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NZD</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Determines the ISO Currency Code of the Contract / Contract payments</description>
+        <name>CurrencyISO_USD</name>
+        <choiceText>USD</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>USD</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>This denotes the Hurdle Measurement Unit option - Ticketed Segments vs Same Period last year</description>
+        <name>HurdleMsmtUnit_option1</name>
+        <choiceText>Ticketed Segments vs Same Period last year</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Ticketed Segments vs Same Period last year</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>This denotes the Hurdle Measurement Unit option - Ticketed QDP booking vs GDS bookings %</description>
+        <name>HurdleMsmtUnit_option2</name>
+        <choiceText>Ticketed QDP booking vs GDS bookings %</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Ticketed QDP booking vs GDS bookings %</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>This denotes the Hurdle Measurement Unit option - Flown segments this year vs last year</description>
+        <name>HurdleMsmtUnit_option3</name>
+        <choiceText>Flown segments this year vs last year</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Flown segments this year vs last year</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>This denotes the Hurdle Measurement Unit option - Flown GDS Booking count</description>
+        <name>HurdleMsmtUnit_option4</name>
+        <choiceText>Flown GDS Booking count</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Flown GDS Booking count</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>This denotes the Hurdle Measurement Unit option - QDP Booking count</description>
+        <name>HurdleMsmtUnit_option5</name>
+        <choiceText>QDP Booking count</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>QDP Booking count</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>HurdleMsmtUnit_option6</name>
+        <choiceText>N/A</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>N/A</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>HurdleMsmtUnit_option7</name>
+        <choiceText>&lt;span style=&quot;color: rgb(51, 51, 51);&quot;&gt;Flown Segments vs Same Period Last Year&lt;/span&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Flown Segments vs Same Period Last Year</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>HurdleMsmtUnit_option8</name>
+        <choiceText>&lt;span style=&quot;color: rgb(51, 51, 51);&quot;&gt;Flown Revenue vs Same Period Last Year&lt;/span&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Flown Revenue vs Same Period Last Year</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PaymentMethod_ACM</name>
+        <choiceText>ACM</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>ACM</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Determines the method of payment for Contract Payment Record</description>
+        <name>PaymentMethod_EFT</name>
+        <choiceText>EFT</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>EFT</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Determines the type of Contract Payments</description>
+        <name>Type_Incentive</name>
+        <choiceText>Incentive</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Incentive</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Determines the type of Contract Payments</description>
+        <name>Type_IncentiveAndTechFund</name>
+        <choiceText>Incentive and Tech Fund</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Incentive and Tech Fund</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Determines the type of Contract Payments</description>
+        <name>Type_TechFund</name>
+        <choiceText>Tech Fund</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Tech Fund</stringValue>
+        </value>
+    </choices>
+    <constants>
+        <name>Choice_12_months</name>
+        <dataType>Number</dataType>
+        <value>
+            <numberValue>12.0</numberValue>
+        </value>
+    </constants>
+    <decisions>
+        <description>To Validate the Account and proceed to next step</description>
+        <name>Account_Detail_Validation</name>
+        <label>Account Detail Validation</label>
+        <locationX>221</locationX>
+        <locationY>239</locationY>
+        <defaultConnector>
+            <targetReference>Channel_Contract</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>ValidationSucceeded</defaultConnectorLabel>
+        <rules>
+            <name>ValidationFailed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>toValidateAccount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Account_Error_Display_Screen</targetReference>
+            </connector>
+            <label>ValidationFailed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>To check whether the confirmation is successful</description>
+        <name>Check_Confirmation_Successful</name>
+        <label>Check Confirmation Successful?</label>
+        <locationX>1259</locationX>
+        <locationY>245</locationY>
+        <defaultConnector>
+            <targetReference>Assign_boolean_to_true</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Back to Confirmation Page</defaultConnectorLabel>
+        <rules>
+            <name>Insert_All_Records</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>confirmationSuccess</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>createdContractId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Opportunity</targetReference>
+            </connector>
+            <label>Insert All Records</label>
+        </rules>
+        <rules>
+            <name>Finish_the_Flow</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>createdFileId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>createdContractId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>confirmationSuccess</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Contract_number</targetReference>
+            </connector>
+            <label>Finish the Flow</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check to Insert Contract Payment Incentive or Tech Fund Record Creation</description>
+        <name>Check_Contract_Payment_Record_Creation</name>
+        <label>Check Contract Payment Record Creation</label>
+        <locationX>1040</locationX>
+        <locationY>622</locationY>
+        <defaultConnector>
+            <targetReference>Create_Tech_Fund_CP</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Tech Fund Record Creation</defaultConnectorLabel>
+        <rules>
+            <name>Incentive_Record_Creation</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Type_Incentive</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Incentive_CP</targetReference>
+            </connector>
+            <label>Incentive Record Creation</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Choose Incentive Payment Screen or Technology Payment Screen or Both based on the Payment Type selected in Contract Creation Screen</description>
+        <name>Payment_Type_Decision</name>
+        <label>Payment Type Decision</label>
+        <locationX>668</locationX>
+        <locationY>237</locationY>
+        <defaultConnector>
+            <targetReference>Incentive_Payment_Rates</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Only Incentive</defaultConnectorLabel>
+        <rules>
+            <name>Only_Technology_Payment</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Type_TechFund</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Technology_Payment</targetReference>
+            </connector>
+            <label>Only Technology Payment</label>
+        </rules>
+    </decisions>
+    <description>Special Character restriction on hurdle measurement unit field</description>
+    <dynamicChoiceSets>
+        <name>ContractClassificationCode</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Contract_Classification_Code__c</picklistField>
+        <picklistObject>Contract__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>ContractRegion</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Contract_Region__c</picklistField>
+        <picklistObject>Contract__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <description>Determines the Payment Frequency of the Contract / Contract payments</description>
+        <name>paymentFrequency</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Payment_Frequency__c</picklistField>
+        <picklistObject>Contract_Payments__c</picklistObject>
+    </dynamicChoiceSets>
+    <formulas>
+        <name>CategoryLabel</name>
+        <dataType>String</dataType>
+        <expression>if({!PreviousContract} = &apos;&apos;,&apos;New&apos;,&apos;Renewal&apos;)</expression>
+    </formulas>
+    <formulas>
+        <description>Channel End Date calculation for Channel Creation Screen</description>
+        <name>ChnEndDate_ContractCreation</name>
+        <dataType>Date</dataType>
+        <expression>IF(
+	AND(
+	  MONTH({!Contract_Start_Date}) = 2,
+	  DAY({!Contract_Start_Date}) = 29,
+	  NOT( OR( 
+		MOD(YEAR({!Contract_Start_Date}),400) = 0, AND( 
+		    MOD(YEAR({!Contract_Start_Date}),4) = 0,
+		    MOD(YEAR({!Contract_Start_Date}),100) &lt;&gt; 0
+                    )
+		)
+	) 
+	),
+	DATE( YEAR({!Contract_Start_Date}) + {!monthToYearValue}, 3, 1) -1 ,
+	DATE( YEAR({!Contract_Start_Date}) + {!monthToYearValue}, MONTH({!Contract_Start_Date}) , DAY({!Contract_Start_Date})) -1
+)</expression>
+    </formulas>
+    <formulas>
+        <name>confirmationError</name>
+        <dataType>String</dataType>
+        <expression>IF(AND({!checkConfirmationError} == true, {!confirmationSuccess} == false),&apos;Please click on Validate button to proceed.&apos;,&apos;&apos; )</expression>
+    </formulas>
+    <formulas>
+        <name>ContractType</name>
+        <dataType>String</dataType>
+        <expression>&apos;Qantas Channel &apos;+{!Type}</expression>
+    </formulas>
+    <formulas>
+        <name>ContractURL</name>
+        <dataType>String</dataType>
+        <expression>HYPERLINK(&quot;/&quot; &amp; {!createdContractId}, {!ContractNumber} ,&quot;_blank&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>ContractURLFormula</name>
+        <dataType>String</dataType>
+        <expression>HYPERLINK(&quot;https://qantas--paymentdev.lightning.force.com/lightning/r/Contract__c/&quot;,&quot;Contract&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>FrequencytoNumberValue</name>
+        <dataType>Number</dataType>
+        <expression>IF(TEXT({!paymentFrequency}) == &apos;Quarterly&apos;, 4, IF(TEXT({!paymentFrequency}) == &apos;Half-Yearly&apos; ,2,1))</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>FundPerPayment</name>
+        <dataType>Number</dataType>
+        <expression>{!Total_Fund_Amount}/({!monthToYearValue}*{!FrequencytoNumberValue})</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <description>To Convert the number of months to Year</description>
+        <name>monthToYearValue</name>
+        <dataType>Number</dataType>
+        <expression>IF({!Contract_Term_in_months} == 12,1, IF({!Contract_Term_in_months} == 24,2, IF({!Contract_Term_in_months} == 36,3,0)))</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <description>Denotes the Name of the Opportunity</description>
+        <name>opptyName</name>
+        <dataType>String</dataType>
+        <expression>&apos;Channel &apos; + {!Type} + &apos; &apos;+ {!curAccount.Name}</expression>
+    </formulas>
+    <formulas>
+        <description>This denotes the error message to display</description>
+        <name>toSendErrorMessage</name>
+        <dataType>String</dataType>
+        <expression>IF( {!accRecordTypeName} &lt;&gt; &apos;Agency_Account&apos; || {!curAccount.Active__c} == false ,&quot;Account should be an Active Agency Account&quot;, 
+IF( ISBLANK({!accBillingCountry}), &quot;Account should have a Billing Country&quot; ,  
+IF( {!accOwnerActive} == false , &quot;Account Owner is inactive&quot;,
+IF( {!activeContractCheck}, &quot;There should not be any active channel contract&quot;,
+IF( NOT({!AuthorizedUser}),&quot;You are not authorized to create or renew an Agency Contract&quot;, 
+IF( NOT({!AuthorizedAccount}),&quot;Please use the Head Office Account for this Agency to create or renew the Contract&quot;, &quot;No Errors found&quot;))))))</expression>
+    </formulas>
+    <formulas>
+        <description>This formula field valid account and provides true or false for condition to be passed</description>
+        <name>toValidateAccount</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(
+AND(
+{!accRecordTypeName} == &apos;Agency_Account&apos;,
+{!curAccount.Active__c},
+NOT(ISBLANK({!accBillingCountry})),
+{!accOwnerActive},
+{!AuthorizedUser},
+{!AuthorizedAccount}
+),
+true,
+false
+)</expression>
+    </formulas>
+    <formulas>
+        <name>UserId</name>
+        <dataType>String</dataType>
+        <expression>{!$User.Id}</expression>
+    </formulas>
+    <interviewLabel>Qantas Payments Contract Creation {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Qantas Payments Contract Creation</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Create Contract Record based on the user inputs</description>
+        <name>Create_Contract</name>
+        <label>Create Contract</label>
+        <locationX>1261</locationX>
+        <locationY>501</locationY>
+        <assignRecordIdToReference>createdContractId</assignRecordIdToReference>
+        <connector>
+            <targetReference>Create_Quote</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Active__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Classification_Code__c</field>
+            <value>
+                <elementReference>ContractClassificationCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_End_Date__c</field>
+            <value>
+                <elementReference>Contract_End_Date</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Owner__c</field>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Region__c</field>
+            <value>
+                <elementReference>ContractRegion</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Start_Date__c</field>
+            <value>
+                <elementReference>Contract_Start_Date</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Type__c</field>
+            <value>
+                <elementReference>ContractType</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CurrencyIsoCode</field>
+            <value>
+                <elementReference>Currency</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>opptyName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Opportunity__c</field>
+            <value>
+                <elementReference>createdOpptyId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Original_Contract_End_Date__c</field>
+            <value>
+                <elementReference>Contract_End_Date</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PreviousContract__c</field>
+            <value>
+                <elementReference>PreviousContract</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>newContractRecTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Signed by Customer</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Contract__c</object>
+    </recordCreates>
+    <recordCreates>
+        <description>Create Incentive Contract Payments Record Type</description>
+        <name>Create_Incentive_CP</name>
+        <label>Create Incentive CP</label>
+        <locationX>984</locationX>
+        <locationY>452</locationY>
+        <connector>
+            <targetReference>Confirmation_Page</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Amount__c</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Agreement__c</field>
+            <value>
+                <elementReference>createdContractId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CurrencyIsoCode</field>
+            <value>
+                <elementReference>Currency</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Domestic_GDS_segment_rate__c</field>
+            <value>
+                <elementReference>Domestic_GDS_Rate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Domestic_QDP_Segment_Rate__c</field>
+            <value>
+                <elementReference>Domestic_QDP_Rate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Hurdle_Measurement_Unit__c</field>
+            <value>
+                <elementReference>Incentive_Hurdle_Measurement_Unit_Text</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Hurdle_rate__c</field>
+            <value>
+                <elementReference>Incentive_Hurdle_Rate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>International_GDS_segment_rate__c</field>
+            <value>
+                <elementReference>International_GDS_Rate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>International_QDP_segment_rate__c</field>
+            <value>
+                <elementReference>International_QDP_Rate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Paid_As__c</field>
+            <value>
+                <elementReference>Payment_Method</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Amount__c</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Criteria__c</field>
+            <value>
+                <elementReference>Payment_Criteria</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Frequency__c</field>
+            <value>
+                <elementReference>Payment_Frequency</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Quote__c</field>
+            <value>
+                <elementReference>createdQuoteId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>newIncentiveCPRecTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type__c</field>
+            <value>
+                <stringValue>Incentive</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Contract_Payments__c</object>
+    </recordCreates>
+    <recordCreates>
+        <description>Create Opportunity Record based on the user inputs</description>
+        <name>Create_Opportunity</name>
+        <label>Create Opportunity</label>
+        <locationX>1262</locationX>
+        <locationY>392</locationY>
+        <assignRecordIdToReference>createdOpptyId</assignRecordIdToReference>
+        <connector>
+            <targetReference>Create_Contract</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>AccountId</field>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Amount</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CloseDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Closed_Reasons__c</field>
+            <value>
+                <stringValue>Account Management</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CurrencyIsoCode</field>
+            <value>
+                <elementReference>Currency</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>opptyName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Other_reasons__c</field>
+            <value>
+                <stringValue>Agency Contract</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>newOpptyRecTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Closed - Accepted</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Type_Level_1__c</field>
+            <value>
+                <stringValue>Contractual</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Type_Level_2__c</field>
+            <value>
+                <stringValue>Qantas Channel Incentive</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Type_Level_3__c</field>
+            <value>
+                <elementReference>CategoryLabel</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type</field>
+            <value>
+                <stringValue>Agency Partnerships</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordCreates>
+    <recordCreates>
+        <description>Create Quote Record based on the user inputs</description>
+        <name>Create_Quote</name>
+        <label>Create Quote</label>
+        <locationX>1262</locationX>
+        <locationY>627</locationY>
+        <assignRecordIdToReference>createdQuoteId</assignRecordIdToReference>
+        <connector>
+            <targetReference>Check_Contract_Payment_Record_Creation</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Active__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Amount__c</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Agreement__c</field>
+            <value>
+                <elementReference>createdContractId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>opptyName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OpportunityId</field>
+            <value>
+                <elementReference>createdOpptyId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>newQuoteRecTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Quote</object>
+    </recordCreates>
+    <recordCreates>
+        <description>Create Incentive Contract Payments Record Type</description>
+        <name>Create_Tech_Fund_CP</name>
+        <label>Create Tech Fund CP</label>
+        <locationX>1160</locationX>
+        <locationY>451</locationY>
+        <connector>
+            <targetReference>Confirmation_Page</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Amount__c</field>
+            <value>
+                <elementReference>Total_Fund_Amount</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Agreement__c</field>
+            <value>
+                <elementReference>createdContractId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CurrencyIsoCode</field>
+            <value>
+                <elementReference>Currency</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Hurdle_Measurement_Unit__c</field>
+            <value>
+                <elementReference>Tech_Hurdle_Measurement_Unit_Text</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Hurdle_rate__c</field>
+            <value>
+                <elementReference>Tech_Fund_Hurdle_Rate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Paid_As__c</field>
+            <value>
+                <elementReference>Payment_Method</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Amount__c</field>
+            <value>
+                <elementReference>Total_Fund_Amount</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Criteria__c</field>
+            <value>
+                <elementReference>Payment_Criteria</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Payment_Frequency__c</field>
+            <value>
+                <elementReference>Payment_Frequency</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Quote__c</field>
+            <value>
+                <elementReference>createdQuoteId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>newTechFundCPRecTypeId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Tech_fund_Fund_amount_for_each_payment__c</field>
+            <value>
+                <elementReference>FundPerPayment</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type__c</field>
+            <value>
+                <stringValue>Tech fund</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Contract_Payments__c</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Contract_number</name>
+        <label>Get Contract number</label>
+        <locationX>1442</locationX>
+        <locationY>243</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>PopulateRecipientList</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>createdContractId</elementReference>
+            </value>
+        </filters>
+        <object>Contract__c</object>
+        <outputAssignments>
+            <assignToReference>ContractNumber</assignToReference>
+            <field>Contract_Number__c</field>
+        </outputAssignments>
+    </recordLookups>
+    <screens>
+        <description>This is the page 1 for the Contract Creation Flow</description>
+        <name>Account_Details</name>
+        <label>Account Details</label>
+        <locationX>136</locationX>
+        <locationY>237</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Account_Detail_Validation</targetReference>
+        </connector>
+        <fields>
+            <name>Ltng_AccountDetailsForContractCreation</name>
+            <extensionName>c:QP_AccountDetailsForFlow</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>recordId</name>
+                <value>
+                    <elementReference>recordId</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>curAccount</assignToReference>
+                <name>existingAccount</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>activeContractCheck</assignToReference>
+                <name>activeContract</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>newContractRecTypeId</assignToReference>
+                <name>contractRTId</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>accBillingCountry</assignToReference>
+                <name>accBillingCountry</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>AuthorizedUser</assignToReference>
+                <name>authorizedUser</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>AuthorizedAccount</assignToReference>
+                <name>authorizedAccount</name>
+            </outputParameters>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Account_Error_Display_Screen</name>
+        <label>Account Error Display Screen</label>
+        <locationX>229</locationX>
+        <locationY>399</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>headerTitle_page2_err</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Account Not Valid&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>errorMessage</name>
+            <fieldText>&lt;p&gt;Please fix the following error : {!toSendErrorMessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>This is the Page 2 of Contract creation used to get input values from end user</description>
+        <name>Channel_Contract</name>
+        <label>Channel Contract</label>
+        <locationX>438</locationX>
+        <locationY>236</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Assign_Contract_End_Date</targetReference>
+        </connector>
+        <fields>
+            <name>headerTitle_Page2</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!CategoryLabel}&lt;/b&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Channel Contract &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Contract_Start_Date</name>
+            <dataType>Date</dataType>
+            <fieldText>Contract Start Date</fieldText>
+            <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;Contract Start Date should be the beginning of a month.&lt;/p&gt;</helpText>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Start Date cannot be before 1st August 2019 and should be the 1st of the month. &lt;/p&gt;</errorMessage>
+                <formulaExpression>AND(IF({!Contract_Start_Date} &lt; DATEVALUE(&quot;2019-08-01&quot;), FALSE,TRUE),IF(DAY({!Contract_Start_Date}) &lt;&gt; 1,FALSE,TRUE))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Contract_Term_in_months</name>
+            <choiceReferences>contractTerm_12</choiceReferences>
+            <choiceReferences>contractTerm_24</choiceReferences>
+            <choiceReferences>contractTerm_36</choiceReferences>
+            <dataType>Number</dataType>
+            <fieldText>Contract Term (in months)</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Type</name>
+            <choiceReferences>Type_Incentive</choiceReferences>
+            <choiceReferences>Type_TechFund</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Type</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>ContractRegionSelect</name>
+            <choiceReferences>ContractRegion</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Contract Region</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Currency</name>
+            <choiceReferences>CurrencyISO_AUD</choiceReferences>
+            <choiceReferences>CurrencyISO_NZD</choiceReferences>
+            <choiceReferences>CurrencyISO_USD</choiceReferences>
+            <choiceReferences>CurrencyISO_EUR</choiceReferences>
+            <choiceReferences>CurrencyISO_GBP</choiceReferences>
+            <choiceReferences>CurrencyISO_CAD</choiceReferences>
+            <choiceReferences>CurrencyISO_INR</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Currency</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Payment_Method</name>
+            <choiceReferences>PaymentMethod_EFT</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Payment Method</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Payment_Frequency</name>
+            <choiceReferences>paymentFrequency</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Payment Frequency</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Payment_Criteria</name>
+            <fieldText>Payment Criteria</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <pausedText>&lt;p&gt;You can revisit the paused flow in your Home Page&lt;/p&gt;</pausedText>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Confirmation_Page</name>
+        <label>Confirmation Page</label>
+        <locationX>1044</locationX>
+        <locationY>242</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Check_Confirmation_Successful</targetReference>
+        </connector>
+        <fields>
+            <name>Ltng_ContractPaymentForContractCreation</name>
+            <extensionName>c:QP_ContractPaymentForFlow</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>Contract__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>FileRecordId</name>
+                <value>
+                    <elementReference>createdContractId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>contractRTId</name>
+                <value>
+                    <elementReference>newContractRecTypeId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>cpIncentiveRTId</name>
+                <value>
+                    <elementReference>newIncentiveCPRecTypeId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>cpTechFundRTId</name>
+                <value>
+                    <elementReference>newTechFundCPRecTypeId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>opptyRTId</name>
+                <value>
+                    <elementReference>newOpptyRecTypeId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>quoteRTId</name>
+                <value>
+                    <elementReference>newQuoteRecTypeId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldName</name>
+                <value>
+                    <stringValue>Contract_Group__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>endDate</name>
+                <value>
+                    <elementReference>Contract_End_Date</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>startDate</name>
+                <value>
+                    <elementReference>Contract_Start_Date</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>accountId</name>
+                <value>
+                    <elementReference>recordId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>contType</name>
+                <value>
+                    <elementReference>ContractType</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>confirmationSuccess</assignToReference>
+                <name>confirmSuccess</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>newIncentiveCPRecTypeId</assignToReference>
+                <name>cpIncentiveRTId</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>newTechFundCPRecTypeId</assignToReference>
+                <name>cpTechFundRTId</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>newOpptyRecTypeId</assignToReference>
+                <name>opptyRTId</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>newQuoteRecTypeId</assignToReference>
+                <name>quoteRTId</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>createdFileId</assignToReference>
+                <name>contentDocumentRecId</name>
+            </outputParameters>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>ConfirmError</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(208, 40, 40);&quot;&gt;{!confirmationError}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <pausedText>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;You can revisit the paused flow in your home page&lt;/span&gt;&lt;/p&gt;</pausedText>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>All the Flow logic are successful</description>
+        <name>End_Flow</name>
+        <label>End Flow</label>
+        <locationX>1622</locationX>
+        <locationY>379</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>FinalScreenMessage</name>
+            <fieldText>&lt;p&gt;Agency contract &lt;a href=&quot;/lightning/r/Contract__c/{!createdContractId}/view&quot; target=&quot;_blank&quot;&gt;({!ContractNumber})&lt;/a&gt; and its related records have been created successfully.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Incentive_Hurdle_Rates</name>
+        <label>Incentive Hurdle Rates</label>
+        <locationX>831</locationX>
+        <locationY>414</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Confirmation_Page</targetReference>
+        </connector>
+        <fields>
+            <name>headerTitle_page4</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Incentive Hurdle Rates&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Incentive_Hurdle_Rate</name>
+            <dataType>Number</dataType>
+            <fieldText>Incentive Hurdle Rate %</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Incentive Hurdle Rate % should be between 0 and 100&lt;/p&gt;</errorMessage>
+                <formulaExpression>AND(IF({!Incentive_Hurdle_Rate} &lt;=100, true, false),if({!Incentive_Hurdle_Rate} &gt;= 0, true, false))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Incentive_Hurdle_Measurement_Unit_Text</name>
+            <dataType>String</dataType>
+            <fieldText>Incentive Hurdle Measurement Unit</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(182, 14, 14);&quot;&gt;Hurdle Measurement Unit cannot be greater than 80 characters and cannot contain special characters&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>AND(LEN({!Incentive_Hurdle_Measurement_Unit_Text}) &lt; 81,REGEX( {!Incentive_Hurdle_Measurement_Unit_Text},&quot;^[a-z  A-Z 0-9]*$&quot;))</formulaExpression>
+            </validationRule>
+        </fields>
+        <pausedText>&lt;p&gt;You can revisit the paused flow in your home page&lt;/p&gt;</pausedText>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Denotes the Incentive Payment Rates for Contract and Contract Payments creation record</description>
+        <name>Incentive_Payment_Rates</name>
+        <label>Incentive Payment Rates</label>
+        <locationX>697</locationX>
+        <locationY>415</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Incentive_Hurdle_Rates</targetReference>
+        </connector>
+        <fields>
+            <name>headerTitle_page3a</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 18px;&quot;&gt;Incentive Payment Rates&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>incentiveCurrency</name>
+            <fieldText>&lt;p&gt;Currency :- &lt;b&gt;{!Currency}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Domestic_QDP_Rate</name>
+            <dataType>Number</dataType>
+            <fieldText>Domestic QDP Rate</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>2</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Please enter a value between 0 and 10&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>AND(IF({!Domestic_QDP_Rate} &lt;= 10,true,false),IF({!Domestic_QDP_Rate} &gt;=0, true, false))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>International_QDP_Rate</name>
+            <dataType>Number</dataType>
+            <fieldText>International QDP Rate</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>2</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Please enter a value between 0 and 10&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>and(if({!International_QDP_Rate} &lt;= 10,true,false),if({!International_QDP_Rate} &gt;=0, true, false))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Domestic_GDS_Rate</name>
+            <dataType>Number</dataType>
+            <fieldText>Domestic GDS Rate</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>2</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Please enter a value between 0 and 10&lt;/p&gt;</errorMessage>
+                <formulaExpression>and(if({!Domestic_GDS_Rate} &lt;= 10,true,false),if({!Domestic_GDS_Rate} &gt;=0, true,false))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>International_GDS_Rate</name>
+            <dataType>Number</dataType>
+            <fieldText>International GDS Rate</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>2</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Please enter a value between 0 and 10&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>and(if({!International_GDS_Rate} &lt;= 10,true,false),if({!International_GDS_Rate} &gt;= 0,true,false))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>ContractClassification</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 18px;&quot;&gt;Contract Classification&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Contract_Classification_Code</name>
+            <choiceReferences>ContractClassificationCode</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Contract Classification Code</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <pausedText>&lt;p&gt;You can revisit the paused flow in your home page.&lt;/p&gt;</pausedText>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Technology_Payment</name>
+        <label>Technology Payment</label>
+        <locationX>895</locationX>
+        <locationY>235</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Confirmation_Page</targetReference>
+        </connector>
+        <fields>
+            <name>headerTitle_page5</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Technology Payment&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>techfundCurrency</name>
+            <fieldText>&lt;p&gt;Currency :- &lt;b&gt;{!Currency}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Total_Fund_Amount</name>
+            <dataType>Number</dataType>
+            <fieldText>Total Tech Fund Amount</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Tech_Fund_Hurdle_Rate</name>
+            <dataType>Number</dataType>
+            <fieldText>Tech Fund Hurdle Rate %</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Tech fund hurdle rate should be between 0 and 100&lt;/p&gt;</errorMessage>
+                <formulaExpression>and(if({!Tech_Fund_Hurdle_Rate} &lt;=100,true,false),if({!Tech_Fund_Hurdle_Rate} &gt;=0, true, false))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Tech_Hurdle_Measurement_Unit_Text</name>
+            <dataType>String</dataType>
+            <fieldText>Tech Hurdle Measurement Unit</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(140, 13, 13);&quot;&gt;Hurdle Measurement Unit cannot be greater than 80 characters and cannot contain special characters&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>AND(LEN({!Tech_Hurdle_Measurement_Unit_Text}) &lt; 81,REGEX( {!Tech_Hurdle_Measurement_Unit_Text},&quot;^[a-z  A-Z 0-9]*$&quot;))</formulaExpression>
+            </validationRule>
+        </fields>
+        <pausedText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;You can revisit the paused flow in your home page&lt;/span&gt;&lt;/p&gt;</pausedText>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Account_Details</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>accBillingCountry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Denotes whether the account owner is active or not</description>
+        <name>accOwnerActive</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <elementReference>curAccount.Owner.IsActive</elementReference>
+        </value>
+    </variables>
+    <variables>
+        <description>Denotes the record type name for Account</description>
+        <name>accRecordTypeName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <elementReference>curAccount.RecordType.DeveloperName</elementReference>
+        </value>
+    </variables>
+    <variables>
+        <description>This field checks whether the Channel Contract is active.</description>
+        <name>activeContractCheck</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>AuthorizedAccount</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>AuthorizedUser</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>checkConfirmationError</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <description>To Determine if the confirmation is successful from Lightning on Confirmation Page</description>
+        <name>confirmationSuccess</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>Contract_End_Date</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ContractNumber</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Denotes the Id that belongs to created contract</description>
+        <name>createdContractId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>createdFileId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Id of the created Opportunity Record</description>
+        <name>createdOpptyId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Id of the Quote that is created</description>
+        <name>createdQuoteId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>This specifies the current Account record</description>
+        <name>curAccount</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>CustomNotificationTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Denotes the Record Type id of the new Contract record</description>
+        <name>newContractRecTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>new Incentive CP Record Type Id</description>
+        <name>newIncentiveCPRecTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Denotes the Record Type id of the new Opportunity record</description>
+        <name>newOpptyRecTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Denotes the Record Type id of the new Quote record</description>
+        <name>newQuoteRecTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Denotes the record type id for Contract payment Tech fund</description>
+        <name>newTechFundCPRecTypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>PreviousContract</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>RecipientList</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>This is the Id of the record on which the flow is placed. (Id of the Account)</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

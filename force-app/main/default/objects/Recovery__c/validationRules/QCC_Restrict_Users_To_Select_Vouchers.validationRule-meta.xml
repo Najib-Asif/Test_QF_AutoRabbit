@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Restrict_Users_To_Select_Vouchers</fullName>
+    <active>true</active>
+    <description>Restricting users to select Wine and Hotel Vouchers</description>
+    <errorConditionFormula>AND($Setup.EnableValidationRule__c.VR_QCC_Restrict_Users_To_Add_Voucher__c=FALSE, $Setup.EnableValidationRule__c.VR_BypassOTSCaseStatusErrors__c=FALSE,
+OR(ISPICKVAL(Type__c, &apos;QF_WINE_voucher&apos;),
+ISPICKVAL(Type__c, &apos;QF_HOTEL_voucher&apos;)),
+RecordType.DeveloperName = &apos;Other_Recovery&apos;)</errorConditionFormula>
+    <errorMessage>The Qantas Hotel and Wine vouchers shall be provided only in-flight. Please select another Recovery Type.</errorMessage>
+</ValidationRule>

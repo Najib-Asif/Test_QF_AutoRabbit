@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Flight</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Flights</value>
+    </caseValues>
+    <recordTypes>
+        <description><!-- This record type stores all the Track &amp; Trace Exception Flight Details --></description>
+        <label><!-- Freight Exception Flight Details --></label>
+        <name>Freight_Exception_Flight_Details</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type stores all the Agency Details of the Flight Object --></description>
+        <label><!-- Service Request --></label>
+        <name>Service_Request</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You cannot edit the flight record if Case origin is &apos;QAC Website&apos; --></errorMessage>
+        <name>QAC_Flight_no_edit_for_QACWeb_case</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot edit the flight record if case status is Closed. --></errorMessage>
+        <name>QAC_Flight_record_cannot_be_edited</name>
+    </validationRules>
+</CustomObjectTranslation>

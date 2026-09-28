@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Cost_Centre_Account_Number__c</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Monetary_Valuef__c</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Fulfilled_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case.Recoveries_Case__r$Original_Currency__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>To assist Melanie N with matching EU Comp payments which are unmatched</description>
+    <filter>
+        <booleanFilter>(1 OR 2 OR 4 OR 5) AND 3</booleanFilter>
+        <criteriaItems>
+            <column>Case.Recoveries_Case__r$Bank_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Uni Credit,unicredit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Recoveries_Case__r$Bank_Account_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Air Help,AirHelp</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Recoveries_Case__r$Monetary_Valuef__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1200</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Recoveries_Case__r$Bank_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>silicon</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Recoveries_Case__r$Branch_Swift_BIC_Code__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>SVB</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>EU Comp AirHelp payments v3</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Case.Recoveries_Case__r$Fulfilled_Date__c</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,201 @@
+<aura:component controller ="QLCampaignCalendar">
+    <!-- For monthly View -->
+    <aura:attribute name="Month" type="Date"/>
+    <aura:attribute name="Spinner" type="Boolean"/>
+    <aura:attribute name="popover" type="Boolean" default="false"/>
+    <aura:attribute name="SplitDates" type="Object[]" />
+    <aura:attribute name="Campaigns" type="Campaign[]" />
+    <aura:attribute name="allCampaigns" type="Campaign[]" />
+    <aura:attribute name="today" type="Date"/>
+    <aura:attribute name="ButtonValue" type="String" default=""/>
+    <aura:attribute name="page" type="integer" default="" description="using for store page Number"/>
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+    <aura:attribute name="total" type="integer" description="total records count store "/>
+    <aura:attribute name="recordToDisply" type="integer" description="Determine number of records per page"/>
+    <aura:attribute name="RecordsPerPage" type="integer[]" default="[{'label' : 50, 'value' : 50},
+                                                                    {'label' : 100, 'value' : 100},
+                                                                    {'label' : 200, 'value' : 200}]" description="Determine number of records per page"/>
+    
+    <!--Handlers -->
+    <aura:handler name="init" value="{!this}" action ="{!c.doInit}"/>
+    
+    <!--Custom Events-->
+    <aura:registerEvent name="SendMonth" type="c:QL_CurrentMonthYear"/>
+    
+    <!-- Aura Methods -->
+    <aura:method name="GetDates" action="{!c.GetMonthDates}"> 
+        <aura:attribute name="BtnValue" type="String"/> 
+    </aura:method>
+    
+    <div class="slds slds-p-around_small slds-scrollable">
+        <aura:if isTrue="{!not(empty(v.Campaigns))}">
+            <div style="height: 35px;">
+                <div class="slds-align_absolute-center" style="left: 40rem;">
+                    <ui:button disabled="{!v.page == 1}" aura:id="toggleButton" class="slds-button--neutral sldsicon Staticpostition">
+                        <lightning:icon class="sldsicon" iconName="utility:chevronleft" size="x-Small" onclick="{!c.navigatePrevious}"/>
+                        <span class="slds-assistive-text">Settings</span>
+                    </ui:button>
+                    
+                    <p class="slds-truncate">{!v.page} / {!v.pages}</p>
+                    
+                    <ui:button disabled="{!v.page == v.pages}" class="slds-button--neutral Staticpostition">
+                        <lightning:icon iconName="utility:chevronright" size="x-Small" onclick="{!c.navigatetoNext}"/>
+                        <span class="slds-assistive-text">Settings</span>
+                    </ui:button>
+                </div> 
+            </div>
+        </aura:if>
+        <div class="slds-grid">
+            <div class="lwc-resource slds-size_1-of-6 slds-p-around_small slds-border_right slds-text-heading_medium" >
+                Campaigns
+            </div>
+            <aura:if isTrue="{!not(v.Spinner)}">
+                <aura:iteration items="{!v.SplitDates}" var="SplitDate">
+                    <aura:iteration items="{!SplitDate.dateCams}" var="dateCams">
+                        <aura:if isTrue="{!dateCams.isInCurrentMonth}">
+                            <div class="slds-col slds-align_absolute-center lwc-timeslot">
+                                <lightning:formattedDateTime value="{!dateCams.sDate}" month="numeric" day="2-digit" />
+                            </div>
+                        </aura:if>
+                    </aura:iteration>
+                </aura:iteration>
+            </aura:if>
+        </div>
+        <div>
+            <aura:if isTrue="{!v.Spinner}">
+                <div class="slds-spinner_container" aura:id="spinnerdiv"></div>
+            </aura:if>
+            <aura:if isTrue="{!empty(v.Campaigns)}">
+                <aura:if isTrue="{!not(v.Spinner)}">
+                    <p class="slds-text-heading_large slds-align_absolute-center slds-p-around_small" style="font-size: 1.5rem;">
+                        Nothing Much this Month!
+                    </p>
+                </aura:if>
+                <aura:set attribute="else"> 
+                    <aura:iteration items="{!v.Campaigns}" var="campaign" indexVar="idx"> 
+                        <div class="slds-grid">
+                            <div data-record="{!idx}" onclick="{!c.goToRecord}"  class="Buttoneffect lwc-resource slds-size_1-of-6 slds-p-around_small slds-border_right textoverflow" >
+                                <span title="{!campaign.Name}">{!campaign.Name}</span>
+                            </div>
+                            <aura:if isTrue="{!not(v.Spinner)}">
+                                <aura:iteration items="{!v.SplitDates}" var="SplitDate">
+                                    <aura:iteration items="{!SplitDate.dateCams}" var="dateCams">
+                                        <aura:if isTrue="{!dateCams.isInCurrentMonth}">
+                                            <div class="slds-col slds-p-vertical_x-small lwc-timeslot">
+                                                <!--  <aura:iteration items="{!v.Campaigns}" var="camp" indexVar="idx">  -->
+                                                
+                                                <aura:if isTrue="{!and(dateCams.sDate == campaign.EndDate,dateCams.sDate == campaign.StartDate)}">
+                                                    <div class="{!campaign.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft' : 
+                                                                campaign.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft': 
+                                                                campaign.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                campaign.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                campaign.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                campaign.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                campaign.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                campaign.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':
+                                                                campaign.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusright Borderradiusleft':''}"></div>
+                                                    
+                                                    
+                                                    <aura:set attribute="else">  
+                                                        <aura:if isTrue="{!dateCams.sDate == campaign.StartDate}">
+                                                            <div class="{!campaign.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusleft' : 
+                                                                        campaign.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusleft': 
+                                                                        campaign.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        campaign.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        campaign.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        campaign.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        campaign.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        campaign.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusleft':
+                                                                        campaign.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusleft':''}" 
+                                                                 >
+                                                                
+                                                            </div>
+                                                            <!--<aura:if isTrue="{!v.popover}">
+                                                <div aura:id ="popoverdiv" style="position: relative;"  >
+                                                    <div style="position: absolute;">
+                                                        
+                                                        <section style ="top: -100px;" aria-label="Dialog title" aria-describedby="popover-body-id" class="slds-popover slds-nubbin_bottom-left" role="dialog">
+                                                            <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-float_right slds-popover__close" title="Close dialog">
+                                                                <span class="slds-assistive-text">Close dialog</span>
+                                                            </button>
+                                                            <div id="popover-body-id" class="slds-popover__body">
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, quaerat? Accusamus excepturi eos, molestias expedita distinctio eligendi ut esse quasi!</p>
+                                                            </div>
+                                                        </section></div></div>
+                                                </aura:if>-->
+                                                            
+                                                        </aura:if>
+                                                        <aura:if isTrue="{!dateCams.sDate == campaign.EndDate}">
+                                                            <div class="{!campaign.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress Borderradiusright' : 
+                                                                        campaign.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress Borderradiusright': 
+                                                                        campaign.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        campaign.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        campaign.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        campaign.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        campaign.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        campaign.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress Borderradiusright':
+                                                                        campaign.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress Borderradiusright':''}"></div>
+                                                            
+                                                        </aura:if>
+                                                        <aura:if isTrue="{!and(greaterthan(dateCams.sDate,campaign.StartDate),lessthan(dateCams.sDate,campaign.EndDate))}">
+                                                            <div class="{!campaign.Status == 'Planned' ? 'Planned Stripped-Bar Stripped-barprogress' : 
+                                                                        campaign.Status == 'In Progress' ? 'InProgress Stripped-Bar Stripped-barprogress': 
+                                                                        campaign.Status == 'Pending Reporting' ? 'PendingReporting Stripped-Bar Stripped-barprogress':
+                                                                        campaign.Status == 'Completed' ? 'Completed Stripped-Bar Stripped-barprogress':
+                                                                        campaign.Status == 'Aborted' ? 'Aborted Stripped-Bar Stripped-barprogress':
+                                                                        campaign.Status == 'On hold' ? 'Onhold Stripped-Bar Stripped-barprogress':
+                                                                        campaign.Status == 'Active' ? 'Active Stripped-Bar Stripped-barprogress':
+                                                                        campaign.Status == 'Closed' ? 'Closed Stripped-Bar Stripped-barprogress':
+                                                                        campaign.Status == 'Concept Phase' ? 'ConceptPhase Stripped-Bar Stripped-barprogress':''}"></div> 
+                                                        </aura:if>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </div>
+                                            <!--  </aura:iteration>   -->
+                                        </aura:if>
+                                        <!-- <aura:iteration items="{!Dates.campsInsDate}" var="campagin" indexVar="idx">
+                                <div class="slds-col">
+                                    <span> {!campagin.Name} </span>
+                                </div>
+                            </aura:iteration> -->
+                                    </aura:iteration>
+                                </aura:iteration>
+                            </aura:if>
+                        </div>
+                    </aura:iteration>
+                </aura:set>
+            </aura:if>
+        </div>
+    </div>
+    <aura:if isTrue="{!not(empty(v.Campaigns))}">
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <div style="padding-left: 620px;" class="ptop slds-align--absolute-center">
+                <ui:button disabled="{!v.page == 1}" aura:id="toggleButton" class="slds-button--neutral">
+                    <lightning:icon iconName="utility:chevronleft" size="x-Small" onclick="{!c.navigatePrevious}"/>
+                    <span class="slds-assistive-text">Settings</span>
+                </ui:button>
+                
+                <p class="slds-truncate">{!v.page} / {!v.pages}</p>
+                
+                <ui:button disabled="{!v.page == v.pages}" class="slds-button--neutral">
+                    <lightning:icon iconName="utility:chevronright" size="x-Small" onclick="{!c.navigatetoNext}"/>
+                    <span class="slds-assistive-text">Settings</span>
+                </ui:button>
+            </div> 
+        </div>
+        <div class="slds-col" style="padding-left: 200px;">
+            <p style="width: 160px; display: flex;" class="ptop slds-p-around--medium">{!v.total} Campaigns.</p>
+            </div>
+        <div class="slds-col" style="padding-left: unset; padding-right: unset;">
+            <div style="padding-top: 6px;">
+                <ui:inputSelect class = "combobox" aura:id="recordSize" label="Display Record Per Page: " change="{!c.ChangeInRecordNumber}">
+                    <ui:inputSelectOption text="50" label="50" value="true"/>
+                    <ui:inputSelectOption text="100" label="100"/>
+                    <ui:inputSelectOption text="200" label="200"/>
+                </ui:inputSelect>
+            </div>
+        </div>
+    </div>
+    </aura:if>
+</aura:component>

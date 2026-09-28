@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2_My_Groups_Waiver_Requests_Created</fullName>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.ESCALATION_STATE</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>Reason_for_Waiver__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Corporate_Organisation__c</columns>
+    <columns>Account_Skill_Group__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Group Waivers,SBT</value>
+    </filters>
+    <label>2. My Groups Waiver Requests Created</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_Support_QIC_Group_Sales_TL_Supervisor</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

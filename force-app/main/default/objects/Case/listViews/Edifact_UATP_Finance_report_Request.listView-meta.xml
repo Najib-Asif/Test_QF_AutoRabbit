@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edifact_UATP_Finance_report_Request</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.LAST_UPDATE</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>On_hold_Reason__c</columns>
+    <columns>NAME</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>Comments__c</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>UPDATEDBY_USER.ALIAS</columns>
+    <columns>QL_Previous_Case_Owner__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>contains</operation>
+        <value>Donna Hill,Amanda Young,Corena St Ledger,Tracy Theise,AU Sales Support,Kate Weeding</value>
+    </filters>
+    <filters>
+        <field>CASES.SUBJECT</field>
+        <operation>contains</operation>
+        <value>UATP finance</value>
+    </filters>
+    <label>Edifact UATP Finance report Request</label>
+    <sharedTo>
+        <role>QF_Support_QIC</role>
+        <role>QF_Support_QIC_Member</role>
+    </sharedTo>
+</ListView>

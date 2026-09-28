@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cases_processed_deal_sheet_required</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>QCI_f__c</columns>
+    <columns>Due_Date__c</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>On_hold_Reason__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.PRIORITY</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>With QDM - iDeal approval</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>Deal Amendment,Deal Extension,Deal Renewal,Deal Termination,New Deal Load,Large Market,Mid-Market,QBR,Other</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>contains</operation>
+        <value>PRISM Team Queue,Donna Hill,Stefanie Reynolds,Genessa Nulot,Rachael Flood,Luca More,Mook Simaraks,deal support team queue</value>
+    </filters>
+    <label>Cases processed deal sheet required</label>
+</ListView>

@@ -1,0 +1,93 @@
+<template> 
+    <template lwc:if={showForm}>
+        <lightning-record-edit-form layout-type="Full" record-id={actPlanRec.Id} object-api-name="EventActionPlan__c">  
+            <lightning-messages></lightning-messages>
+            <div class="slds-var-p-vertical_medium">
+                <article class="slds-card slds-card_boundary">
+                    <lightning-card >
+                        <!--Header-->
+                        <div slot="title" class="slds-list_horizontal">
+                            <h1 class="slds-var-p-top_xx-small">{actPlanRec.Name}</h1>
+                            <lightning-helptext class="slds-var-p-left_xx-small" content={actPlanRec.Description__c}> </lightning-helptext>
+                        </div>
+
+                        <!--Body-->
+                        <div class="slds-grid slds-wrap slds-var-p-left_medium">
+                            <div class="slds-col slds-size_1-of-3">
+                                <!--Action Completed
+                                <lightning-input disabled={actPlanRec.hasCA} checked={actPlanRec.ActionCompleted__c} name="complcheck" type="checkbox" field-name="ActionCompleted__c" ></lightning-input>-->
+                                <template lwc:if={actPlanRec.hasNoCA}>
+                                    <lightning-input-field field-name="ActionCompleted__c"></lightning-input-field>
+                                </template>
+                                <template lwc:if={actPlanRec.hasCA}>
+                                    Action Completed
+                                    <lightning-input disabled={actPlanRec.hasCA} checked={actPlanRec.ActionCompleted__c} name="complcheck" type="checkbox" field-name="ActionCompleted__c" ></lightning-input>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <lightning-output-field field-name="OwnerId"> </lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                Completed DateTime
+                                <div><lightning-formatted-date-time value={actPlanRec.CompletedDateTime__c} year="numeric"
+                                month="numeric"
+                                day="numeric" hour="2-digit"
+                                minute="2-digit"></lightning-formatted-date-time></div>
+                            </div>
+                        </div>
+                        <template lwc:if={actPlanRec.hasNoCA}>
+                            <div class="slds-var-p-horizontal_small">
+                                <lightning-input-field name ="comment" field-name="Comments__c"> </lightning-input-field>
+                            </div>
+                        </template>
+
+                        <template lwc:if={actPlanRec.HasAccess__c}>
+                            <template lwc:if={actPlanRec.hasCA}>
+                                <div class="slds-var-p-vertical_small slds-var-p-horizontal_medium">
+                                    <lightning-button label={buttonLabel} data-id={actPlanRec.compAction} onclick={handleCompleteAction}></lightning-button>
+                                </div>
+                            </template>
+                            <template lwc:else>
+                                <div class="slds-var-p-vertical_small slds-var-p-horizontal_medium">
+                                    <lightning-button type="submit" label="Save" onclick={handleSaveAction}></lightning-button>
+                                </div>
+                            </template>
+                        </template>
+
+                        <!-- Delete action -->
+                        <lightning-button-group class="slds-col slds-size_1-of-1 slds-var-p-left_medium" slot="actions">
+                            <div if:true={actPlanRec.HasAccess__c} >
+                                <div class="slds-var-p-right_xx-small">
+                                <lightning-button label="Delete" icon-name="utility:delete" onclick={handleDeleteClick}></lightning-button>
+                                </div>
+                            </div>
+                        </lightning-button-group>
+                    </lightning-card>
+                </article>
+            </div>
+        </lightning-record-edit-form>
+    </template>
+    <!-- Modal window -->
+    <template if:true={isShowModal}>
+        
+        <section role="dialog" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            
+            
+            <div class="slds-modal__container">
+                <!--<header class="slds-modal__header">-->
+                    <lightning-icon class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse slds-var-p-left_xx-small slds-var-p-top_xx-small" onclick={hideModalBox} icon-name="utility:close"  size="small"></lightning-icon>
+                 <!--</header>-->
+                <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                    <lightning-flow data-id="flow" flow-api-name={actPlanRec.compAction} flow-input-variables={inputVariable} onstatuschange={handleFlowStatusChange}></lightning-flow>
+                </div>
+                <!--<lightning-modal-footer>
+                    <div class="slds-modal__footer_directional">
+                        <lightning-button class="slds-align_absolute-center" label="Close" onclick={hideModalBox}></lightning-button>
+                    </div>
+                </lightning-modal-footer>-->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    
+    </template>
+  </template>

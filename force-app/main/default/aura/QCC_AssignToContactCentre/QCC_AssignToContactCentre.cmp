@@ -1,0 +1,21 @@
+<aura:component implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" 
+               Controller="QCC_AssignToContactCentreController" access="global" >
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+    
+    <article class="slds-card"> 
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate"> 
+                
+                    <div class="slds-media__body">
+                        <h2>
+                            Are you sure you want to assign to Contact Center?
+                        </h2>
+                    </div>
+            </header>
+        </div>
+        <footer class="slds-card__footer">
+            <lightning:button label="OK" onclick="{!c.doAssign}"/>
+        </footer>
+    </article> 
+</aura:component>

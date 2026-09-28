@@ -1,0 +1,419 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" controller="PortfolioController" access="global" >
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'My Portfolio', 'value': 'myPf'},
+                                                        {'label': 'My Team\'s Portfolio', 'value': 'myTeamPf'}
+                                                        ]"/>
+    <aura:attribute name="value" type="String" default="myPf"/>
+    <aura:attribute name="headers" type="String[]" />
+    <aura:attribute name="proactiveActions" type="String[]" />
+    <aura:attribute name="reactiveActions" type="String[]" />
+    <aura:attribute name="recommActions" type="String[]" />
+    <aura:attribute name="oppOwnerList" type="Object[]" />
+    <aura:attribute name="allOwnerList" type="Object[]" />
+    <aura:attribute name="allOwnerIds" type="String[]" />
+    <aura:attribute name="accOwnerList" type="Object[]" />
+    <aura:attribute name="accTaskOwnerList" type="Object[]" />
+    <aura:attribute name="overdueOppOwnerList" type="Object[]" />
+    <aura:attribute name="decAccOwnerList" type="Object[]" />
+    <aura:attribute name="decAccRiskOwnerList" type="Object[]" />
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="oppList" type="Opportunity[]"/>
+    <aura:attribute name="newArrOppList" type="Opportunity[]"/>
+    <aura:attribute name="overdueOppList" type="Opportunity[]"/>
+    <aura:attribute name="newArrOverdueOppList" type="Opportunity[]"/>
+    <aura:attribute name="allAccList" type="Account[]"/>
+    <aura:attribute name="accList" type="Account[]"/>
+    <aura:attribute name="newArrAccList" type="Account[]"/>
+    <aura:attribute name="newArrAcckycWOActivities" type="Account[]"/>
+    <aura:attribute name="decAccList" type="Account[]"/>
+    <aura:attribute name="newArrDecAccList" type="Account[]"/>
+    <aura:attribute name="decAccRiskList" type="Account[]"/>
+    <aura:attribute name="newArrDecAccRiskList" type="Account[]"/>
+    <aura:attribute name="acckycWOActivities" type="Account[]"/>
+    <aura:attribute name="showMorePiOpp" type="String" default="show more >>"/>
+    <aura:attribute name="showMoreAccWOKeyCont" type="String" default="show more >>"/>
+    <aura:attribute name="showMoreAccWOKeyContTsk" type="String" default="show more >>"/>
+    <aura:attribute name="showMoreOverdueOpp" type="String" default="show more >>"/>
+    <aura:attribute name="showMoreDecAcc" type="String" default="show more >>"/>
+    <aura:attribute name="showMoreDecRiskAcc" type="String" default="show more >>"/>
+    <aura:attribute name="noRecords" type="String" default="No Records Found !!!"/>
+    <aura:attribute name="selectedOwner" type="String" default=""/>
+    <aura:attribute name="pfAccIds" type="String[]" />
+    <!--<aura:attribute name="selectedValue" type="String"/>
+    <aura:attribute name="selectedValueAccNoKeyCont" type="String" />
+    <aura:attribute name="selectedValueAccNoKeyContTask" type="String" />
+    <aura:attribute name="selectedValueOverdueOpp" type="String" />
+    <aura:attribute name="selectedValueDecAcc" type="String" />
+    <aura:attribute name="selectedValueDecAccRisk" type="String" />-->
+    <aura:dependency resource="markup://c:QL_AccountHealthIndicator" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.initHandleChange}"/>
+    <!--loading spinner start... style=Brand Medium (blue dots)-->
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <!-- Loading spinner end--> 
+	<!--<div style="position:fixed;top:-14px;width:95%;">-->    
+    <lightning:layout horizontalAlign="center" multipleRows="true">
+        <div/>  
+        <div class="slds-p-top--medium" >
+            <lightning:radioGroup class="slds-p-right--large slds-p-top_xx-small"    
+                                  aura:id="mygroup"
+                                  name="radioButtonGroup"
+                                  options="{! v.options }"
+                                  value="{! v.value }"
+                                  onchange="{! c.initHandleChange }"
+                                  type="button" onfocus="{! c.initHandleChange }"/> 
+            
+        </div> 
+        
+        <aura:if isTrue="{! (v.value) == 'myTeamPf'}" >
+            <div class="slds-p-left--large" > 
+                <lightning:select aura:id="selectOwner" name="selectOwner" value="{!v.selectedOwner}" onchange="{!c.onSelectValOwnerChange}">
+                    <option text="-- Show All Members --" value="showAllMem" selected="true"/>
+                    <option text="-- Show Team's Avg --" value="showAll"/>
+                    <aura:iteration items="{!v.allOwnerList}" var="option">
+                        <option text="{!option.label}" value="{!option.id}" />
+                    </aura:iteration>
+                </lightning:select> 
+            </div>
+        </aura:if>
+        <div/>  
+        
+    </lightning:layout>
+    <!--</div>-->
+    <br/>
+    <div class="slds-page-header" style="cursor: pointer;background-color : #d6eaf8 ;" onclick="{!c.sectionAHI}">
+        <section class="slds-clearfix " >
+            <div class="slds-float--left ">
+                <lightning:icon class="slds-hide" aura:id="articleAHI" iconName="utility:chevronright" size="x-small" alternativeText="Indicates add"/>
+                <lightning:icon class="slds-show" aura:id="articleAHI" iconName="utility:chevrondown" size="x-small" alternativeText="Indicates dash"/>
+            </div>
+            <div class="slds-m-left--large"><!--<lightning:icon class="slds-m-rightxx-small" iconName="custom:custom109" size="small" />--><b>Account Health Indicator</b></div>
+        </section>
+    </div>
+    <div aura:id="articleAHI">
+        <!--<lightning:layout horizontalAlign="spread" multipleRows="true">
+        <div class="slds-m-around_x-small">-->
+        <div class="slds-m-around_x-small">
+        {!v.body}
+        </div>
+        <div style="display:none;">
+        <c:QL_AccountHealthIndicator />
+        </div>
+        <!--</lightning:layout>-->
+    </div>
+    <div class="slds-page-header" style="cursor: pointer;background-color : #fad7a0   ;" onclick="{!c.sectionOne}">
+        <section class="slds-clearfix " >
+            <div class="slds-float--left ">
+                <lightning:icon class="slds-hide" aura:id="articleOne" iconName="utility:chevronright" size="x-small" alternativeText="Indicates add"/>
+                <lightning:icon class="slds-show" aura:id="articleOne" iconName="utility:chevrondown" size="x-small" alternativeText="Indicates dash"/>
+            </div>
+            <div class="slds-m-left--large"><!--<lightning:icon class="slds-m-rightxx-small" iconName="custom:custom109" size="small" />--><b>{!v.headers[0]}</b></div>
+        </section>
+    </div>
+    <div class="slds-p-around--medium" aura:id="articleOne" style="background-color : #FFFFFF ;">
+        <lightning:layout horizontalAlign="spread" multipleRows="true">
+            <div>
+                <div class="slds-text-title_caps slds-p-bottom_x-small"><u><b>{!v.proactiveActions[0]}</b></u> ({!if(v.value == 'myTeamPf',if(v.selectedOwner == 'showAll' || v.selectedOwner == 'showAllMem',v.oppList.length,v.newArrOppList.length),v.oppList.length)}) </div>
+                <!--<lightning:select class="slds-hide" aura:id="selectPiOpp" name="selectPiOpp" label="Filter by Owner :" value="{!v.selectedValue}" onchange="{!c.onSelectValOpp}">
+                    <option text="Show All" value=""/>
+                    <aura:iteration items="{!v.oppOwnerList}" var="option" >
+                        <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                    </aura:iteration>
+                </lightning:select>	-->
+                <div>
+                    <div aura:id="dymDivPiOppMaster">
+                        <aura:if isTrue="{!v.oppList.length != 0}">
+                            <aura:iteration items="{!v.oppList}" var="opp" indexVar="idx">
+                                <aura:if isTrue="{!lessthan(idx,10)}">
+                                    <ul class="slds-list_dotted">
+                                        <li><a href="{!'/one/one.app?#/sObject/'+ opp.Id + '/view'}" target="_blank" title="{!opp.Name}">{!opp.Name}</a></li>  
+                                    </ul>
+                                </aura:if>    
+                            </aura:iteration>
+                            <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                        </aura:if>
+                        <aura:if isTrue="{!greaterthan(v.oppList.length,10)}">
+                            <a><div onclick="{!c.onShowMorePiOpp}" class="slds-p-left_large showMoreFont">{!v.showMorePiOpp}</div></a>
+                        </aura:if>
+                        <div aura:id="dymDivPiOpp">
+                            <aura:iteration items="{!v.oppList}" var="opp" indexVar="idx">
+                                <aura:if isTrue="{!greaterthan(idx,9)}">
+                                    <ul class="slds-list_dotted">
+                                        <li><a href="{!'/one/one.app?#/sObject/'+ opp.Id + '/view'}" target="_blank" title="{!opp.Name}">{!opp.Name}</a></li> 
+                                    </ul>
+                                </aura:if>
+                            </aura:iteration>
+                        </div>
+                    </div> 
+                </div>
+                <div aura:id="dymDivPiOppFilter">
+                    <aura:if isTrue="{!v.newArrOppList.length != 0}">
+                        <aura:iteration items="{!v.newArrOppList}" var="opp" indexVar="idx">
+                            <ul class="slds-list_dotted">
+                                <li><a href="{!'/one/one.app?#/sObject/'+ opp.Id + '/view'}" target="_blank" title="{!opp.Name}">{!opp.Name}</a></li>  
+                            </ul>
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                </div>
+            </div>
+            <div>
+                <div class="slds-text-title_caps slds-p-bottom_x-small"><u><b>{!v.proactiveActions[1]}</b></u> ({!if(v.value == 'myTeamPf',if(v.selectedOwner == 'showAll' || v.selectedOwner == 'showAllMem',v.accList.length,v.newArrAccList.length),v.accList.length)})</div>
+                <!--<lightning:select class="slds-hide " aura:id="selectAccNoKeyCont" name="selectAccNoKeyCont" label="Filter by Owner :" value="{!v.selectedValueAccNoKeyCont}" onchange="{!c.onSelectValAccNoKeyCont}">
+                    <option text="Show All" value=""/>
+                    <aura:iteration items="{!v.accOwnerList}" var="option">
+                        <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                    </aura:iteration>
+                </lightning:select>-->
+                <div aura:id="dymDivMaster">
+                    <aura:if isTrue="{!v.accList.length != 0}">
+                        <aura:iteration items="{!v.accList}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!lessthan(idx,10)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li> 
+                                </ul>
+                            </aura:if>  
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{!greaterthan(v.accList.length,10)}">
+                        <a><div onclick="{!c.onShowMoreAccWOKeyCont}" class="slds-p-left_large showMoreFont">{!v.showMoreAccWOKeyCont}</div></a>
+                    </aura:if>
+                    <div aura:id="dymDiv">
+                        <aura:iteration items="{!v.accList}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!greaterthan(idx,9)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li>
+                                    
+                                </ul>
+                            </aura:if>
+                        </aura:iteration>
+                    </div>
+                </div>  
+                <div aura:id="dymDivFilter">
+                    <aura:if isTrue="{!v.newArrAccList.length != 0}">
+                        <aura:iteration items="{!v.newArrAccList}" var="acc" indexVar="idx">
+                            <ul class="slds-list_dotted">
+                                <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li>  
+                            </ul>
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                </div>
+            </div>    
+            <div>
+                <div class="slds-text-title_caps slds-p-bottom_x-small"><u><b>{!v.proactiveActions[2]}</b></u>  ({!if(v.value == 'myTeamPf',if(v.selectedOwner == 'showAll' || v.selectedOwner == 'showAllMem',v.decAccList.length,v.newArrDecAccList.length),v.decAccList.length)})</div>
+                <!--<lightning:select class="slds-hide " aura:id="selectDecAcc" name="selectDecAcc" label="Filter by Owner :" value="{!v.selectedValueDecAcc}" onchange="{!c.onSelectValDecAcc}">
+                    <option text="Show All" value=""/>
+                    <aura:iteration items="{!v.decAccOwnerList}" var="option">
+                        <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                    </aura:iteration>
+                </lightning:select>-->
+                <div aura:id="dymDivDecAccMaster">
+                    <aura:if isTrue="{!v.decAccList.length != 0}">
+                        <aura:iteration items="{!v.decAccList}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!lessthan(idx,10)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li> 
+                                </ul>
+                            </aura:if>  
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{!greaterthan(v.decAccList.length,10)}">
+                        <a><div onclick="{!c.onShowMoreDecAcc}" class="slds-p-left_large showMoreFont">{!v.showMoreDecAcc}</div></a>
+                    </aura:if>
+                    <div aura:id="dymDivDecAcc">
+                        <aura:iteration items="{!v.decAccList}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!greaterthan(idx,9)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li>
+                                    
+                                </ul>
+                            </aura:if>
+                        </aura:iteration>
+                    </div>
+                </div>
+                <div aura:id="dymDivDecAccFilter">
+                    <aura:if isTrue="{!v.newArrDecAccList.length != 0}">
+                        <aura:iteration items="{!v.newArrDecAccList}" var="acc" indexVar="idx">
+                            <ul class="slds-list_dotted">
+                                <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li>  
+                            </ul>
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                </div>
+            </div> 
+        </lightning:layout>    
+    </div>
+    
+    <div class="slds-page-header" style="cursor: pointer;background-color : #f5b7b1 ;" onclick="{!c.sectionTwo}">
+        <section class="slds-clearfix">
+            <div class="slds-float--left">
+                <lightning:icon class="slds-hide" aura:id="articleTwo" iconName="utility:chevronright" size="x-small" alternativeText="Indicates add"/>
+                <lightning:icon class="slds-show" aura:id="articleTwo" iconName="utility:chevrondown" size="x-small" alternativeText="Indicates dash"/>
+            </div>
+            <div class="slds-m-left--large "><!--<lightning:icon class="slds-m-rightxx-small" iconName="custom:custom109" size="small" />--><b>{!v.headers[1]}</b></div>
+        </section>
+    </div>
+    
+    <div class="slds-p-around--medium" aura:id="articleTwo" style="background-color : #FFFFFF;">
+        <lightning:layout horizontalAlign="spread" multipleRows="true">
+            <div>
+                <div class="slds-text-title_caps slds-p-bottom_x-small"><u><b>{!v.reactiveActions[0]}</b></u> ({!if(v.value == 'myTeamPf',if(v.selectedOwner == 'showAll' || v.selectedOwner == 'showAllMem',v.overdueOppList.length,v.newArrOverdueOppList.length),v.overdueOppList.length)})</div>
+                <!--<lightning:select class="slds-hide" aura:id="selectOverdueOpp" name="selectOverdueOpp" label="Filter by Owner :" value="{!v.selectedValueOverdueOpp}" onchange="{!c.onSelectValOverdueOpp}">
+                    <option text="Show All" value=""/>
+                    <aura:iteration items="{!v.overdueOppOwnerList}" var="option">
+                        <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                    </aura:iteration>
+                </lightning:select>-->
+                <div aura:id="dymDivOverdueOppMaster">
+                    <aura:if isTrue="{!v.overdueOppList.length != 0}">
+                        <aura:iteration items="{!v.overdueOppList}" var="opp" indexVar="idx">
+                            <aura:if isTrue="{!lessthan(idx,10)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ opp.Id + '/view'}" target="_blank" title="{!opp.Name}">{!opp.Name}</a></li>  
+                                </ul>
+                            </aura:if>    
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{!greaterthan(v.overdueOppList.length,10)}">
+                        <a><div onclick="{!c.onShowMoreOverdueOpp}" class="slds-p-left_large showMoreFont">{!v.showMoreOverdueOpp}</div></a>
+                    </aura:if>
+                    <div aura:id="dymDivOverdueOpp">
+                        <aura:iteration items="{!v.overdueOppList}" var="opp" indexVar="idx">
+                            <aura:if isTrue="{!greaterthan(idx,9)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ opp.Id + '/view'}" target="_blank" title="{!opp.Name}">{!opp.Name}</a></li> 
+                                </ul>
+                            </aura:if>
+                        </aura:iteration>
+                    </div>
+                </div>
+                <div aura:id="dymDivOverdueOppFilter">
+                    <aura:if isTrue="{!v.newArrOverdueOppList.length != 0}">
+                        <aura:iteration items="{!v.newArrOverdueOppList}" var="opp" indexVar="idx">
+                            <ul class="slds-list_dotted">
+                                <li><a href="{!'/one/one.app?#/sObject/'+ opp.Id + '/view'}" target="_blank" title="{!opp.Name}">{!opp.Name}</a></li>  
+                            </ul>
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                </div>
+            </div>
+            <!--<div>
+                <div class="slds-text-title_caps slds-p-bottom_x-small"><u><b>{!v.reactiveActions[1]}</b></u> ({!if(v.value == 'myTeamPf',if(v.selectedOwner == 'showAll' || v.selectedOwner == 'showAllMem',v.acckycWOActivities.length,v.newArrAcckycWOActivities.length),v.acckycWOActivities.length)})</div>
+                <lightning:select class="slds-hide" aura:id="selectAccNoKeyContTask" name="selectAccNoKeyContTask" label="Filter by Owner :" value="{!v.selectedValueAccNoKeyContTask}" onchange="{!c.onSelectValAccNoKeyContTask}">
+                    <option text="Show All" value=""/>
+                    <aura:iteration items="{!v.accTaskOwnerList}" var="option">
+                        <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                    </aura:iteration>
+                </lightning:select>
+                <div aura:id="dymDivAccountWOKeyContactTskMaster">
+                    <aura:if isTrue="{!v.acckycWOActivities.length != 0}">
+                        <aura:iteration items="{!v.acckycWOActivities}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!lessthan(idx,10)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a> - <a href="{!'/one/one.app?#/sObject/'+ acc.SF_JobID__c + '/view'}" target="_blank" title="{!acc.key_Contact_Office_ID__c}"><div class="contFont">{!acc.key_Contact_Office_ID__c}</div></a></li> 
+                                </ul>
+                            </aura:if>  
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>    
+                    <aura:if isTrue="{!greaterthan(v.acckycWOActivities.length,10)}">
+                        <a><div onclick="{!c.onShowMoreAccWOKeyContTsk}" class="slds-p-left_large showMoreFont">{!v.showMoreAccWOKeyContTsk}</div></a>
+                    </aura:if>
+                    <div aura:id="dymDivAccountWOKeyContactTsk">
+                        <aura:iteration items="{!v.acckycWOActivities}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!greaterthan(idx,9)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a> - <a href="{!'/one/one.app?#/sObject/'+ acc.SF_JobID__c + '/view'}" target="_blank" title="{!acc.key_Contact_Office_ID__c}"><div class="contFont">{!acc.key_Contact_Office_ID__c}</div></a></li>
+                                    
+                                </ul>
+                            </aura:if>
+                        </aura:iteration>
+                    </div>
+                </div>
+                <div aura:id="dymDivAccountWOKeyContactTskFilter">
+                    <aura:if isTrue="{!v.newArrAcckycWOActivities.length != 0}">
+                        <aura:iteration items="{!v.newArrAcckycWOActivities}" var="acc" indexVar="idx">
+                            <ul class="slds-list_dotted">
+                                <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name} </a>  - <a href="{!'/one/one.app?#/sObject/'+ acc.SF_JobID__c + '/view'}" target="_blank" title="{!acc.key_Contact_Office_ID__c}"><div class="contFont">{!acc.key_Contact_Office_ID__c}</div></a></li>  
+                            </ul>
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                </div>
+            </div>-->
+            <div>
+                <div class="slds-text-title_caps slds-p-bottom_x-small"><u><b>{!v.reactiveActions[2]}</b></u>  ({!if(v.value == 'myTeamPf',if(v.selectedOwner == 'showAll' || v.selectedOwner == 'showAllMem',v.decAccRiskList.length,v.newArrDecAccRiskList.length),v.decAccRiskList.length)})</div>
+                <!--<lightning:select class="slds-hide " aura:id="selectDecAccRisk" name="selectDecAccRisk" label="Filter by Owner :" value="{!v.selectedValueDecAccRisk}" onchange="{!c.onSelectValDecAccRisk}">
+                    <option text="Show All" value=""/>
+                    <aura:iteration items="{!v.decAccRiskOwnerList}" var="option">
+                        <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                    </aura:iteration>
+                </lightning:select>-->
+                <div aura:id="dymDivDecAccRiskMaster">
+                    <aura:if isTrue="{!v.decAccRiskList.length != 0}">
+                        <aura:iteration items="{!v.decAccRiskList}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!lessthan(idx,10)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li> 
+                                </ul>
+                            </aura:if>  
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{!greaterthan(v.decAccRiskList.length,10)}">
+                        <a><div onclick="{!c.onShowMoreDecRiskAcc}" class="slds-p-left_large showMoreFont">{!v.showMoreDecRiskAcc}</div></a>
+                    </aura:if>
+                    <div aura:id="dymDivDecAccRisk">
+                        <aura:iteration items="{!v.decAccRiskList}" var="acc" indexVar="idx">
+                            <aura:if isTrue="{!greaterthan(idx,9)}">
+                                <ul class="slds-list_dotted">
+                                    <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li>
+                                    
+                                </ul>
+                            </aura:if>
+                        </aura:iteration>
+                    </div>
+                </div>
+                <div aura:id="dymDivDecAccRiskFilter">
+                    <aura:if isTrue="{!v.newArrDecAccRiskList.length != 0}">
+                        <aura:iteration items="{!v.newArrDecAccRiskList}" var="acc" indexVar="idx">
+                            <ul class="slds-list_dotted">
+                                <li><a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank" title="{!acc.Name}">{!acc.Name}</a></li>  
+                            </ul>
+                        </aura:iteration>
+                        <aura:set attribute="else"><i><div class="noRecFont">{!v.noRecords}</div></i></aura:set>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:layout>
+    </div>
+    
+    <div class="slds-page-header" style="cursor: pointer;background-color : #abebc6 ;" onclick="{!c.sectionThree}">
+        <section class="slds-clearfix">
+            <div class="slds-float--left">
+                <lightning:icon class="slds-hide" aura:id="articleThree" iconName="utility:chevronright" size="x-small" alternativeText="Indicates add"/>
+                <lightning:icon class="slds-show" aura:id="articleThree" iconName="utility:chevrondown" size="x-small" alternativeText="Indicates dash"/>
+            </div>
+            <div class="slds-m-left--large"><!--<lightning:icon class="slds-m-rightxx-small" iconName="custom:custom109" size="small" />--><b>{!v.headers[2]}</b></div>
+        </section>
+    </div>
+    
+    <div class="slds-p-around--medium" aura:id="articleThree" style="background-color : #FFFFFF;">
+        Recommended actions from AI???
+    </div>
+    
+</aura:component>

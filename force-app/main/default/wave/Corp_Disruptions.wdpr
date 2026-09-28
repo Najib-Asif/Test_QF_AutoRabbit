@@ -1,0 +1,465 @@
+{
+  "version" : "62.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "OwnerId", "Name", "CreatedDate", "Affected__c", "Cabin__c", "Event__c", "FF_Tier__c", "FirstName__c", "FlightNumber__c", "FrequentFlyerNumber__c", "FrequentFlyerTier__c", "LastName__c", "PNR__c", "Passenger__c", "Contact_First_Name__c", "Contact_Last_Name__c", "ArrivalPort__c", "DeparturePort__c", "Departure_Port_Name__c", "Special_Request__c", "CORP_ID__c", "SME_ID__c", "TECH_Tier_Sortable__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Affected_Passenger__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Affected_Passenger__c"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "FILTER0" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "SME_ID__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        }, {
+          "type" : "TEXT",
+          "field" : "CORP_ID__c",
+          "operator" : "IS_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "FILTER1" : {
+      "action" : "filter",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "filterExpressions" : [ {
+          "type" : "TEXT",
+          "field" : "CORP_ID__c",
+          "operator" : "IS_NOT_NULL",
+          "operands" : [ ]
+        } ]
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "FILTER0", "LOAD_DATASET1" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "SME_ID__c" ],
+        "rightQualifier" : "SMEAccount",
+        "rightKeys" : [ "ABN_Tax_Reference__c" ]
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Type", "RecordTypeId", "ParentId", "BillingState", "BillingCountry", "BillingCountryCode", "OwnerId", "ABN_Tax_Reference__c", "Active__c", "Aquire__c", "Contracted__c", "Qantas_Corporate_Identifier__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Account",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Account"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "FILTER1", "LOAD_DATASET2" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "CORP_ID__c" ],
+        "rightQualifier" : "QCIAccount",
+        "rightKeys" : [ "Qantas_Corporate_Identifier__c" ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Type", "RecordTypeId", "ParentId", "BillingState", "BillingCountry", "BillingCountryCode", "Industry", "AnnualRevenue", "NumberOfEmployees", "OwnerId", "AccountSource", "ABN_Tax_Reference__c", "Active__c", "Aquire_Company_Name__c", "Aquire_Eligibility_f__c", "Aquire_Eligibility_l__c", "Aquire_Entity_Type__c", "Aquire_Override__c", "Aquire__c", "Contract_Commencement_Date__c", "Contract_Expiry_Date__c", "Contracted_Previously__c", "Contracted__c", "Country_f__c", "Membership_Number__c", "Qantas_Corporate_Identifier__c", "Airline_Level__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Account",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Account"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "LOAD_DATASET3" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "SMEAccount.OwnerId" ],
+        "rightQualifier" : "SME-AM",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET4" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "QCIAccount.OwnerId" ],
+        "rightQualifier" : "CORP-AM",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "User",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "User"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "APPEND0" : {
+      "action" : "appendV2",
+      "sources" : [ "JOIN3", "JOIN2" ],
+      "parameters" : {
+        "fieldMappings" : [ {
+          "top" : "Id",
+          "bottom" : "Id"
+        }, {
+          "top" : "OwnerId",
+          "bottom" : "OwnerId"
+        }, {
+          "top" : "Name",
+          "bottom" : "Name"
+        }, {
+          "top" : "CreatedDate",
+          "bottom" : "CreatedDate"
+        }, {
+          "top" : "Affected__c",
+          "bottom" : "Affected__c"
+        }, {
+          "top" : "Cabin__c",
+          "bottom" : "Cabin__c"
+        }, {
+          "top" : "Event__c",
+          "bottom" : "Event__c"
+        }, {
+          "top" : "FF_Tier__c",
+          "bottom" : "FF_Tier__c"
+        }, {
+          "top" : "FirstName__c",
+          "bottom" : "FirstName__c"
+        }, {
+          "top" : "FlightNumber__c",
+          "bottom" : "FlightNumber__c"
+        }, {
+          "top" : "FrequentFlyerNumber__c",
+          "bottom" : "FrequentFlyerNumber__c"
+        }, {
+          "top" : "FrequentFlyerTier__c",
+          "bottom" : "FrequentFlyerTier__c"
+        }, {
+          "top" : "LastName__c",
+          "bottom" : "LastName__c"
+        }, {
+          "top" : "PNR__c",
+          "bottom" : "PNR__c"
+        }, {
+          "top" : "Passenger__c",
+          "bottom" : "Passenger__c"
+        }, {
+          "top" : "Contact_First_Name__c",
+          "bottom" : "Contact_First_Name__c"
+        }, {
+          "top" : "Contact_Last_Name__c",
+          "bottom" : "Contact_Last_Name__c"
+        }, {
+          "top" : "ArrivalPort__c",
+          "bottom" : "ArrivalPort__c"
+        }, {
+          "top" : "DeparturePort__c",
+          "bottom" : "DeparturePort__c"
+        }, {
+          "top" : "Departure_Port_Name__c",
+          "bottom" : "Departure_Port_Name__c"
+        }, {
+          "top" : "Special_Request__c",
+          "bottom" : "Special_Request__c"
+        }, {
+          "top" : "CORP_ID__c",
+          "bottom" : "CORP_ID__c"
+        }, {
+          "top" : "SME_ID__c",
+          "bottom" : "SME_ID__c"
+        }, {
+          "top" : "TECH_Tier_Sortable__c",
+          "bottom" : "TECH_Tier_Sortable__c"
+        }, {
+          "top" : "QCIAccount.Id",
+          "bottom" : "SMEAccount.Id"
+        }, {
+          "top" : "QCIAccount.Name",
+          "bottom" : "SMEAccount.Name"
+        }, {
+          "top" : "QCIAccount.Type",
+          "bottom" : "SMEAccount.Type"
+        }, {
+          "top" : "QCIAccount.RecordTypeId",
+          "bottom" : "SMEAccount.RecordTypeId"
+        }, {
+          "top" : "QCIAccount.ParentId",
+          "bottom" : "SMEAccount.ParentId"
+        }, {
+          "top" : "QCIAccount.BillingState",
+          "bottom" : "SMEAccount.BillingState"
+        }, {
+          "top" : "QCIAccount.BillingCountry",
+          "bottom" : "SMEAccount.BillingCountry"
+        }, {
+          "top" : "QCIAccount.BillingCountryCode",
+          "bottom" : "SMEAccount.BillingCountryCode"
+        }, {
+          "top" : "QCIAccount.OwnerId",
+          "bottom" : "SMEAccount.OwnerId"
+        }, {
+          "top" : "QCIAccount.ABN_Tax_Reference__c",
+          "bottom" : "SMEAccount.ABN_Tax_Reference__c"
+        }, {
+          "top" : "QCIAccount.Active__c",
+          "bottom" : "SMEAccount.Active__c"
+        }, {
+          "top" : "QCIAccount.Aquire__c",
+          "bottom" : "SMEAccount.Aquire__c"
+        }, {
+          "top" : "QCIAccount.Contracted__c",
+          "bottom" : "SMEAccount.Contracted__c"
+        }, {
+          "top" : "QCIAccount.Qantas_Corporate_Identifier__c",
+          "bottom" : "SMEAccount.Qantas_Corporate_Identifier__c"
+        }, {
+          "top" : "CORP-AM.Id",
+          "bottom" : "SME-AM.Id"
+        }, {
+          "top" : "CORP-AM.Name",
+          "bottom" : "SME-AM.Name"
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "APPEND0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Flight event with Accounts",
+          "name" : "Paxrecordswithcorp"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "Affected_Passenger__c",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "FILTER0" : {
+        "label" : "SME Bookings",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 112,
+        "left" : 252
+      },
+      "FILTER1" : {
+        "label" : "Corporate Bookings",
+        "description" : "",
+        "type" : "FILTER",
+        "top" : 252.7,
+        "left" : 252
+      },
+      "JOIN0" : {
+        "label" : "SME Join",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Account",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Corp Join",
+        "description" : "",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 392
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Account",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 532
+      },
+      "LOAD_DATASET3" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN3" : {
+        "label" : "Join 3",
+        "type" : "JOIN",
+        "top" : 252,
+        "left" : 532
+      },
+      "LOAD_DATASET4" : {
+        "label" : "User",
+        "type" : "LOAD_DATASET",
+        "top" : 672,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "APPEND0" : {
+        "label" : "Append 0",
+        "type" : "APPEND",
+        "top" : 252,
+        "left" : 672
+      },
+      "OUTPUT0" : {
+        "label" : "Corp disruptions",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 812
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER0"
+    }, {
+      "source" : "LOAD_DATASET0",
+      "target" : "FILTER1"
+    }, {
+      "source" : "FILTER0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN0"
+    }, {
+      "source" : "FILTER1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN3",
+      "target" : "APPEND0"
+    }, {
+      "source" : "JOIN2",
+      "target" : "APPEND0"
+    }, {
+      "source" : "APPEND0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

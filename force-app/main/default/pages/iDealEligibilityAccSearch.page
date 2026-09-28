@@ -1,0 +1,106 @@
+<!-- 
+    Description: Enables to search the Associated person by giving the Frequent Flyer Number as input.
+                 If any record found with that FF# we can add that as Contact.
+ -->
+
+<apex:page standardController="Account" tabStyle="Account" >
+<apex:variable var="renderMessage" value="false" />
+<!--
+<apex:variable var="v1" value="'{!(Account.Agency_Info__r)}'" />
+<apex:variable var="v2" value="'[]'" />
+
+<style>
+      .search{
+          font-size:10pt;
+      }
+  </style>
+  -->
+  <apex:form >       
+    <apex:pageBlock >
+    
+        <apex:pageBlockSection id="results" columns="1">
+        
+          <!--   <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Has active contract &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{!Account.Contracted__c}"/>
+                <apex:image value="/img/func_icons/remove12_on.gif" height="20" rendered="{!!Account.Contracted__c}"><apex:variable var="renderMessage" value="true" /> </apex:image>
+            </apex:outputText> --> 
+            
+            <!-- CRM 2004 - To check whether the account Has Active/Has Previously contracted/Future- Dated Contracted -->
+            
+           <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Has previously-active/active/future-dated contract &nbsp;<apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{! $CurrentPage.parameters.count4 != '0'}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{! $CurrentPage.parameters.count4 == '0' }"><apex:variable var="renderMessage" value="true" /></apex:image>&nbsp;&nbsp;
+            </apex:outputText>          
+            
+            <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Has QCI &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{!!ISBLANK( Account.Qantas_Corporate_Identifier__c )}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="20" rendered="{!ISBLANK( Account.Qantas_Corporate_Identifier__c )}"><apex:variable var="renderMessage" value="true" /> </apex:image>&nbsp;&nbsp;
+            </apex:outputText>
+            
+            <!--<apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Evaluating Corporate Deal flag &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{!Account.Dealing_Flag__c == 'Y'}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="20" rendered="{!NOT(Account.Dealing_Flag__c == 'Y')}"/>&nbsp;&nbsp;
+            </apex:outputText>
+                       
+            <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Aquire override flag &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{!Account.Aquire_Override__c == 'N'}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{!NOT(Account.Aquire_Override__c == 'N')}"/>&nbsp;&nbsp;
+            </apex:outputText>-->
+            
+           <!-- <apex:outputText rendered="{!Account.recordtype.na  me=='Customer Account'}">
+                Billing Address Populated &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{! NOT(OR(ISBLANK( Account.BillingStreet), ISBLANK( Account.BillingCity), ISBLANK( Account.BillingCountry), ISBLANK( Account.BillingState),
+                ISBLANK( Account.BillingPostalCode)))}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{! OR(ISBLANK( Account.BillingStreet), ISBLANK( Account.BillingCity), ISBLANK( Account.BillingCountry), ISBLANK( Account.BillingState),
+                ISBLANK( Account.BillingPostalCode))}"/>&nbsp;&nbsp;
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Shipping Address Populated &nbsp;<apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{! NOT(OR(ISBLANK(Account.ShippingStreet), ISBLANK(Account.ShippingCity), ISBLANK( Account.ShippingCountry ), ISBLANK( Account.ShippingState ),
+                ISBLANK(Account.ShippingPostalCode)))}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{! OR(ISBLANK(Account.ShippingStreet), ISBLANK(Account.ShippingCity), ISBLANK( Account.ShippingCountry ), ISBLANK( Account.ShippingState ),
+                ISBLANK(Account.ShippingPostalCode))}"/>&nbsp;&nbsp;
+            </apex:outputText>-->
+            
+            <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Has TMC info Distribution (ex Agent's email) &nbsp;<apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{! $CurrentPage.parameters.count != '0'}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{! $CurrentPage.parameters.count == '0' }"><apex:variable var="renderMessage" value="true" /> </apex:image>&nbsp;&nbsp;
+            </apex:outputText>
+                      
+            
+            <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Has Travel manager with PCC &nbsp;<apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{! $CurrentPage.parameters.count3 != '0'}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{! $CurrentPage.parameters.count3 == '0' }"><apex:variable var="renderMessage" value="true" /> </apex:image>&nbsp;&nbsp;
+            </apex:outputText>
+            
+            
+          <!--  <apex:outputText rendered="{!Account.recordtype.name=='Customer Account'}">
+                Evaluating Not modified by Data MigrationUser (or) Integration User &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{! NOT(OR(Account.LastModifiedBy.Name == 'Data MigrationUser', Account.LastModifiedBy.Name == 'Integration User'))}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{! OR(Account.LastModifiedBy.Name == 'Data MigrationUser', Account.LastModifiedBy.Name == 'Integration User')}"><apex:variable var="renderMessage" value="true" /> </apex:image>&nbsp;&nbsp;
+            </apex:outputText>-->
+          
+          <!-- Exceptions related to Agency Account-->
+            <apex:outputText rendered="{!Account.recordtype.name=='Agency Account'}">
+                Has QIC &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{!!ISBLANK( Account.Qantas_Industry_Centre_ID__c )}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{!ISBLANK( Account.Qantas_Industry_Centre_ID__c )}"><apex:variable var="renderMessage" value="true" /> </apex:image>&nbsp;&nbsp;
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!Account.recordtype.name=='Agency Account'}">
+                Has Account Tier &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{!!ISBLANK( Account.Customer_Category__c )}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{!ISBLANK( Account.Customer_Category__c )}"><apex:variable var="renderMessage" value="true" /> </apex:image>&nbsp;&nbsp;
+            </apex:outputText>
+            
+             <apex:outputText rendered="{!Account.recordtype.name=='Agency Account'}">
+                Has TMC info with PCC &nbsp; <apex:image value="/img/func_icons/util/checkmark16.gif" height="25" rendered="{! $CurrentPage.parameters.count2 != '0'}"/>&nbsp;
+                <apex:image value="/img/func_icons/remove12_on.gif" height="25" rendered="{! $CurrentPage.parameters.count2 == '0'}"><apex:variable var="renderMessage" value="true" /> </apex:image>&nbsp;&nbsp;
+            </apex:outputText>
+           
+            <apex:outputText rendered="{!renderMessage}">
+            Please arrange for the update of relevant information else the account may not qualify to flow through to ideal. <br/>Please re-validate any time post updates to the account by clicking the ideal check button.
+            <br/><br/></apex:outputText>
+            
+            <apex:outputLink value="/{!Account.Id}">Back to Account</apex:outputLink>
+            
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

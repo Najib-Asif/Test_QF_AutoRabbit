@@ -1,0 +1,29 @@
+<!--
+15 Nov 2021   Pradnya Unde            CRM-5005        New tab on customer banner (displayed on both case and customer contact). New tab name 'Promotions'. Fields to be listed under the tab:
+                                                      Vaccine Reward Type,Qantas Promo Code,Code Expiry Date
+
+-->
+<aura:component controller="QCC_CustomerDetailController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="promodetails" type="Object" default="{ RewardType: 'reward type', PromoCode: 'Disc20', ExpDate: 'Dec2021'}" />
+
+    <lightning:layout horizontalAlign="space" multipleRows="true">
+        <lightning:layoutItem size="6" flexibility="auto" padding="horizontal-small">
+            <ul class="slds-list--horizontal slds-has-inline-block-links--space UISpacing">
+                <li class="slds-text-color_weak LISpacing"> Vaccine Reward Type:  </li>
+                <li class="LISpacing" title="{!v.promodetails.promoType}"><strong>{!v.promodetails.promoType}</strong></li>
+           </ul>
+            <ul class="slds-list--horizontal slds-has-inline-block-links--space UISpacing">
+                <li class="slds-text-color_weak LISpacing"> Qantas Promo Code:  </li>
+                <li class="LISpacing" title="{!v.promodetails.promoCode}"><strong>{!v.promodetails.promoCode}</strong></li>
+               
+            </ul>
+            <ul class="slds-list--horizontal slds-has-inline-block-links--space UISpacing">
+                <li class="slds-text-color_weak LISpacing"> Code Expiry Date: </li>
+                <li class="LISpacing" title="{!v.promodetails.promoExpiryDate}"><strong>{!v.promodetails.promoExpiryDate}</strong></li>
+            </ul>
+        </lightning:layoutItem>
+            
+    </lightning:layout> 	
+</aura:component>

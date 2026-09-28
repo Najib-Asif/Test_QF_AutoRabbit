@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_8124744</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Activity$CreatedBy</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>ANTHONY MATAHLIJA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>BRONTE HOLMES</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CAMERON FRANKLIN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CHRIS BOOTH</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CHRISTOPHER MARDOQUIO</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DANIEL HOVAN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DAVID CANT</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DAMIEN TOWN</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>RICHARD FOX</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>STEPHAN VAN ARNHEM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>TONY BURNS</sourceValue>
+            </sourceValues>
+            <value>Yosu Uriguen</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PAUL FARRELL</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DIANE ANSTEY</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Andres Fernandez</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CRAIG MCCRACKEN</sourceValue>
+            </sourceValues>
+            <value>Dean Howarth</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>DAVID DICKSON</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>ASHLEY HOWELL</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>GARY COWLISHAW</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>HENRY BARRINGTON</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Nick Duggan</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>ANTONIETTA ESPOSITO</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>CLAIRE PAISLEY</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>DREW BEAMES</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>JOHN ISSAAKIDIS</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>JOSHUA BIRD</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Mark Wong</sourceValue>
+            </sourceValues>
+            <value>Ash Howell</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <aggregate>Sum</aggregate>
+            <axisBinding>y</axisBinding>
+            <column>Activity$Number_of_Activities__c</column>
+        </chartSummaries>
+        <chartType>Donut</chartType>
+        <enableHoverLabels>true</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>Activity$CreatedBy</groupingColumn>
+        <legendPosition>Bottom</legendPosition>
+        <location>CHART_TOP</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>true</showPercentage>
+        <showTotal>true</showTotal>
+        <showValues>false</showValues>
+        <size>Huge</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>Activity$Subject</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Activity$Number_of_Activities__c</field>
+    </columns>
+    <columns>
+        <field>Activity$CreatedDate</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>All activity filtered by Leadership team</description>
+    <filter>
+        <criteriaItems>
+            <column>Activity$CreatedBy</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Ash Howel,Kate Sherwood,Angelina Sobczyk,Jaclyn Snell,Neelum Prakash,Jane Yates,Oronzo Miccoli,David Cant,nick vanderwoude,paul; farrel,tim davern,darren batty,elsa d&apos;alessio,tim o&apos;callahan,julien barry,rick sawicki</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Activity$CreatedBy</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <aggregateType>RowCount</aggregateType>
+        <dateGranularity>Day</dateGranularity>
+        <field>Activity$Task_type__c</field>
+        <sortByName>RowCount</sortByName>
+        <sortOrder>Asc</sortOrder>
+        <sortType>Aggregate</sortType>
+    </groupingsDown>
+    <name>Activity Report - Last 7 days Leaders</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activities__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Activity$CreatedDate</dateColumn>
+        <interval>INTERVAL_LAST7</interval>
+    </timeFrameFilter>
+</Report>

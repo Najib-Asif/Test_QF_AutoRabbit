@@ -1,0 +1,284 @@
+{
+  "version" : "58.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "CaseId", "KnowledgeArticleId", "KnowledgeArticleVersionId", "CreatedById", "CreatedDate", "ArticleVersionNumber" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CaseArticle",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CaseArticle"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "LOAD_DATASET1" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "IsDeleted", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp", "ArticleNumber", "ArchivedDate", "ArchivedById", "FirstPublishedDate", "LastPublishedDate", "CaseAssociationCount", "LastViewedDate", "LastReferencedDate", "MigratedToFromArticle", "TotalViewCount" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__ka",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__ka"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET6" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "CreatedById" ],
+        "rightQualifier" : "User",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "JOIN0", "LOAD_DATASET1" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Knowledge__ka.ArchivedById", "Knowledge__ka.ArchivedDate", "Knowledge__ka.CreatedById", "Knowledge__ka.CreatedDate", "Knowledge__ka.FirstPublishedDate", "Knowledge__ka.IsDeleted", "Knowledge__ka.LastModifiedById", "Knowledge__ka.LastModifiedDate", "Knowledge__ka.LastPublishedDate", "Knowledge__ka.LastReferencedDate", "Knowledge__ka.LastViewedDate", "Knowledge__ka.MigratedToFromArticle", "Knowledge__ka.SystemModstamp", "Knowledge__ka.TotalViewCount", "User.Alias", "User.BadgeText", "User.City", "User.CommunityNickname", "User.CompanyName", "User.Country", "User.CountryCode", "User.CurrencyIsoCode", "User.DefaultCurrencyIsoCode", "User.DelegatedApproverId", "User.Department", "User.Division", "User.Email", "User.EmailEncodingKey", "User.EmailPreferencesAutoBcc", "User.EmailPreferencesAutoBccStayInTouch", "User.EmailPreferencesStayInTouchReminder", "User.EmployeeNumber", "User.Fax", "User.FirstName", "User.GeocodeAccuracy", "User.LanguageLocaleKey", "User.LastName", "User.Latitude", "User.LocaleSidKey", "User.Longitude", "User.ManagerId", "User.MobilePhone", "User.Phone", "User.PostalCode", "User.ProfileId", "User.ReceivesAdminInfoEmails", "User.ReceivesInfoEmails", "User.SenderEmail", "User.SenderName", "User.Signature", "User.State", "User.StateCode", "User.StayInTouchNote", "User.StayInTouchSignature", "User.StayInTouchSubject", "User.Street", "User.TimeZoneSidKey", "User.Title", "User.UserRoleId", "User.UserType", "User.Username" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "KnowledgeArticleId" ],
+        "rightQualifier" : "Knowledge__ka",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "JOIN1", "LOAD_DATASET4" ],
+      "schema" : {
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ "Case.AccountId", "Case.Aircraft_Type_Code__c", "Case.CCC_R1_CCAT_Type__c", "Case.Case_Number__c", "Case.Case_Status__c", "Case.Category__c", "Case.ClosedDate", "Case.ContactId", "Case.Contact_Fullname__c", "Case.CreatedDate", "Case.Created_by_Role__c", "Case.Description", "Case.Frequent_Flyer_Number__c", "Case.Frequent_Flyer_Tier__c", "Case.Group__c", "Case.IsClosed", "Case.IsEscalated", "Case.Is_CCAT_User__c", "Case.Is_QCC_Case__c", "Case.LastModifiedDate", "Case.Origin", "Case.OwnerId", "Case.ParentId", "Case.Priority", "Case.Reason", "Case.RecordTypeId", "Case.Record_Type__c", "Case.Recovery_Quantity__c", "Case.Recovery_Value__c", "Case.Status", "Case.Sub_Category__c", "Case.Sub_Type_1__c", "Case.Sub_Type_2__c", "Case.Type" ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LEFT_OUTER",
+        "leftKeys" : [ "CaseId" ],
+        "rightQualifier" : "Case",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Booking_PNR__c", "Id", "MasterRecordId", "CaseNumber", "ContactId", "AccountId", "ParentId", "Type", "RecordTypeId", "Status", "Reason", "Origin", "Description", "IsClosed", "ClosedDate", "OwnerId", "CreatedDate", "LastModifiedDate", "Frequent_Flyer_Number__c", "Contact_Fullname__c", "Created_by_Role__c", "Category__c", "Frequent_Flyer_Tier__c", "Group__c", "OwnerName__c", "Record_Type__c", "Sub_Category__c", "Is_QCC_Case__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Case",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Case"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "JOIN3" : {
+      "action" : "join",
+      "sources" : [ "JOIN2", "LOAD_DATASET5" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "LOOKUP",
+        "leftKeys" : [ "KnowledgeArticleVersionId" ],
+        "rightQualifier" : "Knowledge_",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET5" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "KnowledgeArticleId", "PublishStatus", "VersionNumber", "IsLatestVersion", "Title", "UrlName", "ArticleNumber" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Knowledge__kav",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Knowledge__kav"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN3" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Case article attaches",
+          "name" : "Case_article_attaches",
+          "folderName" : "Knowledge_Articles_and_Cases_Attach"
+        },
+        "measuresToCurrencies" : [ ]
+      }
+    },
+    "LOAD_DATASET6" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "ProfileId", "UserRoleId", "FirstName", "IsActive", "UserRole.ParentRoleId", "Profile.Name", "UserRole.Name", "Name", "UserRole.Id", "Profile.Name_bucket", "Profile.Id", "Id", "LastName", "UserRole.Name_bucket", "UserRole.DeveloperName", "Id_formula_formula_formula_bucket" ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Basic User Master",
+          "name" : "Basic_User_Master"
+        },
+        "sampleDetails" : {
+          "type" : "TopN",
+          "sortBy" : [ ]
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "CaseArticle",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET1" : {
+        "label" : "Knowledge__ka",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 252,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Join 0",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 252
+      },
+      "JOIN1" : {
+        "label" : "Join 1",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 392
+      },
+      "JOIN2" : {
+        "label" : "Join 2",
+        "type" : "JOIN",
+        "top" : 112,
+        "left" : 532
+      },
+      "LOAD_DATASET4" : {
+        "label" : "Case",
+        "type" : "LOAD_DATASET",
+        "top" : 532,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN3" : {
+        "label" : "Join 3",
+        "type" : "JOIN",
+        "top" : 252.39999999999998,
+        "left" : 672
+      },
+      "LOAD_DATASET5" : {
+        "label" : "Knowledge__kav",
+        "type" : "LOAD_DATASET",
+        "top" : 392,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "Case article attaches",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 252,
+        "left" : 812
+      },
+      "LOAD_DATASET6" : {
+        "label" : "Basic User Master",
+        "type" : "LOAD_DATASET",
+        "top" : 252,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET1",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "JOIN3"
+    }, {
+      "source" : "LOAD_DATASET5",
+      "target" : "JOIN3"
+    }, {
+      "source" : "JOIN3",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET6",
+      "target" : "JOIN0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

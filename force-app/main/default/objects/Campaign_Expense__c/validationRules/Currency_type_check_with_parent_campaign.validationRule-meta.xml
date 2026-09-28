@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Currency_type_check_with_parent_campaign</fullName>
+    <active>true</active>
+    <description>This is to ensure user selects the currency same as specified on associated parent campaign.</description>
+    <errorConditionFormula>(NOT(ISBLANK(Campaign__c)) &amp;&amp; TEXT(Campaign__r.CurrencyIsoCode) &lt;&gt; TEXT(CurrencyIsoCode))</errorConditionFormula>
+    <errorDisplayField>CurrencyIsoCode</errorDisplayField>
+    <errorMessage>Please select the appropriate currency which is specified on parent campaign.</errorMessage>
+</ValidationRule>

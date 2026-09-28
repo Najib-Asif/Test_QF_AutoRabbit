@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Care_Global_Events</fullName>
+    <columns>RECORDTYPE</columns>
+    <columns>NAME</columns>
+    <columns>FlightNumber__c</columns>
+    <columns>ScheduledArrDateTime__c</columns>
+    <columns>Estimated_Arrival_UTC__c</columns>
+    <columns>ActualArriDateTime__c</columns>
+    <columns>DeparturePort__c</columns>
+    <columns>ArrivalPort__c</columns>
+    <columns>DelayFailureCode__c</columns>
+    <columns>Non_Delay_Failure_Code__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Event__c.GlobalEvent</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Assigned</value>
+    </filters>
+    <label>CCC Global Events</label>
+    <queue>QCC_EventsAssigned</queue>
+    <sharedTo>
+        <group>QCC_CCPublicGroup</group>
+    </sharedTo>
+</ListView>

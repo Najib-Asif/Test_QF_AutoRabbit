@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Increment_Mrkt_Share_Indicator__c</fullName>
+    <externalId>false</externalId>
+    <formula>if
+(
+RecordType.DeveloperName ==&quot;Currently_Not_In_Contract&quot;,
+	if
+	(
+	Estimated_Increment_Market_Share__c ==0, IMAGE(&quot;/resource/Increment_Nochange&quot;, &quot;No Change&quot;) ,
+	if
+	(
+	Estimated_Increment_Market_Share__c &lt;0, IMAGE(&quot;/resource/Increment_Down&quot;, &quot;Down&quot;) ,
+	if
+	(
+	Estimated_Increment_Market_Share__c &gt;0, IMAGE(&quot;/resource/Increment_up&quot;, &quot;Up&quot;) ,&quot;&quot;
+	)
+	)
+	),
+
+
+if
+(
+RecordType.DeveloperName ==&quot;Currently_In_Contract&quot;,
+	if
+	(
+	Incremental_Market_Share__c ==0, IMAGE(&quot;/resource/Increment_Nochange&quot;, &quot;No Change&quot;) ,
+	if
+	(
+	Incremental_Market_Share__c &lt;0, IMAGE(&quot;/resource/Increment_Down&quot;, &quot;Down&quot;) ,
+	if
+	(
+	Incremental_Market_Share__c &gt;0, IMAGE(&quot;/resource/Increment_up&quot;, &quot;Up&quot;) ,&quot;&quot;
+	)
+	)
+	),&quot;&quot;
+)
+)</formula>
+    <label>Market Share Trend</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

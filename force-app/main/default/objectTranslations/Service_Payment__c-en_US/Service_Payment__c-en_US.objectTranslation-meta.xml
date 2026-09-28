@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Service Payment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Service Payments</value>
+    </caseValues>
+    <recordTypes>
+        <label><!-- Service Request --></label>
+        <name>Service_Request</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Payment total amount should be match work order total price --></errorMessage>
+        <name>QAC_AmountCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>
+            <!-- For Payment status to be paid, 
+Workorder cannot be in closed status -->
+        </errorMessage>
+        <name>QAC_PaymentStatusCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Once Payment status is Paid, Payment status and EMD Number cannot be modified --></errorMessage>
+        <name>QAC_PreventModifyFields</name>
+    </validationRules>
+</CustomObjectTranslation>

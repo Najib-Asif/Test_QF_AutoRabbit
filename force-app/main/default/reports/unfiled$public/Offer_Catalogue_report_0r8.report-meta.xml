@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.OfferCode__c</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.Account_Application__c</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.Offer_Audience__c</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.Offer_Start_Date__c</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.Offer_End_Date__c</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.OfferStatus__c</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.Point_of_Sale_Country__c</field>
+    </columns>
+    <columns>
+        <field>Offer_Catalogue__c.Itinerary__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <format>Tabular</format>
+    <name>Offer Catalogue report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Offer_Catalogue__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Offer_Catalogue__c.Offer_End_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

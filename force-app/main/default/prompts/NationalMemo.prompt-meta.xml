@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>National Memo</masterLabel>
+    <promptVersions>
+        <actionButtonLabel>View National Memo</actionButtonLabel>
+        <actionButtonLink>https://qantas.lightning.force.com/lightning/r/Knowledge__kav/ka0Mo000000CjJ7IAK/view</actionButtonLink>
+        <body>&lt;p&gt;Please read the National Memo for latest update relating to the Cyber Incident&lt;/p&gt;</body>
+        <customApplication>Qantas_Customer_Connect_20</customApplication>
+        <delayDays>1</delayDays>
+        <description>Pop Up for QCC users to read the National Memo</description>
+        <dismissButtonLabel>OK</dismissButtonLabel>
+        <displayPosition>TopCenter</displayPosition>
+        <displayType>FloatingPanel</displayType>
+        <endDate>2025-07-02</endDate>
+        <experience>Lightning</experience>
+        <imageAltText>koala image</imageAltText>
+        <imageLocation>Left</imageLocation>
+        <isPublished>true</isPublished>
+        <masterLabel>National Memo</masterLabel>
+        <publishedDate>2025-07-02</publishedDate>
+        <shouldDisplayActionButton>true</shouldDisplayActionButton>
+        <shouldIgnoreGlobalDelay>true</shouldIgnoreGlobalDelay>
+        <startDate>2025-07-02</startDate>
+        <themeColor>Theme1</themeColor>
+        <themeSaturation>Dark</themeSaturation>
+        <timesToDisplay>2</timesToDisplay>
+        <title>National Memo Update</title>
+        <uiFormulaRule>
+            <booleanFilter>1 OR 2 OR 3</booleanFilter>
+            <criteria>
+                <leftValue>{!$User.Profile.Key}</leftValue>
+                <operator>EQUAL</operator>
+                <rightValue>custom_qantas cc operational manager</rightValue>
+            </criteria>
+            <criteria>
+                <leftValue>{!$User.Profile.Key}</leftValue>
+                <operator>EQUAL</operator>
+                <rightValue>custom_qantas cc consultant</rightValue>
+            </criteria>
+            <criteria>
+                <leftValue>{!$User.Profile.Key}</leftValue>
+                <operator>EQUAL</operator>
+                <rightValue>custom_qantas cc team lead</rightValue>
+            </criteria>
+        </uiFormulaRule>
+        <userAccess>Everyone</userAccess>
+        <userProfileAccess>SpecificProfiles</userProfileAccess>
+        <versionNumber>1</versionNumber>
+    </promptVersions>
+</Prompt>

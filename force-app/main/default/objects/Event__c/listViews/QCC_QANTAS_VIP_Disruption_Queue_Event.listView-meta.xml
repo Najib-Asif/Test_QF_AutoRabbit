@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_QANTAS_VIP_Disruption_Queue_Event</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>FlightNumber__c</columns>
+    <columns>DeparturePort__c</columns>
+    <columns>ArrivalPort__c</columns>
+    <columns>Scheduled_Departure_Date_Time__c</columns>
+    <columns>ScheduledArrDateTime__c</columns>
+    <columns>DelayFailureCode__c</columns>
+    <columns>QCC_Number_of_VIPs__c</columns>
+    <columns>QCC_Number_of_SSUs__c</columns>
+    <columns>QCC_Number_of_VIP_with_DOM_IN_CONX__c</columns>
+    <columns>QCC_Number_of_VIP_with_DOM_OUT_CONX__c</columns>
+    <columns>QCC_Number_of_VIP_with_INTL_IN_CONX__c</columns>
+    <columns>QCC_Number_of_VIP_with_INTL_OUT_CONX__c</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Closed</value>
+    </filters>
+    <label>QANTAS VIP Heads Up Queue</label>
+    <queue>QCC_QANTAS_VIP_Heads_Up_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

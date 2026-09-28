@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>SurveySubject$Survey</field>
+    </columns>
+    <columns>
+        <field>SurveySubject.SurveyResponses.SurveyQuestionResponses$Invitation</field>
+    </columns>
+    <columns>
+        <field>SurveySubject$User.Account.Owner</field>
+    </columns>
+    <columns>
+        <field>SurveySubject$User.Account.Name</field>
+    </columns>
+    <columns>
+        <field>SurveySubject$LastModifiedBy</field>
+    </columns>
+    <columns>
+        <field>SurveySubject.SurveyResponses$LastModifiedBy</field>
+    </columns>
+    <columns>
+        <field>SurveySubject.SurveyResponses.SurveyQuestionResponses$LastModifiedBy</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Count of reponses</description>
+    <filter>
+        <criteriaItems>
+            <column>SurveySubject$Survey</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>2025 Travel Sentiment</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>SurveySubject$ResponseStatus</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Travel sentiment</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_With_Survey_Invitations__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>SurveySubject$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global" controller="QL_FreightRecordtypeAssignment">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="options" type="String[]" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="selectedrecType" type="String" default=""/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <div class="slds-grid slds-grid_pull-padded-medium slds-wrap slds-grid_align-center slds-align_absolute-center" style="text-align:center; background-color: white; padding-top: 2em;">
+        <div class="slds-form-element" style="width: 57px; margin: 1em;">Type</div>
+        <div class="slds-form-element__control" style="margin-top: -19px;">
+            <lightning:select aura:id="recTypeSelect" value="{!v.selectedrecType}" class="select-auto-width">
+                <option value="">-- Please select --</option>
+                <aura:iteration items="{!v.options}" var="recType">
+                    <option value="{!recType}" text="{!recType}"></option>
+                </aura:iteration>
+            </lightning:select>
+        </div>
+        <div class="slds-form-element__control" style="text-align:left; margin: 1em;">
+            <div class="slds-button-group" role="group">
+                <div class="slds-form-element" data-aura-rendered-by="4977:0">
+                    <label class="slds-form-element__label" for="4911:0" data-aura-rendered-by="4917:0">
+                        <span class="" data-aura-rendered-by="4919:0"></span></label>
+                    <lightning:button variant="brand" label="Assign RecordType" onclick="{!c.doAssign}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

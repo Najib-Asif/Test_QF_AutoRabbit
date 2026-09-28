@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DRA_Queue</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>QCI_f__c</columns>
+    <columns>Due_Date__c</columns>
+    <columns>CASES.TYPE</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>On_hold_Reason__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.PRIORITY</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.DRA_Request</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Open,In Progress,On Hold</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>equals</operation>
+        <value>DRA Amendment,DRA Cancellation,New DRA</value>
+    </filters>
+    <filters>
+        <field>OWNER_NAME</field>
+        <operation>contains</operation>
+        <value>DRA Queue,Donna Hill,Stefanie Reynolds,Rachael Flood,Luca More,Emily Macpherson,Mook Simaraks</value>
+    </filters>
+    <label>DRA Queue</label>
+    <sharedTo>
+        <group>QAC_Deal_Support_Access</group>
+        <role>QF_Support_QIC_Member</role>
+        <roleAndSubordinatesInternal>QF_DOM_Sales_SME_QIS_Sr_Manager</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>QF_Support_Deal_Support</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

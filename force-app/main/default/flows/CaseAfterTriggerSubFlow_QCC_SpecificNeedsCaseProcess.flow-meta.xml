@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>myRule_12_A1</name>
+        <label>Send Email</label>
+        <locationX>578</locationX>
+        <locationY>242</locationY>
+        <actionName>QCC_SpecificNeedsAcknowledgementEmail</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>myRule_15</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>caseRecord</name>
+            <value>
+                <elementReference>objNewCase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailTemplateName</name>
+            <value>
+                <stringValue>Specific_Need_Email_Template</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>fromAddress</name>
+            <value>
+                <elementReference>formula_8_myRule_12_A1_9892633988</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QCC_SpecificNeedsAcknowledgementEmail</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>myRule_1_A2</name>
+        <label>Send Email</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <actionName>QCC_SpecificNeedsAcknowledgementEmail</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>myRule_15</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>caseRecord</name>
+            <value>
+                <elementReference>objNewCase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailTemplateName</name>
+            <value>
+                <stringValue>Specific_Needs_Acknowledgement_Form</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>fromAddress</name>
+            <value>
+                <elementReference>formula_1_myRule_1_A2_9334977598</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QCC_SpecificNeedsAcknowledgementEmail</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <description>Send Email Specific Needs customer</description>
+        <name>Send_Email_Specific_Needs</name>
+        <label>Send Email Specific Needs</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <actionName>QCC_SpecificNeedsAcknowledgementEmail</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>myRule_15</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>caseRecord</name>
+            <value>
+                <elementReference>objNewCase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailTemplateName</name>
+            <value>
+                <stringValue>QCC_Specific_Needs_Acknowledgement_1732511668205</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>fromAddress</name>
+            <value>
+                <elementReference>formula_1_myRule_1_A2_9334977598</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QCC_SpecificNeedsAcknowledgementEmail</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Specific_Needs_Email_enquiries_Email</name>
+        <label>Send Specific Needs Email enquiries Email</label>
+        <locationX>1458</locationX>
+        <locationY>242</locationY>
+        <actionName>Case.Specific_Needs_Email_enquiries_Alert</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Case.Specific_Needs_Email_enquiries_Alert</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Wheel_Chair</name>
+        <label>Send Wheel Chair</label>
+        <locationX>842</locationX>
+        <locationY>674</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>myRule_15</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>objNewCase.Contact_Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>noresponse@qantas.com.au</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>We’ve received your specific needs request</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>relatedRecordId</name>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>logEmailOnSend</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_Is_Already_Wheel_Chair_Email_Sent_or_Not</name>
+        <label>Check Is Already Wheel Chair Email Sent or Not?</label>
+        <locationX>974</locationX>
+        <locationY>566</locationY>
+        <defaultConnector>
+            <targetReference>myRule_15</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Email_Not_Sent</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Wheel_Chair_Email_Record_from_Case</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Wheel_Chair</targetReference>
+            </connector>
+            <label>Email Not Sent</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Specific_Needs_Record_is_Exists</name>
+        <label>Is Specific Needs Record is Exists?</label>
+        <locationX>1128</locationX>
+        <locationY>350</locationY>
+        <defaultConnector>
+            <targetReference>myRule_15</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Specific_Needs_Record_Present</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Specific_Needs</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Wheel_Chair_Email_Record_from_Case</targetReference>
+            </connector>
+            <label>Specific Needs Record Present</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_1</name>
+        <label>Specific Needs Case is New</label>
+        <locationX>886</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>myRule_15</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_Specific Needs Case is New</defaultConnectorLabel>
+        <rules>
+            <name>True_Specific_Needs_Case_is_New</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SpecificNeedsFormula</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Email_Specific_Needs</targetReference>
+            </connector>
+            <label>True_Specific Needs Case is New</label>
+        </rules>
+        <rules>
+            <name>TRUE_myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_TRUE_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A2</targetReference>
+            </connector>
+            <label>TRUE_Mobility Aid Case is New</label>
+        </rules>
+        <rules>
+            <name>TRUE_SN_Email_Enquiries_Contact_is_populated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_TRUE_myRule_12</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_12_A1</targetReference>
+            </connector>
+            <label>TRUE_SN Email Enquiries Contact is populated</label>
+        </rules>
+        <rules>
+            <name>TRUE_Send_Wheel_Chair_Dimensions_Email_Creteria</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ISNEW</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>objNewCase.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Mobility Aid</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Specific_Needs</targetReference>
+            </connector>
+            <label>TRUE Send Wheel Chair Dimensions Email Creteria</label>
+        </rules>
+        <rules>
+            <name>Specific_needs_email_enquiries</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Specificneedsemailenquiries</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Specific_Needs_Email_enquiries_Email</targetReference>
+            </connector>
+            <label>Specific needs email enquiries</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_15</name>
+        <label>Contact is Populated or Change</label>
+        <locationX>886</locationX>
+        <locationY>1034</locationY>
+        <defaultConnectorLabel>FALSE_Contact is Populated or Change</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_15</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_TRUE_myRule_15</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Contact_for_Specific_Needs</targetReference>
+            </connector>
+            <label>TRUE_Contact is Populated or Change</label>
+        </rules>
+    </decisions>
+    <description>Migrated from the QCC_SpecificNeedsCaseProcess process using multiple criteria.
+Process data of Specific Needs cases(Platform change)</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>formula_1_myRule_1_A2_9334977598</name>
+        <dataType>String</dataType>
+        <expression>{!$Label.QCC_EmailCustomer_ValidatedFrom_SN}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_2_myRule_1_A1_0448994032</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()  + 5</expression>
+    </formulas>
+    <formulas>
+        <name>formula_3_myRule_1_A1_2037950507</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE(MID({!objNewCase.Departure_Date_Time__c},7,4)
+ &amp; &quot;-&quot; &amp;
+MID({!objNewCase.Departure_Date_Time__c},4,2) 
+&amp; &quot;-&quot; &amp;
+LEFT({!objNewCase.Departure_Date_Time__c},2) )</expression>
+    </formulas>
+    <formulas>
+        <name>formula_4_myRule_1_A1_4976788690</name>
+        <dataType>String</dataType>
+        <expression>IF ( ISBLANK({!objNewCase.ContactId} ),
+
+&apos;&apos;, {!objNewCase.Contact.Frequent_Flyer_Number__c} 
+)</expression>
+    </formulas>
+    <formulas>
+        <name>formula_5_myRule_1_A1_4357982208</name>
+        <dataType>String</dataType>
+        <expression>IF(
+	NOT(ISNULL({!objNewCase.Departure_Date_Time__c})),
+	IF(
+		(DATEVALUE(MID({!objNewCase.Departure_Date_Time__c},7,4) &amp; &quot;-&quot; &amp; MID({!objNewCase.Departure_Date_Time__c},4,2) &amp; &quot;-&quot; &amp; LEFT({!objNewCase.Departure_Date_Time__c},2) ) &lt;= (TODAY() + 3)), 
+		&apos;High&apos;, 
+		&apos;Medium&apos;
+	), 
+	&apos;Medium&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>formula_6_myRule_8_A1_9913858044</name>
+        <dataType>Date</dataType>
+        <expression>
+DATEVALUE(MID({!objNewCase.Departure_Date_Time__c},7,4)
+ &amp; &quot;-&quot; &amp;
+MID({!objNewCase.Departure_Date_Time__c},4,2) 
+&amp; &quot;-&quot; &amp;
+LEFT({!objNewCase.Departure_Date_Time__c},2) )</expression>
+    </formulas>
+    <formulas>
+        <name>formula_7_myRule_8_A1_2607972981</name>
+        <dataType>String</dataType>
+        <expression>
+IF(
+	NOT(ISNULL({!objNewCase.Departure_Date_Time__c})),
+	IF(
+		(DATEVALUE(MID({!objNewCase.Departure_Date_Time__c},7,4) &amp; &quot;-&quot; &amp; MID({!objNewCase.Departure_Date_Time__c},4,2) &amp; &quot;-&quot; &amp; LEFT({!objNewCase.Departure_Date_Time__c},2) ) &lt;= (TODAY() + 3)), 
+		&apos;High&apos;, 
+		&apos;Medium&apos;
+	), 
+	&apos;Medium&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>formula_8_myRule_12_A1_9892633988</name>
+        <dataType>String</dataType>
+        <expression>{!$Label.QCC_EmailCustomer_ValidatedFrom_SN}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_TRUE_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>TEXT({!objNewCase.Status}) = &apos;New&apos;  &amp;&amp; {!ISNEW} &amp;&amp;
+TEXT({!objNewCase.Origin})  = &apos;Qantas.com&apos; &amp;&amp; 
+{!objNewCase.RecordType.DeveloperName}  = &apos;QCC_Specific_Needs&apos; &amp;&amp;
+TEXT({!objNewCase.Type})  = &apos;Mobility Aid&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>formula_TRUE_myRule_12</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!objNewCase.Type},&quot;Specific Needs&quot; ) &amp;&amp; 
+ISPICKVAL({!objNewCase.Origin},&quot;Specific Needs Email Enquiries&quot;  ) &amp;&amp; 
+{!objNewCase.ContactId} != {!objOldCase.ContactId} &amp;&amp; 
+{!objOldCase.ContactId}  == NULL &amp;&amp; 
+{!objNewCase.ContactId}  != NULL</expression>
+    </formulas>
+    <formulas>
+        <name>formula_TRUE_myRule_15</name>
+        <dataType>Boolean</dataType>
+        <expression>
+({!ISNEW} 
+|| 
+{!objNewCase.ContactId} !=  {!objOldCase.ContactId}
+)
+ &amp;&amp; NOT(ISBLANK({!objNewCase.ContactId}))</expression>
+    </formulas>
+    <formulas>
+        <name>formula_TRUE_myRule_8</name>
+        <dataType>Boolean</dataType>
+        <expression> 
+NOT({!ISNEW}) &amp;&amp;
+{!objNewCase.Departure_Date_Time__c} != {!objOldCase.Departure_Date_Time__c} &amp;&amp;
+NOT(ISNULL({!objNewCase.Departure_Date_Time__c})) &amp;&amp; 
+{!objNewCase.RecordType.DeveloperName}  = &apos;QCC_Specific_Needs&apos; &amp;&amp; 
+TEXT({!objNewCase.Origin}) = &apos;Qantas.com&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>Specificneedsemailenquiries</name>
+        <dataType>Boolean</dataType>
+        <expression>{!ISNEW} &amp;&amp;
+TEXT({!objNewCase.Origin})  = &apos;Specific Needs Email Enquiries&apos; &amp;&amp; 
+{!objNewCase.RecordType.DeveloperName}  = &apos;QCC_Specific_Needs&apos;</expression>
+    </formulas>
+    <formulas>
+        <description>SpecificNeedsFormula</description>
+        <name>SpecificNeedsFormula</name>
+        <dataType>Boolean</dataType>
+        <expression>TEXT({!objNewCase.Status}) = &apos;New&apos;  &amp;&amp; {!ISNEW} &amp;&amp;
+TEXT({!objNewCase.Origin})  = &apos;Qantas.com&apos; &amp;&amp; 
+{!objNewCase.RecordType.DeveloperName}  = &apos;QCC_Specific_Needs&apos; &amp;&amp;
+TEXT({!objNewCase.Type})  != &apos;Mobility Aid&apos;</expression>
+    </formulas>
+    <interviewLabel>CaseAfterTriggerSubFlow-QCC_SpecificNeedsCaseProcess {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAfterTriggerSubFlow-QCC_SpecificNeedsCaseProcess</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Specific_Needs</name>
+        <label>Get Specific Needs</label>
+        <locationX>1128</locationX>
+        <locationY>242</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Is_Specific_Needs_Record_is_Exists</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>objNewCase.QCC_Specific_Needs__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>QCC_Mobility_Aid_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Non-Motorised Wheelchair</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>QCC_Specific_Needs__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Wheel_Chair_Email_Record_from_Case</name>
+        <label>Get Wheel Chair Email Record from Case</label>
+        <locationX>974</locationX>
+        <locationY>458</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Is_Already_Wheel_Chair_Email_Sent_or_Not</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>objNewCase.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>We’ve received your specific needs request</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>EmailMessage</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Contact_for_Specific_Needs</name>
+        <label>Update Contact for Specific Needs</label>
+        <locationX>754</locationX>
+        <locationY>1142</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>objNewCase.QCC_Specific_Needs__r.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>QCC_Contact__c</field>
+            <value>
+                <elementReference>objNewCase.ContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>QCC_Specific_Needs__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>760</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>myRule_1</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>EmailBody</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0159000000FSVkd&amp;amp;oid=00D900000010OOK&amp;amp;lastMod=1521233610000&quot; alt=&quot;Logo&quot;&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Mobility Aid Request reference: &lt;/strong&gt;&lt;strong style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!objNewCase.Case_Number__c}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Flight Booking reference: &lt;/strong&gt;&lt;span style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt; {!objNewCase.Booking_PNR__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Hi &lt;/span&gt;&lt;span style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!objNewCase.First_Name__c},&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Thank you for letting us know your mobility aid details for your upcoming flight.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;We’re pleased to let you know that your request has been approved based on the following dimensions you have provided.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Mobility aid type:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Non-Motorised wheelchair&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Length:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Specific_Needs.QCC_Wheelchair_Dimensions_Length__c} {!Get_Specific_Needs.QCC_Wheelchair_Dimensions_Units__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Width:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Specific_Needs.QCC_Wheelchair_Dimensions_Width__c} {!Get_Specific_Needs.QCC_Wheelchair_Dimensions_Units__c} &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Height:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Get_Specific_Needs.QCC_Wheelchair_Dimensions_Height__c} {!Get_Specific_Needs.QCC_Wheelchair_Dimensions_Units__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Weight:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{!Get_Specific_Needs.QCC_Wheelchair_Weight__c} {!Get_Specific_Needs.QCC_Wheelchair_Weight_Metric__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;For mobility aid maximum dimensions and carriage requirements, please visit &lt;/span&gt;&lt;a href=&quot;https://www.qantas.com/au/en/travel-info/specific-needs/mobility-assistance.html#mobility-aid-maximum-dimensions-and-carriage-requirements&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;font-size: 12px;&quot;&gt;our dedicated page&lt;/a&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Your next steps&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;1.&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Check in online before you arrive.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;2.&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Arrive at the airport early and see a Qantas Airport staff member.&lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;For international departures – please arrive at least 3 hours prior to your flight. Or&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;For domestic departures (including regional services) – please arrive 2 hours prior to your flight.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;3.&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;You may drop off your mobility aid at check-in or at the boarding gate.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;4.&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;If you have submitted your mobility aid at check-in, our friendly ground staff will assist you to your boarding gate/aircraft seat as needed.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;Your needs are covered onboard&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;At Qantas, we want to make sure you can enjoy your journey in comfort. So, if you’re not travelling with a companion or carer, our cabin crew would be happy to assist with escorting you to and from the door of the aircraft toilet using the onboard wheelchair where available*. Cabin Crew are not able to assist with any other toileting needs. You must travel with a carer if you require assistance beyond this. Your understanding is appreciated.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;em style=&quot;font-size: 12px;&quot;&gt;*Aisle wheelchairs are not available onboard QantasLink flights, A320, E190, 717, Fokker 100 and Dash 8 aircraft due to cabin size restrictions. The 737-800 has an onboard wheelchair, but no wheelchair accessible toilet.&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;For more information, please refer to the following pages:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.qantas.com/au/en/travel-info/specific-needs/travelling-with-specific-needs/accessible-toilets-onboard.html&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;font-size: 12px;&quot;&gt;Accessible toilets onboard&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.qantas.com/au/en/travel-info/specific-needs/travelling-with-specific-needs/travelling-with-a-carer.html?int_cam=au%3Atravelling-with-specific-needs%3Aarticle%3Atravelling-with-a-carer%3Aen%3Ann#Independent-traveller-requirements&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;font-size: 12px;&quot;&gt;Independent traveller requirements&lt;/a&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;We’re here to help&lt;/strong&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;If you need to speak to a team member regarding your mobility aid request, you may contact Qantas Customer Specific Needs on +61 2 9123 7471 (outside Australia) or 1800 177 474 (inside Australia) and select option 3.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Kind Regards&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Qantas Customer Specific Needs&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;https://qantas.lightning.force.com/servlet/servlet.ImageServer?id=0159000000FSVke&amp;amp;oid=00D900000010OOK&amp;amp;lastMod=1521233610000&quot; alt=&quot;Qantas_Logo&quot;&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;Qantas Airways Limited, ABN 16 009 661 901&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;10 Bourke Road Mascot NSW 2020 Australia | qantas.com&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>ISNEW</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <description>trigger.new</description>
+        <name>objNewCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>trigger.old</description>
+        <name>objOldCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

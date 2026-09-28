@@ -1,0 +1,115 @@
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Warning</h4>
+        </div>
+        <div class="modal-body">
+            <p>This chat is already linked to {{ vm.linkedCaseNumber }}. Are you sure you want to {{ vm.modal.descriptionAction }}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-warning" ng-click="vm.caseAction(vm.modal.action, true, vm.modal.clickedCase)">{{ vm.modal.buttonAction }}</button>
+        </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="emailWarningModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Email Address Required</h4>
+        </div>
+        <div class="modal-body">
+            <p>Please enter a valid email address in order to create a case.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="contact">
+    <div class="row">
+        <div class="col-xs-4">
+            <h1>{{ vm.contact.Name }}</h1>
+        </div>
+        <div class="col-xs-3 pull-right" ng-hide="vm.caseLinked">
+            <a ng-href="#/search"><h3><i class="fa fa-arrow-left fa-1x" aria-hidden="true"></i> Search</h3></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h5>Frequent Flyer Number: {{ vm.contact.frequentFlyerNumber }}</h5>
+            <h5>Frequent Flyer Tier: {{ vm.contact.frequentFlyerTier }}</h5>
+            <h5>Points Balance: {{ vm.contact.pointsBalance }}</h5>
+            <h6>Preferred Phone: {{ vm.contact.preferredPhone}}</h6>
+        </div>
+        <div class="col-xs-6">
+            <h5>Frequent Flyer Status Credits: {{ vm.contact.statusCredits }}</h5>
+            <h5>Status Credits to Attain Next Level: {{ vm.contact.statusCreditsToNextLevel }}</h5>
+            <h5>Tier Anniversary Date: {{ vm.contact.frequentFlyerAnniversaryDate | date:'dd/MM/yyyy'}}</h5>
+            <h6>Preferred Email: {{ vm.contact.preferredEmail }}</h6>
+        </div>
+    </div>
+    <hr/>
+    <div class="row" class="case-button">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="row" ng-show="!vm.caseLinked && !vm.caseLoading">
+                <div class="col-xs-6">
+                    <input type="email" class="form-control" id="emailAddressInput" placeholder="Email Address" ng-model="vm.contactEmail">
+                </div>
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block" ng-click="vm.caseAction('create', false)">Create Case</button>
+                </div>
+            </div>
+            <button type="button" ng-show="vm.caseLoading" class="btn btn-default btn-block"><img class="waitingImage" src="/img/loading.gif" title="Please Wait..." /></button>
+            <button type="button" ng-show="vm.caseLinked" ng-click="vm.popOutObject(vm.linkedCaseId)" class="animate-show-hide btn btn-success btn-block">Open Linked Case: {{ vm.linkedCaseNumber }}</button>
+            <button type="button" ng-show="vm.caseLinked" ng-click="vm.undoLink()" class="animate-show-hide btn btn-warning btn-block">Undo</button>
+        </div>
+    </div>
+    <div class="row" ng-hide="vm.caseLinked">
+        <div class="col-xs-12">
+            <table class="table table-hover table-responsive table-condensed">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Case Number</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Group</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date Opened</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="case in vm.displayCases"
+                        ng-click="vm.caseAction('link', false, case)"
+                        ng-class="{ 'success' : vm.linkedCaseNumber == case.caseNumber }">
+                        <td>{{ case.caseNumber }}</td>
+                        <td>{{ case.type }}</td>
+                        <td>{{ case.group }}</td>
+                        <td>{{ case.category }}</td>
+                        <td>{{ case.priority }}</td>
+                        <td>{{ case.status }}</td>
+                        <td>{{ case.createdDate | date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="center">
+            <paging
+                page="vm.page"
+                page-size="vm.pageSize"
+                total="vm.pageTotal"
+                show-prev-next="true"
+                hide-if-empty="true"
+                paging-action="vm.DoCtrlPagingAct(page)">
+            </paging>
+        </div>
+    </div>
+</div>

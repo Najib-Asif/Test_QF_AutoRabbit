@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Arrival_Date_Time__c</fullName>
+    <description>QCC - Used to display date for conga email templates</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK( Actual_Arrival_Date_Time__c), Arrival_Date_Time__c , Actual_Arrival_Date_Time__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Email Arrival Date/Time</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

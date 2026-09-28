@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SME_Product_Usage__c</fullName>
+    <label>SME Product Usage</label>
+    <summaryFilterItems>
+        <field>Travel_Tracker__c.TY__c</field>
+        <operation>equals</operation>
+        <value>Y</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Travel_Tracker__c.Customer__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

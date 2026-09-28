@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>Account</field>
+        <field>Problem_Type__c</field>
+        <field>Description</field>
+        <field>Cost_of_Sale__c</field>
+        <field>CreatedDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>stephanieseymour@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Service Request UK and Europe</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Account_Country__c</field>
+                <operation>equals</operation>
+                <value>AD,AL,AM,AT,AZ,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FR,GB,GE,GR,HR,HU,IE,IS,IT,KZ,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,UA,VA</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Service Requests - UK and Europe</label>
+        <name>Service_Requests_UK_and_Europe</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>stephanieseymour@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Service Request Africa Majority</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Account_Country__c</field>
+                <operation>equals</operation>
+                <value>AO,BF,BI,BJ,CD,CF,CG,CI,CM,DJ,DZ,EG,ER,ET,GA,GM,GN,GQ,GW,KM,LR,LS,LY,MA,MG,ML,MR,MU,MW,MZ,NA,NE,NG,RW,SC,SD,SL,SN,SO,SS,ST,TD,TG,TN,TZ,UG,ZM</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Service Requests - Africa Majority</label>
+        <name>Service_Requests_Africa_Majority</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>michimessner@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Service Request - South Africa, Botswana and Zimbabbwe</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Account_Country__c</field>
+                <operation>equals</operation>
+                <value>BW,ZA,ZW</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Service Requests - South Africa, Botswana and Zimbabwe</label>
+        <name>Service_Requests_South_Africa_Botswana_and_Zimbabwe</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>parvizladha@qantas.com.au</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Service Requests - Middle East, Ghana and Kenya</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Case.Account_Country__c</field>
+                <operation>equals</operation>
+                <value>AE,BH,IL,IQ,IR,JO,KW,LB,OM,PS,QA,SA,SY,TR,YE,GH and KE</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Service Requests - Middle East, Ghana and Kenya</label>
+        <name>Service_Requests_Middle_East_Ghana_and_Kenya</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>This approval process will cover all service requests excluding ADMs raised for accounts based in the UK and countries in the Middle East and Africa. Ref: CRM-6774</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2 AND 4 AND 5 AND (3 OR 6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approval_Status__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Account_Country__c</field>
+            <operation>equals</operation>
+            <value>AD,AL,AM,AT,AZ,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FR,GB,GE,GR,HR,HU,IE,IS,IT,KZ,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,UA,VA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.Profile_Name__c</field>
+            <operation>equals</operation>
+            <value>QL GSA,Sales and Distribution-Sales GSA,QL_Qantas_Sales,Sales and Distribution-Sales,Sales and Distribution-Distribution</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Problem_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Internal - ADM/ACM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Account_Country__c</field>
+            <operation>equals</operation>
+            <value>AO,BF,BI,BJ,CD,CF,CG,CI,CM,DJ,DZ,EG,ER,ET,GA,GM,GN,GQ,GW,KM,LR,LS,LY,MA,MG,ML,MR,MU,MW,MZ,NA,NE,NG,RW,SC,SD,SL,SN,SO,SS,ST,TD,TG,TN,TZ,UG,ZM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Account_Country__c</field>
+            <operation>equals</operation>
+            <value>BW,ZA,ZW,AE,BH,IL,IQ,IR,JO,KW,LB,OM,PS,QA,SA,SY,TR,YE,GH,KE</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Approval_Status_asApproved</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Update_Authority_Status_to_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Update_Approval_Status_as_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status_as_Pending</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Service Request -UKEMEA</label>
+    <processOrder>16</processOrder>
+    <recallActions>
+        <action>
+            <name>Approval_Status_Change</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

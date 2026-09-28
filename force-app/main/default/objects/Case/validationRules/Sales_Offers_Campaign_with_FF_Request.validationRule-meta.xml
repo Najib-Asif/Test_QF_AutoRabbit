@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Offers_Campaign_with_FF_Request</fullName>
+    <active>false</active>
+    <description>When Case = Sales Offers Request &amp; Type = Campaign, not allowed to create FF Information &amp; Number of Frequent Flyer has to be filled in</description>
+    <errorConditionFormula>AND (
+RecordType.DeveloperName = &quot;Sales_Offers_Request&quot; , /*Sales Offers Service Request*/
+ ISPICKVAL ( Type , &quot;Campaign&quot; ),
+NOT ( $Profile.Name = &quot;System Administrator&quot;), /*System Administrator*/
+NOT ( $Profile.Name = &quot;Qantas System Administrator&quot;),
+NOT ( $Profile.Name = &quot;Qantas System Admin - Freight&quot;),
+NOT ( $Profile.Name = &quot;Qantas System Admin - QCC&quot;),
+NOT ( $Profile.Name = &quot;Qantas System Admin - SND&quot;), 
+NOT ( $UserRole.Id =  $Label.QF_Support_QIC_Member), /*QF-Support-Agency Support-QAC*/ 
+
+OR(
+ Presence_of_Frequent_Flyer_Information__c &gt;=1 ,
+ ISBLANK (  Number_of_Frequent_Flyer_Request__c )
+)
+
+)</errorConditionFormula>
+    <errorDisplayField>Number_of_Frequent_Flyer_Request__c</errorDisplayField>
+    <errorMessage>For Campaign Type Sales Offers, please fill up the Number of Frequent Flyers you are requesting for.</errorMessage>
+</ValidationRule>

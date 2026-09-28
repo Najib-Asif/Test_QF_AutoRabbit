@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>FreightAutoResponseRule</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Qantas Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Claims</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Sub_Type_2__c</field>
+                <operation>equals</operation>
+                <value>Intent to Claim</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Freight_Origin__c</field>
+                <operation>equals</operation>
+                <value>Web-US</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>qffreightusa@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Freight USA</senderName>
+            <template>unfiled$public/Freight_USA_Web_Claims_Intent_To_Claim_Auto_Response_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Qantas Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Special Moves</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Team_Position__c</field>
+                <operation>equals</operation>
+                <value>ASHES</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Freight_Origin__c</field>
+                <operation>equals</operation>
+                <value>Web-US</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>qffreightusa@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Freight USA</senderName>
+            <template>unfiled$public/Freight_Web_USA_Special_Moves_Ashes_Acknowledgement_email</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Qantas Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>Special Moves</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Team_Position__c</field>
+                <operation>equals</operation>
+                <value>CASKET</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Freight_Origin__c</field>
+                <operation>equals</operation>
+                <value>Web-US</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>qffreightusa@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Freight USA</senderName>
+            <template>unfiled$public/Freight_USA_Web_Special_Moves_Casket_Acknowledgement_email</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Qantas Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Freight_Origin__c</field>
+                <operation>equals</operation>
+                <value>Web-US</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Type</field>
+                <operation>equals</operation>
+                <value>NCR</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>qffreightusa@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Freight USA</senderName>
+            <template>unfiled$public/Freight_USA_Web_Auto_Response_Template_NCR</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Qantas Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Freight_Origin__c</field>
+                <operation>equals</operation>
+                <value>Web-US</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>qffreightusa@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Freight USA</senderName>
+            <template>unfiled$public/Freight_USA_Web_Auto_Response_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( ISPICKVAL(Origin, &apos;Web&apos;) ,OR(RecordType.Name=&apos;Freight Shipment&apos;,RecordType.Name=&apos;Freight Query&apos;,RecordType.Name=&apos;Freight Feedback&apos;,RecordType.Name=&apos;Freight Claims&apos;,RecordType.Name=&apos;Qantas Freight&apos;,RecordType.Name=&apos;Freight Invoicing&apos;), 													NOT(AND(ISPICKVAL(Type, &apos;Claims&apos;), OR 															(AND(ISPICKVAL(Sub_Type_1__c, &apos;Missing&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;)), 															 AND(ISPICKVAL(Sub_Type_1__c, &apos;Damaged&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;)), 															 AND(ISPICKVAL(Sub_Type_1__c, &apos;Delay&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;))) 								)), 												NOT(AND(ISPICKVAL(Type, &apos;Customer Query&apos;), OR(AND(ISPICKVAL(Sub_Type_1__c, &apos;Accounts&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Invoice&apos;)),ISPICKVAL(Sub_Type_1__c, &apos;terminal service fee&apos;)) 															 								)), NOT(AND(ISPICKVAL(Type, &apos;Special Moves&apos;),   OR(Team_Position__c=&apos;ASHES&apos;, Team_Position__c=&apos;CASKET&apos;))     ), NOT((ISPICKVAL(Type, &apos;NCR&apos;))) )</formula>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>freightcustomerservice@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Web_Auto_Response_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(ISPICKVAL(Origin, &apos;Web&apos;), 	RecordType.Name=&apos;Qantas Freight&apos;,  OR( ISPICKVAL( Freight_Shipment__c ,  &apos;Domestic&apos;), ISPICKVAL(Freight_Shipment__c , &apos;International&apos;)  ) ,  ISPICKVAL(Type, &apos;Claims&apos;), 		OR(AND(ISPICKVAL(Sub_Type_1__c, &apos;Missing&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;)), 					   AND(ISPICKVAL(Sub_Type_1__c, &apos;Damaged&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;)), 					   AND(ISPICKVAL(Sub_Type_1__c, &apos;Delay&apos;),ISPICKVAL(Sub_Type_2__c, &apos;Intent to Claim&apos;)))     )</formula>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>freightcustomerservice@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Web_Intent_To_Claim_Auto_Response_Domestic_Shipment_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(   ISPICKVAL(Origin, &apos;Web&apos;), 	RecordType.Name=&apos;Qantas Freight&apos;,           ISPICKVAL(Type, &apos;Special Moves&apos;), 		Team_Position__c=&apos;ASHES&apos;     )</formula>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>freightcustomerservice@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Web_Ashes_Acknowledgement_email</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(   ISPICKVAL(Origin, &apos;Web&apos;), 	RecordType.Name=&apos;Qantas Freight&apos;,           ISPICKVAL(Type, &apos;Special Moves&apos;), 		Team_Position__c=&apos;CASKET&apos;    )</formula>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>freightcustomerservice@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Web_Casket_Acknowledgement_email</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL( Origin , &apos;FRT Bookings&apos;) ,  NOT(CONTAINS(SuppliedEmail, &apos;qantas.com&apos;)), NOT(CONTAINS(SuppliedEmail, &apos;qantas.com.au&apos;))  )</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <replyToEmail>aufreightbookings@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Email_to_case_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL( Origin , &apos;FRT Cust Services&apos;),NOT(CONTAINS(SuppliedEmail, &apos;qantas.com&apos;)), NOT(CONTAINS(SuppliedEmail, &apos;qantas.com.au&apos;)) )</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <replyToEmail>freightcustomerservice@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Email_to_case_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( ISPICKVAL(Origin, &apos;Web&apos;), RecordType.Name=&apos;Qantas Freight&apos;, ISPICKVAL(Type, &apos;NCR&apos;) )</formula>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>freightcustomerservice@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Web_Auto_Response_Template_NCR</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL( Origin ,  &apos;FRT Claims&apos;), ISPICKVAL( Status , &apos;Open&apos;), NOT( CONTAINS( SuppliedEmail , &apos;qantas.com&apos;) ), NOT( CONTAINS( SuppliedEmail , &apos;qantas.com.au&apos;) ) )</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <replyToEmail>frtclaims@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Claims</senderName>
+            <template>unfiled$public/Freight_Email_to_case_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( ISPICKVAL(Origin,&apos;Web&apos;),RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL(Freight_Shipment__c,&apos;Domestic&apos;), ISPICKVAL(Type,&apos;Customer Query&apos;), ISPICKVAL(Sub_Type_1__c,&apos;Pets&apos;), OR( ISPICKVAL(Product__c,&apos;Q-GO Animals&apos;), ISPICKVAL(Product__c,&apos;Q-GO Pets&apos;)))</formula>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Customer Service</senderName>
+            <template>unfiled$public/Freight_Pet_Support_Acknowledgement_email</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL( Origin ,  &apos;FRT Spl Moves&apos;), ISPICKVAL(  Status , &apos;Open&apos;), NOT( CONTAINS( SuppliedEmail , &apos;qantas.com&apos;) ), NOT( CONTAINS( SuppliedEmail , &apos;qantas.com.au&apos;) )   )</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Qantas Freight Special Moves</senderName>
+            <template>unfiled$public/Freight_Email_to_case_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( ISPICKVAL(Origin,&apos;FRT Sales Support&apos;),RecordType.Name =&apos;Qantas Freight&apos;,ISPICKVAL( Status , &apos;Open&apos;) )</formula>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>freightsalessupport@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Freight Sales Support</senderName>
+            <template>unfiled$public/Freight_Sales_Support_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL( Origin,&apos;FRT JNB&apos;))</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <replyToEmail>johannesburgfreight@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Freight JNB</senderName>
+            <template>unfiled$public/Freight_JNB_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL(Origin,&apos;FRT US Email&apos;))</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <replyToEmail>qffreightusa@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Freight USA</senderName>
+            <template>unfiled$public/Shr_Freight_USA_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>CONTAINS(RecordType.DeveloperName, &apos;Qantas_Freight&apos;) &amp;&amp; ISPICKVAL(Origin, &apos;FRT LON&apos;)</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>SHR Freight London</senderName>
+            <template>unfiled$public/Freight_LON_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND( RecordType.Name =&apos;Qantas Freight&apos;, ISPICKVAL( Origin,&apos;FRT SYD Tracing&apos;))</formula>
+            <notifyCcRecipients>true</notifyCcRecipients>
+            <replyToEmail>tracingsyd@qantas.com.au</replyToEmail>
+            <senderEmail>freightwebtocaseautoreply@qantas.com.au</senderEmail>
+            <senderName>Shr Tracing Syd</senderName>
+            <template>unfiled$public/Freight_JNB_Acknowledgement_Email_Template</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.OwnerName__c</field>
+                <operation>equals</operation>
+                <value>CCC_Musical_Baggage_Queue</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Category__c</field>
+                <operation>equals</operation>
+                <value>Musical Instrument</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>CCC Query</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>noresponse@qantas.com.au</senderEmail>
+            <senderName>Qantas Customer Care</senderName>
+            <template>QCCAllTemplates/CCC_Musical_Baggage_Auto_response_Email_1769077771763</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

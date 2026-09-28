@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Is_Contact_Birthday__c</fullName>
+    <description>Displays a birthday cake image if today is the customer&apos;s birth date</description>
+    <externalId>false</externalId>
+    <formula>IF(AND(DAY(Birthdate)=DAY(TODAY()), MONTH(Birthdate)=MONTH(TODAY())), IMAGE(&quot;/sfc/servlet.shepherd/version/download/0682v00000DWV6ZAAX&quot;,&quot;&quot;,50,50),&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Birthday Today?</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,41 @@
+<!--CRM-10002 This componnent is built as a base component for achieving 
+dualControlled Field dependancy 
+Field1 controlling Field2
+Field1 and Field2 both controlling Field3)
+-->
+<template>
+    <lightning-card >
+        <lightning-combobox
+          label={level1FieldLabel}
+          value={level1Value}
+          placeholder="---Select---"
+          data-field="level1"
+          readonly={readOnly}
+          options={level1FieldOptions}
+          onchange={handleChange}>
+        </lightning-combobox>
+
+        <lightning-combobox
+          label={level2FieldLabel}
+          value={level2Value}
+          placeholder="---Select---"
+          data-field="level2"
+          readonly={readOnly}
+          options={level2FieldOptions}
+          required={isLevel2Required}
+          onchange={handleChange} >
+        </lightning-combobox>
+        
+        <lightning-combobox
+          label={level3FieldLabel}
+          value={level3Value}
+          placeholder="---Select---"
+          data-field="level3"
+          readonly={readOnly}
+          options={level3FieldOptions}
+          required={isLevel3Required}
+          onchange={handleChange} >
+        </lightning-combobox>
+
+    </lightning-card>
+</template>

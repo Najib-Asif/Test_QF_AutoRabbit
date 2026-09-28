@@ -1,0 +1,43 @@
+<aura:component controller="QuickQuoteController"
+    implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+
+    <aura:attribute name="opportunity" type="Opportunity" />
+    <aura:attribute name="newQuote" type="Quote"
+        default="{ 'sobjectType': 'Quote' }" /> <!-- default to empty record -->
+    <aura:attribute name="isDisabled" type="Boolean" default="false" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Display a header with details about the Opportunity -->
+    <div class="slds-page-header" role="banner">
+        <p class="slds-text-heading--label">{!v.opportunity.Name}</p>
+        <h1 class="slds-page-header__title slds-m-right--small
+            slds-truncate slds-align-left">Create New Quote</h1>
+    </div>
+
+    <!-- Display the new quote form -->
+     <lightning:input aura:id="quoteField" name="quoteName" label="Quote Name"
+                      value="{!v.newQuote.Name}" required="true"/>
+    
+    
+     <lightning:textarea name="sla" value="{!v.newQuote.SLA__c}" label="SLA"/>
+    
+     <lightning:textarea name="rebate" value="{!v.newQuote.Rebates_and_Payment_Terms__c}" 
+                         label="Rebates and Payment Terms"/>
+    
+     <lightning:textarea name="legalInfo" value="{!v.newQuote.Additional_Legal_Information__c}"
+                         label="Additional Legal Information"/>
+    
+        
+    <lightning:button label="Cancel" onclick="{!c.handleCancel}" class="slds-m-top--medium" />
+    <lightning:button label="Save Quote" onclick="{!c.handleSaveQuote}" disabled="{!v.isDisabled}"
+               variant="brand" class="slds-m-top--medium"/>
+    
+    <div class="slds-spinner slds-hide" aura:id="spinner">
+        <div class="slds-spinner--brand slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+    
+</aura:component>

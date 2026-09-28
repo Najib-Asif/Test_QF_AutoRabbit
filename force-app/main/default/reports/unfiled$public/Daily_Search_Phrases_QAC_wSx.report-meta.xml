@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>NetworkSearchQueryFrequency$QueryDate</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>NetworkSearchQueryFrequency$CountQueries</field>
+    </columns>
+    <columns>
+        <field>NetworkSearchQueryFrequency$SearchTerm</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>NetworkSearchQueryFrequency$AvgNumResults</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Report provides search phrases used by customers includes number of searches and number of results</description>
+    <filter>
+        <criteriaItems>
+            <column>NetworkSearchQueryFrequency$Network</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Agency</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Daily Search Phrases - QAC</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>ca_only_2_0__Community_Searches_2_0__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>NetworkSearchQueryFrequency$AvgNumResults</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>NetworkSearchQueryFrequency$QueryDate</dateColumn>
+        <interval>INTERVAL_PREVCURY</interval>
+    </timeFrameFilter>
+</Report>

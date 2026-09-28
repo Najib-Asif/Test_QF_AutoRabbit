@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Amex_Trigger_Outbound_to_True</fullName>
+        <field>AMEX_Trigger_Outbound__c</field>
+        <literalValue>1</literalValue>
+        <name>Amex Trigger Outbound to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copy_AEQCC_Eligibility_from_Account</fullName>
+        <description>To enable a single view of history on Amex responses</description>
+        <field>AEQCC_Eligibility_Code__c</field>
+        <formula>Account__r.AMEX_response_Code__c</formula>
+        <name>Copy AEQCC Eligibility from Account</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copy_AEQCC_Response_Code_from_Account</fullName>
+        <description>To enable a single view of history on Amex responses</description>
+        <field>AEQCC_Response_Code__c</field>
+        <formula>Account__r.Qantas_Accept_or_Reject_Code__c</formula>
+        <name>Copy AEQCC Response Code from Account</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Prod_Reg_Active_c_to_False</fullName>
+        <field>Active__c</field>
+        <literalValue>0</literalValue>
+        <name>Prod Reg Active__c to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Prod_Reg_Active_c_to_True</fullName>
+        <field>Active__c</field>
+        <literalValue>1</literalValue>
+        <name>Prod Reg Active__c to True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_ABN_Info_from_Account</fullName>
+        <description>Get Detail from Account and update ABN.</description>
+        <field>ABN__c</field>
+        <formula>Account__r.ABN_Tax_Reference__c</formula>
+        <name>Update ABN Info from Account</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_AMEX_Trigger_Outbound_to_FALSE</fullName>
+        <description>Update AMEX Trigger Outbound to FALSE</description>
+        <field>AMEX_Trigger_Outbound__c</field>
+        <literalValue>0</literalValue>
+        <name>Update AMEX Trigger Outbound to FALSE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Amex_Airline_Level_to</fullName>
+        <field>Airline_Level__c</field>
+        <formula>IF(Account__r.SME_Deal__c == TRUE &amp;&amp; TEXT(Account__r.Dealing_Flag__c) == &apos;Y&apos;,&apos;L4&apos;,&apos;L1&apos;)</formula>
+        <name>Update Amex Airline Level to</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Amex_Process_Status_to_Pending</fullName>
+        <description>Updates the Process Status to Pending until a QBR Product is created for AMEX</description>
+        <field>Process_Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Update Amex Process Status to Pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Max_Airline_Points_to_FALSE</fullName>
+        <field>Max_Airline_Points_for_Membership_Year__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Max. Airline Points to FALSE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Max_Airline_Points_to_TRUE</fullName>
+        <field>Max_Airline_Points_for_Membership_Year__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Max. Airline Points to TRUE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_QBD_Last_Modified_Date_on_Active</fullName>
+        <field>QBD_Last_Modified_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Update QBD Last Modified Date on Active</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>set_PR_record_type_to_QBD</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>QBD_Registration</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>set PR record type to QBD</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>set_Product_Registraion_Record_Type_t</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>AMEX_Registration</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>set Product Registraion Record Type t</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>set_Registraion_Record_Type_Aquire</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Aquire_Registration</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>set Registraion Record Type Aquire</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>AMEX_IFLY_Notification_for_QBR_Enrol</fullName>
+        <apiVersion>39.0</apiVersion>
+        <description>Amex Ifly Notification Sent to QCP System with the Required AMEX Fields</description>
+        <endpointUrl>https://qbr.api.qantas.com/sme/notification/qbraccount?access_token=51f159ea-ace8-48d9-9864-0c905414748d</endpointUrl>
+        <fields>ABN__c</fields>
+        <fields>AMEX_Address_Line_1__c</fields>
+        <fields>AMEX_Address_Line_2__c</fields>
+        <fields>AMEX_Address_Line_3__c</fields>
+        <fields>AMEX_Address_Line_4__c</fields>
+        <fields>AMEX_Company_Industry__c</fields>
+        <fields>AMEX_Company_Name__c</fields>
+        <fields>AMEX_Company_State__c</fields>
+        <fields>AMEX_Company_Sub_Industry__c</fields>
+        <fields>AMEX_Company_Suburb__c</fields>
+        <fields>AMEX_Email__c</fields>
+        <fields>AMEX_FF_Number__c</fields>
+        <fields>AMEX_First_Name__c</fields>
+        <fields>AMEX_Indicator__c</fields>
+        <fields>AMEX_Job_Tilte__c</fields>
+        <fields>AMEX_Last_Name__c</fields>
+        <fields>AMEX_Phone_Number__c</fields>
+        <fields>AMEX_Salutation__c</fields>
+        <fields>Airline_Eligibility__c</fields>
+        <fields>Airline_Level__c</fields>
+        <fields>Amex_Zip_Postal_Code__c</fields>
+        <fields>Corporate_Deal__c</fields>
+        <fields>Id</fields>
+        <fields>QBD__c</fields>
+        <fields>SME_Deal__c</fields>
+        <fields>SME_override_Flag__c</fields>
+        <fields>Travel_Agent__c</fields>
+        <fields>Type__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>api_integration_user@qantas.com.au</integrationUser>
+        <name>AMEX IFLY Notification for QBR Enrol</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>true</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Copy Account Response and Eligibility codes on Amex Product</fullName>
+        <actions>
+            <name>Copy_AEQCC_Eligibility_from_Account</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Copy_AEQCC_Response_Code_from_Account</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>To enable a single view of history on Amex responses</description>
+        <formula>RecordType.DeveloperName == &apos;AMEX_Registration&apos;</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Product Registration AMEX Pending Records Update</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>AEQCC Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.Type__c</field>
+            <operation>equals</operation>
+            <value>AEQCC,AQBRC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.Process_Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.AMEX_Accept_or_Reject_Code__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>This rule is to re-trigger the records having pending status for AMEX Product Registration.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Amex_Trigger_Outbound_to_True</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Product_Registration__c.CreatedDate</offsetFromField>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Set Active Status on Active%5F%5Fc</fullName>
+        <actions>
+            <name>Prod_Reg_Active_c_to_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND( 3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aquire Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>AEQCC Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.Stage_Status__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.Stage_Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Inactive Status on Active%5F%5Fc</fullName>
+        <actions>
+            <name>Prod_Reg_Active_c_to_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND( 3)</booleanFilter>
+        <criteriaItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aquire Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>AEQCC Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.Stage_Status__c</field>
+            <operation>contains</operation>
+            <value>Inactive,Expired,Suspended,Blacklisted,Deactivated</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Achieved Max Aquire to FALSE</fullName>
+        <actions>
+            <name>Update_Max_Airline_Points_to_FALSE</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 3) AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Product_Registration__c.Aquire_Point_Balance__c</field>
+            <operation>contains</operation>
+            <value>N</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aquire Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.Aquire_Point_Balance__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>CRM 1351</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Achieved Max Aquire to TRUE</fullName>
+        <actions>
+            <name>Update_Max_Airline_Points_to_TRUE</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Product_Registration__c.Aquire_Point_Balance__c</field>
+            <operation>contains</operation>
+            <value>Y</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product_Registration__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aquire Registration</value>
+        </criteriaItems>
+        <description>CRM 1351</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update QBD Enrollment Date on Active</fullName>
+        <actions>
+            <name>Update_QBD_Last_Modified_Date_on_Active</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Product_Registration__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update QBD Reg%2E Last Modified Date</fullName>
+        <actions>
+            <name>Update_QBD_Last_Modified_Date_on_Active</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR(ISCHANGED(Active__c),ISCHANGED(QBD_Key_Contact_Name__c),  ISCHANGED(QBD_Key_Contact_Email__c),ISCHANGED(QBD_Business_Communication__c ),ISCHANGED(Key_Contact_Office_ID__c) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF AMEX to Add ABN deatils on Amex product</fullName>
+        <actions>
+            <name>Update_ABN_Info_from_Account</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>To Add ABN Detail from Account on Product registration creation</description>
+        <formula>RecordType.DeveloperName = &apos;AMEX_Registration&apos; &amp;&amp;  (ISNEW() || Account__r.ABN_Tax_Reference__c !=  ABN__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF AMEX to Set the Airline Level</fullName>
+        <actions>
+            <name>Update_Amex_Airline_Level_to</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Set the Airline Level on AMEX Product to L1 always and if Corp &amp; SME Deal is checked then its sets to Level L4</description>
+        <formula>True</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>WF Amex Ifly Notification for QBR Enrollment</fullName>
+        <actions>
+            <name>Update_AMEX_Trigger_Outbound_to_FALSE</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Amex_Process_Status_to_Pending</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>AMEX_IFLY_Notification_for_QBR_Enrol</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>STME-2435_Amex Ifly Notification Sent to QCP System with the Required AMEX Fields</description>
+        <formula>RecordType.DeveloperName ==&apos;AMEX_Registration&apos; &amp;&amp; $User.Alias != &apos;ainte&apos; &amp;&amp; $User.Alias != &apos;apiuser&apos; &amp;&amp; Active__c == true &amp;&amp; AMEX_Trigger_Outbound__c == True  &amp;&amp;  Airline_Level__c !=&apos;&apos;</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>change Product Registraion Record Type to AMEX</fullName>
+        <actions>
+            <name>set_Product_Registraion_Record_Type_t</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Product_Registration__c.Type__c</field>
+            <operation>equals</operation>
+            <value>AEQCC,AQBRC</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>change Product Registraion Record Type to Aquire</fullName>
+        <actions>
+            <name>set_Registraion_Record_Type_Aquire</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Product_Registration__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Aquire</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>change Product Registraion Record Type to QBD</fullName>
+        <actions>
+            <name>set_PR_record_type_to_QBD</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Product_Registration__c.Type__c</field>
+            <operation>equals</operation>
+            <value>QBD</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

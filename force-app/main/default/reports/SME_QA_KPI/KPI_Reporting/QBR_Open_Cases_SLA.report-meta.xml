@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>CLOSED_DATE</field>
+    </columns>
+    <currency>AUD</currency>
+    <customDetailFormulas>
+        <calculatedFormula>IF(
+   8 * (
+       (5 * FLOOR((DATEVALUE(CLOSED_DATE) - DATE(1900, 1, 7)) / 7) +
+           MIN(5,
+               MOD(DATEVALUE(CLOSED_DATE) - DATE(1900, 1, 7), 7) +
+                   MIN(1, 24 / 8 * (MOD(CLOSED_DATE - DATETIMEVALUE(&apos;1900-01-07 23:00:00&apos;), 1)))
+           )
+       )
+       -
+       (5 * FLOOR((DATEVALUE(CREATED_DATE) - DATE(1900, 1, 7)) / 7) +
+           MIN(5,
+               MOD(DATEVALUE(CREATED_DATE) - DATE(1900, 1, 7), 7) +
+                   MIN(1, 24 / 8 * (MOD(CREATED_DATE - DATETIMEVALUE(&apos;1900-01-07 23:00:00&apos;), 1)))
+           )
+       )
+   ) &lt;= 17,
+   1,  
+   0   
+)</calculatedFormula>
+        <dataType>Double</dataType>
+        <developerName>CDF1</developerName>
+        <label>Within SLA</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <description>Test report for QBR Open Cases SLA %</description>
+    <filter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.SME_Customer_Support</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CLOSED</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER_ROLE</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>QF-DOM-Sales-SME-QIS-SME Callout</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CDF1</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>QBR Open Cases SLA</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CURFY</interval>
+    </timeFrameFilter>
+</Report>

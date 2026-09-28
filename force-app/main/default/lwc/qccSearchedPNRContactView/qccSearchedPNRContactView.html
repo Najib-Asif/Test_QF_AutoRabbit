@@ -1,0 +1,52 @@
+<template>
+    <template if:true={passengers}>
+        <lightning-datatable
+            key-field="id"
+            data={passengers}
+            columns={columns}
+            wrap-text-max-lines="3"
+            selected-rows="0"
+            hide-checkbox-column="true">
+        </lightning-datatable>
+    </template>
+    <template if:false={passengers}>
+        No contact data available
+    </template>
+</template>
+
+<!-- <template>
+    <div class="ivr-selection-div">
+        <p class="call-details"><b>First Name: </b>
+            <lightning-formatted-text 
+                class="slds-var-m-left_xx-small"
+                value={firstName}>
+            </lightning-formatted-text>
+        </p>
+        <p class="call-details"><b>Last name: </b>
+            <lightning-formatted-text 
+                class="slds-var-m-left_xx-small"
+                value={lastName}>
+            </lightning-formatted-text>
+        </p>
+        <p class="call-details"><b>Email: </b>
+            <lightning-formatted-text 
+                class="slds-var-m-left_xx-small"
+                value={Email}>
+            </lightning-formatted-text>
+        </p>
+        <p class="call-details"><b>Phone: </b>
+            <lightning-formatted-text 
+                class="slds-var-m-left_xx-small"
+                value={phone}>
+            </lightning-formatted-text>
+        </p>
+        
+        <p class="call-details" if:true={showFF}><b>Frequent Flyer Number: </b>
+            <lightning-formatted-text 
+               
+                class="slds-var-m-left_xx-small"
+                value={ffNumber}>
+            </lightning-formatted-text>
+        </p>
+    </div>            
+</template>   -->

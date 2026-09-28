@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>YTD_Domestic_Other_Carrier_Revenue__c</fullName>
+    <label>YTD Domestic Other Carrier Revenue</label>
+    <summarizedField>AEQCC_Performance__c.YTD_Other_Airlines_Dom_CV__c</summarizedField>
+    <summaryFilterItems>
+        <field>AEQCC_Performance__c.Rollup__c</field>
+        <operation>equals</operation>
+        <value>TY</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AEQCC_Performance__c.Variance_Link__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

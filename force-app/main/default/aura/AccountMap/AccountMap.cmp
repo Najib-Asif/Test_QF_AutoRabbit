@@ -1,0 +1,20 @@
+<aura:component >   
+    <aura:attribute name="map" type="Object"/>    
+    <aura:attribute name="acc" type="Account"/>
+    <aura:attribute name="accList" type="List"/>
+	<aura:handler event="c:AccountsLoaded" action="{!c.accountsLoaded}"/>
+    <aura:handler event="c:AccountSelected" action="{!c.accountSelected}"/>
+   <!-- <ltng:require styles="/resource/leaflet/leaflet.css"
+        scripts="/resource/leaflet/leaflet.js"
+        afterScriptsLoaded="{!c.jsLoaded}" />-->
+    <ltng:require styles="{!$Resource.leaflet+'/leaflet/leaflet.css'}"
+                  scripts="{!$Resource.leaflet+'/leaflet/leaflet.js'}"
+        afterScriptsLoaded="{!c.jsLoaded}" />-
+    <ltng:require styles="{!$Resource.leaflet+'/leaflet/leaflet.css'}"/>
+    <ltng:require  scripts="{!$Resource.leaflet+'/leaflet/leaflet.js'}"/>
+    <div id="map"> 
+        <img />
+    </div>
+
+    	
+</aura:component>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_for_account</name>
+        <label>Check for account</label>
+        <locationX>177</locationX>
+        <locationY>61</locationY>
+        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <rules>
+            <name>is_account_exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>accountId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Account_Contact_data</targetReference>
+            </connector>
+            <label>is account exists</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_for_Contract</name>
+        <label>Check for Contract</label>
+        <locationX>179</locationX>
+        <locationY>315</locationY>
+        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <rules>
+            <name>Is_contract_exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>contractId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Deactiavte_Contract</targetReference>
+            </connector>
+            <label>Is contract exists</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Remove Contract Account roll up data_ Deactivate Contract {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Remove Contract Account roll up data_ Deactivate Contract</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Deactiavte_Contract</name>
+        <label>Deactiavte Contract</label>
+        <locationX>175</locationX>
+        <locationY>431</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>contractId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Active__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Contract__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Set_Account_Contact_data</name>
+        <label>Set Account Contact data</label>
+        <locationX>177</locationX>
+        <locationY>201</locationY>
+        <connector>
+            <targetReference>Check_for_Contract</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>accountId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Contract_Amount__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Commencement_Date__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contract_Expiry_Date__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contracted__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <startElementReference>Check_for_account</startElementReference>
+    <status>Draft</status>
+    <variables>
+        <name>accountId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>contractId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+</Flow>

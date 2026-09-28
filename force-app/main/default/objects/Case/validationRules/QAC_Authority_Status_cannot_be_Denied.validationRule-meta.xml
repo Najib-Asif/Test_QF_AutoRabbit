@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_Authority_Status_cannot_be_Denied</fullName>
+    <active>true</active>
+    <description>QAC- If the Authority number is generated it cannot be denied.</description>
+    <errorConditionFormula>AND( RecordType.Name == &apos;Service Request&apos;,
+AND( NOT(ISNULL(Authority_Number_F__c )),
+NOT(ISBLANK(Authority_Number_F__c ))) ,
+OR(ISPICKVAL ( PRIORVALUE ( Authority_Status__c ), &quot;Approved&quot;),ISPICKVAL ( PRIORVALUE ( Authority_Status__c ), &quot;Auto Approved&quot;)),ISCHANGED( Authority_Status__c ),
+OR(ISPICKVAL( Authority_Status__c , &apos;Denied&apos;),ISPICKVAL( Authority_Status__c , &apos;Not Applicable&apos;),ISPICKVAL( Authority_Status__c , &apos;&apos;))
+)</errorConditionFormula>
+    <errorMessage>Authority Status cannot be modified after its ‘Approved’ or ‘Auto Approved’</errorMessage>
+</ValidationRule>

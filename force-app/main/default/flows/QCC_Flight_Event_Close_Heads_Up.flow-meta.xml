@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <processMetadataValues>
+            <name>ActionCallType</name>
+            <value>
+                <stringValue>flow</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>flowSelection</name>
+            <value>
+                <stringValue>QCC Flight Event - Update Active and Heads Up Record</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>Get Heads Up Record</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <actionName>QCC_Flight_Event_Update_Active_and_Heads_Up_Record</actionName>
+        <actionType>flow</actionType>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>SObject</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>ActiveFlightEventRecord</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue>Event__c</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>SObject</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>ActiveFlightEventRecord</name>
+            <value>
+                <elementReference>myVariable_current</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QCC_Flight_Event_Update_Active_and_Heads_Up_Record</nameSegment>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>Flight Event - Active</label>
+        </rules>
+    </decisions>
+    <description>Auto-close disruption heads up event.</description>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>(
+	[Event__c].RecordTypeName__c  = &apos;Active_Event&apos;
+	||
+	(
+	PRIORVALUE ([Event__c].RecordTypeName__c ) = &apos;Active_Event&apos; 
+	&amp;&amp; 
+	[Event__c].RecordTypeName__c  = &apos;Closed_Event&apos;
+	)
+
+)
+&amp;&amp;
+(
+	TEXT([Event__c].DelayFailureCode__c ) = &apos;Flight Cancellation&apos;  ||
+	TEXT([Event__c].DelayFailureCode__c)  = &apos;Flight Delay&apos; 
+)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>(
+	{!myVariable_current.RecordTypeName__c}  = &apos;Active_Event&apos;
+	||
+	(
+	PRIORVALUE ({!myVariable_current.RecordTypeName__c} ) = &apos;Active_Event&apos; 
+	&amp;&amp; 
+	{!myVariable_current.RecordTypeName__c}  = &apos;Closed_Event&apos;
+	)
+
+)
+&amp;&amp;
+(
+	TEXT({!myVariable_current.DelayFailureCode__c} ) = &apos;Flight Cancellation&apos;  ||
+	TEXT({!myVariable_current.DelayFailureCode__c})  = &apos;Flight Delay&apos; 
+)</expression>
+    </formulas>
+    <interviewLabel>QCC_Flight_Event_Close_Heads_Up-5_InterviewLabel</interviewLabel>
+    <label>QCC Flight Event - Close Heads Up</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Event__c</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <startElementReference>myDecision</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Event__c</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Event__c</objectType>
+    </variables>
+</Flow>

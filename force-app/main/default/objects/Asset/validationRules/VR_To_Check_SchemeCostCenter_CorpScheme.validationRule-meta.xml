@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_To_Check_SchemeCostCenter_CorpScheme</fullName>
+    <active>true</active>
+    <description>To check if Scheme Cost center present in Corporate Scheme</description>
+    <errorConditionFormula>$Setup.EnableValidationRule__c.VR_To_Check_SchemeCostCenter_CorpScheme__c&amp;&amp;
+RecordType.DeveloperName =&apos;Corporate_Scheme&apos; &amp;&amp; ISBLANK(Scheme_Cost_Center__c)</errorConditionFormula>
+    <errorMessage>Please Enter Scheme Cost Center Value for Corporate Scheme .Refer to Help Text on Scheme Cost Center by hovering on it for more details</errorMessage>
+</ValidationRule>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignmentRule>
+        <fullName>Loyalty Leads</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <assignedTo>QBR_Unassigned_Leads_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Lead.Freight_Account_Business_Type__c</field>
+                <operation>equals</operation>
+                <value>Loyalty</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Lead.Freight_Business_Sub_Type__c</field>
+                <operation>equals</operation>
+                <value>Qantas Business Rewards</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>QFF_Unassigned_Leads_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Lead.Freight_Account_Business_Type__c</field>
+                <operation>equals</operation>
+                <value>Loyalty</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Lead.Freight_Business_Sub_Type__c</field>
+                <operation>equals</operation>
+                <value>Qantas Frequent Flyer</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>nischint.sadana@qantas.com.au</assignedTo>
+            <assignedToType>User</assignedToType>
+            <criteriaItems>
+                <field>Lead.LeadSource</field>
+                <operation>equals</operation>
+                <value>Partner Platform</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_Sales_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Lead.LeadSource</field>
+                <operation>equals</operation>
+                <value>Freight</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Lead.New_Account_Type__c</field>
+                <operation>equals</operation>
+                <value>Freight-Branch</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Freight_Inside_Sales_AU_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Lead.CreatedById</field>
+                <operation>contains</operation>
+                <value>Freight Customer Feedback User</value>
+            </criteriaItems>
+        </ruleEntry>
+    </assignmentRule>
+</AssignmentRules>

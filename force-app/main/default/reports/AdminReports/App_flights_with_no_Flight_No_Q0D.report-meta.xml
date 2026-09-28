@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>Case.Departure_City__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>CASE_ID</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>500Mo00000IWtIP,500Mo00000IWkLY,500Mo00000IWzlx,500Mo00000IWfiW,500Mo00000IWno5,500Mo00000IWznZ,500Mo00000IWzpB,500Mo00000IWzqn,500Mo00000IWvNP,500Mo00000IWhXP,500Mo00000IWzh8,500Mo00000IWmqP,500Mo00000IWlsj,500Mo00000IWyul,500Mo00000IWzu1,500Mo00000IWlMS,500Mo00000IWyYA,500Mo00000IWwEc,500Mo00000IWzyr,500Mo00000IWjPZ,500Mo00000IWbVK,500Mo00000IWUgj,500Mo00000IWjiu,500Mo00000IWhXQ,500Mo00000IWy1u,500Mo00000IX03h,500Mo00000IWUGu,500Mo00000IWc6N,500Mo00000IWtjn,500Mo00000IWeph,500Mo00000IVZnK,500Mo00000IWs1M,500Mo00000IX3pZ,500Mo00000IX3Kx,500Mo00000IX2jq,500Mo00000IWiJt,500Mo00000IWumL,500Mo00000IWjEF,500Mo00000IWqsQ,500Mo00000IWtVL,500Mo00000IWq19,500Mo00000IWkBx,500Mo00000IX3Hi,500Mo00000IWbyE,500Mo00000IX3MY,500Mo00000IWmth,500Mo00000IWo4K,500Mo00000IWmyV,500Mo00000IWrWl,500Mo00000IWiN3,500Mo00000IWYIt,500Mo00000IWjCd,500Mo00000IWj4Y,500Mo00000IWsm7,500Mo00000IWx13,500Mo00000IWZbV,500Mo00000IWlsm,500Mo00000IWezQ,500Mo00000IWvyV,500Mo00000IX6Io,500Mo00000IWkYd,500Mo00000IWcZW,500Mo00000IWtNC</value>
+        </criteriaItems>
+        <language>en_AU</language>
+    </filter>
+    <format>Tabular</format>
+    <name>App flights with no Flight No</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

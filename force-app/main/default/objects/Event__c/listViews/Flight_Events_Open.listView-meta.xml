@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flight_Events_Open</fullName>
+    <booleanFilter>9  AND 1 AND 2 AND ((3 AND 4 AND 5) OR (3 AND 6 AND 7) OR 8 OR 10)</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Plane_Number__c</columns>
+    <columns>Scheduled_Departure__c</columns>
+    <columns>DelayFailureCode__c</columns>
+    <columns>Non_Delay_Failure_Code__c</columns>
+    <columns>ArrivalDelayinHRSandMIN__c</columns>
+    <columns>DepartureDelayinHRSandMIN__c</columns>
+    <columns>Flight_Status__c</columns>
+    <columns>Comments__c</columns>
+    <columns>Primary_Root_Cause__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Event__c.Active_Event</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Open,Re-Opened</value>
+    </filters>
+    <filters>
+        <field>DelayFailureCode__c</field>
+        <operation>equals</operation>
+        <value>Flight Delay</value>
+    </filters>
+    <filters>
+        <field>IntDom__c</field>
+        <operation>equals</operation>
+        <value>Domestic</value>
+    </filters>
+    <filters>
+        <field>TechDepartureDelayDuration__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>0.12</value>
+    </filters>
+    <filters>
+        <field>IntDom__c</field>
+        <operation>equals</operation>
+        <value>International</value>
+    </filters>
+    <filters>
+        <field>TechDepartureDelayDuration__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>0.082</value>
+    </filters>
+    <filters>
+        <field>DelayFailureCode__c</field>
+        <operation>notEqual</operation>
+        <value>Flight Delay</value>
+    </filters>
+    <filters>
+        <field>GlobalEvent__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Non_Delay_Failure_Code__c</field>
+        <operation>equals</operation>
+        <value>A/C Downgrade,Baggage,Catering,IFE Failure - Full,IFE Failure - Partial,Lights,Q-Entertainment,Strike Action,Toilets,Wifi,Other</value>
+    </filters>
+    <label>CJO Recovery Events</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_QDC_CJM</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

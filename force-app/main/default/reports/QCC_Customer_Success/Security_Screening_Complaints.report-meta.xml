@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact.Cases$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Description</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Departure_Airport__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Type</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Category__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Sub_Category__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>requested by Narelle and Steph to check for customer feedback on implementation of new security screening processes</description>
+    <filter>
+        <criteriaItems>
+            <column>Contact.Cases$Type</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Complaint,Complaints</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Airport Security</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Security Screening Complaints</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Contacts_with_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Cases$CreatedDate</dateColumn>
+        <endDate>2021-03-03</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2019-11-01</startDate>
+    </timeFrameFilter>
+</Report>

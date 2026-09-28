@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Contact_Check</fullName>
+    <active>true</active>
+    <description>Should not make Inactive ACR as Primary Contact</description>
+    <errorConditionFormula>AND( Account.RecordType.DeveloperName = &apos;Agency_Account&apos;, IsActive = False, NOT($Profile.Name=&apos;System Administrator&apos;), NOT($Profile.Name=&apos;System Administrator&apos;), NOT($Profile.Name=&apos;Qantas System Administrator&apos;),NOT($Profile.Name=&apos;Qantas System Admin - Freight&apos;), NOT($Profile.Name=&apos;Qantas System Admin - QCC&apos;), NOT($Profile.Name=&apos;Qantas System Admin - SND&apos;),  Contact.Source__c &lt;&gt; &apos;PING&apos;, Primary_Contact__c =TRUE)</errorConditionFormula>
+    <errorDisplayField>Primary_Contact__c</errorDisplayField>
+    <errorMessage>Can not make Inactive ACR as Primary, Please Activate ACR and Make it as Primary</errorMessage>
+</ValidationRule>

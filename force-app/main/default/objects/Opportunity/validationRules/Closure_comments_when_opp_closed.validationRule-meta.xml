@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closure_comments_when_opp_closed</fullName>
+    <active>false</active>
+    <description>Rule to make the closure comments field mandatory, when the opportunity is closed.</description>
+    <errorConditionFormula>AND
+(
+NOT( CreatedBy.FirstName = &apos;Data&apos;), 
+NOT( RecordType.DeveloperName = &apos;Loyalty_Commercial&apos;), 
+NOT( $User.ProfileId = &apos;00e90000001wK8z&apos;), /*SysAdmins*/
+NOT( RecordTypeId = &quot;01290000001YbyD&quot;), /*B&amp;G Campaigns*/
+NOT ( ISPICKVAL( Type , &quot;Global Opportunity&quot;)), /*Global Opportunity*/ 
+OR
+(
+ISPICKVAL( StageName , &quot;Closed Won&quot;),
+ISPICKVAL( StageName , &quot;Closed Lost&quot;),
+ISPICKVAL( StageName , &quot;Closed - Accepted&quot;),
+ISPICKVAL( StageName , &quot;Closed - Not Accepted&quot;)
+), 
+ISBLANK(Other_reasons__c)
+)</errorConditionFormula>
+    <errorDisplayField>Other_reasons__c</errorDisplayField>
+    <errorMessage>Please enter closure comments.</errorMessage>
+</ValidationRule>

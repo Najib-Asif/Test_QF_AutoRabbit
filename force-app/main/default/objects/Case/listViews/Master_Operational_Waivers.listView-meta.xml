@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master_Operational_Waivers</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>Valid_From__c</columns>
+    <columns>Valid_To__c</columns>
+    <columns>Authority_Number__c</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Blanket_Waiver</value>
+    </filters>
+    <label>Master Operational Waivers</label>
+    <sharedTo>
+        <role>QF_Support_QIC</role>
+        <role>QF_Support_QIC_Member</role>
+    </sharedTo>
+</ListView>

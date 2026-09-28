@@ -1,0 +1,34 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="QCC_PassengerDisruptionCaseController">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="listFieldInFieldSet" type="List"/>
+    <aura:attribute name="activeSections" type="List" default="" />
+    <aura:attribute name="activeSectionsMessage" type="String" default="" />
+    
+    <aura:attribute name="mapLabel" type="object" /> 
+    <aura:attribute name="mapValues" type="object" /> 
+    
+    <div class="slds-wrap">
+        <lightning:accordion allowMultipleSectionsOpen="true" activeSectionName="{! v.activeSections }">
+            <aura:iteration items="{!v.listFieldInFieldSet}" var="item">
+                <lightning:accordionSection name="{!item.sectionName}" label="{!item.sectionName}">
+                    <aura:set attribute="body">
+                        <lightning:layout horizontalAlign="space" verticalAlign="center" multipleRows="true">
+                            <aura:iteration items="{!item.passengerWrapperList}" var="passengerInformation">
+                                <lightning:layoutItem flexibility="auto" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6">
+                                <div class="test-id__field-label-container slds-form-element__label">
+                                    {!passengerInformation.fieldName}
+                                </div>
+                                <div class="slds-form-element__control slds-grid itemBody">
+                                    {!passengerInformation.fieldValue}
+                                </div>
+                                </lightning:layoutItem>
+                                <br/>
+                            </aura:iteration>
+                        </lightning:layout>
+                    </aura:set>
+                </lightning:accordionSection>
+            </aura:iteration>      
+        </lightning:accordion>
+    </div>
+</aura:component>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DuplicateRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOnInsert>Block</actionOnInsert>
+    <actionOnUpdate>Block</actionOnUpdate>
+    <alertText>You&apos;re creating a duplicate record. Please use an existing Account with same ABN/Tax Reference instead.</alertText>
+    <description>Duplicate ABN/Tax Reference on Leads</description>
+    <duplicateRuleFilter>
+        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+        <duplicateRuleFilterItems>
+            <field>Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Data Administrator</value>
+            <sortOrder>1</sortOrder>
+            <table>User</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>New_Account_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Agency, Freight-Branch</value>
+            <sortOrder>2</sortOrder>
+            <table>Lead</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Override_Duplicate_Rules_System__c</field>
+            <operation>notEqual</operation>
+            <value>true</value>
+            <sortOrder>3</sortOrder>
+            <table>Lead</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Alias</field>
+            <operation>notEqual</operation>
+            <value>sysup</value>
+            <sortOrder>4</sortOrder>
+            <table>User</table>
+        </duplicateRuleFilterItems>
+    </duplicateRuleFilter>
+    <duplicateRuleMatchRules>
+        <matchRuleSObjectType>Account</matchRuleSObjectType>
+        <matchingRule>ABN_Tax_Reference_Rule</matchingRule>
+        <objectMapping>
+            <inputObject>Lead</inputObject>
+            <mappingFields>
+                <inputField>ABN_Tax_Reference__c</inputField>
+                <outputField>ABN_Tax_Reference__c</outputField>
+            </mappingFields>
+            <outputObject>Account</outputObject>
+        </objectMapping>
+    </duplicateRuleMatchRules>
+    <isActive>true</isActive>
+    <masterLabel>Lead - Duplicate ABN/Tax Reference</masterLabel>
+    <securityOption>BypassSharingRules</securityOption>
+    <sortOrder>1</sortOrder>
+</DuplicateRule>

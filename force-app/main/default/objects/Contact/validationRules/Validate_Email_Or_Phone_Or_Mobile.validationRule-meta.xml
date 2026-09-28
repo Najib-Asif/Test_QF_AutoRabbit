@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Email_Or_Phone_Or_Mobile</fullName>
+    <active>true</active>
+    <description>Validate Email Or Phone Or Mobile.</description>
+    <errorConditionFormula>AND( 
+ISBLANK( MobilePhone), 
+ISBLANK( Phone ), 
+ISBLANK( Email ), 
+(NOT($Profile.Name = &apos;Automated Process&apos;)),
+(NOT($Profile.Name=&apos;System Administrator&apos;)),
+(NOT($Profile.Name=&apos;Qantas System Administrator&apos;)),
+(NOT($Profile.Name=&apos;Qantas System Admin - Freight&apos;)),
+(NOT($Profile.Name=&apos;Qantas System Admin - QCC&apos;)),
+(NOT($Profile.Name=&apos;Qantas System Admin - SND&apos;)),
+(NOT($Profile.Name=&apos;System Admin - Lite&apos;)), 
+(NOT($Profile.Name=&apos;CRM Administrator&apos;)), 
+(NOT($Profile.Name=&apos;CRM Administrator - Freight&apos;)),
+(NOT($Profile.Name=&apos;CRM Administrator - Global&apos;)),
+(NOT($Profile.Name=&apos;CRM Administrator - QCC&apos;)),
+(NOT($Profile.Name=&apos;CRM Administrator - SND&apos;)),
+(NOT($Profile.Name=&apos;Qantas Pre Journey CC Consultant&apos;)), 
+(NOT( $Profile.Name=&apos;Data Administrator&apos;)), 
+(NOT( $Profile.Name=&apos;Qantas CC Consultant&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Contact Center Agent Hobart&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Contact Center Agent Manila&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Contact Center Agent Capetown&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Contact Center Agent Suva&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Contact Center Agent Auckland&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Contact Center Agent Mumbai&apos;)), 
+(NOT( $Profile.Name=&apos;Qantas CC Journey Manager&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Customer Journey Manager&apos;)), 
+(NOT( $Profile.Name=&apos;Qantas CC Operational Manager&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Operational Manager&apos;)), 
+(NOT( $Profile.Name=&apos;Qantas CC Team Lead&apos;)), 
+(NOT( $Profile.Name=&apos;Qantas CC Customer Specific Needs&apos;)), 
+(NOT( $Profile.Name=&apos;QCC Specific Needs Agent&apos;)), 
+(NOT( $Profile.Name=&apos;Qantas Freight Sales&apos;)),
+(NOT( $Profile.Name=&apos;Qantas Freight Service&apos;)),
+(NOT( $Profile.Name=&apos;API Profile QCC Connected/QCC GW Integration&apos;)),
+(NOT( $Profile.Name=&apos;API Profile QSOA Flight Events&apos;)),
+(NOT(CONTAINS(LastName,&apos;Email&apos;))), 
+(NOT(CONTAINS(FirstName,&apos;Store&apos;))) 
+)</errorConditionFormula>
+    <errorMessage>Please enter Phone, Mobile or Email</errorMessage>
+</ValidationRule>

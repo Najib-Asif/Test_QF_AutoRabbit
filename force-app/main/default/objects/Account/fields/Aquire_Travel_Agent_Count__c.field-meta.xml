@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aquire_Travel_Agent_Count__c</fullName>
+    <label>QBR Travel Agent Count (system)</label>
+    <summaryFilterItems>
+        <field>Product_Registration__c.Active__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Product_Registration__c.Aquire_Industry__c</field>
+        <operation>contains</operation>
+        <value>Travel</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Product_Registration__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Aquire Registration</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Product_Registration__c.Account__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

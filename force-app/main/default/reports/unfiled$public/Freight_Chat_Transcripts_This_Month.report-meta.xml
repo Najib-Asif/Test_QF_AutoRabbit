@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_84395446</developerName>
+        <masterLabel>Agent Vs Bot</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>LiveChatTranscript$Owner.FirstName</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Automated</sourceValue>
+            </sourceValues>
+            <value>Bot</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_5172344</developerName>
+        <masterLabel>Chat Start Hour</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>LiveChatTranscript$Chat_Start_hour__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>8 AM</sourceValue>
+            </sourceValues>
+            <value>8-9 am</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>9 AM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>10 AM</sourceValue>
+            </sourceValues>
+            <value>9-10 am</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>LiveChatTranscript$Name</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Platform</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$ReferrerUri</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Location</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>LiveChatTranscript$WaitTime</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>LiveChatTranscript$Chat_Duration_Mins__c</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$Case</field>
+    </columns>
+    <columns>
+        <field>LiveChatTranscript$StartTime</field>
+    </columns>
+    <currency>AUD</currency>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>LiveChatTranscript$Status</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_84395446</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>LiveChatTranscript$Chat_Start_hour__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Freight Chat Transcripts - This Month</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Live_Chat__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>LiveChatTranscript$CreatedDate</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,37 @@
+<aura:component controller="QEC_SpecialConditionController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="refreshDataEvent" type="c:QEC_refreshDataEvent" />
+    <aura:attribute name="fields" type="String[]" />
+    <aura:attribute name="origin" type="sObject" />
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:attribute name="origins" type="sObject[]" />
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:attribute name="destinations" type="sObject[]" />	
+    <aura:attribute name="fieldMap" type="Map" />
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="specialConditionList" type="QEC_Special_Condition__c[]" />
+    <aura:attribute name="pickListMap" type="Map" />
+    <aura:attribute name="selectedFare" type="String"/>
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="objectType" type="String" />
+    <aura:attribute name="selectedCabin" type="String" />
+    <aura:handler name="change" value="{!v.destinations}" action="{!c.handleChange}"/>
+    <aura:handler name="change" value="{!v.origin}" action="{!c.handleChange}"/>
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:handler name="change" value="{!v.origins}" action="{!c.handleChange}"/>
+    <!--Added for JIRA CRM-4196.Allow multiple Origin and restrict only 1 destination-->
+    <aura:handler name="change" value="{!v.selectedFare}" action="{!c.handleChange}"/>
+    <aura:handler name="change" value="{!v.selectedCabin}" action="{!c.handleChange}"/>
+    <aura:handler name="rowDeleteEvent" event="c:QEC_RowOperation" action="{!c.handleRowDelete}"/>
+    <aura:handler name="rowCloneEvent" event="c:QEC_RowOperation" action="{!c.handleRowClone}" />
+	
+    <aura:iteration items="{!v.specialConditionList}" var="item" indexVar="index">
+        <c:QEC_dynamicRow specialCondition="{!item}" fields="{!v.fields}" pickListMap="{!v.pickListMap}" rowIndex="{!index}" type="{v.type}"/>
+    </aura:iteration>
+    <aura:if isTrue="{!not(empty(v.specialConditionList))}">
+    <div class="slds-align_absolute-center">
+        <lightning:button class="slds-m-around_small" variant="brand" label="Save" title="Save" onclick="{!c.handleSave}" />
+    </div>
+    </aura:if>
+</aura:component>
+ <!-- Compnent--><!-- Compnent-->

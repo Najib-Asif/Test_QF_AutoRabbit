@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact.Cases$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$Description</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$LastModifiedBy</field>
+    </columns>
+    <columns>
+        <field>Contact$Frequent_Flyer_Tier__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Cases$RecordType</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Report to identify cases for future bulk emails, tranche 8 and beyond</description>
+    <filter>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8 AND 9 AND 10</booleanFilter>
+        <criteriaItems>
+            <column>Contact.Cases$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.CCC_Baggage,Case.CCC_Complaints,Case.CCC_Query</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Hot_words_check__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Priority</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Critical</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact$Frequent_Flyer_Tier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Platinum,Platinum One,Chairman&apos;s Lounge,Chairman&apos;s Lounge Platinum One,Chairmans Lounge,Chairmans Lounge Platinum One</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Origin</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Red App,Red</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Owner</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>ccc</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$LastModifiedBy</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Nandhini Vasudevan</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$LastModifiedDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>12/21/2021 3:00 PM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Cases$Description</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>death,died,dying,compassionate,cancer,pass away,passed away</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>SF Bulk Email - Tranche Eight</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Contacts_with_without_Recoveries__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Cases$CreatedDate</dateColumn>
+        <endDate>2021-11-15</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2021-10-11</startDate>
+    </timeFrameFilter>
+</Report>

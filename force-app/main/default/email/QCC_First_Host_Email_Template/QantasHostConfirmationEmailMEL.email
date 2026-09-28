@@ -1,0 +1,23 @@
+<center><img src="/resource/QantasLetterheadUpdated" alt="QantasLetterhead" /> <br/> <br/> </center>
+
+Hi {!QCC_First_Host__c.QCC_First_Host_First_Name__c},
+
+<p>Thank you for choosing to fly with Qantas.</p>
+
+{!IF(QCC_First_Host__c.QCC_Qantas_Porter_Service__c = TRUE, "We’ve received your request for Qantas Porter Assistance for " + QCC_First_Host__c.QCC_Carrier_Code__c + "" + QCC_First_Host__c.QCC_Flight_No__c + " with your expected airport arrival time of "
++ QCC_First_Host__c.QCC_TECH_Expected_Arrival_Time_Formula__c + ". Please proceed to the Qantas First curbside check-in on arrival at the Melbourne International Terminal and one of our porters will be expecting you.", "")}
+
+{!IF(QCC_First_Host__c.QCC_Qantas_First_Spa_Lounge__c = TRUE, "<p>A member of our team will be in contact prior to departure in regards to your Spa appointment enquiry.<p>","")}
+
+{!IF(NOT(ISBLANK(QCC_First_Host__c.QCC_Other_Details__c)), "<p>Your special request was noted.<p>","")}
+
+Warm regards,<br>
+Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Service Team<br>
+{!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "World Wide +61 (2) 6250 8204", IF(QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Platinum One" || QCC_First_Host__c.QCC_Frequent_Flyer_Tier_Formula__c = "Chairmans Lounge Platinum One" || QCC_First_Host__c.QCC_Tier_Effective_Tier_Formula__c ="FFLP" ,"World Wide +61 1300 752 801","vipserviceteam@qantas.com.au"))}
+<br>
+</br>
+<img src="/resource/QantasFooter" alt="QantasFooter" />
+<br/>
+--------------------------------------------------------------------<br>
+<b><font size ="4">Important Information </font></b>
+<font size ="2"><p>Porter Service and Spa appointments are subject to availability and we apologise in advance if the service is at capacity at the time of enquiry. Guests must be 18 years or older to access the Qantas Spa.  The Qantas {!IF(QCC_First_Host__c.QCC_SSU_Formula__c = TRUE, "Special","VIP")} Services offered are non-transferable and only offered to eligible customers travelling on selected Qantas International flights. </font></p>

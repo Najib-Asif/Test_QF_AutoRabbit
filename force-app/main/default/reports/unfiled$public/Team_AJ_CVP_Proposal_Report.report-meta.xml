@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Proposal__c$Name</field>
+    </columns>
+    <columns>
+        <field>Proposal__c$Approval_Status__c</field>
+    </columns>
+    <columns>
+        <field>Proposal__c$CreatedDate</field>
+    </columns>
+    <currency>AUD</currency>
+    <description>Team AJ CVP Proposal Report
+Manual QCIs added - not dynamic</description>
+    <filter>
+        <criteriaItems>
+            <column>Proposal__c$Account__c.Qantas_Corporate_Identifier__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>ALI,ZSD,BHJ,GCG,ZJE,ZPX,ZGS,ACZ,DGL,FMM,ZQH,ZZK,FEE,YXR,ZTR,FOR,FHV,BOU,BIZ,ZFZ,ALA,ERJ,CZO,FMQ,EVU,FKR,ZIZ,CNK,YOX,CLD,ZZA,FMD,FFZ,DEB,ZTS,ZZX,CZB,BNX,FGB,BIH,ZRX,GBL,GCA,DGO,FCJ,CIE,ACH,DYC,AQS,ANY,FHZ,EZW,EFO,ZHC,FGQ,DAQ,FOW,FGP,CHF,FMH,BJA,FPB,DQM,CGV,ZWK,COK,CFH,YZG,EBM,CHC,ACY,FOO,ZDS,ERD,EWC,ZRQ,FMW,FNV,BAG,AGP,YRN,CLF,YQQ,EMU,BTL,FAS,DDA,GBP,CHR,EIB,BPI,CLM,CLQ,ZBQ,CMP,FPS,ZSW,ANA,DVD,ZNU,YMO,BJW,DPL,FIR,CLS,AJP,BRO,DBO,FLT,AJX,AOF,FES,BIX,ZZV,ZZI,AIP,DPP,DPV,AKO,DNR,AMM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Proposal__c$Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Proposal__c$CreatedDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>9/24/2025 12:00 AM</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Proposal__c$Opportunity__c.Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Proposal__c$Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Team AJ CVP Proposal Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Proposal__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Proposal__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

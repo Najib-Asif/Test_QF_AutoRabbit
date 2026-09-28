@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_AU_Cases_On_Hold</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Problem_Type__c</columns>
+    <columns>CASES.ORIGIN</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Account_Tier__c</columns>
+    <columns>PNR_number__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>Paid_Service__c</columns>
+    <columns>Billing_Status__c</columns>
+    <columns>Billing_Due_Date__c</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>OWNER_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.QIC_Service_request</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>On Hold</value>
+    </filters>
+    <filters>
+        <field>CASES.TYPE</field>
+        <operation>notEqual</operation>
+        <value>Service Request,Group Waivers,SBT</value>
+    </filters>
+    <filters>
+        <field>Account_Country__c</field>
+        <operation>equals</operation>
+        <value>AU</value>
+    </filters>
+    <label>QAC AU Cases  On Hold</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

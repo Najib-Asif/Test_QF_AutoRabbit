@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>TopicAssignment$Entity</field>
+    </columns>
+    <columns>
+        <field>TopicAssignment$DerivedRecord</field>
+    </columns>
+    <columns>
+        <field>TopicAssignment$EntityKeyPrefix</field>
+    </columns>
+    <currency>AUD</currency>
+    <filter>
+        <criteriaItems>
+            <column>TopicAssignment$EntityKeyPrefix</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>ka0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>TopicAssignment$Network</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Knowledge iQ</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>TopicAssignment$Topic</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>National Memo,Knowledge Request,Memberships &amp; Promotions,Bookings &amp; Payments,Commercial Policies,VIP Customers,Preparing for Travel,En-route &amp; Post Travel,Disruption,Refunds1,Baggage</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <aggregateType>RowCount</aggregateType>
+        <dateGranularity>Day</dateGranularity>
+        <field>TopicAssignment$Topic</field>
+        <sortByName>RowCount</sortByName>
+        <sortOrder>Asc</sortOrder>
+        <sortType>Aggregate</sortType>
+    </groupingsDown>
+    <name>Number of Articles under each Topic</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Topic_Assignments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>TopicAssignment$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

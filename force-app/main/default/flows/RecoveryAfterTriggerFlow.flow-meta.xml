@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_Record_is_Created_Or_Updated</name>
+        <label>Check Record is Created Or Updated?</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>Invoke_RecoveryAfterTriggerSubFlow_CCChatterNotification</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Recovery updated</defaultConnectorLabel>
+        <rules>
+            <name>Recovery_Created</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Recovery Created</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Record_Type_Check</name>
+        <label>Record Type Check</label>
+        <locationX>226</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Customer_Connect</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer_Connect</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Record_is_Created_Or_Updated</targetReference>
+            </connector>
+            <label>Customer Connect</label>
+        </rules>
+    </decisions>
+    <description>RecoveryAfterTriggerFlow</description>
+    <environments>Default</environments>
+    <interviewLabel>RecoveryAfterTriggerFlow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>RecoveryAfterTriggerFlow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>100</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Record_Type_Check</targetReference>
+        </connector>
+        <object>Recovery__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>Invoke_RecoveryAfterTriggerSubFlow_CCChatterNotification</name>
+        <label>Invoke RecoveryAfterTriggerSubFlow-CCChatterNotification</label>
+        <locationX>138</locationX>
+        <locationY>539</locationY>
+        <flowName>RecoveryAfterTriggerSubFlow_CCChatterNotification</flowName>
+        <inputAssignments>
+            <name>objNewRecovery</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>objOldRecovery</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </subflows>
+</Flow>

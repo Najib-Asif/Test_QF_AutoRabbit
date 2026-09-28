@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>CaseAsyncAfterTriggerFlow_BCPFileDeletion {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CaseAsyncAfterTriggerFlow_BCPFileDeletion</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterFormula>{!$Record.RecordType.DeveloperName}=&apos;QAC_3_0&apos; &amp;&amp; {!$Record.Created_From_Website__c}=&apos;BCP&apos; &amp;&amp; ISPICKVAL({!$Record.Status}, &apos;Closed&apos;)</filterFormula>
+        <object>Case</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <scheduledPaths>
+            <name>Delete_all_user_files_after_1_day</name>
+            <connector>
+                <targetReference>CaseAsyncAfterTriggerSubFlow_BCPFileDeletion_Flow_1</targetReference>
+            </connector>
+            <label>Delete all user files after 1 day</label>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>ClosedDate</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>CaseAsyncAfterTriggerSubFlow_BCPFileDeletion_Flow_1</name>
+        <label>CaseAsyncAfterTriggerSubFlow_BCPFileDeletion Flow 1</label>
+        <locationX>308</locationX>
+        <locationY>276</locationY>
+        <flowName>CaseAsyncAfterTriggerSubFlow_BCPFileDeletion</flowName>
+        <inputAssignments>
+            <name>caseRecord</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

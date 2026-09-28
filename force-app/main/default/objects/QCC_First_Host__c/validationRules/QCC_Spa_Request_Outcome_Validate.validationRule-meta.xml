@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QCC_Spa_Request_Outcome_Validate</fullName>
+    <active>true</active>
+    <description>Cannot send email or SMS if Spa Request Outcome is Sent, Sending, or Failed to Send</description>
+    <errorConditionFormula>AND(
+	ISCHANGED(QCC_Spa_Request_Outcome__c),
+		ISPICKVAL(PRIORVALUE(QCC_Spa_Request_Outcome__c), &apos;Sent&apos;),
+	ISPICKVAL(QCC_Spa_Request_Outcome__c, &apos;Sending&apos;)
+)</errorConditionFormula>
+    <errorMessage>Cannot send an email or SMS when status is Sent, Sending, or Failed to Send status.</errorMessage>
+</ValidationRule>

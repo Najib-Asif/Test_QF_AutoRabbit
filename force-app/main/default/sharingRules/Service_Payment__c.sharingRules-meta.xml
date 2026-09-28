@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>QAC_Mindpearl_Service_Payment_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Mindpearl Service Payment Sharing Rule</label>
+        <sharedTo>
+            <group>Mindpearl_Agency_Group</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_NA_Service_Payment_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC NA Service Payment Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_NA_Support_Team_for_US_and_Canada</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Sharing_Rule_for_ServicePayment_Owned_By_QAC_User</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Sharing Rule for ServicePayment Owned By QAC User</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_Sharing_Rule_for_Service_Payment_Service_Request</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Sharing Rule for Service Payment Service Request</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>QAC_UK_Service_Payment_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC UK Service Payment Sharing Rule</label>
+        <sharedTo>
+            <group>QAC_UK_Support_Team</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OwnerId</field>
+            <operation>equals</operation>
+            <value>00590000006dsHy</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>QAC_Credits_Service_Payment_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>QAC Credits Service Payment Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>QF_Support_QIC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <group>QAC_Agency_Credit_Group</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

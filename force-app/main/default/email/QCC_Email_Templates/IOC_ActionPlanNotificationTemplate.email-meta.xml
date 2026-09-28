@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>IOC Action Plan Notification email template, to owners</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>QCC_BlankLetterhead</letterhead>
+    <name>IOC_ActionPlanNotificationTemplate</name>
+    <style>freeForm</style>
+    <subject>Action Plan Notification</subject>
+    <textOnly>Hi Team,
+
+An action is assigned to you, for the flight # {!Event__c.FlightNumber__c} from {!Event__c.DeparturePort__c} to {!Event__c.ArrivalPort__c}. Please complete the action to closed the event.
+
+Open the link for further details: {!Event__c.Link}
+
+Thanks,
+Qantas Operations</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

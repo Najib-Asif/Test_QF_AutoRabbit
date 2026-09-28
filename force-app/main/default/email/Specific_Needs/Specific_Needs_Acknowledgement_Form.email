@@ -1,0 +1,108 @@
+<messaging:emailTemplate subject="We’ve received your specific needs request." recipientType="User" relatedToType="Case" >
+<messaging:htmlEmailBody >
+
+<html>
+<head>
+    <title></title>
+    <style>
+    body{
+        font-family: arial, calibri;
+        font-size: 14px;
+    }
+    </style>
+</head>
+<body>
+    
+   
+<center><img src="https://qantas.file.force.com/servlet/servlet.ImageServer?id=0159000000FSVkd&oid=00D900000010OOK&lastMod=1521233610000" alt="QantasLetterhead" /> <br/> <br/> </center>
+
+Hello {!relatedTo.First_Name__c},
+
+<p>Thanks for submitting your specific needs request.</p>
+
+<p>Once your {!IF(relatedTo.QCC_Specific_Needs__r.QCC_Mobility_Aid_Type__c = "Non-Motorised Wheelchair","wheelchair is","")} 
+
+{!IF(relatedTo.QCC_Specific_Needs__r.QCC_Mobility_Aid_Type__c = "Motorised Wheelchair","motorised wheelchair and battery are","")} 
+
+{!IF(relatedTo.QCC_Specific_Needs__r.QCC_Mobility_Aid_Type__c = "Motorised Mobility Aid","mobility aid and battery are","")} approved, you will receive additional emails confirming details for your day of travel.</p>   
+
+<h4 align="left">Your booking</h4>
+<p align="left">Booking reference number: {!relatedTo.Booking_PNR__c}</p>
+<h4 align="left">Your requests</h4>
+<p align="left">Request number: {!relatedTo.CaseNumber}</p>
+<ul align="left">
+
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Torso_Support_Required__c == 'Yes'}">
+<li> Torso Support </li>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Eagle_Lift__c == 'Yes'}">
+<li> Eagle Lift </li>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Self_Transfer__c == 'Yes'}">
+<li> Self Transfer </li>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Johnny_Belt__c == 'Yes'}">
+<li> Jony Belt </li>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Slide_Board__c == 'Yes'}">
+<li> Slide Board </li>
+</apex:outputPanel>
+</ul>
+
+
+<h4>What are your next steps?</h4>
+
+<ul align="left">
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Mobility_Aid_Type__c == 'Non-Motorised Wheelchair'}">
+<li>You will receive an email approval for your wheelchair.</li>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Mobility_Aid_Type__c == 'Motorised Wheelchair'}">
+<li>You will receive an email approval for your motorised wheelchair.</li>
+<li>Please allow 5 working days for your battery approval to be processed by Dangerous Goods. For further enquiries, contact dg@qantas.com.au</li>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!relatedTo.QCC_Specific_Needs__r.QCC_Mobility_Aid_Type__c == 'Motorised Mobility Aid'}">
+<li>You will receive an email approval for your motorised wheelchair.</li>
+<li>Please allow 5 working days for your battery approval to be processed by Dangerous Goods. For further enquiries, contact dg@qantas.com.au</li>
+</apex:outputPanel>
+<li>Check-in online.</li>
+<li>Arrive at the airport on the day of travel with your wheelchair 2hrs before departure for international flights and 1hr for domestic flights.</li>
+<li>Seek assistance from Qantas staff at check-in. You can drop off your wheelchair at check-in or the boarding gate.</li>
+<li>Go to the boarding gate.</li>
+<li>Get ready for take off.</li>
+</ul>
+
+<h4>We’re here to help</h4>
+
+<p>If you’re a passenger or carer with questions relating to specific needs during your journey, you can reply to this email or contact our Customer Specific Needs team on 1800 177 474 (within Australia), +61 2 9123 7471 (from outside Australia), who are available 7 days, from 6am to 10pm (AEST) or contact your local Qantas office.</p>
+
+<p>Travelling within 72 hours? We will respond within 24 hours.</p>
+
+<p>If your travel departure time is more than 72 hours away, we will respond within 72 hours.</p>
+
+Kind Regards,<br/>
+{!$User.FirstName}<br/>
+Qantas Customer Specific Needs Team<br/>
+
+<img src="https://qantas.file.force.com/servlet/servlet.ImageServer?id=0159000000FSVke&oid=00D900000010OOK&lastMod=1521233610000" alt="QantasFooter" /> 
+
+
+<center>Qantas Airways Limited, ABN 16 009 661 901</center>
+<center>10 Bourke Road Mascot NSW 2020 Australia</center>
+
+
+<center>************PLEASE CONSIDER OUR ENVIRONMENT BEFORE PRINTING************</center>
+<center>***************************Confidentiality and Privilege Notice*******************************</center>
+
+
+<p>This e-mail is intended only to be read or used by the addressee. It is confidential and may contain legally privileged information. If you are not the addressee indicated in this message (or responsible for delivery of the message to such person), you may not copy or deliver this message to anyone, and you should destroy this message and kindly notify the sender by reply e-mail. Confidentiality and legal privilege are not waived or lost by reason of mistaken delivery to you. Qantas Airways Limited ABN 16 009 661 901</p>
+
+<font color="white">
+        <apex:outputText value="{!Relatedto.Custom_Thread_ID__c}"/>
+        <!--<apex:outputText value="{!relatedTo.Thread_Token}"/>-->
+    </font>
+</body>
+</html>
+
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

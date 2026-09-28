@@ -1,0 +1,31 @@
+<template>
+    <!-- Parent Card -->
+    <lightning-card >
+        <!-- Parent Title -->
+        <h3 slot="title" class="slds-var-p-vertical_medium">
+            {parentCardTitle}
+        </h3>
+        <!-- Parent Footer -->
+        <template lwc:if={showButton}>
+            <div slot="footer">
+                <a href="javascript:;" style="font-size: 14px;font-weight: 400;line-height: 21px;color:#006DCC;"
+                    onclick={handleClick}>{buttonLabel}</a>
+            </div>
+        </template>
+        <!-- Parent Body -->
+        <div class="slds-card__body slds-card__body_inner" >
+            <template lwc:if={renderFEvents}>                
+                <template for:each={flightInfoWrapperTemp} for:item="flghtEvnt" for:index="index">
+                    <article key={flghtEvnt.flightNumber} class="slds-card slds-card_boundary" >
+                        <c-qcc-flight-event-item  flght-evnt={flghtEvnt}></c-qcc-flight-event-item>
+                    </article>
+                </template>              
+
+            </template>
+        </div>
+        <!-- No PNR/Flightdata found -->
+        <template lwc:if={noPNRFlightData}>
+            <p class="slds-var-p-horizontal_medium">{errorMessage}</p>
+        </template>
+    </lightning-card>
+</template>

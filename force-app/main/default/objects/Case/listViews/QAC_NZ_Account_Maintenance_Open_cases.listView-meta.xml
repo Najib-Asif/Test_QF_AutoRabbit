@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QAC_NZ_Account_Maintenance_Open_cases</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Sub_Type_1__c</columns>
+    <columns>Sub_Type_2__c</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>Country__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.Account_Maintenance</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>In Progress,New,Open</value>
+    </filters>
+    <filters>
+        <field>Account_Country__c</field>
+        <operation>equals</operation>
+        <value>NZ</value>
+    </filters>
+    <label>QAC NZ Account Maintenance Open cases</label>
+    <sharedTo>
+        <group>Access_to_Angus_LUI</group>
+        <group>QAC_UK_for_AU_Users</group>
+        <roleAndSubordinatesInternal>QF_INT_Sales_North_America_NZ</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

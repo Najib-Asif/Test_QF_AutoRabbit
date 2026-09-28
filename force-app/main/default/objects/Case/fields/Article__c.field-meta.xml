@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Article__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <inlineHelpText>Look up the article against which you want to submit the feedback or amendment request.</inlineHelpText>
+    <label>Article</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Knowledge__kav.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Informational Article, Marketing and Promotional, Policy, Process and Procedure, Triage Article, Internal Noticeboard, Public Knowledge: FAQ&apos;s</value>
+        </filterItems>
+        <filterItems>
+            <field>Knowledge__kav.PublishStatus</field>
+            <operation>equals</operation>
+            <value>Published</value>
+        </filterItems>
+        <infoMessage>Please use the Article Number or the Article title for narrowing down your search.</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Knowledge__kav</referenceTo>
+    <relationshipLabel>Cases</relationshipLabel>
+    <relationshipName>Knowledge</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

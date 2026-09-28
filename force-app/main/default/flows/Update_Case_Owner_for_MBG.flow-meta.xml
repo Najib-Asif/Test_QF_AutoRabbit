@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Set_Case_Checklist_to_False</name>
+        <label>Set Case Checklist to False</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.MBG_Checklist__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Owner_Changed</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Sync_Checkbox_from_Child_Checklist</name>
+        <label>Sync Checkbox from Child Checklist</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.MBG_Checklist__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_MBG_checklist_Values.MBG_Checklist__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Owner_Changed</targetReference>
+        </connector>
+    </assignments>
+    <customErrors>
+        <name>Invalid_Queue_Selection</name>
+        <label>Invalid Queue Selection</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <customErrorMessages>
+            <errorMessage>The MBG Checklist checkbox must be selected before transferring the Case to the Freight Invoicing Queue</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <description>To Prevent null pointer issues</description>
+        <name>Checklist_Exists</name>
+        <label>Checklist Exists?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Set_Case_Checklist_to_False</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No checklist found</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Checklist_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_MBG_checklist_Values</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Sync_Checkbox_from_Child_Checklist</targetReference>
+            </connector>
+            <label>Yes Checklist Exists</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>MBG_Eligible</name>
+        <label>MBG Eligible?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Get_Freight_Invoicing_Record_Type</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Eligible - Allow Transfer</defaultConnectorLabel>
+        <rules>
+            <name>Transfer_Blocked</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_MBG_checklist_Values.MBG_Checklist__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_MBG_checklist_Values.Rejected__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Invalid_Queue_Selection</targetReference>
+            </connector>
+            <label>Transfer Blocked</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>New_Owner_Freight_Invoicing_Queue</name>
+        <label>New Owner = Freight Invoicing Queue?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Freight_Invoicing_Queue</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Get_Freight_Invoicing_Queue_ID.Id</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>MBG_Eligible</targetReference>
+            </connector>
+            <label>Yes_Freight Invoicing Queue</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Owner_Changed</name>
+        <label>Owner Changed?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Owner not changed</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Owner_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>New_Owner_Freight_Invoicing_Queue</targetReference>
+            </connector>
+            <label>Yes Owner Changed</label>
+        </rules>
+    </decisions>
+    <description>To restrict Case transfer until the MBG checklist is selected(CRM-12151)</description>
+    <environments>Default</environments>
+    <interviewLabel>UpdateCaseOwnerforMBG {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Case Owner for MBG</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Freight_Invoicing_Queue_ID</name>
+        <label>Get Freight Invoicing Queue ID</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_MBG_checklist_Values</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight_Invoices_Queue</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Freight_Invoicing_Record_Type</name>
+        <label>Get Freight Invoicing Record Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Change_to_Freight_Invoicing_Record_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Case</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Freight_Invoicing</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get MBG checklist Values from Case checklist Info</description>
+        <name>Get_MBG_checklist_Values</name>
+        <label>Get MBG checklist Values</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Checklist_Exists</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case_Checklist_Info__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Change_to_Freight_Invoicing_Record_Type</name>
+        <label>Change to Freight Invoicing Record Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>Get_Freight_Invoicing_Record_Type.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Freight_Invoicing_Queue_ID</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Sub_Type_1__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>MBG</stringValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

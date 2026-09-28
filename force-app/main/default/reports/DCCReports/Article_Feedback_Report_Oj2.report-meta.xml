@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Article_Number__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Article_Title__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$Vote__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>afl__afl_Article_Feedback__c$afl__Like__c</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>afl__afl_Article_Feedback__c.FeedItems$LikeCount</field>
+    </columns>
+    <columns>
+        <field>afl__afl_Article_Feedback__c$afl__Record_Type__c</field>
+    </columns>
+    <currency>AUD</currency>
+    <format>Tabular</format>
+    <name>Article Feedback Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Article_Feedback__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>afl__afl_Article_Feedback__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

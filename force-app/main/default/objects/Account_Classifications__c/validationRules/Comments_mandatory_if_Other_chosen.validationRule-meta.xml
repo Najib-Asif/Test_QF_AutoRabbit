@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comments_mandatory_if_Other_chosen</fullName>
+    <active>true</active>
+    <description>Comments field is mandatory if Other is chosen in the Sub Classifications</description>
+    <errorConditionFormula>ISPICKVAL(Sub_Classification__c, &quot;Other&quot;) &amp;&amp;  ISBLANK( Comments__c )</errorConditionFormula>
+    <errorDisplayField>Comments__c</errorDisplayField>
+    <errorMessage>Please comment the reason for choosing &apos;Other&apos; in the Sub Classification.</errorMessage>
+</ValidationRule>

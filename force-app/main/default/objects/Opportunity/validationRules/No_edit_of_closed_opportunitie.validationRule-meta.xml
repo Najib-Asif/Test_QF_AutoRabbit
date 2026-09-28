@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_edit_of_closed_opportunitie</fullName>
+    <active>false</active>
+    <description>User will not be able to edit closed opportunities, apart from System Admins.</description>
+    <errorConditionFormula>AND( NOT( CreatedBy.FirstName = &apos;Data&apos;), 
+NOT (  $User.Id  = &quot;00590000005Bf9H&quot;), /*Tom Taylor*/
+NOT ( ISPICKVAL( Type , &quot;Global Opportunity&quot;)), /*Global Opportunity*/ 
+PRIORVALUE( IsClosed ) = True, 
+
+NOT($Profile.Id = &quot;00e90000001wK8z&quot;),
+NOT ( OR($RecordType.DeveloperName = &quot;B_G_Campaigns&quot;,$RecordType.DeveloperName = &quot;Agency_Partnerships&quot;, $RecordType.DeveloperName = &quot;Freight&quot; ))/*B&amp;G Campaigns , Freight  */ , $Setup.EnableValidationRule__c.VR_No_edit_of_closed_opportunitie__c = false 
+)</errorConditionFormula>
+    <errorMessage>You are not authorized to edit a closed opportunity. Please contact your system administrator for assistance.</errorMessage>
+</ValidationRule>

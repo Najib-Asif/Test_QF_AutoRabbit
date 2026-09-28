@@ -1,0 +1,100 @@
+{
+  "version" : "61.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "SiteId", "IsActive", "Source", "Target", "Action", "IsDynamic", "CreatedDate", "CreatedById", "LastModifiedDate", "LastModifiedById", "SystemModstamp" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "SiteRedirectMapping",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "SiteRedirectMapping"
+        },
+        "sampleDetails" : {
+          "type" : "TopN"
+        }
+      }
+    },
+    "BUCKET0" : {
+      "action" : "bucket",
+      "sources" : [ "LOAD_DATASET0" ],
+      "parameters" : {
+        "fields" : [ {
+          "name" : "SiteId_bucket",
+          "label" : "Site Name",
+          "type" : "TEXT",
+          "bucketsSetup" : {
+            "defaultBucketValue" : "Other",
+            "nullBucketValue" : null,
+            "isPassthroughEnabled" : false,
+            "algorithm" : null,
+            "sourceField" : {
+              "name" : "SiteId",
+              "type" : "TEXT"
+            },
+            "buckets" : [ {
+              "value" : "Help n Support",
+              "sourceValues" : [ "0DM2v000000AE1WGAW" ]
+            } ]
+          }
+        } ]
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "BUCKET0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Site Redirects",
+          "name" : "Site_Redirects"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "SiteRedirectMapping",
+        "type" : "LOAD_DATASET",
+        "top" : 112,
+        "left" : 112,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "TRANSFORM0" : {
+        "label" : "Site Name",
+        "description" : "",
+        "type" : "TRANSFORM",
+        "top" : 112,
+        "left" : 252,
+        "graph" : {
+          "BUCKET0" : {
+            "label" : "Bucket"
+          }
+        },
+        "connectors" : [ ]
+      },
+      "OUTPUT0" : {
+        "label" : "Site Redirects",
+        "description" : "",
+        "type" : "OUTPUT",
+        "top" : 112,
+        "left" : 392
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "TRANSFORM0"
+    }, {
+      "source" : "TRANSFORM0",
+      "target" : "OUTPUT0"
+    } ],
+    "hiddenColumns" : [ ]
+  },
+  "runMode" : "full"
+}

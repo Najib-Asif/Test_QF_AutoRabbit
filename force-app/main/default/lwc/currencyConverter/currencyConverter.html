@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Currency Converter" icon-name="custom:custom68">
+        <div class="slds-p-around_medium">
+            <!-- Success and Error Messages -->
+            <font color='red'>{errorMsg}</font>
+            <div style="height:4rem;position:relative" if:true={showSpinner}>
+                <div class="slds-spinner_container">
+                    <div role="status" class="slds-spinner slds-spinner_x-small">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equivalent AUD Amount and Conversion rate-->
+            <div class="slds-box slds-box_x-small slds-theme_shade slds-m-bottom_x-small" if:true={isSuccess}>
+                <ul> <li><b> Equivalent AUD Amount: <font color='Blue'>  <lightning-formatted-number value={equivalentAud} format-style="currency" currency-code="AUD"></lightning-formatted-number> </font> </b></li>
+                  <li><b> Conversion Rate: <font color='Blue'>  {conversionRate}  </font> </b></li></ul>
+            </div>
+      
+
+           <!-- Form fields in a row -->
+           <div>
+               <div >
+                   <lightning-input label="Monetary Value" type="number" step="0.01" value={monetaryValue} onchange={handleMonetaryValueChange} required="true" placeholder="Enter an amount"></lightning-input>
+               </div>
+               <div >
+                    <c-dynamic-pick-list label="Payment Currency" placeholder="Select a currency" required="true" value={refundCurrency} name="refundCurrency" oncurrencychanged={handleCurrencyChanged} oncurrencycleared={handleCurrencyCleared}></c-dynamic-pick-list>
+                </div>
+                <div>
+                    <lightning-input label="Conversion Date" type="date" value={conversionDate} onchange={handleConversionDateChange} required="true" min={minDate} max={maxDate}></lightning-input>
+                </div>
+            </div>
+<!-- Fetch Value button aligned to the right -->
+             <div class="slds-m-top_medium slds-text-align_center">
+                <lightning-button label="Clear" onclick={handleClear} class="slds-p-around_xxx-small"></lightning-button>
+                <lightning-button variant="brand" label="Convert to AUD" onclick={handleConvertCurrency} class="slds-p-around_xxx-small" disabled={isConvertButtonDisabled}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,108 @@
+<template>
+    <lightning-spinner lwc:if={isLoading} alternative-text="Loading..." class="slds-align_absolute-center"></lightning-spinner>
+    <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh Data" class="slds-float_right" title="Refresh" variant="bare" onclick={handleRefresh}></lightning-button-icon>
+    <template lwc:if={errors}> 
+        <div class="slds-text-align_center slds-p-around_medium">
+            Some Error Occured loading.
+        </div>
+    </template>
+    <template lwc:else>
+        <lightning-record-view-form object-api-name="Case" record-id={recordId} optional-fields={casefields}>
+            <lightning-layout>
+                <lightning-layout-item padding="around-small" class="slds-size_2-of-12">
+                    <lightning-output-field field-name="Reason"> </lightning-output-field>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" class="slds-size_2-of-12">
+                    <lightning-output-field field-name="Booking_PNR__c"> </lightning-output-field>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" class="slds-size_3-of-12">
+                    <lightning-output-field field-name="Submit_to_Admin__c"> </lightning-output-field>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" class="slds-size_5-of-12">
+                    &nbsp;
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-record-view-form>
+        <template lwc:if={hasRecords}> 
+            
+            <table aria-multiselectable="true"
+                            class="slds-table slds-table_bordered slds-table_fixed-layout" role="grid">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                            scope="col">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-cell-wrap" title="Expense no.">Expense no.</span>
+                            </div>
+                        </th>
+                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                            scope="col">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-cell-wrap" title="Receipt Date">Receipt Date</span>
+                            </div>
+                        </th>
+                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                            scope="col">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-cell-wrap" title="Category">Category</span>
+                            </div>
+                        </th>
+                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                            scope="col">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-cell-wrap" title="Original Receipt Amount">Original Receipt Amount</span>
+                            </div>
+                        </th>
+                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                            scope="col">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-cell-wrap" title="Equivalent Amount">Equivalent Amount</span>
+                            </div>
+                        </th>
+                        <th class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                            scope="col">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-cell-wrap" title="Approved Amount">Approved Amount</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={records} for:item="expense">
+                        <tr aria-selected="false" class="slds-hint-parent" key={expense.Id}>
+                            <td class="slds-cell_action-mode" role="gridcell">
+                                <a style="border-bottom: 1px dotted;padding-bottom: 2px;text-decoration: none;" tooltip={expense.LineItemNumber.value} onclick={navigateToRecord} data-record-id={expense.Id}>{expense.LineItemNumber.value}</a>
+                            </td>
+                            <td class="slds-cell_action-mode" role="gridcell">
+                                <div class="slds-truncate" title={expense.Receipt_Date__c.displayValue}>{expense.Receipt_Date__c.displayValue}</div>
+                            </td>
+                            <td class="slds-cell_action-mode" role="gridcell">
+                                <div class="slds-cell-wrap" title={expense.Expense_Category__c.displayValue}>{expense.Expense_Category__c.displayValue}</div>
+                            </td>
+                            <td class="slds-cell_action-mode" role="gridcell">
+                                <lightning-formatted-number value={expense.Original_Currency_Amount__c.value} format-style="currency" currency-code={expense.Original_Currency__c.value} currency-display-as="code"></lightning-formatted-number>
+                            </td>
+                            <td class="slds-cell_action-mode" role="gridcell">
+                                <div class="slds-truncate" title={expense.Receipt_Amount__c.displayValue}>{expense.Receipt_Amount__c.displayValue}</div>
+                            </td>
+                            <td class="slds-cell_action-mode" role="gridcell">
+                                <template lwc:if={expense.isApproved}> <div title={expense.Total_Approved_Amount__c.displayValue} class={expense.Status.value}>{expense.Total_Approved_Amount__c.displayValue}</div> </template>
+                                <template lwc:else> <div title={expense.Status.displayValue} class={expense.Status.value}>{expense.Status.displayValue}</div> </template>
+                            </td>
+                        </tr>
+                    </template>
+                    <tr>
+                        <td colspan="4" class="slds-p-around_medium"></td>
+                        <td class="slds-text-align_left slds-p-around_medium" style="font-weight: bold;">Total</td>
+                        <td class={approvedTotalClass} style="font-weight: bold;"><lightning-formatted-number value={approvedTotal} format-style="currency" currency-code="AUD" currency-display-as="code"></lightning-formatted-number></td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+        <template lwc:else>
+            <div class="slds-text-align_center slds-p-around_medium">
+                No Expense records Found.
+            </div>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,76 @@
+<!--
+                Author:        Praveen Sampath
+                Company:       Capgemini
+                Description:   Customer Search Result using PNR
+                Inputs:
+                Test Class:     
+                ************************************************************************************************
+                History
+                ************************************************************************************************
+                03-AUG-2018      Praveen Sampath               Initial Design
+                -->
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="QCC_PNRSearchController" >
+    
+    <!-- attributes -->
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="pnr" type="String"/>
+    <aura:attribute name="caseId" type="String" default=""/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="maxRowSelection" type="Integer" default="1"/>
+    <aura:attribute name="errMSG" type="String" default=""/>
+    <aura:attribute name="selectedRow" type="Object" default=""/>
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="showButton" type="Boolean" default="false"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    
+    
+    
+    <!-- the container element determine the height of the datatable -->
+<aura:html tag="style">
+   .slds-modal__container{ 
+     height : auto;  
+   } 
+</aura:html>
+    <div aura:id="compId">
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-modal__close" title="Close" 
+                                onclick="{!c.closeMe}">
+                            <lightning:icon class="slds-button__icon slds-button__icon_large" variant="inverse" iconName="utility:close" size="small" alternativeText="Close"/> 
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning:datatable
+                                             columns="{! v.columns }"
+                                             data="{! v.data }"
+                                             keyField="id"
+                                             maxRowSelection="{! v.maxRowSelection }"
+                                             onrowselection="{! c.updateSelectedText }"/>
+                   
+                    <aura:renderIf isTrue="{!v.showButton}">
+                        <div class="slds-p-around_small slds-float_right">
+                            <aura:renderIf isTrue="{!not(empty(v.caseId))}">
+                                <lightning:button label="Assign to Case" variant="brand" onclick="{!c.onConfirm}"/>
+                                <aura:set attribute="else">
+                                    <lightning:button label="Select Passenger" variant="brand" onclick="{!c.onConfirm}"/>
+                                </aura:set>
+                            </aura:renderIf>  
+                        </div>
+                    </aura:renderIf>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+        
+    </div>
+    <div aura:id="overlayLibFF"/>
+    <aura:renderIf isTrue="{!v.showModal}">
+        <c:QCC_ShowModal showModal="{!v.showModal}" header="Error" content="{!v.errMSG}"/>
+    </aura:renderIf> 
+</aura:component>

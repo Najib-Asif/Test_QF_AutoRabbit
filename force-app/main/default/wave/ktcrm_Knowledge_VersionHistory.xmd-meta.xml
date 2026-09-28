@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveXmd xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <dataset>ktcrm_Knowledge_VersionHistory</dataset>
+    <dimensions>
+        <customActionsEnabled>true</customActionsEnabled>
+        <field>CreatedDate</field>
+        <isDerived>false</isDerived>
+        <isMultiValue>false</isMultiValue>
+        <label>CreatedDate</label>
+        <linkTemplateEnabled>true</linkTemplateEnabled>
+        <salesforceActionsEnabled>true</salesforceActionsEnabled>
+        <showDetailsDefaultFieldIndex>1</showDetailsDefaultFieldIndex>
+        <showInExplorer>false</showInExplorer>
+        <sortIndex>-1</sortIndex>
+    </dimensions>
+    <dimensions>
+        <conditionalFormatting>
+            <property>chartColor</property>
+            <referenceField>EventType</referenceField>
+            <sortIndex xsi:nil="true"/>
+            <type>categories</type>
+        </conditionalFormatting>
+        <field>EventType</field>
+        <isDerived>false</isDerived>
+        <members>
+            <label>Articles Created</label>
+            <member>created</member>
+            <sortIndex>0</sortIndex>
+        </members>
+        <members>
+            <label>Archived</label>
+            <member>KavArchived</member>
+            <sortIndex>1</sortIndex>
+        </members>
+        <members>
+            <label>New Versions Published By Users</label>
+            <member>KavPublished</member>
+            <sortIndex>2</sortIndex>
+        </members>
+        <members>
+            <label>New Articles Published By Users</label>
+            <member>KavPublishedNew</member>
+            <sortIndex>3</sortIndex>
+        </members>
+        <members>
+            <label>Revised</label>
+            <member>KavRevised</member>
+            <sortIndex>4</sortIndex>
+        </members>
+        <members>
+            <label>Locked</label>
+            <member>locked</member>
+            <sortIndex>5</sortIndex>
+        </members>
+        <members>
+            <label>Unlocked</label>
+            <member>unlocked</member>
+            <sortIndex>6</sortIndex>
+        </members>
+        <members>
+            <label>Fields Changed</label>
+            <member>fieldChanged</member>
+            <sortIndex>7</sortIndex>
+        </members>
+        <members>
+            <label>Restored</label>
+            <member>KavRestored</member>
+            <sortIndex>8</sortIndex>
+        </members>
+        <members>
+            <label>Unpublished</label>
+            <member>KavUnpublished</member>
+            <sortIndex>9</sortIndex>
+        </members>
+        <members>
+            <label>Translation Completed</label>
+            <member>KavTransCompleted</member>
+            <sortIndex>10</sortIndex>
+        </members>
+        <members>
+            <label>Translation Revised</label>
+            <member>KavTransRevised</member>
+            <sortIndex>11</sortIndex>
+        </members>
+        <showDetailsDefaultFieldIndex>3</showDetailsDefaultFieldIndex>
+        <sortIndex>0</sortIndex>
+    </dimensions>
+    <dimensions>
+        <field>kavHistoryCreatedByUser.Name</field>
+        <isDerived>false</isDerived>
+        <label>User Name</label>
+        <showDetailsDefaultFieldIndex>2</showDetailsDefaultFieldIndex>
+        <sortIndex>1</sortIndex>
+    </dimensions>
+    <dimensions>
+        <field>kav.DataCategory.DataCategoryGroupName</field>
+        <isDerived>false</isDerived>
+        <label>Article Data Category Group</label>
+        <showDetailsDefaultFieldIndex>4</showDetailsDefaultFieldIndex>
+        <sortIndex>2</sortIndex>
+    </dimensions>
+    <dimensions>
+        <field>kav.DataCategory.DataCategoryName</field>
+        <isDerived>false</isDerived>
+        <label>Article Data Category</label>
+        <showDetailsDefaultFieldIndex>5</showDetailsDefaultFieldIndex>
+        <sortIndex>3</sortIndex>
+    </dimensions>
+    <dimensions>
+        <field>kav.Title</field>
+        <isDerived>false</isDerived>
+        <label>Article Title</label>
+        <showDetailsDefaultFieldIndex>0</showDetailsDefaultFieldIndex>
+        <sortIndex>4</sortIndex>
+    </dimensions>
+    <dimensions>
+        <field>kav.Language</field>
+        <isDerived>false</isDerived>
+        <label>Article Language</label>
+        <sortIndex>5</sortIndex>
+    </dimensions>
+    <dimensions>
+        <field>kavHistoryCreatedByUser.Profile.Name</field>
+        <isDerived>false</isDerived>
+        <label>Profile</label>
+        <sortIndex>6</sortIndex>
+    </dimensions>
+    <dimensions>
+        <field>kavHistoryCreatedByUser.Role.Name</field>
+        <isDerived>false</isDerived>
+        <label>Role</label>
+        <sortIndex>7</sortIndex>
+    </dimensions>
+    <measures>
+        <field>kav.ViewStat.ViewCount</field>
+        <isDerived>false</isDerived>
+        <label>Article Views</label>
+        <showDetailsDefaultFieldIndex>6</showDetailsDefaultFieldIndex>
+        <sortIndex>0</sortIndex>
+    </measures>
+</WaveXmd>

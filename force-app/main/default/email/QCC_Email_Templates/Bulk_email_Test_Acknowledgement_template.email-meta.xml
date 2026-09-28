@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>QCC: Acknowledgement Letter to send out bulk emails on Case creation</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Bulk email Test Acknowledgement template</name>
+    <style>none</style>
+    <subject>Qantas Customer Care - {!Case.CaseNumber}</subject>
+    <textOnly>Dear {!Case.First_Name__c},
+
+Case Number: {!Case.CaseNumber}
+
+This is a courtesy email to let you know that we haven’t forgotten about your case. We are working through an unprecedented volume of cases due to the ongoing impacts of Covid and apologise for the delay in resolving your matter.
+
+If your case has been resolved through other means or is no longer current, please reply to this email with ‘STOP’ and we will close it on your behalf.
+
+If you still require a response, you do not need to do anything. We will endeavor to respond to all open cases as soon as possible.
+
+Thank you for your ongoing patience.
+
+Qantas Customer Care
+
+
+
+{!Case.Thread_Token}
+Qantas Airways Limited, ABN 16 009 661 901
+10 Bourke Road Mascot NSW 2020 Australia</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

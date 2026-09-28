@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lock_the_record_when_status_is_Accepted</fullName>
+    <active>true</active>
+    <description>Lock the contract payment record from editing when the Proposal status is &quot;Accepted by Customer.</description>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName = &apos;Corporate_Contract_Payments&apos;,
+ISPICKVAL(Proposal__r.Status__c,&apos;Accepted by Customer&apos;),
+OR(
+ISCHANGED(Amount__c),
+ISCHANGED(Paid_As__c),
+ISCHANGED(Payment_Criteria__c),
+ISCHANGED(Payment_Frequency__c),
+ISCHANGED(Proposal__c),
+ISCHANGED(Type__c)
+)
+)</errorConditionFormula>
+    <errorMessage>You can&apos;t edit the record when the status is &quot;Accepted by Customer&quot;</errorMessage>
+</ValidationRule>

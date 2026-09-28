@@ -1,0 +1,13 @@
+@isTest
+global class LeadValidateABNMock implements HttpCalloutMock{
+
+    global HttpResponse respond(HTTPRequest req)
+    {    
+        // Create a fake response
+        HttpResponse res = new HttpResponse();
+        res.setHeader('Content-Type', 'text/XML');
+        res.setBody('<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">  <response>    <usageStatement>The Registrar of the ABR monitors the quality of the information available on this website and updates the information regularly. However, neither the Registrar of the ABR nor the Commonwealth guarantee that the information available through this service (including search results) is accurate, up to date, complete or accept any liability arising from the use of or reliance upon this site.</usageStatement>    <dateRegisterLastUpdated>2017-09-06</dateRegisterLastUpdated>    <dateTimeRetrieved>2017-09-06T18:21:32.6572359+10:00</dateTimeRetrieved>    <businessEntity>      <recordLastUpdatedDate>2017-07-29</recordLastUpdatedDate>      <ABN>        <identifierValue>37093114286</identifierValue>        <isCurrentIndicator>Y</isCurrentIndicator>        <replacedFrom>0001-01-01</replacedFrom>      </ABN>      <entityStatus>        <entityStatusCode>Active</entityStatusCode>        <effectiveFrom>2000-07-01</effectiveFrom>        <effectiveTo>0001-01-01</effectiveTo>      </entityStatus>      <ASICNumber>093114286</ASICNumber>      <entityType>        <entityTypeCode>PRV</entityTypeCode>        <entityDescription>Australian Private Company</entityDescription>      </entityType>      <goodsAndServicesTax>        <effectiveFrom>2000-07-01</effectiveFrom>        <effectiveTo>0001-01-01</effectiveTo>      </goodsAndServicesTax>      <mainName>        <organisationName>JB HI-FI GROUP PTY LTD</organisationName>        <effectiveFrom>2003-03-24</effectiveFrom>      </mainName>      <mainTradingName>        <organisationName>JB HI FI</organisationName>        <effectiveFrom>2000-07-01</effectiveFrom>      </mainTradingName>      <mainBusinessPhysicalAddress>        <stateCode>VIC</stateCode>        <postcode>3145</postcode>        <effectiveFrom>2017-01-04</effectiveFrom>        <effectiveTo>0001-01-01</effectiveTo>      </mainBusinessPhysicalAddress>    </businessEntity>  </response>  </soap:Envelope>');
+        res.setStatusCode(200);
+        return res;
+    }
+}
